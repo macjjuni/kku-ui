@@ -21,6 +21,6 @@
     "types": ["node", "jest", "@testing-library/jest-dom"],
     "paths": { "@/*": ["./src/*"] }
   },
-  "include": ["src", "jest.setup.cjs"],
+  "include": ["src", "jest.config.ts", "jest.setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

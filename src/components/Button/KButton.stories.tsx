@@ -28,3 +28,6 @@ export const errorButton: Story = {
 export const defaultButton: Story = {
   args: { label: 'Default' },
 }
+export const customButton: Story = {
+  args: { label: 'Custom', size: 'md' },
+}

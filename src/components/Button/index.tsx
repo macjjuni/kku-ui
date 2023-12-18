@@ -2,10 +2,10 @@ import { useCallback } from 'react'
 import KButtonProps from './KButton.type'
 
 // Start - [TailWindCSS]
-const defaultStyle = `flex justify-center items-center rounded-xs transition duration-300 overflow-hidden`
+const defaultStyle = `flex justify-center items-center rounded-xs transition duration-100 overflow-hidden`
 const originHoverStyle = 'hover:shadow-button'
 const focusStyle = 'focus:outline-1 focus:opacity-[0.95]'
-const activeStyle = 'active:scale-[1.028]'
+const activeStyle = 'active:scale-[1.028] active:rotate-[1deg]'
 const buttonStyle = `${defaultStyle} ${originHoverStyle} ${focusStyle} ${activeStyle}`
 
 const sizeStyle = {
@@ -30,18 +30,25 @@ const outlinedStyle = {
 
 // End - [TailWindCSS]
 
-function KButton({ children, label, variant = 'default', outlined = false, size = 'md', className = '', onClick }: KButtonProps) {
+function KButton({ children, label, variant = 'default', outlined = false, size = 'md', className = '', onClick, onMouseEnter, onMouseLeave, onKeyDown, onKeyUp }: KButtonProps) {
   const selectVarinat = useCallback(() => {
     if (outlined) return outlinedStyle[variant]
     else return originStyle[variant]
-  }, [variant])
+  }, [variant, className])
 
   const selectSize = useCallback(() => {
     return sizeStyle[size]
   }, [size])
 
   return (
-    <button className={`${buttonStyle} ${selectVarinat()} ${selectSize()} ${className}`} onClick={onClick}>
+    <button
+      className={`${buttonStyle} ${selectVarinat()} ${selectSize()} ${className}`}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onKeyDown={onKeyDown}
+      onKeyUp={onKeyUp}
+    >
       {children ? children : label}
     </button>
   )

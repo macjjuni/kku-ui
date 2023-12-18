@@ -1,5 +1,5 @@
 import { VariantType, SizeType } from '@/types/component'
-import { ReactElement } from 'react'
+import { ReactElement, MouseEvent, KeyboardEvent } from 'react'
 
 export default interface KButtonProps {
   children?: ReactElement
@@ -8,6 +8,9 @@ export default interface KButtonProps {
   size?: SizeType
   outlined?: boolean
   className?: string
-  onClick?: () => void
-  onHover?: () => void
+  onClick?: (e?: MouseEvent<HTMLElement>) => void
+  onMouseLeave?: (e?: MouseEvent<HTMLElement>) => void
+  onMouseEnter?: (e?: MouseEvent<HTMLElement>) => void
+  onKeyUp?: (e?: KeyboardEvent<HTMLElement>) => void
+  onKeyDown?: (e?: KeyboardEvent<HTMLElement>) => void
 }
