@@ -28,6 +28,20 @@ export const errorButton: Story = {
 export const defaultButton: Story = {
   args: { label: 'Default' },
 }
-export const customButton: Story = {
-  args: { label: 'Custom', size: 'md' },
+
+export const customColorButton: Story = {
+  args: { label: 'Custom Color', color: '#7E30E1', size: 'md' },
+}
+export const customElementButton: Story = {
+  args: {
+    children: (
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    ),
+    color: '#7E30E1',
+    size: 'md',
+  },
 }
