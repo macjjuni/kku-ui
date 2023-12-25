@@ -14,24 +14,36 @@ export const primaryButton: Story = {
   args: { label: 'Primary', variant: 'primary', size: 'md' },
 }
 export const primaryOutlinedButton: Story = {
-  args: { label: 'Primary', variant: 'primary', outlined: true, size: 'md' },
+  args: { label: 'Primary Outlined', variant: 'primary', outlined: true, size: 'md' },
 }
 export const successButton: Story = {
   args: { label: 'Success', variant: 'success', size: 'md' },
 }
+export const successOutlinedButton: Story = {
+  args: { label: 'Success Outlined', variant: 'success', outlined: true, size: 'md' },
+}
 export const warningButton: Story = {
   args: { label: 'Warning', variant: 'warning', size: 'md' },
+}
+export const warningOutlinedButton: Story = {
+  args: { label: 'Warning Outlined', variant: 'warning', outlined: true, size: 'md' },
 }
 export const errorButton: Story = {
   args: { label: 'Error', variant: 'error', size: 'md' },
 }
+export const errorOutlinedButton: Story = {
+  args: { label: 'Error Outlined', variant: 'error', outlined: true, size: 'md' },
+}
 export const defaultButton: Story = {
   args: { label: 'Default' },
 }
-
-export const customColorButton: Story = {
-  args: { label: 'Custom Color', color: '#7E30E1', size: 'md' },
+export const defaultOutlinedButton: Story = {
+  args: { label: 'Default Outlined', variant: 'default', outlined: true, size: 'md' },
 }
+export const customColorButton: Story = {
+  args: { label: 'Custom Color', className: 'text-red bg-yellow', size: 'md' },
+}
+
 export const customElementButton: Story = {
   args: {
     children: (
@@ -41,7 +53,7 @@ export const customElementButton: Story = {
         <li>3</li>
       </ul>
     ),
-    color: '#7E30E1',
+    className: 'bg-[#7E30E1] text-white border-success border-2',
     size: 'md',
   },
 }

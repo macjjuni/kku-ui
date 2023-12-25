@@ -8,8 +8,6 @@ export default interface KButtonProps {
   size?: SizeType
   outlined?: boolean
   className?: string
-  color?: string
-  fontWeight?: string
   onClick?: (e?: MouseEvent<HTMLElement>) => void
   onMouseLeave?: (e?: MouseEvent<HTMLElement>) => void
   onMouseEnter?: (e?: MouseEvent<HTMLElement>) => void

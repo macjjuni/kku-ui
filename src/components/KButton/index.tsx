@@ -36,35 +36,26 @@ const outlinedStyle = {
 
 // End - [TailWindCSS]
 
-function KButton({
-  children,
-  label,
-  variant = 'default',
-  outlined = false,
-  size = 'md',
-  className = '',
-  color,
-  fontWeight,
-  onClick,
-  onMouseEnter,
-  onMouseLeave,
-  onKeyDown,
-  onKeyUp,
-}: KButtonProps) {
+function KButton({ children, label, variant = 'default', outlined = false, size = 'md', className = '', onClick, onMouseEnter, onMouseLeave, onKeyDown, onKeyUp }: KButtonProps) {
+  // 커스텀 여부 반환
+  const isCustomStyle = useCallback(() => className?.includes('bg') || className?.includes('text'), [className])
+
   // 사이즈 계산
   const selectSize = useCallback(() => sizeStyle[size], [size])
-  // variant별 글색 계산
-  const selectTextColor = useCallback(() => (outlined ? colorStyle.outlined : colorStyle.origin), [variant])
+
+  // variant별 글자 색상 계산
+  const selectTextColor = useCallback(() => {
+    if (isCustomStyle()) return ''
+    if (outlined) return colorStyle.outlined
+    return colorStyle.origin
+  }, [variant, className])
+
   // variant별 스타일 계산
   const selectVarinat = useCallback(() => {
+    if (isCustomStyle()) return ''
     if (outlined) return outlinedStyle[variant]
-    else if (!color) return bgStyle[variant]
-  }, [outlined, variant])
-
-  // 커스텀 컬러 계산 함수
-  const setBg = useCallback(() => (outlined ? 'none' : color), [outlined, color])
-  const setColor = useCallback(() => (outlined ? color : '#fff'), [outlined, color])
-  const setBorderColor = useCallback(() => (outlined ? color : 'none'), [outlined, color])
+    return bgStyle[variant]
+  }, [outlined, variant, className])
 
   return (
     <button
@@ -74,7 +65,6 @@ function KButton({
       onMouseLeave={onMouseLeave}
       onKeyDown={onKeyDown}
       onKeyUp={onKeyUp}
-      style={{ background: setBg(), color: setColor(), borderColor: setBorderColor(), fontWeight }}
     >
       {children ? children : label}
     </button>

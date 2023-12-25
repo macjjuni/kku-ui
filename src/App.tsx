@@ -1,4 +1,4 @@
-import KButton from './components/Button'
+import KButton from './components/KButton'
 
 export default function App() {
   return (
