@@ -1,12 +1,13 @@
-# kku-ui
+# 🎁 kku-ui
 
-```
-- src
-   ㄴ __tests___
-   ㄴ components
-   ㄴ types
-   ㄴ App.tsx
-   ㄴ index.css
-   ㄴ main.tsx
-   ...
-```
+---
+
+## ✅ Todo
+
+- [x] `KButton`
+  - 기능: O / 디자인: X / 테스트 코드: X
+- [ ] `KTextField`
+  - 기능: O / 디자인: X / 테스트 코드: X
+- [ ] ...
+
+
