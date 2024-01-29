@@ -2,11 +2,16 @@ import path from 'path';
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import compression from 'vite-plugin-compression2';
+import eslint from 'vite-plugin-eslint'
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
         react(),
+        eslint({
+            exclude: [/virtual:/, /node_modules/]
+        }),
         compression({
             include: [/\.(js)$/, /\.(scss)$/],
             threshold: 1400,

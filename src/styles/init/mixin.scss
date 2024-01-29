@@ -1,0 +1,57 @@
+
+@mixin k-head-1 {
+    font-size: $k-font-size-head-1;
+    line-height: $k-line-height-head-1;
+    font-weight: $k-font-weight-body;
+}
+
+@mixin k-head-2 {
+    font-size: $k-font-size-head-2;
+    line-height: $k-line-height-head-2;
+    font-weight: $k-font-weight-body;
+}
+
+@mixin k-head-3 {
+    font-size: $k-font-size-head-3;
+    line-height: $k-line-height-head-3;
+    font-weight: $k-font-weight-body;
+}
+
+
+@mixin k-body-1 {
+    font-size: $k-font-size-body-1;
+    line-height: $k-line-height-body-1;
+    font-weight: $k-font-weight-body-1;
+}
+
+@mixin k-body-2 {
+    font-size: $k-font-size-body-2;
+    line-height: $k-line-height-body-2;
+    font-weight: $k-font-weight-body-2;
+}
+
+@mixin k-body-3 {
+    font-size: $k-font-size-body-3;
+    line-height: $k-line-height-body-3;
+    font-weight: $k-font-weight-body-3;
+}
+
+@mixin k-transition-1 {
+    transition-duration: 0.1s;
+    transition-timing-function: ease;
+}
+
+@mixin k-transition-3 {
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+@mixin k-transition-6 {
+    transition-duration: 0.6s;
+    transition-timing-function: ease;
+}
+
+@mixin k-transition-6 {
+    transition-duration: 0.9s;
+    transition-timing-function: ease;
+}

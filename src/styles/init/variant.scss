@@ -1,4 +1,60 @@
 
+// region [SCSS variable]
+
+$k-hover-overlay-percent: 15%;
+
+$k-primary-color: #068FFF !default;
+$k-primary-hover-color: darken($k-primary-color, $k-hover-overlay-percent) !default;
+
+$k-secondary-red: #ED2B2A !default;
+$k-secondary-green: #7DCE13 !default;
+$k-secondary-yellow: #FFFA4D !default;
+$k-secondary-blue: #0079FF !default;
+
+$k-white-color: #ffffff !default;
+$k-white-hover-color: darken($k-white-color, $k-hover-overlay-percent) !default;
+
+$k-black-color: #000000 !default;
+$k-black-hover-color: lighten($k-black-color, $k-hover-overlay-percent) !default;
+
+$k-gray-color-50: #F8F9FA !default;
+$k-gray-color-100: #F1F3F5 !default;
+$k-gray-color-200: #E8EBED !default;
+$k-gray-color-300: #DEE2E6 !default;
+$k-gray-color-400: #C9CDD2 !default;
+$k-gray-color-500: #9EA4AA !default;
+$k-gray-color-600: #72787F !default;
+$k-gray-color-700: #454C53 !default;
+$k-gray-color-800: #26282B !default;
+$k-gray-color-900: #1B1D1F !default;
+
+:root {
+    --k-primary-color: #{$k-primary-color};
+    --k-primary-hover-color: #{$k-primary-hover-color};
+
+    --k-secondary-color-red: #{$k-secondary-red};
+    --k-secondary-color-green: #{$k-secondary-green};
+    --k-secondary-color-yellow: #{$k-secondary-yellow};
+    --k-secondary-color-blue: #{$k-secondary-blue};
+
+    --k-white-color: #{$k-white-color};
+    --k-white-hover-color: #{$k-white-hover-color};
+
+    --k-black-color: #{$k-black-color};
+    --k-black-hover-color: #{$k-black-hover-color};
+
+    --k-gray-color-50: #{$k-gray-color-50};
+    --k-gray-color-100: #{$k-gray-color-100};
+    --k-gray-color-200: #{$k-gray-color-200};
+    --k-gray-color-300: #{$k-gray-color-300};
+    --k-gray-color-400: #{$k-gray-color-400};
+    --k-gray-color-500: #{$k-gray-color-500};
+    --k-gray-color-600: #{$k-gray-color-600};
+    --k-gray-color-700: #{$k-gray-color-700};
+    --k-gray-color-800: #{$k-gray-color-800};
+    --k-gray-color-900: #{$k-gray-color-900};
+}
+
 
 $k-spacing-2: 2px;
 $k-spacing-4: 4px;
@@ -12,18 +68,31 @@ $k-spacing-32: 32px;
 $k-spacing-36: 36x;
 $k-spacing-40: 40px;
 
-$k-black-color: #000000;
-$k-white-color: #ffffff;
 
-$k-primary-color: #D0F288;
+$k-font-size-head-1: 28px;
+$k-font-size-head-2: 24px;
+$k-font-size-head-3: 20px;
 
-$k-gray-color-50: #F8F9FA;
-$k-gray-color-100: #F1F3F5;
-$k-gray-color-200: #E8EBED;
-$k-gray-color-300: #DEE2E6;
-$k-gray-color-400: #C9CDD2;
-$k-gray-color-500: #9EA4AA;
-$k-gray-color-600: #72787F;
-$k-gray-color-700: #454C53;
-$k-gray-color-800: #26282B;
-$k-gray-color-900: #1B1D1F;
+$k-line-height-head-1: 30px;
+$k-line-height-head-2: 26px;
+$k-line-height-head-3: 22px;
+
+$k-font-weight-head: 500;
+
+$k-font-size-body-1: 18px;
+$k-font-size-body-2: 16px;
+$k-font-size-body-3: 14px;
+
+$k-line-height-body-1: 22px;
+$k-line-height-body-2: 20px;
+$k-line-height-body-3: 18px;
+
+$k-font-weight-body-1: 500;
+$k-font-weight-body-2: 400;
+$k-font-weight-body-3: 300;
+
+
+
+
+
+

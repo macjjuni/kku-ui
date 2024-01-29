@@ -1,33 +1,29 @@
-import { memo, useCallback } from 'react';
+import { memo, useMemo, useCallback } from 'react';
 import KButtonProps from './KButton.interface.ts';
-import { sizes } from '@/common/type/base.interface.ts';
+import { initSize, initVariant, initDisabled } from '@/common/util/variation.ts';
 import './TButton.scss';
 
 
 const KButton = (props: KButtonProps) => {
 
-  const rootClass = useCallback(() => {
-    const classArr = [];
+  const rootClass = useMemo(
+    () => {
+      const clazz = [];
 
-    if (props.className) { classArr.push(props.className); }
-    if (props.size && (!props.large || !props.medium || !props.small)) {
-      throw Error('Multiple sizes are not allowed.');
-    }
+      if (props.className) { clazz.push(props.className); }
 
-    if (props.large) {
-      classArr.push(`k-button--${sizes.large}`);
-    } else if (props.medium) {
-      classArr.push(`k-button--${sizes.medium}`);
-    } else if (props.small) {
-      classArr.push(`k-button--${sizes.small}`);
-    } else if (props.size) {
-      classArr.push(`k-button--${props.size}`);
-    }
+      initSize(clazz, props.size, props.large, props.medium, props.small);
+      initVariant(clazz, props.variant, props.primary, props.outlined);
+      initDisabled(clazz, props.disabled);
 
-    if (props.disabled) { classArr.push('k-button--disabled'); }
+      return clazz.join(' ');
+    },
+    [props.className, props.variant, props.primary, props.outlined, props.large, props.medium, props.small, props.size],
+  );
 
-    return classArr.join(' ');
-  }, [props.className]);
+  const rootStyle = useMemo(() => {
+    return props.style || {};
+  }, [props.style]);
 
 
   const onClick = useCallback(() => {
@@ -36,7 +32,7 @@ const KButton = (props: KButtonProps) => {
   }, [props.onClick]);
 
   return (
-    <button id={props.id} className={`k-button ${rootClass()}`} type='button' onClick={onClick}>
+    <button id={props.id} className={`k-button ${rootClass}`} style={rootStyle} type='button' onClick={onClick}>
       {
         (props.label || props.children)
                 && (
@@ -50,7 +46,6 @@ const KButton = (props: KButtonProps) => {
   );
 };
 
-KButton.defaultProps = {
-};
+KButton.defaultProps = {};
 
 export default memo(KButton);

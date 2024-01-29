@@ -4,7 +4,7 @@
         "node": true,
         "es6": true
     },
-    "ignorePatterns": ["node_modules/", "stories/", "vite.config.ts"], // eslint 미적용될 폴더나 파일 명시
+    "ignorePatterns": ["node_modules/", "stories/", "vite.config.ts", "index.ts"], // eslint 미적용될 폴더나 파일 명시
     "extends": [
         "airbnb",
         "airbnb-typescript",
@@ -43,7 +43,7 @@
         "no-plusplus": "off", // ++ 연산 사용 가능
         "arrow-body-style": "off", // arrow function 이 아니어도 됩
         "lines-between-class-members": "off", // 클래스 멤버변수 사이 한줄 띄우지 않아도 됨
-        "@typescript-eslint/no-explicit-any": "off", // any 사용 가능
+//        "@typescript-eslint/no-explicit-any": "off", // any 사용 가능
         "@typescript-eslint/ban-ts-comment": "off",
         "react/jsx-filename-extension": [1, {"extensions": [".ts", ".tsx"]}],
         "react/function-component-definition": [
@@ -70,6 +70,7 @@
         "@typescript-eslint/return-await": "off",
         "no-param-reassign": ["error", {"props": false}],
         "no-return-assign": "off",
-        "react/destructuring-assignment": "off"
+        "react/destructuring-assignment": "off",
+        "import/export": "off"
     }
 }
