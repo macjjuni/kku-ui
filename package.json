@@ -5,7 +5,9 @@
     "type": "module",
     "module": "lib/esm/index.js",
     "main": "lib/esm/index.js",
-    "files": ["lib/"],
+    "files": [
+        "lib/"
+    ],
     "scripts": {
         "clean": "rimraf lib",
         "build-sass": "sass --no-source-map src/styles/Entry.scss:lib/styles/index.css",
@@ -18,6 +20,7 @@
         "publish": "publish"
     },
     "dependencies": {
+        "lodash": "^4.17.21",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },

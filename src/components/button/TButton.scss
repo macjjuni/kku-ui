@@ -1,5 +1,6 @@
 
 .k-button {
+    position: relative;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -7,10 +8,11 @@
     border: 1px solid $k-gray-color-400;
     background: $k-gray-color-50;
     border-radius: 3px;
+    overflow: hidden;
     cursor: pointer;
     user-select: none;
 
-    transition-property: background-color, border, transform;
+    //transition-property: background-color, border, transform;
     @include k-transition-3;
 
     // Variant
