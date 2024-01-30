@@ -2,7 +2,7 @@
     "compileOnSave": true,
     "compilerOptions": {
         "target": "ESNext",
-        "outDir": "/lib/esm",
+        "outDir": "./lib/esm",
         "useDefineForClassFields": true,
         "lib": ["ES2020", "DOM", "DOM.Iterable"],
         "allowJs": true, // JavaScript 파일의 컴파일을 허용
@@ -16,6 +16,7 @@
         "declaration": true,  // 해당하는 .d.ts 파일을 생성합니다.
         "declarationMap": true,
         "allowImportingTsExtensions": true,
+        "emitDeclarationOnly": true,
         "resolveJsonModule": true, // .json 확장자로 import된 모듈을 포함
         "isolatedModules": true, // 추가 검사를 수행하여 별도의 컴파일
         "noEmit": false,

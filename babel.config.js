@@ -11,5 +11,4 @@ export default {
         '@babel/preset-react',
         '@babel/preset-typescript',
     ],
-    transform: {'^.+\\.(js|jsx)$': 'babel-jest'},
 };
