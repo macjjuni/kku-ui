@@ -6,6 +6,7 @@ import styles from '@/common/util/style.ts';
 type RippleStatus = 'on' | 'off';
 
 const rippleElementTag = 'span';
+const rippleAnimationName = 'ripple-effect';
 
 const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
 
@@ -20,7 +21,7 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
   const register = (event: MouseEvent | KeyboardEvent) => {
 
     setStatus('on');
-    const uniqueRippleId = uniqueId('k-ripple-1');
+    const uniqueRippleId = uniqueId('k-ripple-');
 
     rippleTaskRef.current = new Promise((resolve) => {
 
@@ -34,20 +35,18 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
 
       const ripple = document.createElement(rippleElementTag);
       ripple.classList.add(uniqueRippleId);
+      ripple.classList.add('ripple');
 
       const baseColor = window.getComputedStyle(elementRef.current)
-        .getPropertyValue('background-color');
+        .getPropertyValue('color');
 
       const rippleStyle: CSSProperties = {
-        position: 'absolute',
         top: `${((clientY - y - radius) / height) * 100}%`,
         left: `${((clientX - x - radius) / width) * 100}%`,
         width: `${radius * 2}px`,
         height: `${radius * 2}px`,
-        opacity: '0.1',
-        background: colorUtil.shadeColor(baseColor, 100),
-        borderRadius: '50%',
-        animation: '0.35s ripple linear',
+        background: colorUtil.shadeColor(baseColor, 0),
+        animation: `0.35s ${rippleAnimationName} linear`,
       };
 
 

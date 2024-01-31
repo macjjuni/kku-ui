@@ -12,7 +12,10 @@
     cursor: pointer;
     user-select: none;
 
-    //transition-property: background-color, border, transform;
+    .k-button-content {
+
+    }
+
     @include k-transition-3;
 
     // Variant
@@ -25,7 +28,6 @@
             border-color: $k-primary-hover-color;
             background: $k-primary-hover-color;
         }
-
     }
     &.k-button--outlined {
         color: $k-primary-color;

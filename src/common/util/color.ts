@@ -1,8 +1,18 @@
+const hexToRgb = (hexCode: string) => {
+  // Remove the hash if it's there
+  const regHexCode = hexCode.replace(/^#/, '');
 
-const shadeColor = (baseColor: string, amount:number) => {
+  const r = parseInt(regHexCode.substring(0, 2), 16);
+  const g = parseInt(regHexCode.substring(2, 4), 16);
+  const b = parseInt(regHexCode.substring(4, 6), 16);
 
-  const baseRGB = baseColor.match(/\d+(\.\d+)?/g);
+  return `rgb(${r}, ${g}, ${b})`;
+};
 
+const shadeColor = (baseColor: string, amount: number) => {
+
+  const isHex = baseColor.includes('#');
+  const baseRGB = isHex ? hexToRgb(baseColor).match(/\d+(\.\d+)?/g) : baseColor.match(/\d+(\.\d+)?/g);
   if (!baseRGB) return 'rgb(0,0,0,)';
 
   const shadedColor = [
@@ -14,9 +24,10 @@ const shadeColor = (baseColor: string, amount:number) => {
   return `rgb(${shadedColor.join(',')})`;
 };
 
-function tintColor(baseColor: string, amount: number) {
+const tintColor = (baseColor: string, amount: number) => {
 
-  const baseColorRGB = baseColor.match(/\d+(\.\d+)?/g) as string[];
+  const isHex = baseColor.includes('#');
+  const baseColorRGB = isHex ? hexToRgb(baseColor).match(/\d+(\.\d+)?/g) : baseColor.match(/\d+(\.\d+)?/g) as string[];
 
   if (!baseColorRGB) return 'rgb(0,0,0,)';
 
@@ -27,6 +38,6 @@ function tintColor(baseColor: string, amount: number) {
   ];
 
   return `rgb(${tintedColor.join(',')})`;
-}
+};
 
-export default { shadeColor, tintColor };
+export default { shadeColor, tintColor, hexToRgb };

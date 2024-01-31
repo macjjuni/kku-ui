@@ -1,15 +1,29 @@
 // eslint-disable-next-line max-len
-import { memo, useMemo, useCallback, useRef, forwardRef, useImperativeHandle, Ref, MouseEvent, KeyboardEvent, MutableRefObject } from 'react';
+import {
+  memo,
+  useMemo,
+  useCallback,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+  Ref,
+  MouseEvent,
+  KeyboardEvent,
+  MutableRefObject,
+  CSSProperties,
+} from 'react';
 import { initSize, initVariant, initDisabled } from '@/common/util/variation.ts';
 import useRipple from '@/common/hook/useRipple.ts';
 import './TButton.scss';
 import { KButtonProps, KButtonRefs } from '@/components';
+import colorUtil from '@/common/util/color.ts';
 
 const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
+
+  // region [Hooks]
+
   const rootRef = useRef() as MutableRefObject<HTMLButtonElement>;
-
-
   const ripple = useRipple(rootRef);
 
   useImperativeHandle(ref, () => ({
@@ -36,9 +50,23 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   );
 
   const rootStyle = useMemo(() => {
+    const styles: CSSProperties = props.style || {};
 
-    return props.style || {};
-  }, [props.style]);
+    if (props.variant === 'primary' || props.primary) {
+      if (props.color) {
+        styles.background = props.color;
+        styles.borderColor = props.color;
+      }
+    } else if (props.color) {
+      styles.color = props.color;
+      styles.borderColor = props.color;
+    }
+
+
+    return styles;
+  }, [props.style, props.color]);
+
+  // endregion
 
 
   // region [Events]
@@ -58,10 +86,20 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
     }
   }, [props, ripple]);
 
+  const onMouseEnter = useCallback((): void => {
+
+    if ((props.variant === 'primary' || props.primary) && props.color) {
+      rootRef.current.style.background = colorUtil.shadeColor(props.color, 20);
+    }
+  }, [props.variant, props.primary, props.color]);
+
   const onMouseLeave = useCallback((): void => {
 
     if (ripple.status === 'on') { ripple.remove(); }
-  }, [ripple]);
+    if ((props.variant === 'primary' || props.primary) && props.color) {
+      rootRef.current.style.background = props.color;
+    }
+  }, [props.variant, props.primary, props.color, ripple]);
 
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLButtonElement>): void => {
 
@@ -87,6 +125,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
             style={rootStyle}
             type='button'
             onMouseDown={onMouseDown}
+            onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             onMouseUp={onMouseUp}
             onKeyDown={onKeyDown}
@@ -94,14 +133,12 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
             ref={rootRef}
     >
       {
-        (props.label || props.children)
-                && (
-                  <>
-                    {props.label && <div className='k-button-content'>{props.label}</div>}
-                    {props.children && props.children}
-                  </>
-                )
+        props.children
+          ? props.children
+          : (props.label && <span className='k-button-content'>{props.label}</span>)
       }
+
+
     </button>
   );
 });

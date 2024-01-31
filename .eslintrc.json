@@ -27,7 +27,7 @@
         "react/jsx-indent-props": ["error", "first"], // JSX Element 내 attribute 정렬은 첫 attribute 시작점에 맞춤
         "indent": ["error", 2, { "SwitchCase": 1, "ignoredNodes": ["JSXAttribute"]}], // 4칸 들여쓰기를 하지만 jsx 내 attribute 는 체크하지 않음
         "@typescript-eslint/indent": ["error", 2, { "SwitchCase": 1, "ignoredNodes": ["JSXAttribute"]}],
-        "max-len": ["warn", {"code": 120}], // 라인당 140자까지 허용
+        "max-len": ["warn", {"code": 120}], // 라인당 120자까지 허용
         "no-tabs": "error", // 탭 문자 불허
         "no-multiple-empty-lines": ["error", {"max": 2, "maxBOF": 1, "maxEOF": 1}], // 파일의 시작과 끝에는 1줄씩 빈줄 허용, 중간에는 2줄 허용
         "object-curly-spacing": ["error"], // {} 내부에 공백 없게 입력  예) {foo: 'bar'}
