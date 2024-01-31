@@ -12,7 +12,7 @@
         "clean": "rimraf lib",
         "build-sass": "sass --no-source-map src/styles/Entry.scss:lib/styles/index.css",
         "minify-css": "esbuild dis`t/styles/index.css --minify --allow-overwrite --outfile=lib/styles/index.css",
-        "tsc": "tsc --project ./tsconfig.esm.json",
+        "tsc": "tsc --project ./tsconfig.esm.json && tsc-alias -p tsconfig.esm.json",
         "minify-js": "esbuild lib/esm/**/*.js --minify --allow-overwrite --outdir=lib/esm",
         "test": "jest",
         "sb": "storybook dev -p 6006",
