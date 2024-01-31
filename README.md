@@ -1,14 +1,18 @@
-# 🍬 kku-ui
+# 🍭 kku-ui 🍬
 
-## ✅ Todo
+## Support
 
-- [x] `KButton`
-  - 기능: O / 디자인: X / 테스트 코드: X
-- [ ] `KTextField`
-  - 기능: O / 디자인: X / 테스트 코드: X
-- [ ] ...
+### 📌 KButton
+- ✅ 기능
+- ✅ 디자인
+- ✅ 테스트 코드
+
+### 📌 KTextField -  (~ing 🏃🏻‍♂️)
+- ❌ 기능
+- ❌ 디자인
+- ❌ 테스트 코드
 
 
-##  Supported
+##  Support
 
-- [x] StoryBook
+- ✅ StoryBook
