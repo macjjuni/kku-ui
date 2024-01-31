@@ -6,7 +6,7 @@ import {KButtonProps} from '@/components/button/KButton.interface.ts';
 
 const meta: Meta<typeof KButton> = {
     component: KButton,
-    title: 'KButton',
+    title: 'Button',
 };
 
 export default meta;

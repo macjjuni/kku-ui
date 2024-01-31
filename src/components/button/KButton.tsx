@@ -20,7 +20,6 @@ import colorUtil from '@/common/util/color.ts';
 
 const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
-
   // region [Hooks]
 
   const rootRef = useRef() as MutableRefObject<HTMLButtonElement>;
@@ -120,22 +119,23 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
   return (
     <button
+            ref={rootRef}
             id={props.id}
             className={`k-button ${rootClass}`}
             style={rootStyle}
             type='button'
+            disabled={props.disabled}
             onMouseDown={onMouseDown}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             onMouseUp={onMouseUp}
             onKeyDown={onKeyDown}
             onKeyUp={onKeyUp}
-            ref={rootRef}
     >
       {
         props.children
           ? props.children
-          : (props.label && <span className='k-button-content'>{props.label}</span>)
+          : (props.label && <span className='k-button-label'>{props.label}</span>)
       }
 
 
