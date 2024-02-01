@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
+import { act } from 'react-dom/test-utils';
 import KButton from '@/components/button/KButton.tsx';
 import { KButtonRefs } from '@/components';
 
@@ -20,7 +21,7 @@ describe('KButton', () => {
 
     const testStyle = { color: 'red', fontSize: '20px' };
     render(<KButton style={testStyle}>{labelText}</KButton>);
-    const root = screen.getByText(labelText);
+    const root = screen.getByRole('button');
 
     expect(root).toHaveStyle(testStyle);
   });
@@ -29,7 +30,7 @@ describe('KButton', () => {
 
     const testId = 'k-button-test-id';
     render(<KButton id={testId}>{labelText}</KButton>);
-    const root = screen.getByText(labelText);
+    const root = screen.getByRole('button');
 
     expect(root).toHaveAttribute('id', testId);
   });
@@ -38,7 +39,7 @@ describe('KButton', () => {
 
     const testClassName = 'k-button-test-class-name';
     render(<KButton className={testClassName}>{labelText}</KButton>);
-    const root = screen.getByText(labelText);
+    const root = screen.getByRole('button');
 
     expect(root).toHaveClass(testClassName);
   });
@@ -50,13 +51,13 @@ describe('KButton', () => {
 
     expect(root).toBeInTheDocument();
     // label prop 을 사용하면 span 태그에 들어감
-    expect(root).toHaveClass('k-button-label');
+    expect(root).toHaveClass('k-button__content');
   });
 
   test('children prop render test', () => {
 
     render(<KButton>{labelText}</KButton>);
-    const root = screen.getByText(labelText);
+    const root = screen.getByRole('button');
 
     expect(root).toBeInTheDocument();
     expect(root).toHaveClass('k-button');
@@ -65,7 +66,7 @@ describe('KButton', () => {
   test('disabled prop render test', () => {
 
     render(<KButton disabled>{labelText}</KButton>);
-    const root = screen.getByText(labelText);
+    const root = screen.getByRole('button');
 
     expect(root).toBeDisabled();
   });
@@ -100,10 +101,25 @@ describe('KButton', () => {
     const buttonRef = createRef<KButtonRefs>();
     render(<KButton ref={buttonRef} onClick={mockOnClick}>{labelText}</KButton>);
 
-    const root = screen.getByText(labelText);
+    const root = screen.getByRole('button');
 
     buttonRef.current?.focus();
 
     expect(root).toHaveFocus();
+  });
+
+  test('KButton Ref focus test', async () => {
+
+    const buttonRef = createRef<KButtonRefs>();
+    render(<KButton ref={buttonRef} onClick={mockOnClick}>{labelText}</KButton>);
+    const root = screen.getByRole('button');
+
+    act(() => { buttonRef.current?.startLoading(); });
+
+    expect(root).toHaveClass('k-button--loading');
+
+    act(() => { buttonRef.current?.stopLoading(); });
+
+    expect(root).not.toHaveClass('k-button--loading');
   });
 });

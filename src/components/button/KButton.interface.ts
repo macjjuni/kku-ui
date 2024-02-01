@@ -15,4 +15,6 @@ export interface KButtonProps extends KBaseProp, KSizeProp, KVariantProp {
 export interface KButtonRefs {
   focus: ()=> void
   click: () => void
+  startLoading: () => void
+  stopLoading: () => void
 }

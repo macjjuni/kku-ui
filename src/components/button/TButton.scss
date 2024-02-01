@@ -12,7 +12,21 @@
     cursor: pointer;
     user-select: none;
 
-    .k-button-label {}
+    &.k-button--loading {
+        pointer-events: none;
+        .k-button__content { opacity: 0; }
+    }
+
+    .k-button__loading__container {
+        position: absolute;
+        top: 50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 
     @include k-transition-3;
 
@@ -26,6 +40,11 @@
             border-color: $k-primary-hover-color;
             background: $k-primary-hover-color;
         }
+
+        .k-spinner--loading {
+            border: 3px solid $k-primary-color;
+            border-bottom-color: $k-white-color;
+        }
     }
     &.k-button--outlined {
         color: $k-primary-color;
@@ -35,6 +54,11 @@
         &:hover {
             border-color: $k-primary-hover-color;
             background: $k-white-hover-color;
+        }
+
+        .k-spinner--loading {
+            border: 3px solid $k-primary-color;
+            border-bottom-color: $k-white-color;
         }
     }
     &.k-button--default {
@@ -46,6 +70,11 @@
             border-color: darken($k-gray-color-600, $k-hover-overlay-percent);
             background: $k-white-hover-color;
         }
+
+        .k-spinner--loading {
+            border: 3px solid $k-gray-color-200;
+            border-bottom-color: $k-gray-color-700;
+        }
     }
 
     // Size
@@ -53,18 +82,24 @@
         height: 36px;
         padding: 0 $k-spacing-24;
 
-        .k-button-label { @include k-body-1; }
+        .k-button__content { @include k-body-1; }
+
+        .k-spinner--loading { width: 24px; height: 24px; }
     }
     &.k-button--medium {
         height: 32px;
         padding: 0 $k-spacing-16;
 
-        .k-button-label { @include k-body-2; }
+        .k-button__content { @include k-body-2; }
+
+        .k-spinner--loading { width: 18px; height: 18px; }
     }
     &.k-button--small {
         height: 28px;
         padding: 0 $k-spacing-12;
 
-        .k-button-label { @include k-body-3; }
+        .k-button__content { @include k-body-3; }
+
+        .k-spinner--loading { width: 16px; height: 16px; }
     }
 }

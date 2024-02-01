@@ -10,27 +10,36 @@ import {
   MouseEvent,
   KeyboardEvent,
   MutableRefObject,
-  CSSProperties,
+  CSSProperties, useState,
 } from 'react';
 import { initSize, initVariant, initDisabled } from '@/common/util/variation.ts';
 import useRipple from '@/common/hook/useRipple.ts';
 import './TButton.scss';
 import { KButtonProps, KButtonRefs } from '@/components';
 import colorUtil from '@/common/util/color.ts';
+import { getIdentityName, baseName } from '@/common/base/base.ts';
+
+const identity = getIdentityName('button');
+
 
 const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
   // region [Hooks]
 
   const rootRef = useRef() as MutableRefObject<HTMLButtonElement>;
+  const [isLoad, setIsLoad] = useState<boolean>(false);
   const ripple = useRipple(rootRef);
 
   useImperativeHandle(ref, () => ({
-
     focus() { rootRef.current?.focus(); },
-    click() { if (!props.disabled && props.onClick) { props.onClick(); } },
+    click() { if (!props.disabled && !isLoad && props.onClick) { props.onClick(); } },
+    startLoading() { setIsLoad(true); },
+    stopLoading() { setIsLoad(false); },
   }));
 
+  // endregion
+
+  // region [Styles]
 
   const rootClass = useMemo(
     () => {
@@ -38,14 +47,15 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
       const clazz = [];
 
       if (props.className) { clazz.push(props.className); }
+      if (isLoad) { clazz.push(`${identity}--loading`); }
 
-      initSize(clazz, props.size, props.large, props.medium, props.small);
-      initVariant(clazz, props.variant, props.primary, props.outlined);
-      initDisabled(clazz, props.disabled);
+      initVariant(clazz, identity, props.variant, props.primary, props.outlined);
+      initSize(clazz, identity, props.size, props.large, props.medium, props.small);
+      initDisabled(clazz, identity, props.disabled);
 
       return clazz.join(' ');
     },
-    [props.className, props.variant, props.primary, props.outlined, props.large, props.medium, props.small, props.size],
+    [isLoad, props.className, props.variant, props.primary, props.outlined, props.large, props.medium, props.small, props.size],
   );
 
   const rootStyle = useMemo(() => {
@@ -65,6 +75,14 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
     return styles;
   }, [props.style, props.color]);
 
+  const loadStyle = useMemo(() => {
+    if (!isLoad) return {};
+
+    if (props.color) {
+      return { border: '3px solid #fff', borderBottomColor: props.color || '#fff' };
+    }
+  }, [isLoad]);
+
   // endregion
 
 
@@ -80,7 +98,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   const onMouseUp = useCallback((e: MouseEvent<HTMLButtonElement>): void => {
 
     ripple.remove();
-    if (!props.disabled && props?.onClick) {
+    if (!props.disabled && !isLoad && props?.onClick) {
       props.onClick(e);
     }
   }, [props, ripple]);
@@ -131,14 +149,23 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
             onMouseUp={onMouseUp}
             onKeyDown={onKeyDown}
             onKeyUp={onKeyUp}
+            aria-busy={isLoad}
     >
       {
-        props.children
-          ? props.children
-          : (props.label && <span className='k-button-label'>{props.label}</span>)
+        (props.children || props.label)
+                && (props.label && (
+                  <span className={`${identity}__content`}>
+                    {props.children || props.label}
+                  </span>
+                ))
       }
-
-
+      {
+        isLoad && (
+          <span className={`${identity}__loading__container`}>
+            <span style={loadStyle} className={`${baseName}-spinner--loading`} />
+          </span>
+        )
+      }
     </button>
   );
 });
