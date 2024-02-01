@@ -1,12 +1,10 @@
 import { SizeType, sizes, VariantType, variants } from '@/common/base/base.interface.ts';
-import { baseName } from '@/common/base/base.ts';
-
 
 // region [🎁 - Size]
 
-type GetSizesType = (clazz: string[], size?: SizeType, large?: boolean, medium?: boolean, small?: boolean) => void;
+type GetSizesType = (clazz: string[], identity: string, size?: SizeType, large?: boolean, medium?: boolean, small?: boolean) => void;
 
-export const initSize: GetSizesType = (clazz, size, large, medium, small) => {
+export const initSize: GetSizesType = (clazz, identity, size, large, medium, small) => {
 
   const boolSizeArr = [large, medium, small].filter((s) => s);
 
@@ -15,15 +13,15 @@ export const initSize: GetSizesType = (clazz, size, large, medium, small) => {
   }
 
   if (size) {
-    clazz.push(`${baseName}--${size}`);
+    clazz.push(`${identity}--${size}`);
   } else if (large) {
-    clazz.push(`${baseName}--${sizes.large}`);
+    clazz.push(`${identity}--${sizes.large}`);
   } else if (medium) {
-    clazz.push(`${baseName}--${sizes.medium}`);
+    clazz.push(`${identity}--${sizes.medium}`);
   } else if (small) {
-    clazz.push(`${baseName}--${sizes.small}`);
+    clazz.push(`${identity}--${sizes.small}`);
   } else {
-    clazz.push(`${baseName}--${sizes.medium}`); // Default Size
+    clazz.push(`${identity}--${sizes.medium}`); // Default Size
   }
 };
 
@@ -31,21 +29,21 @@ export const initSize: GetSizesType = (clazz, size, large, medium, small) => {
 
 // region [🍭 - Variant]
 
-type GetVariantType = (clazz: string[], variant?: VariantType, primary?: boolean, outlined?: boolean) => void;
-export const initVariant:GetVariantType = (clazz, variant, primary, outlined) => {
+type GetVariantType = (clazz: string[], identity: string, variant?: VariantType, primary?: boolean, outlined?: boolean) => void;
+export const initVariant:GetVariantType = (clazz, identity, variant, primary, outlined) => {
 
   if ((variant && (primary || outlined)) || (primary && outlined)) {
     throw Error('Multiple variant are not allowed.'); // 중복 Prop 입력 에러 처리
   }
 
   if (variant) {
-    clazz.push(`${baseName}--${variant}`);
+    clazz.push(`${identity}--${variant}`);
   } else if (primary) {
-    clazz.push(`${baseName}--${variants.primary}`);
+    clazz.push(`${identity}--${variants.primary}`);
   } else if (outlined) {
-    clazz.push(`${baseName}--${variants.outlined}`);
+    clazz.push(`${identity}--${variants.outlined}`);
   } else {
-    clazz.push(`${baseName}--default`);
+    clazz.push(`${identity}--default`);
   }
 };
 
@@ -53,8 +51,8 @@ export const initVariant:GetVariantType = (clazz, variant, primary, outlined) =>
 
 // region [☑️ - Disabled]
 
-export const initDisabled = (clazz: string[], disabled?: boolean) => {
-  if (disabled) { clazz.push(`${baseName}--disabled}`); }
+export const initDisabled = (clazz: string[], identity: string, disabled?: boolean) => {
+  if (disabled) { clazz.push(`${identity}--disabled}`); }
 };
 
 // endregion
