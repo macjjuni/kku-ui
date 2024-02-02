@@ -23,9 +23,9 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
   const register = (event: MouseEvent | KeyboardEvent<HTMLButtonElement>) => {
 
     // 키보드 이벤트 제어
-    const KBEvent = event as KeyboardEvent;
+    const keyboardEvent = event as KeyboardEvent;
     if (event.type.includes('key')) {
-      if (KBEvent.key !== 'Enter' && KBEvent.key !== ' ') return;
+      if (keyboardEvent.key !== 'Enter' && keyboardEvent.key !== ' ') return;
 
       const buttonElement = event.target as HTMLElement;
       const rippleRefs = buttonElement.getElementsByClassName(rippleIdentityClass);

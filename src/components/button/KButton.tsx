@@ -111,7 +111,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
   const onMouseLeave = useCallback((): void => {
 
-    if (ripple.status === 'on') { ripple.remove(); }
+    ripple.remove();
     if ((props.variant === 'primary' || props.primary) && props.color) {
       rootRef.current.style.background = props.color;
     }
