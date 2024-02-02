@@ -2,10 +2,12 @@ import { CSSProperties, KeyboardEvent, MouseEvent, MutableRefObject, useRef, use
 import colorUtil from '@/common/util/color.ts';
 import styles from '@/common/util/style.ts';
 import loadsh from '@/common/util/lodashUtil.ts';
+import { baseName } from '@/common/base/base.ts';
 
 type RippleStatus = 'on' | 'off';
 
 const rippleElementTag = 'span';
+const rippleIdentityClass = `${baseName}-ripple`;
 const rippleAnimationName = 'ripple-effect';
 
 const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
@@ -17,6 +19,7 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
 
   // endregion
 
+  // region [Privates]
 
   const register = (event: MouseEvent | KeyboardEvent<HTMLButtonElement>) => {
 
@@ -26,8 +29,8 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
       if (KBEvent.key !== 'Enter' && KBEvent.key !== ' ') return;
 
       const buttonElement = event.target as HTMLElement;
-      const rippleRefs = buttonElement.getElementsByClassName('ripple');
-      if (rippleRefs?.length > 0) return;
+      const rippleRefs = buttonElement.getElementsByClassName(rippleIdentityClass);
+      if (status === 'on' || rippleRefs?.length > 0) return;
     }
 
     setStatus('on');
@@ -44,8 +47,8 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
       const radius = Math.sqrt(width * width + height * height);
 
       const ripple = document.createElement(rippleElementTag);
+      ripple.classList.add(rippleIdentityClass);
       ripple.classList.add(uniqueRippleId);
-      ripple.classList.add('ripple');
 
       const baseColor = window.getComputedStyle(elementRef.current)
         .getPropertyValue('color');
@@ -58,7 +61,6 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
         background: colorUtil.shadeColor(baseColor, 0),
         animation: `0.35s ${rippleAnimationName} linear`,
       };
-
 
       styles.setStyleElement(ripple, rippleStyle);
 
@@ -81,6 +83,7 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
     });
   };
 
+  // endregion
 
   return { status, register, remove };
 };
