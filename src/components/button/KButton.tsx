@@ -55,7 +55,9 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
       return clazz.join(' ');
     },
-    [isLoad, props.className, props.variant, props.primary, props.outlined, props.large, props.medium, props.small, props.size],
+    [
+      isLoad, props.className, props.variant, props.primary,
+      props.outlined, props.large, props.medium, props.small, props.size],
   );
 
   const rootStyle = useMemo(() => {
@@ -89,10 +91,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   // region [Events]
 
   const onMouseDown = useCallback((e: MouseEvent<HTMLButtonElement>): void => {
-
-    if (!props.disabled) {
-      ripple?.register(e);
-    }
+    if (!props.disabled) { ripple?.register(e); }
   }, [props.disabled, ripple]);
 
   const onMouseUp = useCallback((e: MouseEvent<HTMLButtonElement>): void => {
@@ -119,10 +118,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   }, [props.variant, props.primary, props.color, ripple]);
 
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLButtonElement>): void => {
-
-    if ((e.key === 'Enter' || e.key === ' ') && ripple.status === 'off') {
-      ripple?.register(e);
-    }
+    ripple?.register(e);
   }, [ripple]);
 
   const onKeyUp = useCallback((e: KeyboardEvent<HTMLButtonElement>): void => {

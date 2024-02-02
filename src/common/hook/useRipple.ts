@@ -1,7 +1,7 @@
 import { CSSProperties, KeyboardEvent, MouseEvent, MutableRefObject, useRef, useState } from 'react';
-import { uniqueId } from 'lodash';
 import colorUtil from '@/common/util/color.ts';
 import styles from '@/common/util/style.ts';
+import loadsh from '@/common/util/lodashUtil.ts';
 
 type RippleStatus = 'on' | 'off';
 
@@ -18,10 +18,20 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
   // endregion
 
 
-  const register = (event: MouseEvent | KeyboardEvent) => {
+  const register = (event: MouseEvent | KeyboardEvent<HTMLButtonElement>) => {
+
+    // 키보드 이벤트 제어
+    const KBEvent = event as KeyboardEvent;
+    if (event.type.includes('key')) {
+      if (KBEvent.key !== 'Enter' && KBEvent.key !== ' ') return;
+
+      const buttonElement = event.target as HTMLElement;
+      const rippleRefs = buttonElement.getElementsByClassName('ripple');
+      if (rippleRefs?.length > 0) return;
+    }
 
     setStatus('on');
-    const uniqueRippleId = uniqueId('k-ripple-');
+    const uniqueRippleId = loadsh.uniqueId('k-ripple-');
 
     rippleTaskRef.current = new Promise((resolve) => {
 
