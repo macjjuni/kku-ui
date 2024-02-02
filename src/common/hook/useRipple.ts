@@ -1,13 +1,12 @@
 import { CSSProperties, KeyboardEvent, MouseEvent, MutableRefObject, useRef, useState } from 'react';
 import colorUtil from '@/common/util/color.ts';
+import loadashUtil from '@/common/util/lodashUtil.ts';
 import styles from '@/common/util/style.ts';
-import loadsh from '@/common/util/lodashUtil.ts';
-import { baseName } from '@/common/base/base.ts';
 
 type RippleStatus = 'on' | 'off';
 
 const rippleElementTag = 'span';
-const rippleIdentityClass = `${baseName}-ripple`;
+const rippleIdentityClass = 'k-ripple';
 const rippleAnimationName = 'ripple-effect';
 
 const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
@@ -34,7 +33,7 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
     }
 
     setStatus('on');
-    const uniqueRippleId = loadsh.uniqueId('k-ripple-');
+    const uniqueRippleId = loadashUtil.uniqueId('k-ripple-');
 
     rippleTaskRef.current = new Promise((resolve) => {
 
