@@ -52,7 +52,7 @@ export const initVariant:GetVariantType = (clazz, identity, variant, primary, ou
 // region [☑️ - Disabled]
 
 export const initDisabled = (clazz: string[], identity: string, disabled?: boolean) => {
-  if (disabled) { clazz.push(`${identity}--disabled}`); }
+  if (disabled) { clazz.push(`${identity}--disabled`); }
 };
 
 // endregion
