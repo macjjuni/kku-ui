@@ -9,7 +9,7 @@ const config: StorybookConfig = {
             name: '@storybook/preset-scss',
             options: {
                 sassLoaderOptions: {
-                    additionalData: '@import "/src/styles/Entry.scss";'
+                    scss: {additionalData: '@import "/src/styles/Entry.scss";'},
                 },
             },
         }
@@ -31,9 +31,7 @@ const config: StorybookConfig = {
             resolve: {alias: {'@': path.resolve('src')}},
             css: {
                 preprocessorOptions: {
-                    scss: {
-                        additionalData: '@import "/src/styles/Entry.scss";'
-                    },
+                    scss: {additionalData: '@import "/src/styles/Entry.scss";'},
                 },
             },
             optimizeDeps: {

@@ -1,4 +1,4 @@
-import { SizeType, sizes, VariantType, variants } from '@/common/base/base.interface.ts';
+import { SizeType, sizes, VariantType, variants } from '@/common/base/base.interface';
 
 // region [🎁 - Size]
 

@@ -1,2 +1,2 @@
-export { default as KButton } from './KButton.tsx';
-export * from './KButton.interface.ts';
+export { default as KButton } from './KButton';
+export * from './KButton.interface';

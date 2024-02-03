@@ -13,10 +13,7 @@
         "moduleResolution": "node",
         "jsx": "react-jsx",
         "esModuleInterop": true,
-        "declaration": true,  // 해당하는 .d.ts 파일을 생성합니다.
-        "declarationMap": true,
-        "allowImportingTsExtensions": true,
-        "emitDeclarationOnly": true,
+        "declaration": true, // 해당하는 .d.ts 파일을 생성합니다.
         "resolveJsonModule": true, // .json 확장자로 import된 모듈을 포함
         "isolatedModules": true, // 추가 검사를 수행하여 별도의 컴파일
         "noEmit": false,
@@ -34,9 +31,7 @@
         "typeRoots": ["../node_modules/@types", "./node_modules/@types", "../node_modules/@testing-library"],
         "baseUrl": "./",
         "paths": {"@/*": ["./src/*"]},
-        "plugins": [
-            { "name": "typescript-plugin-css-modules" }
-        ]
+        "plugins": [{ "name": "typescript-plugin-css-modules" }]
     },
     "include": [
         "src/**/*.tsx",
@@ -44,13 +39,8 @@
         "stories/components/**/*.tsx",
         "__tests__",
         "jest-setup.ts",
-        "jest.config.ts"
+        "jest.config.ts",
     ],
     "exclude": ["node_modules", "./lib/**/*"],
-    "tsc-alias": {
-        "verbose": true,
-        "fileExtensions": ["js"],
-    },
-    "files": ["index.ts"],
     "references": [{"path": "./tsconfig.node.json"}],
 }

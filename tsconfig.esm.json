@@ -3,7 +3,24 @@
     "compilerOptions": {
         "module": "ESNext",
         "moduleResolution": "Node",
-        "noEmit": false
+        "noEmit": false,
+        "emitDeclarationOnly": false,
+        "allowImportingTsExtensions": false,
+        "declaration": true, // 타입 선언 파일도 생성합니다.
+        "plugins": [{ "name": "typescript-plugin-css-modules" }]
     },
-    "include": ["index.ts"],
+    "include": ["index.ts", "styles.d.ts"],
+    "exclude": [
+        "stories/components/**/*.tsx",
+        "__tests__",
+        "jest-setup.ts",
+        "jest.config.ts",
+        "node_modules",
+        "./lib/**/*",
+    ],
+    "files": ["index.ts", "styles.d.ts"],
+    "tsc-alias": {
+        "verbose": true,
+        "fileExtensions": ["js"],
+    }
 }

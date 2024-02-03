@@ -1,11 +1,10 @@
 import { useState, memo, useMemo, useCallback, useRef, forwardRef, useImperativeHandle,
   Ref, MouseEvent, KeyboardEvent, MutableRefObject, CSSProperties } from 'react';
-import useRipple from '@/common/hook/useRipple.ts';
-import { initSize, initVariant } from '@/common/util/variation.ts';
-import colorUtil from '@/common/util/color.ts';
-import { getIdentityName, baseName } from '@/common/base/base.ts';
+import useRipple from '@/common/hook/useRipple';
+import { initSize, initVariant } from '@/common/util/variation';
+import colorUtil from '@/common/util/color';
+import { getIdentityName, baseName } from '@/common/base/base';
 import { KButtonProps, KButtonRefs } from '@/components';
-import './TButton.scss';
 
 const identity = getIdentityName('button');
 

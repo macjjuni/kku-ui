@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import {Container, Item} from '../common/Container';
+import {KButton, KButtonProps} from '@/components';
 
 
 const meta: Meta<typeof KButton> = {
@@ -15,7 +16,7 @@ const Template = (args: KButtonProps) => {
 
     return (
         <Container>
-            <Item label={'Primary TextField'}>
+            <Item label={'Primary TextField'}  {...args}>
                 TextField
             </Item>
             <Item label={'Outlined TextField'}>

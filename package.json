@@ -1,23 +1,29 @@
 {
     "name": "kku-ui",
     "private": false,
-    "version": "0.0.0",
+    "version": "0.0.4",
     "type": "module",
     "module": "lib/esm/index.js",
     "main": "lib/esm/index.js",
     "files": [
         "lib/"
     ],
+    "keywords": [
+        "react",
+        "react UI",
+        "UI Library"
+    ],
     "scripts": {
         "clean": "rimraf lib",
         "build-sass": "sass --no-source-map src/styles/Entry.scss:lib/styles/index.css",
-        "minify-css": "esbuild dis`t/styles/index.css --minify --allow-overwrite --outfile=lib/styles/index.css",
-        "tsc": "tsc --project ./tsconfig.esm.json && tsc-alias -p tsconfig.esm.json",
+        "minify-css": "esbuild lib/styles/index.css --minify --allow-overwrite --outfile=lib/styles/index.css",
+        "build-tsc": "tsc --project ./tsconfig.esm.json && tsc-alias -p tsconfig.esm.json",
         "minify-js": "esbuild lib/esm/**/*.js --minify --allow-overwrite --outdir=lib/esm",
-        "test": "jest",
+        "build": "yarn clean && yarn build-sass && yarn minify-css && yarn build-tsc && yarn minify-js",
+        "publish": "publish",
+        "test": "jest -all",
         "sb": "storybook dev -p 6006",
-        "build-storybook": "storybook build",
-        "publish": "publish"
+        "build-storybook": "storybook build"
     },
     "dependencies": {
         "lodash": "^4.17.21",

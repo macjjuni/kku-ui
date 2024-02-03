@@ -1,5 +1,5 @@
 import { ReactNode, MouseEvent } from 'react';
-import { KBaseProp, KSizeProp, KVariantProp } from '@/common/base/base.interface.ts';
+import { KBaseProp, KSizeProp, KVariantProp } from '@/common/base/base.interface';
 
 export interface KButtonProps extends KBaseProp, KSizeProp, KVariantProp {
   children?: ReactNode
