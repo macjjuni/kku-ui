@@ -54,15 +54,21 @@ import 'kku-ui/lib/styles/index.css'
 import { KButton } from 'kku-ui'
 
 export default function Component() {
-    return (<KButton label="Hello World!" />);
+    return (<KButton primary label="Hello World!" />);
 } 
 ```
 
 <br>
 
+## 🤖 Preview
+
+![kku-ui](https://github.com/macjjuni/kku-ui/assets/38034518/8a2ab93e-5ef9-4e98-85b7-d6e989fb5c09)
+
+
+<br>
 
 ##  Support
 
-✅ StoryBook
+✅ [StoryBook](https://65be73e78ddcef87875fe7b1-esfnjoixuw.chromatic.com/?path=/story/button--default)
 
 
