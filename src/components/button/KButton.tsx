@@ -1,26 +1,13 @@
-// eslint-disable-next-line max-len
-import {
-  memo,
-  useMemo,
-  useCallback,
-  useRef,
-  forwardRef,
-  useImperativeHandle,
-  Ref,
-  MouseEvent,
-  KeyboardEvent,
-  MutableRefObject,
-  CSSProperties, useState,
-} from 'react';
-import { initSize, initVariant, initDisabled } from '@/common/util/variation.ts';
+import { useState, memo, useMemo, useCallback, useRef, forwardRef, useImperativeHandle,
+  Ref, MouseEvent, KeyboardEvent, MutableRefObject, CSSProperties } from 'react';
 import useRipple from '@/common/hook/useRipple.ts';
-import './TButton.scss';
-import { KButtonProps, KButtonRefs } from '@/components';
+import { initSize, initVariant } from '@/common/util/variation.ts';
 import colorUtil from '@/common/util/color.ts';
 import { getIdentityName, baseName } from '@/common/base/base.ts';
+import { KButtonProps, KButtonRefs } from '@/components';
+import './TButton.scss';
 
 const identity = getIdentityName('button');
-
 
 const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
@@ -31,6 +18,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   const ripple = useRipple(rootRef);
 
   useImperativeHandle(ref, () => ({
+
     focus() { rootRef.current?.focus(); },
     click() { if (!props.disabled && !isLoad && props.onClick) { props.onClick(); } },
     startLoading() { setIsLoad(true); },
@@ -51,7 +39,6 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
       initVariant(clazz, identity, props.variant, props.primary, props.outlined);
       initSize(clazz, identity, props.size, props.large, props.medium, props.small);
-      initDisabled(clazz, identity, props.disabled);
 
       return clazz.join(' ');
     },
@@ -61,6 +48,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   );
 
   const rootStyle = useMemo(() => {
+
     const styles: CSSProperties = props.style || {};
 
     if (props.variant === 'primary' || props.primary) {
@@ -72,12 +60,11 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
       styles.color = props.color;
       styles.borderColor = props.color;
     }
-
-
     return styles;
   }, [props.style, props.color]);
 
   const loadStyle = useMemo(() => {
+
     if (!isLoad) return {};
 
     if (props.color) {
@@ -91,6 +78,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   // region [Events]
 
   const onMouseDown = useCallback((e: MouseEvent<HTMLButtonElement>): void => {
+
     if (!props.disabled) { ripple?.register(e); }
   }, [props.disabled, ripple]);
 
@@ -118,6 +106,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   }, [props.variant, props.primary, props.color, ripple]);
 
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLButtonElement>): void => {
+
     ripple?.register(e);
   }, [ripple]);
 

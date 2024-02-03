@@ -17,6 +17,7 @@
     // Content
     & .k-button__content { white-space: nowrap; }
 
+    @include k-transition-3;
 
     // Variant
     &.k-button--default {
@@ -29,7 +30,7 @@
             background: $k-white-hover-color;
         }
         &[disabled] {
-            background: darken($k-white-color, $k-disabled-percent);
+            background: $k-white-disabled-color;
         }
         .k-spinner--loading {
             border: 3px solid $k-gray-color-200;
@@ -76,6 +77,7 @@
     }
     &.k-button--loading {
         pointer-events: none;
+
         .k-button__content { opacity: 0; }
 
         &:focus-within { outline: none; }
@@ -109,3 +111,31 @@
         .k-spinner--loading { width: 16px; height: 16px; }
     }
 }
+
+// region [Dark Mode]
+
+.#{$k-dark-class-name} .k-button {
+
+    $k-button-dark-color: $k-gray-color-700;
+
+    &.k-button--default {
+        color: $k-white-color;
+        border-color: $k-button-dark-color;
+        background: $k-button-dark-color;
+
+        &:hover {
+            border-color: lighten($k-button-dark-color, $k-hover-overlay-percent);
+            background: lighten($k-button-dark-color, $k-hover-overlay-percent);
+        }
+        &[disabled] {
+            color: darken($k-gray-color-200, $k-hover-overlay-percent);
+            background: lighten($k-button-dark-color, $k-disabled-percent);
+        }
+        .k-spinner--loading {
+            border: 3px solid $k-gray-color-200;
+            border-bottom-color: $k-button-dark-color;
+        }
+    }
+}
+
+// endregion

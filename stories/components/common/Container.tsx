@@ -26,10 +26,11 @@ const titleStyle: CSSProperties = {
     padding:'0 0 16px 0',
     borderBottom: '1px solid #d1d1d1',
 }
-export const Item = ({label, children}: { label: string; children: ReactNode }) => (
-    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', width: '100%'}}>
+export const Item = ({label, children, className}: { label: string; children: ReactNode, className?: string }) => (
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px', width: '100%'}}
+        className={className}>
         <h2 style={titleStyle}>{label}</h2>
-        <div style={{display: 'flex', alignItems: 'center', gap: '40px'}}>
+        <div style={{display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap'}}>
             {children}
         </div>
     </div>

@@ -1,8 +1,14 @@
-
 // region [SCSS variable]
 
-$k-hover-overlay-percent: 4%;
-$k-disabled-percent: 12%;
+// region [Percent]
+
+$k-hover-overlay-percent: 8% !default;
+$k-disabled-percent: 12% !default;
+
+// endregion
+
+
+// region [Colors]
 
 $k-primary-color: #068FFF !default;
 $k-primary-hover-color: darken($k-primary-color, $k-hover-overlay-percent) !default;
@@ -13,11 +19,16 @@ $k-secondary-green: #7DCE13 !default;
 $k-secondary-yellow: #FFFA4D !default;
 $k-secondary-blue: #0079FF !default;
 
+
 $k-white-color: #ffffff !default;
 $k-white-hover-color: darken($k-white-color, $k-hover-overlay-percent) !default;
+$k-white-disabled-color: darken($k-white-color, $k-disabled-percent) !default;
+
 
 $k-black-color: #000000 !default;
 $k-black-hover-color: lighten($k-black-color, $k-hover-overlay-percent) !default;
+$k-black-hover-color: lighten($k-black-color, $k-hover-overlay-percent) !default;
+
 
 $k-gray-color-50: #F8F9FA !default;
 $k-gray-color-100: #F1F3F5 !default;
@@ -31,12 +42,16 @@ $k-gray-color-800: #26282B !default;
 $k-gray-color-900: #1B1D1F !default;
 
 
-// font-color
+// Font Color
+$k-default-font-color-dark: #000000 !default;
+$k-default-font-color-white: #ffffff !default;
+$k-disabled-font-color-dark: lightness($k-default-font-color-dark) !default;
+$k-disabled-font-color-white: darken($k-default-font-color-white, $k-disabled-percent) !default;
 
-$k-default-font-color-dark: #000000;
-$k-default-font-color-white: #ffffff;
-$k-disabled-font-color-dark: lightness($k-default-font-color-dark);
-$k-disabled-font-color-white: darken($k-default-font-color-white, $k-disabled-percent);
+
+// endregion
+
+
 
 
 :root {
@@ -67,42 +82,44 @@ $k-disabled-font-color-white: darken($k-default-font-color-white, $k-disabled-pe
 }
 
 
-$k-spacing-2: 2px;
-$k-spacing-4: 4px;
-$k-spacing-8: 8px;
-$k-spacing-12: 12px;
-$k-spacing-16: 16px;
-$k-spacing-20: 20px;
-$k-spacing-24: 24px;
-$k-spacing-28: 28px;
-$k-spacing-32: 32px;
-$k-spacing-36: 36x;
-$k-spacing-40: 40px;
+$k-spacing-2: 2px !default;
+$k-spacing-4: 4px !default;
+$k-spacing-8: 8px !default;
+$k-spacing-12: 12px !default;
+$k-spacing-16: 16px !default;
+$k-spacing-20: 20px !default;
+$k-spacing-24: 24px !default;
+$k-spacing-28: 28px !default;
+$k-spacing-32: 32px !default;
+$k-spacing-36: 36px !default;
+$k-spacing-40: 40px !default;
 
 
-$k-font-size-head-1: 28px;
-$k-font-size-head-2: 24px;
-$k-font-size-head-3: 20px;
+$k-font-size-head-1: 28px !default;
+$k-font-size-head-2: 24px !default;
+$k-font-size-head-3: 20px !default;
 
-$k-line-height-head-1: 30px;
-$k-line-height-head-2: 26px;
-$k-line-height-head-3: 22px;
+$k-line-height-head-1: 30px !default;
+$k-line-height-head-2: 26px !default;
+$k-line-height-head-3: 22px !default;
 
-$k-font-weight-head: 500;
+$k-font-weight-head: 500 !default;
 
-$k-font-size-body-1: 18px;
-$k-font-size-body-2: 16px;
-$k-font-size-body-3: 14px;
+$k-font-size-body-1: 18px !default;
+$k-font-size-body-2: 16px !default;
+$k-font-size-body-3: 14px !default;
 
-$k-line-height-body-1: 22px;
-$k-line-height-body-2: 20px;
-$k-line-height-body-3: 18px;
+$k-line-height-body-1: 22px !default;
+$k-line-height-body-2: 20px !default;
+$k-line-height-body-3: 18px !default;
 
-$k-font-weight-body-1: 500;
-$k-font-weight-body-2: 400;
-$k-font-weight-body-3: 300;
+$k-font-weight-body-1: 500 !default;
+$k-font-weight-body-2: 400 !default;
+$k-font-weight-body-3: 300 !default;
 
 
+// 다크모드 클래스명
+$k-dark-class-name: #{dark};
 
 
 
