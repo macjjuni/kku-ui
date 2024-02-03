@@ -1,7 +1,7 @@
-import { CSSProperties, KeyboardEvent, MouseEvent, MutableRefObject, useRef, useState } from 'react';
-import colorUtil from '@/common/util/color.ts';
-import loadashUtil from '@/common/util/lodashUtil.ts';
-import styles from '@/common/util/style.ts';
+import { CSSProperties, KeyboardEvent, MouseEvent, MutableRefObject, useRef } from 'react';
+import colorUtil from '@/common/util/color';
+import loadashUtil from '@/common/util/lodashUtil';
+import styles from '@/common/util/style';
 
 type RippleStatus = 'on' | 'off';
 
@@ -13,7 +13,7 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
 
   // region [Hooks]
 
-  const [status, setStatus] = useState<RippleStatus>('off');
+  const status = useRef<RippleStatus>('off');
   const rippleTaskRef = useRef<Promise<string>>();
 
   // endregion
@@ -29,10 +29,10 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
 
       const buttonElement = event.target as HTMLElement;
       const rippleRefs = buttonElement.getElementsByClassName(rippleIdentityClass);
-      if (status === 'on' || rippleRefs?.length > 0) return;
+      if (status.current === 'on' || rippleRefs?.length > 0) return;
     }
 
-    setStatus('on');
+    status.current = 'on';
     const uniqueRippleId = loadashUtil.uniqueId('k-ripple-');
 
     rippleTaskRef.current = new Promise((resolve) => {
@@ -78,13 +78,13 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
 
       const rippleElement = elementRef.current?.getElementsByClassName(rippleId);
       rippleElement[0]?.remove();
-      setStatus('off');
+      status.current = 'off';
     });
   };
 
   // endregion
 
-  return { status, register, remove };
+  return { register, remove };
 };
 
 export default useRipple;
