@@ -5,32 +5,37 @@
     justify-content: center;
     align-items: center;
 
-    border: 1px solid $k-gray-color-400;
-    background: $k-gray-color-50;
+    border: 1px solid transparent;
+    background: transparent;
     border-radius: 3px;
     overflow: hidden;
     cursor: pointer;
     user-select: none;
 
-    &.k-button--loading {
-        pointer-events: none;
-        .k-button__content { opacity: 0; }
-    }
+    &[disabled] { cursor: not-allowed; }
 
-    .k-button__loading__container {
-        position: absolute;
-        top: 50%;
-        left:50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+    // Content
+    & .k-button__content { white-space: nowrap; }
 
-
-    @include k-transition-3;
 
     // Variant
+    &.k-button--default {
+        color: $k-gray-color-700;
+        border-color: $k-gray-color-700;
+        background: $k-white-color;
+
+        &:hover {
+            border-color: darken($k-gray-color-600, $k-hover-overlay-percent);
+            background: $k-white-hover-color;
+        }
+        &[disabled] {
+            background: darken($k-white-color, $k-disabled-percent);
+        }
+        .k-spinner--loading {
+            border: 3px solid $k-gray-color-200;
+            border-bottom-color: $k-gray-color-700;
+        }
+    }
     &.k-button--primary {
         color: $k-white-color;
         border-color: $k-primary-color;
@@ -40,7 +45,11 @@
             border-color: $k-primary-hover-color;
             background: $k-primary-hover-color;
         }
-
+        &[disabled] {
+            color: $k-disabled-font-color-white;
+            border-color: $k-primary-disabled-color;
+            background: $k-primary-disabled-color;
+        }
         .k-spinner--loading {
             border: 3px solid $k-primary-color;
             border-bottom-color: $k-white-color;
@@ -55,25 +64,25 @@
             border-color: $k-primary-hover-color;
             background: $k-white-hover-color;
         }
-
+        &[disabled] {
+            color: $k-primary-disabled-color;
+            border-color: $k-primary-disabled-color;
+            background: $k-disabled-font-color-white;
+        }
         .k-spinner--loading {
             border: 3px solid $k-primary-color;
             border-bottom-color: $k-white-color;
         }
     }
-    &.k-button--default {
-        color: $k-gray-color-700;
-        border-color: $k-gray-color-700;
-        background: $k-white-color;
+    &.k-button--loading {
+        pointer-events: none;
+        .k-button__content { opacity: 0; }
 
-        &:hover {
-            border-color: darken($k-gray-color-600, $k-hover-overlay-percent);
-            background: $k-white-hover-color;
-        }
+        &:focus-within { outline: none; }
 
-        .k-spinner--loading {
-            border: 3px solid $k-gray-color-200;
-            border-bottom-color: $k-gray-color-700;
+        .k-button__loading__container {
+            @include k-center-absolute;
+            @include k-center-flex-wrap;
         }
     }
 
@@ -83,7 +92,6 @@
         padding: 0 $k-spacing-24;
 
         .k-button__content { @include k-body-1; }
-
         .k-spinner--loading { width: 24px; height: 24px; }
     }
     &.k-button--medium {
@@ -91,7 +99,6 @@
         padding: 0 $k-spacing-16;
 
         .k-button__content { @include k-body-2; }
-
         .k-spinner--loading { width: 18px; height: 18px; }
     }
     &.k-button--small {
@@ -99,7 +106,6 @@
         padding: 0 $k-spacing-12;
 
         .k-button__content { @include k-body-3; }
-
         .k-spinner--loading { width: 16px; height: 16px; }
     }
 }

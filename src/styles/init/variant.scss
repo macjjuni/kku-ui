@@ -2,9 +2,11 @@
 // region [SCSS variable]
 
 $k-hover-overlay-percent: 4%;
+$k-disabled-percent: 12%;
 
 $k-primary-color: #068FFF !default;
 $k-primary-hover-color: darken($k-primary-color, $k-hover-overlay-percent) !default;
+$k-primary-disabled-color: darken($k-primary-color, $k-disabled-percent) !default;
 
 $k-secondary-red: #ED2B2A !default;
 $k-secondary-green: #7DCE13 !default;
@@ -27,6 +29,15 @@ $k-gray-color-600: #72787F !default;
 $k-gray-color-700: #454C53 !default;
 $k-gray-color-800: #26282B !default;
 $k-gray-color-900: #1B1D1F !default;
+
+
+// font-color
+
+$k-default-font-color-dark: #000000;
+$k-default-font-color-white: #ffffff;
+$k-disabled-font-color-dark: lightness($k-default-font-color-dark);
+$k-disabled-font-color-white: darken($k-default-font-color-white, $k-disabled-percent);
+
 
 :root {
     --k-primary-color: #{$k-primary-color};
