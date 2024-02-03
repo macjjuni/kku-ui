@@ -14,17 +14,42 @@
 
 ## 🎁 Components
 
-|컴포넌트&nbsp; \ &nbsp; 지원|&nbsp;&nbsp;&nbsp;&nbsp;기능&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;디자인&nbsp;&nbsp;| &nbsp;웹 접근성&nbsp; |&nbsp;테스트 코드&nbsp;|&nbsp;스토리북&nbsp;|
-|:---|:---:|:---:|:-----------------:|:---:|:---:|
-|`<TButton/>`|✅|✅|❌|✅|✅|
-|`<TTextField/>`|❌|❌|❌|❌|❌|
-|🏃🏻‍♂️..|❌|❌|❌|❌|❌|
+|컴포넌트&nbsp; \ &nbsp; 지원|&nbsp;&nbsp;&nbsp;&nbsp;기능&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;디자인&nbsp;&nbsp;| 웹 접근성 |테스트 코드|&nbsp;스토리북&nbsp;|
+|:---|:---:|:---:|:-----------------:|:----:|:---:|
+|`<TButton/>`|✅|✅|❌|  ✅   |✅|
+|`<TTextField/>`|❌|❌|❌|  ❌   |❌|
+|🏃🏻‍♂️..|❌|❌|❌|  ❌   |❌|
 
 
-<br>
+## 📦 Install
+```
+npm install kku-ui
+```
+```
+yarn add kku-ui
+```
+
+## ⚙️ Initial Setting
+
+### 🏃🏻‍♂️ Entry Point
+
+```typescript
+import 'kku-ui/lib/styles/index.css'
+```
+
+
+## 🧑🏻‍💻 Using
+
+```typescript
+import { KButton } from 'kku-ui'
+
+export default function Component() {
+    return (<KButton label="Hello World!" />);
+} 
+```
 
 ##  Support
 
-- ✅ StoryBook
+✅ StoryBook
 
 
