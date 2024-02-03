@@ -108,7 +108,23 @@ describe('KButton', () => {
     expect(root).toHaveFocus();
   });
 
-  test('KButton Ref focus test', async () => {
+  test('KButton aria-busy attribute test', async () => {
+
+    const buttonRef = createRef<KButtonRefs>();
+    render(<KButton ref={buttonRef} onClick={mockOnClick}>{labelText}</KButton>);
+
+    act(() => { buttonRef.current?.startLoading(); });
+
+    const busyRoot = screen.getByRole('button');
+    expect(busyRoot).toHaveAttribute('aria-busy', 'true');
+
+    act(() => { buttonRef.current?.stopLoading(); });
+
+    const noBusyRoot = screen.getByRole('button');
+    expect(noBusyRoot).toHaveAttribute('aria-busy', 'false');
+  });
+
+  test('KButton Ref startLoading and stopLoading test', async () => {
 
     const buttonRef = createRef<KButtonRefs>();
     render(<KButton ref={buttonRef} onClick={mockOnClick}>{labelText}</KButton>);
