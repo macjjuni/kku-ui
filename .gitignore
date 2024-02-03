@@ -41,3 +41,7 @@ dist-ssr
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+# Storybook
+
+storybook-static
