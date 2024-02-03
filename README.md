@@ -1,4 +1,4 @@
-<h1 align="center">KKU-UI</h1>
+<h1 align="center">KKU-UI: React Components Libirary</h1>
 
 <br>
 
@@ -20,6 +20,7 @@
 |`<TTextField/>`|❌|❌|❌|  ❌   |❌|
 |🏃🏻‍♂️..|❌|❌|❌|  ❌   |❌|
 
+<br>
 
 ## 📦 Install
 ```
@@ -29,16 +30,19 @@ npm install kku-ui
 yarn add kku-ui
 ```
 
+<br>
+
 ## ⚙️ Initial Setting
-
-### 🏃🏻‍♂️ Entry Point
-
 ```typescript
+// 🏃🏻‍♂️ Entry Point
+
 import 'kku-ui/lib/styles/index.css'
 ```
 
+<br>
 
-## 🧑🏻‍💻 Using
+
+## 🧑🏻‍💻 Use Examples
 
 ```typescript
 import { KButton } from 'kku-ui'
@@ -47,6 +51,9 @@ export default function Component() {
     return (<KButton label="Hello World!" />);
 } 
 ```
+
+<br>
+
 
 ##  Support
 
