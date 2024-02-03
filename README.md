@@ -16,9 +16,15 @@
 
 |컴포넌트&nbsp; \ &nbsp; 지원|&nbsp;&nbsp;&nbsp;&nbsp;기능&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;디자인&nbsp;&nbsp;| 웹 접근성 |테스트 코드|&nbsp;스토리북&nbsp;|
 |:---|:---:|:---:|:-----------------:|:----:|:---:|
-|`<TButton/>`|✅|✅|❌|  ✅   |✅|
-|`<TTextField/>`|❌|❌|❌|  ❌   |❌|
-|🏃🏻‍♂️..|❌|❌|❌|  ❌   |❌|
+|`<TButton/>`|✅|✅|✅|✅|✅|
+|`<TTextField/>`|❌|❌|❌|❌|❌|
+|🏃🏻‍♂️..|❌|❌|❌|❌|❌|
+
+<br>
+
+## 📆 Planning
+
+### 📌 <a href="https://github.com/users/macjjuni/projects/1/views/1" target="_blank" >GitHub Project</a>
 
 <br>
 
