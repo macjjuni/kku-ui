@@ -60,7 +60,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
       styles.borderColor = props.color;
     }
     return styles;
-  }, [props.style, props.color]);
+  }, [props.style, props.color, props.variant]);
 
   const loadStyle = useMemo(() => {
 
@@ -92,7 +92,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   const onMouseEnter = useCallback((): void => {
 
     if ((props.variant === 'primary' || props.primary) && props.color) {
-      rootRef.current.style.background = colorUtil.shadeColor(props.color, 20);
+      rootRef.current.style.background = colorUtil.shadeColor(props.color, 12);
     }
   }, [props.variant, props.primary, props.color]);
 

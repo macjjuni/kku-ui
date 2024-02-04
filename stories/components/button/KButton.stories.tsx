@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import {Container, Item} from '../common/Container';
 import {KButton, KButtonRefs} from '@/components';
-import {KButtonProps} from '@/components/button/KButton.interface.ts';
+import {KButtonProps} from '@/components/button/KButton.interface';
 import {useEffect, useRef} from 'react';
 
 
