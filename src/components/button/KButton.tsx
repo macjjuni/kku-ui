@@ -31,7 +31,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   const rootClass = useMemo(
     () => {
 
-      const clazz = [];
+      const clazz = [identity];
 
       if (props.className) { clazz.push(props.className); }
       if (isLoad) { clazz.push(`${identity}--loading`); }
@@ -123,7 +123,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
     <button
             ref={rootRef}
             id={props.id}
-            className={`k-button ${rootClass}`}
+            className={rootClass}
             style={rootStyle}
             type='button'
             disabled={props.disabled}
