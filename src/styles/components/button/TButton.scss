@@ -7,7 +7,7 @@
 
     border: 1px solid transparent;
     background: transparent;
-    border-radius: 3px;
+    border-radius: $k-border-radius-default;
     overflow: hidden;
     cursor: pointer;
     user-select: none;
@@ -21,15 +21,17 @@
 
     // Variant
     &.k-button--default {
-        color: $k-gray-color-700;
-        border-color: $k-gray-color-700;
+        color: $k-default-font-color;
+        border-color: $k-border-default-color;
         background: $k-white-color;
 
         &:hover {
-            border-color: darken($k-gray-color-600, $k-hover-overlay-percent);
+            border-color: $k-border-default-hover-color;
             background: $k-white-hover-color;
         }
         &[disabled] {
+            color: $k-disabled-font-color;
+            border-color: $k-border-default-color;
             background: $k-white-disabled-color;
         }
         .k-spinner--loading {
@@ -47,7 +49,7 @@
             background: $k-primary-hover-color;
         }
         &[disabled] {
-            color: $k-disabled-font-color-white;
+            color: $k-disabled-font-color;
             border-color: $k-primary-disabled-color;
             background: $k-primary-disabled-color;
         }
@@ -68,7 +70,7 @@
         &[disabled] {
             color: $k-primary-disabled-color;
             border-color: $k-primary-disabled-color;
-            background: $k-disabled-font-color-white;
+            background: $k-white-disabled-color;
         }
         .k-spinner--loading {
             border: 3px solid $k-primary-color;
@@ -124,12 +126,13 @@
         background: $k-button-dark-color;
 
         &:hover {
-            border-color: lighten($k-button-dark-color, $k-hover-overlay-percent);
-            background: lighten($k-button-dark-color, $k-hover-overlay-percent);
+            border-color: lighten($k-button-dark-color, $k-background-hover-percent);
+            background: lighten($k-button-dark-color, $k-background-hover-percent);
         }
         &[disabled] {
-            color: darken($k-gray-color-200, $k-hover-overlay-percent);
-            background: lighten($k-button-dark-color, $k-disabled-percent);
+            color: darken($k-gray-color-500, $k-background-hover-percent);
+            border-color: darken($k-button-dark-color, $k-background-disabled-percent);
+            background: darken($k-button-dark-color, $k-background-disabled-percent);
         }
         .k-spinner--loading {
             border: 3px solid $k-gray-color-200;
