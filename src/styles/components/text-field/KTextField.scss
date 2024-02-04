@@ -1,0 +1,108 @@
+
+.k-text-field {
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid $k-border-default-color;
+    border-radius: $k-border-radius-default;
+    background: $k-white-color;
+    caret-color: $k-default-font-color;
+    font-size: 0;
+
+    @include k-transition-3;
+
+    .k-text-field__input {
+        width: 100%;
+        padding: 0;
+        border: none;
+        outline: none;
+        color: $k-default-font-color;
+        background: $k-white-color;
+    }
+
+    &:is(:hover, :focus-within) { border-color: $k-border-default-hover-color; }
+
+    &.k-text-field--disabled {
+        background: $k-white-disabled-color;
+
+        &:hover {
+            border-color: $k-border-default-color;
+        }
+
+        .k-text-field__input {
+            color: $k-disabled-font-color;
+            background: $k-white-disabled-color;
+        }
+    }
+
+
+
+
+
+    &.k-text-field--disabled {
+        cursor: not-allowed;
+        .k-text-field__input { cursor: not-allowed;}
+    }
+
+
+    // Size
+    &.k-text-field--large {
+
+        padding: $k-spacing-8 $k-spacing-16;
+
+        .k-text-field__input { @include k-body-1; }
+
+    }
+    &.k-text-field--medium {
+
+        padding: $k-spacing-6 $k-spacing-12;
+
+        .k-text-field__input { @include k-body-2; }
+
+    }
+    &.k-text-field--small {
+
+        padding: $k-spacing-4 $k-spacing-8;
+
+        .k-text-field__input { @include k-body-3; }
+    }
+}
+
+// region [Dark Mode]
+
+.#{$k-dark-class-name} .k-text-field {
+
+
+    border: 1px solid $k-dark-mode-border-default-color;
+    border-radius: $k-border-radius-default;
+    background: $k-dark-mode-background;
+    caret-color: $k-white-color;
+
+    font-size: 0;
+
+    &:is(:hover, :focus-within) { border-color: $k-dark-mode-border-default-hover-color; }
+
+    .k-text-field__input {
+        color: $k-dark-mode-font-color;
+        background: $k-dark-mode-background;
+    }
+
+    $k-text-field-disabled-color: lighten($k-dark-mode-background, 10%);
+
+    &.k-text-field--disabled {
+        background: $k-text-field-disabled-color;
+
+        &:hover {
+            border-color: $k-dark-mode-border-default-color;
+        }
+
+        .k-text-field__input {
+            color: $k-dark-mode-disabled-font-color;
+            background: $k-text-field-disabled-color;
+        }
+    }
+}
+
+// endregion
