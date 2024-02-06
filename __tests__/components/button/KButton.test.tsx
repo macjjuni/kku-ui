@@ -2,8 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
 import { act } from 'react-dom/test-utils';
-import KButton from '@/components/button/KButton.tsx';
-import { KButtonRefs } from '@/components';
+import { KButton, KButtonRefs } from '@/components';
 
 const mockOnClick = jest.fn();
 
