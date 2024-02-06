@@ -57,8 +57,8 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
         left: `${((clientX - x - radius) / width) * 100}%`,
         width: `${radius * 2}px`,
         height: `${radius * 2}px`,
-        background: colorUtil.shadeColor(baseColor, 0),
-        animation: `0.35s ${rippleAnimationName} linear`,
+        background: colorUtil.shadeColor(baseColor, 36),
+        animation: `0.35s ${rippleAnimationName} ease`,
       };
 
       styles.setStyleElement(ripple, rippleStyle);
