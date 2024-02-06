@@ -9,35 +9,24 @@ const hexToRgb = (hexCode: string) => {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-const shadeColor = (baseColor: string, amount: number) => {
+const shadeColor = (baseColor: string, amount: number): string => {
+  const isRGBA = baseColor.startsWith('rgba');
+  const baseColorRGB = baseColor.match(/\d+(\.\d+)?/g)?.map(Number) ?? [];
 
-  const isHex = baseColor.includes('#');
-  const baseRGB = isHex ? hexToRgb(baseColor).match(/\d+(\.\d+)?/g) : baseColor.match(/\d+(\.\d+)?/g);
-  if (!baseRGB) return 'rgb(0,0,0,)';
+  const alpha = isRGBA ? baseColorRGB.pop() : 1;
+  const shadedColor = baseColorRGB.map((color) => Math.max(0, color - (color * (amount / 100))));
 
-  const shadedColor = [
-    Math.max(0, parseInt(baseRGB[0], 10) - amount),
-    Math.max(0, parseInt(baseRGB[1], 10) - amount),
-    Math.max(0, parseInt(baseRGB[2], 10) - amount),
-  ];
-
-  return `rgb(${shadedColor.join(',')})`;
+  return isRGBA ? `rgba(${shadedColor.join(',')},${alpha})` : `rgb(${shadedColor.join(',')})`;
 };
 
-const tintColor = (baseColor: string, amount: number) => {
+const tintColor = (baseColor: string, amount: number): string => {
+  const isRGBA = baseColor.startsWith('rgba');
+  const baseColorRGB = baseColor.match(/\d+(\.\d+)?/g)?.map(Number) ?? [];
+  const alpha = isRGBA ? baseColorRGB.pop() : 1;
+  const tintedColor = baseColorRGB.map((color) => Math.min(255, color + ((255 - color) * (amount / 100))));
 
-  const isHex = baseColor.includes('#');
-  const baseColorRGB = isHex ? hexToRgb(baseColor).match(/\d+(\.\d+)?/g) : baseColor.match(/\d+(\.\d+)?/g) as string[];
-
-  if (!baseColorRGB) return 'rgb(0,0,0,)';
-
-  const tintedColor = [
-    Math.min(255, parseInt(baseColorRGB[0], 10) + amount),
-    Math.min(255, parseInt(baseColorRGB[1], 10) + amount),
-    Math.min(255, parseInt(baseColorRGB[2], 10) + amount),
-  ];
-
-  return `rgb(${tintedColor.join(',')})`;
+  return isRGBA ? `rgba(${tintedColor.join(',')},${alpha})` : `rgb(${tintedColor.join(',')})`;
 };
+
 
 export default { shadeColor, tintColor, hexToRgb };
