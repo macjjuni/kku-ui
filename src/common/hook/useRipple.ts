@@ -3,17 +3,15 @@ import colorUtil from '@/common/util/color';
 import loadashUtil from '@/common/util/lodashUtil';
 import styles from '@/common/util/style';
 
-type RippleStatus = 'on' | 'off';
-
 const rippleElementTag = 'span';
 const rippleIdentityClass = 'k-ripple';
 const rippleAnimationName = 'ripple-effect';
+const rippleAnimationTime = 400;
 
 const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
 
   // region [Hooks]
 
-  const status = useRef<RippleStatus>('off');
   const rippleTaskRef = useRef<Promise<string>>();
 
   // endregion
@@ -23,16 +21,15 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
   const register = (event: MouseEvent | KeyboardEvent<HTMLButtonElement>) => {
 
     // 키보드 이벤트 제어
-    const keyboardEvent = event as KeyboardEvent;
     if (event.type.includes('key')) {
+      const keyboardEvent = event as KeyboardEvent;
       if (keyboardEvent.key !== 'Enter' && keyboardEvent.key !== ' ') return;
 
-      const buttonElement = event.target as HTMLElement;
-      const rippleRefs = buttonElement.getElementsByClassName(rippleIdentityClass);
-      if (status.current === 'on' || rippleRefs?.length > 0) return;
+      const targetElement = event.target as HTMLElement;
+      const rippleElements = targetElement.getElementsByClassName(rippleIdentityClass);
+      if (rippleElements?.length > 0) return;
     }
 
-    status.current = 'on';
     const uniqueRippleId = loadashUtil.uniqueId('k-ripple-');
 
     rippleTaskRef.current = new Promise((resolve) => {
@@ -58,16 +55,16 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
         width: `${radius * 2}px`,
         height: `${radius * 2}px`,
         background: colorUtil.shadeColor(baseColor, 36),
-        animation: `0.35s ${rippleAnimationName} ease`,
+        animation: `${rippleAnimationTime / 1000}s ${rippleAnimationName} ease`,
       };
 
       styles.setStyleElement(ripple, rippleStyle);
-
       elementRef.current.append(ripple);
 
       setTimeout(() => {
+
         resolve(uniqueRippleId);
-      }, 350);
+      }, rippleAnimationTime);
     });
 
   };
@@ -76,9 +73,8 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
 
     rippleTaskRef.current?.then((rippleId) => {
 
-      const rippleElement = elementRef.current?.getElementsByClassName(rippleId);
-      rippleElement[0]?.remove();
-      status.current = 'off';
+      const rippleElements = elementRef.current?.getElementsByClassName(rippleId);
+      if (rippleElements) { rippleElements[0]?.remove(); }
     });
   };
 
