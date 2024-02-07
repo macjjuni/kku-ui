@@ -44,9 +44,7 @@ jobs:
 
       - name: Build storybook
         run: |
-          npm run build-storybook
-          mkdir /build/storybook
-          mv /storybook-static ./build/storybook
+          npm run build-storybook -o /build
 
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v3
