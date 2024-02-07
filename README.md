@@ -1,4 +1,4 @@
-<h1 align="center">KKU-UI: React Components Libirary</h1>
+<h1 align="center">✨ KKU-UI: React Components Libirary ✨</h1>
 
 <br>
 
@@ -69,6 +69,6 @@ export default function Component() {
 
 ##  Support
 
-✅ [StoryBook](https://65be73e78ddcef87875fe7b1-esfnjoixuw.chromatic.com/?path=/story/button--default)
+###  ✅ [StoryBook](https://macjjuni.github.io/kku-ui)
 
 
