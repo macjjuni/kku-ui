@@ -19,6 +19,7 @@
 
     @include k-transition-3;
 
+
     // Variant
     &.k-button--default {
         color: $k-default-font-color;
@@ -77,6 +78,7 @@
             border-bottom-color: $k-white-color;
         }
     }
+
     &.k-button--loading {
         pointer-events: none;
 
@@ -89,6 +91,7 @@
             @include k-center-flex-wrap;
         }
     }
+
     &.k-button--disabled {
         &:after {
             content: '';
@@ -97,7 +100,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.16);
+            background-color: rgba(0, 0, 0, 0.1);
         }
     }
 
@@ -150,6 +153,23 @@
             border-bottom-color: $k-button-dark-color;
         }
     }
+
+    $k-primary-dark-disabled-color: darken($k-primary-color, 20%);
+
+    &.k-button--primary {
+        &[disabled] {
+            color: $k-disabled-font-color;
+            border-color: $k-primary-dark-disabled-color;
+            background: $k-primary-dark-disabled-color;
+        }
+    }
+    &.k-button--outlined {
+        &[disabled] {
+            color: $k-primary-dark-disabled-color;
+            background-color: darken($k-white-color, 32%);
+        }
+    }
+
 }
 
 // endregion
