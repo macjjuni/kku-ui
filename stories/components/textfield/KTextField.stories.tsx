@@ -1,8 +1,8 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import {Container, DarkContainer, Item} from '../common/Container';
+import {Container, Item} from '../common/Container';
 import KTextField from '@/components/textfield/KTextField';
-import {KTextFieldProps} from '@/components/textfield/KTextField.interface';
 import {useState} from 'react';
+import {KTextFieldProps} from '@/components/textfield/KTextField.interface';
 
 
 const meta: Meta<typeof KTextField> = {
@@ -12,7 +12,7 @@ const meta: Meta<typeof KTextField> = {
 
 export default meta;
 
-type Story = StoryObj<typeof KTextField>
+type Story = StoryObj<KTextFieldProps>
 
 const Template = (args: KTextFieldProps) => {
 
@@ -21,33 +21,33 @@ const Template = (args: KTextFieldProps) => {
     const [smallValue, setSmallValue] = useState('Small');
 
     return (
-        <>
-            <Container>
-                <Item label={'Default TextField'}>
-                    <KTextField {...args} large value={largeValue} onChange={(v) => {setLargeValue(v);}}/>
-                    <KTextField {...args} medium value={mediumValue} onChange={(v) => {setMediumValue(v);}}/>
-                    <KTextField {...args} small value={smallValue} onChange={(v) => {setSmallValue(v);}}/>
-                </Item>
-                <Item label={'Disabled TextField'}>
-                    <KTextField {...args} large value={largeValue} disabled onChange={(v) => {setLargeValue(v);}}/>
-                    <KTextField {...args} medium value={mediumValue} disabled onChange={(v) => {setMediumValue(v);}}/>
-                    <KTextField {...args} small value={smallValue} disabled onChange={(v) => {setSmallValue(v);}}/>
-                </Item>
-
-            </Container>
-            <DarkContainer>
-                <Item label={'Dark Mode - Default TextField'} className={'dark'}>
-                    <KTextField {...args} large value={largeValue} onChange={(v) => {setLargeValue(v);}}/>
-                    <KTextField {...args} medium value={mediumValue} onChange={(v) => {setMediumValue(v);}}/>
-                    <KTextField {...args} small value={smallValue} onChange={(v) => {setSmallValue(v);}}/>
-                </Item>
-                <Item label={'Dark Mode - Disabled TextField'} className={'dark'}>
-                    <KTextField {...args} large value={largeValue} disabled onChange={(v) => {setLargeValue(v);}}/>
-                    <KTextField {...args} medium value={mediumValue} disabled onChange={(v) => {setMediumValue(v);}}/>
-                    <KTextField {...args} small value={smallValue} disabled onChange={(v) => {setSmallValue(v);}}/>
-                </Item>
-            </DarkContainer>
-        </>
+        <Container>
+            <Item label={'Default TextField'}>
+                <KTextField {...args} large value={largeValue} onChange={(v) => {setLargeValue(v);}}/>
+                <KTextField medium value={mediumValue} onChange={(v) => {setMediumValue(v);}}/>
+                <KTextField small value={smallValue} onChange={(v) => {setSmallValue(v);}}/>
+            </Item>
+            <Item label={'Password'}>
+                <KTextField large password value={largeValue} onChange={(v) => {setLargeValue(v);}}/>
+                <KTextField medium password value={mediumValue} onChange={(v) => {setMediumValue(v);}}/>
+                <KTextField small password value={smallValue} onChange={(v) => {setSmallValue(v);}}/>
+            </Item>
+            <Item label={'Label - Direction: Column'}>
+                <KTextField label={'아이디'} column large value={largeValue} onChange={(v) => {setLargeValue(v);}}/>
+                <KTextField label={'아이디'} column medium value={mediumValue} onChange={(v) => {setMediumValue(v);}}/>
+                <KTextField label={'아이디'} column small value={smallValue} onChange={(v) => {setSmallValue(v);}}/>
+            </Item>
+            <Item label={'Label - Direction: Row'}>
+                <KTextField label={'아이디'} row large value={largeValue} onChange={(v) => {setLargeValue(v);}}/>
+                <KTextField label={'아이디'} row medium value={mediumValue} onChange={(v) => {setMediumValue(v);}}/>
+                <KTextField label={'아이디'} row small value={smallValue} onChange={(v) => {setSmallValue(v);}}/>
+            </Item>
+            <Item label={'Disabled'}>
+                <KTextField label={'아이디'} large value={largeValue} disabled onChange={(v) => {setLargeValue(v);}}/>
+                <KTextField label={'아이디'} medium value={mediumValue} disabled onChange={(v) => {setMediumValue(v);}}/>
+                <KTextField label={'아이디'} small value={smallValue} disabled onChange={(v) => {setSmallValue(v);}}/>
+            </Item>
+        </Container>
     );
 };
 

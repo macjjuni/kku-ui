@@ -1,57 +1,49 @@
-import {CSSProperties, ReactNode} from 'react';
+import {CSSProperties, ReactNode, memo} from 'react';
+import DarkModeButton from './DarkModeButton';
 
 const containerStyle: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    borderRadius: '8px',
-    border: '1px solid #d1d1d1',
+    gap: '24px',
 };
 
-const darkContainerStyle: CSSProperties = {
-    ...containerStyle,
-    background: '#212121',
-    color: '#fff',
-    marginTop: '16px',
-};
+const darkContainerStyle: CSSProperties = {...containerStyle, background: '#212121', color: '#fff'};
 
-export const Container = ({children}: { children: ReactNode }) => (
-    <div style={containerStyle}>
+const YetMemoContainer = ({children, dark}: { children: ReactNode, dark?: boolean }) => (
+    <div style={!dark ? containerStyle : darkContainerStyle} className={dark ? 'dark' : ''}>
+        <DarkModeButton />
         {children}
     </div>
 );
 
-export const DarkContainer = ({children}: { children: ReactNode }) => (
-    <div style={darkContainerStyle}>
-        {children}
-    </div>
-);
+export const Container = memo(YetMemoContainer);
 
 const titleStyle: CSSProperties = {
     display: 'block',
     width: '100%',
-    fontSize: '18px',
+    fontSize: '24px',
     fontWeight: '500',
-    padding:'0 0 16px 0',
-    borderBottom: '1px solid #d1d1d1',
-}
+};
 
 const defaultItemStyle: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: '20px',
-    width: '100%',
-    padding: '16px'
-}
+    padding: '20px',
+};
 
 
-export const Item = ({label, children, className}: { label: string; children: ReactNode, className?: string }) => (
+const YetMemoItem = ({label, children, className}: { label: string; children: ReactNode, className?: string }) => (
     <div style={defaultItemStyle}
-        className={className}>
+         className={className}>
         <h2 style={titleStyle}>{label}</h2>
+        <div style={{borderBottom: '1px solid #d4d4d4', width: '100%'}} />
         <div style={{display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap'}}>
             {children}
         </div>
     </div>
 );
+
+export const Item = memo(YetMemoItem);
