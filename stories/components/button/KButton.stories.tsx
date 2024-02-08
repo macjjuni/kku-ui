@@ -72,8 +72,9 @@ const Template = (args: KButtonProps) => {
             </Item>
             <Item label={'Dark Mode Default Button'} className={'dark'}>
                 <KButton {...args} large label={'안녕하세요'}/>
-                <KButton {...args} medium label={'Hello'}/>
-                <KButton {...args} small label={'こんにちは'}/>
+                <KButton {...args} large label={'Hello'}/>
+                <KButton {...args} medium label={'こんにちは'}/>
+                <KButton {...args} small label={'kku.dev'}/>
                 <KButton {...args} large disabled label={'Disabled'}/>
                 <KButton ref={loadButtonRef4} {...args} large label={'Loading'} />
             </Item>
