@@ -32,6 +32,10 @@ const hexToRgbWithAlpha = (hexCode: string): number[] => {
 };
 
 const shadeColor = (baseColor: string, amount: number): string => {
+  if (!baseColor.match(/^(rgb(a?)|#)/)) {
+    return baseColor;
+  }
+
   const isRGBA = baseColor.startsWith('rgba');
   const baseColorRGB = hexToRgbWithAlpha(baseColor);
   const alpha = isRGBA ? baseColorRGB.pop() : 1;
@@ -41,6 +45,10 @@ const shadeColor = (baseColor: string, amount: number): string => {
 };
 
 const tintColor = (baseColor: string, amount: number): string => {
+  if (!baseColor.match(/^(rgb(a?)|#)/)) {
+    return baseColor;
+  }
+
   const isRGBA = baseColor.startsWith('rgba');
   const baseColorRGB = hexToRgbWithAlpha(baseColor);
   const alpha = isRGBA ? baseColorRGB.pop() : 1;

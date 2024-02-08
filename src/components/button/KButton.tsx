@@ -99,7 +99,9 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   const onMouseEnter = useCallback((): void => {
 
     if ((props.variant === 'primary' || props.primary) && props.color) {
-      rootRef.current.style.background = colorUtil.shadeColor(props.color, 4);
+      const hoverColor = colorUtil.shadeColor(props.color, 10);
+      rootRef.current.style.background = hoverColor;
+      rootRef.current.style.borderColor = hoverColor;
     }
   }, [props.variant, props.primary, props.color]);
 
