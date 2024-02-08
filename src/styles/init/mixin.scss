@@ -1,19 +1,51 @@
 
-@mixin k-head-1 {
-    font-size: $k-font-size-head-1;
-    line-height: $k-line-height-head-1;
+@mixin k-title-1 {
+    font-size: $k-font-size-title-1;
+    line-height: $k-line-height-title-1;
     font-weight: $k-font-weight-body;
 }
 
-@mixin k-head-2 {
-    font-size: $k-font-size-head-2;
-    line-height: $k-line-height-head-2;
+@mixin k-title-2 {
+    font-size: $k-font-size-title-2;
+    line-height: $k-line-height-title-2;
     font-weight: $k-font-weight-body;
 }
 
-@mixin k-head-3 {
-    font-size: $k-font-size-head-3;
-    line-height: $k-line-height-head-3;
+@mixin k-title-3 {
+    font-size: $k-font-size-title-3;
+    line-height: $k-line-height-title-3;
+    font-weight: $k-font-weight-body;
+}
+
+@mixin k-sub-1 {
+    font-size: $k-font-size-sub-1;
+    line-height: $k-line-height-sub-1;
+    font-weight: $k-font-weight-sub;
+}
+
+@mixin k-sub-2 {
+    font-size: $k-font-size-sub-2;
+    line-height: $k-line-height-sub-2;
+    font-weight: $k-font-weight-sub;
+}
+
+@mixin k-sub-3 {
+    font-size: $k-font-size-sub-3;
+    line-height: $k-line-height-sub-3;
+    font-weight: $k-font-weight-sub;
+}
+
+@mixin k-label-1 {
+    font-size: $k-font-size-label-1;
+    line-height: $k-line-height-label-1;
+    font-weight: $k-font-weight-body;
+}@mixin k-label-2 {
+    font-size: $k-font-size-label-2;
+    line-height: $k-line-height-label-2;
+    font-weight: $k-font-weight-body;
+}@mixin k-label-3 {
+    font-size: $k-font-size-label-3;
+    line-height: $k-line-height-label-3;
     font-weight: $k-font-weight-body;
 }
 

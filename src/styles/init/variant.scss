@@ -59,23 +59,41 @@ $k-disabled-font-color: lighten($k-default-font-color, 64%) !default;
 
 // region [Fonts Style]
 
-$k-font-size-head-1: 28px !default;
-$k-font-size-head-2: 24px !default;
-$k-font-size-head-3: 20px !default;
+$k-font-size-title-1: 26px !default;
+$k-font-size-title-2: 24px !default;
+$k-font-size-title-3: 22px !default;
 
-$k-line-height-head-1: 30px !default;
-$k-line-height-head-2: 26px !default;
-$k-line-height-head-3: 22px !default;
+$k-line-height-title-1: 28px !default;
+$k-line-height-title-2: 26px !default;
+$k-line-height-title-3: 24px !default;
 
-$k-font-weight-head: 500 !default;
+$k-font-size-sub-1: 22px !default;
+$k-font-size-sub-2: 20px !default;
+$k-font-size-sub-3: 18px !default;
+
+$k-font-size-label-1: 16px !default;
+$k-font-size-label-2: 14px !default;
+$k-font-size-label-3: 12px !default;
+
+$k-line-height-label-1: 18px !default;
+$k-line-height-label-2: 16px !default;
+$k-line-height-label-3: 14px !default;
+
+$k-line-height-sub-1: 24px !default;
+$k-line-height-sub-2: 22px !default;
+$k-line-height-sub-3: 20px !default;
+
+$k-font-weight-title: 600 !default;
+$k-font-weight-body: 400 !default;
+$k-font-weight-sub: 500 !default;
 
 $k-font-size-body-1: 18px !default;
 $k-font-size-body-2: 16px !default;
 $k-font-size-body-3: 14px !default;
 
-$k-line-height-body-1: 22px !default;
-$k-line-height-body-2: 20px !default;
-$k-line-height-body-3: 18px !default;
+$k-line-height-body-1: 20px !default;
+$k-line-height-body-2: 18px !default;
+$k-line-height-body-3: 16px !default;
 
 $k-font-weight-body-1: 500 !default;
 $k-font-weight-body-2: 400 !default;

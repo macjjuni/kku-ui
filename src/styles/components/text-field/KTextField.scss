@@ -1,106 +1,125 @@
 
 .k-text-field {
-
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-
-    border: 1px solid $k-border-default-color;
-    border-radius: $k-border-radius-default;
-    background: $k-white-color;
-    caret-color: $k-default-font-color;
+    display: flex;
+    gap: $k-spacing-6;
+    min-width: 280px;
     font-size: 0;
 
-    @include k-transition-3;
+    // Label Direction
+    &.k-text-field--column { flex-direction: column; }
+    &.k-text-field--row { flex-direction: row; }
 
-    .k-text-field__input {
-        width: 100%;
-        padding: 0;
-        border: none;
-        outline: none;
-        color: $k-default-font-color;
-        background: $k-white-color;
+    &.k-text-field--row {
+        gap: $k-spacing-16;
+
+        .k-text-field__label {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            white-space: nowrap;
+            color: $k-default-font-color;
+        }
     }
 
-    &:is(:hover, :focus-within) { border-color: $k-border-default-hover-color; }
+    .k-text-field__wrap {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
 
-    &.k-text-field--disabled {
-        background: $k-white-disabled-color;
+        border: 1px solid $k-border-default-color;
+        border-radius: $k-border-radius-default;
+        background: $k-white-color;
+        caret-color: $k-default-font-color;
 
-        &:hover {
-            border-color: $k-border-default-color;
-        }
+        @include k-transition-3;
+
+        &:is(:hover, :focus-within) { border-color: $k-border-default-hover-color; }
 
         .k-text-field__input {
-            color: $k-disabled-font-color;
-            background: $k-white-disabled-color;
+            width: 100%;
+            padding: 0;
+            border: none;
+            outline: none;
+            color: $k-default-font-color;
+
+            transition-property: background-color;
+            @include k-transition-3;
         }
     }
 
 
+    .dark &.k-text-field--disabled, &.k-text-field--disabled {
 
+        .k-text-field__wrap {
+            background: $k-white-disabled-color;
+            cursor: not-allowed;
 
+            &:hover { border-color: $k-border-default-color; }
 
-    &.k-text-field--disabled {
-        cursor: not-allowed;
-        .k-text-field__input { cursor: not-allowed;}
+            .k-text-field__input {
+                color: $k-disabled-font-color;
+                background: $k-white-disabled-color;
+                cursor: not-allowed;
+            }
+        }
     }
 
+    // Type: Password
+    &.k-text-field__input--password {
+
+        &.k-text-field--large .k-text-field__wrap > .k-text-field__input { letter-spacing: 6px; }
+        &.k-text-field--medium .k-text-field__wrap > .k-text-field__input { letter-spacing: 4px; }
+        &.k-text-field--small .k-text-field__wrap > .k-text-field__input { letter-spacing: 2px; }
+    }
 
     // Size
     &.k-text-field--large {
+        .k-text-field__label { @include k-label-1; }
 
-        padding: $k-spacing-8 $k-spacing-16;
-
-        .k-text-field__input { @include k-body-1; }
-
+        .k-text-field__wrap {
+            padding: $k-spacing-10 $k-spacing-16;
+            .k-text-field__input { @include k-body-1; }
+        }
     }
     &.k-text-field--medium {
+        .k-text-field__label { @include k-label-2; }
 
-        padding: $k-spacing-6 $k-spacing-12;
-
-        .k-text-field__input { @include k-body-2; }
-
+        .k-text-field__wrap {
+            padding: $k-spacing-8 $k-spacing-12;
+            .k-text-field__input { @include k-body-2; }
+        }
     }
     &.k-text-field--small {
+        .k-text-field__label { @include k-label-3; }
 
-        padding: $k-spacing-4 $k-spacing-8;
-
-        .k-text-field__input { @include k-body-3; }
+        .k-text-field__wrap {
+            padding: $k-spacing-6 $k-spacing-8;
+            .k-text-field__input { @include k-body-3; }
+        }
     }
 }
 
 // region [Dark Mode]
-
 .#{$k-dark-class-name} .k-text-field {
 
+    &.k-text-field--row, &.k-text-field--column {
 
-    border: 1px solid $k-dark-mode-border-default-color;
-    border-radius: $k-border-radius-default;
-    background: $k-dark-mode-background;
-    caret-color: $k-white-color;
-
-    font-size: 0;
-
-    &:is(:hover, :focus-within) { border-color: $k-dark-mode-border-default-hover-color; }
-
-    .k-text-field__input {
-        color: $k-dark-mode-font-color;
-        background: $k-dark-mode-background;
+        .k-text-field__label { color: $k-dark-mode-font-color; }
     }
 
-    $k-text-field-disabled-color: lighten($k-dark-mode-background, 10%);
+    .k-text-field__wrap {
+        border: 1px solid $k-dark-mode-border-default-color;
+        border-radius: $k-border-radius-default;
+        background: $k-dark-mode-background;
+        caret-color: $k-white-color;
+        font-size: 0;
 
-    &.k-text-field--disabled {
-        background: $k-text-field-disabled-color;
-
-        &:hover {
-            border-color: $k-dark-mode-border-default-color;
-        }
+        &:is(:hover, :focus-within) { border-color: $k-dark-mode-border-default-hover-color; }
 
         .k-text-field__input {
-            color: $k-dark-mode-disabled-font-color;
-            background: $k-text-field-disabled-color;
+            color: $k-dark-mode-font-color;
+            background: $k-dark-mode-background;
         }
     }
 }
