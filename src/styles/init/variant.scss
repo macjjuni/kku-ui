@@ -3,8 +3,8 @@
 
 // region [Percent]
 
-$k-background-hover-percent: 6% !default;
-$k-background-disabled-percent: 12% !default;
+$k-background-hover-percent: 8% !default;
+$k-background-disabled-percent: 8% !default;
 
 // endregion
 
@@ -52,7 +52,7 @@ $k-border-default-hover-color: $k-gray-color-900;
 // region [Font Color]
 
 $k-default-font-color: $k-gray-color-800 !default;
-$k-disabled-font-color: lighten($k-default-font-color, 56%) !default;
+$k-disabled-font-color: lighten($k-default-font-color, 64%) !default;
 
 // endregion
 

@@ -8,7 +8,7 @@ export interface KBaseProp {
 }
 
 // 🎁 - Size Properties
-export const sizes = { large: 'large', medium: 'medium', small: 'small' };
+export const sizes = { large: 'large', medium: 'medium', small: 'small' } as const;
 export type SizeType = (typeof sizes)[keyof typeof sizes];
 
 
@@ -21,7 +21,7 @@ export interface KSizeProp {
 }
 
 // 🍭 - Variant Properties
-export const variants = { primary: 'primary', outlined: 'outlined' };
+export const variants = { primary: 'primary', outlined: 'outlined' } as const;
 export type VariantType = (typeof variants)[keyof typeof variants];
 
 export interface KVariantProp {

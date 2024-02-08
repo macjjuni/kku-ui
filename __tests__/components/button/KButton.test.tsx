@@ -6,6 +6,10 @@ import { KButton, KButtonRefs } from '@/components';
 
 const mockOnClick = jest.fn();
 
+jest.mock('@/common/util/color', () => ({
+  tintColor: jest.fn(() => 'red'),
+}));
+
 describe('KButton', () => {
 
 
