@@ -35,15 +35,22 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
       if (props.className) { clazz.push(props.className); }
       if (isLoad) { clazz.push(`${identity}--loading`); }
+      if (props.disabled && props.color && (props.primary || props.variant === 'primary')) {
+        clazz.push(`${identity}--disabled`);
+      }
 
+      if (props.variant && (props.outlined || props.primary)) {
+        throw Error('Error: variant and primary or outlined attributes cannot be duplicated.');
+      }
       initVariant(clazz, identity, props.variant, props.primary, props.outlined);
       initSize(clazz, identity, props.size, props.large, props.medium, props.small);
 
       return clazz.join(' ');
     },
     [
-      isLoad, props.className, props.variant, props.primary,
-      props.outlined, props.large, props.medium, props.small, props.size],
+      isLoad, props.className, props.variant, props.primary, props.disabled,
+      props.outlined, props.large, props.medium, props.small, props.size,
+      props.color],
   );
 
   const rootStyle = useMemo(() => {
@@ -92,7 +99,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   const onMouseEnter = useCallback((): void => {
 
     if ((props.variant === 'primary' || props.primary) && props.color) {
-      rootRef.current.style.background = colorUtil.shadeColor(props.color, 12);
+      rootRef.current.style.background = colorUtil.shadeColor(props.color, 4);
     }
   }, [props.variant, props.primary, props.color]);
 
