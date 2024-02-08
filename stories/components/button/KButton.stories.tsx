@@ -18,11 +18,15 @@ const Template = (args: KButtonProps) => {
     const loadButtonRef1 = useRef<KButtonRefs>(null);
     const loadButtonRef2 = useRef<KButtonRefs>(null);
     const loadButtonRef3 = useRef<KButtonRefs>(null);
+    const loadButtonRef4 = useRef<KButtonRefs>(null);
+    const loadButtonRef5 = useRef<KButtonRefs>(null);
 
     useEffect(() => {
         loadButtonRef1.current!.startLoading();
         loadButtonRef2.current!.startLoading();
         loadButtonRef3.current!.startLoading();
+        loadButtonRef4.current!.startLoading();
+        loadButtonRef5.current!.startLoading();
     }, []);
 
     return (
@@ -63,9 +67,11 @@ const Template = (args: KButtonProps) => {
                 <KButton large label={'Disabled'} disabled color={'#7B66FF'}/>
             </Item>
             <Item label={'Loading Button'}>
-                <KButton ref={loadButtonRef1} primary color={'#7B66FF'} large label={'Large'}/>
-                <KButton ref={loadButtonRef2} outlined medium label={'Medium'}/>
-                <KButton ref={loadButtonRef3} primary color={'#FF9B9B'} small label={'Small'}/>
+                <KButton ref={loadButtonRef1} large label={'Loading'}/>
+                <KButton ref={loadButtonRef2} outlined large label={'Loading'}/>
+                <KButton ref={loadButtonRef3} primary large label={'Loading'} color={'#5FBDFF'}/>
+                <KButton ref={loadButtonRef4} primary medium color={'#7B66FF'} label={'Loading'}/>
+                <KButton ref={loadButtonRef5} primary color={'#FF9B9B'} small label={'Loading'}/>
             </Item>
         </Container>
     );

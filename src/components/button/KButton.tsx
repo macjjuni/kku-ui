@@ -30,11 +30,11 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
   const rootClass = useMemo(
     () => {
-
       const clazz = [identity];
 
       if (props.className) { clazz.push(props.className); }
       if (isLoad) { clazz.push(`${identity}--loading`); }
+
       if (props.disabled && props.color && (props.primary || props.variant === 'primary')) {
         clazz.push(`${identity}--disabled`);
       }
@@ -42,13 +42,13 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
       if (props.variant && (props.outlined || props.primary)) {
         throw Error('Error: variant and primary or outlined attributes cannot be duplicated.');
       }
+
       initVariant(clazz, identity, props.variant, props.primary, props.outlined);
       initSize(clazz, identity, props.size, props.large, props.medium, props.small);
 
       return clazz.join(' ');
     },
-    [
-      isLoad, props.className, props.variant, props.primary, props.disabled,
+    [isLoad, props.className, props.variant, props.primary, props.disabled,
       props.outlined, props.large, props.medium, props.small, props.size,
       props.color],
   );
@@ -85,8 +85,8 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
   const onMouseDown = useCallback((e: MouseEvent<HTMLButtonElement>): void => {
 
-    if (!props.disabled) { ripple?.register(e); }
-  }, [props.disabled, ripple]);
+    if (!props.disabled && !isLoad) { ripple?.register(e); }
+  }, [props.disabled, isLoad, ripple]);
 
   const onMouseUp = useCallback((e: MouseEvent<HTMLButtonElement>): void => {
 
@@ -111,7 +111,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
     if ((props.variant === 'primary' || props.primary) && props.color) {
       rootRef.current.style.background = props.color;
     }
-  }, [props.variant, props.primary, props.color, ripple]);
+  }, [props.variant, props.primary, props.outlined, props.color, ripple]);
 
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLButtonElement>): void => {
 
