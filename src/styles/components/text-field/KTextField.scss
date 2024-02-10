@@ -1,23 +1,45 @@
-
 .k-text-field {
     display: flex;
     gap: $k-spacing-6;
     min-width: 280px;
     font-size: 0;
 
-    // Label Direction
-    &.k-text-field--column { flex-direction: column; }
-    &.k-text-field--row { flex-direction: row; }
+    // Label Style - Common
+    .k-text-field__label__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
+        .k-text-field__label__text {
+            display: inline-flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: $k-spacing-2;
+            white-space: nowrap;
+            color: $k-default-font-color;
+
+            &.k-text-field__label__text--focus {
+                color: $k-primary-color;
+                transition-property: color;
+                @include k-transition-3;
+            }
+        }
+    }
+
+    // Label Style - Direction:Column
+    &.k-text-field--column {
+        flex-direction: column;
+    }
+
+    // Label Style - Direction:Row
     &.k-text-field--row {
+        flex-direction: row;
         gap: $k-spacing-16;
 
-        .k-text-field__label {
+        .k-text-field__label__container {
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            white-space: nowrap;
-            color: $k-default-font-color;
         }
     }
 
@@ -34,7 +56,7 @@
 
         @include k-transition-3;
 
-        &:is(:hover, :focus-within) { border-color: $k-border-default-hover-color; }
+        &:hover, &:focus-within { border-color: $k-primary-hover-color; }
 
         .k-text-field__input {
             width: 100%;
@@ -45,6 +67,10 @@
 
             transition-property: background-color;
             @include k-transition-3;
+
+            &::placeholder {
+                color: $k-placeholder-font-color;
+            }
         }
     }
 
@@ -73,9 +99,24 @@
         &.k-text-field--small .k-text-field__wrap > .k-text-field__input { letter-spacing: 2px; }
     }
 
+    &.k-text-field__input--required {
+
+        .k-text-field__label__container {
+
+            .k-text-field__label__text:after {
+                content: '*';
+                color: $k-secondary-error;
+            }
+        }
+    }
+
     // Size
     &.k-text-field--large {
-        .k-text-field__label { @include k-label-1; }
+
+        .k-text-field__label__container {
+
+            .k-text-field__label__text { @include k-label-1; }
+        }
 
         .k-text-field__wrap {
             padding: $k-spacing-10 $k-spacing-16;
@@ -83,7 +124,11 @@
         }
     }
     &.k-text-field--medium {
-        .k-text-field__label { @include k-label-2; }
+
+        .k-text-field__label__container {
+
+            .k-text-field__label__text { @include k-label-2; }
+        }
 
         .k-text-field__wrap {
             padding: $k-spacing-8 $k-spacing-12;
@@ -91,7 +136,11 @@
         }
     }
     &.k-text-field--small {
-        .k-text-field__label { @include k-label-3; }
+
+        .k-text-field__label__container {
+
+            .k-text-field__label__text { @include k-label-3; }
+        }
 
         .k-text-field__wrap {
             padding: $k-spacing-6 $k-spacing-8;
@@ -105,7 +154,18 @@
 
     &.k-text-field--row, &.k-text-field--column {
 
-        .k-text-field__label { color: $k-dark-mode-font-color; }
+        .k-text-field__label__container {
+
+            .k-text-field__label__text {
+                color: $k-dark-mode-font-color;
+
+                &.k-text-field__label__text--focus {
+                    color: $k-primary-color;
+                    transition-property: color;
+                    @include k-transition-3;
+                }
+            }
+        }
     }
 
     .k-text-field__wrap {
@@ -115,7 +175,7 @@
         caret-color: $k-white-color;
         font-size: 0;
 
-        &:is(:hover, :focus-within) { border-color: $k-dark-mode-border-default-hover-color; }
+        &:hover, &:focus-within { border-color: $k-primary-hover-color; }
 
         .k-text-field__input {
             color: $k-dark-mode-font-color;

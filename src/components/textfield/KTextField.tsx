@@ -1,4 +1,5 @@
-import { forwardRef, memo, Ref, useCallback, useImperativeHandle, useMemo, useRef, useId, ChangeEvent, CSSProperties } from 'react';
+import { ChangeEvent, CSSProperties, forwardRef, memo, Ref, useCallback,
+  useId, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import { KTextFieldProps, KTextFieldRefs } from '@/components/textfield/KTextField.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { getIdentityName } from '@/common/base/base';
@@ -11,6 +12,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
 
   const inputRef = useRef<HTMLInputElement>(null);
   const uniqueId = `${useId()}-${identity}-input`;
+  const [isFocus, setIsFocus] = useState<boolean>(false);
 
   useImperativeHandle(ref, () => ({
     focus: () => { inputRef.current?.focus(); },
@@ -43,6 +45,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
     }
 
     if (props.password) { clazz.push(`${identity}__input--password`); }
+    if (props.required) { clazz.push(`${identity}__input--required`); }
 
     return clazz.join(' ');
   }, [
@@ -59,8 +62,18 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
       styles.borderColor = props.color;
     }
     if (props.width) { styles.width = props.width; }
+
     return styles;
   }, [props.style, props.color]);
+
+  const labelClass = useMemo(() => {
+    const clazz = [`${identity}__label__text`];
+
+    if (!props.label) { return clazz.join(' '); }
+    if (isFocus) { clazz.push(`${identity}__label__text--focus`); }
+
+    return clazz.join(' ');
+  }, [props.label, isFocus]);
 
   // endregion
 
@@ -72,18 +85,41 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
     if (props.onChange) props.onChange(changeValue);
   }, []);
 
+  const onFocus = useCallback(() => {
+    if (!props.label) { return; }
+    setIsFocus(true);
+  }, [props.label]);
+
+  const onblur = useCallback(() => {
+    if (!props.label) { return; }
+    setIsFocus(false);
+  }, [props.label]);
+
   // endregion
 
 
   return (
-    <div className={rootClass} style={rootStyle}>
-      {
-        props.label && (
-          <label htmlFor={props.id ? props.id : uniqueId} className={`${identity}__label`}>
-            {props.label}
-          </label>
-        )
-      }
+    <div className={rootClass} style={rootStyle} data-testid='k-text-field'>
+      <div className={`${identity}__label__container`}>
+        {
+          props.label && (
+            <label htmlFor={props.id ? props.id : uniqueId} className={labelClass}>
+              {props.label}
+            </label>
+          )
+        }
+        {
+          props.rightAction && (
+            (!props.labelDirection && !props.row)
+                || (props.labelDirection === 'column' && !props.column)
+                || (!props.labelDirection && props.column)
+          ) && (
+            <div className={`${identity}__label__right-action`}>
+              {props.rightAction}
+            </div>
+          )
+        }
+      </div>
       <div className={`${identity}__wrap`}>
         <input
             id={props.id ? props.id : uniqueId}
@@ -92,7 +128,10 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
             type={props.password ? 'password' : 'input'}
             value={props.value}
             onChange={onChangeValue}
+            onFocus={onFocus}
+            onBlur={onblur}
             disabled={props.disabled}
+            placeholder={props.placeholder}
             // aria-describedby='message' // FIXME: Error Message - 웹접근성
         />
       </div>
