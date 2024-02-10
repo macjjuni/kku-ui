@@ -1,4 +1,4 @@
-import { KeyboardEvent } from 'react';
+import { KeyboardEvent, ReactNode } from 'react';
 import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 
 
@@ -7,30 +7,34 @@ type LabelDirectionType = typeof labelDirection[keyof typeof labelDirection];
 
 export interface KTextFieldProps extends KBaseProp, KSizeProp {
 
-  value: string;
+  value: string
 
-  label?: string;
-  labelDirection?: LabelDirectionType;
+  label?: string
+  labelDirection?: LabelDirectionType
   column?: boolean
   row?: boolean
 
-  disabled?: boolean;
+  disabled?: boolean
+  placeholder?: string
+  required?: boolean
 
-  onChange?: (value: string) => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
-  onKeyDown?: (e?: KeyboardEvent<HTMLInputElement>) => void;
-  onKeyUp?: (e?: KeyboardEvent<HTMLInputElement>) => void;
+  rightAction?: ReactNode
 
-  color?: string;
-  width?: string;
+  onChange?: (value: string) => void
+  onFocus?: () => void
+  onBlur?: () => void
+  onKeyDown?: (e?: KeyboardEvent<HTMLInputElement>) => void
+  onKeyUp?: (e?: KeyboardEvent<HTMLInputElement>) => void
 
-  password?: boolean;
+  color?: string
+  width?: string
+
+  password?: boolean
 }
 
 export interface KTextFieldRefs {
-  focus: () => void;
-  blur: () => void;
-  validate: () => void;
-  value: string;
+  focus: () => void
+  blur: () => void
+  validate: () => void
+  value: string
 }
