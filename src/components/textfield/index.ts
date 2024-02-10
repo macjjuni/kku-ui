@@ -1,1 +1,1 @@
-export { default as TTextField } from './KTextField';
+export { default as KTextField } from './KTextField';

@@ -99,7 +99,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
 
 
   return (
-    <div className={rootClass} style={rootStyle}>
+    <div className={rootClass} style={rootStyle} data-testid='k-text-field'>
       <div className={`${identity}__label__container`}>
         {
           props.label && (
