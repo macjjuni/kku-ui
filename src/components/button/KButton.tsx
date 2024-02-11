@@ -10,6 +10,10 @@ const identity = getIdentityName('button');
 
 const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
+  if (props.label && props.children) {
+    throw Error('Error: label and children attributes cannot be duplicated.');
+  }
+
   // region [Hooks]
 
   const rootRef = useRef() as MutableRefObject<HTMLButtonElement>;
@@ -146,11 +150,11 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
     >
       {
         (props.children || props.label)
-                && (props.label && (
+                && (
                   <span className={`${identity}__content`}>
                     {props.children || props.label}
                   </span>
-                ))
+                )
       }
       {
         isLoad && (

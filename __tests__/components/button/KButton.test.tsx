@@ -12,13 +12,11 @@ jest.mock('@/common/util/color', () => ({
 
 describe('KButton', () => {
 
-
   const labelText = 'k-Button';
 
   beforeEach(() => {
     mockOnClick.mockClear();
   });
-
 
   test('style prop render test', () => {
 
@@ -53,17 +51,15 @@ describe('KButton', () => {
     const root = screen.getByText(labelText);
 
     expect(root).toBeInTheDocument();
-    // label prop 을 사용하면 span 태그에 들어감
     expect(root).toHaveClass('k-button__content');
   });
 
   test('children prop render test', () => {
 
-    render(<KButton>{labelText}</KButton>);
-    const root = screen.getByRole('button');
+    render(<KButton><div data-testid='div-test-id'>labelText</div></KButton>);
+    const childrenRoot = screen.getByTestId('div-test-id');
 
-    expect(root).toBeInTheDocument();
-    expect(root).toHaveClass('k-button');
+    expect(childrenRoot).toBeInTheDocument();
   });
 
   test('disabled prop render test', () => {
@@ -140,5 +136,13 @@ describe('KButton', () => {
     act(() => { buttonRef.current?.stopLoading(); });
 
     expect(root).not.toHaveClass('k-button--loading');
+  });
+
+  test('KButton label, children prop cannot be duplicated.', async () => {
+    try {
+      render(<KButton label={labelText}>{labelText}</KButton>);
+    } catch (err) {
+      expect(err).toEqual(new Error('Error: label and children attributes cannot be duplicated.'));
+    }
   });
 });
