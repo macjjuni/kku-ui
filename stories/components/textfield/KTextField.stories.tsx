@@ -57,9 +57,9 @@ const Template = (args: KTextFieldProps) => {
                             onChange={(v) => {setSmallValue(v);}}/>
             </Item>
             <Item label={'Placeholder'}>
-                <KTextField label={'아이디'} large placeholder={'아이디를 입력해주세요.'} value={''} onChange={(v) => {setLargeValue(v);}}/>
-                <KTextField label={'아이디'} medium placeholder={'아이디를 입력해주세요.'} value={''} onChange={(v) => {setMediumValue(v);}}/>
-                <KTextField label={'아이디'} small placeholder={'아이디를 입력해주세요.'} value={''} onChange={(v) => {setSmallValue(v);}}/>
+                <KTextField label={'아이디'} large placeholder={'아이디를 입력해주세요.'} value={''} />
+                <KTextField label={'아이디'} medium placeholder={'아이디를 입력해주세요.'} value={''} />
+                <KTextField label={'아이디'} small placeholder={'아이디를 입력해주세요.'} value={''} />
             </Item>
             <Item label={'Disabled'}>
                 <KTextField label={'아이디'} large value={largeValue} disabled onChange={(v) => {setLargeValue(v);}}/>

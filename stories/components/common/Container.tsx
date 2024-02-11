@@ -30,7 +30,6 @@ const defaultItemStyle: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    gap: '20px',
     padding: '20px',
 };
 
@@ -39,7 +38,7 @@ const YetMemoItem = ({label, children, className}: { label: string; children: Re
     <div style={defaultItemStyle}
          className={className}>
         <h2 style={titleStyle}>{label}</h2>
-        <div style={{borderBottom: '1px solid #d4d4d4', width: '100%'}} />
+        <div style={{borderBottom: '1px solid #d4d4d4', width: '100%', margin: '8px 0 16px'}} />
         <div style={{display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap'}}>
             {children}
         </div>
