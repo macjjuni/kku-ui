@@ -103,7 +103,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
       <div className={`${identity}__label__container`}>
         {
           props.label && (
-            <label htmlFor={props.id ? props.id : uniqueId} className={labelClass}>
+            <label htmlFor={props.id ? props.id : uniqueId} className={labelClass} data-testid='k-text-field-label'>
               {props.label}
             </label>
           )
@@ -132,6 +132,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
             onBlur={onblur}
             disabled={props.disabled}
             placeholder={props.placeholder}
+            maxLength={props.maxLength}
             // aria-describedby='message' // FIXME: Error Message - 웹접근성
         />
       </div>

@@ -54,7 +54,7 @@ const Template = (args: KTextFieldProps) => {
                 <KTextField label={'아이디'} labelDirection={'row'} placeholder={'Label - Direction: Row'} medium value={mediumValue}
                             onChange={(v) => {setMediumValue(v);}} rightAction={RightAction}/>
                 <KTextField label={'아이디'} row placeholder={'Label - Direction: Row'} small value={smallValue}
-                            onChange={(v) => {setSmallValue(v);}}/>
+                            onChange={(v) => {setSmallValue(v);}} maxLength={10}/>
             </Item>
             <Item label={'Placeholder'}>
                 <KTextField label={'아이디'} large placeholder={'아이디를 입력해주세요.'} value={''} />
