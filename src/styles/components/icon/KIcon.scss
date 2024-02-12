@@ -1,0 +1,14 @@
+
+.k-icon {
+
+    color: $k-gray-color-500;
+    user-select: none;
+
+    &.k-icon--clickable { cursor: pointer; }
+    &.k-icon--disabled { cursor: not-allowed; }
+
+    // Sizes
+    &.k-icon--large { font-size: 42px; }
+    &.k-icon--medium { font-size: 36px; }
+    &.k-icon--small { font-size: 28px; }
+}
