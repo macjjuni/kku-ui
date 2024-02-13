@@ -20,7 +20,7 @@ describe('KButton', () => {
 
       const testStyle = { color: 'red', fontSize: '20px' };
       render(<KIcon icon='search' style={testStyle} />);
-      const root = screen.getByRole('button');
+      const root = screen.getByRole('img');
 
       expect(root).toHaveStyle(testStyle);
     });
@@ -29,7 +29,7 @@ describe('KButton', () => {
 
       const testClass = 'test-class-name';
       render(<KIcon icon='search' className={testClass} />);
-      const root = screen.getByRole('button');
+      const root = screen.getByRole('img');
 
       expect(root).toHaveClass(testClass);
     });
@@ -38,7 +38,7 @@ describe('KButton', () => {
 
       const testSize = 77;
       render(<KIcon icon='search' size={testSize} />);
-      const root = screen.getByRole('button');
+      const root = screen.getByRole('img');
 
       expect(root).toHaveStyle({ fontSize: `${testSize}px` });
     });
@@ -46,7 +46,7 @@ describe('KButton', () => {
     test('Clickable prop render test', () => {
 
       render(<KIcon icon='search' clickable />);
-      const root = screen.getByRole('button');
+      const root = screen.getByRole('img');
 
       expect(root).toHaveClass('k-icon--clickable');
     });
@@ -55,9 +55,25 @@ describe('KButton', () => {
 
       const testColor = '#eaeaea';
       render(<KIcon icon='search' color={testColor} />);
-      const root = screen.getByRole('button');
+      const root = screen.getByRole('img');
 
       expect(root).toHaveStyle({ color: testColor });
+    });
+
+    test('클릭 이벤트가 있을 때 role이 button으로 적용 된다.', async () => {
+
+      render(<KIcon icon='search' onClick={mockOnClick} />);
+      const root = screen.getByRole('button');
+
+      expect(root).toBeInTheDocument();
+    });
+
+    test('클릭 이벤트가 없을 때 role 이 img 로 적용 된다.', async () => {
+
+      render(<KIcon icon='search' />);
+      const root = screen.getByRole('img');
+
+      expect(root).toBeInTheDocument();
     });
 
 
