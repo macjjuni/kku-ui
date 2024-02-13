@@ -1,7 +1,7 @@
-import {
-  CSSProperties, forwardRef, memo, Ref, useCallback, useId, useImperativeHandle,
-  useMemo, useRef, KeyboardEvent,
-} from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import { CSSProperties, forwardRef, KeyboardEvent, memo, Ref, useCallback,
+  useId, useImperativeHandle, useMemo, useRef } from 'react';
 import { KIconProps, KIconRefs } from '@/components/icon/KIcon.interface';
 import { initDisabled } from '@/common/util/variation';
 import { getIdentityName } from '@/common/base/base';
@@ -86,8 +86,8 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
         data-testid='k-icon'
         onClick={onClick}
         onKeyDown={onKeyDown}
-        role='button'
-        tabIndex={0}
+        role={props.onClick ? 'button' : 'img'}
+        tabIndex={props.onClick ? 0 : -1}
     >
       {props.icon}
     </span>
