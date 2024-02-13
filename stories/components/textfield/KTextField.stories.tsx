@@ -16,9 +16,9 @@ type Story = StoryObj<KTextFieldProps>
 
 const Template = (args: KTextFieldProps) => {
 
-    const [largeValue, setLargeValue] = useState('Large');
-    const [mediumValue, setMediumValue] = useState('Medium');
-    const [smallValue, setSmallValue] = useState('Small');
+    const [largeValue, setLargeValue] = useState('');
+    const [mediumValue, setMediumValue] = useState('');
+    const [smallValue, setSmallValue] = useState('');
 
     const RightAction = useMemo(() => {
         const style: CSSProperties = {fontSize: '12px', textDecoration: 'underline'};
@@ -28,43 +28,43 @@ const Template = (args: KTextFieldProps) => {
     return (
         <Container>
             <Item label={'Default TextField'}>
-                <KTextField {...args} large value={largeValue} placeholder={'Default TextField'} onChange={(v) => {setLargeValue(v);}}/>
-                <KTextField medium value={mediumValue} placeholder={'Default TextField'} onChange={(v) => {setMediumValue(v);}}/>
-                <KTextField small value={smallValue} placeholder={'Default TextField'} onChange={(v) => {setSmallValue(v);}}/>
+                <KTextField {...args} large value={largeValue} placeholder={'Large'} onChange={(v) => {setLargeValue(v);}}/>
+                <KTextField medium value={mediumValue} placeholder={'Medium'} onChange={(v) => {setMediumValue(v);}}/>
+                <KTextField small value={smallValue} placeholder={'Small'} onChange={(v) => {setSmallValue(v);}}/>
             </Item>
             <Item label={'Password / required / right-action'}>
-                <KTextField large password required labelDirection={'column'}  label={'비밀번호'} rightAction={RightAction} value={largeValue}
+                <KTextField password labelDirection={'column'} label={'비밀번호'} value={largeValue}
                             onChange={(v) => {setLargeValue(v);}}/>
-                <KTextField medium password required column label={'비밀번호'} rightAction={RightAction} value={mediumValue}
+                <KTextField  password required column label={'비밀번호'} value={mediumValue}
                             onChange={(v) => {setMediumValue(v);}}/>
-                <KTextField small password required label={'비밀번호'} rightAction={RightAction} value={smallValue}
+                <KTextField  password required label={'비밀번호'} rightAction={RightAction} value={smallValue}
                             onChange={(v) => {setSmallValue(v);}}/>
             </Item>
-            <Item label={'Label - Direction: Column'}>
-                <KTextField label={'아이디'} column placeholder={'Label - Direction: Column'} large value={largeValue}
+            <Item label={'Label(Direction: Column)'}>
+                <KTextField label={'Column'} column placeholder={'Column'} large value={largeValue}
                             onChange={(v) => {setLargeValue(v);}}/>
-                <KTextField label={'아이디'} column placeholder={'Label - Direction: Column'} medium value={mediumValue}
+                <KTextField label={'Column'} column placeholder={'Column'} medium value={mediumValue}
                             onChange={(v) => {setMediumValue(v);}}/>
-                <KTextField label={'아이디'} column placeholder={'Label - Direction: Column'} small value={smallValue}
+                <KTextField label={'Column'} column placeholder={'Column'} small value={smallValue}
                             onChange={(v) => {setSmallValue(v);}}/>
             </Item>
-            <Item label={'Label - Direction: Row'}>
-                <KTextField label={'아이디'} row placeholder={'Label - Direction: Row'} large value={largeValue}
+            <Item label={'Label(Direction: Row)'}>
+                <KTextField label={'Row'} row placeholder={'Row'} large value={largeValue}
                             onChange={(v) => {setLargeValue(v);}} rightAction={RightAction}/>
-                <KTextField label={'아이디'} labelDirection={'row'} placeholder={'Label - Direction: Row'} medium value={mediumValue}
+                <KTextField label={'Row'} labelDirection={'row'} placeholder={'Row'} medium value={mediumValue}
                             onChange={(v) => {setMediumValue(v);}} rightAction={RightAction}/>
-                <KTextField label={'아이디'} row placeholder={'Label - Direction: Row'} small value={smallValue}
+                <KTextField label={'Row'} row placeholder={'Row'} small value={smallValue}
                             onChange={(v) => {setSmallValue(v);}} maxLength={10}/>
             </Item>
-            <Item label={'Placeholder'}>
-                <KTextField label={'아이디'} large placeholder={'아이디를 입력해주세요.'} value={''} />
-                <KTextField label={'아이디'} medium placeholder={'아이디를 입력해주세요.'} value={''} />
-                <KTextField label={'아이디'} small placeholder={'아이디를 입력해주세요.'} value={''} />
-            </Item>
             <Item label={'Disabled'}>
-                <KTextField label={'아이디'} large value={largeValue} disabled onChange={(v) => {setLargeValue(v);}}/>
-                <KTextField label={'아이디'} medium value={mediumValue} disabled onChange={(v) => {setMediumValue(v);}}/>
-                <KTextField label={'아이디'} small value={smallValue} disabled onChange={(v) => {setSmallValue(v);}}/>
+                <KTextField label={'아이디'} large value={'Disabled'} disabled />
+                <KTextField label={'아이디'} medium value={'Disabled'} disabled />
+                <KTextField label={'아이디'} small value={'Disabled'} disabled />
+            </Item>
+            <Item label={'Clearable'}>
+                <KTextField placeholder={'Clearable'} clearable value={largeValue} onChange={(v) => {setLargeValue(v);}}/>
+                <KTextField placeholder={'Clearable'} value={mediumValue}  onChange={(v) => {setMediumValue(v);}}/>
+                <KTextField placeholder={'Clearable'} value={smallValue}  onChange={(v) => {setSmallValue(v);}}/>
             </Item>
         </Container>
     );

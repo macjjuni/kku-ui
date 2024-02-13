@@ -18,6 +18,7 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
   placeholder?: string
   maxLength?: number
   required?: boolean
+  clearable?: boolean
 
   rightAction?: ReactNode
 
