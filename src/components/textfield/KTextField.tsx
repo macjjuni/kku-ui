@@ -60,14 +60,10 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
 
     const styles: CSSProperties = props.style || {};
 
-    if (props.color) {
-      styles.color = props.color;
-      styles.borderColor = props.color;
-    }
     if (props.width) { styles.width = props.width; }
 
     return styles;
-  }, [props.style, props.color]);
+  }, [props.style]);
 
   const labelClass = useMemo(() => {
     const clazz = [];
@@ -157,6 +153,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
                     disabled={props.disabled}
                     placeholder={props.placeholder}
                     maxLength={props.maxLength}
+                    data-testid='k-text-field-input'
                     // aria-describedby='message' // FIXME: Error Message - 웹접근성
         />
         {

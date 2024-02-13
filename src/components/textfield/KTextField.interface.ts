@@ -7,31 +7,37 @@ type LabelDirectionType = typeof labelDirection[keyof typeof labelDirection];
 
 export interface KTextFieldProps extends KBaseProp, KSizeProp {
 
+  // Value
   value: string
 
+  // Label
   label?: string
   labelDirection?: LabelDirectionType
   column?: boolean
   row?: boolean
 
-  disabled?: boolean
+  // Options
   placeholder?: string
   maxLength?: number
+
+  // Types
+  disabled?: boolean
   required?: boolean
   clearable?: boolean
+  password?: boolean
 
+  // Custom
   rightAction?: ReactNode
 
+  // Event
   onChange?: (value: string) => void
   onFocus?: () => void
   onBlur?: () => void
   onKeyDown?: (e?: KeyboardEvent<HTMLInputElement>) => void
   onKeyUp?: (e?: KeyboardEvent<HTMLInputElement>) => void
 
-  color?: string
+  // Styles
   width?: string
-
-  password?: boolean
 }
 
 export interface KTextFieldRefs {

@@ -62,9 +62,9 @@ const Template = (args: KTextFieldProps) => {
                 <KTextField label={'아이디'} small value={'Disabled'} disabled />
             </Item>
             <Item label={'Clearable'}>
-                <KTextField placeholder={'Clearable'} clearable value={largeValue} onChange={(v) => {setLargeValue(v);}}/>
-                <KTextField placeholder={'Clearable'} value={mediumValue}  onChange={(v) => {setMediumValue(v);}}/>
-                <KTextField placeholder={'Clearable'} value={smallValue}  onChange={(v) => {setSmallValue(v);}}/>
+                <KTextField large placeholder={'Clearable'} clearable value={largeValue} onChange={(v) => {setLargeValue(v);}}/>
+                <KTextField placeholder={'Clearable'} clearable value={mediumValue}  onChange={(v) => {setMediumValue(v);}}/>
+                <KTextField small placeholder={'Clearable'} clearable value={smallValue}  onChange={(v) => {setSmallValue(v);}}/>
             </Item>
         </Container>
     );
