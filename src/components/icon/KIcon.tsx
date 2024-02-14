@@ -4,12 +4,8 @@ import { CSSProperties, forwardRef, KeyboardEvent, memo, Ref, useCallback,
   useId, useImperativeHandle, useMemo, useRef } from 'react';
 import { KIconProps, KIconRefs } from '@/components/icon/KIcon.interface';
 import { initDisabled } from '@/common/util/variation';
-import { getIdentityName } from '@/common/base/base';
-
 import '@material-symbols/font-300/outlined.css';
 
-
-const identity = getIdentityName('icon');
 
 // https://fonts.google.com/
 
@@ -20,7 +16,7 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
   // region [Hooks]
 
   const inputRef = useRef<HTMLButtonElement>(null);
-  const uniqueId = `${useId()}-${identity}`;
+  const uniqueId = `k-icon-${useId()}`;
 
   useImperativeHandle(ref, () => ({
     click: () => { inputRef.current?.click(); },
@@ -32,15 +28,15 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
   // region [Styles]
 
   const rootClass = useMemo(() => {
-    const clazz = [identity];
+    const clazz = [];
 
     if (props.type) { clazz.push(`material-symbols-${props.type}`); }
     if (props.className) { clazz.push(props.className); }
     if (typeof props.size !== 'number' && props.size) {
-      clazz.push(`${identity}--${props.size}`);
+      clazz.push(`k-icon--${props.size}`);
     }
-    if (props.clickable) { clazz.push(`${identity}--clickable`); }
-    initDisabled(clazz, identity, props.disabled);
+    if (props.clickable) { clazz.push('k-icon--clickable'); }
+    initDisabled(clazz, 'k-icon', props.disabled);
 
     return clazz.join(' ');
   }, [props.type, props.className, props.size, props.disabled]);
@@ -79,15 +75,15 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
   // region [Templates]
   return (
     <span
-        ref={inputRef}
-        id={props.id ? props.id : uniqueId}
-        className={rootClass}
-        style={rootStyle}
-        data-testid='k-icon'
-        onClick={onClick}
-        onKeyDown={onKeyDown}
-        role={props.onClick ? 'button' : 'img'}
-        tabIndex={props.onClick ? 0 : -1}
+      ref={inputRef}
+      id={props.id ? props.id : uniqueId}
+      className={`k-icon ${rootClass}`}
+      style={rootStyle}
+      data-testid='k-icon'
+      onClick={onClick}
+      onKeyDown={onKeyDown}
+      role={props.onClick ? 'button' : 'img'}
+      tabIndex={props.onClick ? 0 : -1}
     >
       {props.icon}
     </span>

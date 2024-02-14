@@ -3,10 +3,7 @@ import { useState, memo, useMemo, useCallback, useRef, forwardRef, useImperative
 import useRipple from '@/common/hook/useRipple';
 import { initSize, initVariant } from '@/common/util/variation';
 import colorUtil from '@/common/util/color';
-import { getIdentityName, baseName } from '@/common/base/base';
 import { KButtonProps, KButtonRefs } from '@/components';
-
-const identity = getIdentityName('button');
 
 const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
@@ -34,21 +31,21 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
   const rootClass = useMemo(
     () => {
-      const clazz = [identity];
+      const clazz = [];
 
       if (props.className) { clazz.push(props.className); }
-      if (isLoad) { clazz.push(`${identity}--loading`); }
+      if (isLoad) { clazz.push('k-button--loading'); }
 
       if (props.disabled && props.color && (props.primary || props.variant === 'primary')) {
-        clazz.push(`${identity}--disabled`);
+        clazz.push('k-button--disabled');
       }
 
       if (props.variant && (props.outlined || props.primary)) {
         throw Error('Error: variant and primary or outlined attributes cannot be duplicated.');
       }
 
-      initVariant(clazz, identity, props.variant, props.primary, props.outlined);
-      initSize(clazz, identity, props.size, props.large, props.medium, props.small);
+      initVariant(clazz, 'k-button', props.variant, props.primary, props.outlined);
+      initSize(clazz, 'k-button', props.size, props.large, props.medium, props.small);
 
       return clazz.join(' ');
     },
@@ -134,32 +131,32 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
   return (
     <button
-            ref={rootRef}
-            id={props.id}
-            className={rootClass}
-            style={rootStyle}
-            type='button'
-            disabled={props.disabled}
-            onMouseDown={onMouseDown}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            onMouseUp={onMouseUp}
-            onKeyDown={onKeyDown}
-            onKeyUp={onKeyUp}
-            aria-busy={isLoad}
+      ref={rootRef}
+      id={props.id}
+      className={`k-button ${rootClass}`}
+      style={rootStyle}
+      type='button'
+      disabled={props.disabled}
+      onMouseDown={onMouseDown}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onMouseUp={onMouseUp}
+      onKeyDown={onKeyDown}
+      onKeyUp={onKeyUp}
+      aria-busy={isLoad}
     >
       {
         (props.children || props.label)
-                && (
-                  <span className={`${identity}__content`}>
-                    {props.children || props.label}
-                  </span>
-                )
+          && (
+            <span className='k-button__content'>
+              {props.children || props.label}
+            </span>
+          )
       }
       {
         isLoad && (
-          <span className={`${identity}__loading__container`}>
-            <span style={loadStyle} className={`${baseName}-spinner--loading`} />
+          <span className='k-button__loading__container'>
+            <span style={loadStyle} className='k-spinner--loading' />
           </span>
         )
       }
