@@ -34,7 +34,21 @@ const Template = (args: KSelectProps) => {
     return (
         <Container>
             <Item label={'Default TextField'}>
-                <KSelect {...args} value={value} onChange={onChange} items={itemTemplates} />
+                <KSelect {...args} large value={value} onChange={onChange} items={itemTemplates}/>
+            </Item>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <Item label={'Default TextField'}>
+                <KSelect {...args} value={value} onChange={onChange} items={itemTemplates}/>
+            </Item>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <Item label={'Default TextField'}>
+                <KSelect {...args} small value={value} onChange={onChange} items={itemTemplates}/>
             </Item>
             {/* <Item label={'Password / required / right-action'}> */}
 

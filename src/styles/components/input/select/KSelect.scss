@@ -1,0 +1,96 @@
+.k-select {
+    position: relative;
+    overflow: hidden;
+
+    .k-select__showcase {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: $k-spacing-8;
+        cursor: pointer;
+
+        border: 1px solid $k-border-default-color;
+        border-radius: $k-border-radius-default;
+        background: $k-white-color;
+    }
+
+
+    .k-select__showcase__arrow-icon {
+        @include k-transition-3;
+    }
+
+    &.k-select--open {
+        overflow: visible;
+
+        .k-select__showcase__arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        .k-select__menu-list {
+            height: auto;
+        }
+    }
+
+    .k-select__menu-list {
+        position: absolute;
+        top: calc(100% + $k-spacing-8);
+        left: 0;
+        width: 100%;
+        height: 0;
+        border: 1px solid $k-border-default-color;
+        background-color: $k-white-color;
+        border-radius: $k-border-default-color;
+        @include k-transition-3;
+        transition-property: height;
+
+        .k-select__menu-item {
+            cursor: pointer;
+        }
+    }
+
+    // Size
+    &.k-select--large {
+
+        .k-select__showcase {
+            padding: $k-spacing-10 $k-spacing-10 $k-spacing-10 $k-spacing-16;
+            .k-select__showcase__label { @include k-label-1; }
+        }
+
+        .k-select__menu-list {
+            .k-select__menu-item {
+                padding: $k-spacing-10 $k-spacing-10;
+                @include k-label-1;
+            }
+        }
+    }
+    &.k-select--medium {
+
+        .k-select__showcase {
+            padding: $k-spacing-8 $k-spacing-12;
+
+            .k-select__showcase__label { @include k-label-2; }
+        }
+        .k-select__menu-list {
+            .k-select__menu-item {
+                padding: $k-spacing-8 $k-spacing-12;
+                @include k-label-2;
+            }
+        }
+
+    }
+    &.k-select--small {
+
+        .k-select__showcase {
+            padding: $k-spacing-6 $k-spacing-8;
+
+            .k-select__showcase__label { @include k-label-3; }
+        }
+        .k-select__menu-list {
+            .k-select__menu-item {
+                padding: $k-spacing-6 $k-spacing-8;
+                @include k-label-3;
+            }
+        }
+    }
+
+}

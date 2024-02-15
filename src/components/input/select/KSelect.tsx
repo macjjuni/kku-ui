@@ -4,6 +4,7 @@ import {
 } from 'react';
 import type { KSelectProps, KSelectRefs, KSelectItemType } from '@/components/input/select/KSelect.interface';
 import { initSize } from '@/common/util/variation';
+import { KIcon } from '@/components';
 
 
 const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
@@ -29,11 +30,12 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
   const rootClass = useMemo(() => {
     const clazz = [];
 
+    if (open) { clazz.push('k-select--open'); }
     if (props.className) { clazz.push(props.className); }
     initSize(clazz, 'k-select', props.size, props.large, props.medium, props.small);
 
     return clazz.join(' ');
-  }, [props.className]);
+  }, [props.className, open]);
 
   const rootStyle = useMemo(() => {
     return props.style || {};
@@ -89,9 +91,9 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
     }
   }, [open]);
 
-  // const onBlur = useCallback(() => {
-  //   if (open) { onSelectOff(); }
-  // }, [open]);
+  const onBlur = useCallback(() => {
+    // if (open) { onSelectOff(); }
+  }, [open]);
 
   const onClickItem = useCallback((item: KSelectItemType) => {
 
@@ -116,7 +118,6 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
   return (
 
     <div className={`k-select ${rootClass}`} style={rootStyle}>
-      {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
       <div
         ref={selectRef}
         tabIndex={0}
@@ -124,29 +125,33 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
         className='k-select__showcase'
         onClick={onClickOpen}
         onKeyDown={onKeyDown}
+        onBlur={onBlur}
         // onBlur={onBlur}
       >
-        {displayValue}
-
-        {
-          open && (
-            <ul className='k-select__menu-list'>
-              {props.items.map((item) => (
-                <li
-                              key={item.value}
-                              role='menuitem'
-                              tabIndex={0}
-                              onClick={() => { onClickItem(item); }}
-                              onKeyDown={(e) => { onKeydownItem(e, item); }}
-                              className='k-select__menu-item'
-                >
-                  {item.value}
-                </li>
-              ))}
-            </ul>
-          )
-        }
+        <span className='k-select__showcase__label'>
+          {displayValue}
+        </span>
+        <KIcon className='k-select__showcase__arrow-icon' icon='expand_more' size={18} />
       </div>
+
+      {
+        // open && (
+        <ul className='k-select__menu-list'>
+          {props.items.map((item) => (
+            <li
+              key={item.value}
+              role='menuitem'
+              tabIndex={0}
+              onClick={() => { onClickItem(item); }}
+              onKeyDown={(e) => { onKeydownItem(e, item); }}
+              className='k-select__menu-item'
+            >
+              {item.value}
+            </li>
+          ))}
+        </ul>
+        // )
+      }
 
     </div>
   );
