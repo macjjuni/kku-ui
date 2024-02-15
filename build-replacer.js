@@ -24,7 +24,7 @@ const replaceContent = async (filePath) => {
 
 const replaceBuildContents = async () => {
     
-    const absolutePath = path.resolve('lib/esm/src/components/**/T*.js');
+    const absolutePath = path.resolve('lib/esm/src/components/**/K*.js');
     const ignorePattern = '**/*.interface.js';
     
     try {
