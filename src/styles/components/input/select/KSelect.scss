@@ -2,27 +2,25 @@
     position: relative;
     overflow: hidden;
 
-    .k-select__showcase {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: $k-spacing-8;
-        cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $k-spacing-8;
+    white-space: nowrap;
+    cursor: pointer;
 
-        border: 1px solid $k-border-default-color;
-        border-radius: $k-border-radius-default;
-        background: $k-white-color;
-    }
+    border: 1px solid $k-border-default-color;
+    border-radius: $k-border-radius-default;
+    background: $k-white-color;
 
-
-    .k-select__showcase__arrow-icon {
+    .k-select__current__label__arrow-icon {
         @include k-transition-3;
     }
 
     &.k-select--open {
         overflow: visible;
 
-        .k-select__showcase__arrow-icon {
+        .k-select__current__label__arrow-icon {
             transform: rotate(180deg);
         }
 
@@ -43,21 +41,23 @@
         @include k-transition-3;
         transition-property: height;
 
-        .k-select__menu-item {
+        .k-select__menu-list__item {
             cursor: pointer;
+            width: 100%;
+            white-space: nowrap;
         }
     }
 
     // Size
     &.k-select--large {
 
-        .k-select__showcase {
-            padding: $k-spacing-10 $k-spacing-10 $k-spacing-10 $k-spacing-16;
-            .k-select__showcase__label { @include k-label-1; }
-        }
+        min-width: 120px;
+        padding: $k-spacing-10 $k-spacing-10 $k-spacing-10 $k-spacing-16;
+        @include k-label-1;
+
 
         .k-select__menu-list {
-            .k-select__menu-item {
+            .k-select__menu-list__item {
                 padding: $k-spacing-10 $k-spacing-10;
                 @include k-label-1;
             }
@@ -65,13 +65,12 @@
     }
     &.k-select--medium {
 
-        .k-select__showcase {
-            padding: $k-spacing-8 $k-spacing-12;
+        min-width: 100px;
+        padding: $k-spacing-8 $k-spacing-12;
+        @include k-label-2;
 
-            .k-select__showcase__label { @include k-label-2; }
-        }
         .k-select__menu-list {
-            .k-select__menu-item {
+            .k-select__menu-list__item {
                 padding: $k-spacing-8 $k-spacing-12;
                 @include k-label-2;
             }
@@ -80,13 +79,12 @@
     }
     &.k-select--small {
 
-        .k-select__showcase {
-            padding: $k-spacing-6 $k-spacing-8;
+        min-width: 80px;
+        padding: $k-spacing-6 $k-spacing-8;
+        @include k-label-3;
 
-            .k-select__showcase__label { @include k-label-3; }
-        }
         .k-select__menu-list {
-            .k-select__menu-item {
+            .k-select__menu-list__item {
                 padding: $k-spacing-6 $k-spacing-8;
                 @include k-label-3;
             }

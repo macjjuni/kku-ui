@@ -1,4 +1,5 @@
 import {
+  CSSProperties,
   forwardRef, KeyboardEvent, memo, Ref, useCallback, useImperativeHandle,
   useMemo, useRef, useState,
 } from 'react';
@@ -12,6 +13,8 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
   // region [Hooks]
 
   const selectRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const isOnMouse = useRef<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
 
 
@@ -38,7 +41,9 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
   }, [props.className, open]);
 
   const rootStyle = useMemo(() => {
-    return props.style || {};
+    const style: CSSProperties = props.width ? { width: props.width } : {};
+
+    return style;
   }, [props.style]);
 
   // endregion
@@ -81,6 +86,14 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
     onSelectOff();
   }, [open]);
 
+  const onMouseEnter = useCallback(() => {
+    isOnMouse.current = true;
+  }, []);
+
+  const onMouseLeave = useCallback(() => {
+    isOnMouse.current = false;
+  }, []);
+
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       if (!open) {
@@ -92,11 +105,12 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
   }, [open]);
 
   const onBlur = useCallback(() => {
-    // if (open) { onSelectOff(); }
+    if (open && !isOnMouse.current) {
+      onSelectOff();
+    }
   }, [open]);
 
   const onClickItem = useCallback((item: KSelectItemType) => {
-
     props.onChange(item.value);
     onSelectOff();
   }, [props.value, props.items]);
@@ -110,33 +124,43 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
   // endregion
 
 
+  // const initialRootWidth = useCallback(() => {
+  //   if (!props.width) {
+  //     selectRef.current?.style.setProperty('width', `${listRef.current?.clientWidth}px`);
+  //   }
+  //
+  // }, []);
+
   // region [LifeCycle]
+
+  // useEffect(() => {
+  //   initialRootWidth();
+  // }, []);
 
   // endregion
 
 
   return (
 
-    <div className={`k-select ${rootClass}`} style={rootStyle}>
-      <div
+    <div
         ref={selectRef}
+        className={`k-select ${rootClass}`}
+        style={rootStyle}
         tabIndex={0}
         role='button'
-        className='k-select__showcase'
         onClick={onClickOpen}
         onKeyDown={onKeyDown}
         onBlur={onBlur}
-        // onBlur={onBlur}
-      >
-        <span className='k-select__showcase__label'>
-          {displayValue}
-        </span>
-        <KIcon className='k-select__showcase__arrow-icon' icon='expand_more' size={18} />
-      </div>
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+    >
+
+      {displayValue}
+      <KIcon className='k-select__current__label__arrow-icon' icon='expand_more' size={18} />
 
       {
         // open && (
-        <ul className='k-select__menu-list'>
+        <ul ref={listRef} className='k-select__menu-list'>
           {props.items.map((item) => (
             <li
               key={item.value}
@@ -144,9 +168,9 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
               tabIndex={0}
               onClick={() => { onClickItem(item); }}
               onKeyDown={(e) => { onKeydownItem(e, item); }}
-              className='k-select__menu-item'
+              className='k-select__menu-list__item'
             >
-              {item.value}
+              {item.title}
             </li>
           ))}
         </ul>
