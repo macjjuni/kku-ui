@@ -15,14 +15,14 @@ type Story = StoryObj<KSelectProps>
 
 
 const itemTemplates = [
+    { title: 'Home 🏠', value: 'home' },
     { title: 'Playground ⚽️', value: 'playground' },
     { title: 'Library 📚', value: 'library' },
-    { title: 'Home 🏠', value: 'home' },
     { title: 'Mountain ⛰️', value: 'mountain' },
 ]
 const Template = (args: KSelectProps) => {
 
-    const [value, setValue] = useState('playground');
+    const [value, setValue] = useState('home');
 
     const onChange = (value: string) => {
         setValue(value);

@@ -183,7 +183,7 @@
     .k-text-field__input__container {
         border: 1px solid $k-dark-mode-border-default-color;
         border-radius: $k-border-radius-default;
-        background: $k-dark-mode-background;
+        background: $k-dark-mode-background-default-color;
         caret-color: $k-white-color;
         font-size: 0;
 
@@ -191,7 +191,7 @@
 
         .k-text-field__input {
             color: $k-dark-mode-font-color;
-            background: $k-dark-mode-background;
+            background: $k-dark-mode-background-default-color;
         }
     }
 }

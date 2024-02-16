@@ -78,7 +78,7 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
 
   // region [Events]
 
-  const onClickOpen = useCallback(() => {
+  const onClickRoot = useCallback(() => {
     if (!open) {
       onSelectOpen();
       return;
@@ -86,15 +86,15 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
     onSelectOff();
   }, [open]);
 
-  const onMouseEnter = useCallback(() => {
+  const onMouseEnterRoot = useCallback(() => {
     isOnMouse.current = true;
   }, []);
 
-  const onMouseLeave = useCallback(() => {
+  const onMouseLeaveRoot = useCallback(() => {
     isOnMouse.current = false;
   }, []);
 
-  const onKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
+  const onKeyDownRoot = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       if (!open) {
         onSelectOpen();
@@ -102,42 +102,41 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
       }
       onSelectOff();
     }
+    if (e.key === 'Tab' && e.shiftKey && isOnMouse.current) { onSelectOff(); }
+    if (e.key === 'Tab') { isOnMouse.current = true; }
   }, [open]);
 
-  const onBlur = useCallback(() => {
-    if (open && !isOnMouse.current) {
-      onSelectOff();
-    }
+  const onBlurRoot = useCallback(() => {
+    if (open && !isOnMouse.current) { onSelectOff(); }
   }, [open]);
 
-  const onClickItem = useCallback((item: KSelectItemType) => {
+  const onClickListItem = useCallback((item: KSelectItemType) => {
     props.onChange(item.value);
     onSelectOff();
-  }, [props.value, props.items]);
+  }, [props.value, props.items, props.onChange]);
 
-  const onKeydownItem = useCallback((e: KeyboardEvent<HTMLLIElement>, item: KSelectItemType) => {
+  const onFocusListItem = useCallback(() => {
+    isOnMouse.current = false;
+  }, []);
+
+  const onKeydownListItem = useCallback((e: KeyboardEvent<HTMLLIElement>, item: KSelectItemType, idx: number) => {
     if (e.key === 'Enter' || e.key === ' ') { props.onChange(item.value); }
-    onSelectOff();
+
+    if (props.items.length - 1 === idx && (!e.shiftKey && e.key === 'Tab')) {
+      onSelectOff();
+    }
   }, [props.value, props.items]);
 
 
   // endregion
 
-
-  // const initialRootWidth = useCallback(() => {
-  //   if (!props.width) {
-  //     selectRef.current?.style.setProperty('width', `${listRef.current?.clientWidth}px`);
-  //   }
-  //
-  // }, []);
 
   // region [LifeCycle]
-
-  // useEffect(() => {
-  //   initialRootWidth();
-  // }, []);
-
   // endregion
+
+  // TODO: 1. 선택된 Item 마다 Width가 변경되는 이슈
+  // TODO: 2. Items가 없을 경우 알림 메세지 추가(prop으로도 받음)
+  // TODO: 3. disabled, placeholder 기능 구현
 
 
   return (
@@ -148,33 +147,35 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
         style={rootStyle}
         tabIndex={0}
         role='button'
-        onClick={onClickOpen}
-        onKeyDown={onKeyDown}
-        onBlur={onBlur}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
+        onClick={onClickRoot}
+        onKeyDown={onKeyDownRoot}
+        onBlur={onBlurRoot}
+        onMouseEnter={onMouseEnterRoot}
+        onMouseLeave={onMouseLeaveRoot}
     >
 
       {displayValue}
+
       <KIcon className='k-select__current__label__arrow-icon' icon='expand_more' size={18} />
 
       {
-        // open && (
-        <ul ref={listRef} className='k-select__menu-list'>
-          {props.items.map((item) => (
-            <li
+        open && (
+          <ul ref={listRef} className='k-select__menu-list'>
+            {props.items.map((item, idx) => (
+              <li
               key={item.value}
               role='menuitem'
               tabIndex={0}
-              onClick={() => { onClickItem(item); }}
-              onKeyDown={(e) => { onKeydownItem(e, item); }}
+              onFocus={onFocusListItem}
+              onClick={() => { onClickListItem(item); }}
+              onKeyDown={(e) => { onKeydownListItem(e, item, idx); }}
               className='k-select__menu-list__item'
-            >
-              {item.title}
-            </li>
-          ))}
-        </ul>
-        // )
+              >
+                {item.title}
+              </li>
+            ))}
+          </ul>
+        )
       }
 
     </div>

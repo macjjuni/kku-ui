@@ -5,28 +5,27 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: $k-spacing-8;
-    white-space: nowrap;
-    cursor: pointer;
+    gap: $k-spacing-10;
 
+    white-space: nowrap;
     border: 1px solid $k-border-default-color;
     border-radius: $k-border-radius-default;
     background: $k-white-color;
+    cursor: pointer;
+    z-index: $k-select-z-index;
+    transition-property: border-color;
 
-    .k-select__current__label__arrow-icon {
-        @include k-transition-3;
-    }
+    @include k-transition-3;
+
+    &:hover { border-color: $k-primary-color; }
+
+    .k-select__current__label__arrow-icon { @include k-transition-3; }
 
     &.k-select--open {
         overflow: visible;
 
-        .k-select__current__label__arrow-icon {
-            transform: rotate(180deg);
-        }
-
-        .k-select__menu-list {
-            height: auto;
-        }
+        .k-select__current__label__arrow-icon { transform: rotate(180deg); }
+        .k-select__menu-list { height: auto; }
     }
 
     .k-select__menu-list {
@@ -37,14 +36,19 @@
         height: 0;
         border: 1px solid $k-border-default-color;
         background-color: $k-white-color;
-        border-radius: $k-border-default-color;
-        @include k-transition-3;
+        border-radius: $k-border-radius-default;
         transition-property: height;
 
+        @include k-transition-3;
+
         .k-select__menu-list__item {
-            cursor: pointer;
             width: 100%;
             white-space: nowrap;
+            cursor: pointer;
+            border-bottom: 1px solid $k-gray-color-100;
+
+            &:hover { background: $k-white-hover-color; }
+            &:last-child { border: none; }
         }
     }
 
@@ -54,7 +58,6 @@
         min-width: 120px;
         padding: $k-spacing-10 $k-spacing-10 $k-spacing-10 $k-spacing-16;
         @include k-label-1;
-
 
         .k-select__menu-list {
             .k-select__menu-list__item {
@@ -91,4 +94,23 @@
         }
     }
 
+}
+
+.#{$k-dark-class-name} .k-select {
+
+    color: $k-dark-mode-font-color;
+    border: 1px solid $k-dark-mode-border-default-color;
+    border-radius: $k-border-radius-default;
+    background: $k-dark-mode-background-default-color;
+
+
+    .k-select__menu-list {
+        border-color: $k-dark-mode-border-default-color;
+        background-color: $k-dark-mode-background-default-color;
+
+        .k-select__menu-list__item {
+            border-color: $k-gray-color-800;
+            &:hover { background: $k-dark-mode-background-hover-color; }
+        }
+    }
 }
