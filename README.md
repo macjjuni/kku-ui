@@ -24,6 +24,7 @@
 
 ### 📌 <a href="https://github.com/users/macjjuni/projects/1/views/1" target="_blank" >GitHub Project</a>
 
+<br>
 
 ## 📦 Install
 ```
@@ -33,6 +34,8 @@ npm install kku-ui
 yarn add kku-ui
 ```
 
+<br>
+
 ## ⚙️ Initial Setting
 ```typescript
 // Entry Point 🏃🏻‍♂️
@@ -40,6 +43,7 @@ yarn add kku-ui
 import 'kku-ui/lib/styles/index.css'
 ```
 
+<br>
 
 ## 🧑🏻‍💻 Use Examples
 
@@ -51,14 +55,11 @@ export default function Component() {
 } 
 ```
 
+<br>
 
-## 🤖 Preview
+## 🕺🏻 Preview
 
-![kku-ui](https://github.com/macjjuni/kku-ui/assets/38034518/8a2ab93e-5ef9-4e98-85b7-d6e989fb5c09)
+###  🔗 [StoryBook](https://macjjuni.github.io/kku-ui)
 
-
-##  Support
-
-###  ✅ [StoryBook](https://macjjuni.github.io/kku-ui)
 
 
