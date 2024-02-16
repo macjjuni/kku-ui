@@ -13,10 +13,12 @@
 | `<KButton />`|✅|✅|✅|✅|✅|✅|
 | `<KTextField />`|✅|✅|✅|✅|✅|✅|
 | `<KIcon />`|✅|✅|✅|✅|✅|✅|
-| `<KSelect />`|✅|⚠️|🧑🏻‍💻|🧑🏻‍💻|🧑🏻‍💻|✅|
+| `<KSelect />`|⚠️|✅|✅|🧑🏻‍💻|✅|✅|
 | 🏃🏻‍♂️..|💎|💎|💎|💎|💎|  💎|
 
 ✅ Good, ⚠️ Not Good, ❌ Nothing, 🧑🏻‍💻 Trying, 💎 wanted 
+
+<br>
 
 ## 📆 Planning
 
