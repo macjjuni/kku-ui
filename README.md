@@ -8,13 +8,15 @@
 
 ## 🎁 Components
 
-| 컴포넌트&nbsp; \ &nbsp; 지원 |&nbsp;&nbsp;&nbsp;기능&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;디자인&nbsp;&nbsp;| 웹 접근성 |테스트 코드|&nbsp;스토리북&nbsp;|
-|:-----------------------|:---:|:---:|:-----------------:|:----:|:---:|
-| `<KButton />`|✅|✅|✅|✅|✅|
-| `<KTextField />`|✅|✅|⚠️|✅|✅|
-| `<KIcon />`|✅|✅|✅|✅|✅|
-| `<KSelect />`|✅|🏃🏻|🏃🏻|🏃🏻|🏃🏻|
-| 🏃🏻‍♂️..|✨|✨|✨|✨|✨|
+| 컴포넌트&nbsp; \ &nbsp; 지원 |&nbsp;&nbsp;&nbsp;기능&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;디자인&nbsp;&nbsp;| 웹 접근성 |테스트 코드|&nbsp;스토리북&nbsp;| 사용/배포 |
+|:-----------------------|:---:|:---:|:-----------------:|:----:|:---:|:-----:|
+| `<KButton />`|✅|✅|✅|✅|✅|✅|
+| `<KTextField />`|✅|✅|✅|✅|✅|✅|
+| `<KIcon />`|✅|✅|✅|✅|✅|✅|
+| `<KSelect />`|✅|⚠️|🧑🏻‍💻|🧑🏻‍💻|🧑🏻‍💻|✅|
+| 🏃🏻‍♂️..|💎|💎|💎|💎|💎|  💎|
+
+✅ Good, ⚠️ Not Good, ❌ Nothing, 🧑🏻‍💻 Trying, 💎 wanted 
 
 ## 📆 Planning
 
@@ -43,7 +45,7 @@ import 'kku-ui/lib/styles/index.css'
 import { KButton } from 'kku-ui'
 
 export default function Component() {
-    return (<KButton primary label="Hello World!" />);
+ return (<KButton primary label="Hello World!" />);
 } 
 ```
 
