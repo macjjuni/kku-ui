@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import fs from 'fs';
 import path from 'path';
-import glob from 'glob';
+import {glob} from 'glob';
 
 const replaceRules = [
     {
