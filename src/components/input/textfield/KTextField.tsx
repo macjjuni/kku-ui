@@ -2,7 +2,7 @@ import {
   ChangeEvent, CSSProperties, forwardRef, memo, Ref, useCallback,
   useId, useImperativeHandle, useMemo, useRef, useState,
 } from 'react';
-import { KTextFieldProps, KTextFieldRefs } from '@/components/textfield/KTextField.interface';
+import { KTextFieldProps, KTextFieldRefs } from '@/components/input/textfield/KTextField.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { KIcon } from '@/components';
 
@@ -120,9 +120,9 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
         {
           props.label && (
             <label
-                            htmlFor={props.id ? props.id : uniqueId}
-                            className={`k-text-field__label__text ${labelClass}`}
-                            data-testid='k-text-field-label'
+              htmlFor={props.id ? props.id : uniqueId}
+              className={`k-text-field__label__text ${labelClass}`}
+              data-testid='k-text-field-label'
             >
               {props.label}
             </label>
@@ -142,39 +142,39 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
       </div>
       <div className='k-text-field__input__container'>
         <input
-                    id={props.id ? props.id : uniqueId}
-                    ref={inputRef}
-                    className='k-text-field__input'
-                    type={(props.password && !isPasswdShow) ? 'password' : 'input'}
-                    value={props.value}
-                    onChange={onChangeValue}
-                    onFocus={onFocus}
-                    onBlur={onblur}
-                    disabled={props.disabled}
-                    placeholder={props.placeholder}
-                    maxLength={props.maxLength}
-                    data-testid='k-text-field-input'
-                    // aria-describedby='message' // FIXME: Error Message - 웹접근성
+          id={props.id ? props.id : uniqueId}
+          ref={inputRef}
+          className='k-text-field__input'
+          type={(props.password && !isPasswdShow) ? 'password' : 'input'}
+          value={props.value}
+          onChange={onChangeValue}
+          onFocus={onFocus}
+          onBlur={onblur}
+          disabled={props.disabled}
+          placeholder={props.placeholder}
+          maxLength={props.maxLength}
+          data-testid='k-text-field-input'
+          // aria-describedby='message' // FIXME: Error Message - 웹접근성
         />
         {
           props.password && (
             isPasswdShow
               ? (
                 <KIcon
-                    className='k-text-field__icon'
-                    icon='visibility_off'
-                    size={iconSize}
-                    clickable
-                    onClick={onPasswordShow}
+                  className='k-text-field__icon'
+                  icon='visibility_off'
+                  size={iconSize}
+                  clickable
+                  onClick={onPasswordShow}
                 />
               )
               : (
                 <KIcon
-                        className='k-text-field__icon'
-                        icon='visibility'
-                        size={iconSize}
-                        clickable
-                        onClick={onPasswordShow}
+                  className='k-text-field__icon'
+                  icon='visibility'
+                  size={iconSize}
+                  clickable
+                  onClick={onPasswordShow}
                 />
               )
           )

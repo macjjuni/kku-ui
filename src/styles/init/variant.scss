@@ -29,7 +29,6 @@ $k-white-disabled-color: darken($k-white-color, $k-background-disabled-percent) 
 
 $k-black-color: #000000 !default;
 $k-black-hover-color: lighten($k-black-color, $k-background-hover-percent) !default;
-$k-black-hover-color: lighten($k-black-color, $k-background-hover-percent) !default;
 
 
 $k-gray-color-50: darken($k-white-color, 0.5%) !default;
@@ -105,6 +104,13 @@ $k-font-weight-body-3: 400 !default;
 // endregion
 
 
+// region [z-index]
+
+$k-select-z-index: 10;
+
+// endregion
+
+
 :root {
     --k-primary-color: #{$k-primary-color};
     --k-primary-hover-color: #{$k-primary-hover-color};
@@ -161,13 +167,16 @@ $k-border-radius-default: 3px !default;
 
 $k-dark-class-name: #{dark};
 
-$k-dark-mode-background: #212121;
+//$k-dark-mode-background-default-color: #212121;
 
 
 // region [Dark Mode - colors]
 
-$k-dark-mode-border-default-color: $k-gray-color-600;
-$k-dark-mode-border-default-hover-color: $k-gray-color-400;
+$k-dark-mode-border-default-color: $k-gray-color-700;
+$k-dark-mode-border-default-hover-color: lighten($k-dark-mode-border-default-color, $k-background-hover-percent);
+
+$k-dark-mode-background-default-color: #212121;
+$k-dark-mode-background-hover-color: lighten($k-dark-mode-background-default-color, $k-background-hover-percent);
 
 // endregion
 
