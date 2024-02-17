@@ -54,6 +54,7 @@
         background: $k-white-color;
         caret-color: $k-default-font-color;
 
+        transition-property: border-color;
         @include k-transition-3;
 
         &:hover, &:focus-within { border-color: $k-primary-hover-color; }
@@ -63,9 +64,9 @@
             padding: 0;
             border: none;
             outline: none;
+            background-color: transparent;
             color: $k-default-font-color;
 
-            transition-property: background-color;
             @include k-transition-3;
 
             &::placeholder {
@@ -204,7 +205,6 @@
 
         .k-text-field__input {
             color: $k-dark-mode-font-color;
-            background: $k-dark-mode-background-default-color;
 
             &::placeholder {
                 color: $k-dark-mode-placeholder-font-color;
