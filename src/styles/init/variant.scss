@@ -185,6 +185,7 @@ $k-dark-mode-background-hover-color: lighten($k-dark-mode-background-default-col
 
 $k-dark-mode-font-color: $k-gray-color-200 !default;
 $k-dark-mode-disabled-font-color: darken($k-dark-mode-font-color, 50%) !default;
+$k-dark-mode-placeholder-font-color: darken($k-dark-mode-disabled-font-color,$k-background-disabled-percent) !default;
 $k-dark-mode-disabled-background-color: lighten($k-dark-mode-background-default-color, $k-background-disabled-percent) !default;
 
 // endregion

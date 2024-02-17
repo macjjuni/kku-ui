@@ -205,6 +205,10 @@
         .k-text-field__input {
             color: $k-dark-mode-font-color;
             background: $k-dark-mode-background-default-color;
+
+            &::placeholder {
+                color: $k-dark-mode-placeholder-font-color;
+            }
         }
     }
 }
