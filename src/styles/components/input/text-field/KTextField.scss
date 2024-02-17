@@ -78,8 +78,7 @@
         }
     }
 
-
-    .dark &.k-text-field--disabled, &.k-text-field--disabled {
+    &.k-text-field--disabled, &.k-text-field--disabled {
 
         .k-text-field__input__container {
             background: $k-white-disabled-color;
@@ -180,6 +179,20 @@
         }
     }
 
+    &.k-text-field--disabled, &.k-text-field--disabled {
+
+        .k-text-field__input__container {
+            background: $k-dark-mode-disabled-background-color;
+
+            &:hover { border-color: $k-dark-mode-border-default-color; }
+
+            .k-text-field__input {
+                color: $k-dark-mode-disabled-font-color;
+                background: $k-dark-mode-disabled-background-color;
+            }
+        }
+    }
+
     .k-text-field__input__container {
         border: 1px solid $k-dark-mode-border-default-color;
         border-radius: $k-border-radius-default;
@@ -195,5 +208,6 @@
         }
     }
 }
+
 
 // endregion
