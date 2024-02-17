@@ -32,17 +32,17 @@ const Template = (args: KSelectProps) => {
     const onChange3 = (value: string) => { setValue3(value); };
 
     // const [mediumValue, setMediumValue] = useState('');
-    // const [smallValue, setSmallValue] = useState('');
+    // const [small width={'132px'}Value, setSmallValue] = useState('');
 
 
     return (
         <Container>
             <Item label={'Select(size: large)'}>
-                <KSelect {...args} large value={value} onChange={onChange} items={itemTemplates}/>
-                <KSelect {...args} large value={value} onChange={onChange} items={itemTemplates}/>
-                <KSelect {...args} large value={value} onChange={onChange} items={itemTemplates}/>
-                <KSelect {...args} large value={''} placeholder={'placeholder'} width={'162px'} onChange={onChange} items={[]}/>
-                <KSelect {...args} large disabled value={value} onChange={onChange} items={itemTemplates}/>
+                <KSelect {...args} width={'180px'} large value={value} onChange={onChange} items={itemTemplates}/>
+                <KSelect {...args} width={'180px'} large value={value} onChange={onChange} items={itemTemplates}/>
+                <KSelect {...args} width={'180px'} large value={value} onChange={onChange} items={itemTemplates}/>
+                <KSelect {...args} width={'180px'} large value={''} placeholder={'placeholder'} onChange={onChange} items={[]}/>
+                <KSelect {...args} width={'180px'} large disabled value={value} onChange={onChange} items={itemTemplates}/>
             </Item>
             <br/>
             <br/>
@@ -52,11 +52,11 @@ const Template = (args: KSelectProps) => {
             <br/>
             <br/>
             <Item label={'Select(size: medium)'}>
-                <KSelect {...args} value={value2} onChange={onChange2} items={itemTemplates}/>
-                <KSelect {...args} value={value2} onChange={onChange2} items={itemTemplates}/>
-                <KSelect {...args} value={value2} onChange={onChange2} items={itemTemplates}/>
-                <KSelect {...args} value={''} placeholder={'placeholder'} width={'148px'} onChange={onChange2} items={[]}/>
-                <KSelect {...args} value={value2} onChange={onChange2} disabled items={itemTemplates}/>
+                <KSelect {...args} value={value2} width={'160px'} onChange={onChange2} items={itemTemplates}/>
+                <KSelect {...args} value={value2} width={'160px'} onChange={onChange2} items={itemTemplates}/>
+                <KSelect {...args} value={value2} width={'160px'} onChange={onChange2} items={itemTemplates}/>
+                <KSelect {...args} value={''} width={'160px'} placeholder={'placeholder'} onChange={onChange2} items={[]}/>
+                <KSelect {...args} value={value2} width={'160px'} onChange={onChange2} disabled items={itemTemplates}/>
             </Item>
             <br/>
             <br/>
@@ -66,12 +66,12 @@ const Template = (args: KSelectProps) => {
             <br/>
             <br/>
             <br/>
-            <Item label={'Select(size: small)'}>
-                <KSelect {...args} small value={value3} onChange={onChange3} items={itemTemplates}/>
-                <KSelect {...args} small value={value3} onChange={onChange3} items={itemTemplates}/>
-                <KSelect {...args} small value={value3} onChange={onChange3} items={itemTemplates}/>
-                <KSelect {...args} small value={''} placeholder={'placeholder'} width={'130px'} onChange={onChange2} items={[]}/>
-                <KSelect {...args} small value={value3} onChange={onChange3} disabled items={itemTemplates}/>
+            <Item label={'Select(size: small'}>
+                <KSelect {...args} small width={'132px'} value={value3} onChange={onChange3} items={itemTemplates}/>
+                <KSelect {...args} small width={'132px'} value={value3} onChange={onChange3} items={itemTemplates}/>
+                <KSelect {...args} small width={'132px'} value={value3} onChange={onChange3} items={itemTemplates}/>
+                <KSelect {...args} small width={'132px'} value={''} placeholder={'placeholder'} onChange={onChange2} items={[]}/>
+                <KSelect {...args} small width={'132px'} value={value3} onChange={onChange3} disabled items={itemTemplates}/>
             </Item>
         </Container>
     );

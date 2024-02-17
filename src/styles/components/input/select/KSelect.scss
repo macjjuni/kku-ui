@@ -5,14 +5,14 @@
     align-items: center;
     gap: $k-spacing-6;
 
+    min-width: 80px;
     border: 1px solid $k-border-default-color;
     border-radius: $k-border-radius-default;
     background: $k-white-color;
     white-space: nowrap;
     cursor: pointer;
     user-select: none;
-    overflow: hidden;
-    z-index: $k-select-z-index;
+
     transition-property: border-color;
 
     @include k-transition-3;
@@ -26,12 +26,12 @@
         &:hover { border-color: $k-border-default-color; }
     }
 
-
     .k-select__label-text {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+
     .k-select__label-text__placeholder {
         color: $k-placeholder-font-color;
     }
@@ -39,7 +39,6 @@
     .k-select__current__label__arrow-icon { @include k-transition-3; }
 
     &.k-select--open {
-        overflow: visible;
 
         .k-select__current__label__arrow-icon { transform: rotate(180deg); }
         .k-select__menu-list { height: auto; }
@@ -54,9 +53,8 @@
         border: 1px solid $k-border-default-color;
         background-color: $k-white-color;
         border-radius: $k-border-radius-default;
-        transition-property: height;
-
-        @include k-transition-3;
+        overflow: hidden;
+        z-index: $k-select-z-index;
 
         .k-select__menu-list__item {
             width: 100%;
@@ -73,9 +71,7 @@
     // Size
     &.k-select--large {
 
-        min-width: 100px;
-
-        &, & + .k-select-template {
+        &, & + .k-select__template {
             padding: $k-spacing-10 $k-spacing-10 $k-spacing-10 $k-spacing-16;
             @include k-body-1;
         }
@@ -88,9 +84,7 @@
     }
     &.k-select--medium {
 
-        min-width: 90px;
-
-        &, & + .k-select-template {
+        &, & + .k-select__template {
             padding: $k-spacing-8 $k-spacing-8 $k-spacing-8 $k-spacing-14;
             @include k-body-2;
         }
@@ -104,9 +98,7 @@
     }
     &.k-select--small {
 
-        min-width: 80px;
-
-        &, & + .k-select-template {
+        &, & + .k-select__template {
             padding: $k-spacing-6 $k-spacing-6 $k-spacing-6 $k-spacing-12;
             @include k-body-3;
         }
@@ -117,11 +109,6 @@
             }
         }
     }
-}
-
-.k-select-template {
-    position: absolute;
-    opacity: 0;
 }
 
 .#{$k-dark-class-name} .k-select {
