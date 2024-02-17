@@ -1,4 +1,3 @@
-import { KeyboardEvent } from 'react';
 import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 
 
@@ -13,20 +12,18 @@ export interface KSelectProps extends KBaseProp, KSizeProp {
   value: string // ✨ Required ✨
   items: KSelectItemType[]
   // Label
-  label?: string
+  // label?: string
   placeholder?: string
+  noDataText?: string
 
   // Types
   disabled?: boolean
-  required?: boolean
-  noClearable?: boolean
+  // required?: boolean
 
   // Event
   onChange: (value: string) => void // ✨ Required ✨
   onFocus?: () => void
   onBlur?: () => void
-  onKeyDown?: (e?: KeyboardEvent<HTMLInputElement>) => void
-  onKeyUp?: (e?: KeyboardEvent<HTMLInputElement>) => void
 
   // Styles
   width?: string

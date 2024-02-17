@@ -1,23 +1,40 @@
 .k-select {
     position: relative;
-    overflow: hidden;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: $k-spacing-10;
+    gap: $k-spacing-6;
 
-    white-space: nowrap;
     border: 1px solid $k-border-default-color;
     border-radius: $k-border-radius-default;
     background: $k-white-color;
+    white-space: nowrap;
     cursor: pointer;
+    user-select: none;
+    overflow: hidden;
     z-index: $k-select-z-index;
     transition-property: border-color;
 
     @include k-transition-3;
 
     &:hover { border-color: $k-primary-color; }
+
+    &.k-select--disabled {
+        color: $k-disabled-font-color;
+        background: $k-white-disabled-color;
+        cursor: not-allowed;
+        &:hover { border-color: $k-border-default-color; }
+    }
+
+
+    .k-select__label-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .k-select__label-text__placeholder {
+        color: $k-placeholder-font-color;
+    }
 
     .k-select__current__label__arrow-icon { @include k-transition-3; }
 
@@ -50,32 +67,37 @@
             &:hover { background: $k-white-hover-color; }
             &:last-child { border: none; }
         }
+        .k-select__menu-list__item-no-data { color: $k-placeholder-font-color; }
     }
 
     // Size
     &.k-select--large {
 
-        min-width: 120px;
-        padding: $k-spacing-10 $k-spacing-10 $k-spacing-10 $k-spacing-16;
-        @include k-label-1;
+        min-width: 100px;
+
+        &, & + .k-select-template {
+            padding: $k-spacing-10 $k-spacing-10 $k-spacing-10 $k-spacing-16;
+            @include k-body-1;
+        }
 
         .k-select__menu-list {
             .k-select__menu-list__item {
-                padding: $k-spacing-10 $k-spacing-10;
-                @include k-label-1;
+                padding: $k-spacing-10 $k-spacing-16;
             }
         }
     }
     &.k-select--medium {
 
-        min-width: 100px;
-        padding: $k-spacing-8 $k-spacing-12;
-        @include k-label-2;
+        min-width: 90px;
+
+        &, & + .k-select-template {
+            padding: $k-spacing-8 $k-spacing-8 $k-spacing-8 $k-spacing-14;
+            @include k-body-2;
+        }
 
         .k-select__menu-list {
             .k-select__menu-list__item {
-                padding: $k-spacing-8 $k-spacing-12;
-                @include k-label-2;
+                padding: $k-spacing-8 $k-spacing-14;
             }
         }
 
@@ -83,17 +105,23 @@
     &.k-select--small {
 
         min-width: 80px;
-        padding: $k-spacing-6 $k-spacing-8;
-        @include k-label-3;
+
+        &, & + .k-select-template {
+            padding: $k-spacing-6 $k-spacing-6 $k-spacing-6 $k-spacing-12;
+            @include k-body-3;
+        }
 
         .k-select__menu-list {
             .k-select__menu-list__item {
-                padding: $k-spacing-6 $k-spacing-8;
-                @include k-label-3;
+                padding: $k-spacing-6 $k-spacing-10;
             }
         }
     }
+}
 
+.k-select-template {
+    position: absolute;
+    opacity: 0;
 }
 
 .#{$k-dark-class-name} .k-select {
@@ -103,6 +131,11 @@
     border-radius: $k-border-radius-default;
     background: $k-dark-mode-background-default-color;
 
+    &.k-select--disabled {
+        color: $k-dark-mode-disabled-font-color;
+        background: $k-dark-mode-disabled-background-color;
+        &:hover { border-color: $k-dark-mode-border-default-color; }
+    }
 
     .k-select__menu-list {
         border-color: $k-dark-mode-border-default-color;
