@@ -29,14 +29,23 @@ describe('KSelect', () => {
       const expectTitle = items[0].title;
       const testStyle = { color: 'red', fontSize: '20px' };
       const testClass = 'test-class-name';
+      const testIdValue = 'k-select-test-id';
 
-      render(<KSelect value={testValue} items={items} onChange={mockFn} className={testClass} style={testStyle} />);
+      render(<KSelect
+                value={testValue}
+                id={testIdValue}
+                items={items}
+                onChange={mockFn}
+                className={testClass}
+                style={testStyle}
+      />);
       const root = screen.getByTestId(testId);
       screen.getByText(expectTitle);
 
       // Assert
       expect(root).toHaveStyle(testStyle);
       expect(root).toHaveClass(testClass);
+      expect(root).toHaveAttribute('id', testIdValue);
     });
 
     test('Placeholder prop render test', () => {
@@ -126,6 +135,80 @@ describe('KSelect', () => {
 
       // Assert
       expect(selectedRoot).toHaveClass('k-select__label-text');
+    });
+
+    test('Focus event test', async () => {
+
+      // Arrange
+      const user = userEvent.setup();
+
+      const TestSelect = () => {
+        const [value, setValue] = useState('');
+        const onChange = (e: string) => { setValue(e); };
+
+        return (<KSelect value={value} items={items} onChange={onChange} />);
+      };
+      render(<TestSelect />);
+
+      // Act
+      await act(async () => {
+        await user.tab();
+      });
+
+      // Arrange
+      const root = screen.getByTestId(testId);
+
+      // Assert
+      expect(root).toHaveFocus();
+    });
+
+    test('Disabled focus event test', async () => {
+
+      // Arrange
+      const user = userEvent.setup();
+      render(<KSelect value='' disabled items={items} onChange={() => {}} />);
+
+      // Act
+      await act(async () => { await user.tab(); });
+
+      // Arrange
+      const root = screen.getByTestId(testId);
+
+      // Assert
+      expect(root).not.toHaveFocus();
+    });
+
+    test('Change Select value Using Keyboard Input', async () => {
+
+      // Arrange
+      const user = userEvent.setup();
+      const TestSelect = () => {
+        const [value, setValue] = useState('');
+        const onChange = (e: string) => { setValue(e); };
+
+        return (<KSelect value={value} items={items} onChange={onChange} />);
+      };
+      render(<TestSelect />);
+
+      // Act
+      await act(async () => { await user.tab(); });
+
+      // Arrange
+      const root = screen.getByTestId(testId);
+
+      // Assert
+      expect(root).toHaveFocus();
+
+      // Act
+      await act(async () => { await user.keyboard('{enter}'); });
+      await act(async () => { await user.tab(); });
+      await act(async () => { await user.keyboard('{enter}'); });
+
+      // Arrange
+      const selectedRoot = screen.getByText(items[0].title);
+
+      // Assert
+      expect(selectedRoot).toBeInTheDocument();
     });
 
   });
