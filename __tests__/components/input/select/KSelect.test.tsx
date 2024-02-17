@@ -20,7 +20,7 @@ describe('KSelect', () => {
     mockFn.mockClear();
   });
 
-  describe('Prop', () => {
+  describe('Props', () => {
 
     test('Style, value, className prop render test', () => {
 
@@ -105,7 +105,7 @@ describe('KSelect', () => {
 
   describe('Event', () => {
 
-    test('Value adn onChange Event test', async () => {
+    test('Value onChange Event test', async () => {
 
       // Arrange
       const user = userEvent.setup();
@@ -151,9 +151,7 @@ describe('KSelect', () => {
       render(<TestSelect />);
 
       // Act
-      await act(async () => {
-        await user.tab();
-      });
+      await act(async () => { await user.tab(); });
 
       // Arrange
       const root = screen.getByTestId(testId);
