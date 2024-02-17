@@ -76,9 +76,9 @@ $k-font-size-label-1: 16px !default;
 $k-font-size-label-2: 14px !default;
 $k-font-size-label-3: 12px !default;
 
-$k-line-height-label-1: 18px !default;
-$k-line-height-label-2: 16px !default;
-$k-line-height-label-3: 14px !default;
+$k-line-height-label-1: 22px !default;
+$k-line-height-label-2: 20px !default;
+$k-line-height-label-3: 18px !default;
 
 $k-line-height-sub-1: 24px !default;
 $k-line-height-sub-2: 22px !default;
@@ -92,9 +92,9 @@ $k-font-size-body-1: 18px !default;
 $k-font-size-body-2: 16px !default;
 $k-font-size-body-3: 14px !default;
 
-$k-line-height-body-1: 20px !default;
-$k-line-height-body-2: 18px !default;
-$k-line-height-body-3: 16px !default;
+$k-line-height-body-1: 22px !default;
+$k-line-height-body-2: 20px !default;
+$k-line-height-body-3: 18px !default;
 
 $k-font-weight-body-1: 400 !default;
 $k-font-weight-body-2: 400 !default;
@@ -184,7 +184,9 @@ $k-dark-mode-background-hover-color: lighten($k-dark-mode-background-default-col
 // region [Dark Mode - colors]
 
 $k-dark-mode-font-color: $k-gray-color-200 !default;
-$k-dark-mode-disabled-font-color: darken($k-white-color, 56%) !default;
+$k-dark-mode-disabled-font-color: darken($k-dark-mode-font-color, 50%) !default;
+$k-dark-mode-placeholder-font-color: darken($k-dark-mode-disabled-font-color,$k-background-disabled-percent) !default;
+$k-dark-mode-disabled-background-color: lighten($k-dark-mode-background-default-color, $k-background-disabled-percent) !default;
 
 // endregion
 
