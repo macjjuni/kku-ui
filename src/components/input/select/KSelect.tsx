@@ -6,6 +6,7 @@ import {
 import type { KSelectProps, KSelectRefs, KSelectItemType } from '@/components/input/select/KSelect.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { KIcon } from '@/components';
+import KSelectList from '@/components/input/select/KSelectList';
 
 
 const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
@@ -13,7 +14,6 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
   // region [Hooks]
 
   const selectRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<HTMLUListElement>(null);
   const isOnMouse = useRef<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
 
@@ -152,45 +152,8 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
 
   // region [Templates]
 
-  const MenuList = useMemo(() => (
-    open && (
-      <ul ref={listRef} className='k-select__menu-list' data-testid='k-select-list'>
-        {props.items.map((item, idx) => (
-          <li
-                    key={item.value}
-                    role='menuitem'
-                    tabIndex={0}
-                    onFocus={onFocusListItem}
-                    onClick={() => { onClickListItem(item); }}
-                    onKeyDown={(e) => { onKeydownListItem(e, item, idx); }}
-                    className='k-select__menu-list__item'
-          >
-            {item.title}
-          </li>
-        ))}
-        {
-          props.items.length === 0 && (
-            <li
-                        role='menuitem'
-                        tabIndex={0}
-                        onFocus={onFocusListItem}
-                        onClick={() => { onClickListItem(null); }}
-                        onKeyDown={(e) => { onKeydownListItem(e, null, -1); }}
-                        className='k-select__menu-list__item k-select__menu-list__item-no-data'
-            >
-              {props.noDataText}
-            </li>
-          )
-        }
-      </ul>
-    )), [open, props.items]);
-
-  // endregion
-
-
   return (
-    <>
-      <div
+    <div
         ref={selectRef}
         id={props.id}
         className={`k-select ${rootClass}`}
@@ -204,17 +167,24 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
         onBlur={onBlurRoot}
         onMouseEnter={onMouseEnterRoot}
         onMouseLeave={onMouseLeaveRoot}
-      >
-        {displayTitle}
-        <KIcon className='k-select__current__label__arrow-icon' icon='expand_more' size={18} />
-        {MenuList}
-      </div>
-    </>
+    >
+      {displayTitle}
+      <KIcon className='k-select__current__label__arrow-icon' icon='expand_more' size={18} />
+      <KSelectList
+        open={open}
+        items={props.items}
+        onClick={onClickListItem}
+        onFocus={onFocusListItem}
+        onKeyDown={onKeydownListItem}
+        noDataText={props.noDataText}
+      />
+    </div>
   );
+
+  // endregion
+
 });
 
-KSelect.defaultProps = {
-  noDataText: 'No Data',
-};
+KSelect.defaultProps = { noDataText: 'No Data' };
 KSelect.displayName = 'KSelect';
 export default memo(KSelect);
