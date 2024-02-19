@@ -1,3 +1,4 @@
+import { KeyboardEvent } from 'react';
 import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 
 
@@ -35,4 +36,13 @@ export interface KSelectRefs {
   value?: string
   focus?: () => void
   blur?: () => void
+}
+
+export interface KSelectListProps {
+  open: boolean
+  items: KSelectItemType[]
+  noDataText?: string
+  onFocus: () => void
+  onClick: (item: KSelectItemType | null) => void
+  onKeyDown: (e: KeyboardEvent<HTMLLIElement>, item: KSelectItemType | null, idx: number) => void
 }

@@ -2,7 +2,9 @@ import { SizeType, sizes, VariantType, variants } from '@/common/base/base.inter
 
 // region [🎁 - Size]
 
-type GetSizesType = (clazz: string[], identity: string, size?: SizeType, large?: boolean, medium?: boolean, small?: boolean) => void;
+type GetSizesType =
+    (clazz: string[], identity: string, size?: SizeType, large?: boolean, medium?: boolean, small?: boolean)
+    => void;
 
 export const initSize: GetSizesType = (clazz, identity, size, large, medium, small) => {
 
@@ -29,7 +31,10 @@ export const initSize: GetSizesType = (clazz, identity, size, large, medium, sma
 
 // region [🍭 - Variant]
 
-type GetVariantType = (clazz: string[], identity: string, variant?: VariantType, primary?: boolean, outlined?: boolean) => void;
+type GetVariantType =
+    (clazz: string[], identity: string, variant?: VariantType, primary?: boolean, outlined?: boolean)
+    => void;
+
 export const initVariant:GetVariantType = (clazz, identity, variant, primary, outlined) => {
 
   if ((variant && (primary || outlined)) || (primary && outlined)) {
