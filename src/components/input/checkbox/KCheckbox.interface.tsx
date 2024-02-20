@@ -9,7 +9,7 @@ export interface KCheckboxProps extends KBaseProp, KSizeProp {
   checked: boolean // ✨ Required ✨
 
   // Types
-  type: KCheckboxSharp
+  type?: KCheckboxSharp
   circle?: boolean
   square?: boolean
   color?: string

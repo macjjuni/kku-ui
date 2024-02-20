@@ -96,7 +96,7 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
 
 
   return (
-    <div id={props.id} className={`k-checkbox ${rootClass}`} style={rootStyle}>
+    <div id={props.id} className={`k-checkbox ${rootClass}`} style={rootStyle} data-testid='k-checkbox'>
       <label htmlFor={uniqueId} className='k-checkbox__container'>
         <input
             ref={inputRef}
@@ -105,6 +105,7 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
             type='checkbox'
             checked={checked}
             onChange={onChange}
+            data-testid='k-checkbox-input'
         />
 
         {/* Square(default) */}
