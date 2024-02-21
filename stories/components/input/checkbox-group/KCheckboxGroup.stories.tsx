@@ -31,8 +31,6 @@ const Template = (args: KCheckboxProps) => {
         console.log('story', value);
         setValue(value);
     };
-    // const onChange2 = (value: string) => { setValue2(value); };
-    // const onChange3 = (value: string) => { setValue3(value); };
 
     // const [mediumValue, setMediumValue] = useState('');
     // const [small width={'132px'}Value, setSmallValue] = useState('');

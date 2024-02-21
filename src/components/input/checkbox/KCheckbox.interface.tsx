@@ -29,7 +29,6 @@ export interface KCheckboxProps extends KBaseProp, KSizeProp {
 
 
 export interface KCheckboxRefs {
-  value: boolean
   click: () => void
   focus: () => void
   blur: () => void
