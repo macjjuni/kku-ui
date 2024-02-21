@@ -6,7 +6,7 @@ type KCheckboxSharp = 'circle' | 'square';
 export interface KCheckboxProps extends KBaseProp, KSizeProp {
 
   label: string // ✨ Required ✨
-  checked: boolean // ✨ Required ✨
+  value: boolean // ✨ Required ✨
 
   // Types
   type?: KCheckboxSharp
@@ -29,9 +29,9 @@ export interface KCheckboxProps extends KBaseProp, KSizeProp {
 
 
 export interface KCheckboxRefs {
+  value: boolean
   click: () => void
   focus: () => void
   blur: () => void
   toggle: () => void
-  checked: boolean
 }
