@@ -12,14 +12,14 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
   const inputRef = useRef<HTMLInputElement>(null);
   const uniqueId = `k-checkbox + ${useId()}`;
 
-  const [checked, setChecked] = useState<boolean>(props.checked);
+  const [value, setValue] = useState<boolean>(props.value);
 
   useImperativeHandle(ref, () => ({
+    value,
     blur() { inputRef.current?.blur(); },
     focus() { inputRef.current?.focus(); },
     click() { inputRef.current?.click(); },
-    toggle() { setChecked((prev) => !prev); },
-    checked,
+    toggle() { setValue((prev) => !prev); },
   }));
 
   // endregion
@@ -28,11 +28,11 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
   // region [Privates]
 
   const iconSize = useMemo((): number => {
-    if (props.size === 'large' || props.large) { return 30; }
-    if (props.size === 'medium' || props.medium) { return 26; }
-    if (props.size === 'small' || props.small) { return 22; }
+    if (props.size === 'large' || props.large) { return 33; }
+    if (props.size === 'medium' || props.medium) { return 27; }
+    if (props.size === 'small' || props.small) { return 23; }
 
-    return 26; // 기본값
+    return 27; // 기본값
   }, [props.size, props.large, props.medium, props.small]);
 
   // endregion
@@ -45,6 +45,7 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
     const clazz = [];
 
     if (props.className) { clazz.push(props.className); }
+
     initSize(clazz, 'k-checkbox', props.size, props.large, props.medium, props.small);
     initDisabled(clazz, 'k-checkbox', props.disabled);
 
@@ -78,7 +79,7 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 
     const isCheck = e.target.checked;
-    setChecked(isCheck);
+    setValue(isCheck);
     props.onChange(isCheck);
   }, []);
 
@@ -88,7 +89,7 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
   // region [Life Cycles]
 
   useEffect(() => {
-    if (props.defaultCheck) { setChecked(true); }
+    if (props.defaultCheck) { setValue(true); }
   }, [props.defaultCheck]);
 
 
@@ -103,7 +104,7 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
             id={uniqueId}
             className='k-checkbox__container__input'
             type='checkbox'
-            checked={checked}
+            checked={value}
             onChange={onChange}
             data-testid='k-checkbox-input'
         />
@@ -111,13 +112,13 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
         {/* Square(default) */}
         {(props.square || props.type === 'square' || props.type === undefined)
            && !props.circle && (
-          checked ? <KIcon size={iconSize} icon='check_box' color={props.color} />
+          value ? <KIcon size={iconSize} icon='check_box' color={props.color} />
             : <KIcon size={iconSize} icon='check_box_outline_blank' color={props.color} />
         )}
 
         {/* Circle */}
         {(props.circle || props.type === 'circle') && (
-          checked ? <KIcon size={iconSize} icon='check_circle' color={props.color} />
+          value ? <KIcon size={iconSize} icon='check_circle' color={props.color} />
             : <KIcon size={iconSize} icon='circle' color={props.color} />
         )}
 

@@ -27,7 +27,7 @@ describe('KSelect', () => {
       const testClass = 'test-class-name';
       const testIdValue = 'k-select-test-id';
 
-      render(<KCheckbox label='kku' id={testIdValue} checked onChange={() => {}} className={testClass} style={testStyle} />);
+      render(<KCheckbox label='kku' id={testIdValue} value={false} onChange={() => {}} className={testClass} style={testStyle} />);
       const root = screen.getByTestId(testId);
 
       // Assert
