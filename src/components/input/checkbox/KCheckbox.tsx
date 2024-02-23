@@ -26,13 +26,9 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
 
   // region [Privates]
 
-  const iconSize = useMemo((): number => {
-    if (props.size === 'large' || props.large) { return 33; }
-    if (props.size === 'medium' || props.medium) { return 27; }
-    if (props.size === 'small' || props.small) { return 23; }
-
-    return 27; // medium
-  }, [props.size, props.large, props.medium, props.small]);
+  const clickInput = useCallback(() => {
+    inputRef.current?.click();
+  }, []);
 
   // endregion
 
@@ -72,6 +68,14 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
     return { ...style, ...props.style };
   }, [props.style, props.width]);
 
+  const iconSize = useMemo((): number => {
+    if (props.size === 'large' || props.large) { return 33; }
+    if (props.size === 'medium' || props.medium) { return 27; }
+    if (props.size === 'small' || props.small) { return 23; }
+
+    return 27; // medium
+  }, [props.size, props.large, props.medium, props.small]);
+
   // endregion
 
 
@@ -84,7 +88,7 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
 
   const onKeyUp = useCallback((e: KeyboardEvent<HTMLElement>) => {
 
-    if (e?.key === ' ' || e?.key === 'Enter') { inputRef.current?.click(); }
+    if (e?.key === ' ' || e?.key === 'Enter') { clickInput(); }
   }, []);
 
   // endregion
@@ -93,7 +97,7 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
   // region [Life Cycles]
 
   useEffect(() => {
-    if (props.defaultCheck) { props.onChange(false); }
+    if (props.defaultCheck) { clickInput(); }
   }, [props.defaultCheck]);
 
 
