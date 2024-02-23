@@ -53,7 +53,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
     return clazz.join(' ');
   }, [
     props.className, props.large, props.medium, props.small, props.size, props.disabled,
-    props.password, props.labelDirection, props.column, props.row]);
+    props.password, props.labelDirection, props.column, props.row, props.required]);
 
 
   const rootStyle = useMemo(() => {
@@ -61,9 +61,10 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
     const styles: CSSProperties = props.style || {};
 
     if (props.width) { styles.width = props.width; }
+    if (props.fullWidth) { styles.width = '100%'; }
 
     return styles;
-  }, [props.style]);
+  }, [props.style, props.fullWidth]);
 
   const labelClass = useMemo(() => {
     const clazz = [];
