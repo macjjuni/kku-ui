@@ -4,7 +4,7 @@ import {KButton} from '@/components';
 import {KButtonProps} from '@/components/button/KButton.interface';
 
 const meta: Meta<KButtonProps> = {
-    title: 'Button',
+    title: 'Components/Button',
     component: KButton,
 };
 

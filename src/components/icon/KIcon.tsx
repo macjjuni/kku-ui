@@ -5,6 +5,7 @@ import { CSSProperties, forwardRef, KeyboardEvent, memo, Ref, useCallback,
 import { KIconProps, KIconRefs } from '@/components/icon/KIcon.interface';
 import { initDisabled } from '@/common/util/variation';
 import '@material-symbols/font-300/outlined.css';
+import '@material-symbols/font-300/rounded.css';
 
 
 // https://fonts.google.com/
@@ -39,7 +40,7 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
     initDisabled(clazz, 'k-icon', props.disabled);
 
     return clazz.join(' ');
-  }, [props.type, props.className, props.size, props.disabled]);
+  }, [props.type, props.className, props.size, props.disabled, props.clickable]);
 
 
   const rootStyle = useMemo(() => {

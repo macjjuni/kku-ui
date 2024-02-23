@@ -4,7 +4,7 @@ import {KButton, KButtonRefs} from '@/components';
 import {KButtonProps} from '@/components/button/KButton.interface';
 import {useEffect, useRef} from 'react';
 
-const meta: Meta<KButtonProps> = {title: 'Button', component: KButton};
+const meta: Meta<KButtonProps> = {title: 'Components/Button', component: KButton};
 
 export default meta;
 
