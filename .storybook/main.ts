@@ -23,7 +23,7 @@ const config: StorybookConfig = {
         autodocs: true,
     },
     // 👈 The builder enabled here.
-    core: {builder: '@storybook/builder-vite'},
+    core: {},
     async viteFinal(config) {
         // Merge custom configuration into the default config
 

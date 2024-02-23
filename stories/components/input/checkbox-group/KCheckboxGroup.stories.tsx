@@ -15,9 +15,9 @@ type Story = StoryObj<KCheckboxProps>
 
 
 const items = [
-    { label: 'text1', value: 'value1' },
-    { label: 'text2', value: 'value2' },
-    { label: 'text3', value: 'value3' },
+    { label: 'text1', value: 'value1' , defaultCheck: true},
+    { label: 'text2', value: 'value2', defaultCheck: true },
+    { label: 'text3', value: 'value3', disabled: true},
 ]
 
 const Template = (args: KCheckboxProps) => {
@@ -27,10 +27,6 @@ const Template = (args: KCheckboxProps) => {
     // const [value3, setValue3] = useState('library');
 
 
-    const onChange = (value: string[]) => {
-        console.log('story', value);
-        setValue(value);
-    };
 
     // const [mediumValue, setMediumValue] = useState('');
     // const [small width={'132px'}Value, setSmallValue] = useState('');
@@ -39,7 +35,7 @@ const Template = (args: KCheckboxProps) => {
     return (
         <Container>
             <Item label={'Select(size: large)'}>
-                <KCheckboxGroup {...args} items={items} value={value} onChange={onChange} />
+                <KCheckboxGroup {...args} items={items} value={value} onChange={setValue} />
             </Item>
             {/* <Item label={'Select(size: Medium)'}> */}
             {/*     <KCheckbox {...args} type={'square'} value={value} label={'Checkbox1'} onChange={onChange}/> */}

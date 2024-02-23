@@ -1,12 +1,26 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import {Container, Item} from '../../common/Container';
 import {KCheckbox} from '@/components/input/checkbox';
 import {useState} from 'react';
 import {KCheckboxProps} from '@/components/input/checkbox/KCheckbox.interface';
+import {commonArgType, disabledArgType, individualSizeArgType, sizeArgType} from '../../common/argTypes';
 
 const meta: Meta<typeof KCheckbox> = {
     component: KCheckbox,
     title: 'Checkbox',
+    argTypes: {
+        sharp: {description: '아이콘 형태를 설정합니다.', defaultValue: {summary: 'square'}},
+        square: {description: '아이콘을 사각형 형태로 설정합니다.', defaultValue: {summary: 'undefined'}},
+        circle: {description: '아이콘을 둥근 형태로 설정합니다.', defaultValue: {summary: 'undefined'}},
+        label: {description: '체크박스 레이블을 설정합니다.', defaultValue: {summary: 'undefined'}},
+        value: {description: '체크박스 값을 설정합니다.', defaultValue: {summary: 'false'}},
+        color: {description: '체크박스 아이콘 색상을 설정합니다.', defaultValue: {summary: 'undefined'}},
+        defaultCheck: {description: '기본 체크 상태로 설정합니다.', defaultValue: {summary: 'false'}},
+        width: {description: '체크박스 스타일 width 값을 설정합니다.', defaultValue: {summary: 'undefined'}},
+       ...commonArgType,
+       ...sizeArgType,
+       ...individualSizeArgType,
+       ...disabledArgType
+    }
 };
 
 export default meta;
@@ -17,38 +31,19 @@ type Story = StoryObj<KCheckboxProps>
 const Template = (args: KCheckboxProps) => {
 
     const [value, setValue] = useState<boolean>(false);
-    // const [value2, setValue2] = useState('playground');
-    // const [value3, setValue3] = useState('library');
-
 
     const onChange = (value: boolean) => { setValue(value); };
-    // const onChange2 = (value: string) => { setValue2(value); };
-    // const onChange3 = (value: string) => { setValue3(value); };
-
-    // const [mediumValue, setMediumValue] = useState('');
-    // const [small width={'132px'}Value, setSmallValue] = useState('');
 
 
-    return (
-        <Container>
-            <Item label={'Select(size: large)'}>
-                <KCheckbox {...args} large value={value} label={'Checkbox1'} onChange={onChange}/>
-                <KCheckbox {...args} large circle value={value} label={'Checkbox1'} onChange={onChange}/>
-            </Item>
-            <Item label={'Select(size: Medium)'}>
-                <KCheckbox {...args} type={'square'} value={value} label={'Checkbox1'} onChange={onChange}/>
-                <KCheckbox {...args} type={'circle'} value={value} label={'Checkbox1'} onChange={onChange}/>
-            </Item>
-            <Item label={'Select(size: Small)'}>
-                <KCheckbox {...args} small type={'square'} value={value} label={'Checkbox1'} onChange={onChange}/>
-                <KCheckbox {...args} small type={'circle'} value={value} label={'Checkbox1'} onChange={onChange}/>
-            </Item>
-
-        </Container>
-    );
+    return (<KCheckbox {...args} value={value} onChange={onChange}/>);
 };
 
 export const Default: Story = {
     render: Template,
-    args: {},
+    args: {
+        size: 'medium',
+        label: 'Checkbox',
+        sharp: 'square',
+        disabled: false,
+    },
 };

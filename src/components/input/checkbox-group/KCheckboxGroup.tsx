@@ -1,12 +1,11 @@
-import { memo, useCallback, useEffect } from 'react';
+import { memo, useCallback } from 'react';
 import { KCheckbox } from '@/components';
 import { KCheckboxGroupProps } from '@/components/input/checkbox-group/KCheckboxGroup.interface';
 
-const KCheckboxGroup = ({ value, items, onChange }: KCheckboxGroupProps) => {
+const KCheckboxGroup = ({ value, items, onChange, sharp, color }: KCheckboxGroupProps) => {
 
 
   // region [Hooks]
-
   // endregion
 
 
@@ -15,11 +14,9 @@ const KCheckboxGroup = ({ value, items, onChange }: KCheckboxGroupProps) => {
   const onChangeCheckbox = useCallback((checked: boolean, itemValue: string) => {
 
     if (checked) {
-      const appendedValue = [...value, itemValue];
-      onChange(appendedValue);
+      onChange([...value, itemValue]);
     } else {
-      const removedValue = value.filter((checkValue) => checkValue !== itemValue);
-      onChange(removedValue);
+      onChange(value.filter((checkValue) => checkValue !== itemValue));
     }
   }, [value, items, onChange]);
 
@@ -27,18 +24,10 @@ const KCheckboxGroup = ({ value, items, onChange }: KCheckboxGroupProps) => {
 
 
   // region [Life Cycles]
-
-
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
-
   // endregion
 
 
   // region [Templates]
-
-
   // endregion
 
   return (
@@ -50,6 +39,10 @@ const KCheckboxGroup = ({ value, items, onChange }: KCheckboxGroupProps) => {
             label={item.label}
             value={value?.includes(item.value)}
             onChange={(checked) => { onChangeCheckbox(checked, item.value); }}
+            sharp={sharp}
+            color={color}
+            disabled={item.disabled}
+            defaultCheck={item.defaultCheck}
           />
         ))
       }

@@ -1,5 +1,7 @@
-import { ChangeEvent, CSSProperties, forwardRef, memo, Ref, useCallback, useEffect,
-  useId, useImperativeHandle, useMemo, useRef } from 'react';
+import {
+  ChangeEvent, CSSProperties, forwardRef, KeyboardEvent, memo, Ref, useCallback, useEffect,
+  useId, useImperativeHandle, useMemo, useRef,
+} from 'react';
 import { KCheckboxProps, KCheckboxRefs } from '@/components/input/checkbox/KCheckbox.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { KIcon } from '@/components';
@@ -24,13 +26,9 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
 
   // region [Privates]
 
-  const iconSize = useMemo((): number => {
-    if (props.size === 'large' || props.large) { return 33; }
-    if (props.size === 'medium' || props.medium) { return 27; }
-    if (props.size === 'small' || props.small) { return 23; }
-
-    return 27; // medium
-  }, [props.size, props.large, props.medium, props.small]);
+  const clickInput = useCallback(() => {
+    inputRef.current?.click();
+  }, []);
 
   // endregion
 
@@ -46,7 +44,7 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
     initSize(clazz, 'k-checkbox', props.size, props.large, props.medium, props.small);
     initDisabled(clazz, 'k-checkbox', props.disabled);
 
-    if (props.type && (props.circle || props.square)) {
+    if (props.sharp && (props.circle || props.square)) {
       throw Error('Error: type and circle, square attributes cannot be duplicated.');
     }
 
@@ -54,12 +52,14 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
       throw Error('Error: circle, square attributes cannot be duplicated.');
     }
 
-    if (props.type) { clazz.push(`k-checkbox--${props.type}`); }
+    if (props.sharp) { clazz.push(`k-checkbox--${props.sharp}`); }
     if (props.circle) { clazz.push('k-checkbox--circle'); }
     if (props.square) { clazz.push('k-checkbox--square'); }
 
     return clazz.join(' ');
-  }, [props.className, props.size, props.small, props.medium, props.large, props.disabled]);
+  }, [
+    props.className, props.size, props.sharp, props.circle, props.square,
+    props.small, props.medium, props.large, props.disabled]);
 
   const rootStyle = useMemo(() => {
 
@@ -68,6 +68,14 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
     return { ...style, ...props.style };
   }, [props.style, props.width]);
 
+  const iconSize = useMemo((): number => {
+    if (props.size === 'large' || props.large) { return 33; }
+    if (props.size === 'medium' || props.medium) { return 27; }
+    if (props.size === 'small' || props.small) { return 23; }
+
+    return 27; // medium
+  }, [props.size, props.large, props.medium, props.small]);
+
   // endregion
 
 
@@ -75,8 +83,12 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 
-    const isChecked = e.target.checked;
-    props.onChange(isChecked);
+    props.onChange(e.target.checked);
+  }, [props.onChange]);
+
+  const onKeyUp = useCallback((e: KeyboardEvent<HTMLElement>) => {
+
+    if (e?.key === ' ' || e?.key === 'Enter') { clickInput(); }
   }, []);
 
   // endregion
@@ -85,38 +97,57 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
   // region [Life Cycles]
 
   useEffect(() => {
-    if (props.defaultCheck) { props.onChange(false); }
+    if (props.defaultCheck) { clickInput(); }
   }, [props.defaultCheck]);
+
+
+  // endregion
+
+  // region [Template]
+
+  const SquareIcon = useMemo(() => (
+    props.value ? <KIcon size={iconSize} icon='check_box' color={props.color} />
+      : <KIcon size={iconSize} icon='check_box_outline_blank' color={props.color} />
+  ), [props.value, iconSize, props.color]);
+
+  const CircleIcon = useMemo(() => (
+    props.value ? <KIcon size={iconSize} icon='check_circle' color={props.color} />
+      : <KIcon size={iconSize} icon='circle' color={props.color} />
+  ), [props.value, iconSize, props.color]);
 
 
   // endregion
 
 
   return (
-    <div id={props.id} className={`k-checkbox ${rootClass}`} style={rootStyle} data-testid='k-checkbox'>
+    <div
+        id={props.id}
+        role='checkbox'
+        aria-checked={props.value}
+        tabIndex={!props.disabled ? 0 : -1}
+        className={`k-checkbox ${rootClass}`}
+        style={rootStyle}
+        data-testid='k-checkbox'
+        onKeyUp={onKeyUp}
+    >
       <label htmlFor={uniqueId} className='k-checkbox__container'>
         <input
-            ref={inputRef}
-            id={uniqueId}
-            className='k-checkbox__container__input'
-            type='checkbox'
-            checked={props.value}
-            onChange={onChange}
-            data-testid='k-checkbox-input'
+          tabIndex={-1}
+          ref={inputRef}
+          id={uniqueId}
+          className='k-checkbox__container__input'
+          type='checkbox'
+          checked={props.value}
+          disabled={props.disabled}
+          onChange={onChange}
+          data-testid='k-checkbox-input'
         />
 
         {/* Square(default) */}
-        {(props.square || props.type === 'square' || props.type === undefined)
-           && !props.circle && (
-          props.value ? <KIcon size={iconSize} icon='check_box' color={props.color} />
-            : <KIcon size={iconSize} icon='check_box_outline_blank' color={props.color} />
-        )}
+        {((props.square || props.sharp === 'square') || props.sharp === undefined) && SquareIcon}
 
         {/* Circle */}
-        {(props.circle || props.type === 'circle') && (
-          props.value ? <KIcon size={iconSize} icon='check_circle' color={props.color} />
-            : <KIcon size={iconSize} icon='circle' color={props.color} />
-        )}
+        {((props.circle || props.sharp === 'circle') || props.sharp === undefined) && CircleIcon}
 
         <span className='k-checkbox__container__label'>
           {props.label}
@@ -128,7 +159,7 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
 
 KCheckbox.defaultProps = {
   defaultCheck: false,
-  color: '#000000',
+  sharp: 'square',
 };
 KCheckbox.displayName = 'KCheckbox';
 
