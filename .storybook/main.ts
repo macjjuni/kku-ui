@@ -20,7 +20,7 @@ const config: StorybookConfig = {
         options: {},
     },
     docs: {
-        autodocs: 'tag',
+        autodocs: true,
     },
     // 👈 The builder enabled here.
     core: {builder: '@storybook/builder-vite'},

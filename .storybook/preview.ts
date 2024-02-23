@@ -11,6 +11,17 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    options: {
+      storySort: {
+        method: 'configure',
+        includeNames: true,
+        order: [
+          'Components', ['Button', 'Icon'],
+          'Input', ['TextField', 'Checkbox', 'CheckboxGroup', 'Select', '*'],
+          '*'
+        ],
+      },
+    },
   },
 }
 

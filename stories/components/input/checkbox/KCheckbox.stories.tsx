@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import {Container, Item} from '../../common/Container';
 import {KCheckbox} from '@/components/input/checkbox';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {KCheckboxProps} from '@/components/input/checkbox/KCheckbox.interface';
 
 const meta: Meta<typeof KCheckbox> = {
@@ -28,24 +28,20 @@ const Template = (args: KCheckboxProps) => {
     // const [mediumValue, setMediumValue] = useState('');
     // const [small width={'132px'}Value, setSmallValue] = useState('');
 
-    useEffect(() => {
-        console.log(value);
-    }, [value]);
-
 
     return (
         <Container>
             <Item label={'Select(size: large)'}>
-                <KCheckbox {...args} large checked={value} label={'Checkbox1'} onChange={onChange} />
-                <KCheckbox {...args} large circle checked={value} label={'Checkbox1'} onChange={onChange} />
+                <KCheckbox {...args} large value={value} label={'Checkbox1'} onChange={onChange}/>
+                <KCheckbox {...args} large circle value={value} label={'Checkbox1'} onChange={onChange}/>
             </Item>
             <Item label={'Select(size: Medium)'}>
-                <KCheckbox {...args} type={'square'} checked={value} label={'Checkbox1'} onChange={onChange} />
-                <KCheckbox {...args} type={'circle'} checked={value} label={'Checkbox1'} onChange={onChange} />
+                <KCheckbox {...args} type={'square'} value={value} label={'Checkbox1'} onChange={onChange}/>
+                <KCheckbox {...args} type={'circle'} value={value} label={'Checkbox1'} onChange={onChange}/>
             </Item>
             <Item label={'Select(size: Small)'}>
-                <KCheckbox {...args} small type={'square'} checked={value} label={'Checkbox1'} onChange={onChange} />
-                <KCheckbox {...args} small type={'circle'} checked={value} label={'Checkbox1'} onChange={onChange} />
+                <KCheckbox {...args} small type={'square'} value={value} label={'Checkbox1'} onChange={onChange}/>
+                <KCheckbox {...args} small type={'circle'} value={value} label={'Checkbox1'} onChange={onChange}/>
             </Item>
 
         </Container>
