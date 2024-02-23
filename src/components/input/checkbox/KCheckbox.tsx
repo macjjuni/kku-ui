@@ -75,9 +75,8 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 
-    const isChecked = e.target.checked;
-    props.onChange(isChecked);
-  }, []);
+    props.onChange(e.target.checked);
+  }, [props.onChange]);
 
   // endregion
 
