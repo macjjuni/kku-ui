@@ -1,13 +1,32 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import {Container, Item} from '../../common/Container';
 import KTextField from '@/components/input/textfield/KTextField';
-import {useState, useMemo, CSSProperties} from 'react';
 import {KTextFieldProps} from '@/components/input/textfield/KTextField.interface';
+import {commonArgType, disabledArgType, individualSizeArgType, sizeArgType} from '../../common/argTypes';
 
 
 const meta: Meta<typeof KTextField> = {
     component: KTextField,
-    title: 'TextField',
+    title: 'Input/TextField',
+    argTypes: {
+        label: {description: '레이블 의 텍스트를 설정합니다.'},
+        value: {description: 'Input value 를 설정합니다.'},
+        labelDirection: {description: '레이블 정렬 스타일을 설정합니다.', defaultValue: {summary: 'column'}},
+        column: {description: '레이블 정렬을 column 형태로 설정합니다.', defaultValue: {summary: 'false'}},
+        row: {description: '레이블 정렬을 row 형태로 설정합니다.', defaultValue: {summary: 'false'}},
+        placeholder: {description: 'Input 에 placeholder 를 설정합니다.', defaultValue: {summary: 'undefined'}},
+        maxLength: {description: 'Input 에 최대 입력 수를 설정합니다.', defaultValue: {summary: 'undefined'}},
+        required: {description: '레이블에 필수 입력 아이콘을 설정합니다.', defaultValue: {summary: 'false'}},
+        clearable: {description: 'value 초기화 버튼을 설정합니다.', defaultValue: {summary: 'false'}},
+        password: {description: '비밀번호 입력 행태로 설정합니다.', defaultValue: {summary: 'false'}},
+        width: {description: '스타일 width 값을 설정합니다.', defaultValue: {summary: 'undefined'}},
+        fullWidth: {description: '스타일 width 값을 100% 로 설정합니다.', defaultValue: {summary: 'undefined'}},
+        rightAction: {description: '레이블 정렬이 column 상태일 경우 우측에 Action 공간을 설정합니다.', defaultValue: {summary: 'undefined'}},
+
+        ...commonArgType,
+        ...sizeArgType,
+        ...disabledArgType,
+        ...individualSizeArgType
+    },
 };
 
 export default meta;
@@ -16,61 +35,19 @@ type Story = StoryObj<KTextFieldProps>
 
 const Template = (args: KTextFieldProps) => {
 
-    const [largeValue, setLargeValue] = useState('');
-    const [mediumValue, setMediumValue] = useState('');
-    const [smallValue, setSmallValue] = useState('');
-
-    const RightAction = useMemo(() => {
-        const style: CSSProperties = {fontSize: '12px', textDecoration: 'underline'};
-        return <a href={'#'} onClick={(e) => { e.preventDefault();}} style={style}>비밀번호 찾기</a>;
-    }, []);
-
-    return (
-        <Container>
-            <Item label={'Default TextField'}>
-                <KTextField {...args} large value={largeValue} placeholder={'Large'} onChange={(v) => {setLargeValue(v);}}/>
-                <KTextField medium value={mediumValue} placeholder={'Medium'} onChange={(v) => {setMediumValue(v);}}/>
-                <KTextField small value={smallValue} placeholder={'Small'} onChange={(v) => {setSmallValue(v);}}/>
-            </Item>
-            <Item label={'Password / required / right-action'}>
-                <KTextField password labelDirection={'column'} label={'비밀번호'} value={largeValue}
-                            onChange={(v) => {setLargeValue(v);}}/>
-                <KTextField  password required column label={'비밀번호'} value={mediumValue}
-                            onChange={(v) => {setMediumValue(v);}}/>
-                <KTextField  password required label={'비밀번호'} rightAction={RightAction} value={smallValue}
-                            onChange={(v) => {setSmallValue(v);}}/>
-            </Item>
-            <Item label={'Label(Direction: Column)'}>
-                <KTextField label={'Column'} column placeholder={'Column'} large value={largeValue}
-                            onChange={(v) => {setLargeValue(v);}}/>
-                <KTextField label={'Column'} column placeholder={'Column'} medium value={mediumValue}
-                            onChange={(v) => {setMediumValue(v);}}/>
-                <KTextField label={'Column'} column placeholder={'Column'} small value={smallValue}
-                            onChange={(v) => {setSmallValue(v);}}/>
-            </Item>
-            <Item label={'Label(Direction: Row)'}>
-                <KTextField label={'Row'} row placeholder={'Row'} large value={largeValue}
-                            onChange={(v) => {setLargeValue(v);}} rightAction={RightAction}/>
-                <KTextField label={'Row'} labelDirection={'row'} placeholder={'Row'} medium value={mediumValue}
-                            onChange={(v) => {setMediumValue(v);}} rightAction={RightAction}/>
-                <KTextField label={'Row'} row placeholder={'Row'} small value={smallValue}
-                            onChange={(v) => {setSmallValue(v);}} maxLength={10}/>
-            </Item>
-            <Item label={'Disabled'}>
-                <KTextField label={'아이디'} large value={'Disabled'} disabled />
-                <KTextField label={'아이디'} medium value={'Disabled'} disabled />
-                <KTextField label={'아이디'} small value={'Disabled'} disabled />
-            </Item>
-            <Item label={'Clearable'}>
-                <KTextField large placeholder={'Clearable'} clearable value={largeValue} onChange={(v) => {setLargeValue(v);}}/>
-                <KTextField placeholder={'Clearable'} clearable value={mediumValue}  onChange={(v) => {setMediumValue(v);}}/>
-                <KTextField small placeholder={'Clearable'} clearable value={smallValue}  onChange={(v) => {setSmallValue(v);}}/>
-            </Item>
-        </Container>
-    );
+    return (<KTextField {...args} />);
 };
 
 export const Default: Story = {
     render: Template,
-    args: {},
+    args: {
+        label: '레이블',
+        value: '',
+        placeholder: 'placeholder!',
+        size: 'medium',
+        labelDirection: 'column',
+        required: true,
+        clearable: false,
+        password: false,
+    },
 };

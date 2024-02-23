@@ -38,6 +38,7 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
 
   // Styles
   width?: string
+  fullWidth?: boolean
 }
 
 export interface KTextFieldRefs {
