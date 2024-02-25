@@ -70,15 +70,16 @@ const KCheckboxGroup = (props: KCheckboxGroupProps) => {
       {
         props.items?.map((item) => (
           <KCheckbox
-                        key={item.value}
-                        label={item.label}
-                        value={props.value?.includes(item.value)}
-                        onChange={(checked) => { onChangeCheckbox(checked, item.value); }}
-                        size={childCheckboxSize}
-                        shape={props.shape}
-                        color={props.color}
-                        disabled={item.disabled}
-                        defaultCheck={item.defaultCheck}
+            key={item.value}
+            label={item.label}
+            value={props.value?.includes(item.value)}
+            onChange={(checked) => { onChangeCheckbox(checked, item.value); }}
+            size={childCheckboxSize}
+            shape={props.shape}
+            color={props.color}
+            disabled={item.disabled}
+            defaultCheck={item.defaultCheck}
+            data-testid='k-checkbox-group'
           />
         ))
       }
