@@ -2,7 +2,7 @@ import { memo, useCallback } from 'react';
 import { KCheckbox } from '@/components';
 import { KCheckboxGroupProps } from '@/components/input/checkbox-group/KCheckboxGroup.interface';
 
-const KCheckboxGroup = ({ value, items, onChange, sharp, color }: KCheckboxGroupProps) => {
+const KCheckboxGroup = ({ value, items, onChange, shape, color }: KCheckboxGroupProps) => {
 
 
   // region [Hooks]
@@ -39,7 +39,7 @@ const KCheckboxGroup = ({ value, items, onChange, sharp, color }: KCheckboxGroup
             label={item.label}
             value={value?.includes(item.value)}
             onChange={(checked) => { onChangeCheckbox(checked, item.value); }}
-            sharp={sharp}
+            shape={shape}
             color={color}
             disabled={item.disabled}
             defaultCheck={item.defaultCheck}

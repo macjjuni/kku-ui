@@ -1,4 +1,4 @@
-import { KCheckboxSharp } from '@/components/input/checkbox/KCheckbox.interface';
+import { KCheckboxShape } from '@/components/input/checkbox/KCheckbox.interface';
 
 export interface KCheckboxGroupItem {
   ['label']: string
@@ -11,7 +11,7 @@ export interface KCheckboxGroupProps {
   items: KCheckboxGroupItem[]
   value: string[]
 
-  sharp?: KCheckboxSharp,
+  shape?: KCheckboxShape,
   color?: string,
 
   onChange: (value: string[]) => void
