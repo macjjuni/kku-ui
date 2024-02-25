@@ -2,13 +2,13 @@ import type {Meta, StoryObj} from '@storybook/react';
 import {KCheckbox} from '@/components/input/checkbox';
 import {useState} from 'react';
 import {KCheckboxProps} from '@/components/input/checkbox/KCheckbox.interface';
-import {commonArgType, disabledArgType, individualSizeArgType, sizeArgType} from '../../common/argTypes';
+import {baseArgTyp, disabledArgType, sizeArgType} from '../../common/argTypes';
 
 const meta: Meta<typeof KCheckbox> = {
     component: KCheckbox,
-    title: 'Checkbox',
+    title: 'Input/Checkbox',
     argTypes: {
-        sharp: {description: '아이콘 형태를 설정합니다.', defaultValue: {summary: 'square'}},
+        shape: {description: '아이콘 형태를 설정합니다.', defaultValue: {summary: 'square'}},
         square: {description: '아이콘을 사각형 형태로 설정합니다.', defaultValue: {summary: 'undefined'}},
         circle: {description: '아이콘을 둥근 형태로 설정합니다.', defaultValue: {summary: 'undefined'}},
         label: {description: '체크박스 레이블을 설정합니다.', defaultValue: {summary: 'undefined'}},
@@ -16,11 +16,8 @@ const meta: Meta<typeof KCheckbox> = {
         color: {description: '체크박스 아이콘 색상을 설정합니다.', defaultValue: {summary: 'undefined'}},
         defaultCheck: {description: '기본 체크 상태로 설정합니다.', defaultValue: {summary: 'false'}},
         width: {description: '체크박스 스타일 width 값을 설정합니다.', defaultValue: {summary: 'undefined'}},
-       ...commonArgType,
-       ...sizeArgType,
-       ...individualSizeArgType,
-       ...disabledArgType
-    }
+        ...baseArgTyp, ...sizeArgType, ...disabledArgType,
+    },
 };
 
 export default meta;
@@ -43,7 +40,7 @@ export const Default: Story = {
     args: {
         size: 'medium',
         label: 'Checkbox',
-        sharp: 'square',
+        shape: 'square',
         disabled: false,
     },
 };
