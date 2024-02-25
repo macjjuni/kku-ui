@@ -23,6 +23,10 @@ const KCheckboxGroup = (props: KCheckboxGroupProps) => {
     const clazz: string[] = [];
 
     initSize(clazz, 'k-checkbox-group', props.size, props.large, props.medium, props.small);
+
+    if (props.className) {
+      clazz.push(props.className);
+    }
     if (props.direction === 'row') {
       clazz.push('k-checkbox-group--row');
     }
@@ -66,7 +70,7 @@ const KCheckboxGroup = (props: KCheckboxGroupProps) => {
   // endregion
 
   return (
-    <div id={props.id} style={rootStyle} className={`k-checkbox-group ${rootClass}`}>
+    <div id={props.id} style={rootStyle} className={`k-checkbox-group ${rootClass}`} data-testid='k-checkbox-group'>
       {
         props.items?.map((item) => (
           <KCheckbox
@@ -79,7 +83,6 @@ const KCheckboxGroup = (props: KCheckboxGroupProps) => {
             color={props.color}
             disabled={item.disabled}
             defaultCheck={item.defaultCheck}
-            data-testid='k-checkbox-group'
           />
         ))
       }
