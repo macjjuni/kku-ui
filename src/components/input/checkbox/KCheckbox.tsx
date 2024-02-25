@@ -44,7 +44,7 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
     initSize(clazz, 'k-checkbox', props.size, props.large, props.medium, props.small);
     initDisabled(clazz, 'k-checkbox', props.disabled);
 
-    if (props.sharp && (props.circle || props.square)) {
+    if (props.shape && (props.circle || props.square)) {
       throw Error('Error: type and circle, square attributes cannot be duplicated.');
     }
 
@@ -52,13 +52,13 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
       throw Error('Error: circle, square attributes cannot be duplicated.');
     }
 
-    if (props.sharp) { clazz.push(`k-checkbox--${props.sharp}`); }
+    if (props.shape) { clazz.push(`k-checkbox--${props.shape}`); }
     if (props.circle) { clazz.push('k-checkbox--circle'); }
     if (props.square) { clazz.push('k-checkbox--square'); }
 
     return clazz.join(' ');
   }, [
-    props.className, props.size, props.sharp, props.circle, props.square,
+    props.className, props.size, props.shape, props.circle, props.square,
     props.small, props.medium, props.large, props.disabled]);
 
   const rootStyle = useMemo(() => {
@@ -144,10 +144,10 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
         />
 
         {/* Square(default) */}
-        {((props.square || props.sharp === 'square') || props.sharp === undefined) && SquareIcon}
+        {((props.square || props.shape === 'square') || props.shape === undefined) && SquareIcon}
 
         {/* Circle */}
-        {((props.circle || props.sharp === 'circle') || props.sharp === undefined) && CircleIcon}
+        {((props.circle || props.shape === 'circle') || props.shape === undefined) && CircleIcon}
 
         <span className='k-checkbox__container__label'>
           {props.label}
@@ -159,7 +159,7 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
 
 KCheckbox.defaultProps = {
   defaultCheck: false,
-  sharp: 'square',
+  shape: 'square',
 };
 KCheckbox.displayName = 'KCheckbox';
 

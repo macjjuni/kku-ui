@@ -1,7 +1,7 @@
 import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 
 
-export type KCheckboxSharp = 'circle' | 'square';
+export type KCheckboxShape = 'circle' | 'square';
 
 export interface KCheckboxProps extends KBaseProp, KSizeProp {
 
@@ -9,7 +9,7 @@ export interface KCheckboxProps extends KBaseProp, KSizeProp {
   value: boolean // ✨ Required ✨
 
   // Types
-  sharp?: KCheckboxSharp
+  shape?: KCheckboxShape
   circle?: boolean
   square?: boolean
   color?: string

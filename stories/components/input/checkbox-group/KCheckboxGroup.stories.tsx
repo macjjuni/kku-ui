@@ -1,56 +1,48 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import {Container, Item} from '../../common/Container';
-import { KCheckboxGroup } from '@/components';
+import {KCheckboxGroup} from '@/components';
 import {useState} from 'react';
-import {KCheckboxProps} from '@/components/input/checkbox/KCheckbox.interface';
+import {KCheckboxGroupProps} from '@/components/input/checkbox-group/KCheckboxGroup.interface';
+import {baseArgTyp, sizeArgType} from '../../common/argTypes';
 
 const meta: Meta<typeof KCheckboxGroup> = {
     component: KCheckboxGroup,
-    title: 'CheckboxGroup',
+    title: 'Input/CheckboxGroup',
+    argTypes: {
+        items: {description: '복수에 체크박스 요소 속성을 설정합니다. \n\n { label: string, value: string,\n\ndisabled?: boolean, defaultCheck?: boolean }',
+            defaultValue: {summary: '[] '}},
+        value: {description: '복수에 선택된 체크박스 값을 설정합니다.', defaultValue: {summary: '[]'}},
+        color: {description: '체크박스 아이콘 색상을 설정합니다.', defaultValue: {summary: 'undefined'}},
+        shape: {description: '복수에 선택된 체크박스 값을 설정합니다.', defaultValue: {summary: '[]'}},
+        direction: {description: '체크박스 그룹에 정렬 방향을 설정합니다.', defaultValue: {summary: 'row'}},
+        gap: {description: '체크박스 요소별 간격을 설정합니다.', defaultValue: {summary: 'undefined'}},
+        ...baseArgTyp, ...sizeArgType,
+    }
 };
 
 export default meta;
 
-type Story = StoryObj<KCheckboxProps>
+type Story = StoryObj<KCheckboxGroupProps>
 
+const checkboxItems = [
+    {label: 'text1', value: 'value1', defaultCheck: false, disabled: false},
+    {label: 'text2', value: 'value2', defaultCheck: false, disabled: false},
+    {label: 'text3', value: 'value3', defaultCheck: false, disabled: true},
+];
 
-const items = [
-    { label: 'text1', value: 'value1' , defaultCheck: true},
-    { label: 'text2', value: 'value2', defaultCheck: true },
-    { label: 'text3', value: 'value3', disabled: true},
-]
+const Template = (args: KCheckboxGroupProps) => {
 
-const Template = (args: KCheckboxProps) => {
+    const [value, setValue] = useState<string[]>(args.value);
 
-    const [value, setValue] = useState<string[]>([]);
-    // const [value2, setValue2] = useState('playground');
-    // const [value3, setValue3] = useState('library');
-
-
-
-    // const [mediumValue, setMediumValue] = useState('');
-    // const [small width={'132px'}Value, setSmallValue] = useState('');
-
-
-    return (
-        <Container>
-            <Item label={'Select(size: large)'}>
-                <KCheckboxGroup {...args} items={items} value={value} onChange={setValue} />
-            </Item>
-            {/* <Item label={'Select(size: Medium)'}> */}
-            {/*     <KCheckbox {...args} type={'square'} value={value} label={'Checkbox1'} onChange={onChange}/> */}
-            {/*     <KCheckbox {...args} type={'circle'} value={value} label={'Checkbox1'} onChange={onChange}/> */}
-            {/* </Item> */}
-            {/* <Item label={'Select(size: Small)'}> */}
-            {/*     <KCheckbox {...args} small type={'square'} value={value} label={'Checkbox1'} onChange={onChange}/> */}
-            {/*     <KCheckbox {...args} small type={'circle'} value={value} label={'Checkbox1'} onChange={onChange}/> */}
-            {/* </Item> */}
-
-        </Container>
-    );
+    return (<KCheckboxGroup {...args} value={value} onChange={setValue}/>);
 };
 
 export const Default: Story = {
     render: Template,
-    args: {},
+    args: {
+        items: checkboxItems,
+        value: ['value1'],
+        size: 'medium',
+        shape: 'square',
+        direction: 'row',
+    },
 };

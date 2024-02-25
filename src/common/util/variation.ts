@@ -11,7 +11,7 @@ export const initSize: GetSizesType = (clazz, identity, size, large, medium, sma
   const boolSizeArr = [large, medium, small].filter((s) => s);
 
   if ((size && (boolSizeArr.length > 0)) || boolSizeArr.length > 1) {
-    throw Error('Multiple sizes are not allowed.'); // 중복 Prop 입력 에러 처리
+    throw Error('Error: Multiple sizes are not allowed.'); // 중복 Prop 입력 에러 처리
   }
 
   if (size) {

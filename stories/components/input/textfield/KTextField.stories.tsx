@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import KTextField from '@/components/input/textfield/KTextField';
 import {KTextFieldProps} from '@/components/input/textfield/KTextField.interface';
-import {commonArgType, disabledArgType, individualSizeArgType, sizeArgType} from '../../common/argTypes';
+import {baseArgTyp, disabledArgType, sizeArgType} from '../../common/argTypes';
 
 
 const meta: Meta<typeof KTextField> = {
@@ -21,11 +21,7 @@ const meta: Meta<typeof KTextField> = {
         width: {description: '스타일 width 값을 설정합니다.', defaultValue: {summary: 'undefined'}},
         fullWidth: {description: '스타일 width 값을 100% 로 설정합니다.', defaultValue: {summary: 'undefined'}},
         rightAction: {description: '레이블 정렬이 column 상태일 경우 우측에 Action 공간을 설정합니다.', defaultValue: {summary: 'undefined'}},
-
-        ...commonArgType,
-        ...sizeArgType,
-        ...disabledArgType,
-        ...individualSizeArgType
+        ...baseArgTyp, ...sizeArgType, ...disabledArgType,
     },
 };
 
