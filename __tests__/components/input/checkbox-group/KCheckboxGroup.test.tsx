@@ -20,13 +20,14 @@ describe('KSelect', () => {
     mockFn.mockClear();
   });
 
-  describe('Props', () => {
+  const TestCheckboxGroup = (props: {
+    defaultValue?: string[], id?: string, className?: string, style?: CSSProperties, shape?: 'circle' | 'square',
+  }) => {
+    const [value, setValue] = useState(props.defaultValue || []);
+    return (<KCheckboxGroup {...props} items={testItems} value={value} onChange={setValue} />);
+  };
 
-    const TestCheckboxGroup = (props: { defaultValue: string[], id: string, className: string, style:CSSProperties
-    }) => {
-      const [value, setValue] = useState(props.defaultValue);
-      return (<KCheckboxGroup {...props} items={testItems} value={value} onChange={setValue} />);
-    };
+  describe('Props', () => {
 
     test('Style, value, className prop render test', () => {
 
@@ -37,10 +38,10 @@ describe('KSelect', () => {
       const testDefaultValue = ['value1'];
 
       render(<TestCheckboxGroup
-          defaultValue={testDefaultValue}
-          id={testIdValue}
-          className={testClass}
-          style={testStyle}
+                defaultValue={testDefaultValue}
+                id={testIdValue}
+                className={testClass}
+                style={testStyle}
       />);
       const root = screen.getByTestId(testId);
 
@@ -49,6 +50,56 @@ describe('KSelect', () => {
       expect(root).toHaveClass(testClass);
       expect(root).toHaveAttribute('id', testIdValue);
     });
+
+    test.each(testItems)('Items render test. %s', (item) => {
+
+      // Arrange
+      render(<TestCheckboxGroup />);
+      const labelRoot = screen.getByText(item.label);
+
+      // Assert
+      expect(labelRoot).toBeInTheDocument();
+    });
+
+    test('Square Shape render test', () => {
+
+      // Arrange
+      render(<TestCheckboxGroup shape='square' />);
+      const root = screen.getByTestId(testId);
+
+      // Assert
+      testItems.forEach((_, idx) => {
+        expect(root.children[idx]).toHaveClass('k-checkbox--square');
+      });
+    });
+
+    test('Circle Shape render test', () => {
+
+      // Arrange
+      render(<TestCheckboxGroup shape='circle' />);
+      const root = screen.getByTestId(testId);
+
+      // Assert
+      testItems.forEach((_, idx) => {
+        expect(root.children[idx]).toHaveClass('k-checkbox--circle');
+      });
+    });
+
+  });
+
+  describe('Events', () => {
+
+
+    // test('OnChange and Value test', () => {
+    //
+    //   // Arrange
+    //   const testItem = testItems[0];
+    //   render(<TestCheckboxGroup defaultValue={[testItem.value]} />);
+    //   const checkedItem = screen.getByText(testItem.label);
+    //
+    //   // Assert
+    //   // expect(root).toHaveAttribute('aria-checked', '');
+    // });
 
   });
 });
