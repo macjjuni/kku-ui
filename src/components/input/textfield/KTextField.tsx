@@ -47,13 +47,12 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
     }
 
     if (props.password) { clazz.push('k-text-field__input--password'); }
-    if (props.required) { clazz.push('k-text-field__input--required'); }
     if (props.clearable) { clazz.push('k-text-field__input--clearable'); }
 
     return clazz.join(' ');
   }, [
     props.className, props.large, props.medium, props.small, props.size, props.disabled,
-    props.password, props.labelDirection, props.column, props.row, props.required]);
+    props.password, props.labelDirection, props.column, props.row]);
 
 
   const rootStyle = useMemo(() => {
@@ -126,6 +125,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
               data-testid='k-text-field-label'
             >
               {props.label}
+              {props.required && <span className='k-text-field__label__text__required'>*</span>}
             </label>
           )
         }
@@ -191,6 +191,5 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
 });
 
 KTextField.displayName = 'KTextField';
-
 KTextField.defaultProps = {};
 export default memo(KTextField);
