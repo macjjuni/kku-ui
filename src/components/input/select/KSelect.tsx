@@ -17,7 +17,7 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
   const isOnMouse = useRef<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
 
-
+  // TODO. Test Code
   useImperativeHandle(ref, () => ({
     focus: () => { selectRef.current?.focus(); },
     blur: () => { selectRef.current?.blur(); },
@@ -110,7 +110,7 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
     isOnMouse.current = false;
   }, []);
 
-  const onKeyDownRoot = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
+  const onKeyUpRoot = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       if (!open) {
         onSelectOpen();
@@ -162,7 +162,7 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
         tabIndex={props.disabled ? -1 : 0}
         role='button'
         onClick={onClickRoot}
-        onKeyDown={onKeyDownRoot}
+        onKeyUp={onKeyUpRoot}
         onFocus={onFocusRoot}
         onBlur={onBlurRoot}
         onMouseEnter={onMouseEnterRoot}
