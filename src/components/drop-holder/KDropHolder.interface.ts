@@ -7,8 +7,10 @@ type KDropHolderPositionType = 'bottom-center' | 'bottom-left' | 'bottom-right';
 export interface KDropHolderProps extends KBaseProp {
 
   position?: KDropHolderPositionType
+  offset?: string
 
   children: ReactNode
+  content: ReactNode
 
   onClick?: () => void
 }
