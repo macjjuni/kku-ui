@@ -18,5 +18,5 @@ export interface KIconProps extends KBaseProp {
 }
 
 export interface KIconRefs {
-  click: () => void;
+  click: () => void
 }
