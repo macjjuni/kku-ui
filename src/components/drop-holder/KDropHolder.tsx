@@ -27,6 +27,8 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
   const rootClass = useMemo(() => {
     const clazz = [];
 
+    if (props.className) { clazz.push(props.className); }
+
     if (props.position) {
       clazz.push(`k-drop-holder--${props.position}`);
     }
@@ -44,17 +46,17 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
   }, [props.style]);
 
   const anchorContainerStyle = useCallback((): CSSProperties => {
-    const { width, height } = rootRef.current?.getBoundingClientRect() ?? { width: 0, height: 0 };
-    console.log(width, height);
-    if (props.position === 'top-left') {
-      return { transform: `translateY(calc(-100% - ${height}px)) translateX(0)` };
-    }
-    if (props.position === 'top-center') {
-      return { transform: `translateY(calc(-100% - ${height}px)) translateX(calc(-50% + ${width / 2}px))` };
-    }
-    if (props.position === 'top-right') {
-      return { transform: `translateY(calc(-100% - ${height}px)) translateX(calc(-100% + ${width}px)` };
-    }
+    const { width } = rootRef.current?.getBoundingClientRect() ?? { width: 0, height: 0 };
+
+    // if (props.position === 'top-left') {
+    //   return { transform: `translateY(calc(-100% - ${height}px)) translateX(0)` };
+    // }
+    // if (props.position === 'top-center') {
+    //   return { transform: `translateY(calc(-100% - ${height}px)) translateX(calc(-50% + ${width / 2}px))` };
+    // }
+    // if (props.position === 'top-right') {
+    //   return { transform: `translateY(calc(-100% - ${height}px)) translateX(calc(-100% + ${width}px)` };
+    // }
     if (props.position === 'bottom-left') {
       return { transform: 'translateX(0)' };
     }
@@ -92,10 +94,7 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
 
   // region [templates]
 
-  const KDropHolderAnchor = useMemo(
-    () => (<>props.content</>),
-    [props.content],
-  );
+  const KDropHolderAnchor = useMemo(() => (<>{props.content}</>), [props.content]);
 
 
   // endregion
@@ -112,16 +111,16 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
   }, []);
 
   const setAnchorRootStyle = useCallback((anchorRoot: HTMLDivElement) => {
-    const { top, left, height } = rootRef.current.getBoundingClientRect();
+    const { top, left, height } = rootRef.current?.getBoundingClientRect() || { top: 0, left: 0, height: 0 };
 
     anchorRoot.style.setProperty('position', 'fixed');
     anchorRoot.style.setProperty('zIndex', '9999');
-    if (props.position.includes('bottom')) {
+    if (props.position?.includes('bottom')) {
       anchorRoot.style.setProperty('top', `calc(${top + height}px + ${props.offset})`);
     }
-    if (props.position.includes('top')) {
-      anchorRoot.style.setProperty('top', `calc(${top + height}px - ${props.offset})`);
-    }
+    // if (props.position.includes('top')) {
+    //   anchorRoot.style.setProperty('top', `calc(${top + height}px - ${props.offset})`);
+    // }
 
     anchorRoot.style.setProperty('left', `${left}px`);
   }, [props.position, props.offset]);
@@ -149,7 +148,7 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
   }, [KDropHolderAnchor, setAnchorRootStyle]);
 
   const removeAnchorRoot = useCallback(() => {
-    const dropHolderWrap = document.body.getElementsByClassName(anchorClass);
+    const dropHolderWrap = document.body.getElementsByClassName(anchorClass.wrapper);
     dropHolderWrap[0]?.remove();
     window.removeEventListener('scroll', observerAnchorRoot);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -178,11 +177,16 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
 
 
   return (
-    <div ref={rootRef} className={`k-drop-holder ${rootClass}`} style={rootStyle}>
+    <div
+        ref={rootRef}
+        id={props.id}
+        className={`k-drop-holder ${rootClass}`}
+        style={rootStyle}
+        data-testid='k-drop-holder'
+    >
       <div className='k-drop-holder__container' tabIndex={0} role='button' onClick={onClickRoot} onKeyUp={onKeyUpRoot}>
         {props.children}
       </div>
-      {isOpen}
     </div>
   );
 });
