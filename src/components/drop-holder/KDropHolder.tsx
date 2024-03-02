@@ -176,15 +176,17 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
 
   return (
     <div
-        ref={rootRef}
-        id={props.id}
-        className={`k-drop-holder ${rootClass}`}
-        style={rootStyle}
-        data-testid='k-drop-holder'
+      ref={rootRef}
+      id={props.id}
+      className={`k-drop-holder ${rootClass}`}
+      tabIndex={0}
+      role='button'
+      onClick={onClickRoot}
+      onKeyUp={onKeyUpRoot}
+      style={rootStyle}
+      data-testid='k-drop-holder'
     >
-      <div className='k-drop-holder__container' tabIndex={0} role='button' onClick={onClickRoot} onKeyUp={onKeyUpRoot}>
-        {props.children}
-      </div>
+      {props.children}
     </div>
   );
 });
