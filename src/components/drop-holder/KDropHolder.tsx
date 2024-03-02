@@ -5,6 +5,7 @@ import {
 } from 'react';
 import { createRoot } from 'react-dom/client';
 import { KDropHolderProps, KDropHolderRefs } from '@/components/drop-holder/KDropHolder.interface';
+import useClickOutside from '@/common/hook/useClickOutside';
 
 const anchorClass = {
   wrapper: 'k-drop-holder__anchor__wrapper',
@@ -19,7 +20,7 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
   const rootRef = useRef<HTMLDivElement>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
   const [scrollY, setScrollY] = useState<number>(0);
-
+  useClickOutside(rootRef, () => { setOpen(false); });
   // endregion
 
   // region [Class]
