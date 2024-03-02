@@ -70,6 +70,45 @@ describe('KDropHolder', () => {
     });
 
 
+    test('Click to hide anchor element', async () => {
+      // Arrange
+      const user = userEvent.setup();
+      const outsideText = 'Outside Element';
+
+      const ExtraContainTextDropHolder = () => (
+        <>
+          <TestDropHolder content={<TestContent />} />
+          <div>{outsideText}</div>
+        </>
+      );
+
+      render(<ExtraContainTextDropHolder />);
+
+      const root = screen.getByText(childrenText);
+      const outsideRoot = screen.getByText(outsideText);
+
+      // Act
+      await act(async () => {
+        await user.click(root); // Click to render anchor element
+      });
+
+      // Assert
+      let contentRoot = null as HTMLElement | null;
+
+      contentRoot = screen.getByText(contentText);
+      expect(contentRoot).toBeInTheDocument();
+
+      // Act
+      await act(async () => {
+        await user.click(outsideRoot); // Click to hide anchor element
+      });
+
+      // Assert
+      contentRoot = screen.queryByText(contentText);
+      expect(contentRoot).toBeNull();
+    });
+
+
   });
 
 });

@@ -21,6 +21,14 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
   const [isOpen, setOpen] = useState<boolean>(false);
   const [scrollY, setScrollY] = useState<number>(0);
   useClickOutside(rootRef, () => { setOpen(false); });
+
+  useImperativeHandle(ref, () => ({
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    open: () => { open(); },
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    close: () => { close(); },
+  }));
+
   // endregion
 
   // region [Class]
@@ -47,17 +55,17 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
   }, [props.style]);
 
   const anchorContainerStyle = useCallback((): CSSProperties => {
-    const { width } = rootRef.current?.getBoundingClientRect() ?? { width: 0, height: 0 };
+    const { width, height } = rootRef.current?.getBoundingClientRect() ?? { width: 0, height: 0 };
 
-    // if (props.position === 'top-left') {
-    //   return { transform: `translateY(calc(-100% - ${height}px)) translateX(0)` };
-    // }
-    // if (props.position === 'top-center') {
-    //   return { transform: `translateY(calc(-100% - ${height}px)) translateX(calc(-50% + ${width / 2}px))` };
-    // }
-    // if (props.position === 'top-right') {
-    //   return { transform: `translateY(calc(-100% - ${height}px)) translateX(calc(-100% + ${width}px)` };
-    // }
+    if (props.position === 'top-left') {
+      return { transform: `translateY(calc(-100% - ${height}px)) translateX(0)` };
+    }
+    if (props.position === 'top-center') {
+      return { transform: `translateY(calc(-100% - ${height}px)) translateX(calc(-50% + ${width / 2}px))` };
+    }
+    if (props.position === 'top-right') {
+      return { transform: `translateY(calc(-100% - ${height}px)) translateX(calc(-100% + ${width}px)` };
+    }
     if (props.position === 'bottom-left') {
       return { transform: 'translateX(0)' };
     }
@@ -97,19 +105,13 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
 
   const KDropHolderAnchor = useMemo(() => (<>{props.content}</>), [props.content]);
 
-
   // endregion
 
 
   // region [Privates]
 
-  const open = useCallback(() => {
-    setOpen(true);
-  }, []);
-
-  const close = useCallback(() => {
-    setOpen(false);
-  }, []);
+  const open = useCallback(() => { setOpen(true); }, []);
+  const close = useCallback(() => { setOpen(false); }, []);
 
   const setAnchorRootStyle = useCallback((anchorRoot: HTMLDivElement) => {
     const { top, left, height } = rootRef.current?.getBoundingClientRect() || { top: 0, left: 0, height: 0 };
@@ -119,9 +121,9 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
     if (props.position?.includes('bottom')) {
       anchorRoot.style.setProperty('top', `calc(${top + height}px + ${props.offset})`);
     }
-    // if (props.position.includes('top')) {
-    //   anchorRoot.style.setProperty('top', `calc(${top + height}px - ${props.offset})`);
-    // }
+    if (props.position?.includes('top')) {
+      anchorRoot.style.setProperty('top', `calc(${top + height}px - ${props.offset})`);
+    }
 
     anchorRoot.style.setProperty('left', `${left}px`);
   }, [props.position, props.offset]);
@@ -154,11 +156,6 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
     window.removeEventListener('scroll', observerAnchorRoot);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useImperativeHandle(ref, () => ({
-    open: () => { open(); },
-    close: () => { close(); },
-  }));
 
   // endregion
 
