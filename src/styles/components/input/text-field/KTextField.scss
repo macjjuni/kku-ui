@@ -20,6 +20,8 @@
             white-space: nowrap;
             color: $k-default-font-color;
 
+            .k-text-field__label__text__required { color: $k-secondary-error; }
+
             &.k-text-field__label__text--focus {
                 color: $k-primary-color;
                 transition-property: color;
@@ -105,21 +107,8 @@
         &.k-text-field--small .k-text-field__input__container > .k-text-field__input { letter-spacing: 1px; }
     }
 
-    // Type: Required
-    &.k-text-field__input--required {
-
-        .k-text-field__label__container {
-
-            .k-text-field__label__text:after {
-                content: '*';
-                color: $k-secondary-error;
-            }
-        }
-    }
-
     // Type: Clearable
     &.k-text-field__input--clearable {
-
 
     }
 
