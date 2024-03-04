@@ -1,12 +1,18 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import {Container, Item} from '../../common/Container';
 import {KSelect} from '@/components/input/select';
 import {useState} from 'react';
 import {KSelectProps} from '@/components/input/select/KSelect.interface';
+import {baseArgTyp, disabledArgType, sizeArgType} from '../../common/argTypes';
 
 const meta: Meta<typeof KSelect> = {
     component: KSelect,
-    title: 'Select',
+    title: 'Input/Select',
+    argTypes: {
+        items: {description: '선택 요소를 설정합니다. { title: string, value: string }', defaultValue: {summary: '[]'}},
+        width: {description: '요소의 width 크기를 설정합니다.', defaultValue: {summary: 'undefined'}},
+        noDataText: {description: '값이 없을 때 보여줄 텍스트를 설정합니다.', defaultValue: {summary: 'No Data'}},
+        ...disabledArgType, ...sizeArgType, ...baseArgTyp,
+    }
 };
 
 export default meta;
@@ -22,42 +28,11 @@ const itemTemplates = [
 ];
 const Template = (args: KSelectProps) => {
 
-    const [value, setValue] = useState('home');
-    const [value2, setValue2] = useState('playground');
-    const [value3, setValue3] = useState('library');
-
-
-    const onChange = (value: string) => { setValue(value); };
-    const onChange2 = (value: string) => { setValue2(value); };
-    const onChange3 = (value: string) => { setValue3(value); };
-
-    // const [mediumValue, setMediumValue] = useState('');
-    // const [small width={'132px'}Value, setSmallValue] = useState('');
-
+    const [value, setValue] = useState('');
 
     return (
-        <Container>
-            <Item label={'Select(size: large)'}>
-                <KSelect {...args} width={'180px'} large value={value} onChange={onChange} items={itemTemplates}/>
-                <KSelect {...args} width={'180px'} large value={value} onChange={onChange} items={itemTemplates}/>
-                <KSelect {...args} width={'180px'} large value={value} onChange={onChange} items={itemTemplates}/>
-                <KSelect {...args} width={'180px'} large value={''} placeholder={'placeholder'} onChange={onChange} items={[]}/>
-                <KSelect {...args} width={'180px'} large disabled value={value} onChange={onChange} items={itemTemplates}/>
-            </Item>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <Item label={'Select(size: medium)'}>
-                <KSelect {...args} value={value2} width={'160px'} onChange={onChange2} items={itemTemplates}/>
-                <KSelect {...args} value={value2} width={'160px'} onChange={onChange2} items={itemTemplates}/>
-                <KSelect {...args} value={value2} width={'160px'} onChange={onChange2} items={itemTemplates}/>
-                <KSelect {...args} value={''} width={'160px'} placeholder={'placeholder'} onChange={onChange2} items={[]}/>
-                <KSelect {...args} value={value2} width={'160px'} onChange={onChange2} disabled items={itemTemplates}/>
-            </Item>
+        <>
+            <KSelect {...args} value={value} onChange={(val) => { setValue(val);}} items={itemTemplates}/>
             <br/>
             <br/>
             <br/>
@@ -66,18 +41,18 @@ const Template = (args: KSelectProps) => {
             <br/>
             <br/>
             <br/>
-            <Item label={'Select(size: small'}>
-                <KSelect {...args} small width={'132px'} value={value3} onChange={onChange3} items={itemTemplates}/>
-                <KSelect {...args} small width={'132px'} value={value3} onChange={onChange3} items={itemTemplates}/>
-                <KSelect {...args} small width={'132px'} value={value3} onChange={onChange3} items={itemTemplates}/>
-                <KSelect {...args} small width={'132px'} value={''} placeholder={'placeholder'} onChange={onChange2} items={[]}/>
-                <KSelect {...args} small width={'132px'} value={value3} onChange={onChange3} disabled items={itemTemplates}/>
-            </Item>
-        </Container>
+            <br/>
+            <br/>
+        </>
     );
 };
 
 export const Default: Story = {
     render: Template,
-    args: {},
+    args: {
+        items: itemTemplates,
+        placeholder: 'placeholder',
+        size: 'medium',
+        width: '280px'
+    },
 };
