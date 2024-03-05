@@ -1,0 +1,101 @@
+
+.k-radio {
+    display: inline-block;
+    font-size: 0;
+    overflow: hidden;
+    user-select: none;
+
+    &.k-radio--disabled {
+
+        .k-radio__container {
+            cursor: not-allowed;
+
+            .k-icon { color: $k-disabled-font-color; }
+            .k-radio__container__label { color: $k-disabled-font-color; }
+        }
+    }
+
+    .k-radio__container {
+        display: inline-flex;
+        align-items: center;
+        gap: $k-spacing-4;
+        cursor: pointer;
+
+        .k-radio__container__input {
+            position: absolute;
+            z-index: -9999;
+            top: -9999px;
+            left: -9999px;
+            opacity: 0;
+        }
+
+        .k-icon { color: $k-default-font-color; }
+        .k-radio__container__label {
+            position: relative;
+            top: 1px;
+            color: $k-default-font-color;
+        }
+
+    }
+
+    &.k-radio--large {
+        .k-radio__container {
+            .k-radio__container__label {
+                @include k-body-1;
+            }
+        }
+    }
+
+    &.k-radio--medium {
+        .k-radio__container {
+            .k-radio__container__label {
+                @include k-body-2;
+            }
+        }
+    }
+
+    &.k-radio--small {
+        .k-radio__container {
+            .k-radio__container__label {
+                @include k-body-3;
+            }
+        }
+    }
+
+
+}
+
+.#{$k-dark-class-name} .k-radio {
+
+    &.k-radio--disabled {
+        color: $k-dark-mode-disabled-font-color;
+
+        .k-radio__container {
+            cursor: not-allowed;
+
+            .k-icon { color: $k-disabled-font-color; }
+            .k-radio__container__label { color: $k-dark-mode-disabled-font-color; }
+        }
+    }
+
+    .k-radio__container {
+        display: inline-flex;
+        align-items: center;
+        gap: $k-spacing-4;
+        cursor: pointer;
+
+        .k-radio__container__input {
+            position: absolute;
+            z-index: -9999;
+            top: -9999px;
+            left: -9999px;
+            opacity: 0;
+        }
+
+        .k-icon { color: $k-dark-mode-font-color; }
+        .k-radio__container__label { color: $k-dark-mode-font-color; }
+
+    }
+
+
+}
