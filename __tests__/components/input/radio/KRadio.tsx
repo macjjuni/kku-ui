@@ -1,30 +1,26 @@
-// import { act } from 'react-dom/test-utils';
-// import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import { useState } from 'react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
-import { KCheckbox } from '@/components';
-import { KCheckboxShape } from '@/components/input/checkbox/KCheckbox.interface';
+import { KRadio } from '@/components';
 
-const testId = 'k-checkbox';
+const testId = 'k-radio';
 const mockFn = jest.fn();
 
-describe('KCheckbox', () => {
+describe('KRadio', () => {
 
   beforeEach(() => {
     mockFn.mockClear();
   });
 
-  const TestCheckbox = (props: { defaultValue?: boolean, defaultCheck?: boolean,
-    label?: string, shape?: KCheckboxShape, color?: string, disabled?: boolean, width?: string }) => {
+  const TestRadio = (props: { defaultValue?: boolean, defaultCheck?: boolean,
+    label?: string, color?: string, disabled?: boolean, width?: string }) => {
 
     const [checked, setChecked] = useState(props.defaultValue || false);
     return (
-      <KCheckbox
+      <KRadio
           label={props.label ? props.label : 'kku'}
           value={checked}
-          shape={props.shape}
           disabled={props.disabled}
           onChange={(e) => { setChecked(e); }}
           color={props.color}
@@ -44,7 +40,7 @@ describe('KCheckbox', () => {
       const testClass = 'test-class-name';
       const testIdValue = 'k-select-test-id';
 
-      render(<KCheckbox
+      render(<KRadio
                 label='kku'
                 id={testIdValue}
                 value={false}
@@ -64,45 +60,21 @@ describe('KCheckbox', () => {
 
       // Arrange
       const defaultCheck = true;
-      render(<TestCheckbox defaultCheck={defaultCheck} />);
+      render(<TestRadio defaultCheck={defaultCheck} />);
 
       const root = screen.getByTestId(testId);
-      const inputRoot = screen.queryAllByRole('checkbox')[1];
+      const inputRoot = screen.queryAllByRole('radio')[1];
 
       // Assert
       expect(root).toHaveAttribute('aria-checked', 'true');
       expect(inputRoot).toHaveProperty('checked', true);
     });
 
-    test('Shape prop render test #1', () => {
-
-      // Arrange
-      const shapeTest = 'circle';
-      render(<TestCheckbox shape={shapeTest} />);
-
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveClass('k-checkbox--circle');
-    });
-
-    test('Shape prop render test #2', () => {
-
-      // Arrange
-      const shapeTest = 'square';
-      render(<TestCheckbox shape={shapeTest} />);
-
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveClass('k-checkbox--square');
-    });
-
     test('color prop render test', () => {
 
       // Arrange
       const testColor = '#eee';
-      render(<TestCheckbox color={testColor} />);
+      render(<TestRadio color={testColor} />);
 
       const root = screen.getByRole('img');
 
@@ -114,13 +86,13 @@ describe('KCheckbox', () => {
 
       // Arrange
       const testDisabled = true;
-      render(<TestCheckbox disabled={testDisabled} />);
+      render(<TestRadio disabled={testDisabled} />);
 
       const root = screen.getByTestId(testId);
-      const inputRoot = screen.queryAllByRole('checkbox')[1];
+      const inputRoot = screen.getAllByRole('radio')[1];
 
       // Assert
-      expect(root).toHaveClass('k-checkbox--disabled');
+      expect(root).toHaveClass('k-radio--disabled');
       expect(inputRoot).toHaveProperty('disabled', true);
     });
 
@@ -128,7 +100,7 @@ describe('KCheckbox', () => {
 
       // Arrange
       const testWidth = '500px';
-      render(<TestCheckbox width={testWidth} />);
+      render(<TestRadio width={testWidth} />);
 
       const root = screen.getByTestId(testId);
 
@@ -146,10 +118,10 @@ describe('KCheckbox', () => {
       // Arrange
       const user = userEvent.setup();
       const labelText = 'Hello World!';
-      render(<TestCheckbox label={labelText} />);
+      render(<TestRadio label={labelText} />);
 
       const root = screen.getByTestId(testId);
-      const inputRoot = screen.queryAllByRole('checkbox')[1];
+      const inputRoot = screen.queryAllByRole('radio')[1];
 
       // Act
       await act(async () => {
@@ -159,19 +131,6 @@ describe('KCheckbox', () => {
       // Assert
       expect(root).toHaveAttribute('aria-checked', 'true');
       expect(inputRoot).toHaveProperty('checked', true);
-
-      // Act
-      await act(async () => {
-        await user.click(root.children[0]);
-      });
-
-      // Arrange
-      const renderedRoot = screen.getByTestId(testId);
-      const renderedInputRoot = screen.queryAllByRole('checkbox')[1];
-
-      // Assert
-      expect(renderedRoot).toHaveAttribute('aria-checked', 'false');
-      expect(renderedInputRoot).toHaveProperty('checked', false);
     });
 
   });
