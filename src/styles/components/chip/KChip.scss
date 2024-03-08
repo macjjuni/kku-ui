@@ -7,7 +7,7 @@
     border-width: 1px;
     border-style: solid;
     cursor: pointer;
-
+    user-select: none;
 
     // Variants
     &.k-chip--primary {
