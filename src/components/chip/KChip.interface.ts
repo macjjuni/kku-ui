@@ -1,20 +1,28 @@
-import { MouseEvent, ReactNode } from 'react';
+import { KeyboardEvent, MouseEvent, FocusEvent, ReactNode } from 'react';
 import { KBaseProp, KSizeProp, KVariantProp } from '@/common/base/base.interface';
 
 export interface KChipProps extends KBaseProp, KSizeProp, KSizeProp, KVariantProp {
 
-  disabled?: boolean
-
+  label?: string
   children?: ReactNode
 
-  onClick?: (e?:MouseEvent<HTMLDivElement>) => void
-  onFocus?: () => void
-  onBlur?: () => void
+  disabled?: boolean
+
+  // Styles
+  color?: string
+  fontColor?: string
+
+  closeable?: boolean
+
+  onClose?: (e:MouseEvent<HTMLSpanElement> | KeyboardEvent<HTMLSpanElement>) => void
+  onClick?: (e:MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => void
+  onFocus?: (e:FocusEvent<HTMLDivElement>) => void
+  onBlur?: (e:FocusEvent<HTMLDivElement>) => void
 }
 
 
 export interface KChipRef {
   click: () => void
-  onFocus?: () => void
-  onBlur?: () => void
+  focus?: () => void
+  blur?: () => void
 }
