@@ -15,6 +15,8 @@ export interface KIconProps extends KBaseProp {
   disabled?: boolean
   color?: string
 
+  tabIndex?: number
+
   onClick?: (e: MouseEvent<HTMLSpanElement> | KeyboardEvent<HTMLSpanElement>) => void
 }
 

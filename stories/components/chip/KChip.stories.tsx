@@ -29,18 +29,21 @@ const Template = (args: KChipProps) => {
                 <KChip {...args} size={'small'}/>
                 <KChip {...args} size={'medium'}/>
                 <KChip {...args} size={'large'}/>
+                <KChip {...args} disabled size={'large'}/>
             </div>
             <br/>
             <div style={{display: 'flex', gap: '12px'}}>
                 <KChip {...args} primary size={'small'}/>
                 <KChip {...args} primary size={'medium'}/>
                 <KChip {...args} primary size={'large'}/>
+                <KChip {...args} primary disabled size={'large'}/>
             </div>
             <br/>
             <div style={{display: 'flex', gap: '12px'}}>
                 <KChip {...args} outlined size={'small'}/>
                 <KChip {...args} outlined size={'medium'}/>
                 <KChip {...args} outlined size={'large'}/>
+                <KChip {...args} outlined disabled size={'large'}/>
             </div>
         </>
     );
@@ -50,9 +53,9 @@ export const Default: Story = {
     render: Template,
     args: {
         size: 'medium',
-        disabled: false,
         children: (<>Chip</>),
         closeable: true,
+        rounded: true,
     },
 };
 

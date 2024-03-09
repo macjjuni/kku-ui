@@ -86,7 +86,7 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
       onClick={onClick}
       onKeyUp={onKeyUp}
       role={props.onClick ? 'button' : 'img'}
-      tabIndex={props.onClick ? 0 : -1}
+      tabIndex={props.onClick ? props.tabIndex : -1}
     >
       {props.icon}
     </span>
@@ -99,5 +99,6 @@ KIcon.displayName = 'KIcon';
 KIcon.defaultProps = {
   type: 'outlined',
   size: 'medium',
+  tabIndex: 0,
 };
 export default memo(KIcon);

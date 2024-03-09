@@ -18,7 +18,7 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
 
   // region [Privates]
 
-  const register = (event: MouseEvent | KeyboardEvent<HTMLButtonElement>) => {
+  const register = (event: MouseEvent | KeyboardEvent<HTMLElement>) => {
 
     // 키보드 이벤트 제어
     if (event.type.includes('key')) {

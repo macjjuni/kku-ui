@@ -7,11 +7,13 @@ export interface KChipProps extends KBaseProp, KSizeProp, KSizeProp, KVariantPro
   children?: ReactNode
 
   disabled?: boolean
+  tabIndex?: number
 
   // Styles
   color?: string
   fontColor?: string
 
+  rounded?: boolean
   closeable?: boolean
 
   onClose?: (e:MouseEvent<HTMLSpanElement> | KeyboardEvent<HTMLSpanElement>) => void
