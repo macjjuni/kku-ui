@@ -19,7 +19,7 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
 
   const rootRef = useRef<HTMLDivElement>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
-  const [scrollY, setScrollY] = useState<number>(0);
+
   useClickOutside(rootRef, () => { setOpen(false); });
 
   useImperativeHandle(ref, () => ({
@@ -30,6 +30,7 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
   }));
 
   // endregion
+
 
   // region [Class]
 
@@ -45,8 +46,8 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
     return clazz.join(' ');
   }, [props.className, props.position]);
 
-
   // endregion
+
 
   // region [Style]
 
@@ -78,7 +79,7 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
 
     return { transform: `translateX(calc(-50% + ${width / 2}px))` }; // bottom-center
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.position, scrollY]);
+  }, [props.position]);
 
   // endregion
 
@@ -100,6 +101,7 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
   }, []);
 
   // endregion
+
 
   // region [templates]
 
@@ -129,7 +131,7 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
   }, [props.position, props.offset]);
 
   const observerAnchorRoot = useCallback(() => {
-    setScrollY(window.scrollY);
+    close();
   }, []);
 
   const createAnchorRoot = useCallback(() => {
@@ -170,9 +172,7 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
     }
   }, [isOpen]);
 
-
   // endregion
-
 
   return (
     <div
