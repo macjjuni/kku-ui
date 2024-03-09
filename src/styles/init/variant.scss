@@ -111,33 +111,32 @@ $k-select-z-index: 10;
 // endregion
 
 // TODO. 정리 해야 함.
-:root {
-    --k-primary-color: #{$k-primary-color};
-    --k-primary-hover-color: #{$k-primary-hover-color};
-
-    --k-secondary-color-error: #{$k-secondary-error};
-    --k-secondary-color-green: #{$k-secondary-green};
-    --k-secondary-color-yellow: #{$k-secondary-yellow};
-    --k-secondary-color-blue: #{$k-secondary-blue};
-
-    --k-white-color: #{$k-white-color};
-    --k-white-hover-color: #{$k-white-hover-color};
-
-    --k-black-color: #{$k-black-color};
-    --k-black-hover-color: #{$k-black-hover-color};
-
-    --k-gray-color-50: #{$k-gray-color-50};
-    --k-gray-color-100: #{$k-gray-color-100};
-    --k-gray-color-200: #{$k-gray-color-200};
-    --k-gray-color-300: #{$k-gray-color-300};
-    --k-gray-color-400: #{$k-gray-color-400};
-    --k-gray-color-500: #{$k-gray-color-500};
-    --k-gray-color-600: #{$k-gray-color-600};
-    --k-gray-color-700: #{$k-gray-color-700};
-    --k-gray-color-800: #{$k-gray-color-800};
-    --k-gray-color-900: #{$k-gray-color-900};
-}
-
+//:root {
+//    --k-primary-color: #{$k-primary-color};
+//    --k-primary-hover-color: #{$k-primary-hover-color};
+//
+//    --k-secondary-color-error: #{$k-secondary-error};
+//    --k-secondary-color-green: #{$k-secondary-green};
+//    --k-secondary-color-yellow: #{$k-secondary-yellow};
+//    --k-secondary-color-blue: #{$k-secondary-blue};
+//
+//    --k-white-color: #{$k-white-color};
+//    --k-white-hover-color: #{$k-white-hover-color};
+//
+//    --k-black-color: #{$k-black-color};
+//    --k-black-hover-color: #{$k-black-hover-color};
+//
+//    --k-gray-color-50: #{$k-gray-color-50};
+//    --k-gray-color-100: #{$k-gray-color-100};
+//    --k-gray-color-200: #{$k-gray-color-200};
+//    --k-gray-color-300: #{$k-gray-color-300};
+//    --k-gray-color-400: #{$k-gray-color-400};
+//    --k-gray-color-500: #{$k-gray-color-500};
+//    --k-gray-color-600: #{$k-gray-color-600};
+//    --k-gray-color-700: #{$k-gray-color-700};
+//    --k-gray-color-800: #{$k-gray-color-800};
+//    --k-gray-color-900: #{$k-gray-color-900};
+//}
 
 $k-spacing-2: 2px !default;
 $k-spacing-4: 4px !default;

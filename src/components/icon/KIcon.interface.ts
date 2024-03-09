@@ -1,3 +1,4 @@
+import { MouseEvent, KeyboardEvent } from 'react';
 import { KBaseProp } from '@/common/base/base.interface';
 
 
@@ -14,7 +15,9 @@ export interface KIconProps extends KBaseProp {
   disabled?: boolean
   color?: string
 
-  onClick?: () => void
+  tabIndex?: number
+
+  onClick?: (e: MouseEvent<HTMLSpanElement> | KeyboardEvent<HTMLSpanElement>) => void
 }
 
 export interface KIconRefs {

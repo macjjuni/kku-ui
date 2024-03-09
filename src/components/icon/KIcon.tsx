@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { CSSProperties, forwardRef, KeyboardEvent, memo, Ref, useCallback,
-  useId, useImperativeHandle, useMemo, useRef } from 'react';
+import {
+  CSSProperties, forwardRef, KeyboardEvent, memo, MouseEvent, Ref, useCallback,
+  useId, useImperativeHandle, useMemo, useRef,
+} from 'react';
 import { KIconProps, KIconRefs } from '@/components/icon/KIcon.interface';
 import { initDisabled } from '@/common/util/variation';
 import '@material-symbols/font-300/outlined.css';
@@ -60,13 +62,13 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
 
   // region [Events]
 
-  const onClick = useCallback(() => {
-    if (!props.disabled && props.onClick) { props.onClick(); }
+  const onClick = useCallback((e:MouseEvent<HTMLSpanElement>) => {
+    if (!props.disabled && props.onClick) { props.onClick(e); }
   }, [props.disabled]);
 
-  const onKeyDown = useCallback((e: KeyboardEvent<HTMLSpanElement>) => {
+  const onKeyUp = useCallback((e: KeyboardEvent<HTMLSpanElement>) => {
     if (e.key === 'enter' || e.key === ' ') {
-      if (!props.disabled && props.onClick) { props.onClick(); }
+      if (!props.disabled && props.onClick) { props.onClick(e); }
     }
   }, [props.disabled]);
 
@@ -82,9 +84,9 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
       style={rootStyle}
       data-testid='k-icon'
       onClick={onClick}
-      onKeyDown={onKeyDown}
+      onKeyUp={onKeyUp}
       role={props.onClick ? 'button' : 'img'}
-      tabIndex={props.onClick ? 0 : -1}
+      tabIndex={props.onClick ? props.tabIndex : -1}
     >
       {props.icon}
     </span>
@@ -97,5 +99,6 @@ KIcon.displayName = 'KIcon';
 KIcon.defaultProps = {
   type: 'outlined',
   size: 'medium',
+  tabIndex: 0,
 };
 export default memo(KIcon);

@@ -1,0 +1,99 @@
+.k-chip {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    overflow: hidden;
+    user-select: none;
+
+    &.k-chip--disabled {
+        cursor: not-allowed;
+    }
+
+    // Variants
+    &.k-chip--primary {
+        color: $k-white-color;
+        border: none;
+        background-color: $k-primary-color;
+
+        &.k-chip--disabled {
+            color: $k-disabled-font-color;
+            background-color: $k-primary-disabled-color;
+        }
+    }
+    &.k-chip--outlined {
+        color: $k-primary-color;
+        border-color: $k-primary-color;
+
+        &.k-chip--disabled {
+            color: $k-primary-disabled-color;
+            background-color: $k-white-disabled-color;
+        }
+    }
+    &.k-chip--default {
+        color: $k-gray-color-400;
+        border-color: $k-border-default-color;
+        background-color: $k-gray-color-50;
+
+        &.k-chip--disabled {
+            color: $k-disabled-font-color;
+            border-color: $k-disabled-font-color;
+            background-color: $k-white-disabled-color;
+        }
+    }
+
+    // Size
+    &.k-chip--large {
+        $k-chip-large-height: 30px;
+
+        gap: $k-spacing-4;
+        height: $k-chip-large-height;
+        padding: $k-spacing-6 $k-spacing-12 $k-spacing-6 $k-spacing-12;
+        border-radius: $k-border-radius-default;
+
+        .k-chip__label {
+            font-size: $k-font-size-body-1;
+        }
+
+        &.k-chip--closeable { padding-right: $k-spacing-6; }
+        &.k-chip--rounded { border-radius: $k-chip-large-height / 2; }
+    }
+
+    &.k-chip--medium {
+        $k-chip-medium-height: 28px;
+
+        gap: $k-spacing-2;
+        height: $k-chip-medium-height;
+        padding: $k-spacing-2 $k-spacing-10 $k-spacing-2 $k-spacing-10;
+        border-radius: $k-border-radius-default;
+
+        .k-chip__label {
+            font-size: $k-font-size-body-2;
+        }
+
+        &.k-chip--closeable { padding-right: $k-spacing-4; }
+        &.k-chip--rounded { border-radius: $k-chip-medium-height / 2; }
+    }
+
+    &.k-chip--small {
+        $k-chip-small-height: 26px;
+
+        gap: $k-spacing-2;
+        height: $k-chip-small-height;
+        padding: $k-spacing-2 $k-spacing-8 $k-spacing-2 $k-spacing-8;
+        border-radius: $k-border-radius-default;
+
+
+        .k-chip__label {
+            font-size: $k-font-size-body-3;
+        }
+
+        &.k-chip--closeable { padding-right: $k-spacing-4; }
+        &.k-chip--rounded { border-radius: $k-chip-small-height / 2; }
+    }
+
+}
