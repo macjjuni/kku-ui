@@ -2,7 +2,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
 import { act } from 'react-dom/test-utils';
-import { KButton, KButtonRefs } from '@/components';
+import { KButton, KButtonRefs, buttonVariants } from '@/components';
+
+const variantList = Object.values(buttonVariants);
 
 const mockOnClick = jest.fn();
 
@@ -43,6 +45,15 @@ describe('KButton', () => {
     const root = screen.getByRole('button');
 
     expect(root).toHaveClass(testClassName);
+  });
+
+  test.each(variantList)('%s variant prop render test.', (variant) => {
+
+    const variantClass = `k-button--${variant}`;
+    render(<KButton variant={variant}>{labelText}</KButton>);
+    const root = screen.getByRole('button');
+
+    expect(root).toHaveClass(variantClass);
   });
 
   test('label prop render test', () => {
@@ -137,12 +148,4 @@ describe('KButton', () => {
 
     expect(root).not.toHaveClass('k-button--loading');
   });
-  // Error 테스트인데, 에러났다고 에러남
-  // test('KButton label, children prop cannot be duplicated.', async () => {
-  //   try {
-  //     render(<KButton label={labelText}>{labelText}</KButton>);
-  //   } catch (err) {
-  //     expect(err).toEqual(new Error('Error: label and children attributes cannot be duplicated.'));
-  //   }
-  // });
 });

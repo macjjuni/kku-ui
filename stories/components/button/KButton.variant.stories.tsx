@@ -19,22 +19,22 @@ const Template = (args: KButtonProps) => {
                 <KButton label={'Hello'}/>
                 <KButton label={'こんにちは'}/>
             </Item>
-            <Item label={'Primary'}>
-                <KButton primary label={'안녕하세요'}/>
-                <KButton primary label={'Hello'}/>
-                <KButton primary label={'こんにちは'}/>
+            <Item label={'Contained'}>
+                <KButton contained label={'안녕하세요'}/>
+                <KButton contained label={'Hello'}/>
+                <KButton contained label={'こんにちは'}/>
             </Item>
             <Item label={'Outlined'}>
                 <KButton outlined label={'안녕하세요'}/>
                 <KButton outlined label={'Hello'}/>
                 <KButton outlined label={'こんにちは'}/>
             </Item>
-            <Item label={'Custom Color'}>
-                <KButton primary label={'안녕하세요'} color={'#FF9B9B'}/>
-                <KButton primary label={'Hello'} color={'#CBFFA9'}/>
-                <KButton primary label={'こんにちは'} color={'#FFD6A5'}/>
+            <Item label={'Contained Custom Color'}>
+                <KButton contained label={'안녕하세요'} color={'#FF9B9B'}/>
+                <KButton contained label={'Hello'} color={'#CBFFA9'}/>
+                <KButton contained label={'こんにちは'} color={'#FFD6A5'}/>
             </Item>
-            <Item label={'Custom Outline Color'}>
+            <Item label={'Outlined Custom Color'}>
                 <KButton label={'안녕하세요'} color={'#7B66FF'}/>
                 <KButton label={'Hello'} color={'#525CEB'}/>
                 <KButton label={'こんにちは'} color={'#5FBDFF'}/>
