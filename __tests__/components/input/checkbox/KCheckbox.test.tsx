@@ -5,7 +5,7 @@ import { useState } from 'react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import { KCheckbox } from '@/components';
-import { KCheckboxShape } from '@/components/input/checkbox/KCheckbox.interface';
+// import { KCheckboxShape } from '@/components/input/checkbox/KCheckbox.interface';
 
 const testId = 'k-checkbox';
 const mockFn = jest.fn();
@@ -17,14 +17,14 @@ describe('KCheckbox', () => {
   });
 
   const TestCheckbox = (props: { defaultValue?: boolean, defaultCheck?: boolean,
-    label?: string, shape?: KCheckboxShape, color?: string, disabled?: boolean, width?: string }) => {
+    label?: string, color?: string, disabled?: boolean, width?: string }) => {
 
     const [checked, setChecked] = useState(props.defaultValue || false);
     return (
       <KCheckbox
           label={props.label ? props.label : 'kku'}
           value={checked}
-          shape={props.shape}
+          // shape={props.shape}
           disabled={props.disabled}
           onChange={(e) => { setChecked(e); }}
           color={props.color}
@@ -74,29 +74,29 @@ describe('KCheckbox', () => {
       expect(inputRoot).toHaveProperty('checked', true);
     });
 
-    test('Shape prop render test #1', () => {
+    // test('Shape prop render test #1', () => {
+    //
+    //   // Arrange
+    //   const shapeTest = 'circle';
+    //   render(<TestCheckbox shape={shapeTest} />);
+    //
+    //   const root = screen.getByTestId(testId);
+    //
+    //   // Assert
+    //   expect(root).toHaveClass('k-checkbox--circle');
+    // });
 
-      // Arrange
-      const shapeTest = 'circle';
-      render(<TestCheckbox shape={shapeTest} />);
-
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveClass('k-checkbox--circle');
-    });
-
-    test('Shape prop render test #2', () => {
-
-      // Arrange
-      const shapeTest = 'square';
-      render(<TestCheckbox shape={shapeTest} />);
-
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveClass('k-checkbox--square');
-    });
+    // test('Shape prop render test #2', () => {
+    //
+    //   // Arrange
+    //   const shapeTest = 'square';
+    //   render(<TestCheckbox shape={shapeTest} />);
+    //
+    //   const root = screen.getByTestId(testId);
+    //
+    //   // Assert
+    //   expect(root).toHaveClass('k-checkbox--square');
+    // });
 
     test('color prop render test', () => {
 

@@ -79,7 +79,7 @@ const KCheckboxGroup = (props: KCheckboxGroupProps) => {
             value={props.value?.includes(item.value)}
             onChange={(checked) => { onChangeCheckbox(checked, item.value); }}
             size={childCheckboxSize}
-            shape={props.shape}
+            // shape={props.shape}
             color={props.color}
             disabled={item.disabled}
             defaultCheck={item.defaultCheck}
