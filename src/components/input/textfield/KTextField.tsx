@@ -75,11 +75,11 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
   }, [props.label, isFocus]);
 
   const iconSize = useMemo(() => {
-    if (props.size === 'large' || props.large) { return 20; }
-    if (!props.size || props.size === 'medium' || props.medium) { return 18; }
-    if (props.size === 'small' || props.small) { return 16; }
+    if (props.size === 'large' || props.large) { return 16; }
+    if (!props.size || props.size === 'medium' || props.medium) { return 16; }
+    if (props.size === 'small' || props.small) { return 14; }
 
-  }, []);
+  }, [props.size]);
 
   // endregion
 
