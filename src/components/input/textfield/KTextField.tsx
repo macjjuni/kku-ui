@@ -74,11 +74,18 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
     return clazz.join(' ');
   }, [props.label, isFocus]);
 
-  const iconSize = useMemo(() => {
+  const closeIconSize = useMemo(() => {
+
     if (props.size === 'large' || props.large) { return 16; }
     if (!props.size || props.size === 'medium' || props.medium) { return 16; }
     if (props.size === 'small' || props.small) { return 14; }
+  }, [props.size]);
 
+  const passwordIconSize = useMemo(() => {
+
+    if (props.size === 'large' || props.large) { return 22; }
+    if (!props.size || props.size === 'medium' || props.medium) { return 20; }
+    if (props.size === 'small' || props.small) { return 18; }
   }, [props.size]);
 
   // endregion
@@ -164,7 +171,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
                 <KIcon
                   className='k-text-field__icon'
                   icon='visibility_off'
-                  size={iconSize}
+                  size={passwordIconSize}
                   clickable
                   onClick={onPasswordShow}
                 />
@@ -173,7 +180,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
                 <KIcon
                   className='k-text-field__icon'
                   icon='visibility'
-                  size={iconSize}
+                  size={passwordIconSize}
                   clickable
                   onClick={onPasswordShow}
                 />
@@ -182,7 +189,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
         }
         {
           props.clearable && props.value && (
-            <KIcon className='k-text-field__icon' icon='close' size={iconSize} clickable onClick={onClear} />
+            <KIcon className='k-text-field__icon' icon='close' size={closeIconSize} clickable onClick={onClear} />
           )
         }
       </div>
