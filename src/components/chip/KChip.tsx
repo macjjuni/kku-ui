@@ -79,9 +79,9 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     if (props.size && (props.large || props.medium || props.small)) {
       throw Error('Error: size and large or medium or small attributes cannot be duplicated.');
     }
-    if (props.size === 'large' || props.large) { return 20; }
-    if (props.size === 'medium' || props.medium) { return 18; }
-    if (props.size === 'small' || props.small) { return 16; }
+    if (props.size === 'large' || props.large) { return 12; }
+    if (props.size === 'medium' || props.medium) { return 12; }
+    if (props.size === 'small' || props.small) { return 10; }
 
   }, [props.size, props.large, props.medium, props.small]);
 
@@ -173,8 +173,9 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     >
       <span className='k-chip__label'>
         {props.label && props.label}
+        {props.children && props.children}
       </span>
-      {props.children && props.children}
+
 
       {props.closeable && (
         <KIcon icon='close' color={closeIconColor} size={closeIconSize} onClick={onClose} tabIndex={-1} />

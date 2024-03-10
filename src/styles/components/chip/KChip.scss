@@ -1,7 +1,7 @@
 .k-chip {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
     border-width: 1px;
@@ -10,9 +10,7 @@
     overflow: hidden;
     user-select: none;
 
-    &.k-chip--disabled {
-        cursor: not-allowed;
-    }
+    &.k-chip--disabled { cursor: not-allowed; }
 
     // Variants
     &.k-chip--primary {
@@ -52,14 +50,12 @@
 
         gap: $k-spacing-4;
         height: $k-chip-large-height;
-        padding: $k-spacing-6 $k-spacing-12 $k-spacing-6 $k-spacing-12;
+        padding: $k-spacing-6 $k-spacing-10 $k-spacing-6 $k-spacing-10;
         border-radius: $k-border-radius-default;
 
-        .k-chip__label {
-            font-size: $k-font-size-body-1;
-        }
+        .k-chip__label { font-size: $k-font-size-body-1; }
 
-        &.k-chip--closeable { padding-right: $k-spacing-6; }
+        &.k-chip--closeable { padding-right: $k-spacing-12; }
         &.k-chip--rounded { border-radius: $k-chip-large-height / 2; }
     }
 
@@ -71,11 +67,9 @@
         padding: $k-spacing-2 $k-spacing-10 $k-spacing-2 $k-spacing-10;
         border-radius: $k-border-radius-default;
 
-        .k-chip__label {
-            font-size: $k-font-size-body-2;
-        }
+        .k-chip__label { font-size: $k-font-size-body-2; }
 
-        &.k-chip--closeable { padding-right: $k-spacing-4; }
+        &.k-chip--closeable { padding-right: $k-spacing-8; }
         &.k-chip--rounded { border-radius: $k-chip-medium-height / 2; }
     }
 
@@ -88,11 +82,9 @@
         border-radius: $k-border-radius-default;
 
 
-        .k-chip__label {
-            font-size: $k-font-size-body-3;
-        }
+        .k-chip__label { font-size: $k-font-size-body-3; }
 
-        &.k-chip--closeable { padding-right: $k-spacing-4; }
+        &.k-chip--closeable { padding-right: $k-spacing-8; }
         &.k-chip--rounded { border-radius: $k-chip-small-height / 2; }
     }
 
