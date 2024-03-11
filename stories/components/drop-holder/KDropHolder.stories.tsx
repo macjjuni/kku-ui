@@ -18,17 +18,17 @@ const Template = (args: KDropHolderProps) => {
     return (
         <>
             <center style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '120px'}}>
-                <KDropHolder {...args} position={'bottom-left'}><KIcon icon={'south_west'}/></KDropHolder>
-                <KDropHolder {...args}><KIcon icon={'south'}/></KDropHolder>
-                <KDropHolder {...args} position={'bottom-right'}><KIcon icon={'south_east'}/></KDropHolder>
+                <KDropHolder {...args} position={'bottom-left'}><KIcon icon={'arrow_down_left'}/></KDropHolder>
+                <KDropHolder {...args}><KIcon icon={'arrow_down'}/></KDropHolder>
+                <KDropHolder {...args} position={'bottom-right'}><KIcon icon={'arrow_down_right'}/></KDropHolder>
             </center>
             <br/><br/><br/><br/><br/><br/>
             <center style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '120px'}}>
                 <KDropHolder {...args} position={'top-left'}>
-                    <KIcon icon={'north_west'} />
+                    <KIcon icon={'arrow_up_left'} />
                 </KDropHolder>
-                <KDropHolder {...args} position={'top-center'}><KIcon icon={'north'} /></KDropHolder>
-                <KDropHolder {...args} position={'top-right'}><KIcon icon={'north_east'} /></KDropHolder>
+                <KDropHolder {...args} position={'top-center'}><KIcon icon={'arrow_up'} /></KDropHolder>
+                <KDropHolder {...args} position={'top-right'}><KIcon icon={'arrow_up_right'} /></KDropHolder>
             </center>
         </>
     );

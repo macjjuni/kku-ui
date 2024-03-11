@@ -19,7 +19,7 @@ describe('KButton', () => {
     test('style prop render test', () => {
 
       const testStyle = { color: 'red', fontSize: '20px' };
-      render(<KIcon icon='search' style={testStyle} />);
+      render(<KIcon icon='close' style={testStyle} />);
       const root = screen.getByRole('img');
 
       expect(root).toHaveStyle(testStyle);
@@ -28,7 +28,7 @@ describe('KButton', () => {
     test('ClassName prop render test', () => {
 
       const testClass = 'test-class-name';
-      render(<KIcon icon='search' className={testClass} />);
+      render(<KIcon icon='close' className={testClass} />);
       const root = screen.getByRole('img');
 
       expect(root).toHaveClass(testClass);
@@ -37,7 +37,7 @@ describe('KButton', () => {
     test('Size prop render test', () => {
 
       const testSize = 77;
-      render(<KIcon icon='search' size={testSize} />);
+      render(<KIcon icon='close' size={testSize} />);
       const root = screen.getByRole('img');
 
       expect(root).toHaveStyle({ fontSize: `${testSize}px` });
@@ -45,7 +45,7 @@ describe('KButton', () => {
 
     test('Clickable prop render test', () => {
 
-      render(<KIcon icon='search' clickable />);
+      render(<KIcon icon='close' clickable />);
       const root = screen.getByRole('img');
 
       expect(root).toHaveClass('k-icon--clickable');
@@ -54,15 +54,15 @@ describe('KButton', () => {
     test('Color prop render test', () => {
 
       const testColor = '#eaeaea';
-      render(<KIcon icon='search' color={testColor} />);
+      render(<KIcon icon='close' color={testColor} />);
       const root = screen.getByRole('img');
 
-      expect(root).toHaveStyle({ color: testColor });
+      expect(root).toHaveStyle({ fill: testColor });
     });
 
     test('클릭 이벤트가 있을 때 role이 button으로 적용 된다.', async () => {
 
-      render(<KIcon icon='search' onClick={mockOnClick} />);
+      render(<KIcon icon='close' onClick={mockOnClick} />);
       const root = screen.getByRole('button');
 
       expect(root).toBeInTheDocument();
@@ -70,7 +70,7 @@ describe('KButton', () => {
 
     test('클릭 이벤트가 없을 때 role 이 img 로 적용 된다.', async () => {
 
-      render(<KIcon icon='search' />);
+      render(<KIcon icon='close' />);
       const root = screen.getByRole('img');
 
       expect(root).toBeInTheDocument();
@@ -84,7 +84,7 @@ describe('KButton', () => {
     test('onClick event test', async () => {
 
       const user = userEvent.setup();
-      render(<KIcon icon='search' onClick={mockOnClick} />);
+      render(<KIcon icon='close' onClick={mockOnClick} />);
       const root = screen.getByRole('button');
 
       expect(mockOnClick).toBeCalledTimes(0);
@@ -97,7 +97,7 @@ describe('KButton', () => {
     test('Disabled onClick event test', async () => {
 
       const user = userEvent.setup();
-      render(<KIcon icon='search' onClick={mockOnClick} disabled />);
+      render(<KIcon icon='close' onClick={mockOnClick} disabled />);
       const root = screen.getByRole('button');
 
       expect(mockOnClick).toBeCalledTimes(0);

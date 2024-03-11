@@ -30,10 +30,10 @@ const Template = (args: KButtonProps) => {
         <Container>
             <Item label={'Loading'}>
                 <KButton ref={loadingButtonRef1} {...args} label={'안녕하세요'}/>
-                <KButton ref={loadingButtonRef2} primary label={'안녕하세요'}/>
+                <KButton ref={loadingButtonRef2} contained label={'안녕하세요'}/>
                 <KButton ref={loadingButtonRef3} outlined label={'안녕하세요'}/>
-                <KButton ref={loadingButtonRef4} primary label={'안녕하세요'} color={'#FF9B9B'}/>
-                <KButton ref={loadingButtonRef5} label={'안녕하세요'} color={'#7B66FF'}/>
+                <KButton ref={loadingButtonRef4} contained label={'안녕하세요'} color={'#FF9B9B'}/>
+                <KButton ref={loadingButtonRef5} outlined label={'안녕하세요'} color={'#7B66FF'}/>
             </Item>
         </Container>
     );

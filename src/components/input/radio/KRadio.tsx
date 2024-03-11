@@ -53,11 +53,11 @@ const KRadio = forwardRef((props: KRadioProps, ref: Ref<KRadioRefs>) => {
   }, [props.style, props.width]);
 
   const iconSize = useMemo((): number => {
-    if (props.size === 'large' || props.large) { return 33; }
-    if (props.size === 'medium' || props.medium) { return 27; }
-    if (props.size === 'small' || props.small) { return 23; }
+    if (props.size === 'large' || props.large) { return 28; }
+    if (props.size === 'medium' || props.medium) { return 24; }
+    if (props.size === 'small' || props.small) { return 20; }
 
-    return 27; // medium
+    return 24; // medium
   }, [props.size, props.large, props.medium, props.small]);
 
   // endregion
@@ -90,8 +90,8 @@ const KRadio = forwardRef((props: KRadioProps, ref: Ref<KRadioRefs>) => {
   // region [Template]
 
   const CircleIcon = useMemo(() => (
-    props.value ? <KIcon size={iconSize} icon='radio_button_checked' color={props.color} />
-      : <KIcon size={iconSize} icon='radio_button_unchecked' color={props.color} />
+    props.value ? <KIcon size={iconSize} icon='radio_checked' color={props.color} />
+      : <KIcon size={iconSize} icon='radio_unchecked' color={props.color} />
   ), [props.value, iconSize, props.color]);
 
 
@@ -100,26 +100,26 @@ const KRadio = forwardRef((props: KRadioProps, ref: Ref<KRadioRefs>) => {
 
   return (
     <div
-            id={props.id}
-            role='radio'
-            aria-checked={props.value}
-            tabIndex={!props.disabled ? 0 : -1}
-            className={`k-radio ${rootClass}`}
-            style={rootStyle}
-            data-testid='k-radio'
-            onKeyUp={onKeyUp}
+      id={props.id}
+      role='radio'
+      aria-checked={props.value}
+      tabIndex={!props.disabled ? 0 : -1}
+      className={`k-radio ${rootClass}`}
+      style={rootStyle}
+      data-testid='k-radio'
+      onKeyUp={onKeyUp}
     >
       <label htmlFor={uniqueId} className='k-radio__container'>
         <input
-                    tabIndex={-1}
-                    ref={inputRef}
-                    id={uniqueId}
-                    className='k-radio__container__input'
-                    type='radio'
-                    checked={props.value}
-                    disabled={props.disabled}
-                    onChange={onChange}
-                    data-testid='k-radio-input'
+          tabIndex={-1}
+          ref={inputRef}
+          id={uniqueId}
+          className='k-radio__container__input'
+          type='radio'
+          checked={props.value}
+          disabled={props.disabled}
+          onChange={onChange}
+          data-testid='k-radio-input'
         />
         {CircleIcon}
         <span className='k-radio__container__label'>

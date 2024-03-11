@@ -8,9 +8,9 @@ const meta: Meta<typeof KCheckbox> = {
     component: KCheckbox,
     title: 'Input/Checkbox',
     argTypes: {
-        shape: {description: '아이콘 형태를 설정합니다.', defaultValue: {summary: 'square'}},
-        square: {description: '아이콘을 사각형 형태로 설정합니다.', defaultValue: {summary: 'undefined'}},
-        circle: {description: '아이콘을 둥근 형태로 설정합니다.', defaultValue: {summary: 'undefined'}},
+        // shape: {description: '아이콘 형태를 설정합니다.', defaultValue: {summary: 'square'}},
+        // square: {description: '아이콘을 사각형 형태로 설정합니다.', defaultValue: {summary: 'undefined'}},
+        // circle: {description: '아이콘을 둥근 형태로 설정합니다.', defaultValue: {summary: 'undefined'}},
         label: {description: '체크박스 레이블을 설정합니다.', defaultValue: {summary: 'undefined'}},
         value: {description: '체크박스 값을 설정합니다.', defaultValue: {summary: 'false'}},
         color: {description: '체크박스 아이콘 색상을 설정합니다.', defaultValue: {summary: 'undefined'}},
@@ -40,7 +40,7 @@ export const Default: Story = {
     args: {
         size: 'medium',
         label: 'Checkbox',
-        shape: 'square',
         disabled: false,
+        // shape: 'square',
     },
 };

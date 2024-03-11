@@ -1,7 +1,7 @@
 import { useState, memo, useMemo, useCallback, useRef, forwardRef, useImperativeHandle,
   Ref, MouseEvent, KeyboardEvent, MutableRefObject, CSSProperties } from 'react';
 import useRipple from '@/common/hook/useRipple';
-import { initSize, initVariant } from '@/common/util/variation';
+import { initSize } from '@/common/util/variation';
 import colorUtil from '@/common/util/color';
 import { KButtonProps, KButtonRefs } from '@/components';
 
@@ -31,34 +31,37 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
   const rootClass = useMemo(
     () => {
+
       const clazz = [];
 
+      if (props.variant && (props.outlined || props.contained)) {
+        throw Error('Error: variant and contained or outlined attributes cannot be duplicated.');
+      }
       if (props.className) { clazz.push(props.className); }
       if (isLoad) { clazz.push('k-button--loading'); }
-
-      if (props.disabled && props.color && (props.primary || props.variant === 'primary')) {
+      if (props.disabled && props.color && (props.contained || props.variant === 'contained')) {
         clazz.push('k-button--disabled');
       }
-
-      if (props.variant && (props.outlined || props.primary)) {
-        throw Error('Error: variant and primary or outlined attributes cannot be duplicated.');
+      if (props.variant === 'contained' || props.contained) { clazz.push('k-button--contained'); }
+      if (props.variant === 'outlined' || props.outlined) { clazz.push('k-button--outlined'); }
+      if ((props.variant === 'default' || !props.variant) && (!props.contained && !props.outlined)) {
+        clazz.push('k-button--default');
       }
+      if (!props.variant && !props.outlined && !props.contained) { clazz.push('k-button--default'); }
 
-      initVariant(clazz, 'k-button', props.variant, props.primary, props.outlined);
       initSize(clazz, 'k-button', props.size, props.large, props.medium, props.small);
 
       return clazz.join(' ');
     },
-    [isLoad, props.className, props.variant, props.primary, props.disabled,
-      props.outlined, props.large, props.medium, props.small, props.size,
-      props.color],
+    [isLoad, props.className, props.variant, props.contained, props.disabled, props.outlined,
+      props.large, props.medium, props.small, props.size, props.color],
   );
 
   const rootStyle = useMemo(() => {
 
     const styles: CSSProperties = props.style || {};
 
-    if (props.variant === 'primary' || props.primary) {
+    if (props.variant === 'contained' || props.contained) {
       if (props.color) {
         styles.background = props.color;
         styles.borderColor = props.color;
@@ -99,20 +102,20 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
   const onMouseEnter = useCallback((): void => {
 
-    if ((props.variant === 'primary' || props.primary) && props.color) {
+    if ((props.variant === 'contained' || props.contained) && props.color) {
       const hoverColor = colorUtil.shadeColor(props.color, 10);
       rootRef.current.style.background = hoverColor;
       rootRef.current.style.borderColor = hoverColor;
     }
-  }, [props.variant, props.primary, props.color]);
+  }, [props.variant, props.contained, props.color]);
 
   const onMouseLeave = useCallback((): void => {
 
     ripple.remove();
-    if ((props.variant === 'primary' || props.primary) && props.color) {
+    if ((props.variant === 'contained' || props.contained) && props.color) {
       rootRef.current.style.background = props.color;
     }
-  }, [props.variant, props.primary, props.outlined, props.color, ripple]);
+  }, [props.variant, props.contained, props.outlined, props.color, ripple]);
 
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLButtonElement>): void => {
 
@@ -147,11 +150,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
     >
       {
         (props.children || props.label)
-          && (
-            <span className='k-button__content'>
-              {props.children || props.label}
-            </span>
-          )
+          && (<span className='k-button__content'>{props.children || props.label}</span>)
       }
       {
         isLoad && (

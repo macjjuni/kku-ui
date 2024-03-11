@@ -19,9 +19,9 @@ const Template = (args: KButtonProps) => {
         <Container>
             <Item label={'Disabled'}>
                 <KButton {...args} label={'안녕하세요'}/>
-                <KButton {...args} primary label={'안녕하세요'}/>
+                <KButton {...args} contained label={'안녕하세요'}/>
                 <KButton {...args} outlined label={'안녕하세요'}/>
-                <KButton {...args} primary label={'안녕하세요'} color={'#1D24CA'}/>
+                <KButton {...args} contained label={'안녕하세요'} color={'#1D24CA'}/>
                 <KButton {...args} label={'안녕하세요'} color={'#7B66FF'}/>
             </Item>
         </Container>

@@ -40,7 +40,8 @@
             border-bottom-color: $k-gray-color-700;
         }
     }
-    &.k-button--primary {
+
+    &.k-button--contained {
         color: $k-white-color;
         border-color: $k-primary-color;
         background: $k-primary-color;
@@ -136,37 +137,43 @@
 
     &.k-button--default {
         color: $k-white-color;
-        border-color: $k-button-dark-color;
-        background: $k-button-dark-color;
+        border-color: $k-dark-mode-default-border-color;
+        background: $k-dark-mode-default-background-color;
 
         &:hover {
-            border-color: lighten($k-button-dark-color, $k-background-hover-percent);
-            background: lighten($k-button-dark-color, $k-background-hover-percent);
+            border-color: $k-dark-mode-hover-border-color;
+            background: $k-dark-mode-hover-background-color;
         }
         &[disabled] {
-            color: darken($k-gray-color-500, $k-background-hover-percent);
-            border-color: darken($k-button-dark-color, $k-background-disabled-percent);
-            background: darken($k-button-dark-color, $k-background-disabled-percent);
+            color: $k-dark-mode-disabled-font-color;
+            border-color: $k-dark-mode-disabled-border-color;
+            background: $k-dark-mode-disabled-background-color;
         }
         .k-spinner--loading {
-            border: 3px solid $k-gray-color-200;
-            border-bottom-color: $k-button-dark-color;
+            border: 3px solid $k-dark-mode-default-border-color;
+            border-bottom-color: $k-white-color;
         }
     }
 
-    $k-primary-dark-disabled-color: darken($k-primary-color, 20%);
 
     &.k-button--primary {
         &[disabled] {
             color: $k-disabled-font-color;
-            border-color: $k-primary-dark-disabled-color;
-            background: $k-primary-dark-disabled-color;
+            border-color: $k-primary-disabled-color;
+            background: $k-primary-disabled-color;
         }
     }
     &.k-button--outlined {
+
+        background: $k-dark-mode-default-background-color;
+
         &[disabled] {
-            color: $k-primary-dark-disabled-color;
-            background-color: darken($k-white-color, 32%);
+            color: $k-primary-disabled-color;
+            background: $k-dark-mode-disabled-background-color;
+        }
+        .k-spinner--loading {
+            border: 3px solid $k-gray-color-200;
+            border-bottom-color: $k-primary-color;
         }
     }
 

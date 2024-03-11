@@ -160,7 +160,7 @@
         .k-text-field__label__container {
 
             .k-text-field__label__text {
-                color: $k-dark-mode-font-color;
+                color: $k-dark-mode-default-font-color;
 
                 &.k-text-field__label__text--focus {
                     color: $k-primary-color;
@@ -176,7 +176,7 @@
         .k-text-field__input__container {
             background: $k-dark-mode-disabled-background-color;
 
-            &:hover { border-color: $k-dark-mode-border-default-color; }
+            &:hover { border-color: $k-dark-mode-default-border-color; }
 
             .k-text-field__input {
                 color: $k-dark-mode-disabled-font-color;
@@ -186,16 +186,16 @@
     }
 
     .k-text-field__input__container {
-        border: 1px solid $k-dark-mode-border-default-color;
+        border: 1px solid $k-dark-mode-default-border-color;
         border-radius: $k-border-radius-default;
-        background: $k-dark-mode-background-default-color;
+        background: $k-dark-mode-default-background-color;
         caret-color: $k-white-color;
         font-size: 0;
 
         &:hover, &:focus-within { border-color: $k-primary-hover-color; }
 
         .k-text-field__input {
-            color: $k-dark-mode-font-color;
+            color: $k-dark-mode-default-font-color;
 
             &::placeholder {
                 color: $k-dark-mode-placeholder-font-color;

@@ -1,4 +1,4 @@
-import { KCheckboxShape } from '@/components/input/checkbox/KCheckbox.interface';
+// import { KCheckboxShape } from '@/components/input/checkbox/KCheckbox.interface';
 import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 
 export interface KCheckboxGroupItem {
@@ -13,7 +13,7 @@ export interface KCheckboxGroupProps extends KBaseProp, KSizeProp {
   value: string[] // ✨ Required ✨
 
   // Styles
-  shape?: KCheckboxShape
+  // shape?: KCheckboxShape
   color?: string
   direction?: 'column' | 'row'
   gap?: string

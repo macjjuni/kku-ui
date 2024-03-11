@@ -6,3 +6,4 @@ export * from '@/components/input/checkbox';
 export * from '@/components/input/radio';
 export * from '@/components/input/checkbox-group'
 export * from '@/components/drop-holder'
+export * from '@/components/chip'

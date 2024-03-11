@@ -169,7 +169,7 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
         onMouseLeave={onMouseLeaveRoot}
     >
       {displayTitle}
-      <KIcon className='k-select__current__label__arrow-icon' icon='expand_more' size={18} />
+      <KIcon className='k-select__current__label__arrow-icon' icon='keyboard_arrow_down' size={16} />
       <KSelectList
         open={open}
         items={props.items}

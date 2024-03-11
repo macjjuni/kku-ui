@@ -12,7 +12,7 @@ const meta: Meta<typeof KCheckboxGroup> = {
             defaultValue: {summary: '[] '}},
         value: {description: '복수에 선택된 체크박스 값을 설정합니다.', defaultValue: {summary: '[]'}},
         color: {description: '체크박스 아이콘 색상을 설정합니다.', defaultValue: {summary: 'undefined'}},
-        shape: {description: '복수에 선택된 체크박스 값을 설정합니다.', defaultValue: {summary: '[]'}},
+        // shape: {description: '복수에 선택된 체크박스 값을 설정합니다.', defaultValue: {summary: '[]'}},
         direction: {description: '체크박스 그룹에 정렬 방향을 설정합니다.', defaultValue: {summary: 'row'}},
         gap: {description: '체크박스 요소별 간격을 설정합니다.', defaultValue: {summary: 'undefined'}},
         ...baseArgTyp, ...sizeArgType,
@@ -42,7 +42,7 @@ export const Default: Story = {
         items: checkboxItems,
         value: ['value1'],
         size: 'medium',
-        shape: 'square',
+        // shape: 'square',
         direction: 'row',
     },
 };

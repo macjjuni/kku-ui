@@ -1,20 +1,11 @@
 // region [SCSS variable]
 
 
-// region [Percent]
-
-$k-background-hover-percent: 8% !default;
-$k-background-disabled-percent: 4% !default;
-$k-border-hover-percent: 40%;
-
-// endregion
-
-
 // region [Colors]
 
 $k-primary-color: #068FFF !default;
-$k-primary-hover-color: darken($k-primary-color, $k-background-hover-percent) !default;
-$k-primary-disabled-color: darken($k-primary-color, $k-background-disabled-percent) !default;
+$k-primary-hover-color: #0084f0 !default;
+$k-primary-disabled-color: #008afb !default;
 
 $k-secondary-error: #ED2B2A !default;
 $k-secondary-green: #7DCE13 !default;
@@ -23,37 +14,39 @@ $k-secondary-blue: #0079FF !default;
 
 
 $k-white-color: #ffffff !default;
-$k-white-hover-color: darken($k-white-color, $k-background-hover-percent) !default;
-$k-white-disabled-color: darken($k-white-color, $k-background-disabled-percent) !default;
+$k-white-hover-color: #ebebeb !default; // dark-8%
+$k-white-disabled-color: #f5f5f5 !default; // dark-4%
 
 
 $k-black-color: #000000 !default;
-$k-black-hover-color: lighten($k-black-color, $k-background-hover-percent) !default;
+$k-black-hover-color: #141414 !default; // light-8%
 
 
-$k-gray-color-50: darken($k-white-color, 0.5%) !default;
-$k-gray-color-100: darken($k-white-color, 10%) !default;
-$k-gray-color-200: darken($k-white-color, 20%) !default;
-$k-gray-color-300: darken($k-white-color, 30%) !default;
-$k-gray-color-400: darken($k-white-color, 40%) !default;
-$k-gray-color-500: darken($k-white-color, 50%) !default;
-$k-gray-color-600: darken($k-white-color, 60%) !default;
-$k-gray-color-700: darken($k-white-color, 70%) !default;
-$k-gray-color-800: darken($k-white-color, 80%) !default;
-$k-gray-color-900: darken($k-white-color, 90%) !default;
+$k-gray-color-50: #f2f2f2 !default;
+$k-gray-color-100: #e6e6e6 !default;
+$k-gray-color-200: #cccccc !default;
+$k-gray-color-300: #b3b3b3 !default;
+$k-gray-color-400: #999999 !default;
+$k-gray-color-500: #808080 !default;
+$k-gray-color-600: #666666 !default;
+$k-gray-color-700: #4d4d4d !default;
+$k-gray-color-800: #333333 !default;
+$k-gray-color-900: #191919 !default;
 
 
-$k-border-default-color: $k-gray-color-200;
-$k-border-default-hover-color: darken($k-border-default-color, $k-border-hover-percent);
+$k-border-default-color: #cccccc !default;
+$k-border-default-hover-color: #7a7a7a !default;
+
+$k-default-icon-color: #333333 !default;
 
 // endregion
 
 
 // region [Font Color]
 
-$k-default-font-color: $k-gray-color-800 !default;
-$k-disabled-font-color: lighten($k-default-font-color, 48%) !default;
-$k-placeholder-font-color: $k-gray-color-300 !default;
+$k-default-font-color: #333333 !default;
+$k-disabled-font-color: #959595 !default;
+$k-placeholder-font-color: #b3b3b3 !default;
 
 // endregion
 
@@ -100,7 +93,6 @@ $k-font-weight-body-1: 400 !default;
 $k-font-weight-body-2: 400 !default;
 $k-font-weight-body-3: 400 !default;
 
-
 // endregion
 
 
@@ -111,33 +103,32 @@ $k-select-z-index: 10;
 // endregion
 
 // TODO. 정리 해야 함.
-:root {
-    --k-primary-color: #{$k-primary-color};
-    --k-primary-hover-color: #{$k-primary-hover-color};
-
-    --k-secondary-color-error: #{$k-secondary-error};
-    --k-secondary-color-green: #{$k-secondary-green};
-    --k-secondary-color-yellow: #{$k-secondary-yellow};
-    --k-secondary-color-blue: #{$k-secondary-blue};
-
-    --k-white-color: #{$k-white-color};
-    --k-white-hover-color: #{$k-white-hover-color};
-
-    --k-black-color: #{$k-black-color};
-    --k-black-hover-color: #{$k-black-hover-color};
-
-    --k-gray-color-50: #{$k-gray-color-50};
-    --k-gray-color-100: #{$k-gray-color-100};
-    --k-gray-color-200: #{$k-gray-color-200};
-    --k-gray-color-300: #{$k-gray-color-300};
-    --k-gray-color-400: #{$k-gray-color-400};
-    --k-gray-color-500: #{$k-gray-color-500};
-    --k-gray-color-600: #{$k-gray-color-600};
-    --k-gray-color-700: #{$k-gray-color-700};
-    --k-gray-color-800: #{$k-gray-color-800};
-    --k-gray-color-900: #{$k-gray-color-900};
-}
-
+//:root {
+//    --k-primary-color: #{$k-primary-color};
+//    --k-primary-hover-color: #{$k-primary-hover-color};
+//
+//    --k-secondary-color-error: #{$k-secondary-error};
+//    --k-secondary-color-green: #{$k-secondary-green};
+//    --k-secondary-color-yellow: #{$k-secondary-yellow};
+//    --k-secondary-color-blue: #{$k-secondary-blue};
+//
+//    --k-white-color: #{$k-white-color};
+//    --k-white-hover-color: #{$k-white-hover-color};
+//
+//    --k-black-color: #{$k-black-color};
+//    --k-black-hover-color: #{$k-black-hover-color};
+//
+//    --k-gray-color-50: #{$k-gray-color-50};
+//    --k-gray-color-100: #{$k-gray-color-100};
+//    --k-gray-color-200: #{$k-gray-color-200};
+//    --k-gray-color-300: #{$k-gray-color-300};
+//    --k-gray-color-400: #{$k-gray-color-400};
+//    --k-gray-color-500: #{$k-gray-color-500};
+//    --k-gray-color-600: #{$k-gray-color-600};
+//    --k-gray-color-700: #{$k-gray-color-700};
+//    --k-gray-color-800: #{$k-gray-color-800};
+//    --k-gray-color-900: #{$k-gray-color-900};
+//}
 
 $k-spacing-2: 2px !default;
 $k-spacing-4: 4px !default;
@@ -167,26 +158,27 @@ $k-border-radius-default: 3px !default;
 
 $k-dark-class-name: #{dark};
 
-//$k-dark-mode-background-default-color: #212121;
+//$k-dark-mode-default-background-color: #212121;
 
 
 // region [Dark Mode - colors]
 
-$k-dark-mode-border-default-color: $k-gray-color-700;
-$k-dark-mode-border-default-hover-color: lighten($k-dark-mode-border-default-color, $k-background-hover-percent);
+$k-dark-mode-default-border-color: #4d4d4d;
+$k-dark-mode-hover-border-color: #5f5f5f; // default => light-10%
+$k-dark-mode-disabled-border-color: #5b5b5b; // default => light-8%
 
-$k-dark-mode-background-default-color: #212121;
-$k-dark-mode-background-hover-color: lighten($k-dark-mode-background-default-color, $k-background-hover-percent);
+$k-dark-mode-default-background-color: #212121;
+$k-dark-mode-hover-background-color: #373737; // default => light-10%
+$k-dark-mode-disabled-background-color: #333333; // default => light-8%
 
 // endregion
 
 
 // region [Dark Mode - colors]
 
-$k-dark-mode-font-color: $k-gray-color-200 !default;
-$k-dark-mode-disabled-font-color: darken($k-dark-mode-font-color, 50%) !default;
-$k-dark-mode-placeholder-font-color: darken($k-dark-mode-disabled-font-color,$k-background-disabled-percent) !default;
-$k-dark-mode-disabled-background-color: lighten($k-dark-mode-background-default-color, $k-background-disabled-percent) !default;
+$k-dark-mode-default-font-color: #cccccc !default;
+$k-dark-mode-disabled-font-color: #666666 !default; // default => dark-50%
+$k-dark-mode-placeholder-font-color: #626262 !default; // default => dark-4%
 
 // endregion
 

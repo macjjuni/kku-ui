@@ -1,14 +1,34 @@
 
 .k-icon {
 
-    color: $k-gray-color-500;
     user-select: none;
 
     &.k-icon--clickable { cursor: pointer; }
     &.k-icon--disabled { cursor: not-allowed; }
+    fill: $k-default-icon-color;
+
+    svg { width: 100%; height: 100%; }
 
     // Sizes
-    &.k-icon--large { font-size: 42px; }
-    &.k-icon--medium { font-size: 36px; }
-    &.k-icon--small { font-size: 28px; }
+    &.k-icon--large {
+        svg {
+            font-size: 42px;
+            width: 42px;
+            height: 42px;
+        }
+    }
+    &.k-icon--medium {
+        svg {
+            font-size: 36px;
+            width: 36px;
+            height: 36px;
+        }
+    }
+    &.k-icon--small {
+        svg {
+            font-size: 28px;
+            width: 28px;
+            height: 28px;
+        }
+    }
 }

@@ -61,30 +61,6 @@ describe('KSelect', () => {
       expect(labelRoot).toBeInTheDocument();
     });
 
-    test('Square Shape render test', () => {
-
-      // Arrange
-      render(<TestCheckboxGroup shape='square' />);
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      testItems.forEach((_, idx) => {
-        expect(root.children[idx]).toHaveClass('k-checkbox--square');
-      });
-    });
-
-    test('Circle Shape render test', () => {
-
-      // Arrange
-      render(<TestCheckboxGroup shape='circle' />);
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      testItems.forEach((_, idx) => {
-        expect(root.children[idx]).toHaveClass('k-checkbox--circle');
-      });
-    });
-
   });
 
   describe('Events', () => {

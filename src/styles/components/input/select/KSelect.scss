@@ -113,24 +113,24 @@
 
 .#{$k-dark-class-name} .k-select {
 
-    color: $k-dark-mode-font-color;
-    border: 1px solid $k-dark-mode-border-default-color;
+    color: $k-dark-mode-default-font-color;
+    border: 1px solid $k-dark-mode-default-border-color;
     border-radius: $k-border-radius-default;
-    background: $k-dark-mode-background-default-color;
+    background: $k-dark-mode-default-background-color;
 
     &.k-select--disabled {
         color: $k-dark-mode-disabled-font-color;
         background: $k-dark-mode-disabled-background-color;
-        &:hover { border-color: $k-dark-mode-border-default-color; }
+        &:hover { border-color: $k-dark-mode-default-border-color; }
     }
 
     .k-select__menu-list {
-        border-color: $k-dark-mode-border-default-color;
-        background-color: $k-dark-mode-background-default-color;
+        border-color: $k-dark-mode-default-border-color;
+        background-color: $k-dark-mode-default-background-color;
 
         .k-select__menu-list__item {
             border-color: $k-gray-color-800;
-            &:hover { background: $k-dark-mode-background-hover-color; }
+            &:hover { background: $k-dark-mode-hover-background-color; }
         }
     }
 }
