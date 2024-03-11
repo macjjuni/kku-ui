@@ -5,11 +5,7 @@ import { CSSProperties, forwardRef, KeyboardEvent, memo, MouseEvent, Ref, useCal
 import { KIconProps, KIconRefs } from '@/components/icon/KIcon.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { getIcon } from '@/common/base/icon';
-import '@material-symbols/font-300/outlined.css';
-import '@material-symbols/font-300/rounded.css';
 
-
-// https://fonts.google.com/
 
 const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
 
