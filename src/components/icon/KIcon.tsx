@@ -45,16 +45,17 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
 
   const rootStyle = useMemo(() => {
 
-    const styles: CSSProperties = props.style || {};
+    const style: CSSProperties = props.style || {};
 
-    if (props.color) { styles.color = props.color; }
+    if (props.color) { style.fill = props.color; }
+    console.log(props.color);
     if (typeof props.size === 'number') {
-      styles.width = `${props.size}px`;
-      styles.height = `${props.size}px`;
-      styles.fontSize = `${props.size}px`;
+      style.width = `${props.size}px`;
+      style.height = `${props.size}px`;
+      style.fontSize = `${props.size}px`;
     }
 
-    return styles;
+    return style;
   }, [props.style, props.color, props.size]);
 
   // endregion

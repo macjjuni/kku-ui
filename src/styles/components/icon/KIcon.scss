@@ -1,16 +1,13 @@
 
 .k-icon {
 
-    //color: $k-gray-color-500;
     user-select: none;
 
     &.k-icon--clickable { cursor: pointer; }
     &.k-icon--disabled { cursor: not-allowed; }
+    fill: $k-default-icon-color;
 
-    svg {
-        width: 100%;
-        height: 100%;
-    }
+    svg { width: 100%; height: 100%; }
 
     // Sizes
     &.k-icon--large {
