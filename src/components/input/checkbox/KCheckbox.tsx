@@ -42,18 +42,6 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
     initSize(clazz, 'k-checkbox', props.size, props.large, props.medium, props.small);
     initDisabled(clazz, 'k-checkbox', props.disabled);
 
-    // if (props.shape && (props.circle || props.square)) {
-    //   throw Error('Error: type and circle, square attributes cannot be duplicated.');
-    // }
-
-    // if (props.circle && props.square) {
-    //   throw Error('Error: circle, square attributes cannot be duplicated.');
-    // }
-
-    // if (props.shape) { clazz.push(`k-checkbox--${props.shape}`); }
-    // if (props.circle) { clazz.push('k-checkbox--circle'); }
-    // if (props.square) { clazz.push('k-checkbox--square'); }
-
     return clazz.join(' ');
   }, [
     props.className, props.size, props.small, props.medium, props.large, props.disabled]);
@@ -103,21 +91,10 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
 
   // region [Template]
 
-  // const SquareIcon = useMemo(() => (
-  //   props.value ? <KIcon size={iconSize} icon='check_box' color={props.color} />
-  //     : <KIcon size={iconSize} icon='check_box_outline_blank' color={props.color} />
-  // ), [props.value, iconSize, props.color]);
-  //
-  // const CircleIcon = useMemo(() => (
-  //   props.value ? <KIcon size={iconSize} icon='check_circle' color={props.color} />
-  //     : <KIcon size={iconSize} icon='circle' color={props.color} />
-  // ), [props.value, iconSize, props.color]);
-
   const Icon = useMemo(() => (
     props.value ? <KIcon size={iconSize} icon='checkbox_checked' color={props.color} />
       : <KIcon size={iconSize} icon='checkbox_unchecked' color={props.color} />
   ), [props.value, iconSize, props.color]);
-
 
   // endregion
 
@@ -162,9 +139,7 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
   );
 });
 
-KCheckbox.defaultProps = {
-  defaultCheck: false,
-};
+KCheckbox.defaultProps = { defaultCheck: false };
 KCheckbox.displayName = 'KCheckbox';
 
 export default memo(KCheckbox);

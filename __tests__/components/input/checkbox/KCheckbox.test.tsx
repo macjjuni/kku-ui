@@ -5,7 +5,6 @@ import { useState } from 'react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import { KCheckbox } from '@/components';
-// import { KCheckboxShape } from '@/components/input/checkbox/KCheckbox.interface';
 
 const testId = 'k-checkbox';
 const mockFn = jest.fn();
@@ -24,7 +23,6 @@ describe('KCheckbox', () => {
       <KCheckbox
           label={props.label ? props.label : 'kku'}
           value={checked}
-          // shape={props.shape}
           disabled={props.disabled}
           onChange={(e) => { setChecked(e); }}
           color={props.color}
@@ -74,30 +72,6 @@ describe('KCheckbox', () => {
       expect(inputRoot).toHaveProperty('checked', true);
     });
 
-    // test('Shape prop render test #1', () => {
-    //
-    //   // Arrange
-    //   const shapeTest = 'circle';
-    //   render(<TestCheckbox shape={shapeTest} />);
-    //
-    //   const root = screen.getByTestId(testId);
-    //
-    //   // Assert
-    //   expect(root).toHaveClass('k-checkbox--circle');
-    // });
-
-    // test('Shape prop render test #2', () => {
-    //
-    //   // Arrange
-    //   const shapeTest = 'square';
-    //   render(<TestCheckbox shape={shapeTest} />);
-    //
-    //   const root = screen.getByTestId(testId);
-    //
-    //   // Assert
-    //   expect(root).toHaveClass('k-checkbox--square');
-    // });
-
     test('color prop render test', () => {
 
       // Arrange
@@ -107,7 +81,7 @@ describe('KCheckbox', () => {
       const root = screen.getByRole('img');
 
       // Assert
-      expect(root).toHaveStyle({ color: testColor });
+      expect(root).toHaveStyle({ fill: testColor });
     });
 
     test('Disabled prop render test', () => {

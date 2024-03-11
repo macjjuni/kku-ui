@@ -79,7 +79,7 @@ describe('KRadio', () => {
       const root = screen.getByRole('img');
 
       // Assert
-      expect(root).toHaveStyle({ color: testColor });
+      expect(root).toHaveStyle({ fill: testColor });
     });
 
     test('Disabled prop render test', () => {
