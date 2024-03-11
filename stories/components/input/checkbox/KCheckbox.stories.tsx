@@ -40,7 +40,7 @@ export const Default: Story = {
     args: {
         size: 'medium',
         label: 'Checkbox',
-        // shape: 'square',
         disabled: false,
+        // shape: 'square',
     },
 };

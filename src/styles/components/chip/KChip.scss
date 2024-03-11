@@ -56,7 +56,7 @@
         .k-chip__label { font-size: $k-font-size-body-1; }
 
         &.k-chip--closeable { padding-right: $k-spacing-12; }
-        &.k-chip--rounded { border-radius: $k-chip-large-height / 2; }
+        &.k-chip--rounded { border-radius: calc($k-chip-large-height / 2); }
     }
 
     &.k-chip--medium {
@@ -70,7 +70,7 @@
         .k-chip__label { font-size: $k-font-size-body-2; }
 
         &.k-chip--closeable { padding-right: $k-spacing-8; }
-        &.k-chip--rounded { border-radius: $k-chip-medium-height / 2; }
+        &.k-chip--rounded { border-radius: calc($k-chip-medium-height / 2); }
     }
 
     &.k-chip--small {
@@ -85,7 +85,7 @@
         .k-chip__label { font-size: $k-font-size-body-3; }
 
         &.k-chip--closeable { padding-right: $k-spacing-8; }
-        &.k-chip--rounded { border-radius: $k-chip-small-height / 2; }
+        &.k-chip--rounded { border-radius: calc($k-chip-small-height / 2); }
     }
 
 }
