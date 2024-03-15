@@ -8,7 +8,7 @@ const rippleIdentityClass = 'k-ripple';
 const rippleAnimationName = 'ripple-effect';
 const rippleAnimationTime = 400;
 
-const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
+export default function useRipple(elementRef: MutableRefObject<HTMLElement>) {
 
   // region [Hooks]
 
@@ -81,6 +81,4 @@ const useRipple = (elementRef: MutableRefObject<HTMLElement>) => {
   // endregion
 
   return { register, remove };
-};
-
-export default useRipple;
+}
