@@ -1,10 +1,10 @@
 // import { act } from 'react-dom/test-utils';
 // import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
-import { KCheckbox } from '@/components';
+import { KCheckbox, KCheckboxRefs } from '@/components';
 
 const testId = 'k-checkbox';
 const mockFn = jest.fn();
@@ -15,12 +15,14 @@ describe('KCheckbox', () => {
     mockFn.mockClear();
   });
 
+  const checkboxRef = React.createRef<KCheckboxRefs>();
   const TestCheckbox = (props: { defaultValue?: boolean, defaultCheck?: boolean,
     label?: string, color?: string, disabled?: boolean, width?: string }) => {
 
     const [checked, setChecked] = useState(props.defaultValue || false);
     return (
       <KCheckbox
+          ref={checkboxRef}
           label={props.label ? props.label : 'kku'}
           value={checked}
           disabled={props.disabled}
@@ -146,6 +148,35 @@ describe('KCheckbox', () => {
       // Assert
       expect(renderedRoot).toHaveAttribute('aria-checked', 'false');
       expect(renderedInputRoot).toHaveProperty('checked', false);
+    });
+
+    test('Ref event test', async () => {
+
+      // Arrange
+      const labelText = 'Hello World!';
+      render(<TestCheckbox label={labelText} />);
+
+      // Act
+      await act(async () => { checkboxRef.current?.click(); });
+
+      // Arrange
+      const root = screen.getByTestId(testId);
+      const inputRoot = screen.queryAllByRole('checkbox')[1];
+
+      // Assert
+      expect(root).toHaveAttribute('aria-checked', 'true');
+      expect(inputRoot).toHaveProperty('checked', true);
+
+      // Act
+      await act(async () => { checkboxRef.current?.toggle(); });
+
+      // Arrange
+      const root2 = screen.getByTestId(testId);
+      const inputRoot2 = screen.queryAllByRole('checkbox')[1];
+
+      // Assert
+      expect(root2).toHaveAttribute('aria-checked', 'false');
+      expect(inputRoot2).toHaveProperty('checked', false);
     });
 
   });
