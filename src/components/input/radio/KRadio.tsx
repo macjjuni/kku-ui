@@ -10,12 +10,8 @@ const KRadio = forwardRef((props: KRadioProps, ref: Ref<KRadioRefs>) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const uniqueId = `k-radio + ${useId()}`;
 
-  // TODO: 테스트 코드
   useImperativeHandle(ref, () => ({
-    blur() { inputRef.current?.blur(); },
-    focus() { inputRef.current?.focus(); },
     click() { inputRef.current?.click(); },
-    toggle() { props.onChange(!props.value); },
   }));
 
   // endregion

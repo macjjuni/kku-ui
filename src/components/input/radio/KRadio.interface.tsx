@@ -24,7 +24,4 @@ export interface KRadioProps extends KBaseProp, KSizeProp {
 
 export interface KRadioRefs {
   click: () => void
-  focus: () => void
-  blur: () => void
-  toggle: () => void
 }

@@ -13,8 +13,6 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
 
   // TODO: 테스트 코드
   useImperativeHandle(ref, () => ({
-    blur() { inputRef.current?.blur(); },
-    focus() { inputRef.current?.focus(); },
     click() { inputRef.current?.click(); },
     toggle() { props.onChange(!props.value); },
   }));

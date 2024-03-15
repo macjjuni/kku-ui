@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
-import { KRadio } from '@/components';
+import { KRadio, KRadioRefs } from '@/components';
 
 const testId = 'k-radio';
 const mockFn = jest.fn();
@@ -13,12 +13,14 @@ describe('KRadio', () => {
     mockFn.mockClear();
   });
 
+  const radioRef = React.createRef<KRadioRefs>();
   const TestRadio = (props: { defaultValue?: boolean, defaultCheck?: boolean,
     label?: string, color?: string, disabled?: boolean, width?: string }) => {
 
-    const [checked, setChecked] = useState(props.defaultValue || false);
+    const [checked, setChecked] = useState(props.defaultValue ?? false);
     return (
       <KRadio
+          ref={radioRef}
           label={props.label ? props.label : 'kku'}
           value={checked}
           disabled={props.disabled}
@@ -111,7 +113,7 @@ describe('KRadio', () => {
 
   });
 
-  describe('Props', () => {
+  describe('Event', () => {
 
     test('Value change render test', async () => {
 
@@ -127,6 +129,23 @@ describe('KRadio', () => {
       await act(async () => {
         await user.click(root.children[0]);
       });
+
+      // Assert
+      expect(root).toHaveAttribute('aria-checked', 'true');
+      expect(inputRoot).toHaveProperty('checked', true);
+    });
+
+    test('Ref event test', async () => {
+
+      // Arrange
+      render(<TestRadio label='label' />);
+
+      // Act
+      await act(async () => { radioRef.current?.click(); });
+
+      // Arrange
+      const root = screen.getByTestId(testId);
+      const inputRoot = screen.queryAllByRole('radio')[1];
 
       // Assert
       expect(root).toHaveAttribute('aria-checked', 'true');
