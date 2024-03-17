@@ -35,16 +35,16 @@ type GetVariantType =
     (clazz: string[], identity: string, variant?: VariantType, primary?: boolean, outlined?: boolean)
     => void;
 
-export const initVariant:GetVariantType = (clazz, identity, variant, primary, outlined) => {
+export const initVariant:GetVariantType = (clazz, identity, variant, contained, outlined) => {
 
-  if ((variant && (primary || outlined)) || (primary && outlined)) {
+  if ((variant && (contained || outlined)) || (contained && outlined)) {
     throw Error('Multiple variant are not allowed.'); // 중복 Prop 입력 에러 처리
   }
 
   if (variant) {
     clazz.push(`${identity}--${variant}`);
-  } else if (primary) {
-    clazz.push(`${identity}--${variants.primary}`);
+  } else if (contained) {
+    clazz.push(`${identity}--${variants.contained}`);
   } else if (outlined) {
     clazz.push(`${identity}--${variants.outlined}`);
   } else {

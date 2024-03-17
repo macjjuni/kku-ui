@@ -21,12 +21,12 @@ export interface KSizeProp {
 }
 
 // 🍭 - Variant Properties
-export const variants = { primary: 'primary', outlined: 'outlined', default: 'default' } as const;
+export const variants = { outlined: 'outlined', contained: 'contained', default: 'default' } as const;
 export type VariantType = (typeof variants)[keyof typeof variants];
 
 export interface KVariantProp {
   variant?: VariantType
 
-  primary?: boolean
+  contained?: boolean
   outlined?: boolean
 }
