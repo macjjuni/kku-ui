@@ -24,13 +24,13 @@ const Template = (args: KButtonProps) => {
             </Item>
             <Item label={'Contained'}>
                 <KButton large contained label={'안녕하세요'}/>
-                <KButton contained medium label={'Hello'}/>
-                <KButton small contained label={'こんにちは'}/>
+                <KButton contained medium label={'こんにちは'}/>
+                <KButton small contained label={'Hello'}/>
             </Item>
             <Item label={'Outlined'}>
                 <KButton large outlined label={'안녕하세요'}/>
-                <KButton outlined small label={'Hello'}/>
-                <KButton small outlined label={'こんにちは'}/>
+                <KButton outlined small label={'こんにちは'}/>
+                <KButton small outlined label={'Hello'}/>
             </Item>
         </Container>
     );
