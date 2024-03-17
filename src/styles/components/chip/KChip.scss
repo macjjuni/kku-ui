@@ -12,20 +12,27 @@
 
     &.k-chip--disabled { cursor: not-allowed; }
 
+
     // Variants
     &.k-chip--primary {
         color: $k-white-color;
         border: none;
         background-color: $k-primary-color;
 
+        .k-icon { fill: $k-white-color; }
+
         &.k-chip--disabled {
             color: $k-disabled-font-color;
             background-color: $k-primary-disabled-color;
+
+            .k-icon { fill: $k-disabled-font-color; }
         }
     }
     &.k-chip--outlined {
         color: $k-primary-color;
         border-color: $k-primary-color;
+
+        .k-icon { fill: $k-primary-color; }
 
         &.k-chip--disabled {
             color: $k-primary-disabled-color;
@@ -35,12 +42,16 @@
     &.k-chip--default {
         color: $k-gray-color-400;
         border-color: $k-border-default-color;
-        background-color: $k-gray-color-50;
+        background-color: $k-white-color;
+
+        .k-icon { fill: $k-gray-color-400; }
 
         &.k-chip--disabled {
             color: $k-disabled-font-color;
             border-color: $k-disabled-font-color;
             background-color: $k-white-disabled-color;
+
+            .k-icon { fill: $k-disabled-font-color; }
         }
     }
 

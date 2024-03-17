@@ -32,7 +32,11 @@ const Template = (args: KCheckboxProps) => {
     const onChange = (value: boolean) => { setValue(value); };
 
 
-    return (<KCheckbox {...args} value={value} onChange={onChange}/>);
+    return (
+        <>
+            <KCheckbox {...args} value={value} onChange={onChange}/>
+        </>
+    );
 };
 
 export const Default: Story = {

@@ -36,8 +36,8 @@
             background: $k-white-disabled-color;
         }
         .k-spinner--loading {
-            border: 3px solid $k-gray-color-200;
-            border-bottom-color: $k-gray-color-700;
+            border: 3px solid $k-gray-color-100;
+            border-bottom-color: $k-gray-color-300;
         }
     }
 
@@ -56,8 +56,8 @@
             background: $k-primary-disabled-color;
         }
         .k-spinner--loading {
-            border: 3px solid $k-primary-color;
-            border-bottom-color: $k-white-color;
+            border: 3px solid $k-gray-color-100;
+            border-bottom-color: $k-gray-color-300;
         }
     }
     &.k-button--outlined {
@@ -75,8 +75,8 @@
             background: $k-white-disabled-color;
         }
         .k-spinner--loading {
-            border: 3px solid $k-primary-color;
-            border-bottom-color: $k-white-color;
+            border: 3px solid $k-gray-color-100;
+            border-bottom-color: $k-primary-color;
         }
     }
 
@@ -151,16 +151,20 @@
         }
         .k-spinner--loading {
             border: 3px solid $k-dark-mode-default-border-color;
-            border-bottom-color: $k-white-color;
+            border-bottom-color: $k-gray-color-500;
         }
     }
 
 
-    &.k-button--primary {
+    &.k-button--contained {
         &[disabled] {
             color: $k-disabled-font-color;
             border-color: $k-primary-disabled-color;
             background: $k-primary-disabled-color;
+        }
+        .k-spinner--loading {
+            border: 3px solid $k-gray-color-300;
+            border-bottom-color: $k-gray-color-700;
         }
     }
     &.k-button--outlined {
@@ -172,7 +176,7 @@
             background: $k-dark-mode-disabled-background-color;
         }
         .k-spinner--loading {
-            border: 3px solid $k-gray-color-200;
+            border: 3px solid $k-gray-color-700;
             border-bottom-color: $k-primary-color;
         }
     }

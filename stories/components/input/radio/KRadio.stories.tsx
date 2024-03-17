@@ -28,7 +28,11 @@ const Template = (args: KRadioProps) => {
     const onChange = (value: boolean) => { setValue(value); };
 
 
-    return (<KRadio {...args} value={value} onChange={onChange}/>);
+    return (
+        <>
+            <KRadio {...args} value={value} onChange={onChange}/>
+        </>
+            );
 };
 
 export const Default: Story = {

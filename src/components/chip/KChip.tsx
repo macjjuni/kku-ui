@@ -62,18 +62,6 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     return style;
   }, [props.style, props.color, props.variant, props.primary, props.outlined]);
 
-  const closeIconColor = useMemo(() => {
-
-    if (props.variant && (props.primary || props.outlined)) {
-      throw Error('Error: variant or primary or outlined attributes cannot be duplicated.');
-    }
-    // scss module 로 색상 정의 해야함!
-    if (props.variant === 'primary' || props.primary) {
-      return '#ffffff';
-    }
-
-  }, [props.color, props.primary, props.outlined, props.variant]);
-
   const closeIconSize = useMemo(() => {
 
     if (props.size && (props.large || props.medium || props.small)) {
@@ -178,7 +166,7 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
 
 
       {props.closeable && (
-        <KIcon icon='close' color={closeIconColor} size={closeIconSize} onClick={onClose} tabIndex={-1} />
+        <KIcon icon='close' size={closeIconSize} onClick={onClose} tabIndex={-1} />
       )}
     </div>
   );
