@@ -31,19 +31,7 @@ const Template = (args: KSelectProps) => {
     const [value, setValue] = useState('');
 
     return (
-        <>
             <KSelect {...args} value={value} onChange={(val) => { setValue(val);}} items={itemTemplates}/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-        </>
     );
 };
 
@@ -53,6 +41,7 @@ export const Default: Story = {
         items: itemTemplates,
         placeholder: 'placeholder',
         size: 'medium',
-        width: '280px'
+        width: '280px',
+        disabled: false
     },
 };
