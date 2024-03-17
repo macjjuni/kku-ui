@@ -127,9 +127,9 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
         {
           props.label && (
             <label
-              htmlFor={props.id ? props.id : uniqueId}
-              className={`k-text-field__label__text ${labelClass}`}
-              data-testid='k-text-field-label'
+                            htmlFor={props.id ? props.id : uniqueId}
+                            className={`k-text-field__label__text ${labelClass}`}
+                            data-testid='k-text-field-label'
             >
               {props.label}
               {props.required && <span className='k-text-field__label__text__required'>*</span>}
@@ -150,46 +150,55 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
       </div>
       <div className='k-text-field__input__container'>
         <input
-          id={props.id ? props.id : uniqueId}
-          ref={inputRef}
-          className='k-text-field__input'
-          type={(props.password && !isPasswdShow) ? 'password' : 'input'}
-          value={props.value}
-          onChange={onChangeValue}
-          onFocus={onFocus}
-          onBlur={onblur}
-          disabled={props.disabled}
-          placeholder={props.placeholder}
-          maxLength={props.maxLength}
-          data-testid='k-text-field-input'
-          // aria-describedby='message' // FIXME: Error Message - 웹접근성
+            id={props.id ? props.id : uniqueId}
+            ref={inputRef}
+            className='k-text-field__input'
+            type={(props.password && !isPasswdShow) ? 'password' : 'input'}
+            value={props.value}
+            onChange={onChangeValue}
+            onFocus={onFocus}
+            onBlur={onblur}
+            disabled={props.disabled}
+            placeholder={props.placeholder}
+            maxLength={props.maxLength}
+            data-testid='k-text-field-input'
+            // aria-describedby='message' // FIXME: Error Message - 웹접근성
         />
         {
           props.password && (
             isPasswdShow
               ? (
                 <KIcon
-                  className='k-text-field__icon'
-                  icon='visibility_off'
-                  size={passwordIconSize}
-                  clickable
-                  onClick={onPasswordShow}
+                    className='k-text-field__icon'
+                    icon='visibility_off'
+                    size={passwordIconSize}
+                    clickable
+                    onClick={onPasswordShow}
+                    disabled={props.disabled}
                 />
               )
               : (
                 <KIcon
-                  className='k-text-field__icon'
-                  icon='visibility'
-                  size={passwordIconSize}
-                  clickable
-                  onClick={onPasswordShow}
+                    className='k-text-field__icon'
+                    icon='visibility'
+                    size={passwordIconSize}
+                    clickable
+                    onClick={onPasswordShow}
+                    disabled={props.disabled}
                 />
               )
           )
         }
         {
           props.clearable && props.value && (
-            <KIcon className='k-text-field__icon' icon='close' size={closeIconSize} clickable onClick={onClear} />
+            <KIcon
+                className='k-text-field__icon'
+                icon='close'
+                size={closeIconSize}
+                clickable
+                onClick={onClear}
+                disabled={props.disabled}
+            />
           )
         }
       </div>
