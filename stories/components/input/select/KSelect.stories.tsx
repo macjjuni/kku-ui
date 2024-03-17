@@ -31,7 +31,10 @@ const Template = (args: KSelectProps) => {
     const [value, setValue] = useState('');
 
     return (
+        <>
             <KSelect {...args} value={value} onChange={(val) => { setValue(val);}} items={itemTemplates}/>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        </>
     );
 };
 

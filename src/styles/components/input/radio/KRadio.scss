@@ -10,7 +10,7 @@
         .k-radio__container {
             cursor: not-allowed;
 
-            .k-icon { color: $k-disabled-font-color; }
+            .k-icon { fill: $k-disabled-font-color; }
             .k-radio__container__label { color: $k-disabled-font-color; }
         }
     }
@@ -73,7 +73,7 @@
         .k-radio__container {
             cursor: not-allowed;
 
-            .k-icon { color: $k-disabled-font-color; }
+            .k-icon { fill: $k-dark-mode-disabled-font-color;}
             .k-radio__container__label { color: $k-dark-mode-disabled-font-color; }
         }
     }
