@@ -32,10 +32,8 @@ export interface KSelectProps extends KBaseProp, KSizeProp {
 
 
 export interface KSelectRefs {
-  onClick?: () => void
-  value?: string
-  focus?: () => void
-  blur?: () => void
+  open: () => void
+  close: () => void
 }
 
 export interface KSelectListProps {

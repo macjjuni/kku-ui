@@ -1,8 +1,8 @@
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { useState } from 'react';
-import { KSelect } from '@/components';
+import { createRef, useState } from 'react';
+import { KSelect, KSelectRefs } from '@/components';
 
 const testId = 'k-select';
 const mockFn = jest.fn();
@@ -16,9 +16,8 @@ const items = [
 
 describe('KSelect', () => {
 
-  beforeEach(() => {
-    mockFn.mockClear();
-  });
+  beforeEach(() => { mockFn.mockClear(); });
+
 
   describe('Props', () => {
 
@@ -48,6 +47,7 @@ describe('KSelect', () => {
       expect(root).toHaveAttribute('id', testIdValue);
     });
 
+
     test('Placeholder prop render test', () => {
 
       // Arrange
@@ -60,6 +60,7 @@ describe('KSelect', () => {
       expect(placeholderRoot).toHaveClass('k-select__label-text__placeholder');
     });
 
+
     test('Disabled prop render test', () => {
 
       // Arrange
@@ -70,6 +71,7 @@ describe('KSelect', () => {
       // Assert
       expect(root).toHaveClass('k-select--disabled');
     });
+
 
     test('Width prop render test', async () => {
 
@@ -82,6 +84,7 @@ describe('KSelect', () => {
       // Assert
       expect(root).toHaveStyle({ width: testWidth });
     });
+
 
     test('NoDataText prop render test', async () => {
 
@@ -137,6 +140,7 @@ describe('KSelect', () => {
       expect(selectedRoot).toHaveClass('k-select__label-text');
     });
 
+
     test('Focus event test', async () => {
 
       // Arrange
@@ -160,6 +164,7 @@ describe('KSelect', () => {
       expect(root).toHaveFocus();
     });
 
+
     test('Disabled focus event test', async () => {
 
       // Arrange
@@ -175,6 +180,7 @@ describe('KSelect', () => {
       // Assert
       expect(root).not.toHaveFocus();
     });
+
 
     test('Change Select value Using Keyboard Input', async () => {
 
@@ -207,6 +213,29 @@ describe('KSelect', () => {
 
       // Assert
       expect(selectedRoot).toBeInTheDocument();
+    });
+
+
+    test('Open and close refs event test', async () => {
+
+      // Arrange
+      const selectRef = createRef<KSelectRefs>();
+      render(<KSelect ref={selectRef} value='' disabled items={items} onChange={() => {}} />);
+
+      // Act
+      act(() => { selectRef.current?.open(); });
+
+      // Arrange
+      const root = screen.getByTestId('k-select');
+
+      // Assert
+      expect(root).toHaveClass('k-select--open');
+
+      // Act
+      act(() => { selectRef.current?.close(); });
+
+      // Assert
+      expect(root).not.toHaveClass('k-select--open');
     });
 
   });
