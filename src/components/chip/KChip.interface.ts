@@ -25,6 +25,6 @@ export interface KChipProps extends KBaseProp, KSizeProp, KSizeProp, KVariantPro
 
 export interface KChipRef {
   click: () => void
-  focus?: () => void
-  blur?: () => void
+  focus: () => void
+  blur: () => void
 }

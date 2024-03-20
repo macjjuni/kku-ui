@@ -87,11 +87,11 @@ describe('KButton', () => {
     render(<KButton label={labelText} onClick={mockOnClick} />);
     const root = screen.getByText(labelText);
 
-    expect(mockOnClick).toBeCalledTimes(0);
+    expect(mockOnClick).toHaveBeenCalledTimes(0);
 
     await user.click(root);
 
-    expect(mockOnClick).toBeCalledTimes(1);
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
 
   test('KButton Ref click test', () => {
@@ -99,11 +99,11 @@ describe('KButton', () => {
     const buttonRef = createRef<KButtonRefs>();
     render(<KButton ref={buttonRef} label={labelText} onClick={mockOnClick} />);
 
-    expect(mockOnClick).toBeCalledTimes(0);
+    expect(mockOnClick).toHaveBeenCalledTimes(0);
 
     buttonRef.current?.click();
 
-    expect(mockOnClick).toBeCalledTimes(1);
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
 
   test('KButton Ref focus test', () => {

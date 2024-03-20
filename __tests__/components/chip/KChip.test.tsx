@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
-import { KChip } from '@/components';
+import { createRef } from 'react';
+import { KChip, KChipRef } from '@/components';
 import { sizes } from '@/common/base/base.interface';
 
 const testId = 'k-chip';
@@ -105,13 +106,13 @@ describe('KDropHolder', () => {
         const root = screen.getByText(testLabel);
 
         // Assert
-        expect(mockOnClick).toBeCalledTimes(0);
+        expect(mockOnClick).toHaveBeenCalledTimes(0);
 
         // Act
         await user.click(root);
 
         // Assert
-        expect(mockOnClick).toBeCalledTimes(1);
+        expect(mockOnClick).toHaveBeenCalledTimes(1);
       });
 
       test('Disabled onClick event test', async () => {
@@ -122,13 +123,13 @@ describe('KDropHolder', () => {
         const root = screen.getByTestId(testId);
 
         // Assert
-        expect(mockOnClick).toBeCalledTimes(0);
+        expect(mockOnClick).toHaveBeenCalledTimes(0);
 
         // Act
         await user.click(root);
 
         // Assert
-        expect(mockOnClick).toBeCalledTimes(0);
+        expect(mockOnClick).toHaveBeenCalledTimes(0);
       });
 
       test('OnFocus event test', async () => {
@@ -138,13 +139,13 @@ describe('KDropHolder', () => {
         render(<KChip label='Test Label' onFocus={mockOnClick} />);
 
         // Assert
-        expect(mockOnClick).toBeCalledTimes(0);
+        expect(mockOnClick).toHaveBeenCalledTimes(0);
 
         // Act
         await act(async () => { await user.tab(); });
 
         // Assert
-        expect(mockOnClick).toBeCalledTimes(1);
+        expect(mockOnClick).toHaveBeenCalledTimes(1);
       });
 
       test('Onblur event test', async () => {
@@ -155,7 +156,7 @@ describe('KDropHolder', () => {
         const root = screen.getByTestId(testId);
 
         // Assert
-        expect(mockOnClick).toBeCalledTimes(0);
+        expect(mockOnClick).toHaveBeenCalledTimes(0);
 
         // Act
         await act(async () => {
@@ -164,7 +165,43 @@ describe('KDropHolder', () => {
         });
 
         // Assert
-        expect(mockOnClick).toBeCalledTimes(1);
+        expect(mockOnClick).toHaveBeenCalledTimes(1);
+      });
+
+      test('Click refs event test', async () => {
+
+        // Arrange
+        const chipRef = createRef<KChipRef>();
+        render(<KChip ref={chipRef} label='Test Label' onClick={mockOnClick} />);
+
+        // Assert
+        expect(mockOnClick).toHaveBeenCalledTimes(0);
+
+        // Act
+        chipRef.current?.click();
+
+        // Assert
+        expect(mockOnClick).toHaveBeenCalledTimes(1);
+      });
+
+      test('Focus, Blur refs event test', async () => {
+
+        // Arrange
+        const chipRef = createRef<KChipRef>();
+        render(<KChip ref={chipRef} label='Test Label' />);
+        const root = screen.getByTestId(testId);
+
+        // Act
+        chipRef.current?.focus();
+
+        // Assert
+        expect(root).toHaveFocus();
+
+        // Act
+        chipRef.current?.blur();
+
+        // Assert
+        expect(root).not.toHaveFocus();
       });
 
     });
