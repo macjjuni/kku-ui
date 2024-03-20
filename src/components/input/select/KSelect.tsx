@@ -1,8 +1,5 @@
-import {
-  CSSProperties,
-  forwardRef, KeyboardEvent, memo, Ref, useCallback, useImperativeHandle,
-  useMemo, useRef, useState,
-} from 'react';
+import { CSSProperties, forwardRef, KeyboardEvent, memo, Ref, useCallback, useImperativeHandle,
+  useMemo, useRef, useState } from 'react';
 import type { KSelectProps, KSelectRefs, KSelectItemType } from '@/components/input/select/KSelect.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { KIcon } from '@/components';
@@ -16,14 +13,6 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
   const selectRef = useRef<HTMLDivElement>(null);
   const isOnMouse = useRef<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
-
-  // TODO. Test Code
-  useImperativeHandle(ref, () => ({
-    focus: () => { selectRef.current?.focus(); },
-    blur: () => { selectRef.current?.blur(); },
-    validate: () => {},
-    value: props.value,
-  }));
 
   // endregion
 
@@ -56,7 +45,7 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
     setOpen(true);
   }, []);
 
-  const onSelectOff = useCallback(() => {
+  const onSelectClose = useCallback(() => {
     setOpen(false);
   }, []);
 
@@ -90,7 +79,7 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
       onSelectOpen();
       return;
     }
-    onSelectOff();
+    onSelectClose();
   }, [open]);
 
   const onFocusRoot = useCallback(() => {
@@ -98,7 +87,7 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
   }, []);
 
   const onBlurRoot = useCallback(() => {
-    if (open && !isOnMouse.current) { onSelectOff(); }
+    if (open && !isOnMouse.current) { onSelectClose(); }
     if (props.onBlur) { props.onBlur(); }
   }, [open]);
 
@@ -116,9 +105,9 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
         onSelectOpen();
         return;
       }
-      onSelectOff();
+      onSelectClose();
     }
-    if (e.key === 'Tab' && e.shiftKey && isOnMouse.current) { onSelectOff(); }
+    if (e.key === 'Tab' && e.shiftKey && isOnMouse.current) { onSelectClose(); }
     if (e.key === 'Tab') { isOnMouse.current = true; }
   }, [open]);
 
@@ -126,7 +115,7 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
     if (item === null) { return; }
 
     props.onChange(item.value);
-    onSelectOff();
+    onSelectClose();
   }, [props.value, props.items, props.onChange]);
 
   const onFocusListItem = useCallback(() => {
@@ -138,7 +127,7 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
     if (item && (e.key === 'Enter' || e.key === ' ')) { props.onChange(item.value); }
 
     if ((props.items.length - 1 === idx || idx === -1) && (!e.shiftKey && e.key === 'Tab')) {
-      onSelectOff();
+      onSelectClose();
     }
 
   }, [props.value, props.items]);
@@ -146,8 +135,10 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
   // endregion
 
 
-  // region [LifeCycle]
-  // endregion
+  useImperativeHandle(ref, () => ({
+    open: () => { onSelectOpen(); },
+    close: () => { onSelectClose(); },
+  }));
 
 
   // region [Templates]

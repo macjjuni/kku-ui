@@ -1,16 +1,5 @@
-import {
-  FocusEvent,
-  forwardRef,
-  KeyboardEvent,
-  memo,
-  MouseEvent,
-  MutableRefObject,
-  Ref,
-  useCallback,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-} from 'react';
+import { FocusEvent, forwardRef, KeyboardEvent, memo, MouseEvent, MutableRefObject,
+  Ref, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { KChipProps, KChipRef } from '@/components/chip/KChip.interface';
 import { initDisabled, initSize, initVariant } from '@/common/util/variation';
 import { KIcon } from '@/components';
@@ -52,8 +41,7 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     initDisabled(clazz, 'k-chip', props.disabled);
 
     return clazz.join(' ');
-  }, [
-    props.className, props.size, props.disabled, props.large, props.medium, props.small,
+  }, [props.className, props.size, props.disabled, props.large, props.medium, props.small,
     props.variant, props.contained, props.outlined]);
 
   const rootStyle = useMemo(() => {
@@ -81,7 +69,6 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     if (props.size === 'large' || props.large) { return 12; }
     if (props.size === 'medium' || props.medium) { return 12; }
     if (props.size === 'small' || props.small) { return 10; }
-
   }, [props.size, props.large, props.medium, props.small]);
 
   const closeIconColor = useMemo(() => {
@@ -159,36 +146,35 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
 
   return (
     <div
-            ref={rootRef}
-            id={props.id}
-            className={`k-chip ${rootClass}`}
-            style={rootStyle}
-            tabIndex={!props.disabled ? props.tabIndex : -1}
-            role='button'
-            onClick={onClick}
-            onKeyUp={onKeyUp}
-            onBlur={onBlur}
-            onFocus={onFocus}
-            onMouseDown={onMouseDown}
-            onMouseUp={onMouseUp}
-            onMouseLeave={onMouseLeave}
-            onKeyDown={onKeyDown}
-            data-testid='k-chip'
+      ref={rootRef}
+      id={props.id}
+      className={`k-chip ${rootClass}`}
+      style={rootStyle}
+      tabIndex={!props.disabled ? props.tabIndex : -1}
+      role='button'
+      onClick={onClick}
+      onKeyUp={onKeyUp}
+      onBlur={onBlur}
+      onFocus={onFocus}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
+      onMouseLeave={onMouseLeave}
+      onKeyDown={onKeyDown}
+      data-testid='k-chip'
     >
       <span className='k-chip__label'>
         {props.label && props.label}
         {props.children && props.children}
       </span>
 
-
       {props.closeable && (
         <KIcon
-                    className='k-chip__close-icon'
-                    icon='close'
-                    color={closeIconColor}
-                    size={closeIconSize}
-                    onClick={onClose}
-                    tabIndex={-1}
+          className='k-chip__close-icon'
+          icon='close'
+          color={closeIconColor}
+          size={closeIconSize}
+          onClick={onClose}
+          tabIndex={-1}
         />
       )}
     </div>
