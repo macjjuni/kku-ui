@@ -1,18 +1,51 @@
 .k-switch {
+    position: relative;
+    border: none;
+    background-color: $k-gray-color-50;
+    cursor: pointer;
+    padding: 0;
 
+    .k-switch__toggle {
+        position: absolute;
+        font-size: 0;
+        background: $k-primary-color;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
 
 
     // Size
-    &.k-select--large {
+    &.k-switch--large {
+        width: 62px;
+        height: 34px;
+        border-radius: $k-spacing-18;
 
+        .k-switch--on { top: 4px; left: 4px; }
+        .k-switch--off {
+            top: 3px;
+            left: calc((100% - 34px) + 4px);
+        }
+
+        .k-switch__toggle {
+            width: 26px;
+            height: 26px;
+        }
     }
 
-    &.k-select--medium {
+    &.k-switch--medium {
+        height: 40px;
 
+        .k-switch__toggle {
+
+        }
     }
 
-    &.k-select--small {
+    &.k-switch--small {
+        height: 40px;
 
+        .k-switch__toggle {
+
+        }
     }
 }
 

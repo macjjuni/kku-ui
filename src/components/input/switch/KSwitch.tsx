@@ -32,9 +32,9 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
     initSize(clazz, 'k-switch', props.size, props.large, props.medium, props.small);
     initDisabled(clazz, 'k-switch', props.disabled);
 
+
     return clazz.join(' ');
-  }, [
-    props.className, props.size, props.small, props.medium, props.large, props.disabled]);
+  }, [props.value, props.className, props.size, props.small, props.medium, props.large, props.disabled]);
 
   const rootStyle = useMemo(() => {
 
@@ -45,20 +45,19 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
 
   const toggleClass = useMemo(() => {
 
-    if (props.value) { return 'k-switch__on'; }
+    if (props.value) { return 'k-switch--on'; }
 
-    return 'k-switch__off';
-  }, []);
+    return 'k-switch--off';
+  }, [props.value]);
 
   // endregion
 
 
   // region [Events]
 
-  const onChange = useCallback(() => {
-
+  const onClick = useCallback(() => {
     props.onChange(!props.value);
-  }, [props.onChange]);
+  }, [props.value]);
 
   // endregion
 
@@ -85,7 +84,7 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
             disabled={props.disabled}
             tabIndex={!props.disabled ? 0 : -1}
             className={`k-switch ${rootClass}`}
-            onChange={onChange}
+            onClick={onClick}
             data-testid='k-swtich'
     >
       <span className={`k-switch__toggle ${toggleClass}`} />
