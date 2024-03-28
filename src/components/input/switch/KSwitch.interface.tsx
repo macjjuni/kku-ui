@@ -7,6 +7,7 @@ export interface KSwitchProps extends KBaseProp, KSizeProp {
 
   // Types
   color?: string
+  bgColor?: string
 
   disabled?: boolean
 

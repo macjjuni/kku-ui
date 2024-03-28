@@ -17,7 +17,7 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
   // endregion
 
 
-  // region [Privates]
+  // region [APIs]
   // endregion
 
 
@@ -28,10 +28,10 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
     const clazz = [];
 
     if (props.className) { clazz.push(props.className); }
+    if (props.value) { clazz.push('k-switch--on'); } else { clazz.push('k-switch--off'); }
 
     initSize(clazz, 'k-switch', props.size, props.large, props.medium, props.small);
     initDisabled(clazz, 'k-switch', props.disabled);
-
 
     return clazz.join(' ');
   }, [props.value, props.className, props.size, props.small, props.medium, props.large, props.disabled]);
@@ -40,15 +40,15 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
 
     const style: CSSProperties = { ...props.style };
 
+    if (props.bgColor) { style.backgroundColor = props.bgColor; }
+
     return style;
   }, [props.style]);
 
-  const toggleClass = useMemo(() => {
 
-    if (props.value) { return 'k-switch--on'; }
-
-    return 'k-switch--off';
-  }, [props.value]);
+  const toggleColor = useMemo((): CSSProperties => {
+    return { backgroundColor: props.color };
+  }, [props.color]);
 
   // endregion
 
@@ -87,7 +87,7 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
             onClick={onClick}
             data-testid='k-swtich'
     >
-      <span className={`k-switch__toggle ${toggleClass}`} />
+      <span className='k-switch__toggle' style={toggleColor} />
     </button>
   );
 });
