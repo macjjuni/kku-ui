@@ -1,51 +1,71 @@
 .k-switch {
     position: relative;
     border: none;
-    background-color: $k-gray-color-50;
+    background: $k-gray-color-50;
     cursor: pointer;
     padding: 0;
+    transition: background-color 0.24s ease;
+    overflow: hidden;
+
+    &.k-switch--on { background: $k-primary-color; }
+
+    &.k-switch--disabled {
+        cursor: not-allowed;
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: $k-black-color;
+            opacity: 0.2;
+            z-index: 1;
+        }
+    }
 
     .k-switch__toggle {
         position: absolute;
         font-size: 0;
-        background: $k-primary-color;
+        background: $k-white-color;
         border-radius: 50%;
-        transition: all 0.3s ease;
+        transition: left 0.3s ease;
     }
 
 
     // Size
     &.k-switch--large {
-        width: 62px;
-        height: 34px;
+        width: 60px;
+        height: 33px;
         border-radius: $k-spacing-18;
 
-        .k-switch--on { top: 4px; left: 4px; }
-        .k-switch--off {
-            top: 3px;
-            left: calc((100% - 34px) + 4px);
-        }
+        .k-switch__toggle { width: 27px; height: 27px; }
 
-        .k-switch__toggle {
-            width: 26px;
-            height: 26px;
-        }
+        &.k-switch--on .k-switch__toggle { top: 3px; left: calc((100% - 33px) + 3px); }
+        &.k-switch--off .k-switch__toggle { top: 3px; left: 3px; }
     }
 
     &.k-switch--medium {
-        height: 40px;
+        width: 54px;
+        height: 30px;
+        border-radius: $k-spacing-14;
 
-        .k-switch__toggle {
+        .k-switch__toggle { width: 24px; height: 24px;}
 
-        }
+        &.k-switch--on .k-switch__toggle { top: 3px; left: calc((100% - 30px) + 3px); }
+        &.k-switch--off .k-switch__toggle { top: 3px; left: 3px; }
     }
 
     &.k-switch--small {
-        height: 40px;
+        width: 48px;
+        height: 27px;
+        border-radius: $k-spacing-14;
 
-        .k-switch__toggle {
+        .k-switch__toggle { width: 21px; height: 21px;}
 
-        }
+        &.k-switch--on .k-switch__toggle { top: 3px; left: calc((100% - 27px) + 3px); }
+        &.k-switch--off .k-switch__toggle { top: 3px; left: 3px; }
     }
 }
 
