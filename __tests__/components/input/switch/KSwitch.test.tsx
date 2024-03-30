@@ -1,13 +1,18 @@
-// import { act } from 'react-dom/test-utils';
-// import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
-import { KCheckbox, KCheckboxRefs } from '@/components';
+import { KSwitch, KSwitchProps, KSwitchRefs } from '@/components';
 
-const testId = 'k-checkbox';
+const testId = 'k-switch';
 const mockFn = jest.fn();
+
+// 필수인 value, onChange 제거한 타입
+type ExceptRequiredKSwitchProps = Omit<Omit<KSwitchProps, 'value'>, 'onChange'>;
+
+interface TestKSwitchProps extends ExceptRequiredKSwitchProps {
+  defaultValue?: boolean
+}
 
 describe('KCheckbox', () => {
 
@@ -15,23 +20,10 @@ describe('KCheckbox', () => {
     mockFn.mockClear();
   });
 
-  const checkboxRef = React.createRef<KCheckboxRefs>();
-  const TestCheckbox = (props: { defaultValue?: boolean, defaultCheck?: boolean,
-    label?: string, color?: string, disabled?: boolean, width?: string }) => {
-
-    const [checked, setChecked] = useState(props.defaultValue || false);
-    return (
-      <KCheckbox
-          ref={checkboxRef}
-          label={props.label ? props.label : 'kku'}
-          value={checked}
-          disabled={props.disabled}
-          onChange={(e) => { setChecked(e); }}
-          color={props.color}
-          defaultCheck={props.defaultCheck}
-          width={props.width}
-      />
-    );
+  const switchRef = React.createRef<KSwitchRefs>();
+  const TestSwitch = (props: TestKSwitchProps) => {
+    const [value, setValue] = useState(props.defaultValue || false);
+    return (<KSwitch {...props} ref={switchRef} value={value} onChange={(val) => { setValue(val); }} />);
   };
 
   describe('Props', () => {
@@ -44,14 +36,7 @@ describe('KCheckbox', () => {
       const testClass = 'test-class-name';
       const testIdValue = 'k-select-test-id';
 
-      render(<KCheckbox
-                label='kku'
-                id={testIdValue}
-                value={false}
-                onChange={() => {}}
-                className={testClass}
-                style={testStyle}
-      />);
+      render(<TestSwitch style={testStyle} className={testClass} id={testIdValue} />);
       const root = screen.getByTestId(testId);
 
       // Assert
@@ -60,123 +45,119 @@ describe('KCheckbox', () => {
       expect(root).toHaveAttribute('id', testIdValue);
     });
 
-    test('DefaultCheck prop render test', () => {
+
+    test('DefaultValue prop render test', () => {
 
       // Arrange
-      const defaultCheck = true;
-      render(<TestCheckbox defaultCheck={defaultCheck} />);
+      const defaultValue = true;
+      render(<TestSwitch defaultValue={defaultValue} />);
 
       const root = screen.getByTestId(testId);
-      const inputRoot = screen.queryAllByRole('checkbox')[1];
 
       // Assert
       expect(root).toHaveAttribute('aria-checked', 'true');
-      expect(inputRoot).toHaveProperty('checked', true);
+      expect(root).toHaveClass('k-switch--on');
     });
 
-    test('color prop render test', () => {
+
+    test('Color and toggleColor prop render test', () => {
 
       // Arrange
-      const testColor = '#eee';
-      render(<TestCheckbox color={testColor} />);
+      const testBgColor = '#eee';
+      const testToggleColor = 'red';
 
-      const root = screen.getByRole('img');
+      render(<TestSwitch toggleColor={testToggleColor} bgColor={testBgColor} />);
+
+      const root = screen.getByTestId(testId);
+      const toggleRoot = screen.getByTestId('k-switch-toggle');
 
       // Assert
-      expect(root).toHaveStyle({ fill: testColor });
+      expect(root).toHaveStyle({ background: testBgColor });
+      expect(toggleRoot).toHaveStyle({ background: testToggleColor });
     });
+
 
     test('Disabled prop render test', () => {
 
       // Arrange
       const testDisabled = true;
-      render(<TestCheckbox disabled={testDisabled} />);
-
-      const root = screen.getByTestId(testId);
-      const inputRoot = screen.queryAllByRole('checkbox')[1];
-
-      // Assert
-      expect(root).toHaveClass('k-checkbox--disabled');
-      expect(inputRoot).toHaveProperty('disabled', true);
-    });
-
-    test('Width prop render test', () => {
-
-      // Arrange
-      const testWidth = '500px';
-      render(<TestCheckbox width={testWidth} />);
+      render(<TestSwitch disabled={testDisabled} />);
 
       const root = screen.getByTestId(testId);
 
       // Assert
-      expect(root).toHaveStyle({ width: testWidth });
+      expect(root).toHaveClass('k-switch--disabled');
+      expect(root).toHaveProperty('disabled', true);
     });
-
 
   });
 
   describe('Props', () => {
 
+
     test('Value change render test', async () => {
 
       // Arrange
       const user = userEvent.setup();
-      const labelText = 'Hello World!';
-      render(<TestCheckbox label={labelText} />);
+      render(<TestSwitch />);
 
       const root = screen.getByTestId(testId);
-      const inputRoot = screen.queryAllByRole('checkbox')[1];
 
       // Act
       await act(async () => {
-        await user.click(root.children[0]);
+        await user.click(root);
       });
 
       // Assert
       expect(root).toHaveAttribute('aria-checked', 'true');
-      expect(inputRoot).toHaveProperty('checked', true);
+      expect(root).toHaveClass('k-switch--on');
 
       // Act
       await act(async () => {
-        await user.click(root.children[0]);
+        await user.click(root);
       });
 
       // Arrange
       const renderedRoot = screen.getByTestId(testId);
-      const renderedInputRoot = screen.queryAllByRole('checkbox')[1];
 
       // Assert
       expect(renderedRoot).toHaveAttribute('aria-checked', 'false');
-      expect(renderedInputRoot).toHaveProperty('checked', false);
+      expect(root).toHaveClass('k-switch--off');
     });
+
 
     test('Ref event test', async () => {
 
-      // Arrange
-      const labelText = 'Hello World!';
-      render(<TestCheckbox label={labelText} />);
 
-      // Act
-      await act(async () => { checkboxRef.current?.click(); });
+      // Arrange
+      render(<TestSwitch defaultValue />);
 
       // Arrange
       const root = screen.getByTestId(testId);
-      const inputRoot = screen.queryAllByRole('checkbox')[1];
 
       // Assert
       expect(root).toHaveAttribute('aria-checked', 'true');
-      expect(inputRoot).toHaveProperty('checked', true);
+      expect(root).toHaveClass('k-switch--on');
 
       // Act
-      await act(async () => { checkboxRef.current?.toggle(); });
+      await act(async () => { switchRef.current?.toggle(); });
 
       // Arrange
-      const root2 = screen.getByTestId(testId);
-      const inputRoot2 = screen.queryAllByRole('checkbox')[1];
+      const renderedOnRoot = screen.getByTestId(testId);
 
       // Assert
-      expect(root2).toHaveAttribute('aria-checked', 'false');
-      expect(inputRoot2).toHaveProperty('checked', false);
+      expect(renderedOnRoot).toHaveAttribute('aria-checked', 'false');
+      expect(renderedOnRoot).toHaveClass('k-switch--off');
+
+      // Act
+      await act(async () => { switchRef.current?.toggle(); });
+
+      // Arrange
+      const renderedOffRoot = screen.getByTestId(testId);
+
+      // Assert
+      expect(renderedOffRoot).toHaveAttribute('aria-checked', 'true');
+      expect(renderedOffRoot).toHaveClass('k-switch--on');
     });
 
   });

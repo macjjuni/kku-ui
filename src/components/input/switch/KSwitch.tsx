@@ -10,14 +10,8 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
 
   useImperativeHandle(ref, () => ({
     toggle() { inputRef.current?.click(); },
-    on() {},
-    off() {},
   }));
 
-  // endregion
-
-
-  // region [APIs]
   // endregion
 
 
@@ -47,8 +41,8 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
 
 
   const toggleColor = useMemo((): CSSProperties => {
-    return { backgroundColor: props.color };
-  }, [props.color]);
+    return { backgroundColor: props.toggleColor };
+  }, [props.toggleColor]);
 
   // endregion
 
@@ -57,7 +51,7 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
 
   const onClick = useCallback(() => {
     props.onChange(!props.value);
-  }, [props.value]);
+  }, [props.onChange, props.value]);
 
   // endregion
 
@@ -75,19 +69,19 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
   return (
   // eslint-disable-next-line react/button-has-type
     <button
-            ref={inputRef}
-            id={props.id}
-            role='switch'
-            style={rootStyle}
-            aria-checked={props.value}
-            aria-label='switch'
-            disabled={props.disabled}
-            tabIndex={!props.disabled ? 0 : -1}
-            className={`k-switch ${rootClass}`}
-            onClick={onClick}
-            data-testid='k-swtich'
+      ref={inputRef}
+      id={props.id}
+      role='switch'
+      style={rootStyle}
+      aria-checked={props.value}
+      aria-label='switch'
+      disabled={props.disabled}
+      tabIndex={!props.disabled ? 0 : -1}
+      className={`k-switch ${rootClass}`}
+      onClick={onClick}
+      data-testid='k-switch'
     >
-      <span className='k-switch__toggle' style={toggleColor} />
+      <span className='k-switch__toggle' style={toggleColor} data-testid='k-switch-toggle' />
     </button>
   );
 });

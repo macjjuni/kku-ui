@@ -72,7 +72,7 @@ describe('KRadio', () => {
       expect(inputRoot).toHaveProperty('checked', true);
     });
 
-    test('color prop render test', () => {
+    test('Color prop render test', () => {
 
       // Arrange
       const testColor = '#eee';

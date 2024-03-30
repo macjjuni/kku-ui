@@ -6,7 +6,7 @@ export interface KSwitchProps extends KBaseProp, KSizeProp {
   value: boolean // ✨ Required ✨
 
   // Types
-  color?: string
+  toggleColor?: string
   bgColor?: string
 
   disabled?: boolean
@@ -17,7 +17,5 @@ export interface KSwitchProps extends KBaseProp, KSizeProp {
 
 
 export interface KSwitchRefs {
-  on: () => void
-  off: () => void
   toggle: () => void
 }
