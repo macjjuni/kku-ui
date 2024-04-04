@@ -1,7 +1,5 @@
-import {
-  ChangeEvent, CSSProperties, forwardRef, memo, Ref, useCallback,
-  useId, useImperativeHandle, useMemo, useRef, useState,
-} from 'react';
+import { ChangeEvent, CSSProperties, forwardRef, memo, Ref, useCallback,
+  useId, useImperativeHandle, useMemo, useRef, useState, KeyboardEvent } from 'react';
 import { KTextFieldProps, KTextFieldRefs } from '@/components/input/textfield/KTextField.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { KIcon } from '@/components';
@@ -118,6 +116,14 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
     setIsPasswdShow((prev) => !prev);
   }, [props.password, isPasswdShow]);
 
+  const onKeyDownEnter = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.nativeEvent.isComposing) { return; }
+
+    if ((e.key === 'Enter' || e.key === '') && props.onKeyDownEnter) {
+      props.onKeyDownEnter(e);
+    }
+  }, [props.onKeyDownEnter]);
+
   // endregion
 
 
@@ -158,6 +164,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
             onChange={onChangeValue}
             onFocus={onFocus}
             onBlur={onblur}
+            onKeyDown={onKeyDownEnter}
             disabled={props.disabled}
             placeholder={props.placeholder}
             maxLength={props.maxLength}
