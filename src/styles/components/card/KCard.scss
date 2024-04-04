@@ -1,0 +1,26 @@
+.k-card {
+
+    display: inline-flex;
+    flex-direction: column;
+    padding: $k-spacing-20;
+    border: 1px solid $k-border-default-color;
+    border-radius: $k-border-radius-default;
+    min-width: 80px;
+
+
+    .k-card__title {
+        @include k-title-2;
+
+        & + .k-card__sub-title {
+            margin-top: $k-spacing-16;
+        }
+    }
+
+    .k-card__sub-title {
+        @include k-label-1;
+    }
+
+    &.k-card--rounded {
+        border-radius: 8px;
+    }
+}

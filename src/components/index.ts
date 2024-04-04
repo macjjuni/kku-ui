@@ -8,3 +8,4 @@ export * from '@/components/input/checkbox-group';
 export * from '@/components/input/switch';
 export * from '@/components/drop-holder';
 export * from '@/components/chip';
+export * from '@/components/card';
