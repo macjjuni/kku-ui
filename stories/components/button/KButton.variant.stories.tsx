@@ -15,29 +15,29 @@ const Template = (args: KButtonProps) => {
     return (
         <Container>
             <Item label={'Default'}>
-                <KButton {...args} label={'안녕하세요'}/>
-                <KButton label={'Hello'}/>
-                <KButton label={'こんにちは'}/>
+                <KButton {...args} large />
+                <KButton {...args} medium />
+                <KButton {...args} small />
             </Item>
             <Item label={'Contained'}>
-                <KButton contained label={'안녕하세요'}/>
-                <KButton contained label={'Hello'}/>
-                <KButton contained label={'こんにちは'}/>
+                <KButton {...args} large contained />
+                <KButton {...args} medium contained />
+                <KButton {...args} small contained />
             </Item>
             <Item label={'Outlined'}>
-                <KButton outlined label={'안녕하세요'}/>
-                <KButton outlined label={'Hello'}/>
-                <KButton outlined label={'こんにちは'}/>
+                <KButton {...args} large outlined />
+                <KButton {...args} medium outlined />
+                <KButton {...args} small outlined />
             </Item>
             <Item label={'Contained Custom Color'}>
-                <KButton contained label={'안녕하세요'} color={'#FF9B9B'}/>
-                <KButton contained label={'Hello'} color={'#CBFFA9'}/>
-                <KButton contained label={'こんにちは'} color={'#FFD6A5'}/>
+                <KButton {...args} large contained color={'#FF9B9B'} />
+                <KButton {...args} medium contained color={'#CBFFA9'} />
+                <KButton {...args} small contained color={'#FFD6A5'} />
             </Item>
             <Item label={'Outlined Custom Color'}>
-                <KButton label={'안녕하세요'} color={'#7B66FF'}/>
-                <KButton label={'Hello'} color={'#525CEB'}/>
-                <KButton label={'こんにちは'} color={'#5FBDFF'}/>
+                <KButton {...args} large outlined color={'#7B66FF'} />
+                <KButton {...args} medium outlined color={'#525CEB'} />
+                <KButton {...args} small outlined color={'#5FBDFF'} />
             </Item>
         </Container>
     );
@@ -45,6 +45,6 @@ const Template = (args: KButtonProps) => {
 
 export const Variant: Story = {
     render: Template,
-    args: {},
+    args: { label: '안녕하세요'},
 };
 
