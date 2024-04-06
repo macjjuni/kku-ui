@@ -73,6 +73,11 @@
     transition-timing-function: ease;
 }
 
+@mixin k-transition-2 {
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+}
+
 @mixin k-transition-3 {
     transition-duration: 0.3s;
     transition-timing-function: ease;

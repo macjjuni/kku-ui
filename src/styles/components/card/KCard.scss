@@ -1,5 +1,6 @@
 .k-card {
 
+    position: relative;
     display: inline-flex;
     flex-direction: column;
     padding: $k-spacing-20;
@@ -7,20 +8,32 @@
     border-radius: $k-border-radius-default;
     min-width: 80px;
 
-
     .k-card__title {
         @include k-title-2;
 
-        & + .k-card__sub-title {
-            margin-top: $k-spacing-16;
+        & + .k-card__sub-title { margin-top: $k-spacing-16; }
+    }
+
+    .k-card__sub-title { @include k-label-1; }
+
+    &.k-card__clickable {
+        cursor: pointer;
+        transition-property: box-shadow;
+        @include k-transition-2;
+
+        &:hover {
+            box-shadow: $k-default-box-shadow;
         }
     }
 
-    .k-card__sub-title {
-        @include k-label-1;
+    &.k-card--outlined {
+        border-color: $k-primary-color;
+        color: $k-primary-color;
     }
 
-    &.k-card--rounded {
-        border-radius: 8px;
+    &.k-card--contained {
+        border-color: $k-primary-color;
+        background: $k-primary-color;
     }
+
 }
