@@ -14,30 +14,30 @@ type Story = StoryObj<typeof KButton>
 
 const Template = (args: KButtonProps) => {
 
-
+    console.log(args);
     return (
         <Container>
             <Item label={'Default'}>
-                <KButton {...args} large label={'안녕하세요'}/>
-                <KButton label={'こんにちは'}/>
-                <KButton small label={'Hello'}/>
+                <KButton {...args} large/>
+                <KButton {...args} medium />
+                <KButton {...args} small />
             </Item>
             <Item label={'Contained'}>
-                <KButton large contained label={'안녕하세요'}/>
-                <KButton contained medium label={'こんにちは'}/>
-                <KButton small contained label={'Hello'}/>
+                <KButton {...args} large contained />
+                <KButton {...args} medium contained />
+                <KButton {...args} small contained />
             </Item>
             <Item label={'Outlined'}>
-                <KButton large outlined label={'안녕하세요'}/>
-                <KButton outlined small label={'こんにちは'}/>
-                <KButton small outlined label={'Hello'}/>
+                <KButton {...args} large outlined />
+                <KButton {...args} medium outlined />
+                <KButton {...args} small outlined />
             </Item>
         </Container>
     );
 };
 
-export const Size: Story = {
+export const size: Story = {
     render: Template,
-    args: {},
+    args: {label: '안녕하세요'},
 };
 
