@@ -30,17 +30,23 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
     return clazz.join(' ');
   }, [props.value, props.className, props.size, props.small, props.medium, props.large, props.disabled]);
 
+
   const rootStyle = useMemo(() => {
 
     const style: CSSProperties = { ...props.style };
-
-    if (props.bgColor) { style.backgroundColor = props.bgColor; }
 
     return style;
   }, [props.style]);
 
 
+  const backgroundStyle = useMemo(() => {
+
+    return props.bgColor ? { background: props.bgColor } : {};
+  }, [props.bgColor]);
+
+
   const toggleColor = useMemo((): CSSProperties => {
+
     return { backgroundColor: props.toggleColor };
   }, [props.toggleColor]);
 
@@ -69,18 +75,24 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
   return (
   // eslint-disable-next-line react/button-has-type
     <button
-      ref={inputRef}
-      id={props.id}
-      role='switch'
-      style={rootStyle}
-      aria-checked={props.value}
-      aria-label='switch'
-      disabled={props.disabled}
-      tabIndex={!props.disabled ? 0 : -1}
-      className={`k-switch ${rootClass}`}
-      onClick={onClick}
-      data-testid='k-switch'
+            ref={inputRef}
+            id={props.id}
+            role='switch'
+            style={rootStyle}
+            aria-checked={props.value}
+            aria-label='switch'
+            disabled={props.disabled}
+            tabIndex={!props.disabled ? 0 : -1}
+            className={`k-switch ${rootClass}`}
+            onClick={onClick}
+            data-testid='k-switch'
     >
+      <span
+          className='k-switch__active-background'
+          style={backgroundStyle}
+          data-testid='k-switch-active-background'
+      />
+      <span className='k-switch__default-background' />
       <span className='k-switch__toggle' style={toggleColor} data-testid='k-switch-toggle' />
     </button>
   );

@@ -8,7 +8,7 @@ const meta: Meta<typeof KSwitch> = {
     component: KSwitch,
     title: 'Input/Switch',
     argTypes: {
-        color: {description: '토글 요소의 색상을 설정합니다.', defaultValue: {summary: 'undefined'}},
+        toggleColor: {description: '토글 요소의 색상을 설정합니다.', defaultValue: {summary: 'undefined'}},
         bgColor: {description: '요소의 배경 색상을 설정합니다.', defaultValue: {summary: 'undefined'}},
         ...disabledArgType, ...sizeArgType, ...baseArgTyp,
     },
@@ -27,16 +27,35 @@ const Template = (args: KSwitchProps) => {
         setValue(value);
     }, []);
 
-    return (
-        <div style={{display: 'flex', gap: '16px'}}>
-            <KSwitch {...args} value={value} onChange={onChangeValue} large/>
-            <KSwitch {...args} value={value} onChange={onChangeValue}/>
-            <KSwitch {...args} value={value} onChange={onChangeValue} small/>
-        </div>
-    );
+    return (<KSwitch {...args} value={value} onChange={onChangeValue}/>);
 };
 
 export const Default: Story = {
     render: Template,
-    args: {disabled: false, color: undefined, bgColor: undefined},
+    args: {toggleColor: undefined, bgColor: undefined, disabled: false},
+};
+
+export const Large: Story = {
+    render: Template,
+    args: {size:'large', toggleColor: undefined, bgColor: undefined, disabled: false},
+};
+
+export const Medium: Story = {
+    render: Template,
+    args: {size:'medium', toggleColor: undefined, bgColor: undefined, disabled: false},
+};
+
+export const Small: Story = {
+    render: Template,
+    args: {size:'small', toggleColor: undefined, bgColor: undefined, disabled: false},
+};
+
+export const Disabled: Story = {
+    render: Template,
+    args: {size:'small', toggleColor: undefined, bgColor: undefined, disabled: true},
+};
+
+export const CustomColor: Story = {
+    render: Template,
+    args: { toggleColor: '#FB9AD1', bgColor: '#5755FE', disabled: false},
 };

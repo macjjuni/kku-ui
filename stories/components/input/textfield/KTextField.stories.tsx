@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import KTextField from '@/components/input/textfield/KTextField';
+import {useState} from 'react';
 import {KTextFieldProps} from '@/components/input/textfield/KTextField.interface';
 import {baseArgTyp, disabledArgType, sizeArgType} from '../../common/argTypes';
 
@@ -31,14 +32,15 @@ type Story = StoryObj<KTextFieldProps>
 
 const Template = (args: KTextFieldProps) => {
 
-    return (<KTextField {...args} />);
+    const [value, setValue] = useState('');
+
+    return (<KTextField {...args} value={value} onChange={(val: string) => { setValue(val); }} />);
 };
 
 export const Default: Story = {
     render: Template,
     args: {
         label: '레이블',
-        value: '',
         placeholder: 'placeholder!',
         size: 'medium',
         labelDirection: 'column',

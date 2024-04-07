@@ -33,8 +33,7 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
   onChange?: (value: string) => void
   onFocus?: () => void
   onBlur?: () => void
-  onKeyDown?: (e?: KeyboardEvent<HTMLInputElement>) => void
-  onKeyUp?: (e?: KeyboardEvent<HTMLInputElement>) => void
+  onKeyDownEnter?: (e?: KeyboardEvent<HTMLInputElement>) => void
 
   // Styles
   width?: string

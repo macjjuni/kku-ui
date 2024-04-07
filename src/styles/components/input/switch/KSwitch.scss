@@ -1,13 +1,24 @@
 .k-switch {
     position: relative;
     border: none;
-    background: $k-gray-color-50;
     cursor: pointer;
     padding: 0;
-    transition: background-color 0.24s ease;
     overflow: hidden;
 
-    &.k-switch--on { background: $k-primary-color; }
+    .k-switch__active-background, .k-switch__default-background {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        opacity: 0;
+        transition: opacity 0.24s ease;
+    }
+
+    .k-switch__active-background { background-color: $k-primary-color; }
+    .k-switch__default-background { background-color: $k-gray-color-50; }
+
+    &.k-switch--on > .k-switch__active-background { opacity: 1; }
+    &.k-switch--on > .k-switch__default-background { opacity: 0; }
+
 
     &.k-switch--disabled {
         cursor: not-allowed;
@@ -31,14 +42,14 @@
         background: $k-white-color;
         border-radius: 50%;
         transition: left 0.3s ease;
+        z-index: 1;
     }
-
 
     // Size
     &.k-switch--large {
         width: 62px;
         height: 34px;
-        border-radius: 17px;
+        border-radius: 18px;
 
         .k-switch__toggle { width: 28px; height: 28px; }
 
@@ -49,7 +60,7 @@
     &.k-switch--medium {
         width: 54px;
         height: 30px;
-        border-radius: 15px;
+        border-radius: 16px;
 
         .k-switch__toggle { width: 24px; height: 24px;}
 
@@ -60,7 +71,7 @@
     &.k-switch--small {
         width: 48px;
         height: 26px;
-        border-radius: 13px;
+        border-radius: 14px;
 
         .k-switch__toggle { width: 20px; height: 20px;}
 
