@@ -1,4 +1,4 @@
-import { forwardRef, memo, useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { KCardProps } from '@/components/card/KCard.interface';
 import { initVariant } from '@/common/util/variation';
 
@@ -6,7 +6,7 @@ import { initVariant } from '@/common/util/variation';
 const borderRadius = '8px';
 
 
-const KCard = forwardRef((props: KCardProps) => {
+const KCard = (props: KCardProps) => {
 
   // region [Hooks]
   // endregion
@@ -88,7 +88,7 @@ const KCard = forwardRef((props: KCardProps) => {
       {props.children}
     </div>
   );
-});
+};
 
 KCard.displayName = 'KCard';
 KCard.defaultProps = { borderRadius };
