@@ -68,12 +68,12 @@ describe('KCheckbox', () => {
 
       render(<TestSwitch toggleColor={testToggleColor} bgColor={testBgColor} />);
 
-      const root = screen.getByTestId(testId);
+      const backgroundRoot = screen.getByTestId('k-switch-active-background');
       const toggleRoot = screen.getByTestId('k-switch-toggle');
 
       // Assert
-      expect(root).toHaveStyle({ background: testBgColor });
       expect(toggleRoot).toHaveStyle({ background: testToggleColor });
+      expect(backgroundRoot).toHaveStyle({ background: testBgColor });
     });
 
 
