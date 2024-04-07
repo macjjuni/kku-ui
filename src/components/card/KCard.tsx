@@ -27,6 +27,7 @@ const KCard = (props: KCardProps) => {
     return clazz.join(' ');
   }, [props.className, props.rounded, props.clickable, props.variant, props.contained, props.outlined]);
 
+
   const rootStyle = useMemo(() => {
 
     const style = props.style ? props.style : {};
@@ -47,8 +48,7 @@ const KCard = (props: KCardProps) => {
     }
 
     return style;
-  }, [
-    props.style, props.rounded, props.borderRadius, props.width, props.height,
+  }, [props.style, props.rounded, props.borderRadius, props.width, props.height,
     props.color, props.fontColor, props.variant, props.outlined, props.contained]);
 
 
@@ -57,19 +57,15 @@ const KCard = (props: KCardProps) => {
 
   // region [Template]
 
-  const CardTitle = useMemo(() => {
+  const CardTitle = useMemo(() => (
 
-    if (props.title) { return (<h2 className='k-card__title'>{props.title}</h2>); }
+    props.title ? (<h2 className='k-card__title'>{props.title}</h2>) : null
+  ), [props.title]);
 
-    return null;
-  }, [props.title]);
+  const CardSubTitle = useMemo(() => (
 
-  const CardSubTitle = useMemo(() => {
-
-    if (props.subTitle) { return (<p className='k-card__sub-title'>{props.subTitle}</p>); }
-
-    return null;
-  }, [props.subTitle]);
+    props.subTitle ? (<p className='k-card__sub-title'>{props.subTitle}</p>) : null
+  ), [props.subTitle]);
 
   // endregion
 
@@ -77,11 +73,11 @@ const KCard = (props: KCardProps) => {
   return (
   // eslint-disable-next-line jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events
     <div
-            id={props.id}
-            className={`k-card ${rootClass}`}
-            style={rootStyle}
-            data-testid='k-card'
-            onClick={props.onClick}
+      id={props.id}
+      className={`k-card ${rootClass}`}
+      style={rootStyle}
+      data-testid='k-card'
+      onClick={props.onClick}
     >
       {CardTitle}
       {CardSubTitle}
