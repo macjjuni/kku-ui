@@ -18,11 +18,12 @@
 
     &.k-card__clickable {
         cursor: pointer;
-        transition-property: box-shadow;
+        transition-property: box-shadow, transform;
         @include k-transition-2;
 
         &:hover {
             box-shadow: $k-default-box-shadow;
+            transform: translateY(-$k-spacing-4);
         }
     }
 

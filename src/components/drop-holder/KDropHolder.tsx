@@ -172,6 +172,10 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    return () => removeAnchorRoot();
+  }, []);
+
   // endregion
 
   return (
