@@ -25,17 +25,18 @@ type Story = StoryObj<typeof KIcon>
 
 const Template = (args: KIconProps) => {
     return (
-        <>
-        <KIcon {...args} />
-        </>
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px'}}>
+            <KIcon {...args} size={'large'} />
+            <KIcon {...args} size={'medium'} />
+            <KIcon {...args} size={'small'} />
+        </div>
     );
 };
 
 export const Default: Story = {
     render: Template,
     args: {
-        icon: 'close',
-        size: 'medium',
+        icon: 'x_logo',
         clickable: false,
         disabled: false,
     },
