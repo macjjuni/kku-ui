@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import {KIcon} from '@/components/icon';
 import {KIconProps} from '@/components/icon/KIcon.interface';
-// import kIcons from '@/common/base/icon';
+import {kIcons} from '@/common/base/icon';
 
 const meta: Meta<KIconProps> = {
     component: KIcon,
@@ -23,22 +23,20 @@ export default meta;
 
 type Story = StoryObj<typeof KIcon>
 
-const Template = (args: KIconProps) => {
+const Template = () => {
     return (
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px'}}>
-            <KIcon {...args} size={'large'} />
-            <KIcon {...args} size={'medium'} />
-            <KIcon {...args} size={'small'} />
+        <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '12px', flexWrap: 'wrap'}}>
+            {
+                Object.keys(kIcons).map((iconName) => (
+                    <KIcon key={iconName} icon={iconName} size={'medium'}/>
+                ))
+            }
         </div>
     );
 };
 
 export const Default: Story = {
     render: Template,
-    args: {
-        icon: 'x_logo',
-        clickable: false,
-        disabled: false,
-    },
+    args: {},
 };
 
