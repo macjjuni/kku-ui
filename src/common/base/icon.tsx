@@ -8,7 +8,7 @@ interface Icons {
 
 const kIcons: Icons = {
   close: (
-    <svg role='img' viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -17,7 +17,7 @@ const kIcons: Icons = {
     </svg>
   ),
   arrow_up: (
-    <svg role='img' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -26,7 +26,7 @@ const kIcons: Icons = {
     </svg>
   ),
   arrow_down: (
-    <svg role='img' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -35,7 +35,7 @@ const kIcons: Icons = {
     </svg>
   ),
   arrow_right: (
-    <svg role='img' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -44,7 +44,7 @@ const kIcons: Icons = {
     </svg>
   ),
   arrow_left: (
-    <svg role='img' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -53,7 +53,7 @@ const kIcons: Icons = {
     </svg>
   ),
   arrow_up_right: (
-    <svg role='img' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -62,7 +62,7 @@ const kIcons: Icons = {
     </svg>
   ),
   arrow_up_left: (
-    <svg role='img' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -71,7 +71,7 @@ const kIcons: Icons = {
     </svg>
   ),
   arrow_down_right: (
-    <svg role='img' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -80,7 +80,7 @@ const kIcons: Icons = {
     </svg>
   ),
   arrow_down_left: (
-    <svg role='img' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -89,7 +89,7 @@ const kIcons: Icons = {
     </svg>
   ),
   keyboard_arrow_down: (
-    <svg role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -98,7 +98,7 @@ const kIcons: Icons = {
     </svg>
   ),
   checkbox_unchecked: (
-    <svg role='img' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -111,7 +111,7 @@ const kIcons: Icons = {
     </svg>
   ),
   checkbox_checked: (
-    <svg role='img' width='64px' height='64px' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+    <svg width='64px' height='64px' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -124,7 +124,7 @@ const kIcons: Icons = {
     </svg>
   ),
   visibility: (
-    <svg role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -133,7 +133,7 @@ const kIcons: Icons = {
     </svg>
   ),
   visibility_off: (
-    <svg role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -142,7 +142,7 @@ const kIcons: Icons = {
     </svg>
   ),
   radio_unchecked: (
-    <svg role='img' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -151,7 +151,7 @@ const kIcons: Icons = {
     </svg>
   ),
   radio_checked: (
-    <svg role='img' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -161,7 +161,7 @@ const kIcons: Icons = {
     </svg>
   ),
   github: (
-    <svg role='img' viewBox='0 0 73 73' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 73 73' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -175,7 +175,7 @@ const kIcons: Icons = {
     </svg>
   ),
   x_logo: (
-    <svg role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' xmlSpace='preserve'>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' xmlSpace='preserve'>
       <defs />
       <g style={{ stroke: 'currentColor', strokeWidth: '0', strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: '10', fillRule: 'nonzero', fill: 'none', opacity: '1' }} transform='translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)'>
         <polygon
@@ -193,7 +193,7 @@ const kIcons: Icons = {
     </svg>
   ),
   gmail: (
-    <svg xmlns='http://www.w3.org/2000/svg' role='img' viewBox='0 0 512 512' fill='currentColor'>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='currentColor'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -207,7 +207,7 @@ const kIcons: Icons = {
     </svg>
   ),
   bitcoin: (
-    <svg role='img' viewBox='0 -0.5 34 34' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 -0.5 34 34' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -216,7 +216,7 @@ const kIcons: Icons = {
     </svg>
   ),
   bitcoin_square: (
-    <svg xmlns='http://www.w3.org/2000/svg' aria-label='Bitcoin' role='img' viewBox='0 0 512 512' fill='#000000'>
+    <svg xmlns='http://www.w3.org/2000/svg' aria-label='Bitcoin' viewBox='0 0 512 512' fill='#000000'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -226,7 +226,7 @@ const kIcons: Icons = {
     </svg>
   ),
   javascript: (
-    <svg role='img' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -240,7 +240,7 @@ const kIcons: Icons = {
     </svg>
   ),
   typescript: (
-    <svg role='img' viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg' fill='#000000'>
+    <svg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg' fill='#000000'>
       <g id='SVGRepo_bgCarrier' strokeWidth='0' />
       <g id='SVGRepo_tracerCarrier' strokeLinecap='round' strokeLinejoin='round' />
       <g id='SVGRepo_iconCarrier'>
@@ -253,7 +253,7 @@ const kIcons: Icons = {
     </svg>
   ),
   react: (
-    <svg viewBox='0 -14 256 256' role='img' xmlns='http://www.w3.org/2000/svg' fill='#000000'>
+    <svg viewBox='0 -14 256 256' xmlns='http://www.w3.org/2000/svg' fill='#000000'>
       <g id='SVGRepo_bgCarrier' strokeWidth='0' />
       <g id='SVGRepo_tracerCarrier' strokeLinecap='round' strokeLinejoin='round' />
       <g id='SVGRepo_iconCarrier'>
@@ -264,7 +264,7 @@ const kIcons: Icons = {
     </svg>
   ),
   vue: (
-    <svg viewBox='0 0 32 32' role='img' xmlns='http://www.w3.org/2000/svg' fill='#000000'>
+    <svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' fill='#000000'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -275,7 +275,7 @@ const kIcons: Icons = {
     </svg>
   ),
   notion: (
-    <svg viewBox='0 0 32 32' role='img' xmlns='http://www.w3.org/2000/svg' fill='#000000'>
+    <svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' fill='#000000'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -284,7 +284,7 @@ const kIcons: Icons = {
     </svg>
   ),
   code: (
-    <svg viewBox='0 0 64 64' role='img' xmlns='http://www.w3.org/2000/svg' fill='currentColor'>
+    <svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg' fill='currentColor'>
       <circle fill='currentColor' cx='32' cy='32' r='32' />
       <path fill='#ebebeb' d='M42.5,44c-0.7,0-1.3-0.3-1.7-1c-0.6-0.9-0.3-2.2,0.7-2.8l10.1-6.2c0,0,0,0,0-0.1s0,0,0-0.1l-10.1-6.2 c-0.9-0.6-1.2-1.8-0.7-2.8c0.6-0.9,1.8-1.2,2.8-0.7l10.6,6.6l0.2,0.2c0.8,0.8,1.2,1.9,1.2,3c0,1.1-0.4,2.2-1.2,3l-0.2,0.2 l-10.6,6.6C43.2,43.9,42.8,44,42.5,44z' />
       <path fill='#ebebeb' d='M21.5,44c-0.4,0-0.7-0.1-1-0.3L9.9,37.1L9.7,37c-0.8-0.8-1.2-1.9-1.2-3c0-1.1,0.4-2.2,1.2-3l0.2-0.2 l10.6-6.6c0.9-0.6,2.2-0.3,2.8,0.7c0.6,0.9,0.3,2.2-0.7,2.8l-10.1,6.2c0,0,0,0,0,0.1s0,0,0,0.1l10.1,6.2 c0.9,0.6,1.2,1.8,0.7,2.8C22.9,43.7,22.2,44,21.5,44z' />
@@ -295,7 +295,7 @@ const kIcons: Icons = {
     </svg>
   ),
   dev: (
-    <svg xmlns='http://www.w3.org/2000/svg' role='img' viewBox='0 0 512 512' fill='currentColor'>
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='currentColor'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
@@ -305,7 +305,7 @@ const kIcons: Icons = {
     </svg>
   ),
   algorithm: (
-    <svg role='img' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg' strokeWidth='3' stroke='currentColor' fill='none'>
+    <svg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg' strokeWidth='3' stroke='currentColor' fill='none'>
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
