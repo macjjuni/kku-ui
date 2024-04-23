@@ -327,7 +327,7 @@ const kIcons: Icons = {
       </g>
     </svg>
   ),
-};
+} as const;
 
 const getIcon = (iconName: string): ReactNode | null => {
 
