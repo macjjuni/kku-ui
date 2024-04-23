@@ -21,7 +21,7 @@ const kIcons: Icons = {
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
-        <path d='M12 5V19M12 5L6 11M12 5L18 11' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+        <path d='M12 5V19M12 5L6 11M12 5L18 11' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
       </g>
     </svg>
   ),
@@ -30,7 +30,7 @@ const kIcons: Icons = {
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
-        <path d='M12 5V19M12 19L6 13M12 19L18 13' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+        <path d='M12 5V19M12 19L6 13M12 19L18 13' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
       </g>
     </svg>
   ),
@@ -39,7 +39,7 @@ const kIcons: Icons = {
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
-        <path d='M6 12H18M18 12L13 7M18 12L13 17' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+        <path d='M6 12H18M18 12L13 7M18 12L13 17' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
       </g>
     </svg>
   ),
@@ -48,7 +48,7 @@ const kIcons: Icons = {
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
-        <path d='M6 12H18M6 12L11 7M6 12L11 17' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+        <path d='M6 12H18M6 12L11 7M6 12L11 17' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
       </g>
     </svg>
   ),
@@ -57,7 +57,7 @@ const kIcons: Icons = {
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
-        <path d='M7 17L17 7M17 7H8M17 7V16' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+        <path d='M7 17L17 7M17 7H8M17 7V16' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
       </g>
     </svg>
   ),
@@ -66,7 +66,7 @@ const kIcons: Icons = {
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
-        <path d='M17 17L7 7M7 7V16M7 7H16' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+        <path d='M17 17L7 7M7 7V16M7 7H16' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
       </g>
     </svg>
   ),
@@ -75,7 +75,7 @@ const kIcons: Icons = {
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
-        <path d='M7 7L17 17M17 17V7M17 17H7' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+        <path d='M7 7L17 17M17 17V7M17 17H7' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
       </g>
     </svg>
   ),
@@ -84,7 +84,7 @@ const kIcons: Icons = {
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
-        <path d='M17 7L7 17M7 17H17M7 17V7' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+        <path d='M17 7L7 17M7 17H17M7 17V7' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
       </g>
     </svg>
   ),
@@ -93,7 +93,7 @@ const kIcons: Icons = {
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
-        <path d='M4 8L12 16L20 8' stroke='#000000' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
+        <path d='M4 8L12 16L20 8' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' />
       </g>
     </svg>
   ),
@@ -165,9 +165,9 @@ const kIcons: Icons = {
       <g strokeWidth='0' />
       <g strokeLinecap='round' strokeLinejoin='round' />
       <g>
-        <g id='team-collaboration/version-control/github' stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
+        <g id='team-collaboration/version-control/github' stroke='currentColoe' strokeWidth='1' fill='currentColoe' fillRule='evenodd'>
           <g transform='translate(2.000000, 2.000000)' fillRule='nonzero'>
-            <rect id='mask' stroke='#000000' strokeWidth='2' fill='#000000' x='-1' y='-1' width='71' height='71' rx='14' />
+            <rect id='mask' stroke='currentColoe' strokeWidth='2' fill='currentColoe' x='-1' y='-1' width='71' height='71' rx='14' />
             <path d='M58.3067362,21.4281798 C55.895743,17.2972267 52.6253846,14.0267453 48.4948004,11.615998 C44.3636013,9.20512774 39.8535636,8 34.9614901,8 C30.0700314,8 25.5585181,9.20549662 21.4281798,11.615998 C17.2972267,14.0266224 14.0269912,17.2972267 11.615998,21.4281798 C9.20537366,25.5590099 8,30.0699084 8,34.9607523 C8,40.8357654 9.71405782,46.1187277 13.1430342,50.8109917 C16.5716416,55.5036246 21.0008949,58.7507436 26.4304251,60.5527176 C27.0624378,60.6700211 27.5302994,60.5875152 27.8345016,60.3072901 C28.1388268,60.0266961 28.290805,59.6752774 28.290805,59.2545094 C28.290805,59.1842994 28.2847799,58.5526556 28.2730988,57.3588401 C28.2610487,56.1650247 28.2553926,55.1235563 28.2553926,54.2349267 L27.4479164,54.3746089 C26.9330843,54.468919 26.2836113,54.5088809 25.4994975,54.4975686 C24.7157525,54.4866252 23.9021284,54.4044881 23.0597317,54.2517722 C22.2169661,54.1004088 21.4330982,53.749359 20.7075131,53.1993604 C19.982297,52.6493618 19.4674649,51.9294329 19.1631397,51.0406804 L18.8120898,50.2328353 C18.5780976,49.6950097 18.2097104,49.0975487 17.7064365,48.4426655 C17.2031625,47.7871675 16.6942324,47.3427912 16.1794003,47.108799 L15.9336039,46.9328437 C15.7698216,46.815909 15.6178435,46.6748743 15.4773006,46.511215 C15.3368806,46.3475556 15.2317501,46.1837734 15.1615401,46.0197452 C15.0912072,45.855594 15.1494901,45.7209532 15.3370036,45.6153308 C15.5245171,45.5097084 15.8633939,45.4584343 16.3551097,45.4584343 L17.0569635,45.5633189 C17.5250709,45.6571371 18.104088,45.9373622 18.7947525,46.4057156 C19.4850481,46.8737001 20.052507,47.4821045 20.4972521,48.230683 C21.0358155,49.1905062 21.6846737,49.9218703 22.4456711,50.4251443 C23.2060537,50.9284182 23.9727072,51.1796248 24.744894,51.1796248 C25.5170807,51.1796248 26.1840139,51.121096 26.7459396,51.0046532 C27.3072505,50.8875956 27.8338868,50.7116403 28.3256025,50.477771 C28.5362325,48.9090515 29.1097164,47.7039238 30.0455624,46.8615271 C28.7116959,46.721353 27.5124702,46.5102313 26.4472706,46.2295144 C25.3826858,45.9484285 24.2825656,45.4922482 23.1476478,44.8597436 C22.0121153,44.2280998 21.0701212,43.44374 20.3214198,42.5080169 C19.5725954,41.571802 18.9580429,40.3426971 18.4786232,38.821809 C17.9989575,37.300306 17.7590632,35.5451796 17.7590632,33.5559381 C17.7590632,30.7235621 18.6837199,28.3133066 20.5326645,26.3238191 C19.6665366,24.1944035 19.7483048,21.8072644 20.778215,19.1626478 C21.4569523,18.951772 22.4635002,19.1100211 23.7973667,19.6364115 C25.1314792,20.1630477 26.1082708,20.6141868 26.7287253,20.9882301 C27.3491798,21.3621504 27.8463057,21.6790175 28.2208409,21.9360032 C30.3978419,21.3277217 32.644438,21.0235195 34.9612442,21.0235195 C37.2780503,21.0235195 39.5251383,21.3277217 41.7022622,21.9360032 L43.0362517,21.0938524 C43.9484895,20.5319267 45.0257392,20.0169716 46.2654186,19.5488642 C47.5058357,19.0810026 48.4543466,18.9521409 49.1099676,19.1630167 C50.1627483,21.8077563 50.2565666,24.1947724 49.3901927,26.324188 C51.2390143,28.3136755 52.1640399,30.7245457 52.1640399,33.556307 C52.1640399,35.5455485 51.9232849,37.3062081 51.444357,38.8393922 C50.9648143,40.3728223 50.3449746,41.6006975 49.5845919,42.5256002 C48.8233486,43.4503799 47.8753296,44.2285916 46.7404118,44.8601125 C45.6052481,45.4921252 44.504759,45.9483056 43.4401742,46.2293914 C42.3750975,46.5104772 41.1758719,46.7217219 39.8420054,46.8621419 C41.0585683,47.9149226 41.6669728,49.5767225 41.6669728,51.846804 L41.6669728,59.2535257 C41.6669728,59.6742937 41.8132948,60.0255895 42.1061847,60.3063064 C42.3987058,60.5865315 42.8606653,60.6690374 43.492678,60.5516109 C48.922946,58.7498829 53.3521992,55.5026409 56.7806837,50.810008 C60.2087994,46.117744 61.923472,40.8347817 61.923472,34.9597686 C61.9222424,30.0695396 60.7162539,25.5590099 58.3067362,21.4281798 Z' fill='#FFFFFF' />
           </g>
         </g>
@@ -177,15 +177,15 @@ const kIcons: Icons = {
   x_logo: (
     <svg role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' xmlSpace='preserve'>
       <defs />
-      <g style={{ stroke: 'none', strokeWidth: '0', strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: '10', fillRule: 'nonzero', fill: 'none', opacity: '1' }} transform='translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)'>
+      <g style={{ stroke: 'currentColor', strokeWidth: '0', strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: '10', fillRule: 'nonzero', fill: 'none', opacity: '1' }} transform='translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)'>
         <polygon
             points='24.89,23.01 57.79,66.99 65.24,66.99 32.34,23.01 '
-            style={{ stroke: 'none', strokeWidth: 1, strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fill: 'rgb(0,0,0)', fillRule: 'nonzero', opacity: 1 }}
-            transform='  matrix(1 0 0 1 0 0) '
+            style={{ stroke: 'currentColor', strokeWidth: 1, strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fill: 'currentColor', fillRule: 'nonzero', opacity: 1 }}
+            transform='matrix(1 0 0 1 0 0) '
         />
         <path
             d='M 72.349 0 H 17.651 C 7.902 0 0 7.902 0 17.651 v 54.699 C 0 82.098 7.902 90 17.651 90 h 54.699 C 82.098 90 90 82.098 90 72.349 V 17.651 C 90 7.902 82.098 0 72.349 0 z M 56.032 70.504 L 41.054 50.477 L 22.516 70.504 h -4.765 L 38.925 47.63 L 17.884 19.496 h 16.217 L 47.895 37.94 l 17.072 -18.444 h 4.765 L 50.024 40.788 l 22.225 29.716 H 56.032 z'
-            style={{ stroke: 'none', strokeWidth: 1, strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fill: 'rgb(0,0,0)', fillRule: 'nonzero', opacity: 1 }}
+            style={{ stroke: 'none', strokeWidth: 1, strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fill: 'currentColor', fillRule: 'nonzero', opacity: 1 }}
             transform=' matrix(1 0 0 1 0 0) '
             strokeLinecap='round'
         />
@@ -285,7 +285,7 @@ const kIcons: Icons = {
   ),
   code: (
     <svg viewBox='0 0 64 64' role='img' xmlns='http://www.w3.org/2000/svg' fill='currentColor'>
-      <circle fill='#000000' cx='32' cy='32' r='32' />
+      <circle fill='currentColor' cx='32' cy='32' r='32' />
       <path fill='#ebebeb' d='M42.5,44c-0.7,0-1.3-0.3-1.7-1c-0.6-0.9-0.3-2.2,0.7-2.8l10.1-6.2c0,0,0,0,0-0.1s0,0,0-0.1l-10.1-6.2 c-0.9-0.6-1.2-1.8-0.7-2.8c0.6-0.9,1.8-1.2,2.8-0.7l10.6,6.6l0.2,0.2c0.8,0.8,1.2,1.9,1.2,3c0,1.1-0.4,2.2-1.2,3l-0.2,0.2 l-10.6,6.6C43.2,43.9,42.8,44,42.5,44z' />
       <path fill='#ebebeb' d='M21.5,44c-0.4,0-0.7-0.1-1-0.3L9.9,37.1L9.7,37c-0.8-0.8-1.2-1.9-1.2-3c0-1.1,0.4-2.2,1.2-3l0.2-0.2 l10.6-6.6c0.9-0.6,2.2-0.3,2.8,0.7c0.6,0.9,0.3,2.2-0.7,2.8l-10.1,6.2c0,0,0,0,0,0.1s0,0,0,0.1l10.1,6.2 c0.9,0.6,1.2,1.8,0.7,2.8C22.9,43.7,22.2,44,21.5,44z' />
       <path fill='#ffffff' d='M25.5,53c-0.2,0-0.5,0-0.7-0.1c-1-0.4-1.5-1.6-1.2-2.6l13-34c0.4-1,1.6-1.5,2.6-1.2c1,0.4,1.5,1.6,1.2,2.6 l-13,34C27.1,52.5,26.3,53,25.5,53z' />
@@ -301,6 +301,29 @@ const kIcons: Icons = {
       <g>
         <rect width='512' height='512' rx='15%' />
         <path fill='#ffffff' d='M140.47 203.94h-17.44v104.47h17.45c10.155-.545 17.358-8.669 17.47-17.41v-69.65c-.696-10.364-7.796-17.272-17.48-17.41zm45.73 87.25c0 18.81-11.61 47.31-48.36 47.25h-46.4V172.98h47.38c35.44 0 47.36 28.46 47.37 47.28zm100.68-88.66H233.6v38.42h32.57v29.57H233.6v38.41h53.29v29.57h-62.18c-11.16.29-20.44-8.53-20.72-19.69V193.7c-.27-11.15 8.56-20.41 19.71-20.69h63.19zm103.64 115.29c-13.2 30.75-36.85 24.63-47.44 0l-38.53-144.8h32.57l29.71 113.72 29.57-113.72h32.58z' />
+      </g>
+    </svg>
+  ),
+  algorithm: (
+    <svg role='img' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg' strokeWidth='3' stroke='currentColor' fill='none'>
+      <g strokeWidth='0' />
+      <g strokeLinecap='round' strokeLinejoin='round' />
+      <g>
+        <circle cx='34.52' cy='11.43' r='5.82' />
+        <circle cx='53.63' cy='31.6' r='5.82' />
+        <circle cx='34.52' cy='50.57' r='5.82' />
+        <circle cx='15.16' cy='42.03' r='5.82' />
+        <circle cx='15.16' cy='19.27' r='5.82' />
+        <circle cx='34.51' cy='29.27' r='4.7' />
+        <line x1='20.17' y1='16.3' x2='28.9' y2='12.93' />
+        <line x1='38.6' y1='15.59' x2='49.48' y2='27.52' />
+        <line x1='50.07' y1='36.2' x2='38.67' y2='46.49' />
+        <line x1='18.36' y1='24.13' x2='30.91' y2='46.01' />
+        <line x1='20.31' y1='44.74' x2='28.7' y2='48.63' />
+        <line x1='17.34' y1='36.63' x2='31.37' y2='16.32' />
+        <line x1='20.52' y1='21.55' x2='30.34' y2='27.1' />
+        <line x1='39.22' y1='29.8' x2='47.81' y2='30.45' />
+        <line x1='34.51' y1='33.98' x2='34.52' y2='44.74' />
       </g>
     </svg>
   ),

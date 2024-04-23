@@ -36,7 +36,7 @@ const Template = (args: KIconProps) => {
 export const Default: Story = {
     render: Template,
     args: {
-        icon: 'x_logo',
+        icon: 'algorithm',
         clickable: false,
         disabled: false,
     },
