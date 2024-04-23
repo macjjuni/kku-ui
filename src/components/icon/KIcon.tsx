@@ -43,7 +43,10 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
 
     const style: CSSProperties = props.style || {};
 
-    if (props.color) { style.fill = props.color; }
+    if (props.color) {
+      style.fill = props.color;
+      style.color = props.color;
+    }
 
     if (typeof props.size === 'number') {
       style.width = `${props.size}px`;
