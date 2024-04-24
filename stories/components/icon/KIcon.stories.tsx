@@ -23,12 +23,12 @@ export default meta;
 
 type Story = StoryObj<typeof KIcon>
 
-const Template = () => {
+const Template = (args: KIconProps) => {
     return (
         <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '12px', flexWrap: 'wrap'}}>
             {
                 Object.keys(kIcons).map((iconName) => (
-                    <KIcon key={iconName} icon={iconName} size={'medium'}/>
+                    <KIcon key={iconName} {...args} icon={iconName} size={'medium'}/>
                 ))
             }
         </div>
@@ -37,6 +37,8 @@ const Template = () => {
 
 export const Default: Story = {
     render: Template,
-    args: {},
+    args: {
+        color:'red'
+    },
 };
 
