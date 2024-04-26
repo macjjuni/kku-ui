@@ -2,6 +2,7 @@
 .k-radio {
     display: inline-block;
     font-size: 0;
+    font-family: $k-font-family;
     overflow: hidden;
     user-select: none;
 
@@ -31,8 +32,6 @@
 
         .k-icon { color: $k-default-font-color; }
         .k-radio__container__label {
-            position: relative;
-            top: 1px;
             color: $k-default-font-color;
         }
 

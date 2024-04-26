@@ -1,10 +1,10 @@
-
 .k-button {
     position: relative;
     display: inline-flex;
     justify-content: center;
     align-items: center;
 
+    font-family: $k-font-family;
     border: 1px solid transparent;
     background: transparent;
     border-radius: $k-border-radius-default;
