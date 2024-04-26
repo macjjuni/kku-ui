@@ -37,8 +37,6 @@ const Template = (args: KIconProps) => {
 
 export const Default: Story = {
     render: Template,
-    args: {
-        color:'red'
-    },
+    args: {    },
 };
 
