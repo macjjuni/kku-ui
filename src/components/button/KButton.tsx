@@ -5,6 +5,7 @@ import { initSize } from '@/common/util/variation';
 import colorUtil from '@/common/util/color';
 import { KButtonProps, KButtonRefs } from '@/components';
 
+
 const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
   if (props.label && props.children) {
@@ -16,6 +17,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   const rootRef = useRef() as MutableRefObject<HTMLButtonElement>;
   const [isLoad, setIsLoad] = useState<boolean>(false);
   const ripple = useRipple(rootRef);
+
 
   useImperativeHandle(ref, () => ({
 
@@ -37,8 +39,11 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
       if (props.variant && (props.outlined || props.contained)) {
         throw Error('Error: variant and contained or outlined attributes cannot be duplicated.');
       }
+
       if (props.className) { clazz.push(props.className); }
+
       if (isLoad) { clazz.push('k-button--loading'); }
+
       if (props.disabled && props.color && (props.contained || props.variant === 'contained')) {
         clazz.push('k-button--disabled');
       }
@@ -57,21 +62,26 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
       props.large, props.medium, props.small, props.size, props.color],
   );
 
+
   const rootStyle = useMemo(() => {
 
     const styles: CSSProperties = props.style || {};
 
     if (props.variant === 'contained' || props.contained) {
+
       if (props.color) {
         styles.background = props.color;
         styles.borderColor = props.color;
       }
     } else if (props.color) {
+
       styles.color = props.color;
       styles.borderColor = props.color;
     }
+
     return styles;
   }, [props.style, props.color, props.variant]);
+
 
   const loadStyle = useMemo(() => {
 
@@ -92,6 +102,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
     if (!props.disabled && !isLoad) { ripple?.register(e); }
   }, [props.disabled, isLoad, ripple]);
 
+
   const onMouseUp = useCallback((e: MouseEvent<HTMLButtonElement>): void => {
 
     ripple.remove();
@@ -99,6 +110,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
       props.onClick(e);
     }
   }, [props, ripple]);
+
 
   const onMouseEnter = useCallback((): void => {
 
@@ -109,6 +121,7 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
     }
   }, [props.variant, props.contained, props.color]);
 
+
   const onMouseLeave = useCallback((): void => {
 
     ripple.remove();
@@ -117,10 +130,12 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
     }
   }, [props.variant, props.contained, props.outlined, props.color, ripple]);
 
+
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLButtonElement>): void => {
 
     ripple?.register(e);
   }, [ripple]);
+
 
   const onKeyUp = useCallback((e: KeyboardEvent<HTMLButtonElement>): void => {
 
@@ -163,7 +178,6 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   );
 });
 
-KButton.defaultProps = {};
 KButton.displayName = 'KButton';
 
 export default memo(KButton);
