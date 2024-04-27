@@ -1,5 +1,4 @@
 .k-card {
-
     position: relative;
     display: inline-flex;
     flex-direction: column;
@@ -7,6 +6,7 @@
     border: 1px solid $k-border-default-color;
     border-radius: $k-border-radius-default;
     min-width: 80px;
+    font-family: $k-font-family;
 
     .k-card__title {
         @include k-title-2;

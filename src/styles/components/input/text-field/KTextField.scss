@@ -2,8 +2,10 @@
     display: flex;
     gap: $k-spacing-6;
     min-width: 280px;
-    font-size: 0;
     width: 300px;
+    font-size: 0;
+    font-family: $k-font-family;
+
 
     // Label Style - Common
     .k-text-field__label__container {

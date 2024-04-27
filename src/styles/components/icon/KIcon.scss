@@ -1,6 +1,9 @@
 
 .k-icon {
 
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     user-select: none;
 
     &.k-icon--clickable { cursor: pointer; }
