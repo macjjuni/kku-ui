@@ -17,6 +17,25 @@
     font-weight: $k-font-weight-body;
 }
 
+@mixin k-sub-title-1 {
+    font-size: $k-font-size-sub-title-1;
+    line-height: $k-line-height-sub-title-1;
+    font-weight: $k-font-weight-body;
+}
+
+@mixin k-sub-title-2 {
+    font-size: $k-font-size-sub-title-2;
+    line-height: $k-line-height-title-2;
+    font-weight: $k-font-weight-body;
+}
+
+@mixin k-sub-title-3 {
+    font-size: $k-font-size-sub-title-3;
+    line-height: $k-line-height-title-3;
+    font-weight: $k-font-weight-body;
+}
+
+
 @mixin k-sub-1 {
     font-size: $k-font-size-sub-1;
     line-height: $k-line-height-sub-1;

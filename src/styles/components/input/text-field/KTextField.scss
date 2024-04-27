@@ -2,8 +2,10 @@
     display: flex;
     gap: $k-spacing-6;
     min-width: 280px;
-    font-size: 0;
     width: 300px;
+    font-size: 0;
+    font-family: $k-font-family;
+
 
     // Label Style - Common
     .k-text-field__label__container {
@@ -122,7 +124,7 @@
         }
 
         .k-text-field__input__container {
-            padding: $k-spacing-10 $k-spacing-16;
+            padding: $k-spacing-10 $k-spacing-12;
             .k-text-field__input { @include k-body-1; }
         }
     }
@@ -134,7 +136,7 @@
         }
 
         .k-text-field__input__container {
-            padding: $k-spacing-8 $k-spacing-12;
+            padding: $k-spacing-8 $k-spacing-10;
             .k-text-field__input { @include k-body-2; }
         }
     }

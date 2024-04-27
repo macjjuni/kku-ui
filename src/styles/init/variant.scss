@@ -59,15 +59,17 @@ $k-placeholder-font-color: #b3b3b3 !default;
 // endregion
 
 
-// region [Fonts Style]
+// region [Typography]
 
-$k-font-size-title-1: 26px !default;
-$k-font-size-title-2: 24px !default;
-$k-font-size-title-3: 22px !default;
+$k-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, sans-serif;;
 
-$k-line-height-title-1: 28px !default;
-$k-line-height-title-2: 26px !default;
-$k-line-height-title-3: 24px !default;
+$k-font-size-title-1: 48px !default;
+$k-font-size-title-2: 32px !default;
+$k-font-size-title-3: 28px !default;
+
+$k-font-size-sub-title-1: 24px !default;
+$k-font-size-sub-title-2: 20px !default;
+$k-font-size-sub-title-3: 16px !default;
 
 $k-font-size-sub-1: 22px !default;
 $k-font-size-sub-2: 20px !default;
@@ -77,13 +79,21 @@ $k-font-size-label-1: 16px !default;
 $k-font-size-label-2: 14px !default;
 $k-font-size-label-3: 12px !default;
 
-$k-line-height-label-1: 22px !default;
-$k-line-height-label-2: 20px !default;
-$k-line-height-label-3: 18px !default;
+$k-line-height-title-1: 56px !default;
+$k-line-height-title-2: 40px !default;
+$k-line-height-title-3: 36px !default;
 
-$k-line-height-sub-1: 24px !default;
-$k-line-height-sub-2: 22px !default;
-$k-line-height-sub-3: 20px !default;
+$k-line-height-sub-title-1: 32px !default;
+$k-line-height-sub-title-2: 28px !default;
+$k-line-height-sub-title-3: 24px !default;
+
+$k-line-height-label-1: 24px !default;
+$k-line-height-label-2: 22px !default;
+$k-line-height-label-3: 20px !default;
+
+$k-line-height-sub-1: 30px !default;
+$k-line-height-sub-2: 28px !default;
+$k-line-height-sub-3: 26px !default;
 
 $k-font-weight-title: 600 !default;
 $k-font-weight-body: 400 !default;

@@ -72,26 +72,26 @@
     &.k-select--large {
 
         &, & + .k-select__template {
-            padding: $k-spacing-6 $k-spacing-10 $k-spacing-6 $k-spacing-16;
+            padding: $k-spacing-6 $k-spacing-10 $k-spacing-6 $k-spacing-10;
             @include k-body-1;
         }
 
         .k-select__menu-list {
             .k-select__menu-list__item {
-                padding: $k-spacing-6 $k-spacing-16;
+                padding: $k-spacing-6 $k-spacing-10;
             }
         }
     }
     &.k-select--medium {
 
         &, & + .k-select__template {
-            padding: $k-spacing-6 $k-spacing-8 $k-spacing-6 $k-spacing-14;
+            padding: $k-spacing-6 $k-spacing-8 $k-spacing-6 $k-spacing-10;
             @include k-body-2;
         }
 
         .k-select__menu-list {
             .k-select__menu-list__item {
-                padding: $k-spacing-6 $k-spacing-14;
+                padding: $k-spacing-6 $k-spacing-8;
             }
         }
 
@@ -99,13 +99,13 @@
     &.k-select--small {
 
         &, & + .k-select__template {
-            padding: $k-spacing-6 $k-spacing-6 $k-spacing-6 $k-spacing-12;
+            padding: $k-spacing-6 $k-spacing-8 $k-spacing-6 $k-spacing-10;
             @include k-body-3;
         }
 
         .k-select__menu-list {
             .k-select__menu-list__item {
-                padding: $k-spacing-6 $k-spacing-10;
+                padding: $k-spacing-6 $k-spacing-8;
             }
         }
     }
