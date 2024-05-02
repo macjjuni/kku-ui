@@ -406,6 +406,15 @@ points='0 128 0 0 128 0 256 0 256 128 256 256 128 256 0 256'
       </g>
     </svg>
   ),
+  menu: (
+    <svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' color='currentColor'>
+      <g strokeWidth='0' />
+      <g strokeLinecap='round' strokeLinejoin='round' />
+      <g>
+        <path d='M6 7L18 7M6 12L18 12M6 17L18 17' />
+      </g>
+    </svg>
+  ),
 } as const;
 
 const getIcon = (iconName: string): ReactNode | null => {
