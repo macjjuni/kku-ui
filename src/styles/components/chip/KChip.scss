@@ -1,19 +1,18 @@
 .k-chip {
     position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     font-family: $k-font-family;
 
     border-width: 1px;
     border-style: solid;
-    cursor: pointer;
     overflow: hidden;
     user-select: none;
 
     &.k-chip--disabled { cursor: not-allowed; }
-
+    &.k-chip--clickable { cursor: pointer;}
 
     // Variants
     &.k-chip--contained {
