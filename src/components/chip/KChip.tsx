@@ -1,5 +1,7 @@
-import { FocusEvent, forwardRef, KeyboardEvent, memo, MouseEvent, MutableRefObject,
-  Ref, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
+import {
+  FocusEvent, forwardRef, KeyboardEvent, memo, MouseEvent, MutableRefObject,
+  Ref, useCallback, useImperativeHandle, useMemo, useRef,
+} from 'react';
 import { KChipProps, KChipRef } from '@/components/chip/KChip.interface';
 import { initDisabled, initSize, initVariant } from '@/common/util/variation';
 import { KIcon } from '@/components';
@@ -35,6 +37,7 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     if (props.className) { clazz.push(props.className); }
     if (props.closeable) { clazz.push('k-chip--closeable'); }
     if (props.rounded) { clazz.push('k-chip--rounded'); }
+    if (props.onClick) { clazz.push('k-chip--clickable'); }
 
     initVariant(clazz, 'k-chip', props.variant, props.contained, props.outlined);
     initSize(clazz, 'k-chip', props.size, props.large, props.medium, props.small);
@@ -42,7 +45,8 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
 
     return clazz.join(' ');
   }, [props.className, props.size, props.disabled, props.large, props.medium, props.small,
-    props.variant, props.contained, props.outlined]);
+    props.variant, props.contained, props.outlined, props.onClick]);
+
 
   const rootStyle = useMemo(() => {
 
@@ -52,7 +56,7 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
       style.background = props.color;
     }
     if (props.color && (props.variant === 'outlined' || props.outlined
-        || (!props.variant && !props.contained))) {
+            || (!props.variant && !props.contained))) {
       style.borderColor = props.color;
       style.color = props.color;
     }
@@ -60,6 +64,7 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
 
     return style;
   }, [props.style, props.color, props.variant, props.contained, props.outlined]);
+
 
   const closeIconSize = useMemo(() => {
 
@@ -71,10 +76,11 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     if (props.size === 'small' || props.small) { return 10; }
   }, [props.size, props.large, props.medium, props.small]);
 
+
   const closeIconColor = useMemo(() => {
 
     if ((props.variant === 'outlined' || props.outlined
-        || (!props.variant && !props.contained)) && props.color) {
+            || (!props.variant && !props.contained)) && props.color) {
       return props.color;
     }
 
@@ -90,6 +96,7 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     if (props.onClick && !props.disabled) { props.onClick(e); }
   }, []);
 
+
   const onKeyUp = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
 
     if (e.key === ' ' || e.key === 'Enter') {
@@ -98,7 +105,8 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
         props.onClick(e);
       }
     }
-  }, []);
+  }, [props.onClick]);
+
 
   const onClose = useCallback((e: MouseEvent<HTMLSpanElement> | KeyboardEvent<HTMLSpanElement>) => {
 
@@ -106,11 +114,13 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     if (props.onClose) { props.onClose(e); }
   }, [props.onClose]);
 
+
   const onBlur = useCallback((e: FocusEvent<HTMLDivElement>) => {
 
     e.stopPropagation();
     if (props.onBlur) { props.onBlur(e); }
   }, [props.onBlur]);
+
 
   const onFocus = useCallback((e: FocusEvent<HTMLDivElement>) => {
 
@@ -118,28 +128,35 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     if (props.onFocus) { props.onFocus(e); }
   }, [props.onFocus]);
 
+
   const onMouseDown = useCallback((e: MouseEvent<HTMLDivElement>): void => {
 
-    if (!props.disabled) { ripple?.register(e); }
-  }, [props.disabled, ripple]);
+    if (!props.disabled && props.onClick) { ripple?.register(e); }
+  }, [props.disabled, props.onClick, ripple]);
+
 
   const onMouseUp = useCallback((): void => {
+    if (props.onClick) {
+      ripple.remove();
+    }
+  }, [props.onClick, ripple]);
 
-    ripple.remove();
-  }, [props, ripple]);
 
   const onMouseLeave = useCallback((): void => {
 
-    ripple.remove();
+    if (props.onClick) {
+      ripple.remove();
+    }
     if ((props.variant === 'contained' || props.contained) && props.color) {
       rootRef.current.style.background = props.color;
     }
-  }, [props.variant, props.contained, props.outlined, props.color, ripple]);
+  }, [props.variant, props.contained, props.outlined, props.color, props.onClick, ripple]);
+
 
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>): void => {
 
-    if (!props.disabled) { ripple?.register(e); }
-  }, [ripple]);
+    if (!props.disabled && props.onClick) { ripple?.register(e); }
+  }, [props.onClick, ripple]);
 
   // endregion
 
@@ -185,6 +202,7 @@ KChip.displayName = 'KChip';
 KChip.defaultProps = {
   closeable: false,
   tabIndex: 0,
+  onClick: undefined,
 };
 
 export default memo(KChip);
