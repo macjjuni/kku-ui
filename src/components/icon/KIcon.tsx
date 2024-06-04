@@ -80,7 +80,7 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
 
   const onClick = useCallback((e:MouseEvent<HTMLSpanElement>) => {
     if (!props.disabled && props.onClick) { props.onClick(e); }
-  }, [props.disabled]);
+  }, [props.disabled, props.onClick]);
 
   const onKeyUp = useCallback((e: KeyboardEvent<HTMLSpanElement>) => {
     if (e.key === 'enter' || e.key === ' ') {
