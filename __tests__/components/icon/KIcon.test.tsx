@@ -120,6 +120,16 @@ describe('KButton', () => {
       expect(mockOnClick).toHaveBeenCalledTimes(0);
     });
 
+    test('onClick prop style test', async () => {
+
+      // Arrange
+      render(<KIcon icon='close' onClick={mockOnClick} disabled />);
+      const root = screen.getByRole('button');
+
+      // Assert
+      expect(root).toHaveStyle({ cursor: 'pointer' });
+    });
+
   });
 
 

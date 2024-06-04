@@ -54,6 +54,10 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
       style.fontSize = `${props.size}px`;
     }
 
+    if (props.onClick) {
+      style.cursor = 'pointer';
+    }
+
     return style;
   }, [props.style, props.color, props.size]);
 
