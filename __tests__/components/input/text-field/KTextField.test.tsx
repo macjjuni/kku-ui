@@ -1,7 +1,4 @@
 import { render, screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
-// import { createRef } from 'react';
-// import { act } from 'react-dom/test-utils';
 import { useState } from 'react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
@@ -9,8 +6,14 @@ import { KTextField } from '@/components';
 
 
 const testId = 'k-text-field';
+const mockOnClick = jest.fn();
+
 
 describe('KTextField', () => {
+
+  beforeEach(() => {
+    mockOnClick.mockClear();
+  });
 
 
   describe('Prop test', () => {
@@ -143,6 +146,24 @@ describe('KTextField', () => {
       // Assert
       expect(inputRoot).toHaveStyle({ width: testWidth });
     });
+
+    test('search prop render and event test', async () => {
+
+      // Arrange
+      const user = userEvent.setup();
+      render(<KTextField label='label' value='' search onSearch={mockOnClick} />);
+      const searchIconRoot = screen.getByTestId('k-icon');
+
+      // Act
+      await act(async () => {
+        await user.click(searchIconRoot);
+      });
+
+      // Assert
+      expect(searchIconRoot).toHaveClass('k-text-field__search-icon');
+      expect(mockOnClick).toHaveBeenCalledTimes(1);
+    });
+
   });
 
 });
