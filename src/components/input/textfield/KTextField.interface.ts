@@ -25,6 +25,7 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
   required?: boolean
   clearable?: boolean
   password?: boolean
+  search?: boolean
 
   // Custom
   rightAction?: ReactNode
@@ -34,6 +35,7 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
   onFocus?: () => void
   onBlur?: () => void
   onKeyDownEnter?: (e?: KeyboardEvent<HTMLInputElement>) => void
+  onSearch?: () => void
 
   // Styles
   width?: string
