@@ -19,6 +19,7 @@ const meta: Meta<typeof KTextField> = {
         required: {description: '레이블에 필수 입력 아이콘을 설정합니다.', defaultValue: {summary: 'false'}},
         clearable: {description: 'value 초기화 버튼을 설정합니다.', defaultValue: {summary: 'false'}},
         password: {description: '비밀번호 입력 행태로 설정합니다.', defaultValue: {summary: 'false'}},
+        search: {description: '검색 아이콘 버튼을 활성화합니다.', defaultValue: {summary: 'false'}},
         width: {description: '스타일 width 값을 설정합니다.', defaultValue: {summary: 'undefined'}},
         fullWidth: {description: '스타일 width 값을 100% 로 설정합니다.', defaultValue: {summary: 'undefined'}},
         rightAction: {description: '레이블 정렬이 column 상태일 경우 우측에 Action 공간을 설정합니다.', defaultValue: {summary: 'undefined'}},
