@@ -1,15 +1,31 @@
 import * as ReactDOM from 'react-dom/client';
 import { memo, useCallback, useEffect, useMemo } from 'react';
 import { KModalProps } from '@/components/modal/KModal.interface';
+import { initSize } from '@/common/util/variation';
+
+const modalWrapperClass = 'k-modal__wrapper';
 
 
-function KModal({ isOpen, title, content, footer }: KModalProps) {
+function KModal({ isOpen, title, content, footer, size, large, medium, small }: KModalProps) {
+
+  // region [Style]
+
+  const rootClass = useMemo(() => {
+    const clazz: string[] = [];
+
+    initSize(clazz, 'k-modal__container', size, large, medium, small);
+
+    return clazz.join(' ');
+  }, [size]);
+
+  // endregion
+
 
   // region [Templates]
 
-  const modalComponent = useMemo(() => (
+  const modalComponent = useCallback(() => (
     <>
-      <div className='k-modal__container'>
+      <div className={`k-modal__container ${rootClass}`}>
 
         <div className='k-modal__container__header'>
           {title}
@@ -34,8 +50,8 @@ function KModal({ isOpen, title, content, footer }: KModalProps) {
 
   // region [Privates]
 
-  const initialize = useCallback(() => {
-    const modalWrapperClass = 'k-modal__wrapper';
+  const initializeModal = useCallback(() => {
+
     const modalWrapper = document.createElement('div');
     modalWrapper.className = modalWrapperClass;
 
@@ -44,7 +60,18 @@ function KModal({ isOpen, title, content, footer }: KModalProps) {
     const modalWrapperElement = document.querySelector(`.${modalWrapperClass}`) as HTMLDivElement;
     const modalWrapperRoot = ReactDOM.createRoot(modalWrapperElement);
 
-    modalWrapperRoot.render(modalComponent);
+    modalWrapperRoot.render(modalComponent());
+  }, []);
+
+  const removeModal = useCallback(() => {
+    const modalWrapperElement = document.querySelector(`.${modalWrapperClass}`) as HTMLDivElement;
+
+    if (modalWrapperElement) {
+      modalWrapperElement.classList.add('fade-out');
+      setTimeout(() => {
+        modalWrapperElement.remove();
+      }, 2000);
+    }
   }, []);
 
   // endregion
@@ -53,7 +80,11 @@ function KModal({ isOpen, title, content, footer }: KModalProps) {
   // region [Effects]
 
   useEffect(() => {
-    initialize();
+    if (isOpen) {
+      initializeModal();
+    } else {
+      removeModal();
+    }
   }, [isOpen]);
 
   // endregion
