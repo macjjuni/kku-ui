@@ -1,11 +1,25 @@
 $k-modal__large: 1440px;
 $k-modal__medium: 840px;
-$k-modal__small: 640px;
-
+$k-modal__small: 720px;
 
 $k-modal__wrapper_zIndex: 1000;
 $k-modal__container_zIndex: 1002;
 $k-modal__overlay_zIndex: 1001;
+
+$k-modal__header__font-size: 20px;
+$k-modal__header__line-height: 24px;
+
+$k-modal__overlay__background-color: rgba(0, 0, 0, 0.12);
+
+
+@keyframes modalDown {
+    from { top: 47%; }
+    to { top: 50%; }
+}
+@keyframes modalUp {
+    from { top: 50%; }
+    to { top: 47%; }
+}
 
 
 .k-modal__wrapper {
@@ -15,6 +29,15 @@ $k-modal__overlay_zIndex: 1001;
     width: 100%;
     height: 100%;
     z-index: $k-modal__wrapper_zIndex;
+    @include fade-in;
+
+    &.k-modal__wrapper--close {
+        @include fade-out;
+
+        .k-modal__container {
+            animation: modalUp 0.3s ease-in forwards;
+        }
+    }
 
     .k-modal__container {
         z-index: $k-modal__container_zIndex;
@@ -26,11 +49,40 @@ $k-modal__overlay_zIndex: 1001;
         background-color: $k-white-color;
         box-shadow: $k-default-box-shadow;
         overflow: hidden;
+        animation: modalDown 0.3s ease-out forwards;
 
         .k-modal__container__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: $k-spacing-16;
-            @include k-sub-title-1;
             border-bottom: 1px solid $k-gray-color-100;
+
+            .k-modal__container__header__text{
+                font-size: $k-modal__header__font-size;
+                line-height: $k-modal__header__line-height;
+                font-weight: bold;
+            }
+
+            .k-modal__container__header__close-button {
+                position: relative;
+                width: 24px; height: 24px;
+                background: none;
+                border: none;
+                cursor: pointer;
+
+                &:after, &:before {
+                    content: '';
+                    position: absolute;
+                    top: 50%; left: 50%;
+                    width: 2px; height: 80%;
+                    border-radius: 1px;
+                    transform: translate(-50%, -50%);
+                    background-color: $k-black-color;
+                }
+                &:after { transform: translate(-50%, -50%) rotate(45deg); }
+                &:before { transform: translate(-50%, -50%) rotate(-45deg); }
+            }
         }
 
         .k-modal__container__content {
@@ -64,7 +116,27 @@ $k-modal__overlay_zIndex: 1001;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.12);
         z-index: $k-modal__overlay_zIndex;
+
+        &.k-modal-wrapper__overlay--transparent {
+            background-color: $k-modal__overlay__background-color;
+        }
+    }
+}
+
+
+@media screen and (max-width: $k-modal__large) {
+    .k-modal__wrapper .k-modal__container.k-modal__container--large {
+        max-width: calc(100% - ($k-spacing-32 * 2));
+    }
+}
+@media screen and (max-width: $k-modal__medium) {
+    .k-modal__wrapper .k-modal__container.k-modal__container--medium {
+        max-width: calc(100% - ($k-spacing-24 * 2));
+    }
+}
+@media screen and (max-width: $k-modal__small) {
+    .k-modal__wrapper .k-modal__container.k-modal__container--small {
+        max-width: calc(100% - ($k-spacing-16 * 2));
     }
 }

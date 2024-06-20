@@ -124,3 +124,10 @@
     justify-content: center;
     align-items: center;
 }
+
+@mixin fade-in {
+    animation: fadeIn 0.3s forwards;
+}
+@mixin fade-out {
+    animation: fadeOut 0.3s forwards;
+}
