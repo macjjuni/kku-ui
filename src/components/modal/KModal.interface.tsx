@@ -4,9 +4,12 @@ import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 
 export interface KModalProps extends KBaseProp, KSizeProp {
   isOpen: boolean;
+  onClose: () => void;
 
   title: string;
   content: ReactNode;
   footer?: ReactNode;
-  isOverlay?: boolean;
+
+  overlay?: boolean;
+  overlayClosable?: boolean;
 }

@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import {useState} from 'react';
+import {useState, useMemo} from 'react';
 import {KModal, KModalProps} from '@/components/modal';
 import {KButton} from '@/components';
 // import {variantArgType} from '../common/argTypes';
@@ -21,24 +21,45 @@ type Story = StoryObj<typeof KModal>
 const Template = (args: KModalProps) => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [state, setState] = useState(0);
 
-    const changeOpen = () => {
-        setIsOpen(prev => !prev);
+    const onOpen = () => {
+        setIsOpen(true);
     };
+
+    const onClose = () => {
+        setIsOpen(false);
+    };
+
+    const increaseState = () => {
+        setState(prev => prev + 1);
+    };
+
+    const content = useMemo(() => (
+        <>
+            <div>{state}</div>
+            <button onClick={increaseState}>Increase</button>
+        </>
+    ), [state, increaseState]);
+
 
     return (
         <>
-            <KButton onClick={changeOpen}>Open Modal!</KButton>
-            <KModal {...args} isOpen={isOpen}/>
+            <KButton onClick={onOpen}>Open Modal!</KButton>
+            <KModal {...args}
+                    title={'What is Lorem Ipsum?'}
+                    isOpen={isOpen}
+                    size={"small"}
+                    onClose={onClose}
+                    overlayClosable
+                    content={content}
+                    footer={<KButton onClick={onClose}>취소</KButton>}
+            />
         </>
     );
 };
 
 
 export const Default: Story = {
-    render: Template, args: {
-        title: 'What is Lorem Ipsum?',
-        content: <>Hello World!</>,
-        footer: <><KButton>확인</KButton><KButton>취소</KButton></>
-    },
+    render: Template, args: {},
 };
