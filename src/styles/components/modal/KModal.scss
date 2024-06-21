@@ -13,12 +13,12 @@ $k-modal__overlay__background-color: rgba(0, 0, 0, 0.12);
 
 
 @keyframes modalDown {
-    from { top: 47%; }
+    from { top: calc(50% - $k-spacing-16); }
     to { top: 50%; }
 }
 @keyframes modalUp {
     from { top: 50%; }
-    to { top: 47%; }
+    to { top: calc(50% - $k-spacing-16); }
 }
 
 
@@ -35,7 +35,7 @@ $k-modal__overlay__background-color: rgba(0, 0, 0, 0.12);
         @include fade-out;
 
         .k-modal__container {
-            animation: modalUp 0.3s ease-in forwards;
+            animation: modalUp 0.24s ease-in forwards;
         }
     }
 
@@ -49,7 +49,7 @@ $k-modal__overlay__background-color: rgba(0, 0, 0, 0.12);
         background-color: $k-white-color;
         box-shadow: $k-default-box-shadow;
         overflow: hidden;
-        animation: modalDown 0.3s ease-out forwards;
+        animation: modalDown 0.24s ease-out forwards;
 
         .k-modal__container__header {
             display: flex;

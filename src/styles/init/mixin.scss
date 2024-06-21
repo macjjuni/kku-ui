@@ -126,8 +126,8 @@
 }
 
 @mixin fade-in {
-    animation: fadeIn 0.3s forwards;
+    animation: fadeIn 0.24s forwards;
 }
 @mixin fade-out {
-    animation: fadeOut 0.3s forwards;
+    animation: fadeOut 0.24s forwards;
 }
