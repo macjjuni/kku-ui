@@ -86,13 +86,13 @@ $k-modal__overlay__background-color: rgba(0, 0, 0, 0.12);
         }
 
         .k-modal__container__content {
-            padding: $k-spacing-24 $k-spacing-16;
+            padding: $k-spacing-20 $k-spacing-16;
         }
 
         .k-modal__container__footer {
             @include k-center-flex-wrap;
             gap: 8px;
-            padding: $k-spacing-16;
+            padding: 0 $k-spacing-16 $k-spacing-16 $k-spacing-16;
         }
 
 
