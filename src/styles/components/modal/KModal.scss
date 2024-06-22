@@ -9,7 +9,9 @@ $k-modal__overlay_zIndex: 1001;
 $k-modal__header__font-size: 20px;
 $k-modal__header__line-height: 24px;
 
-$k-modal__overlay__background-color: rgba(0, 0, 0, 0.12);
+$k-modal__overlay__background-color: $k-black-color;
+$k-modal__overlay__opacity: 0.16;
+
 
 
 @keyframes modalDown {
@@ -120,6 +122,7 @@ $k-modal__overlay__background-color: rgba(0, 0, 0, 0.12);
 
         &.k-modal-wrapper__overlay--transparent {
             background-color: $k-modal__overlay__background-color;
+            opacity: $k-modal__overlay__opacity;
         }
     }
 }
