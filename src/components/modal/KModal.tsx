@@ -1,11 +1,14 @@
-import { memo, useCallback, useEffect, useMemo, useState, useRef } from 'react';
-import { KModalProps } from '@/components/modal/KModal.interface';
+import { CSSProperties, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { initSize } from '@/common/util/variation';
+import { KModalProps } from '@/components/modal/KModal.interface';
 
 
-function KModal({ isOpen, onClose, title, content, footer, size, large, medium, small, className, overlay, overlayClosable }: KModalProps) {
+function KModal({ id, style, isOpen, onClose, title, content, footer, size, large, medium, small,
+  className, overlay, overlayClosable, rounded, borderRadius = '8px',
+  overlayOpacity }: KModalProps) {
 
-  // region [Style]
+
+  // region [Hooks]
 
   const modalWrapperRef = useRef<HTMLDivElement>(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -30,6 +33,22 @@ function KModal({ isOpen, onClose, title, content, footer, size, large, medium, 
     }
     return 'k-modal-wrapper__overlay--transparent';
   }, [overlay]);
+
+  const containerStyle = useMemo(() => {
+    const styles: CSSProperties = { ...style };
+    if (rounded) {
+      styles.borderRadius = borderRadius;
+    }
+    return styles;
+  }, [rounded, borderRadius]);
+
+  const overlayStyle = useMemo(() => {
+    const styles: CSSProperties = {};
+    if (overlayOpacity) {
+      styles.opacity = overlayOpacity.toString();
+    }
+    return styles;
+  }, [overlayOpacity]);
 
   // endregion
 
@@ -87,8 +106,8 @@ function KModal({ isOpen, onClose, title, content, footer, size, large, medium, 
   }
 
   return (
-    <div ref={modalWrapperRef} className='k-modal__wrapper'>
-      <div className={`k-modal__container ${rootClass}`}>
+    <div ref={modalWrapperRef} id={id} className='k-modal__wrapper'>
+      <div className={`k-modal__container ${rootClass}`} style={containerStyle}>
 
         <div className='k-modal__container__header'>
           <p className='k-modal__container__header__text'>
@@ -109,7 +128,7 @@ function KModal({ isOpen, onClose, title, content, footer, size, large, medium, 
         )}
       </div>
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-      <div onClick={onClickOverlay} className={`k-modal-wrapper__overlay ${overlayClass}`} />
+      <div style={overlayStyle} onClick={onClickOverlay} className={`k-modal-wrapper__overlay ${overlayClass}`} />
     </div>
   );
 }
