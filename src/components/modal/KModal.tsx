@@ -106,7 +106,7 @@ function KModal({ id, style, isOpen, onClose, title, content, footer, size, larg
   }
 
   return (
-    <div ref={modalWrapperRef} id={id} className='k-modal__wrapper'>
+    <div ref={modalWrapperRef} id={id} className='k-modal__wrapper' data-testid='k-modal-test-id'>
       <div className={`k-modal__container ${rootClass}`} style={containerStyle}>
 
         <div className='k-modal__container__header'>
