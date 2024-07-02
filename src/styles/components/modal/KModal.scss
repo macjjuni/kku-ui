@@ -13,14 +13,21 @@ $k-modal__overlay__background-color: $k-black-color;
 $k-modal__overlay__opacity: 0.16;
 
 
-
-@keyframes modalDown {
-    from { top: calc(50% - $k-spacing-16); }
-    to { top: 50%; }
-}
 @keyframes modalUp {
-    from { top: 50%; }
-    to { top: calc(50% - $k-spacing-16); }
+    from { transform: translateY(0); }
+    to { transform: translateY(-$k-spacing-16); }
+}
+@keyframes modalDown {
+    from { transform: translateY(-$k-spacing-16); }
+    to { transform: translateY(0); }
+}
+@keyframes modalScaleUp {
+    from { transform: scale(1.0); }
+    to { transform: scale(1.032); }
+}
+@keyframes modalScaleDown {
+    from { transform: scale(1.032); }
+    to { transform: scale(1.0); }
 }
 
 
@@ -30,34 +37,42 @@ $k-modal__overlay__opacity: 0.16;
     left: 0;
     width: 100%;
     height: 100%;
+    @include k-center-flex-wrap;
     z-index: $k-modal__wrapper_zIndex;
     @include fade-in;
 
     &.k-modal__wrapper--close {
         @include fade-out;
 
-        .k-modal__container {
+        // 컨테이너 종료 애니메이션
+        .k-modal__container.k-modal__container--updown {
             animation: modalUp 0.24s ease-in forwards;
+        }
+        .k-modal__container.k-modal__container--scale {
+            animation: modalScaleUp 0.24s ease-in forwards;
         }
     }
 
     .k-modal__container {
         z-index: $k-modal__container_zIndex;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         border-radius: $k-border-radius-default;
         background-color: $k-white-color;
         box-shadow: $k-default-box-shadow;
         overflow: hidden;
-        animation: modalDown 0.24s ease-out forwards;
+
+        // 컨테이너 시작 애니메이션
+        &.k-modal__container--updown {
+            animation: modalDown 0.24s ease-out forwards;
+        }
+        &.k-modal__container--scale {
+            animation: modalScaleDown 0.24s ease-out forwards;
+        }
 
         .k-modal__container__header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: $k-spacing-16;
+            padding: $k-spacing-14;
             border-bottom: 1px solid $k-gray-color-100;
 
             .k-modal__container__header__text{
