@@ -1,7 +1,6 @@
-import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { createRef, useState } from 'react';
+import { createRef, useState, act } from 'react';
 import { KSelect, KSelectRefs } from '@/components';
 
 const testId = 'k-select';

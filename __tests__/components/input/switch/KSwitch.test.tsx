@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import React, { useState } from 'react';
+import React, { useState, act } from 'react';
 import userEvent from '@testing-library/user-event';
-import { act } from 'react-dom/test-utils';
 import { KSwitch, KSwitchProps, KSwitchRefs } from '@/components';
 
 const testId = 'k-switch';
@@ -11,7 +10,7 @@ const mockFn = jest.fn();
 type ExceptRequiredKSwitchProps = Omit<Omit<KSwitchProps, 'value'>, 'onChange'>;
 
 interface TestKSwitchProps extends ExceptRequiredKSwitchProps {
-  defaultValue?: boolean
+  defaultValue?: boolean;
 }
 
 describe('KCheckbox', () => {
