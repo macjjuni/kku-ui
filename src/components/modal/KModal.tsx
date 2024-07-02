@@ -3,14 +3,16 @@ import { initSize } from '@/common/util/variation';
 import { KModalProps } from '@/components/modal/KModal.interface';
 
 
-function KModal({ id, style, isOpen, onClose, title, content, footer, size, large, medium, small,
+function KModal({
+  id, style, isOpen, onClose, title, content, footer, size, large, medium, small,
   className, overlay, overlayClosable, rounded, borderRadius = '8px',
-  overlayOpacity }: KModalProps) {
+  overlayOpacity,
+}: KModalProps) {
 
 
   // region [Hooks]
 
-  const modalWrapperRef = useRef<HTMLDivElement>(null);
+  const modalWrapperRef = useRef<HTMLDivElement | null>(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   // endregion
@@ -107,14 +109,19 @@ function KModal({ id, style, isOpen, onClose, title, content, footer, size, larg
 
   return (
     <div ref={modalWrapperRef} id={id} className='k-modal__wrapper' data-testid='k-modal-test-id'>
-      <div className={`k-modal__container ${rootClass}`} style={containerStyle}>
+      <div className={`k-modal__container ${rootClass}`} style={containerStyle} data-testid='k-modal__container-test-id'>
 
         <div className='k-modal__container__header'>
           <p className='k-modal__container__header__text'>
             {title}
           </p>
           {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <button type='button' onClick={onCloseModal} className='k-modal__container__header__close-button' />
+          <button
+            type='button'
+            onClick={onCloseModal}
+            className='k-modal__container__header__close-button'
+            data-testid='k-modal__close-button-test-id'
+          />
         </div>
 
         <div className='k-modal__container__content'>
