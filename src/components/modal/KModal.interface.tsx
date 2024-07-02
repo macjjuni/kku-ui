@@ -2,6 +2,9 @@ import { ReactNode } from 'react';
 import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 
 
+type KModalAnimation = 'updown' | 'scale';
+
+
 export interface KModalProps extends KBaseProp, KSizeProp {
   isOpen: boolean;
   onClose: () => void;
@@ -16,4 +19,11 @@ export interface KModalProps extends KBaseProp, KSizeProp {
 
   rounded?: boolean;
   borderRadius?: string;
+
+  // styles
+  headerClass?: string;
+  contentClass?: string;
+  footerClass?: string;
+
+  animation: KModalAnimation;
 }

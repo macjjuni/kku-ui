@@ -49,6 +49,7 @@ const Template = (args: KModalProps) => {
                     size={'small'}
                     onClose={onClose}
                     content={content}
+                    overlayClosable
                     footer={<KButton onClick={onClose}>취소</KButton>}
             />
         </>
@@ -56,6 +57,6 @@ const Template = (args: KModalProps) => {
 };
 
 
-export const Default: Story = {
+export const overlayClosable: Story = {
     render: Template, args: {},
 };

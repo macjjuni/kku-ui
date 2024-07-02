@@ -49,13 +49,12 @@ const Template = (args: KModalProps) => {
                     size={'small'}
                     onClose={onClose}
                     content={content}
-                    footer={<KButton onClick={onClose}>취소</KButton>}
             />
         </>
     );
 };
 
 
-export const Default: Story = {
+export const noFooter: Story = {
     render: Template, args: {},
 };
