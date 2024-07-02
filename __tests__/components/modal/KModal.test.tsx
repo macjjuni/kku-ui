@@ -1,44 +1,124 @@
-import { render, screen } from '@testing-library/react';
-// import { act } from 'react-dom/test-utils';
-// import userEvent from '@testing-library/user-event';
-import { CSSProperties } from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { act, useCallback, useState } from 'react';
 import { KModal } from '@/components';
 
-const testId = 'k-modal-test-id';
-const testClass = 'k-modal-class';
-// const testChildrenId = 'k-modal-children-id';
 const mockOnClick = jest.fn();
 
-describe('KDropHolder', () => {
+const rootTestId = 'k-modal-test-id';
+const containerTestId = 'k-modal__container-test-id';
+const closeButtonTestId = 'k-modal__close-button-test-id';
+const testClass = 'k-modal-class';
+const testStyle = { color: 'red' };
+const titleText = 'this is Modal Title';
+const contentText = 'this is Modal Content';
+const footerText = 'this is footer';
+const Footer = () => <div data-testid='k-modal-footer-test-id'>{footerText}</div>;
+
+
+const TestModalComponent = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onOpen = useCallback(() => { setIsOpen(true); }, []);
+  const onClose = useCallback(() => { setIsOpen(false); }, []);
+
+
+  return (
+    <>
+      <button type='button' onClick={onOpen}>Open</button>
+      <KModal
+                isOpen={isOpen}
+                onClose={onClose}
+                className={testClass}
+                id={rootTestId}
+                style={testStyle}
+                title={titleText}
+                content={contentText}
+                footer={<Footer />}
+      />
+    </>
+  );
+};
+
+
+describe('KModal', () => {
   // const TestChildren = () => (<div data-testid={testChildrenId} />);
 
   beforeEach(() => { mockOnClick.mockClear(); });
 
 
-  describe('KModal ', () => {
+  describe('Props ', () => {
+
+    test('IsOpen, Style, className, id, prop render test', async () => {
+
+      // Arrange
+      const user = userEvent.setup();
+
+      render(<TestModalComponent />);
+      const openButton = screen.getByText('Open');
+
+      // Act
+      await act(async () => { await user.click(openButton); });
+
+      // Arrange
+      const rootModal = screen.getByTestId(rootTestId);
+      const rootContainer = screen.getByTestId(containerTestId);
 
 
-    describe('Props ', () => {
-
-      test('Style, value, className, id prop render test', () => {
-
-        // Arrange
-        const testIdValue = 'k-chip-test-id';
-        const testStyle: CSSProperties = { color: 'red' };
-
-        render(<KModal id={testIdValue} className={testClass} style={testStyle} isOpen />);
-        const root = screen.getByTestId(testId);
-
-        // Assert
-        expect(root).toHaveStyle(testStyle);
-        expect(root).toHaveClass(testClass);
-        expect(root).toHaveAttribute('id', testIdValue);
-      });
-
-
+      // Assert
+      expect(rootContainer).toHaveStyle(testStyle);
+      expect(rootContainer).toHaveClass(testClass);
+      expect(rootModal).toHaveAttribute('id', rootTestId);
     });
 
+    test('Title, content, footer prop render test', async () => {
 
+      // Arrange
+      const user = userEvent.setup();
+
+      render(<TestModalComponent />);
+      const openButton = screen.getByText('Open');
+
+      // Act
+      await act(async () => { await user.click(openButton); });
+
+      // Arrange
+      const rootTitle = screen.getByText(titleText);
+      const rootContent = screen.getByText(contentText);
+      const rootFooter = screen.getByText(footerText);
+
+      // Assert
+      expect(rootTitle).toBeInTheDocument();
+      expect(rootContent).toBeInTheDocument();
+      expect(rootFooter).toBeInTheDocument();
+    });
+
+    test('onClose event test', async () => {
+
+      // Arrange
+      const user = userEvent.setup();
+
+      render(<TestModalComponent />);
+      const openButton = screen.getByText('Open');
+
+      // Act
+      await act(async () => { await user.click(openButton); });
+
+      // Arrange
+      const closeButtonRoot = screen.getByTestId(closeButtonTestId);
+
+      // Act
+      await act(async () => { await user.click(closeButtonRoot); });
+
+      // wait 3s
+      await waitFor(() => expect(screen.queryByTestId(rootTestId)).not.toBeInTheDocument(), { timeout: 3000 });
+
+      // Arrange
+      const root = screen.queryByTestId(rootTestId);
+
+      // Assert
+      expect(root).not.toBeInTheDocument();
+    });
   });
 
 
