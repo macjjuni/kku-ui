@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import React, { useState } from 'react';
+import React, { useState, act } from 'react';
 import userEvent from '@testing-library/user-event';
-import { act } from 'react-dom/test-utils';
 import { KRadio, KRadioRefs } from '@/components';
 
 const testId = 'k-radio';

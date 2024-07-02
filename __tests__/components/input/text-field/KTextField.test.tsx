@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { useState } from 'react';
+import { useState, act } from 'react';
 import userEvent from '@testing-library/user-event';
-import { act } from 'react-dom/test-utils';
 import { KTextField } from '@/components';
 
 
