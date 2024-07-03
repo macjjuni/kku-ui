@@ -10,8 +10,8 @@ const closeButtonTestId = 'k-modal__close-button-test-id';
 
 function KModal({
   id, style, isOpen, onClose, title, content, footer, size, large, medium, small,
-  className, overlay, overlayClosable, rounded, borderRadius = '8px',
-  overlayOpacity, headerClass, contentClass, footerClass, animation = 'updown',
+  className, isOverlay = true, overlayOpacity, overlayClosable, rounded, borderRadius = '8px',
+  headerClass, contentClass, footerClass, animation = 'updown',
 }: KModalProps) {
 
 
@@ -39,10 +39,10 @@ function KModal({
 
   const overlayClass = useMemo(() => {
 
-    if (overlay) { return 'k-modal-wrapper__overlay--active'; }
+    if (isOverlay) { return 'k-modal-wrapper__overlay--active'; }
 
     return 'k-modal-wrapper__overlay--transparent';
-  }, [overlay]);
+  }, [isOverlay]);
 
   const containerStyle = useMemo(() => {
 
@@ -143,7 +143,12 @@ function KModal({
         {modalFooter}
       </div>
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-      <div style={overlayStyle} onClick={onClickOverlay} className={`k-modal-wrapper__overlay ${overlayClass}`} />
+      <div
+        style={overlayStyle}
+        className={`k-modal-wrapper__overlay ${overlayClass}`}
+        onClick={onClickOverlay}
+        data-testid='k-modal-overlay-test-id'
+      />
     </div>
   );
 }
