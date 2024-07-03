@@ -135,9 +135,14 @@ $k-modal__overlay__opacity: 0.16;
         height: 100%;
         z-index: $k-modal__overlay_zIndex;
 
-        &.k-modal-wrapper__overlay--transparent {
+        &.k-modal-wrapper__overlay--active {
             background-color: $k-modal__overlay__background-color;
             opacity: $k-modal__overlay__opacity;
+        }
+
+        &.k-modal-wrapper__overlay--transparent {
+            background-color: transparent;
+            opacity: 0;
         }
     }
 }
