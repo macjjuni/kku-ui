@@ -1,6 +1,6 @@
 {
   "name": "kku-ui",
-  "version": "0.0.469",
+  "version": "0.0.470",
   "type": "module",
   "module": "lib/esm/index.js",
   "main": "lib/esm/index.js",
