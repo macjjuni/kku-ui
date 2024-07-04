@@ -1,10 +1,10 @@
-import { memo, useCallback, useMemo } from 'react';
+import { CSSProperties, memo, useCallback, useMemo } from 'react';
 import { KCheckbox } from '@/components';
 import { KCheckboxGroupProps } from '@/components/input/checkbox-group/KCheckboxGroup.interface';
 import { initSize } from '@/common/util/variation';
 
-const KCheckboxGroup = (props: KCheckboxGroupProps) => {
-
+const KCheckboxGroup = ({ id, className, style, items = [], value, color, direction = 'row', gap,
+  onChange, size, large, medium, small }: KCheckboxGroupProps) => {
 
   // region [Hooks]
   // endregion
@@ -13,29 +13,29 @@ const KCheckboxGroup = (props: KCheckboxGroupProps) => {
   // region [Styles]
 
   const rootStyle = useMemo(() => {
-    const style = props.style ? props.style : {};
+    const styles:CSSProperties = { ...style };
 
-    if (props.gap) { style.gap = props.gap; }
+    if (gap) { styles.gap = gap; }
     return style;
-  }, [props.style, props.gap]);
+  }, [style, gap]);
 
   const rootClass = useMemo(() => {
     const clazz: string[] = [];
 
-    initSize(clazz, 'k-checkbox-group', props.size, props.large, props.medium, props.small);
+    initSize(clazz, 'k-checkbox-group', size, large, medium, small);
 
-    if (props.className) {
-      clazz.push(props.className);
+    if (className) {
+      clazz.push(className);
     }
-    if (props.direction === 'row') {
+    if (direction === 'row') {
       clazz.push('k-checkbox-group--row');
     }
-    if (props.direction === 'column') {
+    if (direction === 'column') {
       clazz.push('k-checkbox-group--column');
     }
 
     return clazz.join(' ');
-  }, [props.className, props.direction, props.large, props.medium, props.small, props.size]);
+  }, [className, direction, large, medium, small, size]);
 
   // endregion
 
@@ -45,11 +45,11 @@ const KCheckboxGroup = (props: KCheckboxGroupProps) => {
   const onChangeCheckbox = useCallback((checked: boolean, itemValue: string) => {
 
     if (checked) {
-      props.onChange([...props.value, itemValue]);
+      onChange([...value, itemValue]);
     } else {
-      props.onChange(props.value.filter((checkValue) => checkValue !== itemValue));
+      onChange(value.filter((checkValue) => checkValue !== itemValue));
     }
-  }, [props.value, props.items, props.onChange]);
+  }, [value, items, onChange]);
 
   // endregion
 
@@ -70,17 +70,17 @@ const KCheckboxGroup = (props: KCheckboxGroupProps) => {
   // endregion
 
   return (
-    <div id={props.id} style={rootStyle} className={`k-checkbox-group ${rootClass}`} data-testid='k-checkbox-group'>
+    <div id={id} style={rootStyle} className={`k-checkbox-group ${rootClass}`} data-testid='k-checkbox-group'>
       {
-        props.items?.map((item) => (
+        items?.map((item) => (
           <KCheckbox
             key={item.value}
             label={item.label}
-            value={props.value?.includes(item.value)}
+            value={value?.includes(item.value)}
             onChange={(checked) => { onChangeCheckbox(checked, item.value); }}
             size={childCheckboxSize}
-            // shape={props.shape}
-            color={props.color}
+            // shape={shape}
+            color={color}
             disabled={item.disabled}
             defaultCheck={item.defaultCheck}
           />
@@ -88,11 +88,6 @@ const KCheckboxGroup = (props: KCheckboxGroupProps) => {
       }
     </div>
   );
-};
-
-KCheckboxGroup.defaultProps = {
-  item: [],
-  direction: 'row',
 };
 
 export default memo(KCheckboxGroup);
