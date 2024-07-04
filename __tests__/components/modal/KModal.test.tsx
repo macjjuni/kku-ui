@@ -66,7 +66,7 @@ describe('KModal', () => {
       const rootContainer = screen.getByTestId(containerTestId);
 
       // Assert
-      expect(rootContainer).toHaveStyle(testStyle);
+      expect(rootModal).toHaveStyle(testStyle);
       expect(rootContainer).toHaveClass(testClass);
       expect(rootModal).toHaveAttribute('id', rootTestId);
     });
