@@ -13,7 +13,6 @@ export interface KCheckboxGroupProps extends KBaseProp, KSizeProp {
   value: string[] // ✨ Required ✨
 
   // Styles
-  // shape?: KCheckboxShape
   color?: string
   direction?: 'column' | 'row'
   gap?: string

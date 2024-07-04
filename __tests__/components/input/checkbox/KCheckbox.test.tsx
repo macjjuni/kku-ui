@@ -1,9 +1,8 @@
 // import { act } from 'react-dom/test-utils';
 // import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import React, { useState } from 'react';
+import React, { useState, act } from 'react';
 import userEvent from '@testing-library/user-event';
-import { act } from 'react-dom/test-utils';
 import { KCheckbox, KCheckboxRefs } from '@/components';
 
 const testId = 'k-checkbox';

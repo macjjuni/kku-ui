@@ -1,7 +1,7 @@
 import { KeyboardEvent, MouseEvent, FocusEvent, ReactNode } from 'react';
 import { KBaseProp, KSizeProp, KVariantProp } from '@/common/base/base.interface';
 
-export interface KChipProps extends KBaseProp, KSizeProp, KSizeProp, KVariantProp {
+export interface KChipProps extends KBaseProp, KSizeProp, KVariantProp {
 
   label?: string
   children?: ReactNode

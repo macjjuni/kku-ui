@@ -1,0 +1,165 @@
+$k-modal__large: 1440px;
+$k-modal__medium: 840px;
+$k-modal__small: 720px;
+
+$k-modal__wrapper_zIndex: 1000;
+$k-modal__container_zIndex: 1002;
+$k-modal__overlay_zIndex: 1001;
+
+$k-modal__header__font-size: 20px;
+$k-modal__header__line-height: 24px;
+
+$k-modal__overlay__background-color: $k-black-color;
+$k-modal__overlay__opacity: 0.16;
+
+
+@keyframes modalUp {
+    from { transform: translateY(0); }
+    to { transform: translateY(-$k-spacing-16); }
+}
+@keyframes modalDown {
+    from { transform: translateY(-$k-spacing-16); }
+    to { transform: translateY(0); }
+}
+@keyframes modalScaleUp {
+    from { transform: scale(1.0); }
+    to { transform: scale(1.032); }
+}
+@keyframes modalScaleDown {
+    from { transform: scale(1.032); }
+    to { transform: scale(1.0); }
+}
+
+
+.k-modal__wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @include k-center-flex-wrap;
+    z-index: $k-modal__wrapper_zIndex;
+    @include fade-in;
+
+    &.k-modal__wrapper--close {
+        @include fade-out;
+
+        // 컨테이너 종료 애니메이션
+        .k-modal__container.k-modal__container--updown {
+            animation: modalUp 0.24s ease-in forwards;
+        }
+        .k-modal__container.k-modal__container--scale {
+            animation: modalScaleUp 0.24s ease-in forwards;
+        }
+    }
+
+    .k-modal__container {
+        z-index: $k-modal__container_zIndex;
+        border-radius: $k-border-radius-default;
+        background-color: $k-white-color;
+        box-shadow: $k-default-box-shadow;
+        overflow: hidden;
+
+        // 컨테이너 시작 애니메이션
+        &.k-modal__container--updown {
+            animation: modalDown 0.24s ease-out forwards;
+        }
+        &.k-modal__container--scale {
+            animation: modalScaleDown 0.24s ease-out forwards;
+        }
+
+        .k-modal__container__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: $k-spacing-14;
+            border-bottom: 1px solid $k-gray-color-100;
+
+            .k-modal__container__header__text{
+                font-size: $k-modal__header__font-size;
+                line-height: $k-modal__header__line-height;
+                font-weight: bold;
+            }
+
+            .k-modal__container__header__close-button {
+                position: relative;
+                width: 24px; height: 24px;
+                background: none;
+                border: none;
+                cursor: pointer;
+
+                &:after, &:before {
+                    content: '';
+                    position: absolute;
+                    top: 50%; left: 50%;
+                    width: 2px; height: 80%;
+                    border-radius: 1px;
+                    transform: translate(-50%, -50%);
+                    background-color: $k-black-color;
+                }
+                &:after { transform: translate(-50%, -50%) rotate(45deg); }
+                &:before { transform: translate(-50%, -50%) rotate(-45deg); }
+            }
+        }
+
+        .k-modal__container__content {
+            padding: $k-spacing-20 $k-spacing-16;
+        }
+
+        .k-modal__container__footer {
+            @include k-center-flex-wrap;
+            gap: 8px;
+            padding: 0 $k-spacing-16 $k-spacing-16 $k-spacing-16;
+        }
+
+
+        &.k-modal__container--large {
+            max-width: $k-modal__large;
+            width: 100%;
+        }
+        &.k-modal__container--medium {
+            max-width: $k-modal__medium;
+            width: 100%;
+        }
+        &.k-modal__container--small {
+            max-width: $k-modal__small;
+            width: 100%;
+        }
+    }
+
+    .k-modal-wrapper__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: $k-modal__overlay_zIndex;
+
+        &.k-modal-wrapper__overlay--active {
+            background-color: $k-modal__overlay__background-color;
+            opacity: $k-modal__overlay__opacity;
+        }
+
+        &.k-modal-wrapper__overlay--transparent {
+            background-color: transparent;
+            opacity: 0;
+        }
+    }
+}
+
+
+@media screen and (max-width: $k-modal__large) {
+    .k-modal__wrapper .k-modal__container.k-modal__container--large {
+        max-width: calc(100% - ($k-spacing-32 * 2));
+    }
+}
+@media screen and (max-width: $k-modal__medium) {
+    .k-modal__wrapper .k-modal__container.k-modal__container--medium {
+        max-width: calc(100% - ($k-spacing-24 * 2));
+    }
+}
+@media screen and (max-width: $k-modal__small) {
+    .k-modal__wrapper .k-modal__container.k-modal__container--small {
+        max-width: calc(100% - ($k-spacing-16 * 2));
+    }
+}

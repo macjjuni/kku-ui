@@ -10,3 +10,4 @@ export * from '@/components/drop-holder';
 export * from '@/components/chip';
 export * from '@/components/card';
 export * from '@/components/accordion';
+export * from '@/components/modal';

@@ -1,7 +1,6 @@
-import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { CSSProperties, ReactNode } from 'react';
+import { CSSProperties, ReactNode, act } from 'react';
 import { KDropHolder } from '@/components';
 
 const testId = 'k-drop-holder';

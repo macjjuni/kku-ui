@@ -1,9 +1,9 @@
+import { act } from 'react';
 import { render, screen } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import { KCard } from '@/components';
 
-const testId = 'k-card';
+const testId = 'k-card-testid';
 const mockOnClick = jest.fn();
 
 describe('KCard', () => {

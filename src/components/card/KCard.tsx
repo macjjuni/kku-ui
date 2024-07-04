@@ -1,12 +1,10 @@
-import { memo, useMemo } from 'react';
+import { CSSProperties, memo, useMemo } from 'react';
 import { KCardProps } from '@/components/card/KCard.interface';
 import { initVariant } from '@/common/util/variation';
 
 
-const borderRadius = '8px';
-
-
-const KCard = (props: KCardProps) => {
+const KCard = ({ children, id, className, style, title, subTitle, clickable, width, height, color,
+  fontColor, rounded, borderRadius = '8px', onClick, variant, contained, outlined }: KCardProps) => {
 
   // region [Hooks]
   // endregion
@@ -18,38 +16,38 @@ const KCard = (props: KCardProps) => {
 
     const clazz = [];
 
-    if (props.className) { clazz.push(props.className); }
-    if (props.rounded) { clazz.push('k-card--rounded'); }
-    if (props.clickable) { clazz.push('k-card__clickable'); }
+    if (className) { clazz.push(className); }
+    if (rounded) { clazz.push('k-card--rounded'); }
+    if (clickable) { clazz.push('k-card__clickable'); }
 
-    initVariant(clazz, 'k-card', props.variant, props.contained, props.outlined);
+    initVariant(clazz, 'k-card', variant, contained, outlined);
 
     return clazz.join(' ');
-  }, [props.className, props.rounded, props.clickable, props.variant, props.contained, props.outlined]);
+  }, [className, rounded, clickable, variant, contained, outlined]);
 
 
   const rootStyle = useMemo(() => {
 
-    const style = props.style ? props.style : {};
+    const styles: CSSProperties = { ...style };
 
-    if (props.rounded) { style.borderRadius = props.borderRadius; }
-    if (props.width) { style.width = props.width; }
-    if (props.height) { style.height = props.height; }
-    if (props.fontColor) { style.color = props.fontColor; }
+    if (rounded) { styles.borderRadius = borderRadius; }
+    if (width) { styles.width = width; }
+    if (height) { styles.height = height; }
+    if (fontColor) { styles.color = fontColor; }
 
-    if (props.variant || props.contained || props.outlined) {
-      if (props.variant === 'outlined' || props.outlined) {
-        style.borderColor = props.color;
+    if (variant || contained || outlined) {
+      if (variant === 'outlined' || outlined) {
+        styles.borderColor = color;
       }
-      if (props.variant === 'contained' || props.contained) {
-        style.background = props.color;
-        style.borderColor = 'transparent';
+      if (variant === 'contained' || contained) {
+        styles.background = color;
+        styles.borderColor = 'transparent';
       }
     }
 
-    return style;
-  }, [props.style, props.rounded, props.borderRadius, props.width, props.height,
-    props.color, props.fontColor, props.variant, props.outlined, props.contained]);
+    return styles;
+  }, [style, rounded, borderRadius, width, height,
+    color, fontColor, variant, outlined, contained]);
 
 
   // endregion
@@ -59,13 +57,13 @@ const KCard = (props: KCardProps) => {
 
   const CardTitle = useMemo(() => (
 
-    props.title ? (<h2 className='k-card__title'>{props.title}</h2>) : null
-  ), [props.title]);
+    title ? (<h2 className='k-card__title'>{title}</h2>) : null
+  ), [title]);
 
   const CardSubTitle = useMemo(() => (
 
-    props.subTitle ? (<p className='k-card__sub-title'>{props.subTitle}</p>) : null
-  ), [props.subTitle]);
+    subTitle ? (<p className='k-card__sub-title'>{subTitle}</p>) : null
+  ), [subTitle]);
 
   // endregion
 
@@ -73,20 +71,18 @@ const KCard = (props: KCardProps) => {
   return (
   // eslint-disable-next-line jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events
     <div
-      id={props.id}
+      id={id}
       className={`k-card ${rootClass}`}
       style={rootStyle}
-      data-testid='k-card'
-      onClick={props.onClick}
+      data-testid='k-card-testid'
+      onClick={onClick}
     >
       {CardTitle}
       {CardSubTitle}
-      {props.children}
+      {children}
     </div>
   );
 };
 
 KCard.displayName = 'KCard';
-KCard.defaultProps = { borderRadius };
-
 export default memo(KCard);
