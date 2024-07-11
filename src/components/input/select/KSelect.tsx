@@ -1,6 +1,5 @@
-import { CSSProperties, forwardRef, KeyboardEvent, memo, Ref, useCallback, useImperativeHandle,
-  useMemo, useRef, useState } from 'react';
-import type { KSelectProps, KSelectRefs, KSelectItemType } from '@/components/input/select/KSelect.interface';
+import { CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import type { KSelectItemType, KSelectProps, KSelectRefs } from '@/components/input/select/KSelect.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { KIcon } from '@/components';
 import KSelectList from '@/components/input/select/KSelectList';
@@ -144,31 +143,17 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
   // region [Templates]
 
   return (
-    <div
-        ref={selectRef}
-        id={props.id}
-        className={`k-select ${rootClass}`}
-        data-testid='k-select'
-        style={rootStyle}
-        tabIndex={props.disabled ? -1 : 0}
-        role='button'
-        onClick={onClickRoot}
-        onKeyUp={onKeyUpRoot}
-        onFocus={onFocusRoot}
-        onBlur={onBlurRoot}
-        onMouseEnter={onMouseEnterRoot}
-        onMouseLeave={onMouseLeaveRoot}
-    >
+    <div ref={selectRef} id={props.id} className={`k-select ${rootClass}`} data-testid='k-select'
+        style={rootStyle} tabIndex={props.disabled ? -1 : 0} role='button' onClick={onClickRoot}
+        onKeyUp={onKeyUpRoot} onFocus={onFocusRoot} onBlur={onBlurRoot} onMouseEnter={onMouseEnterRoot}
+        onMouseLeave={onMouseLeaveRoot}>
+
       {displayTitle}
+
       <KIcon className='k-select__current__label__arrow-icon' icon='keyboard_arrow_down' size={16} />
-      <KSelectList
-        open={open}
-        items={props.items}
-        onClick={onClickListItem}
-        onFocus={onFocusListItem}
-        onKeyDown={onKeydownListItem}
-        noDataText={props.noDataText}
-      />
+
+      <KSelectList open={open} items={props.items} onClick={onClickListItem} onFocus={onFocusListItem}
+          onKeyDown={onKeydownListItem} noDataText={props.noDataText} />
     </div>
   );
 
@@ -178,4 +163,4 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
 
 KSelect.defaultProps = { noDataText: 'No Data' };
 KSelect.displayName = 'KSelect';
-export default memo(KSelect);
+export default KSelect;

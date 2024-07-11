@@ -1,5 +1,7 @@
-import { useState, memo, useMemo, useCallback, useRef, forwardRef, useImperativeHandle,
-  Ref, MouseEvent, KeyboardEvent, MutableRefObject, CSSProperties } from 'react';
+import {
+  useState, memo, useMemo, useCallback, useRef, forwardRef, useImperativeHandle,
+  Ref, MouseEvent, KeyboardEvent, MutableRefObject, CSSProperties,
+} from 'react';
 import useRipple from '@/common/hook/useRipple';
 import { initSize } from '@/common/util/variation';
 import colorUtil from '@/common/util/color';
@@ -58,7 +60,8 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
 
       return clazz.join(' ');
     },
-    [isLoad, props.className, props.variant, props.contained, props.disabled, props.outlined,
+    [
+      isLoad, props.className, props.variant, props.contained, props.disabled, props.outlined,
       props.large, props.medium, props.small, props.size, props.color],
   );
 
@@ -148,24 +151,13 @@ const KButton = forwardRef((props: KButtonProps, ref: Ref<KButtonRefs>) => {
   // endregion
 
   return (
-    <button
-      ref={rootRef}
-      id={props.id}
-      className={`k-button ${rootClass}`}
-      style={rootStyle}
-      type='button'
-      disabled={props.disabled}
-      onMouseDown={onMouseDown}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      onMouseUp={onMouseUp}
-      onKeyDown={onKeyDown}
-      onKeyUp={onKeyUp}
-      aria-busy={isLoad}
-    >
+    <button ref={rootRef} id={props.id} className={`k-button ${rootClass}`} style={rootStyle}
+        type='button' disabled={props.disabled} onMouseDown={onMouseDown} onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave} onMouseUp={onMouseUp} onKeyDown={onKeyDown} onKeyUp={onKeyUp}
+        aria-busy={isLoad}>
       {
         (props.children || props.label)
-          && (<span className='k-button__content'>{props.children || props.label}</span>)
+                && (<span className='k-button__content'>{props.children || props.label}</span>)
       }
       {
         isLoad && (

@@ -1,5 +1,16 @@
-import { ChangeEvent, CSSProperties, forwardRef, KeyboardEvent, memo, Ref, useCallback, useEffect,
-  useId, useImperativeHandle, useMemo, useRef } from 'react';
+import {
+  ChangeEvent,
+  CSSProperties,
+  forwardRef,
+  KeyboardEvent,
+  Ref,
+  useCallback,
+  useEffect,
+  useId,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react';
 import { KCheckboxProps, KCheckboxRefs } from '@/components/input/checkbox/KCheckbox.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { KIcon } from '@/components';
@@ -98,29 +109,19 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
 
 
   return (
-    <div
-        id={props.id}
+    <div id={props.id}
         role='checkbox'
         aria-checked={props.value}
         tabIndex={!props.disabled ? 0 : -1}
         className={`k-checkbox ${rootClass}`}
         style={rootStyle}
         data-testid='k-checkbox'
-        onKeyUp={onKeyUp}
-    >
+        onKeyUp={onKeyUp}>
       <label htmlFor={uniqueId} className='k-checkbox__container'>
-        <input
-          tabIndex={-1}
-          ref={inputRef}
-          id={uniqueId}
-          className='k-checkbox__container__input'
-          type='checkbox'
-          checked={props.value}
-          disabled={props.disabled}
-          onChange={onChange}
-          data-testid='k-checkbox-input'
-        />
 
+        <input tabIndex={-1} ref={inputRef} id={uniqueId} className='k-checkbox__container__input'
+            type='checkbox' checked={props.value} disabled={props.disabled} onChange={onChange}
+            data-testid='k-checkbox-input' />
         {Icon}
 
         {/* Square(default) */}
@@ -140,4 +141,4 @@ const KCheckbox = forwardRef((props: KCheckboxProps, ref: Ref<KCheckboxRefs>) =>
 KCheckbox.defaultProps = { defaultCheck: false };
 KCheckbox.displayName = 'KCheckbox';
 
-export default memo(KCheckbox);
+export default KCheckbox;

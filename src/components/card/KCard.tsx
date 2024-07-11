@@ -70,13 +70,8 @@ const KCard = ({ children, id, className, style, title, subTitle, clickable, wid
 
   return (
   // eslint-disable-next-line jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events
-    <div
-      id={id}
-      className={`k-card ${rootClass}`}
-      style={rootStyle}
-      data-testid='k-card-testid'
-      onClick={onClick}
-    >
+    <div id={id} className={`k-card ${rootClass}`} style={rootStyle} data-testid='k-card-testid'
+        onClick={onClick}>
       {CardTitle}
       {CardSubTitle}
       {children}

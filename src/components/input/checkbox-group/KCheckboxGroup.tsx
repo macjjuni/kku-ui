@@ -73,17 +73,10 @@ const KCheckboxGroup = ({ id, className, style, items = [], value, color, direct
     <div id={id} style={rootStyle} className={`k-checkbox-group ${rootClass}`} data-testid='k-checkbox-group'>
       {
         items?.map((item) => (
-          <KCheckbox
-            key={item.value}
-            label={item.label}
-            value={value?.includes(item.value)}
-            onChange={(checked) => { onChangeCheckbox(checked, item.value); }}
-            size={childCheckboxSize}
-            // shape={shape}
-            color={color}
-            disabled={item.disabled}
-            defaultCheck={item.defaultCheck}
-          />
+          <KCheckbox key={item.value} label={item.label} value={value?.includes(item.value)} size={childCheckboxSize}
+              onChange={(checked) => { onChangeCheckbox(checked, item.value); }}
+              // shape={shape}
+              color={color} disabled={item.disabled} defaultCheck={item.defaultCheck} />
         ))
       }
     </div>

@@ -8,28 +8,17 @@ const KSelectList = ({ open, items, noDataText, onClick, onFocus, onKeyDown }: K
     open && (
       <ul className='k-select__menu-list' data-testid='k-select-list'>
         {items.map((item, idx) => (
-          <li
-            key={item.value}
-            role='menuitem'
-            tabIndex={0}
-            onFocus={onFocus}
-            onClick={() => { onClick(item); }}
-            onKeyDown={(e) => { onKeyDown(e, item, idx); }}
-            className='k-select__menu-list__item'
-          >
+          <li key={item.value} role='menuitem' tabIndex={0} onFocus={onFocus}
+              onClick={() => { onClick(item); }} onKeyDown={(e) => { onKeyDown(e, item, idx); }}
+              className='k-select__menu-list__item'>
             {item.title}
           </li>
         ))}
         {
           items.length === 0 && (
-            <li
-                role='menuitem'
-                tabIndex={0}
-                onFocus={onFocus}
-                onClick={() => { onClick(null); }}
+            <li role='menuitem' tabIndex={0} onFocus={onFocus} onClick={() => { onClick(null); }}
                 onKeyDown={(e) => { onKeyDown(e, null, -1); }}
-                className='k-select__menu-list__item k-select__menu-list__item-no-data'
-            >
+                className='k-select__menu-list__item k-select__menu-list__item-no-data'>
               {noDataText}
             </li>
           )

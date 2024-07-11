@@ -1,7 +1,17 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */
 import {
-  forwardRef, useState, useMemo, memo, Ref, useImperativeHandle, useCallback, KeyboardEvent,
-  useEffect, useRef, createElement, CSSProperties, MouseEvent,
+  createElement,
+  CSSProperties,
+  forwardRef,
+  KeyboardEvent,
+  MouseEvent,
+  Ref,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
 } from 'react';
 import { createRoot } from 'react-dom/client';
 import { KDropHolderProps, KDropHolderRefs } from '@/components/drop-holder/KDropHolder.interface';
@@ -17,7 +27,7 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
 
   // region [Hooks]
 
-  const rootRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
 
   useClickOutside(rootRef, () => { setOpen(false); });
@@ -179,17 +189,9 @@ const KDropHolder = forwardRef((props: KDropHolderProps, ref: Ref<KDropHolderRef
   // endregion
 
   return (
-    <div
-      ref={rootRef}
-      id={props.id}
-      className={`k-drop-holder ${rootClass}`}
-      tabIndex={0}
-      role='button'
-      onClick={onClickRoot}
-      onKeyUp={onKeyUpRoot}
-      style={rootStyle}
-      data-testid='k-drop-holder'
-    >
+    <div ref={rootRef} id={props.id} className={`k-drop-holder ${rootClass}`} tabIndex={0}
+        role='button' onClick={onClickRoot} onKeyUp={onKeyUpRoot} style={rootStyle}
+        data-testid='k-drop-holder'>
       {props.children}
     </div>
   );
@@ -200,4 +202,4 @@ KDropHolder.defaultProps = {
   offset: '4px',
 };
 KDropHolder.displayName = 'KDropHolder';
-export default memo(KDropHolder);
+export default KDropHolder;
