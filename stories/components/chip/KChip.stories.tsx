@@ -1,6 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import {KChip} from '@/components/chip';
 import {KChipProps} from '@/components/chip';
+import {ReactNode} from 'react';
 
 const meta: Meta<KChipProps> = {
     component: KChip,
@@ -34,7 +35,7 @@ const Template = (args: KChipProps) => {
     );
 };
 
-export const Default: Story = {
+export const Default: { args: KChipProps; render: (args: KChipProps) => ReactNode } = {
     render: Template,
     args: {
         size: 'large',
