@@ -155,11 +155,23 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
   // endregion
 
 
+  // region [Privates]
+
+  const tabIndex = useMemo(() => {
+    if (props.disabled) { return -1; }
+    if (typeof props.tabIndex === 'number') { return props.tabIndex; }
+    return 0;
+  }, [props.disabled, props.tabIndex]);
+
+
+  // endregion
+
+
   return (
     <div ref={rootRef} id={props.id} className={`k-chip ${rootClass}`} style={rootStyle}
-        tabIndex={!props.disabled ? props.tabIndex : -1} role='button' onClick={onClick}
-        onKeyUp={onKeyUp} onBlur={onBlur} onFocus={onFocus} onMouseDown={onMouseDown}
-        onMouseUp={onMouseUp} onMouseLeave={onMouseLeave} onKeyDown={onKeyDown} data-testid='k-chip'>
+        tabIndex={tabIndex} role='button' data-testid='k-chip'
+        onClick={onClick} onKeyUp={onKeyUp} onBlur={onBlur} onFocus={onFocus}
+        onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseLeave={onMouseLeave} onKeyDown={onKeyDown}>
 
       <span className='k-chip__label'>
         {props.label && props.label}
