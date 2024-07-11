@@ -10,7 +10,7 @@ const KAccordion = ({ children, className, id, large, medium, size, small, style
   // region [Hooks]
 
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
-  const root = useRef<HTMLDetailsElement>(null);
+  const root = useRef<HTMLDetailsElement | null>(null);
 
   // endregion
 
@@ -104,7 +104,8 @@ const KAccordion = ({ children, className, id, large, medium, size, small, style
 
 
   return (
-    <details ref={root} id={id} className={`k-accordion ${rootClass}`} style={rootStyle} data-testid='k-accordion'>
+    <details ref={root} id={id} className={`k-accordion ${rootClass}`} style={rootStyle}
+        data-testid='k-accordion'>
 
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
       <summary className='k-accordion__summary' onClick={onClick} aria-hidden={!isOpen}>
@@ -114,11 +115,9 @@ const KAccordion = ({ children, className, id, large, medium, size, small, style
           <span className='k-accordion__summary__text'>{summary}</span>
         </div>
 
-        <KIcon
-            className={`k-accordion__summary__icon ${iconClass}`}
+        <KIcon className={`k-accordion__summary__icon ${iconClass}`}
             icon='keyboard_arrow_down'
-            size={iconSize}
-        />
+            size={iconSize} />
 
       </summary>
 

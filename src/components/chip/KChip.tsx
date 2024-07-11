@@ -1,5 +1,15 @@
-import { FocusEvent, forwardRef, KeyboardEvent, memo, MouseEvent, MutableRefObject,
-  Ref, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
+import {
+  FocusEvent,
+  forwardRef,
+  KeyboardEvent,
+  MouseEvent,
+  MutableRefObject,
+  Ref,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react';
 import { KChipProps, KChipRef } from '@/components/chip/KChip.interface';
 import { initDisabled, initSize, initVariant } from '@/common/util/variation';
 import { KIcon } from '@/components';
@@ -41,7 +51,8 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     initDisabled(clazz, 'k-chip', props.disabled);
 
     return clazz.join(' ');
-  }, [props.className, props.size, props.disabled, props.large, props.medium, props.small,
+  }, [
+    props.className, props.size, props.disabled, props.large, props.medium, props.small,
     props.variant, props.contained, props.outlined]);
 
   const rootStyle = useMemo(() => {
@@ -52,7 +63,7 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
       style.background = props.color;
     }
     if (props.color && (props.variant === 'outlined' || props.outlined
-        || (!props.variant && !props.contained))) {
+            || (!props.variant && !props.contained))) {
       style.borderColor = props.color;
       style.color = props.color;
     }
@@ -74,7 +85,7 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
   const closeIconColor = useMemo(() => {
 
     if ((props.variant === 'outlined' || props.outlined
-        || (!props.variant && !props.contained)) && props.color) {
+            || (!props.variant && !props.contained)) && props.color) {
       return props.color;
     }
 
@@ -144,47 +155,40 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
   // endregion
 
 
+  // region [Privates]
+
+  const tabIndex = useMemo(() => {
+    if (props.disabled) { return -1; }
+    if (typeof props.tabIndex === 'number') { return props.tabIndex; }
+    return 0;
+  }, [props.disabled, props.tabIndex]);
+
+
+  // endregion
+
+
   return (
-    <div
-      ref={rootRef}
-      id={props.id}
-      className={`k-chip ${rootClass}`}
-      style={rootStyle}
-      tabIndex={!props.disabled ? props.tabIndex : -1}
-      role='button'
-      onClick={onClick}
-      onKeyUp={onKeyUp}
-      onBlur={onBlur}
-      onFocus={onFocus}
-      onMouseDown={onMouseDown}
-      onMouseUp={onMouseUp}
-      onMouseLeave={onMouseLeave}
-      onKeyDown={onKeyDown}
-      data-testid='k-chip'
-    >
+    <div ref={rootRef} id={props.id} className={`k-chip ${rootClass}`} style={rootStyle}
+        tabIndex={tabIndex} role='button' data-testid='k-chip'
+        onClick={onClick} onKeyUp={onKeyUp} onBlur={onBlur} onFocus={onFocus}
+        onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseLeave={onMouseLeave} onKeyDown={onKeyDown}>
+
       <span className='k-chip__label'>
         {props.label && props.label}
         {props.children && props.children}
       </span>
 
       {props.closeable && (
-        <KIcon
-          className='k-chip__close-icon'
-          icon='close'
-          color={closeIconColor}
-          size={closeIconSize}
-          onClick={onClose}
-          tabIndex={-1}
-        />
+        <KIcon className='k-chip__close-icon'
+            icon='close'
+            color={closeIconColor}
+            size={closeIconSize}
+            onClick={onClose}
+            tabIndex={-1} />
       )}
     </div>
   );
 });
 
 KChip.displayName = 'KChip';
-KChip.defaultProps = {
-  closeable: false,
-  tabIndex: 0,
-};
-
-export default memo(KChip);
+export default KChip;

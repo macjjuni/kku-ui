@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { CSSProperties, forwardRef, KeyboardEvent, memo, MouseEvent, Ref, useCallback,
-  useId, useImperativeHandle, useMemo, useRef } from 'react';
+import { CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref, useCallback, useId, useImperativeHandle, useMemo, useRef } from 'react';
 import { KIconProps, KIconRefs } from '@/components/icon/KIcon.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { getIcon } from '@/common/base/icon';
@@ -93,17 +92,10 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
 
   // region [Templates]
   return (
-    <span
-      ref={inputRef}
-      id={props.id ? props.id : uniqueId}
-      className={`k-icon ${rootClass}`}
-      style={rootStyle}
-      data-testid='k-icon'
-      onClick={onClick}
-      onKeyUp={onKeyUp}
-      role={props.onClick ? 'button' : 'img'}
-      tabIndex={props.onClick ? props.tabIndex : -1}
-    >
+    <span ref={inputRef} id={props.id ? props.id : uniqueId} className={`k-icon ${rootClass}`}
+        style={rootStyle} data-testid='k-icon' onClick={onClick} onKeyUp={onKeyUp}
+        role={props.onClick ? 'button' : 'img'}
+        tabIndex={props.onClick ? props.tabIndex : -1}>
       {Icon}
     </span>
   );
@@ -115,4 +107,4 @@ KIcon.displayName = 'KIcon';
 KIcon.defaultProps = {
   tabIndex: 0,
 };
-export default memo(KIcon);
+export default KIcon;

@@ -86,7 +86,9 @@ $k-modal__overlay__opacity: 0.16;
                 width: 24px; height: 24px;
                 background: none;
                 border: none;
+                color: transparent;
                 cursor: pointer;
+                overflow: hidden;
 
                 &:after, &:before {
                     content: '';

@@ -134,6 +134,7 @@ describe('KDropHolder', () => {
       test('OnFocus event test', async () => {
 
         // Arrange
+
         const user = userEvent.setup();
         render(<KChip label='Test Label' onFocus={mockOnClick} />);
 
