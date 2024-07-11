@@ -172,6 +172,14 @@ $k-spacing-40: 40px !default;
 $k-border-radius-default: 3px !default;
 
 
+// region [Transition]
+
+$k-transition-timing-function: ease;
+
+// endregion
+
+
+
 // region [Dark Mode]
 
 $k-dark-class-name: #{dark} !default;
