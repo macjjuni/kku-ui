@@ -1,7 +1,5 @@
-import {
-  FocusEvent, forwardRef, KeyboardEvent, memo, MouseEvent, MutableRefObject,
-  Ref, useCallback, useImperativeHandle, useMemo, useRef,
-} from 'react';
+import { FocusEvent, forwardRef, KeyboardEvent, memo, MouseEvent, MutableRefObject,
+  Ref, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { KChipProps, KChipRef } from '@/components/chip/KChip.interface';
 import { initDisabled, initSize, initVariant } from '@/common/util/variation';
 import { KIcon } from '@/components';

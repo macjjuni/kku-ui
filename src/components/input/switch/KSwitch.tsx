@@ -1,4 +1,4 @@
-import { CSSProperties, forwardRef, memo, Ref, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
+import { CSSProperties, forwardRef, Ref, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { KSwitchProps, KSwitchRefs } from '@/components/input/switch/KSwitch.interface';
 
@@ -6,7 +6,7 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
 
   // region [Hooks]
 
-  const inputRef = useRef<HTMLButtonElement>(null);
+  const inputRef = useRef<HTMLButtonElement | null>(null);
 
   useImperativeHandle(ref, () => ({
     toggle() { inputRef.current?.click(); },
@@ -73,33 +73,19 @@ const KSwitch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
 
 
   return (
-  // eslint-disable-next-line react/button-has-type
-    <button
-            ref={inputRef}
-            id={props.id}
-            role='switch'
-            style={rootStyle}
-            aria-checked={props.value}
-            aria-label='switch'
-            disabled={props.disabled}
-            tabIndex={!props.disabled ? 0 : -1}
-            className={`k-switch ${rootClass}`}
-            onClick={onClick}
-            data-testid='k-switch'
-    >
-      <span
-          className='k-switch__active-background'
-          style={backgroundStyle}
-          data-testid='k-switch-active-background'
-      />
+    <button ref={inputRef} id={props.id} role='switch' style={rootStyle}
+        type='button' aria-checked={props.value} aria-label='switch' disabled={props.disabled}
+        tabIndex={!props.disabled ? 0 : -1} className={`k-switch ${rootClass}`} onClick={onClick} data-testid='k-switch'>
+
+      <span className='k-switch__active-background' style={backgroundStyle} data-testid='k-switch-active-background' />
       <span className='k-switch__default-background' />
       <span className='k-switch__toggle' style={toggleColor} data-testid='k-switch-toggle' />
+
     </button>
   );
 });
 
 
-KSwitch.defaultProps = {};
 KSwitch.displayName = 'KSwitch';
 
-export default memo(KSwitch);
+export default KSwitch;
