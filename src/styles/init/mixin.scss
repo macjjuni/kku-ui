@@ -89,27 +89,27 @@
 
 @mixin k-transition-1 {
     transition-duration: 0.1s;
-    transition-timing-function: ease;
+    transition-timing-function: $k-transition-timing-function;
 }
 
 @mixin k-transition-2 {
     transition-duration: 0.2s;
-    transition-timing-function: ease;
+    transition-timing-function: $k-transition-timing-function;
 }
 
 @mixin k-transition-3 {
     transition-duration: 0.3s;
-    transition-timing-function: ease;
+    transition-timing-function: $k-transition-timing-function;
 }
 
 @mixin k-transition-6 {
     transition-duration: 0.6s;
-    transition-timing-function: ease;
+    transition-timing-function: $k-transition-timing-function;
 }
 
-@mixin k-transition-6 {
+@mixin k-transition-9 {
     transition-duration: 0.9s;
-    transition-timing-function: ease;
+    transition-timing-function: $k-transition-timing-function;
 }
 
 @mixin k-center-absolute {
