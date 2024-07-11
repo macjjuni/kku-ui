@@ -12,13 +12,7 @@
     cursor: pointer;
     user-select: none;
 
-    &[disabled] { cursor: not-allowed; }
-
-    // Content
-    & .k-button__content { white-space: nowrap; }
-
     @include k-transition-3;
-
 
     // Variant
     &.k-button--default {
@@ -126,6 +120,12 @@
 
         .k-button__content { @include k-body-3; }
         .k-spinner--loading { width: 16px; height: 16px; }
+    }
+
+    &[disabled] { cursor: not-allowed; }
+    // Content
+    .k-button__content {
+        white-space: nowrap;
     }
 }
 
