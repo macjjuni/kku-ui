@@ -16,6 +16,7 @@ export interface KModalProps extends KBaseProp, KSizeProp {
   isOverlay?: boolean;
   overlayOpacity?: number;
   overlayClosable?: boolean;
+  escClosable?: boolean;
 
   rounded?: boolean;
   borderRadius?: string;
