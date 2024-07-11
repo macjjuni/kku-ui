@@ -11,7 +11,7 @@ const closeButtonTestId = 'k-modal__close-button-test-id';
 function KModal({
   id, style, isOpen, onClose, title, content, footer, size, large, medium, small,
   className, isOverlay = true, overlayOpacity, overlayClosable, rounded, borderRadius = '8px',
-  headerClass, contentClass, footerClass, animation = 'updown',
+  headerClass, contentClass, footerClass, animation = 'updown', escClosable = false,
 }: KModalProps) {
 
 
@@ -98,14 +98,23 @@ function KModal({
     }
   }, [onClose, overlayClosable]);
 
-  // endregion
+  const onKeyDown = useCallback((e) => {
+    if (e.keyCode === 27) {
+      closeModal();
+    }
+  }, [closeModal]);
 
+  const addKeyEventListener = useCallback(() => {
+    if (escClosable) {
+      window.addEventListener('keydown', onKeyDown);
+    }
+  }, [escClosable]);
 
-  // region [Templates]
-
-  const modalFooter = useMemo(() => (
-    footer && (<div className={`k-modal__container__footer ${footerClass}`}>{footer}</div>)
-  ), [footer, footerClass]);
+  const removeKeyEventListener = useCallback(() => {
+    if (escClosable) {
+      window.addEventListener('keydown', onKeyDown);
+    }
+  }, [escClosable]);
 
   // endregion
 
@@ -115,40 +124,58 @@ function KModal({
   useEffect(() => {
     if (isOpen) {
       onOpenModal();
+      addKeyEventListener();
     } else {
       onCloseModal();
     }
+
+    return () => removeKeyEventListener();
   }, [isOpen]);
 
   // endregion
+
+
+  // region [Templates]
+
+  const modalHeader = useMemo(() => (
+    <div className={`k-modal__container__header ${headerClass}`} data-testid={headerTestId}>
+      <p className='k-modal__container__header__text'>{title}</p>
+      <button type='button' onClick={onCloseModal} className='k-modal__container__header__close-button'
+          data-testid={closeButtonTestId}>
+        close
+      </button>
+    </div>
+  ), [headerClass, title, onCloseModal, closeButtonTestId]);
+
+  const modalContent = useMemo(() => (
+    <div className={`k-modal__container__content ${contentClass}`}>
+      {content}
+    </div>
+  ), [content]);
+
+  const modalFooter = useMemo(() => (
+    footer && (<div className={`k-modal__container__footer ${footerClass}`}>{footer}</div>)
+  ), [footer, footerClass]);
+
+  // endregion
+
 
   if (!isOpenModal) {
     return null;
   }
 
   return (
-    <div ref={modalWrapperRef} id={id} className='k-modal__wrapper' data-testid={rootTestId} style={style}>
+    <div ref={modalWrapperRef} id={id} className='k-modal__wrapper' style={style}
+        role='dialog' tabIndex='-1' aria-modal='true' aria-labelledby={`${title}-modal`}
+        aria-describedby={`${title}-modal`} data-testid={rootTestId}>
+
       <div className={`k-modal__container ${rootClass}`} style={containerStyle} data-testid={containerTestId}>
-
-        <div className={`k-modal__container__header ${headerClass}`} data-testid={headerTestId}>
-          <p className='k-modal__container__header__text'>{title}</p>
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label,max-len */}
-          <button type='button' onClick={onCloseModal} className='k-modal__container__header__close-button' data-testid={closeButtonTestId} />
-        </div>
-
-        <div className={`k-modal__container__content ${contentClass}`}>
-          {content}
-        </div>
-
+        {modalHeader}
+        {modalContent}
         {modalFooter}
       </div>
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-      <div
-        style={overlayStyle}
-        className={`k-modal-wrapper__overlay ${overlayClass}`}
-        onClick={onClickOverlay}
-        data-testid='k-modal-overlay-test-id'
-      />
+      <div style={overlayStyle} className={`k-modal-wrapper__overlay ${overlayClass}`} onClick={onClickOverlay}
+          aria-hidden='true' data-testid='k-modal-overlay-test-id' />
     </div>
   );
 }

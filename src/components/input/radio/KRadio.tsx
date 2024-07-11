@@ -1,5 +1,16 @@
-import { ChangeEvent, CSSProperties, forwardRef, KeyboardEvent, memo, useRef,
-  Ref, useCallback, useEffect, useId, useImperativeHandle, useMemo } from 'react';
+import {
+  ChangeEvent,
+  CSSProperties,
+  forwardRef,
+  KeyboardEvent,
+  Ref,
+  useCallback,
+  useEffect,
+  useId,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react';
 import { KIcon, KRadioProps, KRadioRefs } from '@/components';
 import { initDisabled, initSize } from '@/common/util/variation';
 
@@ -7,7 +18,7 @@ const KRadio = forwardRef((props: KRadioProps, ref: Ref<KRadioRefs>) => {
 
   // region [Hooks]
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const uniqueId = `k-radio + ${useId()}`;
 
   useImperativeHandle(ref, () => ({
@@ -95,28 +106,13 @@ const KRadio = forwardRef((props: KRadioProps, ref: Ref<KRadioRefs>) => {
 
 
   return (
-    <div
-      id={props.id}
-      role='radio'
-      aria-checked={props.value}
-      tabIndex={!props.disabled ? 0 : -1}
-      className={`k-radio ${rootClass}`}
-      style={rootStyle}
-      data-testid='k-radio'
-      onKeyUp={onKeyUp}
-    >
+    <div id={props.id} role='radio' aria-checked={props.value} tabIndex={!props.disabled ? 0 : -1}
+        className={`k-radio ${rootClass}`} style={rootStyle} data-testid='k-radio' onKeyUp={onKeyUp}>
+
       <label htmlFor={uniqueId} className='k-radio__container'>
-        <input
-          tabIndex={-1}
-          ref={inputRef}
-          id={uniqueId}
-          className='k-radio__container__input'
-          type='radio'
-          checked={props.value}
-          disabled={props.disabled}
-          onChange={onChange}
-          data-testid='k-radio-input'
-        />
+        <input tabIndex={-1} ref={inputRef} id={uniqueId} className='k-radio__container__input'
+            type='radio' checked={props.value} disabled={props.disabled} onChange={onChange}
+            data-testid='k-radio-input' />
         {CircleIcon}
         <span className='k-radio__container__label'>
           {props.label}
@@ -131,4 +127,4 @@ KRadio.defaultProps = {
 };
 KRadio.displayName = 'KRadio';
 
-export default memo(KRadio);
+export default KRadio;
