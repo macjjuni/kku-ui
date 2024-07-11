@@ -98,7 +98,7 @@ function KModal({
     }
   }, [onClose, overlayClosable]);
 
-  const onKeyDown = useCallback((e) => {
+  const onKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.keyCode === 27) {
       closeModal();
     }
@@ -166,7 +166,7 @@ function KModal({
 
   return (
     <div ref={modalWrapperRef} id={id} className='k-modal__wrapper' style={style}
-        role='dialog' tabIndex='-1' aria-modal='true' aria-labelledby={`${title}-modal`}
+        role='dialog' tabIndex={-1} aria-modal='true' aria-labelledby={`${title}-modal`}
         aria-describedby={`${title}-modal`} data-testid={rootTestId}>
 
       <div className={`k-modal__container ${rootClass}`} style={containerStyle} data-testid={containerTestId}>

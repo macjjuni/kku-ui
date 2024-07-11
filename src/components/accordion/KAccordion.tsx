@@ -10,7 +10,7 @@ const KAccordion = ({ children, className, id, large, medium, size, small, style
   // region [Hooks]
 
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
-  const root = useRef<HTMLDetailsElement>();
+  const root = useRef<HTMLDetailsElement | null>(null);
 
   // endregion
 
