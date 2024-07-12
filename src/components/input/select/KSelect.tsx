@@ -3,6 +3,7 @@ import type { KSelectItemType, KSelectProps, KSelectRefs } from '@/components/in
 import { initDisabled, initSize } from '@/common/util/variation';
 import { KIcon } from '@/components';
 import KSelectList from '@/components/input/select/KSelectList';
+import { useCleanId } from '@/common/hook/useCleanId';
 
 
 const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
@@ -12,6 +13,7 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
   const selectRef = useRef<HTMLDivElement>(null);
   const isOnMouse = useRef<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
+  const selectListId = useCleanId('k-select-list');
 
   // endregion
 
@@ -146,14 +148,13 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
     <div ref={selectRef} id={props.id} className={`k-select ${rootClass}`} data-testid='k-select'
         style={rootStyle} tabIndex={props.disabled ? -1 : 0} role='button' onClick={onClickRoot}
         onKeyUp={onKeyUpRoot} onFocus={onFocusRoot} onBlur={onBlurRoot} onMouseEnter={onMouseEnterRoot}
-        onMouseLeave={onMouseLeaveRoot}>
-
+        onMouseLeave={onMouseLeaveRoot} aria-expanded={open}>
       {displayTitle}
 
       <KIcon className='k-select__current__label__arrow-icon' icon='keyboard_arrow_down' size={16} />
 
-      <KSelectList open={open} items={props.items} onClick={onClickListItem} onFocus={onFocusListItem}
-          onKeyDown={onKeydownListItem} noDataText={props.noDataText} />
+      <KSelectList id={selectListId} open={open} items={props.items} onClick={onClickListItem}
+          onFocus={onFocusListItem} onKeyDown={onKeydownListItem} noDataText={props?.noDataText || 'No Data'} />
     </div>
   );
 
@@ -161,6 +162,5 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
 
 });
 
-KSelect.defaultProps = { noDataText: 'No Data' };
 KSelect.displayName = 'KSelect';
 export default KSelect;
