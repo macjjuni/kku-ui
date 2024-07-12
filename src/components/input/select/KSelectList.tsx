@@ -2,11 +2,11 @@ import { memo } from 'react';
 import { KSelectListProps } from '@/components/input/select/KSelect.interface';
 
 
-const KSelectList = ({ open, items, noDataText, onClick, onFocus, onKeyDown }: KSelectListProps) => {
+const KSelectList = ({ id, open, items, noDataText, onClick, onFocus, onKeyDown }: KSelectListProps) => {
 
   return (
     open && (
-      <ul className='k-select__menu-list' data-testid='k-select-list'>
+      <ul id={id} className='k-select__menu-list' data-testid='k-select-list'>
         {items.map((item, idx) => (
           <li key={item.value} role='menuitem' tabIndex={0} onFocus={onFocus}
               onClick={() => { onClick(item); }} onKeyDown={(e) => { onKeyDown(e, item, idx); }}
