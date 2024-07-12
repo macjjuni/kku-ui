@@ -1,6 +1,7 @@
 import { CSSProperties, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { initSize } from '@/common/util/variation';
 import { KModalProps } from '@/components/modal/KModal.interface';
+import { useCleanId } from '@/common/hook/useCleanId';
 
 const rootTestId = 'k-modal-test-id';
 const headerTestId = 'k-modal__header-test-id';
@@ -11,7 +12,7 @@ const closeButtonTestId = 'k-modal__close-button-test-id';
 function KModal({
   id, style, isOpen, onClose, title, content, footer, size, large, medium, small,
   className, isOverlay = true, overlayOpacity, overlayClosable, rounded, borderRadius = '8px',
-  headerClass, contentClass, footerClass, animation = 'updown', escClosable = false,
+  headerClass = '', contentClass, footerClass, animation = 'updown', escClosable = false,
 }: KModalProps) {
 
 
@@ -19,6 +20,7 @@ function KModal({
 
   const modalWrapperRef = useRef<HTMLDivElement | null>(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const headerTitleId = useCleanId('k-modal-header-title');
 
   // endregion
 
@@ -139,19 +141,17 @@ function KModal({
 
   const modalHeader = useMemo(() => (
     <div className={`k-modal__container__header ${headerClass}`} data-testid={headerTestId}>
-      <p className='k-modal__container__header__text'>{title}</p>
+      <h1 id={headerTitleId} className='k-modal__container__header__text'>{title}</h1>
       <button type='button' onClick={onCloseModal} className='k-modal__container__header__close-button'
-          data-testid={closeButtonTestId}>
-        close
-      </button>
+          data-testid={closeButtonTestId} aria-label='Close modal' />
     </div>
-  ), [headerClass, title, onCloseModal, closeButtonTestId]);
+  ), [headerClass, title, onCloseModal, headerTitleId, closeButtonTestId]);
 
   const modalContent = useMemo(() => (
-    <div className={`k-modal__container__content ${contentClass}`}>
+    <section className={`k-modal__container__content ${contentClass}`} aria-labelledby={headerTitleId}>
       {content}
-    </div>
-  ), [content]);
+    </section>
+  ), [content, headerTitleId]);
 
   const modalFooter = useMemo(() => (
     footer && (<div className={`k-modal__container__footer ${footerClass}`}>{footer}</div>)
@@ -166,8 +166,8 @@ function KModal({
 
   return (
     <div ref={modalWrapperRef} id={id} className='k-modal__wrapper' style={style}
-        role='dialog' tabIndex={-1} aria-modal='true' aria-labelledby={`${title}-modal`}
-        aria-describedby={`${title}-modal`} data-testid={rootTestId}>
+        role='dialog' tabIndex={-1} aria-modal='true' aria-label={`${title}-modal-wrapper`}
+        data-testid={rootTestId}>
 
       <div className={`k-modal__container ${rootClass}`} style={containerStyle} data-testid={containerTestId}>
         {modalHeader}
