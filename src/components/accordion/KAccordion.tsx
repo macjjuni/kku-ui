@@ -1,7 +1,8 @@
-import { CSSProperties, memo, useCallback, useEffect, useMemo, useState, useRef } from 'react';
+import { CSSProperties, memo, useCallback, useEffect, useMemo, useState, useRef, MouseEvent, KeyboardEvent } from 'react';
 import { KAccordionProps } from '@/components/accordion/KAccordion.interface';
 import { initSize } from '@/common/util/variation';
 import { KIcon } from '@/components';
+import { useCleanId } from '@/common/hook/useCleanId';
 
 
 const KAccordion = ({ children, className, id, large, medium, size, small, style, summary,
@@ -11,6 +12,10 @@ const KAccordion = ({ children, className, id, large, medium, size, small, style
 
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
   const root = useRef<HTMLDetailsElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const [contentHeight, setContentHeight] = useState(0);
+  const summaryId = useCleanId('k-accordion-summary');
+  const contentId = useCleanId('k-accordion-content');
 
   // endregion
 
@@ -50,9 +55,9 @@ const KAccordion = ({ children, className, id, large, medium, size, small, style
   }, [style]);
 
   const contentStyle = useMemo((): CSSProperties => {
-
-    return {};
-  }, [isOpen]);
+    const height = isOpen ? `${contentHeight}px` : 0;
+    return { maxHeight: height };
+  }, [isOpen, contentHeight]);
 
   const iconSize = useMemo(() => {
 
@@ -65,10 +70,32 @@ const KAccordion = ({ children, className, id, large, medium, size, small, style
   // endregion
 
 
+  // region [Privates]
+
+  const initializeRoot = useCallback(() => {
+    root.current?.setAttribute('open', 'true');
+  }, []);
+
+  const initializeContent = useCallback(() => {
+    console.dir(contentRef?.current);
+    setContentHeight(contentRef.current?.scrollHeight || 0);
+  }, []);
+
+  // endregion
+
+
   // region [Events]
 
-  const onClick = useCallback(() => {
+  const onClick = useCallback((e?: MouseEvent<HTMLElement>) => {
+    e?.preventDefault();
     setIsOpen((prev) => !prev);
+  }, []);
+
+  const onKeyDown = useCallback((e: KeyboardEvent<HTMLElement>) => {
+    e.preventDefault();
+    if (e.key === 'Enter' || e.key === ' ') {
+      onClick();
+    }
   }, []);
 
   // endregion
@@ -93,35 +120,32 @@ const KAccordion = ({ children, className, id, large, medium, size, small, style
   // region [Life Cycles]
 
   useEffect(() => {
-    if (open) {
-      root.current?.setAttribute('open', 'true');
-    } else {
-      root.current?.removeAttribute('open');
-    }
-  }, [open]);
+    initializeRoot();
+    initializeContent();
+  }, []);
 
   // endregion
 
 
   return (
-    <details ref={root} id={id} className={`k-accordion ${rootClass}`} style={rootStyle}
-        data-testid='k-accordion'>
+    <details ref={root} id={id} className={`k-accordion ${rootClass}`} open
+        style={rootStyle} data-testid='k-accordion'>
 
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-      <summary className='k-accordion__summary' onClick={onClick} aria-hidden={!isOpen}>
-
+      <summary role='button' id={summaryId} className='k-accordion__summary' onClick={onClick}
+          onKeyDown={onKeyDown} aria-hidden={!isOpen} tabIndex={0}>
         <div className='k-accordion__summary__container' data-testid='k-accordion__summary'>
           {SummaryIcon}
           <span className='k-accordion__summary__text'>{summary}</span>
         </div>
-
-        <KIcon className={`k-accordion__summary__icon ${iconClass}`}
-            icon='keyboard_arrow_down'
-            size={iconSize} />
-
+        <div className='k-accordion__summary__icon__wrapper'>
+          <KIcon className={`k-accordion__summary__icon ${iconClass}`} icon='keyboard_arrow_down' size={iconSize} />
+        </div>
       </summary>
 
-      <div className='k-accordion__content' style={contentStyle}>{children}</div>
+      <div ref={contentRef} id={contentId} className='k-accordion__content' style={contentStyle}
+          aria-labelledby={summaryId}>
+        <div className='k-accordion__content__wrapper'>{children}</div>
+      </div>
 
     </details>
   );
