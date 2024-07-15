@@ -21,11 +21,7 @@ const Template = (args: KAccordionProps) => {
 
     return (
         <>
-            <KAccordion {...args} open large/>
-            <br/><br/><br/>
-            <KAccordion {...args} medium/>
-            <br/><br/><br/>
-            <KAccordion {...args} small/>
+            <KAccordion {...args}/>
         </>
     );
 };
