@@ -8,6 +8,7 @@ const meta: Meta<KAccordionProps> = {
         size: {description: '크기를 설정합니다.', defaultValue: {summary: 'medium'}},
         id: {description: 'id 속성을 설정합니다.', defaultValue: {summary: 'undefined'}},
         className: {description: 'class 속성을 설정합니다.', defaultValue: {summary: 'undefined'}},
+        width: {description: 'width 속성을 설정합니다.', defaultValue: {summary: 'undefined'}},
         style: {description: 'style 속성을 설정합니다.', defaultValue: {summary: 'undefined'}},
     },
 };
@@ -21,7 +22,7 @@ const Template = (args: KAccordionProps) => {
 
     return (
         <>
-            <KAccordion {...args}/>
+            <KAccordion {...args} />
         </>
     );
 };
