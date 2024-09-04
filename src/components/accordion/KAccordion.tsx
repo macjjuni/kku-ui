@@ -5,8 +5,10 @@ import { KIcon } from '@/components';
 import { useCleanId } from '@/common/hook/useCleanId';
 
 
-const KAccordion = ({ children, className, id, large, medium, size, small, style, summary,
-  open, summaryIcon, summaryIconSize = 'medium' }: KAccordionProps) => {
+const KAccordion = (props: KAccordionProps) => {
+
+  const { children, className, id, large, medium, size, small, style, summary, width,
+    open, summaryIcon, summaryIconSize = 'medium' } = props;
 
   // region [Hooks]
 
@@ -51,8 +53,13 @@ const KAccordion = ({ children, className, id, large, medium, size, small, style
 
   const rootStyle = useMemo(() => {
 
-    return style;
-  }, [style]);
+    const styles: CSSProperties = { ...style };
+    if (width) {
+      styles.width = width;
+      console.log(styles);
+    }
+    return styles;
+  }, [style, width]);
 
   const contentStyle = useMemo((): CSSProperties => {
     const height = isOpen ? `${contentHeight}px` : 0;

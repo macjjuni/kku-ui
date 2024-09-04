@@ -160,37 +160,33 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
 
 
   return (
-    <div
-      ref={rootRef}
-      id={props.id}
-      className={`k-chip ${rootClass}`}
-      style={rootStyle}
-      tabIndex={!props.disabled ? props.tabIndex : -1}
-      role='button'
-      onClick={onClick}
-      onKeyUp={onKeyUp}
-      onBlur={onBlur}
-      onFocus={onFocus}
-      onMouseDown={onMouseDown}
-      onMouseUp={onMouseUp}
-      onMouseLeave={onMouseLeave}
-      onKeyDown={onKeyDown}
-      data-testid='k-chip'
-    >
+    <div ref={rootRef}
+        id={props.id}
+        className={`k-chip ${rootClass}`}
+        style={rootStyle}
+        tabIndex={!props.disabled ? props.tabIndex : -1}
+        role='button'
+        onClick={onClick}
+        onKeyUp={onKeyUp}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseLeave}
+        onKeyDown={onKeyDown}
+        data-testid='k-chip'>
       <span className='k-chip__label'>
         {props.label && props.label}
         {props.children && props.children}
       </span>
 
       {props.closeable && (
-        <KIcon
-          className='k-chip__close-icon'
-          icon='close'
-          color={closeIconColor}
-          size={closeIconSize}
-          onClick={onClose}
-          tabIndex={-1}
-        />
+        <KIcon className='k-chip__close-icon'
+            icon='close'
+            color={closeIconColor}
+            size={closeIconSize}
+            onClick={onClose}
+            tabIndex={-1} />
       )}
     </div>
   );

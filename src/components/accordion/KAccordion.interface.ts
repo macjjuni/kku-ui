@@ -3,11 +3,13 @@ import { KBaseProp, KSizeProp, SizeType } from '@/common/base/base.interface';
 
 export interface KAccordionProps extends KBaseProp, KSizeProp {
 
-  summary: string | ReactNode
-  children: ReactNode
+  summary: string | ReactNode;
+  children: ReactNode;
 
-  summaryIcon?: string | ReactNode
-  summaryIconSize?: SizeType | number
+  summaryIcon?: string | ReactNode;
+  summaryIconSize?: SizeType | number;
 
-  open?: boolean
+  open?: boolean;
+
+  width?: string;
 }
