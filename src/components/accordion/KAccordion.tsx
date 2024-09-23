@@ -56,7 +56,6 @@ const KAccordion = (props: KAccordionProps) => {
     const styles: CSSProperties = { ...style };
     if (width) {
       styles.width = width;
-      console.log(styles);
     }
     return styles;
   }, [style, width]);
