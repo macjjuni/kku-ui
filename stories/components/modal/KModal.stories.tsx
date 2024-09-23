@@ -10,6 +10,7 @@ const meta: Meta<KModalProps> = {
         id: {description: 'id 속성을 설정합니다.', defaultValue: {summary: 'undefined'}},
         className: {description: 'class 속성을 설정합니다.', defaultValue: {summary: 'undefined'}},
         style: {description: 'style 속성을 설정합니다.', defaultValue: {summary: 'undefined'}},
+        size: {description: '모달 사이즈 속성을 설정합니다.', defaultValue: {summary: 'medium'}},
     },
 };
 
@@ -46,7 +47,6 @@ const Template = (args: KModalProps) => {
             <KModal {...args}
                     title={'What is Lorem Ipsum?'}
                     isOpen={isOpen}
-                    size={'small'}
                     onClose={onClose}
                     content={content}
                     footer={<KButton onClick={onClose}>취소</KButton>}
