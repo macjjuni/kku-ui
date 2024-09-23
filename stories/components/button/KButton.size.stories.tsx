@@ -14,7 +14,6 @@ type Story = StoryObj<typeof KButton>
 
 const Template = (args: KButtonProps) => {
 
-    console.log(args);
     return (
         <Container>
             <Item label={'Default'}>
