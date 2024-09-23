@@ -17,7 +17,7 @@ const footerText = 'this is footer';
 const Footer = () => <div data-testid='k-modal-footer-test-id'>{footerText}</div>;
 
 
-const TestModalComponent = ({ isOverlay = true, overlayOpacity }: { isOverlay?: boolean, overlayOpacity?: number }) => {
+const TestModalComponent = ({ isOverlay = true, overlayOpacity, width }: { isOverlay?: boolean, overlayOpacity?: number, width?: string }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onOpen = useCallback(() => { setIsOpen(true); }, []);
@@ -26,18 +26,9 @@ const TestModalComponent = ({ isOverlay = true, overlayOpacity }: { isOverlay?: 
   return (
     <>
       <button type='button' onClick={onOpen}>Open</button>
-      <KModal
-        isOpen={isOpen}
-        onClose={onClose}
-        className={testClass}
-        id={rootTestId}
-        style={testStyle}
-        isOverlay={isOverlay}
-        overlayOpacity={overlayOpacity}
-        title={titleText}
-        content={contentText}
-        footer={<Footer />}
-      />
+      <KModal isOpen={isOpen} onClose={onClose} className={testClass} id={rootTestId}
+          style={testStyle} isOverlay={isOverlay} overlayOpacity={overlayOpacity}
+          title={titleText} content={contentText} footer={<Footer />} width={width} />
     </>
   );
 };
@@ -140,7 +131,25 @@ describe('KModal', () => {
       expect(overlayRoot).toHaveClass('k-modal-wrapper__overlay--transparent');
       expect(overlayRoot).toHaveStyle({ opacity: testOverlayOpacity });
     });
-  });
 
+    test('width prop render test', async () => {
+
+      // Arrange
+      const user = userEvent.setup();
+      const modalWidth = '777px';
+      render(<TestModalComponent width={modalWidth} />);
+      const openButton = screen.getByText('Open');
+
+      // Act
+      await act(async () => { await user.click(openButton); });
+
+      // Arrange
+      const rootContainer = screen.getByTestId(containerTestId);
+
+      // Assert
+      expect(rootContainer).toHaveStyle({ width: modalWidth });
+    });
+
+  });
 
 });

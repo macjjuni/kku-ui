@@ -12,7 +12,7 @@ const closeButtonTestId = 'k-modal__close-button-test-id';
 function KModal({
   id, style, isOpen, onClose, title, content, footer, size, large, medium, small,
   className, isOverlay = true, overlayOpacity, overlayClosable, rounded, borderRadius = '8px',
-  headerClass = '', contentClass, footerClass, animation = 'updown', escClosable = false,
+  headerClass = '', contentClass, footerClass, animation = 'updown', escClosable = false, width,
 }: KModalProps) {
 
 
@@ -50,10 +50,11 @@ function KModal({
 
     const styles: CSSProperties = {};
 
+    if (width) { styles.width = width; }
     if (rounded) { styles.borderRadius = borderRadius; }
 
     return styles;
-  }, [rounded, borderRadius]);
+  }, [rounded, borderRadius, width]);
 
   const overlayStyle = useMemo(() => {
 
@@ -78,7 +79,7 @@ function KModal({
     setTimeout(() => {
       onClose();
       setIsOpenModal(false);
-    }, 300);
+    }, 240);
   }, [addCloseAnimation]);
 
   // endregion

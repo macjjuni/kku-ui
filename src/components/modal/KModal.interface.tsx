@@ -13,6 +13,7 @@ export interface KModalProps extends KBaseProp, KSizeProp {
   content: ReactNode;
   footer?: ReactNode;
 
+  width?: string;
   isOverlay?: boolean;
   overlayOpacity?: number;
   overlayClosable?: boolean;
