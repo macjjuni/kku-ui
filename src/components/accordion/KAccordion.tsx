@@ -83,7 +83,6 @@ const KAccordion = (props: KAccordionProps) => {
   }, []);
 
   const initializeContent = useCallback(() => {
-    console.dir(contentRef?.current);
     setContentHeight(contentRef.current?.scrollHeight || 0);
   }, []);
 

@@ -1,4 +1,3 @@
-
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 export default {
   roots: ['<rootDir>/__tests__/'],
@@ -9,6 +8,7 @@ export default {
   moduleNameMapper: {
     '\\.(css|scss)$': 'identity-obj-proxy',
     '@/(.*)$': '<rootDir>/src/$1', // @ <= alias path
+    '^lodash-es$': 'lodash',
   },
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],

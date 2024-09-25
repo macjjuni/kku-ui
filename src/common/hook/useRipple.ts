@@ -1,6 +1,6 @@
 import { CSSProperties, KeyboardEvent, MouseEvent, MutableRefObject, useRef } from 'react';
 import colorUtil from '@/common/util/color';
-import loadashUtil from '@/common/util/lodashUtil';
+import lodashUtil from '@/common/util/lodashUtil';
 import styles from '@/common/util/style';
 
 const rippleElementTag = 'span';
@@ -30,7 +30,7 @@ export default function useRipple(elementRef: MutableRefObject<HTMLElement>) {
       if (rippleElements?.length > 0) return;
     }
 
-    const uniqueRippleId = loadashUtil.uniqueId('k-ripple-');
+    const uniqueRippleId = lodashUtil.uniqueId('k-ripple-');
 
     rippleTaskRef.current = new Promise((resolve) => {
 
