@@ -1,4 +1,3 @@
-import { uniqueId } from 'lodash';
-
+import uniqueId from 'lodash-es';
 
 export default { uniqueId };
