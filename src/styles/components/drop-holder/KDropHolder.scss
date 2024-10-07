@@ -4,9 +4,7 @@
     cursor: pointer;
 }
 
-.k-drop-holder__anchor__wrapper {
-    .k-drop-holder__anchor__container {
-        padding: $k-spacing-12;
-        border: 1px solid #000;
-    }
+.k-drop-holder__popup__wrapper {
+    padding: $k-spacing-12;
+    border: 1px solid #000;
 }
