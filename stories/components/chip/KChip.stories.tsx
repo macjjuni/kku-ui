@@ -1,6 +1,5 @@
-import type {Meta, StoryObj} from '@storybook/react';
-import {KChip} from '@/components/chip';
-import {KChipProps} from '@/components/chip';
+import type {Meta} from '@storybook/react';
+import {KChip, KChipProps} from '@/components/chip';
 import {ReactNode} from 'react';
 
 const meta: Meta<KChipProps> = {
@@ -19,29 +18,70 @@ const meta: Meta<KChipProps> = {
 
 export default meta;
 
-type Story = StoryObj<typeof KChip>
-
-const Template = (args: KChipProps) => {
-
-
+const defaultTemplate = (args: KChipProps) => {
     return (
-        <>
-            <div style={{display: 'flex', gap: '12px'}}>
-                <KChip {...args} />
-                <KChip {...args} contained />
-                <KChip {...args} outlined />
+        <div style={{display: 'flex'}}>
+            <KChip {...args} />
+        </div>
+    );
+};
+
+const customTemplate = (args: KChipProps) => {
+    return (
+        <div style={{display: 'flex', flexDirection: 'column', gap: '12px'}}>
+            <div style={{display: 'flex', gap: '16px'}}>
+                <KChip {...args} large rounded/>
+                <KChip {...args} large outlined rounded/>
+                <KChip {...args} large contained rounded/>
             </div>
-        </>
+            <div style={{display: 'flex', gap: '16px'}}>
+                <KChip {...args} rounded/>
+                <KChip {...args} outlined rounded/>
+                <KChip {...args} contained rounded/>
+            </div>
+            <div style={{display: 'flex', gap: '16px'}}>
+                <KChip {...args} small rounded/>
+                <KChip {...args} small outlined rounded/>
+                <KChip {...args} small contained rounded/>
+            </div>
+            <br/>
+            <div style={{display: 'flex', gap: '16px'}}>
+                <KChip {...args} large/>
+                <KChip {...args} large outlined/>
+                <KChip {...args} large contained/>
+            </div>
+            <div style={{display: 'flex', gap: '16px'}}>
+                <KChip {...args} />
+                <KChip {...args} outlined/>
+                <KChip {...args} contained/>
+            </div>
+            <div style={{display: 'flex', gap: '16px'}}>
+                <KChip {...args} small/>
+                <KChip {...args} small outlined/>
+                <KChip {...args} small contained/>
+            </div>
+        </div>
     );
 };
 
 export const Default: { args: KChipProps; render: (args: KChipProps) => ReactNode } = {
-    render: Template,
+    render: defaultTemplate,
     args: {
         size: 'large',
         children: (<>Chip</>),
-        closeable: true,
+        closeable: false,
         rounded: true,
     },
 };
+
+
+export const Clickable: { args: KChipProps; render: (args: KChipProps) => ReactNode } = {
+    render: customTemplate,
+    args: {
+        children: (<>Chip</>),
+        onClick: () => {},
+        closeable: false,
+    },
+};
+
 

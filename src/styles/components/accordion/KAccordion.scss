@@ -11,6 +11,7 @@
         background: $k-gray-color-50;
         list-style-type: none; // #Marker Style[Other Browser]
         user-select: none;
+        cursor: pointer;
 
         &:hover { background: $k-gray-color-100; }
         &::-webkit-details-marker { display: none; }
