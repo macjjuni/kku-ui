@@ -10,23 +10,23 @@ $k-modal__header__font-size: 20px;
 $k-modal__header__line-height: 24px;
 
 $k-modal__overlay__background-color: $k-black-color;
-$k-modal__overlay__opacity: 0.16;
+$k-modal__overlay__opacity: 0.56;
 
 
 @keyframes modalUp {
     from { transform: translateY(0); }
-    to { transform: translateY(-$k-spacing-16); }
+    to { transform: translateY(-$k-spacing-8); }
 }
 @keyframes modalDown {
-    from { transform: translateY(-$k-spacing-16); }
+    from { transform: translateY(-$k-spacing-8); }
     to { transform: translateY(0); }
 }
 @keyframes modalScaleUp {
     from { transform: scale(1.0); }
-    to { transform: scale(1.032); }
+    to { transform: scale(1.024); }
 }
 @keyframes modalScaleDown {
-    from { transform: scale(1.032); }
+    from { transform: scale(1.024); }
     to { transform: scale(1.0); }
 }
 
@@ -46,10 +46,10 @@ $k-modal__overlay__opacity: 0.16;
 
         // 컨테이너 종료 애니메이션
         .k-modal__container.k-modal__container--updown {
-            animation: modalUp 0.24s ease-in forwards;
+            animation: modalUp 0.12s ease-in forwards;
         }
         .k-modal__container.k-modal__container--scale {
-            animation: modalScaleUp 0.24s ease-in forwards;
+            animation: modalScaleUp 0.12s ease-in forwards;
         }
     }
 
@@ -62,10 +62,10 @@ $k-modal__overlay__opacity: 0.16;
 
         // 컨테이너 시작 애니메이션
         &.k-modal__container--updown {
-            animation: modalDown 0.24s ease-out forwards;
+            animation: modalDown 0.12s ease-out forwards;
         }
         &.k-modal__container--scale {
-            animation: modalScaleDown 0.24s ease-out forwards;
+            animation: modalScaleDown 0.12s ease-out forwards;
         }
 
         .k-modal__container__header {
