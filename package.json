@@ -23,6 +23,7 @@
     "publish": "publish",
     "test": "jest -all",
     "sb": "storybook dev -p 6006",
+    "analyze": "node analyze.js",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_8a400cd81ccf1b2"
   },
@@ -62,6 +63,7 @@
     "babel-jest": "^29.7.0",
     "chromatic": "^10.7.1",
     "esbuild": "^0.20.0",
+    "esbuild-analyzer": "^0.2.0",
     "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",

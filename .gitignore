@@ -45,3 +45,8 @@ dist-ssr
 # Storybook
 
 storybook-static
+
+# analyzer
+
+analyzer
+EsbuildAnalyzer.html
