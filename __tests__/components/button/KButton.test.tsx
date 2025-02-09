@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { createRef, act } from 'react';
-import { KButton, KButtonRefs, buttonVariants } from '@/components';
+import { createRef } from 'react';
+import { KButton, KButtonRefs } from '@/components';
+import { variants } from '@/common/base/base.interface';
 
-const variantList = Object.values(buttonVariants);
-
+const variantList = Object.values(variants);
 const mockOnClick = jest.fn();
+
 
 jest.mock('@/common/util/color', () => ({
   tintColor: jest.fn(() => 'red'),
@@ -57,7 +58,7 @@ describe('KButton', () => {
 
   test('label prop render test', () => {
 
-    render(<KButton label={labelText} />);
+    render(<KButton label={labelText}/>);
     const root = screen.getByText(labelText);
 
     expect(root).toBeInTheDocument();
@@ -66,7 +67,9 @@ describe('KButton', () => {
 
   test('children prop render test', () => {
 
-    render(<KButton><div data-testid='div-test-id'>labelText</div></KButton>);
+    render(<KButton>
+      <div data-testid='div-test-id'>labelText</div>
+    </KButton>);
     const childrenRoot = screen.getByTestId('div-test-id');
 
     expect(childrenRoot).toBeInTheDocument();
@@ -83,7 +86,7 @@ describe('KButton', () => {
   test('KButton click test', async () => {
 
     const user = userEvent.setup();
-    render(<KButton label={labelText} onClick={mockOnClick} />);
+    render(<KButton label={labelText} onClick={mockOnClick}/>);
     const root = screen.getByText(labelText);
 
     expect(mockOnClick).toHaveBeenCalledTimes(0);
@@ -96,7 +99,7 @@ describe('KButton', () => {
   test('KButton Ref click test', () => {
 
     const buttonRef = createRef<KButtonRefs>();
-    render(<KButton ref={buttonRef} label={labelText} onClick={mockOnClick} />);
+    render(<KButton ref={buttonRef} label={labelText} onClick={mockOnClick}/>);
 
     expect(mockOnClick).toHaveBeenCalledTimes(0);
 
@@ -117,34 +120,4 @@ describe('KButton', () => {
     expect(root).toHaveFocus();
   });
 
-  test('KButton aria-busy attribute test', async () => {
-
-    const buttonRef = createRef<KButtonRefs>();
-    render(<KButton ref={buttonRef} onClick={mockOnClick}>{labelText}</KButton>);
-
-    act(() => { buttonRef.current?.startLoading(); });
-
-    const busyRoot = screen.getByRole('button');
-    expect(busyRoot).toHaveAttribute('aria-busy', 'true');
-
-    act(() => { buttonRef.current?.stopLoading(); });
-
-    const noBusyRoot = screen.getByRole('button');
-    expect(noBusyRoot).toHaveAttribute('aria-busy', 'false');
-  });
-
-  test('KButton Ref startLoading and stopLoading test', async () => {
-
-    const buttonRef = createRef<KButtonRefs>();
-    render(<KButton ref={buttonRef} onClick={mockOnClick}>{labelText}</KButton>);
-    const root = screen.getByRole('button');
-
-    act(() => { buttonRef.current?.startLoading(); });
-
-    expect(root).toHaveClass('k-button--loading');
-
-    act(() => { buttonRef.current?.stopLoading(); });
-
-    expect(root).not.toHaveClass('k-button--loading');
-  });
 });

@@ -3,7 +3,7 @@ import {
   forwardRef,
   KeyboardEvent,
   MouseEvent,
-  MutableRefObject,
+  RefObject,
   Ref,
   useCallback,
   useImperativeHandle,
@@ -24,13 +24,19 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
 
   // region [Hooks]
 
-  const rootRef = useRef() as MutableRefObject<HTMLDivElement>;
+  const rootRef = useRef<RefObject<HTMLDivElement>>(null);
   const ripple = useRipple(rootRef);
 
   useImperativeHandle(ref, () => ({
-    click: () => { rootRef.current?.click(); },
-    focus: () => { rootRef.current?.focus(); },
-    blur: () => { rootRef.current?.blur(); },
+    click: () => {
+      rootRef.current?.click();
+    },
+    focus: () => {
+      rootRef.current?.focus();
+    },
+    blur: () => {
+      rootRef.current?.blur();
+    },
   }));
 
   // endregion
@@ -42,10 +48,18 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
 
     const clazz = [];
 
-    if (props.className) { clazz.push(props.className); }
-    if (props.closeable) { clazz.push('k-chip--closeable'); }
-    if (props.rounded) { clazz.push('k-chip--rounded'); }
-    if (props.onClick) { clazz.push('k-chip--clickable'); }
+    if (props.className) {
+      clazz.push(props.className);
+    }
+    if (props.closeable) {
+      clazz.push('k-chip--closeable');
+    }
+    if (props.rounded) {
+      clazz.push('k-chip--rounded');
+    }
+    if (props.onClick) {
+      clazz.push('k-chip--clickable');
+    }
 
     initVariant(clazz, 'k-chip', props.variant, props.contained, props.outlined);
     initSize(clazz, 'k-chip', props.size, props.large, props.medium, props.small);
@@ -64,11 +78,13 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
       style.background = props.color;
     }
     if (props.color && (props.variant === 'outlined' || props.outlined
-            || (!props.variant && !props.contained))) {
+      || (!props.variant && !props.contained))) {
       style.borderColor = props.color;
       style.color = props.color;
     }
-    if (props.fontColor) { style.color = props.fontColor; }
+    if (props.fontColor) {
+      style.color = props.fontColor;
+    }
 
     return style;
   }, [props.style, props.color, props.variant, props.contained, props.outlined]);
@@ -78,15 +94,21 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     if (props.size && (props.large || props.medium || props.small)) {
       throw Error('Error: size and large or medium or small attributes cannot be duplicated.');
     }
-    if (props.size === 'large' || props.large) { return 12; }
-    if (props.size === 'medium' || props.medium) { return 12; }
-    if (props.size === 'small' || props.small) { return 10; }
+    if (props.size === 'large' || props.large) {
+      return 12;
+    }
+    if (props.size === 'medium' || props.medium) {
+      return 12;
+    }
+    if (props.size === 'small' || props.small) {
+      return 10;
+    }
   }, [props.size, props.large, props.medium, props.small]);
 
   const closeIconColor = useMemo(() => {
 
     if ((props.variant === 'outlined' || props.outlined
-            || (!props.variant && !props.contained)) && props.color) {
+      || (!props.variant && !props.contained)) && props.color) {
       return props.color;
     }
 
@@ -99,7 +121,9 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
   // region [Events]
 
   const onClick = useCallback((e: MouseEvent<HTMLDivElement>) => {
-    if (props.onClick && !props.disabled) { props.onClick(e); }
+    if (props.onClick && !props.disabled) {
+      props.onClick(e);
+    }
   }, []);
 
   const onKeyUp = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
@@ -115,24 +139,32 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
   const onClose = useCallback((e: MouseEvent<HTMLSpanElement> | KeyboardEvent<HTMLSpanElement>) => {
 
     e.stopPropagation();
-    if (props.onClose) { props.onClose(e); }
+    if (props.onClose) {
+      props.onClose(e);
+    }
   }, [props.onClose]);
 
   const onBlur = useCallback((e: FocusEvent<HTMLDivElement>) => {
 
     e.stopPropagation();
-    if (props.onBlur) { props.onBlur(e); }
+    if (props.onBlur) {
+      props.onBlur(e);
+    }
   }, [props.onBlur]);
 
   const onFocus = useCallback((e: FocusEvent<HTMLDivElement>) => {
 
     e.stopPropagation();
-    if (props.onFocus) { props.onFocus(e); }
+    if (props.onFocus) {
+      props.onFocus(e);
+    }
   }, [props.onFocus]);
 
   const onMouseDown = useCallback((e: MouseEvent<HTMLDivElement>): void => {
 
-    if (!props.disabled && props.onClick) { ripple?.register(e); }
+    if (!props.disabled && props.onClick) {
+      ripple?.register(e);
+    }
   }, [props.disabled, props.onClick, ripple]);
 
   const onMouseUp = useCallback((): void => {
@@ -150,7 +182,9 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
 
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>): void => {
 
-    if (!props.disabled) { ripple?.register(e); }
+    if (!props.disabled) {
+      ripple?.register(e);
+    }
   }, [ripple]);
 
   // endregion
@@ -159,9 +193,15 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
   // region [Privates]
 
   const tabIndex = useMemo(() => {
-    if (props.disabled) { return -1; }
-    if (typeof props.tabIndex === 'number') { return props.tabIndex; }
-    if (props.onClick) { return 0; }
+    if (props.disabled) {
+      return -1;
+    }
+    if (typeof props.tabIndex === 'number') {
+      return props.tabIndex;
+    }
+    if (props.onClick) {
+      return 0;
+    }
     return 0;
   }, [props.disabled, props.tabIndex]);
 
@@ -171,9 +211,9 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
 
   return (
     <div ref={rootRef} id={props.id} className={`k-chip ${rootClass}`} style={rootStyle}
-        tabIndex={tabIndex} role='button' data-testid='k-chip'
-        onClick={onClick} onKeyUp={onKeyUp} onBlur={onBlur} onFocus={onFocus}
-        onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseLeave={onMouseLeave} onKeyDown={onKeyDown}>
+         tabIndex={tabIndex} role='button' data-testid='k-chip'
+         onClick={onClick} onKeyUp={onKeyUp} onBlur={onBlur} onFocus={onFocus}
+         onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseLeave={onMouseLeave} onKeyDown={onKeyDown}>
 
       <span className='k-chip__label'>
         {props.label && props.label}
@@ -182,11 +222,11 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
 
       {props.closeable && (
         <KIcon className='k-chip__close-icon'
-            icon='close'
-            color={closeIconColor}
-            size={closeIconSize}
-            onClick={onClose}
-            tabIndex={-1} />
+               icon='close'
+               color={closeIconColor}
+               size={closeIconSize}
+               onClick={onClose}
+               tabIndex={-1}/>
       )}
     </div>
   );

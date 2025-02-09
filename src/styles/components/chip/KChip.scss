@@ -23,10 +23,10 @@
         .k-icon { fill: $k-white-color; }
 
         &.k-chip--disabled {
-            color: $k-disabled-font-color;
+            color: $k-font-disabled-color;
             background-color: $k-primary-disabled-color;
 
-            .k-icon { fill: $k-disabled-font-color; }
+            .k-icon { fill: $k-font-disabled-color; }
         }
     }
     &.k-chip--outlined {
@@ -42,17 +42,17 @@
     }
     &.k-chip--default {
         color: $k-gray-color-400;
-        border-color: $k-border-default-color;
+        border-color: $k-border-color;
         background-color: $k-white-color;
 
         .k-icon { fill: $k-gray-color-400; }
 
         &.k-chip--disabled {
-            color: $k-disabled-font-color;
-            border-color: $k-disabled-font-color;
+            color: $k-font-disabled-color;
+            border-color: $k-font-disabled-color;
             background-color: $k-white-disabled-color;
 
-            .k-icon { fill: $k-disabled-font-color; }
+            .k-icon { fill: $k-font-disabled-color; }
         }
     }
 

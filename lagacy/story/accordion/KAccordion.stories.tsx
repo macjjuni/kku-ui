@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import {KAccordionProps, KAccordion} from '@/components';
+import {KAccordionProps, KAccordion} from '../../../src/components';
 
 const meta: Meta<KAccordionProps> = {
     component: KAccordion,
