@@ -11,8 +11,8 @@
         .k-radio__container {
             cursor: not-allowed;
 
-            .k-icon { fill: $k-disabled-font-color; }
-            .k-radio__container__label { color: $k-disabled-font-color; }
+            .k-icon { fill: $k-font-disabled-color; }
+            .k-radio__container__label { color: $k-font-disabled-color; }
         }
     }
 
@@ -30,9 +30,9 @@
             opacity: 0;
         }
 
-        .k-icon { color: $k-default-font-color; }
+        .k-icon { color: $k-font-color; }
         .k-radio__container__label {
-            color: $k-default-font-color;
+            color: $k-font-color;
         }
 
     }
@@ -67,13 +67,13 @@
 .#{$k-dark-class-name} .k-radio {
 
     &.k-radio--disabled {
-        color: $k-dark-mode-disabled-font-color;
+        color: $k-dark-font-disabled-color;
 
         .k-radio__container {
             cursor: not-allowed;
 
-            .k-icon { fill: $k-dark-mode-disabled-font-color;}
-            .k-radio__container__label { color: $k-dark-mode-disabled-font-color; }
+            .k-icon { fill: $k-dark-font-disabled-color;}
+            .k-radio__container__label { color: $k-dark-font-disabled-color; }
         }
     }
 
@@ -91,8 +91,8 @@
             opacity: 0;
         }
 
-        .k-icon { color: $k-dark-mode-default-font-color; }
-        .k-radio__container__label { color: $k-dark-mode-default-font-color; }
+        .k-icon { color: $k-dark-font-color; }
+        .k-radio__container__label { color: $k-dark-font-color; }
 
     }
 

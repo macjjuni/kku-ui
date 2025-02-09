@@ -3,7 +3,7 @@ import {
   forwardRef,
   KeyboardEvent,
   MouseEvent,
-  MutableRefObject,
+  RefObject,
   Ref,
   useCallback,
   useImperativeHandle,
@@ -45,6 +45,7 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     if (props.className) { clazz.push(props.className); }
     if (props.closeable) { clazz.push('k-chip--closeable'); }
     if (props.rounded) { clazz.push('k-chip--rounded'); }
+    if (props.onClick) { clazz.push('k-chip--clickable'); }
 
     initVariant(clazz, 'k-chip', props.variant, props.contained, props.outlined);
     initSize(clazz, 'k-chip', props.size, props.large, props.medium, props.small);
@@ -53,7 +54,7 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
     return clazz.join(' ');
   }, [
     props.className, props.size, props.disabled, props.large, props.medium, props.small,
-    props.variant, props.contained, props.outlined]);
+    props.variant, props.contained, props.outlined, props.onClick]);
 
   const rootStyle = useMemo(() => {
 
@@ -131,8 +132,8 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
 
   const onMouseDown = useCallback((e: MouseEvent<HTMLDivElement>): void => {
 
-    if (!props.disabled) { ripple?.register(e); }
-  }, [props.disabled, ripple]);
+    if (!props.disabled && props.onClick) { ripple?.register(e); }
+  }, [props.disabled, props.onClick, ripple]);
 
   const onMouseUp = useCallback((): void => {
 
@@ -160,6 +161,7 @@ const KChip = forwardRef((props: KChipProps, ref: Ref<KChipRef>) => {
   const tabIndex = useMemo(() => {
     if (props.disabled) { return -1; }
     if (typeof props.tabIndex === 'number') { return props.tabIndex; }
+    if (props.onClick) { return 0; }
     return 0;
   }, [props.disabled, props.tabIndex]);
 

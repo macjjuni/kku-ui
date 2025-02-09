@@ -1,185 +1,119 @@
 .k-button {
-    position: relative;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 
-    font-family: $k-font-family;
-    border: 1px solid transparent;
-    background: transparent;
-    border-radius: $k-border-radius-default;
-    overflow: hidden;
-    cursor: pointer;
-    user-select: none;
+  font-family: $k-font-family;
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: $k-border-radius-default;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  @include k-transition-3;
 
-    @include k-transition-3;
+  &[disabled] { cursor: not-allowed; }
+  .k-button__content { white-space: nowrap; }
+  .k-ripple { background-color: darken($k-white-color, $ripple-percent); }
 
-    // Variant
-    &.k-button--default {
-        color: $k-default-font-color;
-        border-color: $k-border-default-color;
-        background: $k-white-color;
+  // region [Variant]
+  &.k-button--outlined {
+    color: $k-font-color;
+    border-color: $k-border-color;
+    background: $k-background-color;
 
-        &:hover {
-            border-color: $k-border-default-hover-color;
-            background: $k-white-hover-color;
-        }
-        &[disabled] {
-            color: $k-disabled-font-color;
-            border-color: $k-border-default-color;
-            background: $k-white-disabled-color;
-        }
-        .k-spinner--loading {
-            border: 3px solid $k-gray-color-100;
-            border-bottom-color: $k-gray-color-300;
-        }
+    &:hover {
+      border-color: $k-border-hover-color;
+      background: $k-background-hover-color;
     }
 
-    &.k-button--contained {
-        color: $k-white-color;
-        border-color: $k-primary-color;
-        background: $k-primary-color;
-
-        &:hover {
-            border-color: $k-primary-hover-color;
-            background: $k-primary-hover-color;
-        }
-        &[disabled] {
-            color: $k-disabled-font-color;
-            border-color: $k-primary-disabled-color;
-            background: $k-primary-disabled-color;
-        }
-        .k-spinner--loading {
-            border: 3px solid $k-gray-color-100;
-            border-bottom-color: $k-gray-color-300;
-        }
+    &[disabled] {
+      color: $k-font-disabled-color;
+      border-color: $k-border-disabled-color;
+      background-color: $k-background-disabled-color;
     }
-    &.k-button--outlined {
-        color: $k-primary-color;
-        border-color: $k-primary-color;
-        background: $k-white-color;
+  }
 
-        &:hover {
-            border-color: $k-primary-hover-color;
-            background: $k-white-hover-color;
-        }
-        &[disabled] {
-            color: $k-primary-disabled-color;
-            border-color: $k-primary-disabled-color;
-            background: $k-white-disabled-color;
-        }
-        .k-spinner--loading {
-            border: 3px solid $k-gray-color-100;
-            border-bottom-color: $k-primary-color;
-        }
+  $k-button-contained-color: $k-contained-color;
+
+  &.k-button--contained {
+    color: $k-white-color;
+    border-color: $k-button-contained-color;
+    background: $k-button-contained-color;
+
+    &:hover {
+      border-color: darken($k-button-contained-color, $hover-percent);
+      background: darken($k-button-contained-color, $hover-percent);
     }
 
-    &.k-button--loading {
-        pointer-events: none;
-
-        .k-button__content { opacity: 0; }
-
-        &:focus-within { outline: none; }
-
-        .k-button__loading__container {
-            @include k-center-absolute;
-            @include k-center-flex-wrap;
-        }
+    &[disabled] {
+      color: darken($k-white-color, $disabled-percent);
+      border-color: lighten($k-contained-color, $disabled-percent);
+      background: lighten($k-contained-color, $disabled-percent);
     }
+  }
+  // endregion
 
-    &.k-button--disabled {
-        &:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.1);
-        }
-    }
 
-    // Size
-    &.k-button--large {
-        height: 36px;
-        padding: 0 $k-spacing-24;
+  // region [Size]
+  &.k-button--small {
+    height: 28px;
+    padding: 0 $k-spacing-12;
 
-        .k-button__content { @include k-body-1; }
-        .k-spinner--loading { width: 24px; height: 24px; }
-    }
-    &.k-button--medium {
-        height: 32px;
-        padding: 0 $k-spacing-16;
+    .k-button__content { @include k-body-3; }
+  }
 
-        .k-button__content { @include k-body-2; }
-        .k-spinner--loading { width: 18px; height: 18px; }
-    }
-    &.k-button--small {
-        height: 28px;
-        padding: 0 $k-spacing-12;
+  &.k-button--medium {
+    height: 32px;
+    padding: 0 $k-spacing-16;
 
-        .k-button__content { @include k-body-3; }
-        .k-spinner--loading { width: 16px; height: 16px; }
-    }
+    .k-button__content { @include k-body-2; }
+  }
 
-    &[disabled] { cursor: not-allowed; }
-    // Content
-    .k-button__content {
-        white-space: nowrap;
-    }
+  // endregion
 }
 
 // region [Dark Mode]
 
 .#{$k-dark-class-name} .k-button {
 
-    $k-button-dark-color: $k-gray-color-700;
+  .k-ripple { background-color: darken($k-white-color, $ripple-percent); }
 
-    &.k-button--default {
-        color: $k-white-color;
-        border-color: $k-dark-mode-default-border-color;
-        background: $k-dark-mode-default-background-color;
+  // region [Variant]
+  &.k-button--outlined {
+    color: $k-white-color;
+    border-color: $k-white-color;
+    background-color: $k-dark-background-color;
 
-        &:hover {
-            border-color: $k-dark-mode-hover-border-color;
-            background: $k-dark-mode-hover-background-color;
-        }
-        &[disabled] {
-            color: $k-dark-mode-disabled-font-color;
-            border-color: $k-dark-mode-disabled-border-color;
-            background: $k-dark-mode-disabled-background-color;
-        }
-        .k-spinner--loading {
-            border: 3px solid $k-dark-mode-default-border-color;
-            border-bottom-color: $k-gray-color-500;
-        }
+    &:hover {
+      border-color: $k-dark-border-hover-color;
+      background: $k-dark-background-hover-color;
+    }
+    &[disabled] {
+      color: $k-dark-font-disabled-color;
+      border-color: $k-dark-border-disabled-color;
+      background-color: $k-dark-background-disabled-color;
+    }
+  }
+
+  $k-button-contained-color: $k-contained-color;
+
+  &.k-button--contained {
+    color: $k-dark-font-color;
+    border: none;
+    background: $k-dark-background-color;
+
+    &:hover {
+      background: $k-dark-background-hover-color;
     }
 
-
-    &.k-button--contained {
-        &[disabled] {
-            color: $k-disabled-font-color;
-            border-color: $k-primary-disabled-color;
-            background: $k-primary-disabled-color;
-        }
-        .k-spinner--loading {
-            border: 3px solid $k-gray-color-300;
-            border-bottom-color: $k-gray-color-700;
-        }
+    &[disabled] {
+      color: $k-dark-font-disabled-color;
+      background-color: $k-dark-background-disabled-color;
     }
-    &.k-button--outlined {
-
-        background: $k-dark-mode-default-background-color;
-
-        &[disabled] {
-            color: $k-primary-disabled-color;
-            background: $k-dark-mode-disabled-background-color;
-        }
-        .k-spinner--loading {
-            border: 3px solid $k-gray-color-700;
-            border-bottom-color: $k-primary-color;
-        }
-    }
+  }
+  // endregion
 
 }
 

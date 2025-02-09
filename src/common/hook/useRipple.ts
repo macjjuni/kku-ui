@@ -1,18 +1,20 @@
-import { CSSProperties, KeyboardEvent, MouseEvent, MutableRefObject, useRef } from 'react';
-import colorUtil from '@/common/util/color';
+import { CSSProperties, KeyboardEvent, MouseEvent, RefObject, useRef } from 'react';
+// import colorUtil from '@/common/util/color';
 import lodashUtil from '@/common/util/lodashUtil';
 import styles from '@/common/util/style';
+
 
 const rippleElementTag = 'span';
 const rippleIdentityClass = 'k-ripple';
 const rippleAnimationName = 'ripple-effect';
 const rippleAnimationTime = 400;
 
-export default function useRipple(elementRef: MutableRefObject<HTMLElement>) {
+
+export default function useRipple(elementRef: RefObject<HTMLElement | null>) {
 
   // region [Hooks]
 
-  const rippleTaskRef = useRef<Promise<string>>();
+  const rippleTaskRef = useRef<Promise<string>>(null);
 
   // endregion
 
@@ -34,7 +36,7 @@ export default function useRipple(elementRef: MutableRefObject<HTMLElement>) {
 
     rippleTaskRef.current = new Promise((resolve) => {
 
-      const { x, y, width, height } = elementRef.current.getBoundingClientRect();
+      const { x, y, width, height } = elementRef.current!.getBoundingClientRect();
 
       const { // Default values for Keyboard event
         clientX = x + (width / 2),
@@ -46,20 +48,20 @@ export default function useRipple(elementRef: MutableRefObject<HTMLElement>) {
       ripple.classList.add(rippleIdentityClass);
       ripple.classList.add(uniqueRippleId);
 
-      const baseColor = window.getComputedStyle(elementRef.current)
-        .getPropertyValue('color');
+      // const baseColor = window.getComputedStyle(elementRef.current!)
+      //   .getPropertyValue('background-color');
 
       const rippleStyle: CSSProperties = {
         top: `${((clientY - y - radius) / height) * 100}%`,
         left: `${((clientX - x - radius) / width) * 100}%`,
         width: `${radius * 2}px`,
         height: `${radius * 2}px`,
-        background: colorUtil.tintColor(baseColor, 26),
+        // background: colorUtil.tintColor(baseColor, 8),
         animation: `${rippleAnimationTime / 1000}s ${rippleAnimationName} ease`,
       };
 
       styles.setStyleElement(ripple, rippleStyle);
-      elementRef.current.append(ripple);
+      elementRef.current!.append(ripple);
 
       setTimeout(() => {
 
@@ -74,7 +76,9 @@ export default function useRipple(elementRef: MutableRefObject<HTMLElement>) {
     rippleTaskRef.current?.then((rippleId) => {
 
       const rippleElements = elementRef.current?.getElementsByClassName(rippleId);
-      if (rippleElements) { rippleElements[0]?.remove(); }
+      if (rippleElements) {
+        rippleElements[0]?.remove();
+      }
     });
   };
 

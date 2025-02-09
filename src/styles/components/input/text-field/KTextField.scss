@@ -20,7 +20,7 @@
             align-items: center;
             gap: $k-spacing-2;
             white-space: nowrap;
-            color: $k-default-font-color;
+            color: $k-font-color;
 
             .k-text-field__label__text__required { color: $k-secondary-error; }
 
@@ -55,10 +55,10 @@
         align-items: center;
         width: 100%;
 
-        border: 1px solid $k-border-default-color;
+        border: 1px solid $k-border-color;
         border-radius: $k-border-radius-default;
         background: $k-white-color;
-        caret-color: $k-default-font-color;
+        caret-color: $k-font-color;
 
         transition-property: border-color;
         @include k-transition-3;
@@ -71,12 +71,12 @@
             border: none;
             outline: none;
             background-color: transparent;
-            color: $k-default-font-color;
+            color: $k-font-color;
 
             @include k-transition-3;
 
             &::placeholder {
-                color: $k-placeholder-font-color;
+                color: $k-font-placeholder-color;
             }
         }
 
@@ -91,10 +91,10 @@
             background: $k-white-disabled-color;
             cursor: not-allowed;
 
-            &:hover { border-color: $k-border-default-color; }
+            &:hover { border-color: $k-border-color; }
 
             .k-text-field__input {
-                color: $k-disabled-font-color;
+                color: $k-font-disabled-color;
                 background: $k-white-disabled-color;
                 cursor: not-allowed;
             }
@@ -162,7 +162,7 @@
         .k-text-field__label__container {
 
             .k-text-field__label__text {
-                color: $k-dark-mode-default-font-color;
+                color: $k-dark-font-color;
 
                 &.k-text-field__label__text--focus {
                     color: $k-primary-color;
@@ -176,31 +176,31 @@
     &.k-text-field--disabled, &.k-text-field--disabled {
 
         .k-text-field__input__container {
-            background: $k-dark-mode-disabled-background-color;
+            background: $k-dark-background-disabled-color;
 
-            &:hover { border-color: $k-dark-mode-default-border-color; }
+            &:hover { border-color: $k-dark-default-border-color; }
 
             .k-text-field__input {
-                color: $k-dark-mode-disabled-font-color;
-                background: $k-dark-mode-disabled-background-color;
+                color: $k-dark-font-disabled-color;
+                background: $k-dark-background-disabled-color;
             }
         }
     }
 
     .k-text-field__input__container {
-        border: 1px solid $k-dark-mode-default-border-color;
+        border: 1px solid $k-dark-default-border-color;
         border-radius: $k-border-radius-default;
-        background: $k-dark-mode-default-background-color;
+        background: $k-dark-background-color;
         caret-color: $k-white-color;
         font-size: 0;
 
         &:hover, &:focus-within { border-color: $k-primary-hover-color; }
 
         .k-text-field__input {
-            color: $k-dark-mode-default-font-color;
+            color: $k-dark-font-color;
 
             &::placeholder {
-                color: $k-dark-mode-placeholder-font-color;
+                color: $k-dark-font-placeholder-color;
             }
         }
     }

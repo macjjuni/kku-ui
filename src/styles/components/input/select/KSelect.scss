@@ -6,7 +6,7 @@
     gap: $k-spacing-6;
 
     min-width: 80px;
-    border: 1px solid $k-border-default-color;
+    border: 1px solid $k-border-color;
     border-radius: $k-border-radius-default;
     background: $k-white-color;
     white-space: nowrap;
@@ -20,10 +20,10 @@
     &:hover { border-color: $k-primary-color; }
 
     &.k-select--disabled {
-        color: $k-disabled-font-color;
+        color: $k-font-disabled-color;
         background: $k-white-disabled-color;
         cursor: not-allowed;
-        &:hover { border-color: $k-border-default-color; }
+        &:hover { border-color: $k-border-color; }
     }
 
     .k-select__label-text {
@@ -33,7 +33,7 @@
     }
 
     .k-select__label-text__placeholder {
-        color: $k-placeholder-font-color;
+        color: $k-font-placeholder-color;
     }
 
     .k-select__current__label__arrow-icon { @include k-transition-3; }
@@ -50,7 +50,7 @@
         left: 0;
         width: 100%;
         height: 0;
-        border: 1px solid $k-border-default-color;
+        border: 1px solid $k-border-color;
         background-color: $k-white-color;
         border-radius: $k-border-radius-default;
         overflow: hidden;
@@ -65,7 +65,7 @@
             &:hover { background: $k-white-hover-color; }
             &:last-child { border: none; }
         }
-        .k-select__menu-list__item-no-data { color: $k-placeholder-font-color; }
+        .k-select__menu-list__item-no-data { color: $k-font-placeholder-color; }
     }
 
     // Size
@@ -113,24 +113,24 @@
 
 .#{$k-dark-class-name} .k-select {
 
-    color: $k-dark-mode-default-font-color;
-    border: 1px solid $k-dark-mode-default-border-color;
+    color: $k-dark-font-color;
+    border: 1px solid $k-dark-default-border-color;
     border-radius: $k-border-radius-default;
-    background: $k-dark-mode-default-background-color;
+    background: $k-dark-background-color;
 
     &.k-select--disabled {
-        color: $k-dark-mode-disabled-font-color;
-        background: $k-dark-mode-disabled-background-color;
-        &:hover { border-color: $k-dark-mode-default-border-color; }
+        color: $k-dark-font-disabled-color;
+        background: $k-dark-background-disabled-color;
+        &:hover { border-color: $k-dark-default-border-color; }
     }
 
     .k-select__menu-list {
-        border-color: $k-dark-mode-default-border-color;
-        background-color: $k-dark-mode-default-background-color;
+        border-color: $k-dark-default-border-color;
+        background-color: $k-dark-background-color;
 
         .k-select__menu-list__item {
             border-color: $k-gray-color-800;
-            &:hover { background: $k-dark-mode-hover-background-color; }
+            &:hover { background: $k-dark-background-hover-color; }
         }
     }
 }

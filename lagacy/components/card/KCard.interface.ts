@@ -18,5 +18,5 @@ export interface KCardProps extends KBaseProp, KVariantProp {
   rounded?: boolean
   borderRadius?: string
 
-  onClick?: (e:MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => void
+  onClick?: (e: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => void
 }

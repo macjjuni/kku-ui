@@ -1,6 +1,6 @@
 import { CSSProperties, memo, useMemo } from 'react';
-import { KCardProps } from '@/components/card/KCard.interface';
-import { initVariant } from '@/common/util/variation';
+import { KCardProps } from './KCard.interface';
+import { initVariant } from '../../../src/common/util/variation';
 
 
 const KCard = ({ children, id, className, style, title, subTitle, clickable, width, height, color,
