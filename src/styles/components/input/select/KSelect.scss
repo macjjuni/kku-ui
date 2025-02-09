@@ -68,21 +68,9 @@
         .k-select__menu-list__item-no-data { color: $k-font-placeholder-color; }
     }
 
-    // Size
-    &.k-select--large {
-
-        &, & + .k-select__template {
-            padding: $k-spacing-6 $k-spacing-10 $k-spacing-6 $k-spacing-10;
-            @include k-body-1;
-        }
-
-        .k-select__menu-list {
-            .k-select__menu-list__item {
-                padding: $k-spacing-6 $k-spacing-10;
-            }
-        }
-    }
+    // region[Sizes]
     &.k-select--medium {
+        width: 240px;
 
         &, & + .k-select__template {
             padding: $k-spacing-6 $k-spacing-8 $k-spacing-6 $k-spacing-10;
@@ -94,42 +82,45 @@
                 padding: $k-spacing-6 $k-spacing-8;
             }
         }
-
     }
     &.k-select--small {
+        width: 200px;
 
         &, & + .k-select__template {
-            padding: $k-spacing-6 $k-spacing-8 $k-spacing-6 $k-spacing-10;
+            padding: $k-spacing-4 $k-spacing-8 $k-spacing-4 $k-spacing-10;
             @include k-body-3;
         }
 
         .k-select__menu-list {
             .k-select__menu-list__item {
-                padding: $k-spacing-6 $k-spacing-8;
+                padding: $k-spacing-4 $k-spacing-8;
             }
         }
     }
+    // endregion
 }
 
 .#{$k-dark-class-name} .k-select {
 
     color: $k-dark-font-color;
-    border: 1px solid $k-dark-default-border-color;
+    border: 1px solid $k-dark-border-color;
     border-radius: $k-border-radius-default;
     background: $k-dark-background-color;
+
+    &:hover { border-color: $k-dark-border-hover-color; }
 
     &.k-select--disabled {
         color: $k-dark-font-disabled-color;
         background: $k-dark-background-disabled-color;
-        &:hover { border-color: $k-dark-default-border-color; }
+        &:hover { border-color: $k-dark-border-color; }
     }
 
     .k-select__menu-list {
-        border-color: $k-dark-default-border-color;
+        border-color: $k-dark-border-color;
         background-color: $k-dark-background-color;
 
         .k-select__menu-list__item {
-            border-color: $k-gray-color-800;
+            border-color: $k-dark-border-color;
             &:hover { background: $k-dark-background-hover-color; }
         }
     }
