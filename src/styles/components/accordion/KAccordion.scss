@@ -1,61 +1,116 @@
 .k-accordion {
-    border: 1px solid $k-border-color;
-    border-radius: 4px;
+  border: 1px solid $k-border-color;
+  border-radius: 4px;
+  overflow: hidden;
+
+  .k-accordion__summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    background: $k-gray-color-50;
+    list-style-type: none; // #Marker Style[Other Browser]
+    user-select: none;
+    cursor: pointer;
+
+    &:hover {
+      background: $k-gray-color-100;
+    }
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    // #Marker Style[Safari]
+
+    .k-accordion__summary__container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: $k-font-color;
+    }
+
+    .k-accordion__summary__icon__wrapper {
+      @include k-center-flex-wrap;
+      cursor: pointer;
+
+      .k-accordion__summary__icon {
+        @include k-transition-2;
+      }
+
+      .k-accordion__summary__icon--close {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .k-accordion__content {
+    max-height: 0;
+    height: auto;
+    background-color: $k-white-color;
     overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
 
-    .k-accordion__summary {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: background-color 0.3s ease;
-        background: $k-gray-color-50;
-        list-style-type: none; // #Marker Style[Other Browser]
-        user-select: none;
+  &.k-accordion--large {
+    @include k-body-1;
 
-        &:hover { background: $k-gray-color-100; }
-        &::-webkit-details-marker { display: none; }
-        // #Marker Style[Safari]
-
-        .k-accordion__summary__container {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        .k-accordion__summary__icon__wrapper {
-            @include k-center-flex-wrap;
-            cursor: pointer;
-            .k-accordion__summary__icon { @include k-transition-2; }
-            .k-accordion__summary__icon--close { transform: rotate(180deg); }
-        }
+    .k-accordion__summary, .k-accordion__content__wrapper {
+      padding: $k-spacing-16;
     }
 
-    .k-accordion__content {
-        max-height: 0;
-        height: auto;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
+    .k-accordion__summary__icon ~ .k-accordion__summary__text {
+      margin-left: $k-spacing-12;
+    }
+  }
+
+  &.k-accordion--medium {
+    @include k-body-1;
+
+    .k-accordion__summary, .k-accordion__content__wrapper {
+      padding: $k-spacing-12 $k-spacing-14;
     }
 
-    &.k-accordion--large {
-        @include k-body-1;
+    .k-accordion__summary__icon ~ .k-accordion__summary__text {
+      margin-left: $k-spacing-10;
+    }
+  }
 
-        .k-accordion__summary, .k-accordion__content__wrapper { padding: $k-spacing-16; }
-        .k-accordion__summary__icon ~ .k-accordion__summary__text { margin-left: $k-spacing-12; }
+  &.k-accordion--small {
+    @include k-body-1;
+
+    .k-accordion__summary, .k-accordion__content__wrapper {
+      padding: $k-spacing-8 $k-spacing-12;
     }
 
-    &.k-accordion--medium {
-        @include k-body-1;
+    .k-accordion__summary__icon ~ .k-accordion__summary__text {
+      margin-left: $k-spacing-8;
+    }
+  }
 
-        .k-accordion__summary, .k-accordion__content__wrapper { padding: $k-spacing-12 $k-spacing-14; }
-        .k-accordion__summary__icon ~ .k-accordion__summary__text { margin-left: $k-spacing-10; }
+}
+
+
+.#{$k-dark-class-name} .k-accordion {
+  border-color: $k-dark-border-color;
+
+  .k-accordion__summary {
+    background: $k-gray-color-900;
+
+    .k-accordion__summary__container {
+      color: $k-dark-font-color;
     }
 
-    &.k-accordion--small {
-        @include k-body-1;
+    .k-accordion__summary__icon__wrapper {
 
-        .k-accordion__summary, .k-accordion__content__wrapper { padding: $k-spacing-8 $k-spacing-12; }
-        .k-accordion__summary__icon ~ .k-accordion__summary__text { margin-left: $k-spacing-8; }
+      .k-accordion__summary__icon > svg {
+                  fill: $k-white-color;
+      }
     }
+  }
 
+  .k-accordion__content {
+    color: $k-dark-font-shade-color;
+    background-color: $k-gray-color-800;
+  }
 }
