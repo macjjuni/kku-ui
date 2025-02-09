@@ -190,13 +190,13 @@ $k-dark-default-icon-color: #cccccc !default;
 // region [Percent]
 $dark-hover-percent: 12%;
 $dark-disabled-percent: 24%;
-$dark-placeholder-percent: 6%;
+$dark-placeholder-percent: 48%;
 // endregion
 
 // region [Fonts]
 $k-dark-font-color: #ffffff !default;
 $k-dark-font-disabled-color: lighten($k-dark-font-color, $dark-disabled-percent) !default;
-$k-dark-font-placeholder-color: lighten($k-dark-font-color, $dark-placeholder-percent) !default;
+$k-dark-font-placeholder-color: darken($k-dark-font-color, $dark-placeholder-percent) !default;
 // endregion
 
 // region [Background]
@@ -206,7 +206,7 @@ $k-dark-background-disabled-color: lighten($k-dark-background-color, $dark-disab
 // endregion
 
 // region [Border]
-$k-dark-border-color: $k-white-color !default;
+$k-dark-border-color: $k-gray-color-500 !default;
 $k-dark-border-hover-color: darken($k-white-color, $dark-hover-percent) !default;
 $k-dark-border-disabled-color: darken($k-dark-border-color, $dark-disabled-percent) !default;
 // endregion

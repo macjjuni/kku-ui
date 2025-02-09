@@ -1,11 +1,9 @@
 .k-text-field {
     display: flex;
-    gap: $k-spacing-6;
     min-width: 280px;
     width: 300px;
     font-size: 0;
     font-family: $k-font-family;
-
 
     // Label Style - Common
     .k-text-field__label__container {
@@ -13,6 +11,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 $k-spacing-2;
+        overflow: hidden;
 
         .k-text-field__label__text {
             display: inline-flex;
@@ -25,7 +24,7 @@
             .k-text-field__label__text__required { color: $k-secondary-error; }
 
             &.k-text-field__label__text--focus {
-                color: $k-primary-color;
+                color: $k-black-color;
                 transition-property: color;
                 @include k-transition-3;
             }
@@ -35,6 +34,10 @@
     // Label Style - Direction:Column
     &.k-text-field--column {
         flex-direction: column;
+
+        .k-text-field__label__container {
+            margin-bottom: $k-spacing-6;
+        }
     }
 
     // Label Style - Direction:Row
@@ -59,11 +62,12 @@
         border-radius: $k-border-radius-default;
         background: $k-white-color;
         caret-color: $k-font-color;
+        font-size: 0;
 
         transition-property: border-color;
         @include k-transition-3;
 
-        &:hover, &:focus-within { border-color: $k-primary-hover-color; }
+        &:hover, &:focus-within { border-color: $k-black-color; }
 
         .k-text-field__input {
             width: 100%;
@@ -115,32 +119,24 @@
     }
 
 
-    // Size
-    &.k-text-field--large {
-
-        .k-text-field__label__container {
-
-            .k-text-field__label__text { @include k-label-1; }
-        }
-
-        .k-text-field__input__container {
-            padding: $k-spacing-10 $k-spacing-12;
-            .k-text-field__input { @include k-body-1; }
-        }
-    }
+    // region [Sizes]
     &.k-text-field--medium {
 
         .k-text-field__label__container {
-
             .k-text-field__label__text { @include k-label-2; }
         }
 
         .k-text-field__input__container {
-            padding: $k-spacing-8 $k-spacing-10;
-            .k-text-field__input { @include k-body-2; }
+
+            .k-text-field__input {
+                @include k-body-2;
+                padding: $k-spacing-6 $k-spacing-10;
+            }
         }
     }
     &.k-text-field--small {
+        min-width: 220px;
+        width: 240px;
 
         .k-text-field__label__container {
 
@@ -148,10 +144,13 @@
         }
 
         .k-text-field__input__container {
-            padding: $k-spacing-6 $k-spacing-8;
-            .k-text-field__input { @include k-body-3; }
+            .k-text-field__input {
+                @include k-body-3;
+                padding: $k-spacing-4 $k-spacing-8;
+            }
         }
     }
+    // endregion
 }
 
 // region [Dark Mode]
@@ -162,10 +161,10 @@
         .k-text-field__label__container {
 
             .k-text-field__label__text {
-                color: $k-dark-font-color;
+                color: $k-gray-color-200;
 
                 &.k-text-field__label__text--focus {
-                    color: $k-primary-color;
+                    color: $k-dark-font-color;
                     transition-property: color;
                     @include k-transition-3;
                 }
@@ -192,9 +191,8 @@
         border-radius: $k-border-radius-default;
         background: $k-dark-background-color;
         caret-color: $k-white-color;
-        font-size: 0;
 
-        &:hover, &:focus-within { border-color: $k-primary-hover-color; }
+        &:hover, &:focus-within { border-color: $k-white-color; }
 
         .k-text-field__input {
             color: $k-dark-font-color;
