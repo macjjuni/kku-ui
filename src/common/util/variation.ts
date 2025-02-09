@@ -1,8 +1,8 @@
-import { SizeType, VariantType } from '@/common/base/base.interface';
+import { VariantType } from '@/common/base/base.interface';
 
 // region [🎁 - Size]
 
-type GetSizesType = (clazz: string[], identity: string, size?: SizeType) => void;
+type GetSizesType = (clazz: string[], identity: string, size?: 'small' | 'medium' | 'large') => void;
 
 export const initSize: GetSizesType = (clazz, identity, size) => {
 
