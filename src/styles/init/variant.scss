@@ -195,6 +195,7 @@ $dark-placeholder-percent: 48%;
 
 // region [Fonts]
 $k-dark-font-color: #ffffff !default;
+$k-dark-font-shade-color: #e8e8e8 !default;
 $k-dark-font-disabled-color: lighten($k-dark-font-color, $dark-disabled-percent) !default;
 $k-dark-font-placeholder-color: darken($k-dark-font-color, $dark-placeholder-percent) !default;
 // endregion
