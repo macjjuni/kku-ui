@@ -3,16 +3,30 @@ import {
   MouseEvent,
   forwardRef,
   useImperativeHandle,
-  useRef,
+  useRef, useMemo, useCallback,
 } from 'react';
 import useRipple from '@/common/hook/useRipple';
 import { initSize, initVariant } from '@/common/util/variation';
 import { KButtonProps, KButtonRefs } from '@/components';
 
 
-const KButton = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
+const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => {
 
-  if (props.label && props.children) {
+  const {
+    children,
+    id,
+    className,
+    style,
+    onClick,
+    label,
+    disabled,
+    variant,
+    size,
+    color,
+    fontColor,
+  }: KButtonProps = { ...restProps };
+
+  if (label && children) {
     throw Error('Error: label and children attributes cannot be duplicated.');
   }
 
@@ -26,8 +40,8 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
       rootRef.current?.focus();
     },
     click() {
-      if (!props.disabled) {
-        props?.onClick?.();
+      if (!disabled) {
+        onClick?.();
       }
     },
   }));
@@ -37,72 +51,98 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
   // region [Styles]
 
-  const rootClass = () => {
+  const rootClass = useMemo(() => {
 
     const clazz = [];
 
-    if (props.className) { clazz.push(props.className); }
-    if (props.disabled) { clazz.push('k-button--disabled'); }
+    if (className) {
+      clazz.push(className);
+    }
+    if (disabled) {
+      clazz.push('k-button--disabled');
+    }
 
-    initVariant(clazz, 'k-button', props.variant);
-    initSize(clazz, 'k-button', props.size);
+    initVariant(clazz, 'k-button', variant);
+    initSize(clazz, 'k-button', size);
 
     return clazz.join(' ');
-  }
+  }, [className, disabled, variant, size]);
+
+  const rootStyle = useMemo(() => {
+
+    const styles = { ...style };
+
+    if (color) {
+      styles.borderColor = color;
+      styles.backgroundColor = color;
+
+      if (!fontColor) {
+        styles.color = '#fff';
+      }
+    }
+    if (fontColor) {
+      styles.color = fontColor;
+    }
+
+    return styles;
+  }, [style, color, fontColor])
 
   // endregion
 
 
   // region [Events]
 
-  const onMouseDown = (e: MouseEvent<HTMLButtonElement>) => {
-    if (!props.disabled) {
+  const onMouseDown = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+
+    if (!disabled) {
       ripple?.register(e);
     }
-  }
+  }, [ripple]);
 
-  const onMouseUp = (e: MouseEvent<HTMLButtonElement>) => {
+  const onMouseUp = useCallback((e: MouseEvent<HTMLButtonElement>) => {
 
     ripple.remove();
 
-    if (!props.disabled && props?.onClick) { props.onClick(e); }
-  }
+    if (!disabled) {
+      onClick?.(e);
+    }
+  }, [ripple, disabled, onClick]);
 
-  const onMouseLeave = () => {
+  const onMouseLeave = useCallback(() => {
 
     if (!rootRef?.current) {
       throw Error('Invalid rootRef.');
     }
 
     ripple.remove();
-  }
+  }, [ripple]);
 
-  const onKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+  const onKeyDown = useCallback((e: KeyboardEvent<HTMLButtonElement>) => {
 
     ripple?.register(e);
-  }
+  }, [ripple]);
 
-  const onKeyUp = (e: KeyboardEvent<HTMLButtonElement>) => {
+  const onKeyUp = useCallback((e: KeyboardEvent<HTMLButtonElement>) => {
 
     if (e.key === 'Enter' || e.key === ' ') {
       ripple.remove();
-      props?.onClick?.();
+      onClick?.();
     }
-  }
+  }, [ripple, onClick]);
 
   // endregion
 
   return (
-    <button ref={rootRef} id={props.id} className={`k-button ${rootClass()}`} style={props.style || {}}
-            type='button' disabled={props.disabled} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave}
+    <button ref={rootRef} id={id} className={`k-button ${rootClass}`} style={rootStyle}
+            type='button' disabled={disabled} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave}
             onMouseUp={onMouseUp} onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
 
-      {(props.children || props.label) && (
-        <span className='k-button__content'>{props.children || props.label}</span>)}
+      {(children || label) && (
+        <span className='k-button__content'>{children || label}</span>)}
     </button>
   );
 });
 
-KButton.displayName = 'KButton';
 
+KButton.displayName = 'KButton';
 export default KButton;
