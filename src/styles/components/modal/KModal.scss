@@ -6,30 +6,20 @@ $k-modal__wrapper_zIndex: 1000;
 $k-modal__container_zIndex: 1002;
 $k-modal__overlay_zIndex: 1001;
 
-$k-modal__header__font-size: 20px;
+$k-modal__header__font-size: 18px;
 $k-modal__header__line-height: 24px;
 
 $k-modal__overlay__background-color: $k-black-color;
 $k-modal__overlay__opacity: 0.16;
 
-
-@keyframes modalUp {
-    from { transform: translateY(0); }
-    to { transform: translateY(-$k-spacing-16); }
-}
-@keyframes modalDown {
-    from { transform: translateY(-$k-spacing-16); }
-    to { transform: translateY(0); }
-}
 @keyframes modalScaleUp {
     from { transform: scale(1.0); }
-    to { transform: scale(1.032); }
+    to { transform: scale(1.016); }
 }
 @keyframes modalScaleDown {
-    from { transform: scale(1.032); }
+    from { transform: scale(1.016); }
     to { transform: scale(1.0); }
 }
-
 
 .k-modal__wrapper {
     position: fixed;
@@ -45,11 +35,8 @@ $k-modal__overlay__opacity: 0.16;
         @include fade-out;
 
         // 컨테이너 종료 애니메이션
-        .k-modal__container.k-modal__container--updown {
-            animation: modalUp 0.24s ease-in forwards;
-        }
-        .k-modal__container.k-modal__container--scale {
-            animation: modalScaleUp 0.24s ease-in forwards;
+        .k-modal__container {
+            animation: modalScaleUp 0.16s ease-in forwards;
         }
     }
 
@@ -61,18 +48,13 @@ $k-modal__overlay__opacity: 0.16;
         overflow: hidden;
 
         // 컨테이너 시작 애니메이션
-        &.k-modal__container--updown {
-            animation: modalDown 0.24s ease-out forwards;
-        }
-        &.k-modal__container--scale {
-            animation: modalScaleDown 0.24s ease-out forwards;
-        }
+        animation: modalScaleDown 0.16s ease-out forwards;
 
         .k-modal__container__header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: $k-spacing-14;
+            padding: $k-spacing-8 $k-spacing-12;
             border-bottom: 1px solid $k-gray-color-100;
 
             .k-modal__container__header__text{
@@ -89,18 +71,6 @@ $k-modal__overlay__opacity: 0.16;
                 color: transparent;
                 cursor: pointer;
                 overflow: hidden;
-
-                &:after, &:before {
-                    content: '';
-                    position: absolute;
-                    top: 50%; left: 50%;
-                    width: 2px; height: 80%;
-                    border-radius: 1px;
-                    transform: translate(-50%, -50%);
-                    background-color: $k-black-color;
-                }
-                &:after { transform: translate(-50%, -50%) rotate(45deg); }
-                &:before { transform: translate(-50%, -50%) rotate(-45deg); }
             }
         }
 
@@ -111,14 +81,11 @@ $k-modal__overlay__opacity: 0.16;
         .k-modal__container__footer {
             @include k-center-flex-wrap;
             gap: 8px;
-            padding: 0 $k-spacing-16 $k-spacing-16 $k-spacing-16;
+            padding: 0 $k-spacing-12 $k-spacing-12 $k-spacing-12;
         }
 
 
-        &.k-modal__container--large {
-            max-width: $k-modal__large;
-            width: 100%;
-        }
+        // region [Sizes]
         &.k-modal__container--medium {
             max-width: $k-modal__medium;
             width: 100%;
@@ -127,6 +94,7 @@ $k-modal__overlay__opacity: 0.16;
             max-width: $k-modal__small;
             width: 100%;
         }
+        // endregion
     }
 
     .k-modal-wrapper__overlay {
