@@ -5,16 +5,23 @@ import { KIcon } from '@/components';
 import { useCleanId } from '@/common/hook/useCleanId';
 
 
-const KAccordion = (props: KAccordionProps) => {
-
-  // {
-  //   children, className, id, size, style, summary, width,
-  //     open, summaryIcon, summaryIconSize = 'medium'
-  // }
+const KAccordion = ({ ...restProps }: KAccordionProps) => {
 
   // region [Hooks]
 
-  const [isOpen, setIsOpen] = useState<boolean>(!!props.open);
+  const {
+    id,
+    className,
+    size,
+    children,
+    summaryIconSize,
+    summary,
+    summaryIcon,
+    style,
+    width,
+    open,
+  }: KAccordionProps = { ...restProps };
+  const [isOpen, setIsOpen] = useState<boolean>(!!open);
   const root = useRef<HTMLDetailsElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [contentHeight, setContentHeight] = useState(0);
@@ -26,20 +33,20 @@ const KAccordion = (props: KAccordionProps) => {
 
   // region [Styles]
 
-  const rootClass = () => {
+  const rootClass = useMemo(() => {
 
     const clazz = [];
 
-    if (props.className) {
-      clazz.push(props.className);
+    if (className) {
+      clazz.push(className);
     }
 
-    initSize(clazz, 'k-accordion', props.size);
+    initSize(clazz, 'k-accordion', size);
 
     clazz.push(`k-accordion--${isOpen ? 'open' : 'close'}`);
 
     return clazz.join(' ');
-  }
+  }, [className, size]);
 
   const iconClass = () => {
 
@@ -55,28 +62,30 @@ const KAccordion = (props: KAccordionProps) => {
   }
 
 
-  const rootStyle = () => {
+  const rootStyle = useMemo(() => {
 
-    const styles: CSSProperties = { ...props.style };
-    if (props.width) {
-      styles.width = props.width;
+    const styles: CSSProperties = { ...style };
+
+    if (width) {
+      styles.width = width;
     }
     return styles;
-  }
+  }, [width]);
 
-  const contentStyle = (): CSSProperties => {
+  const contentStyle = useMemo((): CSSProperties => {
+
     const height = isOpen ? `${contentHeight}px` : 0;
     return { maxHeight: height };
-  }
+  }, [isOpen, contentHeight]);
 
-  const iconSize = () => {
+  const iconSize = useMemo(() => {
 
-    if (props.size === 'small') {
+    if (size === 'small') {
       return 16;
     }
 
     return 18;
-  }
+  }, [size]);
 
   // endregion
 
@@ -115,20 +124,20 @@ const KAccordion = (props: KAccordionProps) => {
 
   const SummaryIcon = useMemo(() => {
 
-    if (!props.summaryIcon) {
+    if (!summaryIcon) {
       return null;
     }
 
-    if (typeof props.summaryIcon === 'string') {
+    if (typeof summaryIcon === 'string') {
       return (
         <KIcon className='k-accordion__summary__icon'
-               icon={props.summaryIcon}
-               size={props.summaryIconSize}/>
+               icon={summaryIcon}
+               size={summaryIconSize}/>
       );
     }
 
-    return props.summaryIcon;
-  }, [props.summaryIcon, props.summaryIconSize])
+    return summaryIcon;
+  }, [summaryIcon, summaryIconSize])
 
   // endregion
 
@@ -145,29 +154,29 @@ const KAccordion = (props: KAccordionProps) => {
 
 
   return (
-    <details ref={root} id={props.id} className={`k-accordion ${rootClass()}`} open
-             style={rootStyle()} data-testid='k-accordion'>
+    <details ref={root} id={id} className={`k-accordion ${rootClass}`} open
+             style={rootStyle} data-testid='k-accordion'>
 
       <summary role='button' id={summaryId} className='k-accordion__summary' onClick={onClick}
                onKeyDown={onKeyDown} tabIndex={0}>
         <div className='k-accordion__summary__container' data-testid='k-accordion__summary'>
           {SummaryIcon}
-          <span className='k-accordion__summary__text'>{props.summary}</span>
+          <span className='k-accordion__summary__text'>{summary}</span>
         </div>
         <div className='k-accordion__summary__icon__wrapper'>
-          <KIcon className={`k-accordion__summary__icon ${iconClass()}`} icon='keyboard_arrow_down' size={iconSize()}/>
+          <KIcon className={`k-accordion__summary__icon ${iconClass()}`} icon='keyboard_arrow_down' size={iconSize}/>
         </div>
       </summary>
 
-      <div ref={contentRef} id={contentId} className='k-accordion__content' style={contentStyle()}
+      <div ref={contentRef} id={contentId} className='k-accordion__content' style={contentStyle}
            aria-labelledby={summaryId}>
-        <div className='k-accordion__content__wrapper'>{props.children}</div>
+        <div className='k-accordion__content__wrapper'>{children}</div>
       </div>
 
     </details>
   );
 };
 
-KAccordion.displayName = 'KAccordion';
 
+KAccordion.displayName = 'KAccordion';
 export default memo(KAccordion);
