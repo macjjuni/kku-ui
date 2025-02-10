@@ -8,9 +8,6 @@ export const variantArgType = {
 
 export const sizeArgType = {
     size: {description: '요소의 크기를 설정합니다.', defaultValue: {summary: 'medium'}},
-    large: {description: '요소의 크기를 Large 상태로 설정합니다.', defaultValue: {summary: 'false'}},
-    medium: {description: '요소의 크기를 Medium 상태로 설정합니다.', defaultValue: {summary: 'false'}},
-    small: {description: '요소의 크기를 Small 상태로 설정합니다.', defaultValue: {summary: 'false'}},
 };
 
 export const disabledArgType = {
