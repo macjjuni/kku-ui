@@ -9,6 +9,8 @@ export interface KButtonProps extends KBaseProp, KSizeProp {
 
   variant?: VariantType
   onClick?: (e?: MouseEvent<HTMLButtonElement>) => void
+  color?: string
+  fontColor?: string
 }
 
 export interface KButtonRefs {

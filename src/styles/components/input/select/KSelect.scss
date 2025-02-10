@@ -17,7 +17,7 @@
 
     @include k-transition-3;
 
-    &:hover { border-color: $k-primary-color; }
+    &:hover { border-color: $k-border-hover-color; }
 
     &.k-select--disabled {
         color: $k-font-disabled-color;

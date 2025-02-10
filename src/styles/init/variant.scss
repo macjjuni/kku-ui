@@ -59,8 +59,8 @@ $k-background-disabled-color: darken($k-white-color, $disabled-percent) !default
 // endregion
 
 // region [Border]
-$k-border-color: $k-gray-color-400 !default;
-$k-border-hover-color: darken($k-border-color, $hover-percent);
+$k-border-color: $k-gray-color-300 !default;
+$k-border-hover-color: lighten($k-black-color, $hover-percent);
 $k-border-disabled-color: darken($k-border-color, $disabled-percent) !default;
 // endregion
 
