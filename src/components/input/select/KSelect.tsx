@@ -1,4 +1,14 @@
-import { CSSProperties, forwardRef, KeyboardEvent, Ref, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import {
+  CSSProperties,
+  forwardRef,
+  KeyboardEvent,
+  Ref,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import type { KSelectItemType, KSelectProps, KSelectRefs } from '@/components/input/select/KSelect.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { KIcon } from '@/components';
@@ -6,9 +16,25 @@ import KSelectList from '@/components/input/select/KSelectList';
 import { useCleanId } from '@/common/hook/useCleanId';
 
 
-const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
+const KSelect = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs>) => {
 
   // region [Hooks]
+
+  const {
+    id,
+    className,
+    style,
+    items,
+    onBlur,
+    noDataText,
+    onFocus,
+    size,
+    width,
+    onChange,
+    value,
+    placeholder,
+    disabled,
+  }: KSelectProps = { ...restProps };
 
   const selectRef = useRef<HTMLDivElement>(null);
   const isOnMouse = useRef<boolean>(false);
@@ -20,97 +46,93 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
 
   // region [Styles]
 
-  const rootClass = () => {
+  const rootClass = useMemo(() => {
     const clazz = [];
 
     if (open) {
       clazz.push('k-select--open');
     }
-    if (props.className) {
-      clazz.push(props.className);
+    if (className) {
+      clazz.push(className);
     }
-    initSize(clazz, 'k-select', props.size);
-    initDisabled(clazz, 'k-select', props.disabled);
+    initSize(clazz, 'k-select', size);
+    initDisabled(clazz, 'k-select', disabled);
 
     return clazz.join(' ');
-  }
+  }, [open, className, size, disabled])
 
-  const rootStyle = () => {
-    const style: CSSProperties = props.width ? { width: props.width } : {};
+  const rootStyle = useMemo(() => {
+    const styles: CSSProperties = width ? { width } : {};
 
-    return { ...style, ...props.style };
-  }
+    return { ...styles, ...style };
+  }, [style]);
 
   // endregion
 
 
   // region [Privates]
 
-  const onSelectOpen = () => {
+  const onSelectOpen = useCallback(() => {
     setOpen(true);
-  }
+  }, []);
 
-  const onSelectClose = () => {
+  const onSelectClose = useCallback(() => {
     setOpen(false);
-  }
+  }, []);
 
   const displayTitle = useMemo(() => {
 
-    if ((!props.value || props.value === '') && props.placeholder) {
+    if ((!value || value === '') && placeholder) {
       return (
         <span className='k-select__label-text__placeholder'>
-          {props.placeholder}
+          {placeholder}
         </span>
       );
     }
 
-    const selectedItem = props.items?.find((item) => (
-      item.value === props.value));
+    const selectedItem = items?.find((item) => (
+      item.value === value));
 
     return (
       <span className='k-select__label-text' data-testid='k-select-label'>
-        {selectedItem?.title || props.value}
+        {selectedItem?.title || value}
       </span>
     );
-  }, [props.value, props.items, props.placeholder]);
+  }, [value, items, placeholder]);
 
   // endregion
 
 
   // region [Events]
 
-  const onClickRoot = () => {
-    if (!open && !props.disabled) {
+  const onClickRoot = useCallback(() => {
+    if (!open && !disabled) {
       onSelectOpen();
       return;
     }
     onSelectClose();
-  }
+  }, [open, disabled]);
 
-  const onFocusRoot = () => {
-    if (props.onFocus) {
-      props.onFocus();
-    }
-  }
+  const onFocusRoot = useCallback(() => {
+    onFocus?.();
+  }, []);
 
-  const onBlurRoot = () => {
+  const onBlurRoot = useCallback(() => {
     if (open && !isOnMouse.current) {
       onSelectClose();
     }
-    if (props.onBlur) {
-      props.onBlur();
-    }
-  }
+    onBlur?.();
+  }, []);
 
-  const onMouseEnterRoot = () => {
+  const onMouseEnterRoot = useCallback(() => {
     isOnMouse.current = true;
-  }
+  }, []);
 
-  const onMouseLeaveRoot = () => {
+  const onMouseLeaveRoot = useCallback(() => {
     isOnMouse.current = false;
-  }
+  }, []);
 
-  const onKeyUpRoot = (e: KeyboardEvent<HTMLDivElement>) => {
+  const onKeyUpRoot = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       if (!open) {
         onSelectOpen();
@@ -124,57 +146,52 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
     if (e.key === 'Tab') {
       isOnMouse.current = true;
     }
-  }
+  }, [open]);
 
-  const onClickListItem = (item: KSelectItemType | null) => {
+  const onClickListItem = useCallback((item: KSelectItemType | null) => {
     if (item === null) {
       return;
     }
 
-    props.onChange(item.value);
+    onChange(item.value);
     onSelectClose();
-  }
+  }, [onChange]);
 
-  const onFocusListItem = () => {
+  const onFocusListItem = useCallback(() => {
     isOnMouse.current = false;
-  }
+  }, []);
 
   // eslint-disable-next-line max-len
-  const onKeydownListItem = (e: KeyboardEvent<HTMLLIElement>, item: KSelectItemType | null, idx: number) => {
+  const onKeydownListItem = useCallback((e: KeyboardEvent<HTMLLIElement>, item: KSelectItemType | null, idx: number) => {
     if (item && (e.key === 'Enter' || e.key === ' ')) {
-      props.onChange(item.value);
+      onChange(item.value);
     }
 
-    if ((props.items.length - 1 === idx || idx === -1) && (!e.shiftKey && e.key === 'Tab')) {
+    if ((items.length - 1 === idx || idx === -1) && (!e.shiftKey && e.key === 'Tab')) {
       onSelectClose();
     }
-
-  }
+  }, [onChange, items]);
 
   // endregion
 
 
   useImperativeHandle(ref, () => ({
-    open: () => {
-      onSelectOpen();
-    },
-    close: () => {
-      onSelectClose();
-    },
+    open: onSelectOpen,
+    close: onSelectClose,
   }));
 
 
   return (
-    <div ref={selectRef} id={props.id} className={`k-select ${rootClass()}`} data-testid='k-select'
-         style={rootStyle()} tabIndex={props.disabled ? -1 : 0} role='button' onClick={onClickRoot}
+    <div ref={selectRef} id={id} className={`k-select ${rootClass}`} data-testid='k-select'
+         style={rootStyle} tabIndex={disabled ? -1 : 0} role='button' onClick={onClickRoot}
          onKeyUp={onKeyUpRoot} onFocus={onFocusRoot} onBlur={onBlurRoot} onMouseEnter={onMouseEnterRoot}
          onMouseLeave={onMouseLeaveRoot} aria-expanded={open}>
       {displayTitle}
 
       <KIcon className='k-select__current__label__arrow-icon' icon='keyboard_arrow_down' size={16}/>
 
-      <KSelectList id={selectListId} open={open} items={props.items} onClick={onClickListItem}
-                   onFocus={onFocusListItem} onKeyDown={onKeydownListItem} noDataText={props?.noDataText || 'No Data'}/>
+      <KSelectList id={selectListId} open={open} items={items} onClick={onClickListItem}
+                   onFocus={onFocusListItem} onKeyDown={onKeydownListItem} noDataText={noDataText || 'No Data'}/>
     </div>
   );
 
@@ -182,6 +199,6 @@ const KSelect = forwardRef((props: KSelectProps, ref: Ref<KSelectRefs>) => {
 
 });
 
-KSelect.displayName = 'KSelect';
 
+KSelect.displayName = 'KSelect';
 export default KSelect;
