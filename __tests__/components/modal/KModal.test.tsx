@@ -7,7 +7,7 @@ const mockOnClick = jest.fn();
 
 const rootTestId = 'k-modal-test-id';
 const containerTestId = 'k-modal__container-test-id';
-const closeButtonTestId = 'k-modal__close-button-test-id';
+const closeButtonTestId = 'k-icon';
 const overlayTestId = 'k-modal-overlay-test-id';
 const testClass = 'k-modal-class';
 const testStyle = { color: 'red' };
