@@ -1,6 +1,6 @@
 .k-accordion {
   border: 1px solid $k-border-color;
-  border-radius: 4px;
+  border-radius: $k-border-radius-default;
   overflow: hidden;
 
   .k-accordion__summary {
