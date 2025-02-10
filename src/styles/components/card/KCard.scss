@@ -2,16 +2,16 @@
     position: relative;
     display: inline-flex;
     flex-direction: column;
-    padding: $k-spacing-20;
+    padding: $k-spacing-8;
     border: 1px solid $k-border-color;
     border-radius: $k-border-radius-default;
     min-width: 80px;
     font-family: $k-font-family;
 
     .k-card__title {
-        @include k-title-2;
+        @include k-sub-title-1;
 
-        & + .k-card__sub-title { margin-top: $k-spacing-16; }
+        & + .k-card__sub-title { margin-top: $k-spacing-8; }
     }
 
     .k-card__sub-title { @include k-label-1; }
@@ -28,13 +28,18 @@
     }
 
     &.k-card--outlined {
-        border-color: $k-primary-color;
-        color: $k-primary-color;
+        border-color: $k-border-color;
+        color: $k-font-color;
     }
 
     &.k-card--contained {
         border-color: $k-primary-color;
         background: $k-primary-color;
     }
+}
 
+
+.#{$k-dark-class-name} .k-card {
+    border-color: $k-dark-border-color;
+    color: $k-dark-font-color;
 }
