@@ -1,52 +1,44 @@
-name: Storybook Deploy to GitHub Pages
+name: Deploy Storybook to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
-  workflow_dispatch:
+    branches:
+      - main  # main 브랜치에 push될 때 실행
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18  # 원하는 Node.js 버전
 
       - name: Install dependencies
-        run: npm i --legacy-peer-deps
+        run: npm install  # 프로젝트에 따라 pnpm, yarn 사용 가능
 
       - name: Build Storybook
-        run: npm run build-storybook
+        run: npm run build-storybook  # Storybook 빌드
 
-      - name: Verify build output
-        run: |
-          pwd
-          ls -la ./storybook-static  # 폴더 확인
+      - name: List build output (debug)
+        run: ls -l ./storybook-static  # 빌드된 파일 확인
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload artifact
+      - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./storybook-static"
-          name: "storybook-static"
-          retention-days: 1  # 캐시 문제 방지
+          path: ./storybook-static  # Storybook 빌드 결과물
 
+  deploy:
+    needs: build  # build job이 완료된 후 실행
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v2
-        with:
-          artifact_name: "storybook-static"
