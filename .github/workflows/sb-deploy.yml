@@ -1,40 +1,44 @@
-name: Deploy Storybook to GitHub Pages
+name: Deploy storybook-static to Pages
 
 on:
   push:
-    branches:
-      - main  # main 브랜치에 push될 때 실행
+    branches: ["main"]
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  storybook:
-    runs-on: ubuntu-20.04
-    outputs:
-      status: ${{ job.status }}
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-      - name: checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: cache dependencies
-        id: cache
-        uses: actions/cache@v3
+      # Build storybook
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-storybook
+          node-version: "20.x"
+      - run: npm install --lagacy-peer-deps
+      - run: npm run build-storybook
 
-      - name: depedency install
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-
-      - name: publish to chromatic
-        id: chromatic
-        uses: chromaui/action@v1
+      # deploy
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          projectToken: ${{ secrets.CHROMATIC }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # Upload entire repository
+          path: "./storybook-static"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
