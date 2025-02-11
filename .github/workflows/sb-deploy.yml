@@ -23,7 +23,7 @@ jobs:
           node-version: 18  # 원하는 Node.js 버전
 
       - name: Install dependencies
-        run: npm install  # 프로젝트에 따라 pnpm, yarn 사용 가능
+        run: npm i --legacy-peer-deps  # 프로젝트에 따라 pnpm, yarn 사용 가능
 
       - name: Build Storybook
         run: npm run build-storybook  # Storybook 빌드
