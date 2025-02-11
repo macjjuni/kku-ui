@@ -23,14 +23,27 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - run: npm i --legacy-peer-deps
-      - run: npm run build-storybook
+
+      - name: Install dependencies
+        run: npm i --legacy-peer-deps
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Verify build output
+        run: ls -la ./storybook-static  # 폴더 확인
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./storybook-static"
+          name: "storybook-static"  # 명시적으로 지정
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+        with:
+          artifact_name: "storybook-static"  # 동일한 이름 사용
