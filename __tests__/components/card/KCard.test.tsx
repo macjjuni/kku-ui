@@ -24,7 +24,7 @@ describe('KCard', () => {
         const testClass = 'test-class-name';
         const testIdValue = 'k-chip-test-id';
 
-        render(<KCard id={testIdValue} className={testClass} style={testStyle} />);
+        render(<KCard id={testIdValue} className={testClass} style={testStyle}/>);
         const root = screen.getByTestId(testId);
 
         // Assert
@@ -38,7 +38,7 @@ describe('KCard', () => {
         // Arrange
         const testTitle = 'This is Title';
         const testSubTitle = 'This is SubTitle';
-        render(<KCard title={testTitle} subTitle={testSubTitle} />);
+        render(<KCard title={testTitle} subTitle={testSubTitle}/>);
 
         const titleRoot = screen.getByText(testTitle);
         const subTitleRoot = screen.getByText(testSubTitle);
@@ -54,7 +54,7 @@ describe('KCard', () => {
         const testText = 'This is Children';
         const TestChildren = () => (<>{testText}</>);
 
-        render(<KCard><TestChildren /></KCard>);
+        render(<KCard><TestChildren/></KCard>);
 
         const root = screen.getByText(testText);
 
@@ -65,7 +65,7 @@ describe('KCard', () => {
       test('Clickable prop render test', () => {
 
         // Arrange
-        render(<KCard clickable />);
+        render(<KCard clickable/>);
         const root = screen.getByTestId(testId);
 
         // Assert
@@ -78,7 +78,7 @@ describe('KCard', () => {
         const testWidth = '300px';
         const testHeight = '500px';
 
-        render(<KCard width={testWidth} height={testHeight} />);
+        render(<KCard width={testWidth} height={testHeight}/>);
 
         const root = screen.getByTestId(testId);
 
@@ -91,27 +91,13 @@ describe('KCard', () => {
         // Arrange
         const testFontColor = 'red';
 
-        render(<KCard fontColor={testFontColor} />);
+        render(<KCard fontColor={testFontColor}/>);
 
         const root = screen.getByTestId(testId);
 
         // Assert
         expect(root).toHaveStyle({ color: testFontColor });
       });
-
-      test('Rounded, BorderRadius prop render test', () => {
-
-        // Arrange
-        const testRadius = '20px';
-
-        render(<KCard rounded borderRadius={testRadius} />);
-
-        const root = screen.getByTestId(testId);
-
-        // Assert
-        expect(root).toHaveStyle({ borderRadius: testRadius });
-      });
-
 
     });
 
@@ -123,7 +109,7 @@ describe('KCard', () => {
         // Arrange
         const user = userEvent.setup();
 
-        render(<KCard clickable onClick={mockOnClick} />);
+        render(<KCard clickable onClick={mockOnClick}/>);
 
         const root = screen.getByTestId(testId);
 

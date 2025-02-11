@@ -8,6 +8,8 @@
     min-width: 80px;
     font-family: $k-font-family;
 
+    $k-card-contained-color: $k-primary-color;
+
     .k-card__title {
         @include k-sub-title-1;
 
@@ -33,8 +35,9 @@
     }
 
     &.k-card--contained {
-        border-color: $k-primary-color;
-        background: $k-primary-color;
+        color: $k-white-color;
+        border-color: $k-card-contained-color;
+        background: $k-card-contained-color;
     }
 }
 
