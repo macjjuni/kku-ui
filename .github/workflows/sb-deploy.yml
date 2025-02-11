@@ -31,7 +31,9 @@ jobs:
         run: npm run build-storybook
 
       - name: Verify build output
-        run: ls -la ./storybook-static  # 폴더 확인
+        run: |
+          pwd
+          ls -la ./storybook-static  # 폴더 확인
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -40,10 +42,11 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./storybook-static"
-          name: "storybook-static"  # 명시적으로 지정
+          name: "storybook-static"
+          retention-days: 1  # 캐시 문제 방지
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
         with:
-          artifact_name: "storybook-static"  # 동일한 이름 사용
+          artifact_name: "storybook-static"
