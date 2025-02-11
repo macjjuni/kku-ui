@@ -1,22 +1,44 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref, useId, useImperativeHandle, useRef } from 'react';
+import {
+  CSSProperties,
+  forwardRef,
+  KeyboardEvent,
+  MouseEvent,
+  Ref,
+  useCallback,
+  useId,
+  useImperativeHandle,
+  useRef,
+  useMemo,
+} from 'react';
 import { KIconProps, KIconRefs } from '@/components/icon/KIcon.interface';
-import { initDisabled, initSize } from '@/common/util/variation';
+import { initDisabled } from '@/common/util/variation';
 import { getIcon } from '@/common/base/icon';
 
 
-const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
-
-  if (!props.icon) {
-    throw Error('Error: icon is required and must be provided.');
-  }
+const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
 
   // region [Hooks]
 
+  const {
+    id,
+    className,
+    style,
+    icon,
+    size = 24,
+    onClick,
+    disabled,
+    tabIndex = 0,
+    color,
+    clickable,
+  }: KIconProps = { ...resProps };
   const inputRef = useRef<HTMLButtonElement>(null);
   const uniqueId = `k-icon-${useId()}`;
-  const tabIndex = props.tabIndex ? props.tabIndex : 0;
+
+  if (!icon) {
+    throw Error('Error: icon is required and must be provided.');
+  }
 
   useImperativeHandle(ref, () => ({
     click: () => {
@@ -29,89 +51,91 @@ const KIcon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
 
   // region [Styles]
 
-  const rootClass = () => {
+  const rootClass = useMemo(() => {
     const clazz = [];
 
-    if (props.className) {
-      clazz.push(props.className);
+    if (className) {
+      clazz.push(className);
     }
-    if (props.clickable) {
+    if (clickable) {
       clazz.push('k-icon--clickable');
     }
-    if (props.size && typeof props.size === 'string') {
-      initSize(clazz, 'k-icon', props.size);
-    }
 
-    initDisabled(clazz, 'k-icon', props.disabled);
+    initDisabled(clazz, 'k-icon', disabled);
 
     return clazz.join(' ');
-  }
+  }, []);
 
 
-  const rootStyle = () => {
+  const rootStyle = useMemo(() => {
 
-    const style: CSSProperties = props.style || {};
+    const styles: CSSProperties = style || {};
 
-    if (props.color) {
-      style.fill = props.color;
-      style.color = props.color;
+    if (color) {
+      styles.fill = color;
+      styles.color = color;
     }
 
-    if (typeof props.size === 'number') {
-      style.width = `${props.size}px`;
-      style.height = `${props.size}px`;
-      style.fontSize = `${props.size}px`;
+    if (typeof size === 'number') {
+      styles.width = `${size}px`;
+      styles.height = `${size}px`;
+      styles.fontSize = `${size}px`;
+    }
+    if (typeof size === 'string') {
+      styles.width = size;
+      styles.height = size;
+      styles.fontSize = size;
     }
 
-    if (props.onClick) {
-      style.cursor = 'pointer';
+    if (onClick) {
+      styles.cursor = 'pointer';
     }
 
-    return style;
-  }
+    return styles;
+  }, [color, size, onClick]);
 
   // endregion
 
 
   // region [Privates]
 
-  const Icon = () => {
-    const targetIcon = getIcon(props.icon);
+  const currentIcon = useMemo(() => {
+    const targetIcon = getIcon(icon);
 
     if (!targetIcon) {
       throw Error('Not Found icon');
     }
     return targetIcon;
-  }
+  }, [icon]);
 
   // endregion
 
 
   // region [Events]
 
-  const onClick = (e: MouseEvent<HTMLSpanElement>) => {
-    if (!props.disabled && props.onClick) {
-      props.onClick(e);
+  const onClickIcon = useCallback((e: MouseEvent<HTMLSpanElement>) => {
+    if (!disabled) {
+      onClick?.(e);
     }
-  }
+  }, [onClick, disabled]);
 
-  const onKeyUp = (e: KeyboardEvent<HTMLSpanElement>) => {
+  const onKeyUp = useCallback((e: KeyboardEvent<HTMLSpanElement>) => {
     if (e.key === 'enter' || e.key === ' ') {
-      if (!props.disabled && props.onClick) {
-        props.onClick(e);
+      if (!disabled) {
+        onClick?.(e);
       }
     }
-  }
+  }, [disabled, onClick]);
 
   // endregion
 
 
   return (
-    <span ref={inputRef} id={props.id ? props.id : uniqueId} className={`k-icon ${rootClass()}`}
-          style={rootStyle()} data-testid='k-icon' onClick={onClick} onKeyUp={onKeyUp}
-          role={props.onClick ? 'button' : 'img'}
-          tabIndex={props.onClick ? tabIndex : -1}>
-      {Icon()}
+    <span ref={inputRef} id={id || uniqueId} className={`k-icon ${rootClass}`}
+          style={rootStyle} data-testid='k-icon' onClick={onClickIcon} onKeyUp={onKeyUp}
+          role={onClick ? 'button' : 'img'}
+          tabIndex={onClick ? tabIndex : -1}>
+      {currentIcon}
     </span>
   );
 });

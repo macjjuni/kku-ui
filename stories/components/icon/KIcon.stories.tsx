@@ -8,14 +8,14 @@ const meta: Meta<KIconProps> = {
     title: 'Components/Icon',
     argTypes: {
         icon: {description: '아이콘 형태를 설정합니다.'},
-        size: {description: '크기를 설정합니다.', defaultValue: { summary: 'medium' }},
-        color: {description: '아이콘 색상을 설정합니다.', defaultValue: { summary: 'undefined' }},
-        onClick: {description: '아이콘 클릭 이벤트를 설정합니다.', defaultValue: { summary: 'undefined' }},
-        clickable: {description: '클릭 형태로 스타일을 설정합니다.', defaultValue: { summary: 'false' }},
-        disabled: {description: '클릭 불가능 스타일을 설정합니다.', defaultValue: { summary: 'false' }},
-        id: {description: 'id 속성을 설정합니다.', defaultValue: { summary: 'undefined' }},
-        className: {description: 'class 속성을 설정합니다.', defaultValue: { summary: 'undefined' }},
-        style: {description: 'style 속성을 설정합니다.', defaultValue: { summary: 'undefined' }},
+        size: {description: '크기를 설정합니다.'},
+        color: {description: '아이콘 색상을 설정합니다.'},
+        onClick: {description: '아이콘 클릭 이벤트를 설정합니다.'},
+        clickable: {description: '클릭 형태로 스타일을 설정합니다.'},
+        disabled: {description: '클릭 불가능 스타일을 설정합니다.'},
+        id: {description: 'id 속성을 설정합니다.'},
+        className: {description: 'class 속성을 설정합니다.'},
+        style: {description: 'style 속성을 설정합니다.'},
     }
 };
 
@@ -28,7 +28,7 @@ const Template = (args: KIconProps) => {
         <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '12px', flexWrap: 'wrap'}}>
             {
                 Object.keys(kIcons).map((iconName) => (
-                    <KIcon key={iconName} {...args} icon={iconName} size={'medium'}/>
+                    <KIcon key={iconName} {...args} icon={iconName} size={40}/>
                 ))
             }
         </div>
