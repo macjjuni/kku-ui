@@ -16,9 +16,8 @@ export interface KCardProps extends KBaseProp, KVariantProp {
   color?: string
   fontColor?: string
   padding?: string
-
-  rounded?: boolean
   borderRadius?: string
+
 
   onClick?: (e: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => void
 }

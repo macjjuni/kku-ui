@@ -37,10 +37,6 @@ export const Default: Story = {
   render: Template, args: { ...cardText },
 };
 
-export const Rounded: Story = {
-  render: Template, args: { ...cardText, rounded: true },
-};
-
 export const Clickable: Story = {
   render: Template, args: { ...cardText, clickable: true },
 };
@@ -51,7 +47,7 @@ export const Outlined: Story = {
 };
 
 export const Contained: Story = {
-  render: Template, args: { ...cardText },
+  render: Template, args: { ...cardText, variant: 'contained' },
 };
 
 export const size: Story = {

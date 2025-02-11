@@ -9,7 +9,7 @@ const KCard = ({ ...restProps }: KCardProps) => {
 
   const {
     children, id, className, style, title, subTitle, clickable, width, height, color, padding,
-    fontColor, rounded, borderRadius = '8px', onClick, variant = 'outlined',
+    fontColor, borderRadius = '8px', onClick, variant = 'outlined',
   }: KCardProps = { ...restProps };
 
   // endregion
@@ -24,9 +24,6 @@ const KCard = ({ ...restProps }: KCardProps) => {
     if (className) {
       clazz.push(className);
     }
-    if (rounded) {
-      clazz.push('k-card--rounded');
-    }
     if (clickable) {
       clazz.push('k-card__clickable');
     }
@@ -34,16 +31,13 @@ const KCard = ({ ...restProps }: KCardProps) => {
     initVariant(clazz, 'k-card', variant);
 
     return clazz.join(' ');
-  }, [className, rounded, clickable, variant]);
+  }, [className, clickable, variant]);
 
 
   const rootStyle = useMemo(() => {
 
     const styles: CSSProperties = { ...style };
 
-    if (rounded) {
-      styles.borderRadius = borderRadius;
-    }
     if (width) {
       styles.width = width;
     }
@@ -67,7 +61,7 @@ const KCard = ({ ...restProps }: KCardProps) => {
     }
 
     return styles;
-  }, [style, rounded, borderRadius, width, height, padding, color, fontColor, variant]);
+  }, [style, borderRadius, width, height, padding, color, fontColor, variant]);
 
 
   // endregion
