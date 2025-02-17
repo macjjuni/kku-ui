@@ -24,6 +24,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Execute all unit tests
         run: npx jest
