@@ -33,6 +33,7 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
   // Styles
   width?: string
   fullWidth?: boolean
+  align?: 'left' | 'center' | 'right';
 }
 
 export interface KTextFieldRefs {

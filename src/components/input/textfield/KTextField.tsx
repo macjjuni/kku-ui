@@ -79,6 +79,13 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
     return styles;
   }, [props.width, props.fullWidth, props.style]);
 
+  const containerStyle = useMemo(() => {
+    if (props.width) {
+      return { width: '100%', minWidth: '100%' };
+    }
+    return {};
+  }, [props.width]);
+
   const labelClass = useMemo(() => {
     const clazz = [];
 
@@ -92,6 +99,13 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
 
     return clazz.join(' ');
   }, [props.label]);
+
+  const inputStyle = useMemo((): CSSProperties => {
+    if (props.align) {
+      return { textAlign: props.align };
+    }
+    return { textAlign: 'left' };
+  }, [props.align]);
 
 
   // endregion
@@ -159,11 +173,11 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
         </div>
       )}
 
-      <div className='k-text-field__input__container'>
+      <div className='k-text-field__input__container' style={containerStyle}>
 
         {props.leftAction && (<div className='k-text-field__label__left-action'>{props.leftAction}</div>)}
 
-        <input id={props.id || uniqueId} ref={inputRef} className='k-text-field__input'
+        <input id={props.id || uniqueId} ref={inputRef} className='k-text-field__input' style={inputStyle}
                type={(props.password && !isPasswdShow) ? 'password' : 'input'} value={props.value}
                onChange={onChangeValue} onFocus={onFocus} onBlur={onblur} onKeyDown={onKeyDownEnter}
                disabled={props.disabled} placeholder={props.placeholder} maxLength={props.maxLength}
