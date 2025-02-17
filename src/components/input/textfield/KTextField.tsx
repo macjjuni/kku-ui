@@ -2,7 +2,7 @@ import {
   ChangeEvent,
   CSSProperties,
   forwardRef,
-  KeyboardEvent,
+  KeyboardEvent, memo,
   Ref,
   useCallback,
   useId,
@@ -53,11 +53,6 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
     initSize(clazz, 'k-text-field', props.size);
     initDisabled(clazz, 'k-text-field', props.disabled);
 
-    if (props.labelDirection) {
-      clazz.push(`k-text-field--${props.labelDirection}`);
-    } else {
-      clazz.push('k-text-field--column');
-    }
     if (props.password) {
       clazz.push('k-text-field__input--password');
     }
@@ -65,8 +60,12 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
       clazz.push('k-text-field__input--clearable');
     }
 
+    if (props.fullWidth) {
+      clazz.push('k-text-field__input--full-width');
+    }
+
     return clazz.join(' ');
-  }, [props.className, props.labelDirection, props.password, props.clearable, props.disabled, props.size]);
+  }, [props.className, props.password, props.clearable, props.disabled, props.size, props.fullWidth]);
 
 
   const rootStyle = useMemo(() => {
@@ -77,12 +76,15 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
       styles.width = props.width;
     }
 
-    if (props.fullWidth) {
-      styles.width = '100%';
-    }
-
     return styles;
   }, [props.width, props.fullWidth, props.style]);
+
+  const containerStyle = useMemo(() => {
+    if (props.width) {
+      return { width: '100%', minWidth: '100%' };
+    }
+    return {};
+  }, [props.width]);
 
   const labelClass = useMemo(() => {
     const clazz = [];
@@ -98,23 +100,13 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
     return clazz.join(' ');
   }, [props.label]);
 
-  const closeIconSize = useMemo(() => {
-
-    if (props.size === 'small') {
-      return 14;
+  const inputStyle = useMemo((): CSSProperties => {
+    if (props.align) {
+      return { textAlign: props.align };
     }
+    return { textAlign: 'left' };
+  }, [props.align]);
 
-    return 16;
-  }, [props.size]);
-
-  const passwordIconSize = useMemo(() => {
-
-    if (props.size === 'small') {
-      return 18;
-    }
-
-    return 20;
-  }, [props.size]);
 
   // endregion
 
@@ -178,16 +170,14 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
             {props.label}
             {props.required && <span className='k-text-field__label__text__required'>*</span>}
           </label>
-          {props.rightAction && !props.labelDirection && (
-            <div className='k-text-field__label__right-action'>
-              {props.rightAction}
-            </div>
-          )}
         </div>
       )}
 
-      <div className='k-text-field__input__container'>
-        <input id={props.id || uniqueId} ref={inputRef} className='k-text-field__input'
+      <div className='k-text-field__input__container' style={containerStyle}>
+
+        {props.leftAction && (<div className='k-text-field__label__left-action'>{props.leftAction}</div>)}
+
+        <input id={props.id || uniqueId} ref={inputRef} className='k-text-field__input' style={inputStyle}
                type={(props.password && !isPasswdShow) ? 'password' : 'input'} value={props.value}
                onChange={onChangeValue} onFocus={onFocus} onBlur={onblur} onKeyDown={onKeyDownEnter}
                disabled={props.disabled} placeholder={props.placeholder} maxLength={props.maxLength}
@@ -197,28 +187,26 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
             isPasswdShow
               ? (
                 <KIcon className='k-text-field__icon k-text-field__password-icon' icon='visibility_off'
-                       size={passwordIconSize} clickable onClick={onPasswordShow} disabled={props.disabled}/>
+                       clickable onClick={onPasswordShow} disabled={props.disabled}/>
               )
               : (
                 <KIcon className='k-text-field__icon k-text-field__visibility-icon' icon='visibility'
-                       size={passwordIconSize}
                        clickable onClick={onPasswordShow} disabled={props.disabled}/>
               )
           )
         }
-        {
-          props.clearable && props.value && (
-            <KIcon className='k-text-field__icon k-text-field__clearable-icon'
-                   icon='close' size={closeIconSize} clickable onClick={onClear}
-                   disabled={props.disabled}/>
-          )
-        }
-        {
-          props.search && (
-            <KIcon className='k-text-field__icon k-text-field__search-icon'
-                   icon='search' size={passwordIconSize} onClick={props?.onSearch}/>
-          )
-        }
+
+        {props.clearable && props.value && (
+          <KIcon className='k-text-field__icon k-text-field__clearable-icon'
+                 icon='close' clickable onClick={onClear}
+                 disabled={props.disabled}/>
+        )}
+
+        {props.rightAction && (
+          <div className='k-text-field__label__right-action'>
+            {props.rightAction}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -226,4 +214,4 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
 
 
 KTextField.displayName = 'KTextField';
-export default KTextField;
+export default memo(KTextField);

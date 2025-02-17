@@ -1,207 +1,324 @@
+$k-text-field-medium-height: 40px;
+$k-text-field-small-height: 36px;
+
+
 .k-text-field {
-    display: flex;
-    min-width: 280px;
-    width: 300px;
-    font-size: 0;
-    font-family: $k-font-family;
+  position: relative;
+  display: flex;
+  width: auto;
+  font-size: 0;
+  font-family: $k-font-family;
 
-    // Label Style - Common
-    .k-text-field__label__container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 $k-spacing-2;
-        overflow: hidden;
+  // region [Hover]
+  &:hover, &:focus-within {
 
-        .k-text-field__label__text {
-            display: inline-flex;
-            justify-content: flex-start;
-            align-items: center;
-            gap: $k-spacing-2;
-            white-space: nowrap;
-            color: $k-font-color;
-
-            .k-text-field__label__text__required { color: $k-secondary-error; }
-
-            &.k-text-field__label__text--focus {
-                color: $k-black-color;
-                transition-property: color;
-                @include k-transition-3;
-            }
-        }
-    }
-
-    // Label Style - Direction:Column
-    &.k-text-field--column {
-        flex-direction: column;
-
-        .k-text-field__label__container {
-            margin-bottom: $k-spacing-6;
-        }
-    }
-
-    // Label Style - Direction:Row
-    &.k-text-field--row {
-        flex-direction: row;
-        gap: $k-spacing-16;
-
-        .k-text-field__label__container {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
+    .k-text-field__label__container > .k-text-field__label__text {
+      color: $k-font-color;
     }
 
     .k-text-field__input__container {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
+      border-color: $k-font-color;
+    }
+  }
+  // endregion
 
-        border: 1px solid $k-border-color;
-        border-radius: $k-border-radius-default;
-        background: $k-white-color;
-        caret-color: $k-font-color;
-        font-size: 0;
 
-        transition-property: border-color;
+  // region [Label]
+  .k-text-field__label__container {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 $k-spacing-2;
+    overflow: hidden;
+
+    &:before {
+      content: '';
+      top: 49%;
+      left: 0;
+      transform: translateY(-50%);
+      height: 2px;
+      width: 100%;
+      position: absolute;
+      background-color: $k-background-color;
+      z-index: 1;
+    }
+
+    .k-text-field__label__text {
+      display: inline-flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: $k-spacing-2;
+      color: $k-border-color;
+      white-space: nowrap;
+      border-radius: 4px;
+      z-index: 2;
+      overflow: hidden;
+      @include k-transition-3;
+
+      .k-text-field__label__text__required {
+        color: $k-secondary-error;
+      }
+
+      &.k-text-field__label__text--focus {
+        color: $k-black-color;
+        transition-property: color;
         @include k-transition-3;
+      }
+    }
+  }
+  // endregion
 
-        &:hover, &:focus-within { border-color: $k-black-color; }
 
-        .k-text-field__input {
-            width: 100%;
-            padding: 0;
-            border: none;
-            outline: none;
-            background-color: transparent;
-            color: $k-font-color;
+  // region [FullWidth]
+  &.k-text-field__input--full-width {
+    &.k-text-field--small, &.k-text-field--medium {
+      & > .k-text-field__input__container {
+        min-width: 100%;
+        width: 100%;
+      }
+    }
+  }
+  // endregion
 
-            @include k-transition-3;
 
-            &::placeholder {
-                color: $k-font-placeholder-color;
-            }
-        }
+  // region [Container]
+  .k-text-field__input__container {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
 
-        .k-text-field__icon {
-            margin-left: $k-spacing-8;
-        }
+    border: 1px solid $k-border-color;
+    border-radius: $k-border-radius-default;
+    background: $k-white-color;
+    caret-color: $k-font-color;
+    font-size: 0;
+
+    transition-property: border-color;
+    @include k-transition-3;
+
+
+    .k-text-field__label__left-action, .k-text-field__label__right-action {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background-color: transparent;
     }
 
-    &.k-text-field--disabled, &.k-text-field--disabled {
+    .k-text-field__input {
+      width: 100%;
+      padding: 0;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: $k-font-color;
 
-        .k-text-field__input__container {
-            background: $k-white-disabled-color;
-            cursor: not-allowed;
+      @include k-transition-3;
 
-            &:hover { border-color: $k-border-color; }
-
-            .k-text-field__input {
-                color: $k-font-disabled-color;
-                background: $k-white-disabled-color;
-                cursor: not-allowed;
-            }
-        }
+      &::placeholder {
+        color: $k-font-placeholder-color;
+      }
     }
 
-    // Type: Password
-    &.k-text-field__input--password {
+    .k-text-field__icon {
+      margin-right: $k-spacing-8;
+      width: 100%;
+    }
+  }
+  // endregion
 
-        &.k-text-field--large .k-text-field__input__container > .k-text-field__input { letter-spacing: 4px; }
-        &.k-text-field--medium .k-text-field__input__container > .k-text-field__input { letter-spacing: 2px; }
-        &.k-text-field--small .k-text-field__input__container > .k-text-field__input { letter-spacing: 1px; }
+
+  // region [Disabled]
+  &.k-text-field--disabled, &.k-text-field--disabled {
+    color: $k-font-disabled-color;
+
+    .k-text-field__label__container {
+      .k-text-field__label__text {
+        color: $k-font-disabled-color;
+      }
     }
 
-    // Type: Clearable
-    &.k-text-field__input--clearable {
+    .k-text-field__input__container {
+      border-color: $k-font-disabled-color;
+      cursor: not-allowed;
 
+      &:hover {
+        border-color: $k-font-disabled-color;
+      }
+
+      .k-text-field__input {
+        color: $k-font-disabled-color;
+        cursor: not-allowed;
+      }
+    }
+  }
+  // endregion
+
+
+  // Type: Password
+  &.k-text-field__input--password {
+
+    &.k-text-field--large .k-text-field__input__container > .k-text-field__input {
+      letter-spacing: 4px;
     }
 
-
-    // region [Sizes]
-    &.k-text-field--medium {
-
-        .k-text-field__label__container {
-            .k-text-field__label__text { @include k-label-2; }
-        }
-
-        .k-text-field__input__container {
-
-            .k-text-field__input {
-                @include k-body-2;
-                padding: $k-spacing-6 $k-spacing-10;
-            }
-        }
+    &.k-text-field--medium .k-text-field__input__container > .k-text-field__input {
+      letter-spacing: 2px;
     }
-    &.k-text-field--small {
-        min-width: 220px;
-        width: 240px;
 
-        .k-text-field__label__container {
-
-            .k-text-field__label__text { @include k-label-3; }
-        }
-
-        .k-text-field__input__container {
-            .k-text-field__input {
-                @include k-body-3;
-                padding: $k-spacing-4 $k-spacing-8;
-            }
-        }
+    &.k-text-field--small .k-text-field__input__container > .k-text-field__input {
+      letter-spacing: 1px;
     }
-    // endregion
+  }
+
+  // Type: Clearable
+  &.k-text-field__input--clearable {
+
+  }
+
+
+  // region [Sizes]
+  &.k-text-field--medium {
+
+    .k-text-field__label__container {
+      top: -6px;
+      left: 8px;
+
+      .k-text-field__label__text {
+        @include k-label-2;
+        line-height: 1;
+      }
+    }
+
+    .k-text-field__input__container {
+      min-width: 300px;
+      width: 300px;
+
+      .k-text-field__input {
+        @include k-body-2;
+        min-height: $k-text-field-medium-height;
+        padding: 0 $k-spacing-12;
+      }
+
+      .k-text-field__label__left-action {
+        padding-left: $k-spacing-12;
+      }
+
+      .k-text-field__label__right-action {
+        padding-right: $k-spacing-12;
+      }
+
+      .k-text-field__label__left-action, .k-text-field__label__right-action {
+        @include k-label-2;
+      }
+
+      //.k-text-field__password-icon {
+      //  min-width: 16px; min-height: 16px;
+      //}
+      //.k-text-field__visibility-icon {
+      //  min-width: 16px; min-height: 16px;
+      //}
+      //.k-text-field__clearable-icon {
+      //  min-width: 16px; min-height: 16px;
+      //}
+    }
+  }
+
+  &.k-text-field--small {
+
+    .k-text-field__label__container {
+      top: -5px;
+      left: 8px;
+
+      .k-text-field__label__text {
+        @include k-label-3;
+        line-height: 1;
+      }
+    }
+
+    .k-text-field__input__container {
+      min-width: 260px;
+      width: 260px;
+
+      .k-text-field__input {
+        @include k-body-3;
+        min-height: $k-text-field-small-height;
+        padding: 0 $k-spacing-8;
+      }
+
+      .k-text-field__label__left-action {
+        padding-left: $k-spacing-8;
+      }
+
+      .k-text-field__label__right-action {
+        padding-right: $k-spacing-8;
+      }
+
+      .k-text-field__label__left-action, .k-text-field__label__right-action {
+        @include k-body-3;
+      }
+    }
+  }
+  // endregion
 }
 
 // region [Dark Mode]
 .#{$k-dark-class-name} .k-text-field {
+  color: $k-dark-font-color;
 
-    &.k-text-field--row, &.k-text-field--column {
+  &.k-text-field--disabled, &.k-text-field--disabled {
 
-        .k-text-field__label__container {
+    .k-text-field__input__container {
 
-            .k-text-field__label__text {
-                color: $k-gray-color-200;
+      &:hover {
+        border-color: $k-dark-default-border-color;
+      }
 
-                &.k-text-field__label__text--focus {
-                    color: $k-dark-font-color;
-                    transition-property: color;
-                    @include k-transition-3;
-                }
-            }
-        }
+      .k-text-field__input {
+        color: $k-dark-font-disabled-color;
+      }
     }
+  }
 
-    &.k-text-field--disabled, &.k-text-field--disabled {
-
-        .k-text-field__input__container {
-            background: $k-dark-background-disabled-color;
-
-            &:hover { border-color: $k-dark-default-border-color; }
-
-            .k-text-field__input {
-                color: $k-dark-font-disabled-color;
-                background: $k-dark-background-disabled-color;
-            }
-        }
+  &:hover, &:focus-within {
+    .k-text-field__label__container > .k-text-field__label__text {
+      color: $k-dark-font-color;
     }
 
     .k-text-field__input__container {
-        border: 1px solid $k-dark-default-border-color;
-        border-radius: $k-border-radius-default;
-        background: $k-dark-background-color;
-        caret-color: $k-white-color;
-
-        &:hover, &:focus-within { border-color: $k-white-color; }
-
-        .k-text-field__input {
-            color: $k-dark-font-color;
-
-            &::placeholder {
-                color: $k-dark-font-placeholder-color;
-            }
-        }
+      border-color: $k-white-color;
     }
+  }
+
+  .k-text-field__label__container {
+    background-color: $k-dark-background-color;
+
+    .k-text-field__label__text {
+      color: $k-dark-default-border-color;
+    }
+
+    &:before {
+      background-color: $k-dark-background-color;
+    }
+  }
+
+  .k-text-field__input__container {
+    border: 1px solid $k-dark-default-border-color;
+    border-radius: $k-border-radius-default;
+    background: $k-dark-background-color;
+    caret-color: $k-white-color;
+
+
+    .k-text-field__input {
+      color: $k-dark-font-color;
+
+      &::placeholder {
+        color: $k-dark-font-placeholder-color;
+      }
+    }
+  }
+
 }
 
 

@@ -23,7 +23,7 @@ describe('KTextField', () => {
       const testStyle = { color: 'red', fontSize: '20px' };
       const testClass = 'macjjuni-class-name';
 
-      render(<KTextField value={testValue} className={testClass} style={testStyle} />);
+      render(<KTextField value={testValue} className={testClass} style={testStyle}/>);
       const root = screen.getByTestId(testId);
       const inputRoot = screen.getByRole('textbox');
 
@@ -34,7 +34,7 @@ describe('KTextField', () => {
 
     test('Disabled prop render test', () => {
 
-      render(<KTextField value='' disabled />);
+      render(<KTextField value='' disabled/>);
       const inputRoot = screen.getByRole('textbox') as HTMLInputElement;
       const root = screen.getByTestId(testId);
 
@@ -46,7 +46,7 @@ describe('KTextField', () => {
     test('placeholder, clearable prop render test', () => {
 
       const testPlaceholder = 'test placeholder';
-      render(<KTextField value='test' label='test' placeholder={testPlaceholder} clearable />);
+      render(<KTextField value='test' label='test' placeholder={testPlaceholder} clearable/>);
 
       const inputRoot = screen.getByRole('textbox');
       const clearIcon = screen.getByRole('button');
@@ -62,9 +62,9 @@ describe('KTextField', () => {
       const passwordText = 'thisISpassword!';
       const TestTextField = () => {
         const [value, setValue] = useState<string>('');
-        return (<KTextField value={value} onChange={(e) => { setValue(e); }} password />);
+        return (<KTextField value={value} onChange={(e) => { setValue(e); }} password/>);
       };
-      render(<TestTextField />);
+      render(<TestTextField/>);
 
       const inputRoot = screen.getByTestId('k-text-field-input');
       const visibilityIcon = screen.getByRole('button');
@@ -98,15 +98,13 @@ describe('KTextField', () => {
       const TestKTextField = () => {
         const [value, setValue] = useState('');
         return (
-          <KTextField
-                        label='label'
-                        maxLength={testMaxLength}
-                        value={value}
-                        onChange={(v) => { setValue(v); }}
-          />
+          <KTextField label='label'
+                      maxLength={testMaxLength}
+                      value={value}
+                      onChange={(v) => { setValue(v); }}/>
         );
       };
-      render(<TestKTextField />);
+      render(<TestKTextField/>);
       const labelRoot = screen.getByTestId('k-text-field-label');
 
       // Act
@@ -128,7 +126,7 @@ describe('KTextField', () => {
       const onMockChange = jest.fn();
       const rightActionTestId = 'test-right-action-id';
       const RightAction = () => (<div data-testid={rightActionTestId}>Right Action Text</div>);
-      render(<KTextField label='label' value='' onChange={onMockChange} rightAction={<RightAction />} />);
+      render(<KTextField label='label' value='' onChange={onMockChange} rightAction={<RightAction/>}/>);
       const rightActionRoot = screen.getByTestId(rightActionTestId);
 
       // Assert
@@ -139,28 +137,11 @@ describe('KTextField', () => {
 
       // Arrange
       const testWidth = '321px';
-      render(<KTextField label='label' value='' width={testWidth} />);
+      render(<KTextField label='label' value='' width={testWidth}/>);
       const inputRoot = screen.getByTestId(testId);
 
       // Assert
       expect(inputRoot).toHaveStyle({ width: testWidth });
-    });
-
-    test('search prop render and event test', async () => {
-
-      // Arrange
-      const user = userEvent.setup();
-      render(<KTextField label='label' value='' search onSearch={mockOnClick} />);
-      const searchIconRoot = screen.getByTestId('k-icon');
-
-      // Act
-      await act(async () => {
-        await user.click(searchIconRoot);
-      });
-
-      // Assert
-      expect(searchIconRoot).toHaveClass('k-text-field__search-icon');
-      expect(mockOnClick).toHaveBeenCalledTimes(1);
     });
 
   });

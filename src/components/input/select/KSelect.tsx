@@ -3,7 +3,7 @@ import {
   forwardRef,
   KeyboardEvent,
   Ref,
-  useCallback,
+  useCallback, useId,
   useImperativeHandle,
   useMemo,
   useRef,
@@ -21,7 +21,8 @@ const KSelect = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs
   // region [Hooks]
 
   const {
-    id,
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    id = `k-select-${useId()}`,
     className,
     style,
     items,
@@ -64,21 +65,33 @@ const KSelect = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs
   const rootStyle = useMemo(() => {
     const styles: CSSProperties = width ? { width } : {};
 
-    return { ...styles, ...style };
-  }, [style]);
+    return { ...style, ...styles };
+  }, [style, width]);
 
   // endregion
 
 
   // region [Privates]
 
+  const onAddEventListener = useCallback((e: MouseEvent) => {
+    if (selectRef.current && !selectRef.current.contains(e.target as Node)) {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      onSelectClose();
+    }
+  }, []);
+
   const onSelectOpen = useCallback(() => {
     setOpen(true);
+    setTimeout(() => {
+      window.addEventListener('click', onAddEventListener);
+    }, 0); // setTimeout을 사용하여 이벤트 버블링 방지
   }, []);
 
   const onSelectClose = useCallback(() => {
     setOpen(false);
+    window.removeEventListener('click', onAddEventListener);
   }, []);
+
 
   const displayTitle = useMemo(() => {
 

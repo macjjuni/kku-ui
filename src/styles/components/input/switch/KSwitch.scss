@@ -2,7 +2,9 @@
     position: relative;
     border: none;
     cursor: pointer;
+    margin: 0;
     padding: 0;
+    background-color: $k-gray-color-50;
     overflow: hidden;
 
     .k-switch__active-background, .k-switch__default-background {
@@ -14,7 +16,7 @@
     }
 
     .k-switch__active-background { background-color: $k-primary-color; }
-    .k-switch__default-background { background-color: $k-gray-color-50; }
+    .k-switch__default-background { background-color: $k-gray-color-100; }
 
     &.k-switch--on > .k-switch__active-background { opacity: 1; }
     &.k-switch--on > .k-switch__default-background { opacity: 0; }
@@ -72,5 +74,5 @@
 
 .#{$k-dark-class-name} .k-switch {
 
-
+    background-color: $k-gray-color-700;
 }

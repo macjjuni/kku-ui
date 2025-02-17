@@ -4,7 +4,7 @@
 // region [Percent]
 $hover-percent: 4%;
 $ripple-percent: 15%;
-$disabled-percent: 6%;
+$disabled-percent: 40%;
 $placeholder-percent: 6%;
 // endregion
 
@@ -203,7 +203,7 @@ $k-dark-class-name: #{dark} !default;
 
 // region [Dark Mode - colors]
 
-$k-dark-default-border-color: #4d4d4d !default;
+$k-dark-default-border-color: #808080 !default;
 $k-dark-hover-border-color: #5f5f5f !default; // default => light-10%
 $k-dark-disabled-border-color: #5b5b5b !default; // default => light-8%
 
