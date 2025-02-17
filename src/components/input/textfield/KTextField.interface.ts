@@ -2,9 +2,6 @@ import { KeyboardEvent, ReactNode } from 'react';
 import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 
 
-const labelDirection = { column: 'column', row: 'row' } as const;
-type LabelDirectionType = typeof labelDirection[keyof typeof labelDirection];
-
 export interface KTextFieldProps extends KBaseProp, KSizeProp {
 
   // Value
@@ -12,7 +9,6 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
 
   // Label
   label?: string
-  labelDirection?: LabelDirectionType
 
   // Options
   placeholder?: string
@@ -23,9 +19,9 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
   required?: boolean
   clearable?: boolean
   password?: boolean
-  search?: boolean
 
   // Custom
+  leftAction?: ReactNode
   rightAction?: ReactNode
 
   // Event
@@ -33,7 +29,6 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
   onFocus?: () => void
   onBlur?: () => void
   onKeyDownEnter?: (e?: KeyboardEvent<HTMLInputElement>) => void
-  onSearch?: () => void
 
   // Styles
   width?: string

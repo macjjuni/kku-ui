@@ -64,8 +64,8 @@ const KSelect = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs
   const rootStyle = useMemo(() => {
     const styles: CSSProperties = width ? { width } : {};
 
-    return { ...styles, ...style };
-  }, [style]);
+    return { ...style, ...styles };
+  }, [style, width]);
 
   // endregion
 
