@@ -98,7 +98,7 @@ const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
     const targetIcon = getIcon(icon, color);
 
     if (!targetIcon) {
-      throw Error('Not Found icon');
+      throw Error(`Not Found icon. icon: ${icon}`);
     }
     return targetIcon;
   }, [icon, color]);
