@@ -71,11 +71,6 @@ const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
 
     const styles: CSSProperties = style || {};
 
-    if (color) {
-      styles.fill = color;
-      styles.color = color;
-    }
-
     if (typeof size === 'number') {
       styles.width = `${size}px`;
       styles.height = `${size}px`;
@@ -92,7 +87,7 @@ const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
     }
 
     return styles;
-  }, [color, size, onClick]);
+  }, [size, onClick]);
 
   // endregion
 
@@ -100,13 +95,13 @@ const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
   // region [Privates]
 
   const currentIcon = useMemo(() => {
-    const targetIcon = getIcon(icon);
+    const targetIcon = getIcon(icon, color);
 
     if (!targetIcon) {
       throw Error('Not Found icon');
     }
     return targetIcon;
-  }, [icon]);
+  }, [icon, color]);
 
   // endregion
 

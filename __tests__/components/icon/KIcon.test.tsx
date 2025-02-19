@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { KIcon } from '@/components';
 
 
-describe('KButton', () => {
+describe('KIcon', () => {
 
   const mockOnClick = jest.fn();
 
@@ -20,7 +20,7 @@ describe('KButton', () => {
 
       // Arrange
       const testStyle = { color: 'red', fontSize: '20px' };
-      render(<KIcon icon='close' style={testStyle} />);
+      render(<KIcon icon='close' style={testStyle}/>);
       const root = screen.getByRole('img');
 
       // Assert
@@ -31,7 +31,7 @@ describe('KButton', () => {
 
       // Arrange
       const testClass = 'test-class-name';
-      render(<KIcon icon='close' className={testClass} />);
+      render(<KIcon icon='close' className={testClass}/>);
       const root = screen.getByRole('img');
 
       // Assert
@@ -42,7 +42,7 @@ describe('KButton', () => {
 
       // Arrange
       const testSize = 77;
-      render(<KIcon icon='close' size={testSize} />);
+      render(<KIcon icon='close' size={testSize}/>);
       const root = screen.getByRole('img');
 
       // Assert
@@ -52,30 +52,20 @@ describe('KButton', () => {
     test('Clickable prop render test', () => {
 
       // Arrange
-      render(<KIcon icon='close' clickable />);
+      render(<KIcon icon='close' clickable/>);
       const root = screen.getByRole('img');
 
       // Assert
       expect(root).toHaveClass('k-icon--clickable');
     });
 
-    test('Color prop render test', () => {
-
-      // Arrange
-      const testColor = '#eaeaea';
-      render(<KIcon icon='close' color={testColor} />);
-      const root = screen.getByRole('img');
-
-      // Assert
-      expect(root).toHaveStyle({ fill: testColor });
-    });
 
     test('tabIndex prop render test.', async () => {
 
       // Arrange
       // eslint-disable-next-line jsx-a11y/tabindex-no-positive
-      render(<KIcon icon='close' tabIndex={2} onClick={mockOnClick} />);
-      render(<KIcon icon='close' />);
+      render(<KIcon icon='close' tabIndex={2} onClick={mockOnClick}/>);
+      render(<KIcon icon='close'/>);
 
       const imgRoot = screen.getByRole('img');
       const buttonRoot = screen.getByRole('button');
@@ -94,7 +84,7 @@ describe('KButton', () => {
 
       // Arrange
       const user = userEvent.setup();
-      render(<KIcon icon='close' onClick={mockOnClick} />);
+      render(<KIcon icon='close' onClick={mockOnClick}/>);
       const root = screen.getByRole('button');
 
       expect(mockOnClick).toHaveBeenCalledTimes(0);
@@ -109,7 +99,7 @@ describe('KButton', () => {
 
       // Arrange
       const user = userEvent.setup();
-      render(<KIcon icon='close' onClick={mockOnClick} disabled />);
+      render(<KIcon icon='close' onClick={mockOnClick} disabled/>);
       const root = screen.getByRole('button');
 
       expect(mockOnClick).toHaveBeenCalledTimes(0);
@@ -123,7 +113,7 @@ describe('KButton', () => {
     test('onClick prop style test', async () => {
 
       // Arrange
-      render(<KIcon icon='close' onClick={mockOnClick} disabled />);
+      render(<KIcon icon='close' onClick={mockOnClick} disabled/>);
       const root = screen.getByRole('button');
 
       // Assert
