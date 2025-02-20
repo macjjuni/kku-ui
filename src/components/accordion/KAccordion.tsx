@@ -48,19 +48,6 @@ const KAccordion = ({ ...restProps }: KAccordionProps) => {
     return clazz.join(' ');
   }, [className, size, isOpen]);
 
-  const iconClass = () => {
-
-    const clazz = [];
-
-    if (isOpen) {
-      clazz.push('k-accordion__summary__icon--open');
-    } else {
-      clazz.push('k-accordion__summary__icon--close');
-    }
-
-    return clazz.join(' ');
-  }
-
 
   const rootStyle = useMemo(() => {
 
@@ -164,7 +151,7 @@ const KAccordion = ({ ...restProps }: KAccordionProps) => {
           <span className='k-accordion__summary__text'>{summary}</span>
         </div>
         <div className='k-accordion__summary__icon__wrapper'>
-          <KIcon className={`k-accordion__summary__icon ${iconClass()}`} icon='keyboard_arrow_down' size={iconSize}/>
+          <KIcon className='k-accordion__summary__icon' icon='keyboard_arrow_down' size={iconSize}/>
         </div>
       </summary>
 
