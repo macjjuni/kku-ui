@@ -67,9 +67,7 @@ describe('KButton', () => {
 
   test('children prop render test', () => {
 
-    render(<KButton>
-      <div data-testid='div-test-id'>labelText</div>
-    </KButton>);
+    render(<KButton><div data-testid='div-test-id'>labelText</div></KButton>);
     const childrenRoot = screen.getByTestId('div-test-id');
 
     expect(childrenRoot).toBeInTheDocument();

@@ -46,7 +46,7 @@ const KAccordion = ({ ...restProps }: KAccordionProps) => {
     clazz.push(`k-accordion--${isOpen ? 'open' : 'close'}`);
 
     return clazz.join(' ');
-  }, [className, size]);
+  }, [className, size, isOpen]);
 
   const iconClass = () => {
 

@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
+import userEvent from '@testing-library/user-event';
+import { act } from 'react';
 import { KAccordion } from '@/components';
 import { sizes } from '@/common/base/base.interface';
 
@@ -9,9 +11,11 @@ const sizeArr = Object.values(sizes);
 const mockOnClick = jest.fn();
 
 describe('KAccordion', () => {
-  const TestChildren = () => (<div data-testid={testChildrenId} />);
+  const TestChildren = () => (<div data-testid={testChildrenId}/>);
 
-  beforeEach(() => { mockOnClick.mockClear(); });
+  beforeEach(() => {
+    mockOnClick.mockClear();
+  });
 
 
   describe('Props', () => {
@@ -26,7 +30,7 @@ describe('KAccordion', () => {
 
       render(
         <KAccordion id={testIdValue} className={testClass} style={testStyle} summary={summaryTest}>
-          <TestChildren />
+          <TestChildren/>
         </KAccordion>,
       );
       const root = screen.getByTestId(testId);
@@ -48,7 +52,7 @@ describe('KAccordion', () => {
 
       render(
         <KAccordion summary={summaryText} size={size}>
-          <TestChildren />
+          <TestChildren/>
         </KAccordion>,
       );
 
@@ -59,26 +63,34 @@ describe('KAccordion', () => {
     });
 
 
-    describe('Event ', () => {
+    test('Test className rendering based on accordion state', async () => {
 
-      // test('OnClick event test', async () => {
-      //
-      //   // Arrange
-      //   const user = userEvent.setup();
-      //   const testLabel = 'Test Label';
-      //   render(<KChip label={testLabel} onClick={mockOnClick} />);
-      //   const root = screen.getByText(testLabel);
-      //
-      //   // Assert
-      //   expect(mockOnClick).toHaveBeenCalledTimes(0);
-      //
-      //   // Act
-      //   await user.click(root);
-      //
-      //   // Assert
-      //   expect(mockOnClick).toHaveBeenCalledTimes(1);
-      // });
+      // Arrange
+      const user = userEvent.setup();
+      const summaryText = 'text';
 
+      render(
+        <KAccordion summary={summaryText}>
+          <TestChildren/>
+        </KAccordion>,
+      );
+
+      const summaryRoot = screen.getByText(summaryText);
+      const rootClosetState = screen.getByTestId(testId);
+
+      // Assert
+      expect(rootClosetState).toHaveClass('k-accordion--close');
+
+      // Events
+      await act(async () => {
+        await user.click(summaryRoot);
+      })
+
+      // Arrange
+      const rootOpenState = screen.getByTestId(testId);
+
+      // Assert
+      expect(rootOpenState).toHaveClass('k-accordion--open');
     });
 
   });
