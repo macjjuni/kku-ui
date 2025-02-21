@@ -312,7 +312,7 @@ const kIcons: Icons = {
       </g>
     </svg>
   ),
-  bitcoin: (color = "#f7931a") => (
+  bitcoin: (color = '#f7931a') => (
     <svg viewBox='0 -0.5 34 34' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0'/>
       <g strokeLinecap='round' strokeLinejoin='round'/>
@@ -325,7 +325,7 @@ const kIcons: Icons = {
       </g>
     </svg>
   ),
-  bitcoin_square: (color = "#f7931a") => (
+  bitcoin_square: (color = '#f7931a') => (
     <svg xmlns='http://www.w3.org/2000/svg' aria-label='Bitcoin' viewBox='0 0 512 512' fill='none'>
       <g strokeWidth='0'/>
       <g strokeLinecap='round' strokeLinejoin='round'/>
@@ -454,6 +454,14 @@ const kIcons: Icons = {
       </g>
     </svg>
   ),
+  copy: (color = DEFAULT_COLOR) => (
+    <svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' width='100%'
+         height='100%'>
+      <path
+        d='M9 15H5C3.89543 15 3 14.1046 3 13V5C3 3.89543 3.89543 3 5 3H13C14.1046 3 15 3.89543 15 5V9M11 21H19C20.1046 21 21 20.1046 21 19V11C21 9.89543 20.1046 9 19 9H11C9.89543 9 9 9.89543 9 11V19C9 20.1046 9.89543 21 11 21Z'
+        stroke={color} strokeWidth={2} strokeLinecap='round' strokeLinejoin='round'/>
+    </svg>
+  ),
   paste: (color = DEFAULT_COLOR) => (
     <svg xmlns='http://www.w3.org/2000/svg' fill={color} width='100%' height='100%'
          viewBox='0 0 36 36'>
@@ -537,7 +545,7 @@ const kIcons: Icons = {
       </g>
     </svg>
   ),
-  tether: (color = "#53ae94") => (
+  tether: (color = '#53ae94') => (
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 2000' width='100%' height='100%'>
       <path d='M1000 0c552.26 0 1000 447.74 1000 1000s-447.76 1000-1000 1000S0 1552.38 0 1000 447.68 0 1000 0'
             fill={color}/>
