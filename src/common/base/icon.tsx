@@ -561,13 +561,10 @@ const kIcons: Icons = {
   triangleDown: (color = DEFAULT_COLOR) => (
     <svg fill={color} width='100%' height='100%' viewBox='0 0 24 24'
          xmlns='http://www.w3.org/2000/svg'
-         enableBackground='new 0 0 24 24' transform='rotate(180)'>
-      <g strokeWidth='0'/>
-      <g strokeLinecap='round' strokeLinejoin='round'/>
-      <g>
-        <path d='M2.1,4.7l9,15.6c0.1,0.1,0.2,0.2,0.3,0.3c0.5,0.3,1.1,0.2,1.4-0.3l9-15.6C22,4.6,22,4.4,22,4.2c0-0.6-0.4-1-1-1H3
-  c-0.2,0-0.3,0-0.5,0.1C2,3.6,1.9,4.2,2.1,4.7z'/>
-
+         enableBackground='new 0 0 24 24'>
+      <g transform='rotate(180, 12, 12)'>
+        <path d='M21.9,19.3l-9-15.6c-0.1-0.1-0.2-0.2-0.3-0.3c-0.5-0.3-1.1-0.2-1.4,0.3l-9,15.6C2,19.4,2,19.6,2,19.8
+        c0,0.6,0.4,1,1,1h18c0.2,0,0.3,0,0.5-0.1C22,20.4,22.1,19.8,21.9,19.3z'/>
       </g>
     </svg>
   ),
