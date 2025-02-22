@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-first-prop-new-line */
 /* eslint-disable @typescript-eslint/comma-dangle */
 /* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable react/jsx-max-props-per-line */
 
 import { ReactNode } from 'react';
 
@@ -10,7 +11,7 @@ interface Icons {
   [key: string]: (color?: string) => ReactNode;
 }
 
-const DEFAULT_COLOR = '#000';
+const DEFAULT_COLOR = 'currentColor';
 
 const kIcons: Icons = {
   close: (color = DEFAULT_COLOR) => (
@@ -694,7 +695,27 @@ const kIcons: Icons = {
       </g>
     </svg>
   ),
+  won: (color = DEFAULT_COLOR) => (
+    <svg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg' viewBox='-5.12 -5.12 74.24 74.24' fill={color}>
+      <path fill='none' stroke={color} strokeWidth='4.608' strokeMiterlimit='10'
+            d='M53.92,10.081c12.107,12.105,12.107,31.732,0,43.838 c-12.106,12.108-31.734,12.108-43.84,0c-12.107-12.105-12.107-31.732,0-43.838C22.186-2.027,41.813-2.027,53.92,10.081z'/>
+      <polyline fill='none' stroke={color} strokeWidth='4.608' strokeMiterlimit='10'
+                points='15,16 23,48 24,48 31,18 33,18 40,48 41,48 49,16'/>
+      <line fill='none' stroke={color} strokeWidth='4.608' strokeMiterlimit='10' x1='13' y1='30' x2='51' y2='30'/>
+      <line fill='none' stroke={color} strokeWidth='4.608' strokeMiterlimit='10' x1='13' y1='36' x2='51' y2='36'/>
+    </svg>
+  ),
+  dollar: (color = DEFAULT_COLOR) => (
+    <svg viewBox='-0.48 -0.48 24.96 24.96' fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <circle cx='12' cy='12' r='10' stroke={color} strokeWidth='1.632'/>
+      <path d='M12 6V18' stroke={color} strokeWidth='1.632' strokeLinecap='round'/>
+      <path
+        d='M15 9.5C15 8.11929 13.6569 7 12 7C10.3431 7 9 8.11929 9 9.5C9 10.8807 10.3431 12 12 12C13.6569 12 15 13.1193 15 14.5C15 15.8807 13.6569 17 12 17C10.3431 17 9 15.8807 9 14.5'
+        stroke={color} strokeWidth='1.632' strokeLinecap='round'/>
+    </svg>
+  )
 } as const;
+
 
 const getIcon = (iconName: string, color: string | undefined): ReactNode | null => {
 
