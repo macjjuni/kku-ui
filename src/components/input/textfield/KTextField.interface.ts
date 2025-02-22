@@ -30,6 +30,11 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
   onBlur?: () => void
   onKeyDownEnter?: (e?: KeyboardEvent<HTMLInputElement>) => void
 
+  // Options
+  autoComplete?: string;
+  autoCorrect?: string;
+  autoCapitalize?: string;
+
   // Styles
   width?: string
   fullWidth?: boolean

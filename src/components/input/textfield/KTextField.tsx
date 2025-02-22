@@ -181,7 +181,8 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
                type={(props.password && !isPasswdShow) ? 'password' : 'input'} value={props.value}
                onChange={onChangeValue} onFocus={onFocus} onBlur={onblur} onKeyDown={onKeyDownEnter}
                disabled={props.disabled} placeholder={props.placeholder} maxLength={props.maxLength}
-               data-testid='k-text-field-input'/>
+               data-testid='k-text-field-input' autoComplete={props.autoComplete} autoCorrect={props.autoCorrect}
+               autoCapitalize={props.autoCapitalize}/>
         {
           props.password && (
             isPasswdShow
