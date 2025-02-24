@@ -313,7 +313,7 @@ const kIcons: Icons = {
       </g>
     </svg>
   ),
-  bitcoin: (color = '#f7931a') => (
+  bitcoin: (color = "#f7931a") => (
     <svg viewBox='0 -0.5 34 34' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0'/>
       <g strokeLinecap='round' strokeLinejoin='round'/>
@@ -326,7 +326,7 @@ const kIcons: Icons = {
       </g>
     </svg>
   ),
-  bitcoin_square: (color = '#f7931a') => (
+  bitcoin_square: (color = "#f7931a") => (
     <svg xmlns='http://www.w3.org/2000/svg' aria-label='Bitcoin' viewBox='0 0 512 512' fill='none'>
       <g strokeWidth='0'/>
       <g strokeLinecap='round' strokeLinejoin='round'/>
@@ -453,14 +453,6 @@ const kIcons: Icons = {
         <line x1='39.22' y1='29.8' x2='47.81' y2='30.45'/>
         <line x1='34.51' y1='33.98' x2='34.52' y2='44.74'/>
       </g>
-    </svg>
-  ),
-  copy: (color = DEFAULT_COLOR) => (
-    <svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' width='100%'
-         height='100%'>
-      <path
-        d='M9 15H5C3.89543 15 3 14.1046 3 13V5C3 3.89543 3.89543 3 5 3H13C14.1046 3 15 3.89543 15 5V9M11 21H19C20.1046 21 21 20.1046 21 19V11C21 9.89543 20.1046 9 19 9H11C9.89543 9 9 9.89543 9 11V19C9 20.1046 9.89543 21 11 21Z'
-        stroke={color} strokeWidth={2} strokeLinecap='round' strokeLinejoin='round'/>
     </svg>
   ),
   paste: (color = DEFAULT_COLOR) => (
@@ -712,6 +704,16 @@ const kIcons: Icons = {
       <path
         d='M15 9.5C15 8.11929 13.6569 7 12 7C10.3431 7 9 8.11929 9 9.5C9 10.8807 10.3431 12 12 12C13.6569 12 15 13.1193 15 14.5C15 15.8807 13.6569 17 12 17C10.3431 17 9 15.8807 9 14.5'
         stroke={color} strokeWidth='1.632' strokeLinecap='round'/>
+    </svg>
+  ),
+  app: (color = DEFAULT_COLOR) => (
+    <svg fill={color} width='100%' height='100%' viewBox='0 0 32 32'
+         xmlns='http://www.w3.org/2000/svg'>
+      <g strokeWidth='0'/>
+      <g strokeLinecap='round' strokeLinejoin='round'/>
+      <g>
+        <path d='M15.994 7.556l0.569-0.981c0.35-0.613 1.131-0.819 1.744-0.469s0.819 1.131 0.469 1.744l-5.469 9.469h3.956c1.281 0 2 1.506 1.444 2.55h-11.594c-0.706 0-1.275-0.569-1.275-1.275s0.569-1.275 1.275-1.275h3.25l4.162-7.213-1.3-2.256c-0.35-0.613-0.144-1.388 0.469-1.744 0.612-0.35 1.387-0.144 1.744 0.469zM11.075 21.181l-1.225 2.125c-0.35 0.613-1.131 0.819-1.744 0.469s-0.819-1.131-0.469-1.744l0.913-1.575c1.025-0.319 1.863-0.075 2.525 0.725zM21.631 17.325h3.319c0.706 0 1.275 0.569 1.275 1.275s-0.569 1.275-1.275 1.275h-1.844l1.244 2.156c0.35 0.613 0.143 1.387-0.469 1.744-0.613 0.35-1.388 0.144-1.744-0.469-2.094-3.631-3.669-6.35-4.712-8.162-1.069-1.844-0.306-3.694 0.45-4.319 0.837 1.438 2.087 3.606 3.756 6.5zM16 0.5c-8.563 0-15.5 6.938-15.5 15.5s6.938 15.5 15.5 15.5c8.563 0 15.5-6.938 15.5-15.5s-6.938-15.5-15.5-15.5zM29.5 16c0 7.419-6.006 13.5-13.5 13.5-7.419 0-13.5-6.006-13.5-13.5 0-7.419 6.006-13.5 13.5-13.5 7.419 0 13.5 6.006 13.5 13.5z'/>
+      </g>
     </svg>
   )
 } as const;
