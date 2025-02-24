@@ -10,7 +10,7 @@ import {
   useId,
   useImperativeHandle,
   useRef,
-  useMemo,
+  useMemo, memo,
 } from 'react';
 import { KIconProps, KIconRefs } from '@/components/icon/KIcon.interface';
 import { initDisabled } from '@/common/util/variation';
@@ -136,5 +136,4 @@ const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
 });
 
 KIcon.displayName = 'KIcon';
-
-export default KIcon;
+export default memo(KIcon);
