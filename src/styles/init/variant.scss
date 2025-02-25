@@ -1,253 +1,158 @@
-// region [SCSS variable]
+// region [variables]
+
+:root {
+
+  // region [Colors]
+  --white-color: #ffffff;
+  --black-color: #000000;
+
+  --error-color: #ED2B2A;
+  --success-color: #7DCE13;
+  --warning-color: #FFFA4D;
+  --eanble-color: #0079FF;
+
+  --gray-color-50: #f8f9fa;
+  --gray-color-100: #eceeef;
+  --gray-color-200: #dee2e6;
+  --gray-color-300: #ced4da;
+  --gray-color-400: #adb5bd;
+  --gray-color-500: #868e96;
+  --gray-color-600: #495057;
+  --gray-color-700: #343a40;
+  --gray-color-800: #212529;
+  --gray-color-900: #121416;
 
 
-// region [Percent]
-$hover-percent: 4%;
-$ripple-percent: 15%;
-$disabled-percent: 40%;
-$placeholder-percent: 6%;
+  --default-font-color: var(--gray-color-700);
+  --default-disabled-font-color: var(--gray-color-500);
+  --default-placeholder-font-color: #b3b3b3;
+
+  --dark-font-color: #ffffff;
+  --dark-disabled-font-color: var(--gray-color-500);
+  --dark-placeholder-font-color: #b3b3b3;
+
+  --default-border-color: var(--gray-color-500);
+  --default-hover-border-color: var(--gray-color-800);
+  --default-disabled-border-color: var(--gray-color-500);
+
+  --dark-border-color: var(--gray-color-500);
+  --dark-hover-border-color: var(--gray-color-200);
+  --dark-disabled-border-color: var(--gray-color-600);
+
+
+  --default-background-color: var(--white-color);
+  --default-hover-background-color: var(--gray-color-50);
+  --default-disabled-background-color: var(--gray-color-50);
+
+  --dark-default-background-color: var(--black-color);
+  --dark-hover-background-color: var(--gray-color-900);
+  --dark-disabled-background-color: var(--gray-color-900);
+
+
+  --default-ripple-color: var(--gray-color-300);
+  --dark-ripple-color: var(--gray-color-400);
+
+  // endregion
+
+
+  // region [Spacing]
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-10: 10px;
+  --spacing-12: 12px;
+  --spacing-14: 14px;
+  --spacing-16: 16px;
+  --spacing-18: 18px;
+  --spacing-20: 20px;
+  --spacing-22: 22px;
+  --spacing-24: 24px;
+  --spacing-26: 26px;
+  --spacing-28: 28px;
+  --spacing-30: 30px;
+  --spacing-32: 32px;
+  --spacing-34: 34px;
+  --spacing-36: 36px;
+  --spacing-38: 38px;
+  --spacing-40: 40px;
+  // endregion
+
+
+  // region [fonts]
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, sans-serif;
+
+  --font-size-title-1: 48px;
+  --font-size-title-2: 32px;
+  --font-size-title-3: 28px;
+
+  --font-size-sub-title-1: 24px;
+  --font-size-sub-title-2: 20px;
+  --font-size-sub-title-3: 16px;
+
+  --font-size-sub-1: 22px;
+  --font-size-sub-2: 20px;
+  --font-size-sub-3: 18px;
+
+  --font-size-label-1: 16px;
+  --font-size-label-2: 14px;
+  --font-size-label-3: 12px;
+
+  --line-height-title-1: 56px;
+  --line-height-title-2: 40px;
+  --line-height-title-3: 36px;
+
+  --line-height-sub-title-1: 32px;
+  --line-height-sub-title-2: 28px;
+  --line-height-sub-title-3: 24px;
+
+  --line-height-label-1: 24px;
+  --line-height-label-2: 22px;
+  --line-height-label-3: 20px;
+
+  --line-height-sub-1: 30px;
+  --line-height-sub-2: 28px;
+  --line-height-sub-3: 26px;
+
+  --font-weight-title: 600;
+  --font-weight-body: 400;
+  --font-weight-sub: 500;
+
+  --font-size-body-1: 18px;
+  --font-size-body-2: 16px;
+  --font-size-body-3: 14px;
+
+  --line-height-body-1: 24px;
+  --line-height-body-2: 22px;
+  --line-height-body-3: 20px;
+
+  --font-weight-body-1: 400;
+  --font-weight-body-2: 400;
+  --font-weight-body-3: 400;
+  // endregion
+
+
+  // region [border-radius]
+  --default-border-radius: 3px;
+  // endregion
+
+
+  // region [box-shadow]
+  --default-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  // endregion
+
+
+  // region [transition]
+  --default-transition-timing-function: ease;
+  // endregion
+
+
+  // region [z-index]
+  --select-z-index: 10;
+  // endregion
+}
+
+$dark-class-name: dark;
 // endregion
-
-// region [Colors]
-$k-primary-color: #068FFF !default; // TODO. 지워야함
-$k-primary-hover-color: #0084f0 !default; // TODO. 지워야함
-$k-primary-disabled-color: #008afb !default; // TODO. 지워야함
-
-$k-secondary-error: #ED2B2A !default; // TODO. 지워야함
-$k-secondary-green: #7DCE13 !default; // TODO. 지워야함
-$k-secondary-yellow: #FFFA4D !default; // TODO. 지워야함
-$k-secondary-blue: #0079FF !default; // TODO. 지워야함
-
-// region [White]
-$k-white-color: #ffffff !default;
-$k-white-hover-color: darken($k-white-color, $hover-percent) !default; // TODO. 지워야함
-$k-white-disabled-color: darken($k-white-color, $disabled-percent) !default; // TODO. 지워야함
-// endregion
-
-// region [Black]
-$k-black-color: #000000 !default;
-$k-black-hover-color: #141414 !default; // TODO. 지워야함
-// endregion
-
-// region [Gray]
-$k-gray-color-50: #f2f2f2 !default;
-$k-gray-color-100: #e6e6e6 !default;
-$k-gray-color-200: #cccccc !default;
-$k-gray-color-300: #b3b3b3 !default;
-$k-gray-color-400: #999999 !default;
-$k-gray-color-500: #808080 !default;
-$k-gray-color-600: #666666 !default;
-$k-gray-color-700: #4d4d4d !default;
-$k-gray-color-800: #333333 !default;
-$k-gray-color-900: #191919 !default;
-// endregion
-
-// region [Contained]
-$k-contained-color: $k-gray-color-400;
-// endregion
-
-// region [Font]
-$k-font-color: #333333 !default;
-$k-font-disabled-color: lighten($k-font-color, $disabled-percent) !default;
-$k-font-placeholder-color: #b3b3b3 !default;
-// endregion
-
-// region [Background]
-$k-background-color: #ffffff !default;
-$k-background-hover-color: darken($k-white-color, $hover-percent) !default;
-$k-background-disabled-color: darken($k-white-color, $disabled-percent) !default;
-// endregion
-
-// region [Border]
-$k-border-color: $k-gray-color-300 !default;
-$k-border-hover-color: lighten($k-black-color, $hover-percent);
-$k-border-disabled-color: darken($k-border-color, $disabled-percent) !default;
-// endregion
-
 
 $k-default-icon-color: #333333 !default;
-
-// region [Styles]
-
-$k-default-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
-// endregion
-
-
-
-// region [Typography]
-
-$k-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, sans-serif;;
-
-$k-font-size-title-1: 48px !default;
-$k-font-size-title-2: 32px !default;
-$k-font-size-title-3: 28px !default;
-
-$k-font-size-sub-title-1: 24px !default;
-$k-font-size-sub-title-2: 20px !default;
-$k-font-size-sub-title-3: 16px !default;
-
-$k-font-size-sub-1: 22px !default;
-$k-font-size-sub-2: 20px !default;
-$k-font-size-sub-3: 18px !default;
-
-$k-font-size-label-1: 16px !default;
-$k-font-size-label-2: 14px !default;
-$k-font-size-label-3: 12px !default;
-
-$k-line-height-title-1: 56px !default;
-$k-line-height-title-2: 40px !default;
-$k-line-height-title-3: 36px !default;
-
-$k-line-height-sub-title-1: 32px !default;
-$k-line-height-sub-title-2: 28px !default;
-$k-line-height-sub-title-3: 24px !default;
-
-$k-line-height-label-1: 24px !default;
-$k-line-height-label-2: 22px !default;
-$k-line-height-label-3: 20px !default;
-
-$k-line-height-sub-1: 30px !default;
-$k-line-height-sub-2: 28px !default;
-$k-line-height-sub-3: 26px !default;
-
-$k-font-weight-title: 600 !default;
-$k-font-weight-body: 400 !default;
-$k-font-weight-sub: 500 !default;
-
-$k-font-size-body-1: 18px !default;
-$k-font-size-body-2: 16px !default;
-$k-font-size-body-3: 14px !default;
-
-$k-line-height-body-1: 24px !default;
-$k-line-height-body-2: 22px !default;
-$k-line-height-body-3: 20px !default;
-
-$k-font-weight-body-1: 400 !default;
-$k-font-weight-body-2: 400 !default;
-$k-font-weight-body-3: 400 !default;
-
-// endregion
-
-
-// region [z-index]
-
-$k-select-z-index: 10;
-
-// endregion
-
-// TODO. 정리 해야 함.
-//:root {
-//    --k-primary-color: #{$k-primary-color};
-//    --k-primary-hover-color: #{$k-primary-hover-color};
-//
-//    --k-secondary-color-error: #{$k-secondary-error};
-//    --k-secondary-color-green: #{$k-secondary-green};
-//    --k-secondary-color-yellow: #{$k-secondary-yellow};
-//    --k-secondary-color-blue: #{$k-secondary-blue};
-//
-//    --k-white-color: #{$k-white-color};
-//    --k-white-hover-color: #{$k-white-hover-color};
-//
-//    --k-black-color: #{$k-black-color};
-//    --k-black-hover-color: #{$k-black-hover-color};
-//
-//    --k-gray-color-50: #{$k-gray-color-50};
-//    --k-gray-color-100: #{$k-gray-color-100};
-//    --k-gray-color-200: #{$k-gray-color-200};
-//    --k-gray-color-300: #{$k-gray-color-300};
-//    --k-gray-color-400: #{$k-gray-color-400};
-//    --k-gray-color-500: #{$k-gray-color-500};
-//    --k-gray-color-600: #{$k-gray-color-600};
-//    --k-gray-color-700: #{$k-gray-color-700};
-//    --k-gray-color-800: #{$k-gray-color-800};
-//    --k-gray-color-900: #{$k-gray-color-900};
-//}
-
-$k-spacing-2: 2px !default;
-$k-spacing-4: 4px !default;
-$k-spacing-6: 6px !default;
-$k-spacing-8: 8px !default;
-$k-spacing-10: 10px !default;
-$k-spacing-12: 12px !default;
-$k-spacing-14: 14px !default;
-$k-spacing-16: 16px !default;
-$k-spacing-18: 18px !default;
-$k-spacing-20: 20px !default;
-$k-spacing-22: 22px !default;
-$k-spacing-24: 24px !default;
-$k-spacing-26: 26px !default;
-$k-spacing-28: 28px !default;
-$k-spacing-30: 30px !default;
-$k-spacing-32: 32px !default;
-$k-spacing-34: 34px !default;
-$k-spacing-36: 36px !default;
-$k-spacing-38: 38px !default;
-$k-spacing-40: 40px !default;
-
-$k-border-radius-default: 3px !default;
-
-
-// region [Transition]
-
-$k-transition-timing-function: ease;
-
-// endregion
-
-
-
-// region [Dark Mode]
-
-$k-dark-class-name: #{dark} !default;
-
-
-// region [Dark Mode - colors]
-
-$k-dark-default-border-color: #808080 !default;
-$k-dark-hover-border-color: #5f5f5f !default; // default => light-10%
-$k-dark-disabled-border-color: #5b5b5b !default; // default => light-8%
-
-$k-dark-default-icon-color: #cccccc !default;
-
-// endregion
-
-
-// region [Dark Mode - colors]
-
-// region [Percent]
-$dark-hover-percent: 12%;
-$dark-disabled-percent: 24%;
-$dark-placeholder-percent: 48%;
-// endregion
-
-// region [Fonts]
-$k-dark-font-color: #ffffff !default;
-$k-dark-font-shade-color: #e8e8e8 !default;
-$k-dark-font-disabled-color: lighten($k-dark-font-color, $dark-disabled-percent) !default;
-$k-dark-font-placeholder-color: darken($k-dark-font-color, $dark-placeholder-percent) !default;
-// endregion
-
-// region [Background]
-$k-dark-background-color: $k-black-color !default;
-$k-dark-background-hover-color: lighten($k-dark-background-color, $dark-hover-percent) !default;
-$k-dark-background-disabled-color: lighten($k-dark-background-color, $dark-disabled-percent) !default;
-// endregion
-
-// region [Border]
-$k-dark-border-color: $k-gray-color-500 !default;
-$k-dark-border-hover-color: darken($k-white-color, $dark-hover-percent) !default;
-$k-dark-border-disabled-color: darken($k-dark-border-color, $dark-disabled-percent) !default;
-// endregion
-
-
-
-// endregion
-
-
-
-
-// endregion
-
-
-
-

@@ -8,7 +8,6 @@ const meta: Meta<KButtonProps> = {
   title: 'Components/Button',
   argTypes: {
     label: { description: '내부 텍스트를 설정합니다.' },
-    variant: { description: '색상 또는 형태를 설정합니다.' },
     ...onClickArgType, ...sizeArgType, ...disabledArgType, ...baseArgTyp,
   },
 };

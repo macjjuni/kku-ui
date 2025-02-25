@@ -7,17 +7,17 @@ $k-text-field-small-height: 36px;
   display: flex;
   width: auto;
   font-size: 0;
-  font-family: $k-font-family;
+  font-family: var(--font-family);
 
   // region [Hover]
   &:hover, &:focus-within {
 
     .k-text-field__label__container > .k-text-field__label__text {
-      color: $k-font-color;
+      color: var(--default-font-color);
     }
 
     .k-text-field__input__container {
-      border-color: $k-font-color;
+      border-color: var(--default-font-color);
     }
   }
   // endregion
@@ -29,7 +29,7 @@ $k-text-field-small-height: 36px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 $k-spacing-2;
+    padding: 0 var(--spacing-2);
     overflow: hidden;
 
     &:before {
@@ -40,7 +40,7 @@ $k-text-field-small-height: 36px;
       height: 2px;
       width: 100%;
       position: absolute;
-      background-color: $k-background-color;
+      background-color: var(--default-background-color);
       z-index: 1;
     }
 
@@ -48,8 +48,8 @@ $k-text-field-small-height: 36px;
       display: inline-flex;
       justify-content: flex-start;
       align-items: center;
-      gap: $k-spacing-2;
-      color: $k-border-color;
+      gap: var(--spacing-2);
+      color: var(--default-border-color);
       white-space: nowrap;
       border-radius: 4px;
       z-index: 2;
@@ -57,11 +57,11 @@ $k-text-field-small-height: 36px;
       @include k-transition-3;
 
       .k-text-field__label__text__required {
-        color: $k-secondary-error;
+        color: var(--error-color);
       }
 
       &.k-text-field__label__text--focus {
-        color: $k-black-color;
+        color: var(--black-color);
         transition-property: color;
         @include k-transition-3;
       }
@@ -88,10 +88,10 @@ $k-text-field-small-height: 36px;
     justify-content: space-between;
     align-items: center;
 
-    border: 1px solid $k-border-color;
-    border-radius: $k-border-radius-default;
-    background: $k-white-color;
-    caret-color: $k-font-color;
+    border: 1px solid var(--default-border-color);
+    border-radius: var(--default-border-radius);
+    background: var(--white-color);
+    caret-color: var(--default-font-color);
     font-size: 0;
 
     transition-property: border-color;
@@ -112,17 +112,17 @@ $k-text-field-small-height: 36px;
       border: none;
       outline: none;
       background-color: transparent;
-      color: $k-font-color;
+      color: var(--default-font-color);
 
       @include k-transition-3;
 
       &::placeholder {
-        color: $k-font-placeholder-color;
+        color: var(--default-placeholder-font-color);
       }
     }
 
     .k-text-field__icon {
-      margin-right: $k-spacing-8;
+      margin-right: var(--spacing-8);
       width: 100%;
     }
   }
@@ -131,24 +131,24 @@ $k-text-field-small-height: 36px;
 
   // region [Disabled]
   &.k-text-field--disabled, &.k-text-field--disabled {
-    color: $k-font-disabled-color;
+    color: var(--default-disabled-font-color);
 
     .k-text-field__label__container {
       .k-text-field__label__text {
-        color: $k-font-disabled-color;
+        color: var(--default-disabled-font-color);
       }
     }
 
     .k-text-field__input__container {
-      border-color: $k-font-disabled-color;
+      border-color: var(--default-disabled-font-color);
       cursor: not-allowed;
 
       &:hover {
-        border-color: $k-font-disabled-color;
+        border-color: var(--default-disabled-font-color);
       }
 
       .k-text-field__input {
-        color: $k-font-disabled-color;
+        color: var(--default-disabled-font-color);
         cursor: not-allowed;
       }
     }
@@ -198,15 +198,15 @@ $k-text-field-small-height: 36px;
       .k-text-field__input {
         @include k-body-2;
         min-height: $k-text-field-medium-height;
-        padding: 0 $k-spacing-12;
+        padding: 0 var(--spacing-12);
       }
 
       .k-text-field__label__left-action {
-        padding-left: $k-spacing-12;
+        padding-left: var(--spacing-12);
       }
 
       .k-text-field__label__right-action {
-        padding-right: $k-spacing-12;
+        padding-right: var(--spacing-12);
       }
 
       .k-text-field__label__left-action, .k-text-field__label__right-action {
@@ -244,15 +244,15 @@ $k-text-field-small-height: 36px;
       .k-text-field__input {
         @include k-body-3;
         min-height: $k-text-field-small-height;
-        padding: 0 $k-spacing-8;
+        padding: 0 var(--spacing-8);
       }
 
       .k-text-field__label__left-action {
-        padding-left: $k-spacing-8;
+        padding-left: var(--spacing-8);
       }
 
       .k-text-field__label__right-action {
-        padding-right: $k-spacing-8;
+        padding-right: var(--spacing-8);
       }
 
       .k-text-field__label__left-action, .k-text-field__label__right-action {
@@ -264,61 +264,49 @@ $k-text-field-small-height: 36px;
 }
 
 // region [Dark Mode]
-.#{$k-dark-class-name} .k-text-field {
-  color: $k-dark-font-color;
+.#{$dark-class-name} .k-text-field {
+
+  color: var(--dark-font-color);
 
   &.k-text-field--disabled, &.k-text-field--disabled {
 
     .k-text-field__input__container {
 
-      &:hover {
-        border-color: $k-dark-default-border-color;
-      }
-
-      .k-text-field__input {
-        color: $k-dark-font-disabled-color;
-      }
+      &:hover { border-color: var(--dark-hover-border-color); }
+      .k-text-field__input { color: var(--dark-disabled-font-color) }
     }
   }
 
   &:hover, &:focus-within {
     .k-text-field__label__container > .k-text-field__label__text {
-      color: $k-dark-font-color;
+      color: var(--dark-font-color);
     }
 
     .k-text-field__input__container {
-      border-color: $k-white-color;
+      border-color: var(--white-color);
     }
   }
 
   .k-text-field__label__container {
-    background-color: $k-dark-background-color;
+    background-color: var(--dark-default-background-color);
 
-    .k-text-field__label__text {
-      color: $k-dark-default-border-color;
-    }
-
-    &:before {
-      background-color: $k-dark-background-color;
-    }
+    .k-text-field__label__text { color: var(--dark-border-color); }
+    &:before { background-color: var(--dark-default-background-color); }
   }
 
   .k-text-field__input__container {
-    border: 1px solid $k-dark-default-border-color;
-    border-radius: $k-border-radius-default;
-    background: $k-dark-background-color;
-    caret-color: $k-white-color;
+    border: 1px solid var(--dark-border-color);
+    border-radius: var(--default-border-radius);
+    background: var(--dark-default-background-color);
+    caret-color: var(--white-color);
 
 
     .k-text-field__input {
-      color: $k-dark-font-color;
+      color: var(--dark-font-color);
 
-      &::placeholder {
-        color: $k-dark-font-placeholder-color;
-      }
+      &::placeholder { color: var(--dark-placeholder-font-color); }
     }
   }
-
 }
 
 

@@ -4,7 +4,7 @@
     cursor: pointer;
     margin: 0;
     padding: 0;
-    background-color: $k-gray-color-50;
+    background-color: var(--gray-color-50);
     overflow: hidden;
 
     .k-switch__active-background, .k-switch__default-background {
@@ -15,8 +15,8 @@
         transition: opacity 0.24s ease;
     }
 
-    .k-switch__active-background { background-color: $k-primary-color; }
-    .k-switch__default-background { background-color: $k-gray-color-100; }
+    .k-switch__active-background { background-color: #068FFF; }
+    .k-switch__default-background { background-color: var(--gray-color-100); }
 
     &.k-switch--on > .k-switch__active-background { opacity: 1; }
     &.k-switch--on > .k-switch__default-background { opacity: 0; }
@@ -32,7 +32,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: $k-black-color;
+            background: var(--black-color);
             opacity: 0.16;
             z-index: 1;
         }
@@ -41,7 +41,7 @@
     .k-switch__toggle {
         position: absolute;
         font-size: 0;
-        background: $k-white-color;
+        background: var(--white-color);
         border-radius: 50%;
         transition: left 0.3s ease;
         z-index: 1;
@@ -72,7 +72,7 @@
     // endregion
 }
 
-.#{$k-dark-class-name} .k-switch {
+.#{$dark-class-name} .k-switch {
 
-    background-color: $k-gray-color-700;
+    background-color: var(--gray-color-700);
 }
