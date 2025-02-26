@@ -27,7 +27,7 @@
   --default-disabled-font-color: var(--gray-color-500);
   --default-placeholder-font-color: #b3b3b3;
 
-  --dark-font-color: #ffffff;
+  --dark-font-color: var(--gray-color-100);
   --dark-disabled-font-color: var(--gray-color-500);
   --dark-placeholder-font-color: #b3b3b3;
 
@@ -139,6 +139,7 @@
 
   // region [box-shadow]
   --default-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  --dark-box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
   // endregion
 
 
