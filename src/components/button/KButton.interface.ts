@@ -1,5 +1,5 @@
-import { ReactNode, MouseEvent } from 'react';
-import { KBaseProp, KSizeProp, VariantType } from '@/common/base/base.interface';
+import { MouseEvent, ReactNode } from 'react';
+import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 
 export interface KButtonProps extends KBaseProp, KSizeProp {
   children?: ReactNode
@@ -7,7 +7,6 @@ export interface KButtonProps extends KBaseProp, KSizeProp {
 
   disabled?: boolean
 
-  variant?: VariantType
   onClick?: (e?: MouseEvent<HTMLButtonElement>) => void
   color?: string
   fontColor?: string

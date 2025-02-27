@@ -1,7 +1,7 @@
 import { KeyboardEvent, MouseEvent, ReactNode } from 'react';
-import { KBaseProp, KVariantProp } from '@/common/base/base.interface';
+import { KBaseProp } from '@/common/base/base.interface';
 
-export interface KCardProps extends KBaseProp, KVariantProp {
+export interface KCardProps extends KBaseProp {
 
   children?: ReactNode
 

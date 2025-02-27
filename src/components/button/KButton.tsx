@@ -6,7 +6,7 @@ import {
   useRef, useMemo, useCallback,
 } from 'react';
 import useRipple from '@/common/hook/useRipple';
-import { initSize, initVariant } from '@/common/util/variation';
+import { initSize } from '@/common/util/variation';
 import { KButtonProps, KButtonRefs } from '@/components';
 
 
@@ -20,7 +20,6 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) =>
     onClick,
     label,
     disabled,
-    variant,
     size,
     color,
     fontColor,
@@ -58,15 +57,17 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) =>
     if (className) {
       clazz.push(className);
     }
+    if (color) {
+      clazz.push('k-button--color');
+    }
     if (disabled) {
       clazz.push('k-button--disabled');
     }
 
-    initVariant(clazz, 'k-button', variant);
     initSize(clazz, 'k-button', size);
 
     return clazz.join(' ');
-  }, [className, disabled, variant, size]);
+  }, [className, disabled, size, color]);
 
   const rootStyle = useMemo(() => {
 

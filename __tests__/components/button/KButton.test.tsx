@@ -2,9 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
 import { KButton, KButtonRefs } from '@/components';
-import { variants } from '@/common/base/base.interface';
 
-const variantList = Object.values(variants);
 const mockOnClick = jest.fn();
 
 
@@ -45,15 +43,6 @@ describe('KButton', () => {
     const root = screen.getByRole('button');
 
     expect(root).toHaveClass(testClassName);
-  });
-
-  test.each(variantList)('%s variant prop render test.', (variant) => {
-
-    const variantClass = `k-button--${variant}`;
-    render(<KButton variant={variant}>{labelText}</KButton>);
-    const root = screen.getByRole('button');
-
-    expect(root).toHaveClass(variantClass);
   });
 
   test('label prop render test', () => {

@@ -1,115 +1,118 @@
 
+
 @mixin k-title-1 {
-    font-size: $k-font-size-title-1;
-    line-height: $k-line-height-title-1;
-    font-weight: $k-font-weight-body;
+    font-size: var(--font-size-title-1);
+    line-height: var(--line-height-title-1);
+    font-weight: var(--font-weight-body);
 }
 
 @mixin k-title-2 {
-    font-size: $k-font-size-title-2;
-    line-height: $k-line-height-title-2;
-    font-weight: $k-font-weight-body;
+    font-size: $k-var(--font-size-title-2);
+    line-height: var(--line-height-title-2);
+    font-weight: var(--font-weight-body);
 }
 
 @mixin k-title-3 {
-    font-size: $k-font-size-title-3;
-    line-height: $k-line-height-title-3;
-    font-weight: $k-font-weight-body;
+    font-size: var(--font-size-title-3);
+    line-height: var(--line-height-title-3);
+    font-weight: var(--font-weight-body);
 }
 
 @mixin k-sub-title-1 {
-    font-size: $k-font-size-sub-title-1;
-    line-height: $k-line-height-sub-title-1;
-    font-weight: $k-font-weight-body;
+    font-size: var(--font-size-sub-title-1);
+    line-height: var(--line-height-sub-title-1);
+    font-weight: var(--font-weight-body);
 }
 
 @mixin k-sub-title-2 {
-    font-size: $k-font-size-sub-title-2;
-    line-height: $k-line-height-title-2;
-    font-weight: $k-font-weight-body;
+    font-size: var(--font-size-sub-title-2);
+    line-height: var(--line-height-title-2);
+    font-weight: var(--font-weight-body);
 }
 
 @mixin k-sub-title-3 {
-    font-size: $k-font-size-sub-title-3;
-    line-height: $k-line-height-title-3;
-    font-weight: $k-font-weight-body;
+    font-size: var(--font-size-sub-title-3);
+    line-height: var(--line-height-title-3);
+    font-weight: var(--font-weight-body);
 }
 
 
 @mixin k-sub-1 {
-    font-size: $k-font-size-sub-1;
-    line-height: $k-line-height-sub-1;
-    font-weight: $k-font-weight-sub;
+    font-size: var(--font-size-sub-1);
+    line-height: var(--line-height-sub-1);
+    font-weight: var(--font-weight-sub);
 }
 
 @mixin k-sub-2 {
-    font-size: $k-font-size-sub-2;
-    line-height: $k-line-height-sub-2;
-    font-weight: $k-font-weight-sub;
+    font-size: var(--font-size-sub-2);
+    line-height: var(--line-height-sub-2);
+    font-weight: var(--font-weight-sub);
 }
 
 @mixin k-sub-3 {
-    font-size: $k-font-size-sub-3;
-    line-height: $k-line-height-sub-3;
-    font-weight: $k-font-weight-sub;
+    font-size: var(--font-size-sub-3);
+    line-height: var(--line-height-sub-3);
+    font-weight: var(--font-weight-sub);
 }
 
 @mixin k-label-1 {
-    font-size: $k-font-size-label-1;
-    line-height: $k-line-height-label-1;
-    font-weight: $k-font-weight-body;
-}@mixin k-label-2 {
-    font-size: $k-font-size-label-2;
-    line-height: $k-line-height-label-2;
-    font-weight: $k-font-weight-body;
-}@mixin k-label-3 {
-    font-size: $k-font-size-label-3;
-    line-height: $k-line-height-label-3;
-    font-weight: $k-font-weight-body;
+    font-size: var(--font-size-label-1);
+    line-height: var(--line-height-label-1);
+    font-weight: var(--font-weight-body);
+}
+@mixin k-label-2 {
+    font-size: var(--font-size-label-2);
+    line-height: var(--line-height-label-2);
+    font-weight: var(--font-weight-body);
+}
+@mixin k-label-3 {
+    font-size: var(--font-size-label-3);
+    line-height: var(--line-height-label-3);
+    font-weight: var(--font-weight-body);
 }
 
 
 @mixin k-body-1 {
-    font-size: $k-font-size-body-1;
-    line-height: $k-line-height-body-1;
-    font-weight: $k-font-weight-body-1;
+    font-size: var(--font-size-body-1);
+    line-height: var(--line-height-body-1);
+    font-weight: var(--font-weight-body)-1;
 }
 
 @mixin k-body-2 {
-    font-size: $k-font-size-body-2;
-    line-height: $k-line-height-body-2;
-    font-weight: $k-font-weight-body-2;
+    font-size: var(--font-size-body-2);
+    line-height: var(--line-height-body-2);
+    font-weight: var(--font-weight-body)-2;
 }
 
 @mixin k-body-3 {
-    font-size: $k-font-size-body-3;
-    line-height: $k-line-height-body-3;
-    font-weight: $k-font-weight-body-3;
+    font-size: var(--font-size-body-3);
+    line-height: var(--line-height-body-3);
+    font-weight: var(--font-weight-body)-3;
 }
 
 @mixin k-transition-1 {
     transition-duration: 0.1s;
-    transition-timing-function: $k-transition-timing-function;
+    transition-timing-function: var(--default-transition-timing-function);
 }
 
 @mixin k-transition-2 {
     transition-duration: 0.2s;
-    transition-timing-function: $k-transition-timing-function;
+    transition-timing-function: var(--default-transition-timing-function);
 }
 
 @mixin k-transition-3 {
     transition-duration: 0.3s;
-    transition-timing-function: $k-transition-timing-function;
+    transition-timing-function: var(--default-transition-timing-function);
 }
 
 @mixin k-transition-6 {
     transition-duration: 0.6s;
-    transition-timing-function: $k-transition-timing-function;
+    transition-timing-function: var(--default-transition-timing-function);
 }
 
 @mixin k-transition-9 {
     transition-duration: 0.9s;
-    transition-timing-function: $k-transition-timing-function;
+    transition-timing-function: var(--default-transition-timing-function);
 }
 
 @mixin k-center-absolute {

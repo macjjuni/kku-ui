@@ -5,71 +5,57 @@
   align-items: center;
 
   margin: 0;
-  font-family: $k-font-family;
-  border: 1px solid transparent;
-  background: transparent;
-  border-radius: $k-border-radius-default;
-  overflow: hidden;
+  border: 1px solid var(--default-border-color);
+  border-radius: var(--default-border-radius);
+  background: var(--default-background-color);
+  font-family: var(--font-family);
+  color: var(--default-font-color);
   cursor: pointer;
+  overflow: hidden;
   user-select: none;
   @include k-transition-3;
 
+  .k-ripple { background-color: var(--default-ripple-color); }
+  &:hover {
+    border-color: var(--default-hover-border-color);
+    background: var(--default-hover-background-color);
+  }
+
+  &[disabled] {
+    color: var(--default-disabled-font-color);
+    border-color: var(--default-disabled-border-color);
+    background-color: var(--default-disabled-background-color);
+  }
   &[disabled] { cursor: not-allowed; }
+  &[disabled].k-button--color:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.16);
+  }
+
   .k-button__content { white-space: nowrap; }
-  .k-ripple { background-color: darken($k-white-color, $ripple-percent); }
-
-  // region [Variant]
-  &.k-button--outlined {
-    color: $k-font-color;
-    border-color: $k-border-color;
-    background: $k-background-color;
-
-    &:hover {
-      border-color: $k-border-hover-color;
-      background: $k-background-hover-color;
-    }
-
-    &[disabled] {
-      color: $k-font-disabled-color;
-      border-color: $k-border-disabled-color;
-      background-color: $k-background-disabled-color;
-    }
-  }
-
-  $k-button-contained-color: $k-contained-color;
-
-  &.k-button--contained {
-    color: $k-white-color;
-    border-color: $k-button-contained-color;
-    background: $k-button-contained-color;
-
-    &:hover {
-      border-color: darken($k-button-contained-color, $hover-percent);
-      background: darken($k-button-contained-color, $hover-percent);
-    }
-
-    &[disabled] {
-      color: darken($k-white-color, $disabled-percent);
-      border-color: lighten($k-contained-color, $disabled-percent);
-      background: lighten($k-contained-color, $disabled-percent);
-    }
-  }
-  // endregion
-
 
   // region [Size]
   &.k-button--small {
     height: 28px;
-    padding: 0 $k-spacing-12;
+    padding: 0 var(--spacing-12);
 
-    .k-button__content { @include k-body-3; }
+    .k-button__content {
+      @include k-body-3;
+    }
   }
 
   &.k-button--medium {
     height: 32px;
-    padding: 0 $k-spacing-16;
+    padding: 0 var(--spacing-16);
 
-    .k-button__content { @include k-body-2; }
+    .k-button__content {
+      @include k-body-2;
+    }
   }
 
   // endregion
@@ -77,45 +63,23 @@
 
 // region [Dark Mode]
 
-.#{$k-dark-class-name} .k-button {
+.#{$dark-class-name} .k-button {
 
-  .k-ripple { background-color: darken($k-white-color, $ripple-percent); }
+  color: var(--dark-font-color);
+  border-color: var(--dark-border-color);
+  background-color: var(--dark-default-background-color);
 
-  // region [Variant]
-  &.k-button--outlined {
-    color: $k-white-color;
-    border-color: $k-dark-border-color;
-    background-color: $k-dark-background-color;
-
-    &:hover {
-      border-color: $k-dark-border-hover-color;
-      background: $k-dark-background-hover-color;
-    }
-    &[disabled] {
-      color: $k-dark-font-disabled-color;
-      border-color: $k-dark-border-disabled-color;
-      background-color: $k-dark-background-disabled-color;
-    }
+  .k-ripple { background-color: var(--dark-ripple-color); }
+  &:hover {
+    border-color: var(--dark-hover-border-color);
+    background: var(--dark-hover-background-color);
   }
 
-  $k-button-contained-color: $k-contained-color;
-
-  &.k-button--contained {
-    color: $k-dark-font-color;
-    border: none;
-    background: $k-dark-background-color;
-
-    &:hover {
-      background: $k-dark-background-hover-color;
-    }
-
-    &[disabled] {
-      color: $k-dark-font-disabled-color;
-      background-color: $k-dark-background-disabled-color;
-    }
+  &[disabled] {
+    color: var(--default-disabled-font-color);
+    border-color: var(--dark-disabled-border-color);
+    background-color: var(--dark-disabled-background-color);
   }
-  // endregion
-
 }
 
 // endregion

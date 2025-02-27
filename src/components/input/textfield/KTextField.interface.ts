@@ -44,6 +44,5 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
 export interface KTextFieldRefs {
   focus: () => void
   blur: () => void
-  validate: () => void
   value: string
 }

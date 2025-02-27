@@ -44,7 +44,7 @@ export const Default: Story = {
         required: true,
         clearable: false,
         password: false,
-        leftAction: '₩',
-        rightAction: 'Right'
+        leftAction: null,
+        rightAction: null,
     },
 };

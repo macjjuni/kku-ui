@@ -1,6 +1,6 @@
 
 .sb-main-padded.sb-show-main.dark {
-    background-color: $k-dark-background-color !important;
+    background-color: #000 !important;
 }
 
 .sb-show-main.sb-main-padded {
@@ -10,3 +10,4 @@
 .dark :is(h1, h2,h3,h4,h5) {
     color: #fff !important;
 }
+

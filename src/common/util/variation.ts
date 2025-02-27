@@ -1,4 +1,3 @@
-import { VariantType } from '@/common/base/base.interface';
 
 // region [🎁 - Size]
 
@@ -15,21 +14,6 @@ export const initSize: GetSizesType = (clazz, identity, size) => {
 
 // endregion
 
-// region [🍭 - Variant]
-
-type GetVariantType =
-  (clazz: string[], identity: string, variant?: VariantType) => void;
-
-export const initVariant: GetVariantType = (clazz, identity, variant) => {
-
-  if (variant) {
-    clazz.push(`${identity}--${variant}`);
-  } else {
-    clazz.push(`${identity}--outlined`);
-  }
-};
-
-// endregion
 
 // region [☑️ - Disabled]
 

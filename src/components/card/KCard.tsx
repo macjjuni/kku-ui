@@ -1,16 +1,13 @@
 import { CSSProperties, memo, useMemo } from 'react';
-import { KCardProps } from './KCard.interface';
-import { initVariant } from '@/common/util/variation';
+import { KCardProps } from '@/components';
 
 
 const KCard = ({ ...restProps }: KCardProps) => {
 
   // region [Hooks]
 
-  const {
-    children, id, className, style, title, subTitle, clickable, width, height, color, padding,
-    fontColor, borderRadius = '8px', onClick, variant = 'outlined',
-  }: KCardProps = { ...restProps };
+  const { children, id, className, style, title, subTitle, clickable, width, height, color, padding,
+    fontColor, borderRadius = '8px', onClick }: KCardProps = { ...restProps };
 
   // endregion
 
@@ -28,10 +25,9 @@ const KCard = ({ ...restProps }: KCardProps) => {
       clazz.push('k-card__clickable');
     }
 
-    initVariant(clazz, 'k-card', variant);
 
     return clazz.join(' ');
-  }, [className, clickable, variant]);
+  }, [className, clickable]);
 
 
   const rootStyle = useMemo(() => {
@@ -52,16 +48,8 @@ const KCard = ({ ...restProps }: KCardProps) => {
       styles.padding = padding;
     }
 
-    if (variant === 'outlined') {
-      styles.borderColor = color;
-    }
-    if (variant === 'contained') {
-      styles.background = color;
-      styles.borderColor = 'transparent';
-    }
-
     return styles;
-  }, [style, borderRadius, width, height, padding, color, fontColor, variant]);
+  }, [style, borderRadius, width, height, padding, color, fontColor]);
 
 
   // endregion

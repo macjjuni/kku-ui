@@ -1,26 +1,24 @@
 .k-accordion {
-  border: 1px solid $k-border-color;
-  border-radius: $k-border-radius-default;
+  border: 1px solid var(--gray-color-300);
+  border-radius: var(--default-border-radius);
   overflow: hidden;
-
 
   &.k-accordion--open .k-accordion__summary__icon__wrapper .k-accordion__summary__icon {
     transform: rotate(180deg);
   }
-
 
 .k-accordion__summary {
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: background-color 0.3s ease;
-  background: $k-gray-color-50;
+  background: var(--gray-color-50);
   list-style-type: none; // #Marker Style[Other Browser]
   user-select: none;
   cursor: pointer;
 
   &:hover {
-    background: $k-gray-color-100;
+    background: var(--gray-color-100);
   }
 
   // #Marker Style[Safari]
@@ -33,7 +31,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    color: $k-font-color;
+    color: var(--default-font-color);
   }
 
   .k-accordion__summary__icon__wrapper {
@@ -49,7 +47,7 @@
 .k-accordion__content {
   max-height: 0;
   height: auto;
-  background-color: $k-white-color;
+  background-color: var(--white-color);
   overflow: hidden;
   transition: max-height 0.3s ease;
 }
@@ -58,11 +56,11 @@
   @include k-body-1;
 
   .k-accordion__summary, .k-accordion__content__wrapper {
-    padding: $k-spacing-16;
+    padding: var(--spacing-16);
   }
 
   .k-accordion__summary__icon ~ .k-accordion__summary__text {
-    margin-left: $k-spacing-12;
+    margin-left: var(--spacing-12);
   }
 }
 
@@ -70,11 +68,11 @@
   @include k-body-1;
 
   .k-accordion__summary, .k-accordion__content__wrapper {
-    padding: $k-spacing-12 $k-spacing-14;
+    padding: var(--spacing-12) var(--spacing-14);
   }
 
   .k-accordion__summary__icon ~ .k-accordion__summary__text {
-    margin-left: $k-spacing-10;
+    margin-left: var(--spacing-10);
   }
 }
 
@@ -82,37 +80,38 @@
   @include k-body-1;
 
   .k-accordion__summary, .k-accordion__content__wrapper {
-    padding: $k-spacing-8 $k-spacing-12;
+    padding: var(--spacing-8) var(--spacing-12);
   }
 
   .k-accordion__summary__icon ~ .k-accordion__summary__text {
-    margin-left: $k-spacing-8;
+    margin-left: var(--spacing-8);
   }
 }
 
 }
 
 
-.#{$k-dark-class-name} .k-accordion {
-  border-color: $k-dark-border-color;
+.#{$dark-class-name} .k-accordion {
+
+  border-color: var(--dark-default-background-color);
 
   .k-accordion__summary {
-    background: $k-gray-color-900;
+    background: var(--gray-color-800);
 
     .k-accordion__summary__container {
-      color: $k-dark-font-color;
+      color: var(--dark-font-color);
     }
 
     .k-accordion__summary__icon__wrapper {
 
       .k-accordion__summary__icon > svg {
-        fill: $k-white-color;
+        fill: var(--white-color);
       }
     }
   }
 
   .k-accordion__content {
-    color: $k-dark-font-shade-color;
-    background-color: $k-gray-color-800;
+    color: var(--dark-font-color);
+    background-color: var(--gray-color-700);
   }
 }
