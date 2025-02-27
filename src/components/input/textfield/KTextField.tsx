@@ -1,15 +1,6 @@
 import {
-  ChangeEvent,
-  CSSProperties,
-  forwardRef,
-  KeyboardEvent, memo,
-  Ref,
-  useCallback,
-  useId,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
+  ChangeEvent, CSSProperties, forwardRef, KeyboardEvent, memo, Ref, useCallback,
+  useId, useImperativeHandle, useMemo, useRef, useState,
 } from 'react';
 import { KTextFieldProps, KTextFieldRefs } from '@/components/input/textfield/KTextField.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
@@ -32,8 +23,6 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
     },
     blur: () => {
       inputRef.current?.blur();
-    },
-    validate: () => {
     },
     value: props.value,
   }));
@@ -107,7 +96,6 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
     return { textAlign: 'left' };
   }, [props.align]);
 
-
   // endregion
 
 
@@ -160,54 +148,62 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
   // endregion
 
 
+  // region [Templates]
+
+  const Label = useMemo(() => (
+    props.label && (
+      <div className='k-text-field__label__container'>
+        <label htmlFor={props.id ? props.id : uniqueId} className={`k-text-field__label__text ${labelClass}`}
+               data-testid='k-text-field-label'>
+          {props.label}
+          {props.required && <span className='k-text-field__label__text__required'>*</span>}
+        </label>
+      </div>
+    )
+  ), [props.label, props.id, uniqueId, labelClass, props.required]);
+
+
+  const LeftAction = useMemo(() => (
+    props.leftAction && (<div className='k-text-field__label__left-action'>{props.leftAction}</div>)
+  ), [props.leftAction]);
+
+  const RightAction = useMemo(() => (
+    props.rightAction && (<div className='k-text-field__label__right-action'>{props.rightAction}</div>)
+  ), [props.rightAction]);
+
+
+  const PasswordIcon = useMemo(() => (
+    props.password && (
+      <KIcon className='k-text-field__icon' icon={isPasswdShow ? 'visibility' : 'visibility_off'}
+             clickable onClick={onPasswordShow} disabled={props.disabled}/>
+    )
+  ), [props.password, isPasswdShow, onPasswordShow, props.disabled])
+
+
+  const Clearable = useMemo(() => (
+    props.clearable && props.value && (
+      <KIcon className='k-text-field__icon k-text-field__clearable-icon' icon='close' clickable
+             onClick={onClear} disabled={props.disabled}/>
+    )
+  ), [props.clearable, props.value, props.disabled, onClear])
+
+  // endregion
+
+
   return (
     <div className={`k-text-field ${rootClass}`} style={rootStyle} data-testid='k-text-field'>
-      {/* Label */}
-      {props.label && (
-        <div className='k-text-field__label__container'>
-          <label htmlFor={props.id ? props.id : uniqueId} className={`k-text-field__label__text ${labelClass}`}
-                 data-testid='k-text-field-label'>
-            {props.label}
-            {props.required && <span className='k-text-field__label__text__required'>*</span>}
-          </label>
-        </div>
-      )}
-
+      {Label}
       <div className='k-text-field__input__container' style={containerStyle}>
-
-        {props.leftAction && (<div className='k-text-field__label__left-action'>{props.leftAction}</div>)}
-
+        {LeftAction}
         <input id={props.id || uniqueId} ref={inputRef} className='k-text-field__input' style={inputStyle}
                type={(props.password && !isPasswdShow) ? 'password' : 'input'} value={props.value}
                onChange={onChangeValue} onFocus={onFocus} onBlur={onblur} onKeyDown={onKeyDownEnter}
                disabled={props.disabled} placeholder={props.placeholder} maxLength={props.maxLength}
                data-testid='k-text-field-input' autoComplete={props.autoComplete} autoCorrect={props.autoCorrect}
                autoCapitalize={props.autoCapitalize}/>
-        {
-          props.password && (
-            isPasswdShow
-              ? (
-                <KIcon className='k-text-field__icon k-text-field__password-icon' icon='visibility_off'
-                       clickable onClick={onPasswordShow} disabled={props.disabled}/>
-              )
-              : (
-                <KIcon className='k-text-field__icon k-text-field__visibility-icon' icon='visibility'
-                       clickable onClick={onPasswordShow} disabled={props.disabled}/>
-              )
-          )
-        }
-
-        {props.clearable && props.value && (
-          <KIcon className='k-text-field__icon k-text-field__clearable-icon'
-                 icon='close' clickable onClick={onClear}
-                 disabled={props.disabled}/>
-        )}
-
-        {props.rightAction && (
-          <div className='k-text-field__label__right-action'>
-            {props.rightAction}
-          </div>
-        )}
+        {PasswordIcon}
+        {Clearable}
+        {RightAction}
       </div>
     </div>
   );

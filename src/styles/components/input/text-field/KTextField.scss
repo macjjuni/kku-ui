@@ -1,6 +1,6 @@
-$k-text-field-medium-height: 40px;
-$k-text-field-small-height: 36px;
-
+$k-text-field-medium-height: 36px;
+$k-text-field-small-height: 32px;
+$k-text-field-label-font-size: 10px;
 
 .k-text-field {
   position: relative;
@@ -9,27 +9,15 @@ $k-text-field-small-height: 36px;
   font-size: 0;
   font-family: var(--font-family);
 
-  // region [Hover]
-  &:hover, &:focus-within {
-
-    .k-text-field__label__container > .k-text-field__label__text {
-      color: var(--default-font-color);
-    }
-
-    .k-text-field__input__container {
-      border-color: var(--default-font-color);
-    }
-  }
-  // endregion
-
-
-  // region [Label]
   .k-text-field__label__container {
     position: absolute;
+    top: -4px;
+    left: 6px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 var(--spacing-2);
+    color: var(--default-border-color);
     overflow: hidden;
 
     &:before {
@@ -49,11 +37,12 @@ $k-text-field-small-height: 36px;
       justify-content: flex-start;
       align-items: center;
       gap: var(--spacing-2);
-      color: var(--default-border-color);
+
+      font-size: $k-text-field-label-font-size;
+      line-height: 1;
       white-space: nowrap;
-      border-radius: 4px;
-      z-index: 2;
       overflow: hidden;
+      z-index: 2;
       @include k-transition-3;
 
       .k-text-field__label__text__required {
@@ -67,52 +56,43 @@ $k-text-field-small-height: 36px;
       }
     }
   }
-  // endregion
 
-
-  // region [FullWidth]
-  &.k-text-field__input--full-width {
-    &.k-text-field--small, &.k-text-field--medium {
-      & > .k-text-field__input__container {
-        min-width: 100%;
-        width: 100%;
-      }
-    }
-  }
-  // endregion
-
-
-  // region [Container]
   .k-text-field__input__container {
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
 
+    height: 100%;
     border: 1px solid var(--default-border-color);
     border-radius: var(--default-border-radius);
     background: var(--white-color);
     caret-color: var(--default-font-color);
-    font-size: 0;
 
     transition-property: border-color;
-    @include k-transition-3;
+    font-size: 0;
 
 
     .k-text-field__label__left-action, .k-text-field__label__right-action {
-      display: flex;
+      display: inline-flex;
       justify-content: center;
       align-items: center;
+      width: auto;
       height: 100%;
+      font-size: inherit;
+      line-height: inherit;
       background-color: transparent;
     }
 
     .k-text-field__input {
       width: 100%;
+      height: 100%;
       padding: 0;
       border: none;
       outline: none;
       background-color: transparent;
       color: var(--default-font-color);
+      font-size: inherit;
+      line-height: inherit;
 
       @include k-transition-3;
 
@@ -126,31 +106,43 @@ $k-text-field-small-height: 36px;
       width: 100%;
     }
   }
+
+  // region [Hover]
+  &:hover, &:focus-within {
+
+    .k-text-field__label__container { color: var(--default-font-color); }
+    .k-text-field__input__container { border-color: var(--default-font-color); }
+  }
+  // endregion
+
+
+  // region [FullWidth]
+  &.k-text-field__input--full-width {
+    &.k-text-field--small, &.k-text-field--medium {
+      .k-text-field__input__container {
+
+        min-width: 100%;
+        width: 100%;
+      }
+    }
+  }
   // endregion
 
 
   // region [Disabled]
   &.k-text-field--disabled, &.k-text-field--disabled {
     color: var(--default-disabled-font-color);
+    cursor: not-allowed;
 
     .k-text-field__label__container {
-      .k-text-field__label__text {
-        color: var(--default-disabled-font-color);
-      }
+      color: var(--default-disabled-font-color);
     }
-
     .k-text-field__input__container {
       border-color: var(--default-disabled-font-color);
-      cursor: not-allowed;
+      background-color: var(--default-disabled-background-color);
 
-      &:hover {
-        border-color: var(--default-disabled-font-color);
-      }
-
-      .k-text-field__input {
-        color: var(--default-disabled-font-color);
-        cursor: not-allowed;
-      }
+      .k-text-field__input { color: var(--default-disabled-font-color); }
+      &:hover { border-color: var(--default-disabled-font-color); }
     }
   }
   // endregion
@@ -159,17 +151,9 @@ $k-text-field-small-height: 36px;
   // Type: Password
   &.k-text-field__input--password {
 
-    &.k-text-field--large .k-text-field__input__container > .k-text-field__input {
-      letter-spacing: 4px;
-    }
-
-    &.k-text-field--medium .k-text-field__input__container > .k-text-field__input {
-      letter-spacing: 2px;
-    }
-
-    &.k-text-field--small .k-text-field__input__container > .k-text-field__input {
-      letter-spacing: 1px;
-    }
+    &.k-text-field--large .k-text-field__input__container > .k-text-field__input { letter-spacing: 4px; }
+    &.k-text-field--medium .k-text-field__input__container > .k-text-field__input { letter-spacing: 2px; }
+    &.k-text-field--small .k-text-field__input__container > .k-text-field__input { letter-spacing: 1px; }
   }
 
   // Type: Clearable
@@ -180,84 +164,30 @@ $k-text-field-small-height: 36px;
 
   // region [Sizes]
   &.k-text-field--medium {
-
-    .k-text-field__label__container {
-      top: -6px;
-      left: 8px;
-
-      .k-text-field__label__text {
-        @include k-label-2;
-        line-height: 1;
-      }
-    }
+    height: $k-text-field-medium-height;
 
     .k-text-field__input__container {
       min-width: 300px;
       width: 300px;
+      @include k-body-2;
 
-      .k-text-field__input {
-        @include k-body-2;
-        min-height: $k-text-field-medium-height;
-        padding: 0 var(--spacing-12);
-      }
-
-      .k-text-field__label__left-action {
-        padding-left: var(--spacing-12);
-      }
-
-      .k-text-field__label__right-action {
-        padding-right: var(--spacing-12);
-      }
-
-      .k-text-field__label__left-action, .k-text-field__label__right-action {
-        @include k-label-2;
-      }
-
-      //.k-text-field__password-icon {
-      //  min-width: 16px; min-height: 16px;
-      //}
-      //.k-text-field__visibility-icon {
-      //  min-width: 16px; min-height: 16px;
-      //}
-      //.k-text-field__clearable-icon {
-      //  min-width: 16px; min-height: 16px;
-      //}
+      .k-text-field__input { padding: 0 var(--spacing-8); }
+      .k-text-field__label__left-action { padding-left: var(--spacing-12); }
+      .k-text-field__label__right-action { padding-right: var(--spacing-12); }
     }
   }
 
   &.k-text-field--small {
-
-    .k-text-field__label__container {
-      top: -5px;
-      left: 8px;
-
-      .k-text-field__label__text {
-        @include k-label-3;
-        line-height: 1;
-      }
-    }
+    height: $k-text-field-small-height;
 
     .k-text-field__input__container {
       min-width: 260px;
       width: 260px;
+      @include k-body-3;
 
-      .k-text-field__input {
-        @include k-body-3;
-        min-height: $k-text-field-small-height;
-        padding: 0 var(--spacing-8);
-      }
-
-      .k-text-field__label__left-action {
-        padding-left: var(--spacing-8);
-      }
-
-      .k-text-field__label__right-action {
-        padding-right: var(--spacing-8);
-      }
-
-      .k-text-field__label__left-action, .k-text-field__label__right-action {
-        @include k-body-3;
-      }
+      .k-text-field__input { padding: 0 var(--spacing-6); }
+      .k-text-field__label__right-action { padding-right: var(--spacing-8); }
+      .k-text-field__label__left-action{ padding-left: var(--spacing-8); }
     }
   }
   // endregion

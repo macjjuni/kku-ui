@@ -1,3 +1,6 @@
+$k-select-medium-height: 36px;
+$k-select-small-height: 32px;
+
 .k-select {
     position: relative;
     display: flex;
@@ -27,7 +30,7 @@
 
     &.k-select--disabled {
         color: var(--default-disabled-font-color);
-        background: transparent; // TODO: 수정
+        background: var(--default-disabled-background-color);
         cursor: not-allowed;
         &:hover { border-color: var(--default-border-color); }
     }
@@ -66,6 +69,9 @@
         z-index: var(--select-z-index);
 
         .k-select__menu-list__item {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
             width: 100%;
             white-space: nowrap;
             cursor: pointer;
@@ -80,29 +86,35 @@
     // region[Sizes]
     &.k-select--medium {
         width: 240px;
+        height: $k-select-medium-height;
 
         &, & + .k-select__template {
-            padding: var(--spacing-6) var(--spacing-8) var(--spacing-6) var(--spacing-10);
+            height: $k-select-medium-height;
+            padding: 0 var(--spacing-8);
             @include k-body-2;
         }
 
         .k-select__menu-list {
             .k-select__menu-list__item {
-                padding: var(--spacing-6) var(--spacing-8);
+                height: $k-select-medium-height;
+                padding: 0 var(--spacing-8);
             }
         }
     }
     &.k-select--small {
         width: 200px;
+        height: $k-select-small-height;
 
         &, & + .k-select__template {
-            padding: var(--spacing-4) var(--spacing-8) var(--spacing-4) var(--spacing-10);
+            height: $k-select-small-height;
+            padding: 0 var(--spacing-8);
             @include k-body-3;
         }
 
         .k-select__menu-list {
             .k-select__menu-list__item {
-                padding: var(--spacing-4) var(--spacing-8);
+                height: $k-select-small-height;
+                padding: 0 var(--spacing-8);
             }
         }
     }

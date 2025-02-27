@@ -59,11 +59,13 @@
     font-size: var(--font-size-label-1);
     line-height: var(--line-height-label-1);
     font-weight: var(--font-weight-body);
-}@mixin k-label-2 {
+}
+@mixin k-label-2 {
     font-size: var(--font-size-label-2);
     line-height: var(--line-height-label-2);
     font-weight: var(--font-weight-body);
-}@mixin k-label-3 {
+}
+@mixin k-label-3 {
     font-size: var(--font-size-label-3);
     line-height: var(--line-height-label-3);
     font-weight: var(--font-weight-body);
