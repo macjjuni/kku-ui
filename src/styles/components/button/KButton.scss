@@ -41,7 +41,7 @@
 
   // region [Size]
   &.k-button--small {
-    height: 28px;
+    height: var(--input-small-height);
     padding: 0 var(--spacing-12);
 
     .k-button__content {
@@ -50,14 +50,13 @@
   }
 
   &.k-button--medium {
-    height: 32px;
+    height: var(--input-medium-height);
     padding: 0 var(--spacing-16);
 
     .k-button__content {
       @include k-body-2;
     }
   }
-
   // endregion
 }
 

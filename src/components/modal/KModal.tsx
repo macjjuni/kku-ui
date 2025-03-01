@@ -167,7 +167,7 @@ function KModal({ ...restProps }: KModalProps) {
   const modalHeader = useMemo(() => (
     <div className={`k-modal__container__header ${headerClass}`} data-testid={headerTestId}>
       <h1 id={headerTitleId} className='k-modal__container__header__text'>{title}</h1>
-      <KIcon className='k-modal__container__header__close-button' icon='close' size={16}
+      <KIcon className='k-modal__container__header__close-button' icon='close' size={22}
              onClick={onCloseModal}/>
     </div>
   ), [headerClass, title, onCloseModal, headerTitleId, closeButtonTestId]);

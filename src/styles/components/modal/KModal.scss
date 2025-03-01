@@ -67,7 +67,7 @@ $k-modal__overlay__opacity: 0.16;
 
             .k-modal__container__header__close-button {
                 position: relative;
-                width: 24px; height: 24px;
+                padding: var(--spacing-2);
                 background: none;
                 border: none;
                 color: inherit;

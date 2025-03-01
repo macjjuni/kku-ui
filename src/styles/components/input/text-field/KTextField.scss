@@ -1,5 +1,4 @@
-$k-text-field-medium-height: 36px;
-$k-text-field-small-height: 32px;
+
 
 .k-text-field {
   position: relative;
@@ -41,16 +40,10 @@ $k-text-field-small-height: 32px;
       overflow: hidden;
       z-index: 2;
       @include k-transition-3;
+      transition-property: color;
 
-      .k-text-field__label__text__required {
-        color: var(--error-color);
-      }
-
-      &.k-text-field__label__text--focus {
-        color: var(--black-color);
-        transition-property: color;
-        @include k-transition-3;
-      }
+      .k-text-field__label__text__required { color: var(--error-color); }
+      &.k-text-field__label__text--focus { color: var(--black-color); }
     }
   }
 
@@ -65,8 +58,9 @@ $k-text-field-small-height: 32px;
     background: var(--white-color);
     caret-color: var(--default-font-color);
 
-    transition-property: border-color;
     font-size: 0;
+    transition-property: border-color;
+    @include k-transition-3;
 
     .k-text-field__label__left-action, .k-text-field__label__right-action {
       display: inline-flex;
@@ -87,7 +81,7 @@ $k-text-field-small-height: 32px;
       outline: none;
       background-color: transparent;
       color: var(--default-font-color);
-
+      transition-property: color;
       @include k-transition-3;
 
       &::placeholder {
@@ -167,7 +161,7 @@ $k-text-field-small-height: 32px;
     .k-text-field__input__container {
       min-width: 300px;
       width: 300px;
-      height: $k-text-field-medium-height;
+      height: var(--input-medium-height);;
 
       .k-text-field__input {
         @include k-body-2;
@@ -189,7 +183,7 @@ $k-text-field-small-height: 32px;
     .k-text-field__input__container {
       min-width: 260px;
       width: 260px;
-      height: $k-text-field-small-height;
+      height: var(--input-small-height);;
 
       .k-text-field__input {
         @include k-body-3;
