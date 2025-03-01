@@ -1,6 +1,5 @@
 $k-text-field-medium-height: 36px;
 $k-text-field-small-height: 32px;
-$k-text-field-label-font-size: 10px;
 
 .k-text-field {
   position: relative;
@@ -11,8 +10,7 @@ $k-text-field-label-font-size: 10px;
 
   .k-text-field__label__container {
     position: absolute;
-    top: -4px;
-    left: 6px;
+    top: -5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -38,7 +36,6 @@ $k-text-field-label-font-size: 10px;
       align-items: center;
       gap: var(--spacing-2);
 
-      font-size: $k-text-field-label-font-size;
       line-height: 1;
       white-space: nowrap;
       overflow: hidden;
@@ -71,7 +68,6 @@ $k-text-field-label-font-size: 10px;
     transition-property: border-color;
     font-size: 0;
 
-
     .k-text-field__label__left-action, .k-text-field__label__right-action {
       display: inline-flex;
       justify-content: center;
@@ -91,8 +87,6 @@ $k-text-field-label-font-size: 10px;
       outline: none;
       background-color: transparent;
       color: var(--default-font-color);
-      font-size: inherit;
-      line-height: inherit;
 
       @include k-transition-3;
 
@@ -120,7 +114,6 @@ $k-text-field-label-font-size: 10px;
   &.k-text-field__input--full-width {
     &.k-text-field--small, &.k-text-field--medium {
       .k-text-field__input__container {
-
         min-width: 100%;
         width: 100%;
       }
@@ -164,28 +157,44 @@ $k-text-field-label-font-size: 10px;
 
   // region [Sizes]
   &.k-text-field--medium {
-    height: $k-text-field-medium-height;
+
+    .k-text-field__label__container {
+      left: 10px;
+
+      .k-text-field__label__text { font-size: 12px; }
+    }
 
     .k-text-field__input__container {
       min-width: 300px;
       width: 300px;
-      @include k-body-2;
+      height: $k-text-field-medium-height;
 
-      .k-text-field__input { padding: 0 var(--spacing-8); }
+      .k-text-field__input {
+        @include k-body-2;
+        padding: 0 var(--spacing-10);
+      }
       .k-text-field__label__left-action { padding-left: var(--spacing-12); }
       .k-text-field__label__right-action { padding-right: var(--spacing-12); }
     }
   }
 
   &.k-text-field--small {
-    height: $k-text-field-small-height;
+
+    .k-text-field__label__container {
+      left: 8px;
+
+      .k-text-field__label__text { font-size: 12px; }
+    }
 
     .k-text-field__input__container {
       min-width: 260px;
       width: 260px;
-      @include k-body-3;
+      height: $k-text-field-small-height;
 
-      .k-text-field__input { padding: 0 var(--spacing-6); }
+      .k-text-field__input {
+        @include k-body-3;
+        padding: 0 var(--spacing-8);
+      }
       .k-text-field__label__right-action { padding-right: var(--spacing-8); }
       .k-text-field__label__left-action{ padding-left: var(--spacing-8); }
     }
@@ -238,6 +247,5 @@ $k-text-field-label-font-size: 10px;
     }
   }
 }
-
 
 // endregion
