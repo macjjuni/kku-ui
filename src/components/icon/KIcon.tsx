@@ -60,11 +60,14 @@ const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
     if (clickable) {
       clazz.push('k-icon--clickable');
     }
+    if (icon) {
+      clazz.push(`k-icon--${icon}`);
+    }
 
     initDisabled(clazz, 'k-icon', disabled);
 
     return clazz.join(' ');
-  }, []);
+  }, [className, clickable, disabled, icon]);
 
 
   const rootStyle = useMemo(() => {
