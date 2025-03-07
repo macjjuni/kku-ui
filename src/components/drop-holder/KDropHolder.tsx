@@ -36,11 +36,12 @@ const KDropHolder = forwardRef(({
 
   const { content, children, onClick, offset = '4px', position = 'bottom-center' } = { ...restProps };
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
 
-  useClickOutside(rootRef, () => {
+  useClickOutside(contentRef, () => {
     setOpen(false);
-  });
+  }, rootRef);
 
   // endregion
 
@@ -48,15 +49,11 @@ const KDropHolder = forwardRef(({
   // region [Class]
 
   const rootClass = useMemo(() => {
+
     const clazz = [];
 
-    if (className) {
-      clazz.push(className);
-    }
-
-    if (position) {
-      clazz.push(`k-drop-holder--${position}`);
-    }
+    if (className) { clazz.push(className); }
+    if (position) { clazz.push(`k-drop-holder--${position}`); }
 
     return clazz.join(' ');
   }, [className, position]);
@@ -127,7 +124,6 @@ const KDropHolder = forwardRef(({
 
 
   // region [Privates]
-
   const open = useCallback(() => {
     setOpen(true);
   }, []);
@@ -164,7 +160,7 @@ const KDropHolder = forwardRef(({
 
     const anchorParentElement = createElement(
       'div',
-      { className: anchorClass.container, style: anchorContainerStyle(), onClick: onClickAnchor },
+      { ref: contentRef, className: anchorClass.container, style: anchorContainerStyle(), onClick: onClickAnchor },
       KDropHolderAnchor,
     );
     createRoot(dropHolderWrap).render(anchorParentElement);
