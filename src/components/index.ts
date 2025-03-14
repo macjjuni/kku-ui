@@ -7,3 +7,4 @@ export * from '@/components/drop-holder';
 export * from '@/components/card';
 export * from '@/components/accordion';
 export * from '@/components/modal';
+export * from '@/components/css-transition/CSSTransition';

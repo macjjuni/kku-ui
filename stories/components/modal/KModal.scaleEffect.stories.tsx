@@ -49,7 +49,6 @@ const Template = (args: KModalProps) => {
                     size={'small'}
                     onClose={onClose}
                     content={content}
-                    animation={'scale'}
             />
         </>
     );
