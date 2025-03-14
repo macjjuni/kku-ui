@@ -12,6 +12,7 @@ import {
 import type { KSelectItemType, KSelectProps, KSelectRefs } from '@/components/input/select/KSelect.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { KIcon } from '@/components';
+import CSSTransition from '@/components/css-transition/CSSTransition';
 import KSelectList from '@/components/input/select/KSelectList';
 import { useCleanId } from '@/common/hook/useCleanId';
 
@@ -203,8 +204,10 @@ const KSelect = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs
 
       <KIcon className='k-select__current__label__arrow-icon' icon='keyboard_arrow_down' size={16}/>
 
-      <KSelectList id={selectListId} open={open} items={items} onClick={onClickListItem}
-                   onFocus={onFocusListItem} onKeyDown={onKeydownListItem} noDataText={noDataText || 'No Data'}/>
+      <CSSTransition className='k-select__transition' show={open} timeout={160} startAnimation={{ y: -8 }} >
+        <KSelectList id={selectListId} items={items} onClick={onClickListItem}
+                     onFocus={onFocusListItem} onKeyDown={onKeydownListItem} noDataText={noDataText || 'No Data'}/>
+      </CSSTransition>
     </div>
   );
 

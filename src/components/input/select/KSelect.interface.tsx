@@ -38,7 +38,6 @@ export interface KSelectRefs {
 
 export interface KSelectListProps {
   id: string // ✨ Required ✨
-  open: boolean
   items: KSelectItemType[]
   noDataText?: string
   onFocus: () => void
