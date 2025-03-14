@@ -72,6 +72,7 @@
     border-radius: var(--default-border-radius);
     overflow: hidden;
     z-index: var(--select-z-index);
+    animation: select-slide-down 0.16s ease-out forwards;
 
     .k-select__menu-list__item {
       display: flex;
@@ -174,4 +175,10 @@
       }
     }
   }
+}
+
+
+@keyframes select-slide-down {
+  0% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
 }

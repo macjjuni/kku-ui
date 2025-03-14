@@ -4,7 +4,7 @@
     cursor: pointer;
     margin: 0;
     padding: 0;
-    background-color: var(--gray-color-50);
+    background-color: var(--gray-color-200);
     overflow: hidden;
 
     .k-switch__active-background, .k-switch__default-background {
@@ -16,7 +16,6 @@
     }
 
     .k-switch__active-background { background-color: #068FFF; }
-    .k-switch__default-background { background-color: var(--gray-color-100); }
 
     &.k-switch--on > .k-switch__active-background { opacity: 1; }
     &.k-switch--on > .k-switch__default-background { opacity: 0; }
