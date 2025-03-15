@@ -19,7 +19,7 @@
     "build-tsc": "tsc --project ./tsconfig.esm.json && tsc-alias -p tsconfig.esm.json",
     "minify-js": "esbuild lib/esm/**/*.js --minify --allow-overwrite --outdir=lib/esm",
     "replacer": "node build-replacer.js",
-    "build": "yarn clean && yarn build-sass && yarn minify-css && yarn build-tsc && yarn replacer && yarn minify-js",
+    "build": "pnpm clean && pnpm build-sass && pnpm minify-css && pnpm build-tsc && pnpm replacer && pnpm minify-js",
     "publish": "publish",
     "test": "jest -all",
     "sb": "storybook dev -p 6006",
