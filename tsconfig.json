@@ -8,7 +8,7 @@
         "allowJs": true, // JavaScript 파일의 컴파일을 허용
         "module": "ESNext",
         "skipLibCheck": true, // 모든 선언 파일(*.d.ts)의 타입 검사를 건너뜀
-        "types": ["jest"],
+        "types": [],
         /* Bundler mode */
         "moduleResolution": "node",
         "jsx": "react-jsx",
