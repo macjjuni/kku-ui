@@ -1,5 +1,5 @@
+import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-
 import userEvent from '@testing-library/user-event';
 import { act } from 'react';
 import { KAccordion } from '@/components';
@@ -8,22 +8,20 @@ import { sizes } from '@/common/base/base.interface';
 const testId = 'k-accordion';
 const testChildrenId = 'k-test-children';
 const sizeArr = Object.values(sizes);
-const mockOnClick = jest.fn();
+const mockOnClick = vi.fn();
 
 describe('KAccordion', () => {
-  const TestChildren = () => (<div data-testid={testChildrenId}/>);
+  const TestChildren = () => <div data-testid={testChildrenId}/>;
 
   beforeEach(() => {
     mockOnClick.mockClear();
   });
 
-
   describe('Props', () => {
-
     test('Style, value, className, id, summary, children prop render test', () => {
 
       // Arrange
-      const testStyle = { color: 'red', fontSize: '20px' };
+      const testStyle = { color: '#eee', fontSize: '20px' };
       const testClass = 'test-class-name';
       const testIdValue = 'k-accordion-test-id';
       const summaryTest = 'k-accordion-summary';
@@ -33,6 +31,7 @@ describe('KAccordion', () => {
           <TestChildren/>
         </KAccordion>,
       );
+
       const root = screen.getByTestId(testId);
       const rootGetSummary = screen.getByText(summaryTest);
       const rootGetChildren = screen.getByTestId(testChildrenId);
@@ -62,11 +61,9 @@ describe('KAccordion', () => {
       expect(root).toHaveClass(`k-accordion--${size}`);
     });
 
-
     test('Test className rendering based on accordion state', async () => {
 
       // Arrange
-      const user = userEvent.setup();
       const summaryText = 'text';
 
       render(
@@ -83,8 +80,8 @@ describe('KAccordion', () => {
 
       // Events
       await act(async () => {
-        await user.click(summaryRoot);
-      })
+        await userEvent.click(summaryRoot);
+      });
 
       // Arrange
       const rootOpenState = screen.getByTestId(testId);
@@ -92,6 +89,5 @@ describe('KAccordion', () => {
       // Assert
       expect(rootOpenState).toHaveClass('k-accordion--open');
     });
-
   });
 });

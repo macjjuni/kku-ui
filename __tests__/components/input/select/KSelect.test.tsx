@@ -1,10 +1,11 @@
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import { act, createRef, useState } from 'react';
+import { describe, it, beforeEach, beforeAll, expect, vi } from 'vitest';
 import { KSelect, KSelectRefs } from '@/components';
 
 const testId = 'k-select';
-const mockFn = jest.fn();
+const mockFn = vi.fn();
 
 const items = [
   { title: '선택1', value: 'value1' },
@@ -12,37 +13,40 @@ const items = [
   { title: '선택3', value: 'value3' },
 ];
 
-
 describe('KSelect', () => {
-
   beforeEach(() => {
     mockFn.mockClear();
   });
 
   beforeAll(() => {
-    HTMLDivElement.prototype.animate = jest.fn().mockReturnValue({
+    // JSDOM에서는 animate 메서드가 없으므로 mock 처리
+    HTMLDivElement.prototype.animate = vi.fn().mockReturnValue({
       onfinish: null,
-      play: jest.fn(),
-      pause: jest.fn(),
-      cancel: jest.fn(),
-      finish: jest.fn(),
+      play: vi.fn(),
+      pause: vi.fn(),
+      cancel: vi.fn(),
+      finish: vi.fn(),
     });
   });
 
-
   describe('Props', () => {
-
-    test('Style, value, className prop render test', () => {
-
+    it('Style, value, className prop render test', () => {
       // Arrange
       const testValue = items[0].value;
       const expectTitle = items[0].title;
-      const testStyle = { color: 'red', fontSize: '20px' };
+      const testStyle = { color: '#a1a1a1', fontSize: '20px' };
       const testClass = 'test-class-name';
       const testIdValue = 'k-select-test-id';
 
-      render(<KSelect value={testValue} id={testIdValue} items={items} onChange={mockFn}
-                      className={testClass} style={testStyle}/>);
+      render(
+        <KSelect value={testValue}
+                 id={testIdValue}
+                 items={items}
+                 onChange={mockFn}
+                 className={testClass}
+                 style={testStyle}/>,
+      );
+
       const root = screen.getByTestId(testId);
       screen.getByText(expectTitle);
 
@@ -52,9 +56,7 @@ describe('KSelect', () => {
       expect(root).toHaveAttribute('id', testIdValue);
     });
 
-
-    test('Placeholder prop render test', () => {
-
+    it('Placeholder prop render test', () => {
       // Arrange
       const testPlaceholder = 'placeholder';
       render(<KSelect value='' items={[]} onChange={mockFn} placeholder={testPlaceholder}/>);
@@ -65,9 +67,7 @@ describe('KSelect', () => {
       expect(placeholderRoot).toHaveClass('k-select__label-text__placeholder');
     });
 
-
-    test('Disabled prop render test', () => {
-
+    it('Disabled prop render test', () => {
       // Arrange
       render(<KSelect value='' items={[]} onChange={mockFn} disabled/>);
 
@@ -77,9 +77,7 @@ describe('KSelect', () => {
       expect(root).toHaveClass('k-select--disabled');
     });
 
-
-    test('Width prop render test', async () => {
-
+    it('Width prop render test', async () => {
       // Arrange
       const testWidth = '200px';
       render(<KSelect value='' items={[]} onChange={mockFn} width={testWidth}/>);
@@ -90,9 +88,7 @@ describe('KSelect', () => {
       expect(root).toHaveStyle({ width: testWidth });
     });
 
-
-    test('NoDataText prop render test', async () => {
-
+    it('NoDataText prop render test', async () => {
       // Arrange
       const user = userEvent.setup();
       const testNoDataText = 'No Data Text';
@@ -112,11 +108,8 @@ describe('KSelect', () => {
     });
   });
 
-
   describe('Event', () => {
-
-    test('Value onChange Event test', async () => {
-
+    it('Value onChange Event test', async () => {
       // Arrange
       const user = userEvent.setup();
 
@@ -126,7 +119,7 @@ describe('KSelect', () => {
           setValue(e);
         };
 
-        return (<KSelect value={value} items={items} onChange={onChange}/>);
+        return <KSelect value={value} items={items} onChange={onChange}/>;
       };
 
       render(<TestSelect/>);
@@ -153,9 +146,7 @@ describe('KSelect', () => {
       expect(selectedRoot).toHaveClass('k-select__label-text');
     });
 
-
-    test('Focus event test', async () => {
-
+    it('Focus event test', async () => {
       // Arrange
       const user = userEvent.setup();
 
@@ -165,7 +156,7 @@ describe('KSelect', () => {
           setValue(e);
         };
 
-        return (<KSelect value={value} items={items} onChange={onChange}/>);
+        return <KSelect value={value} items={items} onChange={onChange}/>;
       };
       render(<TestSelect/>);
 
@@ -181,13 +172,10 @@ describe('KSelect', () => {
       expect(root).toHaveFocus();
     });
 
-
-    test('Disabled focus event test', async () => {
-
+    it('Disabled focus event test', async () => {
       // Arrange
       const user = userEvent.setup();
-      render(<KSelect value='' disabled items={items} onChange={() => {
-      }}/>);
+      render(<KSelect value='' disabled items={items} onChange={() => {}}/>);
 
       // Act
       await act(async () => {
@@ -201,9 +189,7 @@ describe('KSelect', () => {
       expect(root).not.toHaveFocus();
     });
 
-
-    test('Change Select value Using Keyboard Input', async () => {
-
+    it('Change Select value Using Keyboard Input', async () => {
       // Arrange
       const user = userEvent.setup();
       const TestSelect = () => {
@@ -212,7 +198,7 @@ describe('KSelect', () => {
           setValue(e);
         };
 
-        return (<KSelect value={value} items={items} onChange={onChange}/>);
+        return <KSelect value={value} items={items} onChange={onChange}/>;
       };
       render(<TestSelect/>);
 
@@ -245,9 +231,7 @@ describe('KSelect', () => {
       expect(selectedRoot).toBeInTheDocument();
     });
 
-
-    test('Open and close refs event test', async () => {
-
+    it('Open and close refs event test', async () => {
       // Arrange
       const selectRef = createRef<KSelectRefs>();
       render(<KSelect ref={selectRef} value='' disabled items={items}
@@ -272,7 +256,5 @@ describe('KSelect', () => {
       // Assert
       expect(root).not.toHaveClass('k-select--open');
     });
-
   });
-
 });

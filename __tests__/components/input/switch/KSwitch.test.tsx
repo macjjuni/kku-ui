@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import React, { useState, act } from 'react';
 import userEvent from '@testing-library/user-event';
+import { describe, test, expect, beforeEach, vi } from 'vitest';
 import { KSwitch, KSwitchProps, KSwitchRefs } from '@/components';
 
 const testId = 'k-switch';
-const mockFn = jest.fn();
+const mockFn = vi.fn();
 
 // 필수인 value, onChange 제거한 타입
 type ExceptRequiredKSwitchProps = Omit<Omit<KSwitchProps, 'value'>, 'onChange'>;
@@ -14,7 +15,6 @@ interface TestKSwitchProps extends ExceptRequiredKSwitchProps {
 }
 
 describe('KCheckbox', () => {
-
   beforeEach(() => {
     mockFn.mockClear();
   });
@@ -22,20 +22,17 @@ describe('KCheckbox', () => {
   const switchRef = React.createRef<KSwitchRefs>();
   const TestSwitch = (props: TestKSwitchProps) => {
     const [value, setValue] = useState(props.defaultValue || false);
-    return (<KSwitch {...props} ref={switchRef} value={value} onChange={(val) => { setValue(val); }} />);
+    return (<KSwitch {...props} ref={switchRef} value={value} onChange={(val) => { setValue(val); }}/>);
   };
 
   describe('Props', () => {
-
-
     test('Style, value, className prop render test', () => {
-
       // Arrange
-      const testStyle = { color: 'red', fontSize: '20px' };
+      const testStyle = { color: '#e1e1e1', fontSize: '20px' };
       const testClass = 'test-class-name';
       const testIdValue = 'k-select-test-id';
 
-      render(<TestSwitch style={testStyle} className={testClass} id={testIdValue} />);
+      render(<TestSwitch style={testStyle} className={testClass} id={testIdValue}/>);
       const root = screen.getByTestId(testId);
 
       // Assert
@@ -44,13 +41,10 @@ describe('KCheckbox', () => {
       expect(root).toHaveAttribute('id', testIdValue);
     });
 
-
     test('DefaultValue prop render test', () => {
-
       // Arrange
       const defaultValue = true;
-      render(<TestSwitch defaultValue={defaultValue} />);
-
+      render(<TestSwitch defaultValue={defaultValue}/>);
       const root = screen.getByTestId(testId);
 
       // Assert
@@ -58,15 +52,12 @@ describe('KCheckbox', () => {
       expect(root).toHaveClass('k-switch--on');
     });
 
-
     test('Color and toggleColor prop render test', () => {
-
       // Arrange
       const testBgColor = '#eee';
-      const testToggleColor = 'red';
+      const testToggleColor = '#aaa';
 
-      render(<TestSwitch toggleColor={testToggleColor} bgColor={testBgColor} />);
-
+      render(<TestSwitch toggleColor={testToggleColor} bgColor={testBgColor}/>);
       const backgroundRoot = screen.getByTestId('k-switch-active-background');
       const toggleRoot = screen.getByTestId('k-switch-toggle');
 
@@ -75,31 +66,23 @@ describe('KCheckbox', () => {
       expect(backgroundRoot).toHaveStyle({ background: testBgColor });
     });
 
-
     test('Disabled prop render test', () => {
-
       // Arrange
       const testDisabled = true;
-      render(<TestSwitch disabled={testDisabled} />);
-
+      render(<TestSwitch disabled={testDisabled}/>);
       const root = screen.getByTestId(testId);
 
       // Assert
       expect(root).toHaveClass('k-switch--disabled');
       expect(root).toHaveProperty('disabled', true);
     });
-
   });
 
-  describe('Props', () => {
-
-
+  describe('Behavior', () => {
     test('Value change render test', async () => {
-
       // Arrange
       const user = userEvent.setup();
-      render(<TestSwitch />);
-
+      render(<TestSwitch/>);
       const root = screen.getByTestId(testId);
 
       // Act
@@ -124,14 +107,9 @@ describe('KCheckbox', () => {
       expect(root).toHaveClass('k-switch--off');
     });
 
-
     test('Ref event test', async () => {
-
-
       // Arrange
-      render(<TestSwitch defaultValue />);
-
-      // Arrange
+      render(<TestSwitch defaultValue/>);
       const root = screen.getByTestId(testId);
 
       // Assert
@@ -158,6 +136,5 @@ describe('KCheckbox', () => {
       expect(renderedOffRoot).toHaveAttribute('aria-checked', 'true');
       expect(renderedOffRoot).toHaveClass('k-switch--on');
     });
-
   });
 });
