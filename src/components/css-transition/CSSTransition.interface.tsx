@@ -1,19 +1,18 @@
 import { ReactNode } from 'react';
+import { KBaseProp } from '@/common/base/base.interface';
 
-
-interface AnimationType {
+export interface AnimationType {
   x?: number;
   y?: number;
   opacity?: number;
-  easing?: 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out';
 }
 
-
-export interface CSSTransitionProps {
+export interface CSSTransitionProps extends KBaseProp {
   children: ReactNode;
   className?: string;
   show: boolean;
   timeout: number;
-  startAnimation: AnimationType;
-  endAnimation: AnimationType;
+  startAnimation?: AnimationType;
+  endAnimation?: AnimationType;
+  easing?: 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out';
 }

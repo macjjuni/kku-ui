@@ -1,22 +1,16 @@
-import { memo, useCallback, useEffect, useMemo, useRef, useState, ReactNode } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { CSSTransitionProps } from '@/components/css-transition/CSSTransition.interface';
 
-interface AnimationType {
-  x?: number;
-  y?: number;
-  opacity?: number;
-}
 
-interface CSSTransitionProps {
-  children: ReactNode;
-  className?: string;
-  show: boolean;
-  timeout: number;
-  startAnimation?: AnimationType;
-  endAnimation?: AnimationType;
-  easing?: 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out';
-}
-
-const CSSTransition = ({ children, className, show, easing = 'ease-out', timeout, startAnimation, endAnimation }: CSSTransitionProps) => {
+const CSSTransition = ({
+  children,
+  className,
+  show,
+  easing = 'ease-out',
+  timeout,
+  startAnimation,
+  endAnimation,
+}: CSSTransitionProps) => {
 
   // region [Hooks]
 
@@ -45,7 +39,10 @@ const CSSTransition = ({ children, className, show, easing = 'ease-out', timeout
     requestAnimationFrame(() => {
       elementRef.current?.animate(
         [
-          { opacity: startAnimation?.opacity || 0, transform: `translate(${startAnimation?.x || 0}px, ${startAnimation?.y || 0}px)` },
+          {
+            opacity: startAnimation?.opacity || 0,
+            transform: `translate(${startAnimation?.x || 0}px, ${startAnimation?.y || 0}px)`,
+          },
           { opacity: 1, transform: `translate(${endAnimation?.x || 0}px, ${endAnimation?.y || 0}px)` },
         ],
         { duration: timeout, easing, fill: 'forwards' },
@@ -59,8 +56,14 @@ const CSSTransition = ({ children, className, show, easing = 'ease-out', timeout
     } else {
       const animation = elementRef.current?.animate(
         [
-          { opacity: startAnimation?.opacity || 1, transform: `translate(${endAnimation?.x || 0}px, ${endAnimation?.y || 0}px)` },
-          { opacity: endAnimation?.opacity || 0, transform: `translate(${startAnimation?.x || 0}px, ${startAnimation?.y || 0}px)` },
+          {
+            opacity: startAnimation?.opacity || 1,
+            transform: `translate(${endAnimation?.x || 0}px, ${endAnimation?.y || 0}px)`,
+          },
+          {
+            opacity: endAnimation?.opacity || 0,
+            transform: `translate(${startAnimation?.x || 0}px, ${startAnimation?.y || 0}px)`,
+          },
         ],
         { duration: timeout, easing, fill: 'forwards' },
       );
@@ -87,7 +90,9 @@ const CSSTransition = ({ children, className, show, easing = 'ease-out', timeout
 
   // endregion
 
+
   return isLoad ? <div className={rootClass} ref={elementRef}>{children}</div> : null;
 };
+
 
 export default memo(CSSTransition);
