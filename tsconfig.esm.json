@@ -13,8 +13,8 @@
     "exclude": [
         "stories/components/**/*.tsx",
         "__tests__",
-        "jest-setup.ts",
-        "jest.config.ts",
+        "setupTests.ts",
+        "vitest.config.ts",
         "node_modules",
         "./lib/**/*",
     ],

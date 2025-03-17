@@ -17,7 +17,7 @@
         "resolveJsonModule": true, // .json 확장자로 import된 모듈을 포함
         "isolatedModules": true, // 추가 검사를 수행하여 별도의 컴파일
         "noEmit": false,
-        
+
         /* Linting */
         "strict": true, // 타입 엄격 모드
         "noUnusedLocals": true, // 사용하지 않는 지역 변수에 대한 오류를 보고
@@ -38,8 +38,8 @@
         "src/**/*.ts",
         "stories/components/**/*.tsx",
         "__tests__",
-        "jest-setup.ts",
-        "jest.config.ts",
+        "setupTests.ts",
+        "vitest.config.ts",
         "analyzer.js"
     ],
     "exclude": ["node_modules", "./lib/**/*"],
