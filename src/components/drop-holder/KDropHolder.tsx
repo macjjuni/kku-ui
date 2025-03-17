@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */
 import {
   CSSProperties,
   forwardRef,
@@ -16,12 +15,7 @@ import useClickOutside from '@/common/hook/useClickOutside';
 import CSSTransition from '@/components/css-transition/CSSTransition';
 
 
-const KDropHolder = forwardRef(({
-  id,
-  className,
-  style,
-  ...restProps
-}: KDropHolderProps, ref: Ref<KDropHolderRefs>) => {
+const KDropHolder = forwardRef(({ id, className, style, ...restProps }: KDropHolderProps, ref: Ref<KDropHolderRefs>) => {
 
 
   // region [Hooks]
@@ -59,43 +53,17 @@ const KDropHolder = forwardRef(({
 
   // region [Style]
 
-  const rootStyle = useMemo(() => {
-    return style || {};
-  }, [style]);
-
-
-  // endregion
-
-
-  // region [Events]
-
-  const onClickRoot = useCallback(() => {
-    setOpen(true);
-    onClick?.();
-  }, []);
-
-  const onKeyUpRoot = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === ' ' || e.key === 'Enter') {
-      setOpen(true);
-    }
-  }, []);
-
-  // const onClickAnchor = useCallback((e: MouseEvent<HTMLDivElement>) => {
-  //   e.stopPropagation();
-  // }, []);
-
-  // endregion
-
-
-  // region [templates]
+  const rootStyle = useMemo(() => (style || {}), [style]);
 
   // endregion
 
 
   // region [Privates]
+
   const open = useCallback(() => {
     setOpen(true);
   }, []);
+
   const close = useCallback(() => {
     setOpen(false);
   }, []);
@@ -108,11 +76,7 @@ const KDropHolder = forwardRef(({
       height: 0,
       width: 0,
     };
-    const styles: CSSProperties = {
-      position: 'fixed',
-      zIndex: '9999',
-      left: `${left}px`,
-    };
+    const styles: CSSProperties = { position: 'fixed', zIndex: '9999', left: `${left}px` };
 
     let translateX = '0';
     let translateY = '0';
@@ -135,31 +99,49 @@ const KDropHolder = forwardRef(({
     return styles;
   }, [position, offset, isOpen]);
 
-  // const observerAnchorRoot = useCallback(() => {
-  //   close();
-  // }, []);
+  const addWindowEvents = useCallback(() => {
+    window.addEventListener('resize', close);
+    window.addEventListener('scroll', close);
+  }, []);
+
+  const removeWindowEvents = useCallback(() => {
+    window.removeEventListener('resize', close);
+    window.removeEventListener('scroll', close);
+  }, []);
+
+  // endregion
 
 
-  // const removeAnchorRoot = useCallback(() => {
-  //   const dropHolderWrap = document.body.getElementsByClassName(anchorClass.wrapper);
-  //   dropHolderWrap[0]?.remove();
-  //   window.removeEventListener('scroll', observerAnchorRoot);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  // region [Events]
+
+  const onClickRoot = useCallback(() => {
+    open();
+    onClick?.();
+  }, []);
+
+  const onKeyUpRoot = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === ' ' || e.key === 'Enter') {
+      open();
+    }
+  }, []);
 
   // endregion
 
 
   // region [LifeCycles]
 
-  // useEffect(() => {
-  //   // if (!isOpen) {
-  //   //   removeAnchorRoot();
-  //   // }
-  // }, [isOpen]);
+  useEffect(() => {
+    if (isOpen) {
+      addWindowEvents();
+    } else {
+      removeWindowEvents();
+    }
+  }, [isOpen]);
 
   useEffect(() => {
-    // return () => removeAnchorRoot();
+    return () => {
+      removeWindowEvents();
+    }
   }, []);
 
   // endregion
@@ -173,19 +155,17 @@ const KDropHolder = forwardRef(({
 
 
   return (
-    <>
-      <div ref={rootRef} id={id} className={`k-drop-holder ${rootClass}`} tabIndex={0}
-           role='button' onClick={onClickRoot} onKeyUp={onKeyUpRoot} style={rootStyle}
-           data-testid='k-drop-holder'>
-        {children}
-        <div ref={contentRef} style={AnchorRootStyle}>
-          <CSSTransition show={isOpen} className='k-drop-holder__anchor__wrapper' timeout={400}>
-            {content}
-          </CSSTransition>
-        </div>
+    <div ref={rootRef} id={id} className={`k-drop-holder ${rootClass}`} tabIndex={0}
+         role='button' onClick={onClickRoot} onKeyUp={onKeyUpRoot} style={rootStyle}
+         data-testid='k-drop-holder'>
+      {children}
+      <div ref={contentRef} style={AnchorRootStyle}>
+        <CSSTransition show={isOpen} className='k-drop-holder__anchor__wrapper' timeout={400}
+                       startAnimation={{ opacity: 0 }} endAnimation={{ opacity: 1 }}>
+          {content}
+        </CSSTransition>
       </div>
-
-    </>
+    </div>
   );
 });
 

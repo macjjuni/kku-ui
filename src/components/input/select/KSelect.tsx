@@ -204,7 +204,8 @@ const KSelect = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs
 
       <KIcon className='k-select__current__label__arrow-icon' icon='keyboard_arrow_down' size={16}/>
 
-      <CSSTransition className='k-select__transition' show={open} timeout={160} startAnimation={{ y: -8 }} >
+      <CSSTransition className='k-select__transition' show={open} timeout={160} startAnimation={{ y: -8 }}
+                     endAnimation={{ y: 0 }}>
         <KSelectList id={selectListId} items={items} onClick={onClickListItem}
                      onFocus={onFocusListItem} onKeyDown={onKeydownListItem} noDataText={noDataText || 'No Data'}/>
       </CSSTransition>

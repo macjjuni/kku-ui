@@ -57,16 +57,17 @@ const CSSTransition = ({
       const animation = elementRef.current?.animate(
         [
           {
-            opacity: startAnimation?.opacity || 1,
-            transform: `translate(${endAnimation?.x || 0}px, ${endAnimation?.y || 0}px)`,
+            opacity: endAnimation?.opacity ?? 1,
+            transform: `translate(${endAnimation?.x ?? 0}px, ${endAnimation?.y ?? 0}px)`,
           },
           {
-            opacity: endAnimation?.opacity || 0,
-            transform: `translate(${startAnimation?.x || 0}px, ${startAnimation?.y || 0}px)`,
+            opacity: startAnimation?.opacity ?? 0,
+            transform: `translate(${startAnimation?.x ?? 0}px, ${startAnimation?.y ?? 0}px)`,
           },
         ],
         { duration: timeout, easing, fill: 'forwards' },
       );
+
       if (animation) {
         animation.onfinish = () => setIsLoad(false);
       }
