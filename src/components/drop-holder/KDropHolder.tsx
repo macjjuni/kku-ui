@@ -60,6 +60,10 @@ const KDropHolder = forwardRef(({ id, className, style, ...restProps }: KDropHol
 
   // region [Privates]
 
+  const toggle = useCallback(() => {
+    setOpen((prev) => !prev);
+  }, []);
+
   const open = useCallback(() => {
     setOpen(true);
   }, []);
@@ -115,7 +119,7 @@ const KDropHolder = forwardRef(({ id, className, style, ...restProps }: KDropHol
   // region [Events]
 
   const onClickRoot = useCallback(() => {
-    open();
+    toggle();
     onClick?.();
   }, []);
 
