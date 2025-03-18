@@ -28,16 +28,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20.x"
-      - run: npm install --force
+      - name: Clean npm cache and reinstall dependencies
+        run: |
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
+          npm install
       - run: npm run build-storybook
 
-      # deploy
+      # Deploy
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: "./storybook-static"
       - name: Deploy to GitHub Pages
         id: deployment
