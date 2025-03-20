@@ -4,7 +4,7 @@ import {
 } from 'react';
 import { KTextFieldProps, KTextFieldRefs } from '@/components/input/textfield/KTextField.interface';
 import { initDisabled, initSize } from '@/common/util/variation';
-import { KIcon } from '@/components';
+import KIcon from '@/components/icon/KIcon';
 
 
 const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KTextFieldRefs>) => {

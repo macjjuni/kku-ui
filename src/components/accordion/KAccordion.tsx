@@ -1,7 +1,7 @@
 import { CSSProperties, KeyboardEvent, memo, MouseEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { KAccordionProps } from '@/components/accordion/KAccordion.interface';
 import { initSize } from '@/common/util/variation';
-import { KIcon } from '@/components';
+import KIcon from '@/components/icon/KIcon';
 import { useCleanId } from '@/common/hook/useCleanId';
 
 

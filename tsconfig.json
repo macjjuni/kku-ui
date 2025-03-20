@@ -40,7 +40,9 @@
         "__tests__",
         "setupTests.ts",
         "vitest.config.ts",
-        "analyzer.js"
+        "analyzer.js",
+        "babel.config.js",
+        "build-replacer.js"
     ],
     "exclude": ["node_modules", "./lib/**/*"],
     "references": [{"path": "./tsconfig.node.json"}],
