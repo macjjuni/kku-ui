@@ -1,0 +1,179 @@
+:root {
+  --kku-gray-color-100: #F2F3F4;
+  --kku-gray-color-200: #ECEDEF;
+  --kku-gray-color-300: #DBDADE;
+  --kku-gray-color-400: #808793;
+  --kku-gray-color-500: #737A84;
+  --kku-gray-color-600: #6A707A;
+  --kku-gray-color-700: #60656E;
+  --kku-gray-color-800: #4D5158;
+  --kku-gray-color-900: #3A3D42;
+
+  --kku-blue-color-100: #E6F1FE;
+  --kku-blue-color-200: #D9EAFD;
+  --kku-blue-color-300: #B0D4FA;
+  --kku-blue-color-400: #0074F0;
+  --kku-blue-color-500: #0068D8;
+  --kku-blue-color-600: #005DC0;
+  --kku-blue-color-700: #0057B4;
+  --kku-blue-color-800: #004690;
+  --kku-blue-color-900: #00346C;
+
+  --kku-green-color-100: #F1FEEE;
+  --kku-green-color-200: #EAFFEE;
+  --kku-green-color-300: #D4FFCB;
+  --kku-green-color-400: #73F557;
+  --kku-green-color-500: #68E64E;
+  --kku-green-color-600: #5CCC46;
+  --kku-green-color-700: #58BF41;
+  --kku-green-color-800: #459934;
+  --kku-green-color-900: #347327;
+
+  --kku-orange-color-100: #FEF4E8;
+  --kku-orange-color-200: #FEF0DD;
+  --kku-orange-color-300: #FDDEB8;
+  --kku-orange-color-400: #F7931A;
+  --kku-orange-color-500: #DE8417;
+  --kku-orange-color-600: #C67615;
+  --kku-orange-color-700: #B96E14;
+  --kku-orange-color-800: #945810;
+  --kku-orange-color-900: #6F420C;
+
+  --kku-red-color-100: #FEE6E6;
+  --kku-red-color-200: #FDDD9D;
+  --kku-red-color-300: #FBBB1B;
+  --kku-red-color-400: #F10404;
+  --kku-red-color-500: #D90404;
+  --kku-red-color-600: #C10303;
+  --kku-red-color-700: #B50303;
+  --kku-red-color-800: #910202;
+  --kku-red-color-900: #6C0202;
+
+  --kku-white-color: #ffffff;
+  --kku-black-color: #000000;
+
+
+  --kku-text-size-xlarge: 32px;
+  --kku-text-size-large: 24px;
+  --kku-text-size-medium: 16px;
+  --kku-text-size-small: 14px;
+  --kku-text-size-xsize: 12px;
+
+
+  --kku-spacing-2: 2px;
+  --kku-spacing-4: 4px;
+  --kku-spacing-8: 8px;
+  --kku-spacing-12: 12px;
+  --kku-spacing-16: 16px;
+  --kku-spacing-20: 20px;
+  --kku-spacing-24: 24px;
+  --kku-spacing-28: 28px;
+  --kku-spacing-32: 32px;
+  --kku-spacing-36: 36px;
+  --kku-spacing-40: 40px;
+  --kku-spacing-44: 44px;
+  --kku-spacing-48: 48px;
+  --kku-spacing-52: 52px;
+  --kku-spacing-56: 56px;
+  --kku-spacing-60: 60px;
+  --kku-spacing-64: 64px;
+  --kku-spacing-68: 68px;
+  --kku-spacing-72: 72px;
+  --kku-spacing-76: 76px;
+  --kku-spacing-80: 80px;
+
+  --kku-border-radius-default: 3px;
+}
+
+/* Gray */
+$kku-gray-color-100: var(--kku-gray-color-100);
+$kku-gray-color-200: var(--kku-gray-color-200);
+$kku-gray-color-300: var(--kku-gray-color-300);
+$kku-gray-color-400: var(--kku-gray-color-400);
+$kku-gray-color-500: var(--kku-gray-color-500);
+$kku-gray-color-600: var(--kku-gray-color-600);
+$kku-gray-color-700: var(--kku-gray-color-700);
+$kku-gray-color-800: var(--kku-gray-color-800);
+$kku-gray-color-900: var(--kku-gray-color-900);
+
+/* Blue */
+$kku-blue-color-100: var(--kku-blue-color-100);
+$kku-blue-color-200: var(--kku-blue-color-200);
+$kku-blue-color-300: var(--kku-blue-color-300);
+$kku-blue-color-400: var(--kku-blue-color-400);
+$kku-blue-color-500: var(--kku-blue-color-500);
+$kku-blue-color-600: var(--kku-blue-color-600);
+$kku-blue-color-700: var(--kku-blue-color-700);
+$kku-blue-color-800: var(--kku-blue-color-800);
+$kku-blue-color-900: var(--kku-blue-color-900);
+
+/* Green */
+$kku-green-color-100: var(--kku-green-color-100);
+$kku-green-color-200: var(--kku-green-color-200);
+$kku-green-color-300: var(--kku-green-color-300);
+$kku-green-color-400: var(--kku-green-color-400);
+$kku-green-color-500: var(--kku-green-color-500);
+$kku-green-color-600: var(--kku-green-color-600);
+$kku-green-color-700: var(--kku-green-color-700);
+$kku-green-color-800: var(--kku-green-color-800);
+$kku-green-color-900: var(--kku-green-color-900);
+
+/* Orange */
+$kku-orange-color-100: var(--kku-orange-color-100);
+$kku-orange-color-200: var(--kku-orange-color-200);
+$kku-orange-color-300: var(--kku-orange-color-300);
+$kku-orange-color-400: var(--kku-orange-color-400);
+$kku-orange-color-500: var(--kku-orange-color-500);
+$kku-orange-color-600: var(--kku-orange-color-600);
+$kku-orange-color-700: var(--kku-orange-color-700);
+$kku-orange-color-800: var(--kku-orange-color-800);
+$kku-orange-color-900: var(--kku-orange-color-900);
+
+/* Red */
+$kku-red-color-100: var(--kku-red-color-100);
+$kku-red-color-200: var(--kku-red-color-200);
+$kku-red-color-300: var(--kku-red-color-300);
+$kku-red-color-400: var(--kku-red-color-400);
+$kku-red-color-500: var(--kku-red-color-500);
+$kku-red-color-600: var(--kku-red-color-600);
+$kku-red-color-700: var(--kku-red-color-700);
+$kku-red-color-800: var(--kku-red-color-800);
+$kku-red-color-900: var(--kku-red-color-900);
+
+/* Base Color */
+$kku-white-color: var(--kku-white-color);
+$kku-black-color: var(--kku-black-color);
+
+/* Text Size */
+$kku-text-size-xsmall: var(--kku-text-size-xsmall);
+$kku-text-size-small: var(--kku-text-size-small);
+$kku-text-size-medium: var(--kku-text-size-medium);
+$kku-text-size-large: var(--kku-text-size-large);
+$kku-text-size-xlarge: var(--kku-text-size-xlarge);
+
+
+/* Spacing Size */
+$kku-spacing-2: var(--kku-spacing-2);
+$kku-spacing-4: var(--kku-spacing-4);
+$kku-spacing-8: var(--kku-spacing-8);
+$kku-spacing-12: var(--kku-spacing-12);
+$kku-spacing-16: var(--kku-spacing-16);
+$kku-spacing-20: var(--kku-spacing-20);
+$kku-spacing-24: var(--kku-spacing-24);
+$kku-spacing-28: var(--kku-spacing-28);
+$kku-spacing-32: var(--kku-spacing-32);
+$kku-spacing-36: var(--kku-spacing-36);
+$kku-spacing-40: var(--kku-spacing-40);
+$kku-spacing-44: var(--kku-spacing-44);
+$kku-spacing-48: var(--kku-spacing-48);
+$kku-spacing-52: var(--kku-spacing-52);
+$kku-spacing-56: var(--kku-spacing-56);
+$kku-spacing-60: var(--kku-spacing-60);
+$kku-spacing-64: var(--kku-spacing-64);
+$kku-spacing-68: var(--kku-spacing-68);
+$kku-spacing-72: var(--kku-spacing-72);
+$kku-spacing-76: var(--kku-spacing-76);
+$kku-spacing-80: var(--kku-spacing-80);
+
+
+$kku-border-radius-default: var(--kku-border-radius-default);

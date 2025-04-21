@@ -14,3 +14,11 @@ export type SizeType = (typeof sizes)[keyof typeof sizes];
 export interface KSizeProp {
   size?: SizeType
 }
+
+// 🎁 - Variant Properties
+export const variants = { primary: 'primary', default: 'default' } as const;
+export type VariantType = (typeof variants)[keyof typeof variants];
+
+export interface KVariantProp {
+  variant?: VariantType
+}

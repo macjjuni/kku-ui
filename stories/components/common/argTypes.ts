@@ -1,9 +1,5 @@
 export const variantArgType = {
-    variant: {
-        description: '색상 또는 형태를 설정합니다. 개별적으로 boolean 형태인 contained, outlined Prop 으로도 설정할 수 있습니다.',
-        defaultValue: {summary: 'default'},
-        controls: {includes: ['default', 'contained', 'outlined']},
-    },
+    variant: { description: '형태를 설정합니다.', defaultValue: { summary: 'primary' }},
 };
 
 export const sizeArgType = {
@@ -27,3 +23,4 @@ export const baseArgTyp = {
 export const onClickArgType = {
     onClick: {description: '클릭 이벤트를 설정합니다.', defaultValue: {summary: 'undefined'}},
 };
+

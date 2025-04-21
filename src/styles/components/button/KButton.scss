@@ -1,3 +1,45 @@
+@use "/src/styles/init" as *;
+
+// region [Component Tokens]
+
+// Sizes
+$button-text-size-small: $kku-text-size-small;
+$button-text-size-medium: $kku-text-size-medium;
+
+
+// Default
+$button-text-default-color-base: $kku-text-color-primary;
+$button-text-default-color-hover: $kku-text-color-secondary;
+$button-text-default-color-disabled: $kku-text-color-disabled;
+
+$button-background-default-color-base: $kku-background-color-base;
+$button-background-default-color-hover: $kku-background-color-hover;
+$button-background-default-color-disabled: $kku-background-color-disabled;
+
+$button-border-default-color-base: $kku-border-color-base;
+$button-border-default-color-hover: $kku-border-color-hover;
+$button-border-default-color-disabled: $kku-border-color-disabled;
+
+
+$button-border-radius: $kku-border-radius-default;
+
+
+// Primary
+$button-text-primary-color-base: $kku-white-color;
+$button-text-primary-color-hover: $kku-white-color;
+$button-text-primary-color-disabled: $kku-gray-color-300;
+
+$button-primary-text-color-base: $kku-gray-color-100;
+$button-primary-text-color-hover: $kku-text-color-secondary;
+$button-primary-text-color-disabled: $kku-text-color-disabled;
+
+$button-border-primary-color-base: $kku-primary-color-base;
+$button-border-primary-color-hover: $kku-primary-color-hover;
+$button-border-primary-color-disabled: $kku-primary-color-disabled;
+
+// endregion
+
+
 .k-button {
   position: relative;
   display: inline-flex;
@@ -5,80 +47,92 @@
   align-items: center;
 
   margin: 0;
-  border: 1px solid var(--default-border-color);
-  border-radius: var(--default-border-radius);
-  background: var(--default-background-color);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: $button-border-radius;
   font-family: var(--font-family);
-  color: var(--default-font-color);
   cursor: pointer;
   overflow: hidden;
   user-select: none;
-  @include k-transition-3;
 
-  .k-ripple { background-color: var(--default-ripple-color); }
-  &:hover {
-    border-color: var(--default-hover-border-color);
-    background: var(--default-hover-background-color);
-  }
+  .k-button__content { color: inherit; }
+  .k-ripple { background-color: $kku-background-color-ripple; }
 
-  &[disabled] {
-    color: var(--default-disabled-font-color);
-    border-color: var(--default-disabled-border-color);
-    background-color: var(--default-disabled-background-color);
-  }
   &[disabled] { cursor: not-allowed; }
   &[disabled].k-button--color:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.16);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.16);
   }
 
-  .k-button__content { white-space: nowrap; }
+  .k-button__content {
+    white-space: nowrap;
+  }
+
+  // region [Variant]
+
+  &.k-button--default {
+    color: $button-text-default-color-base;
+    border-color: $button-border-default-color-base;
+    background-color: $button-background-default-color-base;
+
+    &:hover {
+      border-color: $button-border-default-color-hover;
+      background: $button-background-default-color-hover;
+    }
+
+    &[disabled] {
+      color: $button-text-default-color-disabled;
+      border-color: $button-border-default-color-disabled;
+      background: $button-background-default-color-disabled;
+    }
+  }
+
+  &.k-button--primary {
+    color: $button-text-primary-color-base;
+    border-color: $button-border-primary-color-base;
+    background-color: $button-border-primary-color-base;
+
+    &:hover {
+      color: $button-text-primary-color-hover;
+      border-color: $button-border-primary-color-hover;
+      background: $button-border-primary-color-hover;
+    }
+
+    &[disabled] {
+      color: $button-text-primary-color-disabled;
+      border-color: $button-border-primary-color-disabled;
+      background: $button-border-primary-color-disabled;
+    }
+  }
+
+
+  // endregion
 
   // region [Size]
+
   &.k-button--small {
     height: 32px;
-    padding: 0 var(--spacing-12);
+    padding: 0 $kku-spacing-12;
 
     .k-button__content {
-      @include k-body-3;
+      font-size: $button-text-size-small;
     }
   }
 
   &.k-button--medium {
     height: 36px;
-    padding: 0 var(--spacing-16);
+    padding: 0 $kku-spacing-16;
 
     .k-button__content {
-      @include k-body-2;
+      font-size: $button-text-size-medium;
     }
   }
+
   // endregion
+
 }
-
-// region [Dark Mode]
-
-.#{$dark-class-name} .k-button {
-
-  color: var(--dark-font-color);
-  border-color: var(--dark-border-color);
-  background-color: var(--dark-default-background-color);
-
-  .k-ripple { background-color: var(--dark-ripple-color); }
-  &:hover {
-    border-color: var(--dark-hover-border-color);
-    background: var(--dark-hover-background-color);
-  }
-
-  &[disabled] {
-    color: var(--default-disabled-font-color);
-    border-color: var(--dark-disabled-border-color);
-    background-color: var(--dark-disabled-background-color);
-  }
-}
-
-// endregion

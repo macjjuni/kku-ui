@@ -1,9 +1,9 @@
-@import 'button/KButton';
-@import 'input/text-field/KTextField';
-@import 'input/select/KSelect';
-@import 'input/switch/KSwitch';
-@import 'icon/KIcon';
-@import 'drop-holder/KDropHolder';
-@import 'card/KCard';
-@import 'accordion/KAccordion';
-@import 'modal/KModal';
+@use 'button/KButton' as *;
+//@use 'input/text-field/KTextField' as *;
+//@use 'input/select/KSelect' as *;
+//@use 'input/switch/KSwitch' as *;
+//@use 'icon/KIcon' as *;
+//@use 'drop-holder/KDropHolder' as *;
+//@use 'card/KCard' as *;
+//@use 'accordion/KAccordion' as *;
+//@use 'modal/KModal' as *;

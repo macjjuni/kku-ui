@@ -1,2 +1,2 @@
-@import 'init';
-@import 'components/index';
+@use 'init' as *;
+@use 'components/index' as *;

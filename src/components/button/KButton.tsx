@@ -12,18 +12,8 @@ import { KButtonProps, KButtonRefs } from '@/components';
 
 const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => {
 
-  const {
-    children,
-    id,
-    className,
-    style,
-    onClick,
-    label,
-    disabled,
-    size,
-    color,
-    fontColor,
-  }: KButtonProps = { ...restProps };
+  const { children, id, className, style, onClick, label,
+    disabled, size, color, fontColor, variant = 'default' }: KButtonProps = { ...restProps };
 
   if (label && children) {
     throw Error('Error: label and children attributes cannot be duplicated.');
@@ -63,11 +53,14 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) =>
     if (disabled) {
       clazz.push('k-button--disabled');
     }
+    if (variant) {
+      clazz.push(`k-button--${variant}`);
+    }
 
     initSize(clazz, 'k-button', size);
 
     return clazz.join(' ');
-  }, [className, disabled, size, color]);
+  }, [className, disabled, size, color, variant]);
 
   const rootStyle = useMemo(() => {
 

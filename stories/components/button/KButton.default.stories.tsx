@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { KButton } from '@/components';
 import { KButtonProps } from '@/components/button/KButton.interface';
-import { baseArgTyp, disabledArgType, onClickArgType, sizeArgType } from '../common/argTypes';
+import { baseArgTyp, disabledArgType, onClickArgType, sizeArgType, variantArgType } from '../common/argTypes';
 
 const meta: Meta<KButtonProps> = {
   component: KButton,
   title: 'Components/Button',
   argTypes: {
     label: { description: '내부 텍스트를 설정합니다.' },
-    ...onClickArgType, ...sizeArgType, ...disabledArgType, ...baseArgTyp,
+    ...variantArgType, ...onClickArgType, ...sizeArgType, ...disabledArgType, ...baseArgTyp,
   },
 };
 
@@ -25,6 +25,16 @@ export const Default: Story = {
   args: {
     label: '안녕하세요',
     size: 'medium',
+    disabled: false,
+  },
+};
+
+export const Primary: Story = {
+  render: Template,
+  args: {
+    label: '안녕하세요',
+    size: 'medium',
+    variant: 'primary',
     disabled: false,
   },
 };

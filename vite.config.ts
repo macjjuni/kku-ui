@@ -24,7 +24,7 @@ export default defineConfig({
     // SCSS 전역 사용
     css: {
         preprocessorOptions: {
-            scss: {additionalData: '@import "/src/styles/Entry.scss";'},
+            scss: {additionalData: '@use "/src/styles/Entry.scss" as *;'},
         },
         devSourcemap: true,
     },
