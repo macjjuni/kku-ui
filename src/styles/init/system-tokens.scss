@@ -11,8 +11,8 @@
   --kku-border-color-hover: #{$kku-gray-color-300};
   --kku-border-color-disabled: #{$kku-gray-color-300};
 
-  --kku-background-color-base: #{$kku-gray-color-100};
-  --kku-background-color-hover: #{$kku-gray-color-200};
+  --kku-background-color-base: #{$kku-white-color};
+  --kku-background-color-hover: #{$kku-gray-color-100};
   --kku-background-color-disabled: #{$kku-gray-color-300};
 
   --kku-background-color-ripple: #{$kku-gray-color-900};
@@ -29,6 +29,9 @@
 
   --kku-error-color-base: #{$kku-red-color-400};
   --kku-error-color-hover: #{$kku-red-color-500};
+
+  --kku-element-height-medium: 34px;
+  --kku-element-height-small: 30px;
 }
 
 
@@ -66,6 +69,9 @@ $kku-text-size-large: var(--kku-text-size-large);
 $kku-text-size-medium: var(--kku-text-size-medium);
 $kku-text-size-small: var(--kku-text-size-small);
 $kku-text-size-x-small: var(--kku-text-size-x-small);
+
+$kku-element-height-medium: var(--kku-element-height-medium);
+$kku-element-height-small: var(--kku-element-height-small);
 
 
 $kku-dark-mode-signature: 'dark';

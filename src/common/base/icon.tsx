@@ -130,7 +130,7 @@ const kIcons: Icons = {
     </svg>
   ),
   checkbox_checked: (color = DEFAULT_COLOR) => (
-    <svg width='64px' height='64px' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+    <svg width='100%' height='100%' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
       <g strokeWidth='0'/>
       <g strokeLinecap='round' strokeLinejoin='round'/>
       <g>
@@ -743,7 +743,7 @@ const kIcons: Icons = {
 } as const;
 
 
-const getIcon = (iconName: string, color: string | undefined): ReactNode | null => {
+const getIcon = (iconName: string, color?: string): ReactNode | null => {
 
   const targetIcon = kIcons[iconName](color);
 

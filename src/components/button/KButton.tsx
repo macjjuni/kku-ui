@@ -3,7 +3,7 @@ import {
   MouseEvent,
   forwardRef,
   useImperativeHandle,
-  useRef, useMemo, useCallback,
+  useRef, useMemo, useCallback, memo,
 } from 'react';
 import useRipple from '@/common/hook/useRipple';
 import { initSize } from '@/common/util/variation';
@@ -128,15 +128,14 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) =>
 
   return (
     <button ref={rootRef} id={id} className={`k-button ${rootClass}`} style={rootStyle}
-            type='button' disabled={disabled} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave}
+            type='button' aria-label={label} disabled={disabled}
+            onMouseDown={onMouseDown} onMouseLeave={onMouseLeave}
             onMouseUp={onMouseUp} onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
-
       {(children || label) && (
         <span className='k-button__content'>{children || label}</span>)}
     </button>
   );
 });
 
-
 KButton.displayName = 'KButton';
-export default KButton;
+export default memo(KButton);

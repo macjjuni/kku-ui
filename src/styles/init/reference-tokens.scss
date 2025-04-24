@@ -1,4 +1,5 @@
 :root {
+  /* Gray */
   --kku-gray-color-100: #F2F3F4;
   --kku-gray-color-200: #ECEDEF;
   --kku-gray-color-300: #DBDADE;
@@ -9,6 +10,7 @@
   --kku-gray-color-800: #4D5158;
   --kku-gray-color-900: #3A3D42;
 
+  /* Blue */
   --kku-blue-color-100: #E6F1FE;
   --kku-blue-color-200: #D9EAFD;
   --kku-blue-color-300: #B0D4FA;
@@ -19,6 +21,7 @@
   --kku-blue-color-800: #004690;
   --kku-blue-color-900: #00346C;
 
+  /* Green */
   --kku-green-color-100: #F1FEEE;
   --kku-green-color-200: #EAFFEE;
   --kku-green-color-300: #D4FFCB;
@@ -29,6 +32,7 @@
   --kku-green-color-800: #459934;
   --kku-green-color-900: #347327;
 
+  /* Orange */
   --kku-orange-color-100: #FEF4E8;
   --kku-orange-color-200: #FEF0DD;
   --kku-orange-color-300: #FDDEB8;
@@ -39,6 +43,7 @@
   --kku-orange-color-800: #945810;
   --kku-orange-color-900: #6F420C;
 
+  /* Red */
   --kku-red-color-100: #FEE6E6;
   --kku-red-color-200: #FDDD9D;
   --kku-red-color-300: #FBBB1B;
@@ -49,21 +54,31 @@
   --kku-red-color-800: #910202;
   --kku-red-color-900: #6C0202;
 
+  /* Base Color */
   --kku-white-color: #ffffff;
   --kku-black-color: #000000;
 
-
+  /* Text Size */
   --kku-text-size-xlarge: 32px;
   --kku-text-size-large: 24px;
   --kku-text-size-medium: 16px;
   --kku-text-size-small: 14px;
   --kku-text-size-xsize: 12px;
 
+  /* Line height Size */
+  --kku-line-height-xlarge: 34px;
+  --kku-line-height-large: 26px;
+  --kku-line-height-medium: 18px;
+  --kku-line-height-small: 16px;
+  --kku-line-height-xsize: 14px;
 
+  /* Spacing Size */
   --kku-spacing-2: 2px;
   --kku-spacing-4: 4px;
   --kku-spacing-8: 8px;
+  --kku-spacing-10: 10px;
   --kku-spacing-12: 12px;
+  --kku-spacing-14: 14px;
   --kku-spacing-16: 16px;
   --kku-spacing-20: 20px;
   --kku-spacing-24: 24px;
@@ -82,6 +97,7 @@
   --kku-spacing-76: 76px;
   --kku-spacing-80: 80px;
 
+  /* Border radius Size */
   --kku-border-radius-default: 3px;
 }
 
@@ -151,12 +167,20 @@ $kku-text-size-medium: var(--kku-text-size-medium);
 $kku-text-size-large: var(--kku-text-size-large);
 $kku-text-size-xlarge: var(--kku-text-size-xlarge);
 
+/* Line height Size */
+$kku-line-height-xsmall: var(--kku-line-height-xlarge);
+$kku-line-height-small: var(--kku-line-height-large);
+$kku-line-height-medium: var(--kku-line-height-medium);
+$kku-line-height-large: var(--kku-line-height-small);
+$kku-line-height-xlarge: var(--kku-line-height-xsize);
 
 /* Spacing Size */
 $kku-spacing-2: var(--kku-spacing-2);
 $kku-spacing-4: var(--kku-spacing-4);
 $kku-spacing-8: var(--kku-spacing-8);
+$kku-spacing-10: var(--kku-spacing-10);
 $kku-spacing-12: var(--kku-spacing-12);
+$kku-spacing-14: var(--kku-spacing-14);
 $kku-spacing-16: var(--kku-spacing-16);
 $kku-spacing-20: var(--kku-spacing-20);
 $kku-spacing-24: var(--kku-spacing-24);
@@ -175,5 +199,5 @@ $kku-spacing-72: var(--kku-spacing-72);
 $kku-spacing-76: var(--kku-spacing-76);
 $kku-spacing-80: var(--kku-spacing-80);
 
-
+/* Border radius Size */
 $kku-border-radius-default: var(--kku-border-radius-default);

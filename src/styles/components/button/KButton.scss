@@ -57,6 +57,10 @@ $button-border-primary-color-disabled: $kku-primary-color-disabled;
 
   .k-button__content { color: inherit; }
   .k-ripple { background-color: $kku-background-color-ripple; }
+  &:focus-visible {
+    outline: 2px solid $kku-primary-color-base;
+    outline-offset: 2px;
+  }
 
   &[disabled] { cursor: not-allowed; }
   &[disabled].k-button--color:after {
@@ -110,27 +114,22 @@ $button-border-primary-color-disabled: $kku-primary-color-disabled;
     }
   }
 
-
   // endregion
 
   // region [Size]
 
   &.k-button--small {
-    height: 32px;
-    padding: 0 $kku-spacing-12;
+    height: $kku-element-height-small;
+    padding: 0 $kku-spacing-10;
 
-    .k-button__content {
-      font-size: $button-text-size-small;
-    }
+    .k-button__content { @include kku-text-small; }
   }
 
   &.k-button--medium {
-    height: 36px;
+    height: $kku-element-height-medium;
     padding: 0 $kku-spacing-16;
 
-    .k-button__content {
-      font-size: $button-text-size-medium;
-    }
+    .k-button__content { @include kku-text-medium; }
   }
 
   // endregion

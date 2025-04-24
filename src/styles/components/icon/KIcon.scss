@@ -1,41 +1,48 @@
+@use "/src/styles/init" as *;
+
+// region [Component Token]
+
+$k-icon-light-color: $kku-gray-color-900;
+
+$k-icon-size-large: 42px;
+$k-icon-size-medium: 36px;
+$k-icon-size-small: 28px;
+
+// endregion
+
 
 .k-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: $k-icon-light-color;
+  fill: $k-icon-light-color;
+  user-select: none;
 
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-    fill: $k-default-icon-color;
+  &.k-icon--clickable { cursor: pointer; }
+  &.k-icon--disabled { cursor: not-allowed; }
 
-    &.k-icon--clickable { cursor: pointer; }
-    &.k-icon--disabled { cursor: not-allowed; }
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 
-    svg { width: 100%; height: 100%; }
+  // Sizes
+  &.k-icon--large > svg {
+    font-size: $k-icon-size-large;
+    width: $k-icon-size-large;
+    height: $k-icon-size-large;
+  }
 
-    // Sizes
-    &.k-icon--large {
-        svg {
-            font-size: 42px;
-            width: 42px;
-            height: 42px;
-        }
-    }
-    &.k-icon--medium {
-        svg {
-            font-size: 36px;
-            width: 36px;
-            height: 36px;
-        }
-    }
-    &.k-icon--small {
-        svg {
-            font-size: 28px;
-            width: 28px;
-            height: 28px;
-        }
-    }
+  &.k-icon--medium > svg {
+    font-size: $k-icon-size-medium;
+    width: $k-icon-size-medium;
+    height: $k-icon-size-medium;
+  }
+
+  &.k-icon--small > svg {
+    font-size: $k-icon-size-small;
+    width: $k-icon-size-small;
+    height: $k-icon-size-small;
+  }
 }
-
-//.#{$dark-class-name} .k-icon {
-//    fill: $k-dark-default-icon-color;
-//}

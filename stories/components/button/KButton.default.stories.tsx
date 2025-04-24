@@ -10,6 +10,8 @@ const meta: Meta<KButtonProps> = {
     label: { description: '내부 텍스트를 설정합니다.' },
     ...variantArgType, ...onClickArgType, ...sizeArgType, ...disabledArgType, ...baseArgTyp,
   },
+  tags: ['autodocs'],
+
 };
 
 export default meta;
@@ -24,8 +26,6 @@ export const Default: Story = {
   render: Template,
   args: {
     label: '안녕하세요',
-    size: 'medium',
-    disabled: false,
   },
 };
 
