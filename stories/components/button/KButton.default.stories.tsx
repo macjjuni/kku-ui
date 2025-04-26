@@ -11,7 +11,6 @@ const meta: Meta<KButtonProps> = {
     ...variantArgType, ...onClickArgType, ...sizeArgType, ...disabledArgType, ...baseArgTyp,
   },
   tags: ['autodocs'],
-
 };
 
 export default meta;

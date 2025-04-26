@@ -1,12 +1,12 @@
 .k-drop-holder {
-    display: inline-block;
-    cursor: pointer;
-    font-size: 0;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 0;
 
-    .k-drop-holder__anchor__wrapper {
-        padding: var(--spacing-8);
-        border: 1px solid #000;
-        cursor: default;
-        font-size: var(--font-size-body-2);
-    }
+  .k-drop-holder__anchor__wrapper {
+    padding: var(--spacing-8);
+    border: 1px solid #000;
+    cursor: default;
+    font-size: var(--font-size-body-2);
+  }
 }

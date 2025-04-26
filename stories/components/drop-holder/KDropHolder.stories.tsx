@@ -1,13 +1,12 @@
-import type {Meta, StoryObj} from '@storybook/react';
-import {KDropHolder, KIcon} from '@/components';
-import {KDropHolderProps} from '@/components';
+import type { Meta, StoryObj } from '@storybook/react';
+import { KDropHolder, KIcon } from '@/components';
+import { KDropHolderProps } from '@/components';
 
 const meta: Meta<KDropHolderProps> = {
-    component: KDropHolder,
-    title: 'Components/DropHolder',
-    argTypes: {
-
-    }
+  component: KDropHolder,
+  title: 'Components/DropHolder',
+  argTypes: {},
+  tags: ['autodocs'],
 };
 
 export default meta;
@@ -15,30 +14,47 @@ export default meta;
 type Story = StoryObj<typeof KDropHolder>
 
 const Template = (args: KDropHolderProps) => {
-    return (
-        <>
-            <center style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '120px'}}>
-                <KDropHolder {...args} position={'bottom-left'}><KIcon icon={'arrow_down_left'} size={32}/></KDropHolder>
-                <KDropHolder {...args}><KIcon icon={'arrow_down'} size={32}/></KDropHolder>
-                <KDropHolder {...args} position={'bottom-right'}><KIcon icon={'arrow_down_right'} size={32}/></KDropHolder>
-            </center>
-            <br/><br/><br/><br/><br/><br/>
-            <center style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '120px'}}>
-                <KDropHolder {...args} position={'top-left'}>
-                    <KIcon icon={'arrow_up_left'} size={32}/>
-                </KDropHolder>
-                <KDropHolder {...args} position={'top-center'}><KIcon icon={'arrow_up'} size={32}/></KDropHolder>
-                <KDropHolder {...args} position={'top-right'}><KIcon icon={'arrow_up_right'} size={32}/></KDropHolder>
-            </center>
-        </>
-    );
+  return (
+    <center>
+    <div style={{ display: 'flex', flexDirection: 'column', width: '400px', gap: '40px'}}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '80px' }}>
+        <KDropHolder {...args} position={'bottom-start'}><KIcon icon={'arrow_down_left'} size={32}/></KDropHolder>
+        <KDropHolder {...args} position={'bottom'}><KIcon icon={'arrow_down'} size={32}/></KDropHolder>
+        <KDropHolder {...args} position={'bottom-end'}><KIcon icon={'arrow_down_right'} size={32}/></KDropHolder>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: '48px' }}>
+          <KDropHolder {...args} position={'right-start'}><KIcon icon={'arrow_right'} size={32}/></KDropHolder>
+          <KDropHolder {...args} position={'right'}><KIcon icon={'arrow_right'} size={32}/></KDropHolder>
+          <KDropHolder {...args} position={'right-end'}><KIcon icon={'arrow_right'} size={32}/></KDropHolder>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', gap: '48px' }}>
+          <KDropHolder {...args} position={'left-start'}><KIcon icon={'arrow_left'} size={32}/></KDropHolder>
+          <KDropHolder {...args} position={'left'}><KIcon icon={'arrow_left'} size={32}/></KDropHolder>
+          <KDropHolder {...args} position={'left-end'}><KIcon icon={'arrow_left'} size={32}/></KDropHolder>
+        </div>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '80px' }}>
+        <KDropHolder {...args} position={'top-start'}>
+          <KIcon icon={'arrow_up_left'} size={32}/>
+        </KDropHolder>
+        <KDropHolder {...args} position={'top'}><KIcon icon={'arrow_up'} size={32}/></KDropHolder>
+        <KDropHolder {...args} position={'top-end'}><KIcon icon={'arrow_up_right'} size={32}/></KDropHolder>
+      </div>
+    </div>
+    </center>
+  );
 };
 
 export const Default: Story = {
-    render: Template,
-    args: {
-        children: <KIcon icon={'favorite'} size={'large'}/>,
-        content: <><h1>hello world!</h1> <p>this is content</p></>
-    },
+  render: Template,
+  args: {
+    content: (
+      <>
+        <p>Hello World!</p>
+        <p>This is a content</p>
+      </>
+    ),
+  },
 };
 
