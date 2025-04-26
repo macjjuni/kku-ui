@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
-import { KBaseProp } from '@/common/base/base.interface';
-import { MotionType } from '@/common/component/motion/Motion.interface';
+import { KBaseProp, MotionType } from '@/common/base/base.interface';
 
 export type KDropHolderPositionType =
   | 'top-start'

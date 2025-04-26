@@ -24,3 +24,9 @@
   font-size: $kku-text-size-xsmall;
   line-height: $kku-line-height-xsmall;
 }
+
+@mixin kku-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

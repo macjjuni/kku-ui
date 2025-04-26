@@ -3,44 +3,41 @@ import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 
 
 export interface KSelectItemType {
-  ['value']: string
-  ['title']: string
+  ['value']: string;
+  ['label']: string;
 }
 
 
 export interface KSelectProps extends KBaseProp, KSizeProp {
-  // Value
-  value: string // ✨ Required ✨
-  items: KSelectItemType[]
-  // Label
-  // label?: string
-  placeholder?: string
-  noDataText?: string
 
-  // Types
-  disabled?: boolean
-  // required?: boolean
+  value: string; // ✨ Required ✨
+  items: KSelectItemType[];
+
+  placeholder?: string;
+  noDataText?: string;
+
+  disabled?: boolean;
 
   // Event
-  onChange: (value: string) => void // ✨ Required ✨
-  onFocus?: () => void
-  onBlur?: () => void
+  onChange: (value: string) => void; // ✨ Required ✨
+  onFocus?: () => void;
+  onBlur?: () => void;
 
   // Styles
-  width?: string
+  width?: number;
 }
 
 
 export interface KSelectRefs {
-  open: () => void
-  close: () => void
+  open: () => void;
+  close: () => void;
 }
 
 export interface KSelectListProps {
-  id: string // ✨ Required ✨
-  items: KSelectItemType[]
-  noDataText?: string
-  onFocus: () => void
-  onClick: (item: KSelectItemType | null) => void
-  onKeyDown: (e: KeyboardEvent<HTMLLIElement>, item: KSelectItemType | null, idx: number) => void
+  value: string;
+  items: KSelectItemType[];
+  noDataText?: string;
+  onFocus: () => void;
+  onClick: (item: KSelectItemType | null) => void;
+  onKeyDown: (e: KeyboardEvent<HTMLLIElement>, item: KSelectItemType | null, idx: number) => void;
 }

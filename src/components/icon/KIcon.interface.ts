@@ -6,7 +6,7 @@ type KIconSize = 'small' | 'medium' | 'large';
 
 export interface KIconProps extends KBaseProp {
   icon: string
-  size: KIconSize | number
+  size?: KIconSize | number
 
   clickable?: boolean
   disabled?: boolean

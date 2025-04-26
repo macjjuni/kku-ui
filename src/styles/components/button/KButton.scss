@@ -6,7 +6,6 @@
 $button-text-size-small: $kku-text-size-small;
 $button-text-size-medium: $kku-text-size-medium;
 
-
 // Default
 $button-text-default-color-base: $kku-text-color-primary;
 $button-text-default-color-hover: $kku-text-color-secondary;
@@ -52,6 +51,7 @@ $button-border-primary-color-disabled: $kku-primary-color-disabled;
   border-radius: $button-border-radius;
   font-family: var(--font-family);
   cursor: pointer;
+  transition: 0.24s ease;
   overflow: hidden;
   user-select: none;
 
@@ -133,5 +133,4 @@ $button-border-primary-color-disabled: $kku-primary-color-disabled;
   }
 
   // endregion
-
 }

@@ -6,14 +6,15 @@
   --kku-text-color-tertiary: #{$kku-gray-color-500};
   --kku-text-color-disabled: #{$kku-gray-color-400};
   --kku-text-color-link: #{$kku-blue-color-400};
+  --kku-text-color-placeholder: #{$kku-gray-color-500};
 
   --kku-border-color-base: #{$kku-gray-color-300};
-  --kku-border-color-hover: #{$kku-gray-color-300};
+  --kku-border-color-hover: #{$kku-gray-color-500};
   --kku-border-color-disabled: #{$kku-gray-color-300};
 
   --kku-background-color-base: #{$kku-white-color};
   --kku-background-color-hover: #{$kku-gray-color-100};
-  --kku-background-color-disabled: #{$kku-gray-color-300};
+  --kku-background-color-disabled: #{$kku-gray-color-200};
 
   --kku-background-color-ripple: #{$kku-gray-color-900};
 
@@ -40,6 +41,7 @@ $kku-text-color-secondary: var(--kku-text-color-secondary);
 $kku-text-color-tertiary: var(--kku-text-color-tertiary);
 $kku-text-color-disabled: var(--kku-text-color-disabled);
 $kku-text-color-link: var(--kku-text-color-link);
+$kku-text-color-placeholder: var(--kku-text-color-placeholder);
 
 $kku-border-color-base: var(--kku-border-color-base);
 $kku-border-color-hover: var(--kku-border-color-hover);
@@ -80,7 +82,7 @@ $kku-dark-mode-signature: 'dark';
   --kku-text-color-primary: #{$kku-gray-color-100};
   //--kku-text-color-secondary: #{$kku-gray-color-700};
   //--kku-text-color-tertiary: #{$kku-gray-color-500};
-  --kku-text-color-disabled: #{$kku-gray-color-400};
+  --kku-text-color-disabled: #{$kku-gray-color-600};
   --kku-text-color-link: #{$kku-blue-color-400};
 
   --kku-border-color-base: #{$kku-gray-color-700};
@@ -89,7 +91,7 @@ $kku-dark-mode-signature: 'dark';
 
   --kku-background-color-base: #{$kku-gray-color-900};
   --kku-background-color-hover: #{$kku-gray-color-800};
-  --kku-background-color-disabled: #{$kku-gray-color-700};
+  --kku-background-color-disabled: #{$kku-gray-color-800};
 
   --kku-background-color-ripple: #{$kku-gray-color-300};
 }

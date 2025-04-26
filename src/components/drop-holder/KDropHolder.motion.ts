@@ -1,4 +1,4 @@
-import { MotionType } from '@/common/component/motion/Motion.interface';
+import { MotionType } from '@/common/base/base.interface';
 
 const KDropHolderMotion: MotionType = {
   initial: { opacity: 0 },

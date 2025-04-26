@@ -2,9 +2,9 @@ import {
   CSSProperties, forwardRef, KeyboardEvent, Ref, useCallback, useEffect,
   useImperativeHandle, useMemo, useRef, useState, memo, useId,
 } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { KDropHolderProps, KDropHolderRefs } from '@/components/drop-holder/KDropHolder.interface';
 import useClickOutside from '@/common/hook/useClickOutside';
-import Motion from '@/common/component/motion/Motion';
 import KDropHolderMotion from '@/components/drop-holder/KDropHolder.motion';
 
 
@@ -19,7 +19,7 @@ const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDrop
   const { onClick, onHover } = { ...restProp };
 
   const rootRef = useRef<HTMLDivElement | null>(null);
-  const contentRef = useRef<HTMLElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -252,10 +252,15 @@ const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDrop
          role='button' onClick={onClickRoot} onKeyUp={onKeyUpRoot} onMouseEnter={onMouseEnterRoot}
          onMouseLeave={onMouseLeaveRoot} onFocus={onFocusRoot} onBlur={onBlurRoot} data-testid='k-drop-holder'>
       {children}
-      <Motion ref={contentRef} className='k-drop-holder__content' style={dropHolderStyle} role='tooltip'
-              isOpen={isOpen} initial={initial} animate={animate} exit={exit} transition={transition}>
-        {content}
-      </Motion>
+      <AnimatePresence>
+        { isOpen && (
+          <motion.div ref={contentRef} className='k-drop-holder__content' style={dropHolderStyle} role='tooltip'
+                      initial={initial} animate={animate} exit={exit} transition={transition} aria-hidden={!isOpen}>
+            {content}
+          </motion.div>
+        )}
+
+      </AnimatePresence>
     </div>
   );
 });

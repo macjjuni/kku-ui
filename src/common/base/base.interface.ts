@@ -1,4 +1,5 @@
 import { CSSProperties } from 'react';
+import { MotionProps } from 'motion/react';
 
 // 🦴 - Base Properties
 export interface KBaseProp {
@@ -18,3 +19,6 @@ export interface KSizeProp {
 // 🎁 - Variant Properties
 export const variants = { primary: 'primary', default: 'default' } as const;
 export type VariantType = (typeof variants)[keyof typeof variants];
+
+// 🌸 - Motion Properties
+export type MotionType = Pick<MotionProps, 'initial' | 'animate' | 'exit' | 'transition'>;
