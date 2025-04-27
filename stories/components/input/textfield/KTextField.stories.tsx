@@ -17,7 +17,6 @@ const meta: Meta<typeof KTextField> = {
         clearable: {description: 'value 초기화 버튼을 설정합니다.'},
         password: {description: '비밀번호 입력 행태로 설정합니다.'},
         width: {description: '스타일 width 값을 설정합니다.'},
-        fullWidth: {description: '스타일 width 값을 100% 로 설정합니다.'},
         rightAction: {description: '우측에 Action 공간을 설정합니다.'},
         leftAction: {description: '좌측에 Action 공간을 설정합니다.'},
         ...baseArgTyp, ...sizeArgType, ...disabledArgType,
@@ -30,7 +29,7 @@ type Story = StoryObj<KTextFieldProps>
 
 const Template = (args: KTextFieldProps) => {
 
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState(args.value);
 
     return (<KTextField {...args} value={value} onChange={(val: string) => { setValue(val); }} />);
 };
@@ -39,12 +38,12 @@ export const Default: Story = {
     render: Template,
     args: {
         label: '레이블',
+        labelAlign: 'column',
         placeholder: 'placeholder!',
         size: 'medium',
         required: true,
         clearable: false,
         password: false,
-        leftAction: null,
-        rightAction: null,
+        value: '',
     },
 };

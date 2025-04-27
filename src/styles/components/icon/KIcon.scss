@@ -2,7 +2,8 @@
 
 // region [Component Token]
 
-$k-icon-light-color: $kku-gray-color-900;
+$k-icon-light-color: $kku-gray-color-700;
+$k-icon-dark-color: $kku-gray-color-300;
 
 $k-icon-size-large: 42px;
 $k-icon-size-medium: 36px;
@@ -45,4 +46,9 @@ $k-icon-size-small: 28px;
     width: $k-icon-size-small;
     height: $k-icon-size-small;
   }
+}
+
+.#{$kku-dark-mode-signature} .k-icon {
+  color: $k-icon-dark-color;
+  fill: $k-icon-dark-color;
 }

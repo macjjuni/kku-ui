@@ -1,30 +1,38 @@
 import {
-  ChangeEvent, CSSProperties, forwardRef, KeyboardEvent, memo, Ref, useCallback,
+  ChangeEvent, CSSProperties, forwardRef, KeyboardEvent, memo, Ref, useCallback, useEffect,
   useId, useImperativeHandle, useMemo, useRef, useState,
 } from 'react';
 import { KTextFieldProps, KTextFieldRefs } from '@/components/input/textfield/KTextField.interface';
-import { initDisabled, initSize } from '@/common/util/variation';
-import KIcon from '@/components/icon/KIcon';
+import { KIcon } from '@/components';
 
 
-const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KTextFieldRefs>) => {
+const TextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KTextFieldRefs>) => {
 
   // region [Hooks]
 
-  const props: KTextFieldProps = { ...restProps };
+  const uniqueId = `k-text-field-${useId()}`;
+  const { id = uniqueId, style, className } = { ...restProps };
+  const { value, placeholder, maxLength } = { ...restProps };
+  const { onChange, onKeyDownEnter, onFocus, onBlur } = { ...restProps };
+  const { password, clearable, disabled, align = 'left', size = 'medium', width, required } = { ...restProps };
+  const { label, labelAlign = 'column', labelGap = size === 'small' ? 10 : 12 } = { ...restProps };
+  const { autoComplete, autoCorrect, autoCapitalize } = { ...restProps };
+  const { leftAction, rightAction } = { ...restProps };
+
   const inputRef = useRef<HTMLInputElement>(null);
-  const uniqueId = `k-text-field-input-${useId()}`;
+  const iconAreaRef = useRef<HTMLDivElement>(null);
   const [isPasswdShow, setIsPasswdShow] = useState<boolean>(false);
   const [isFocus, setIsFocus] = useState<boolean>(false);
+  const [inputPadding, setInputPadding] = useState({});
 
   useImperativeHandle(ref, () => ({
+    value,
     focus: () => {
       inputRef.current?.focus();
     },
     blur: () => {
       inputRef.current?.blur();
     },
-    value: props.value,
   }));
 
   // endregion
@@ -33,68 +41,73 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
   // region [Styles]
 
   const rootClass = useMemo(() => {
-    const clazz = [];
 
-    if (props.className) {
-      clazz.push(props.className);
+    const clazz = ['k-text-field'];
+
+    if (className) {
+      clazz.push(className);
     }
-
-    initSize(clazz, 'k-text-field', props.size);
-    initDisabled(clazz, 'k-text-field', props.disabled);
-
-    if (props.password) {
+    if (size) {
+      clazz.push(`k-text-field--${size}`);
+    }
+    if (disabled) {
+      clazz.push('k-text-field--disabled');
+    }
+    if (password) {
       clazz.push('k-text-field__input--password');
     }
-    if (props.clearable) {
+    if (clearable) {
       clazz.push('k-text-field__input--clearable');
     }
-
-    if (props.fullWidth) {
-      clazz.push('k-text-field__input--full-width');
+    if (required) {
+      clazz.push('k-text-field__input--required');
+    }
+    if (isFocus) {
+      clazz.push('k-text-field__input--focus');
+    }
+    if (label && labelAlign) {
+      clazz.push(`k-text-field__input--label-${labelAlign}`);
     }
 
     return clazz.join(' ');
-  }, [props.className, props.password, props.clearable, props.disabled, props.size, props.fullWidth]);
+  }, [className, size, disabled, password, clearable, required, isFocus, label, labelAlign]);
 
 
-  const rootStyle = useMemo(() => {
+  const rootStyle = useMemo(() => ({
+    ...style,
+    maxWidth: width !== undefined ? width : undefined,
+    flexDirection: labelAlign,
+  }), [width, style, labelAlign, labelGap]);
 
-    const styles: CSSProperties = props.style || {};
-
-    if (props.width) {
-      styles.width = props.width;
-    }
-
-    return styles;
-  }, [props.width, props.fullWidth, props.style]);
-
-  const containerStyle = useMemo(() => {
-    if (props.width) {
-      return { width: '100%', minWidth: '100%' };
+  const labelStyle = useMemo((): CSSProperties => {
+    if (labelAlign === 'row') {
+      return { marginBottom: 0, marginRight: labelGap };
     }
     return {};
-  }, [props.width]);
-
-  const labelClass = useMemo(() => {
-    const clazz = [];
-
-    if (!props.label) {
-      return '';
-    }
-
-    if (isFocus) {
-      clazz.push('k-text-field__label__text--focus');
-    }
-
-    return clazz.join(' ');
-  }, [props.label]);
+  }, [labelAlign, labelGap]);
 
   const inputStyle = useMemo((): CSSProperties => {
-    if (props.align) {
-      return { textAlign: props.align };
+    return { textAlign: align };
+  }, [align]);
+
+  // endregion
+
+
+  // region [Privates]
+
+  const initializeInputPadding = useCallback(() => {
+
+    const inputRect = inputRef.current?.getBoundingClientRect();
+    const iconAreaRect = iconAreaRef.current?.getBoundingClientRect();
+
+    setInputPadding({ paddingRight: iconAreaRect?.width });
+
+    if (password || clearable) {
+
+      const calcWidth = `${(inputRect?.width || 0) - (iconAreaRect?.width || 0)}px`;
+      iconAreaRef.current?.style.setProperty('left', calcWidth);
     }
-    return { textAlign: 'left' };
-  }, [props.align]);
+  }, [password, clearable]);
 
   // endregion
 
@@ -104,111 +117,121 @@ const KTextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KText
   const onChangeValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 
     const changeValue = e.target.value;
-    if (props.onChange) props.onChange(changeValue);
-  }, [props.onChange]);
+    if (onChange) onChange(changeValue);
+  }, [onChange]);
 
-  const onFocus = useCallback(() => {
-
-    if (!props.label) {
-      return;
+  const onFocusInput = useCallback(() => {
+    onFocus?.();
+    if (label) {
+      setIsFocus(true);
     }
-    setIsFocus(true);
-  }, [props.label]);
+  }, [label]);
 
-  const onblur = useCallback(() => {
-
-    if (!props.label) {
-      return;
+  const onblurInput = useCallback(() => {
+    onBlur?.();
+    if (label) {
+      setIsFocus(false);
     }
-    setIsFocus(false);
-  }, [props.label]);
+  }, [label]);
 
   const onClear = useCallback(() => {
 
-    if (props.clearable) {
-      props.onChange?.('');
+    if (clearable) {
+      onChange?.('');
     }
-  }, [props.clearable, props.onChange]);
+  }, [clearable, onChange]);
 
   const onPasswordShow = useCallback(() => {
 
     setIsPasswdShow((prev) => !prev);
   }, []);
 
-  const onKeyDownEnter = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDownEnterInput = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
 
     if (e.nativeEvent.isComposing) {
       return;
     }
     if ((e.key === 'Enter' || e.key === '')) {
-      props.onKeyDownEnter?.(e);
+      onKeyDownEnter?.(e);
     }
-  }, [props.onKeyDownEnter]);
+  }, [onKeyDownEnter]);
 
   // endregion
 
 
   // region [Templates]
 
-  const Label = useMemo(() => (
-    props.label && (
-      <div className='k-text-field__label__container'>
-        <label htmlFor={props.id ? props.id : uniqueId} className={`k-text-field__label__text ${labelClass}`}
-               data-testid='k-text-field-label'>
-          {props.label}
-          {props.required && <span className='k-text-field__label__text__required'>*</span>}
-        </label>
-      </div>
-    )
-  ), [props.label, props.id, uniqueId, labelClass, props.required]);
-
-
   const LeftAction = useMemo(() => (
-    props.leftAction && (<div className='k-text-field__label__left-action'>{props.leftAction}</div>)
-  ), [props.leftAction]);
+    leftAction && (<div className='k-text-field__input__left-action'>{leftAction}</div>)
+  ), [leftAction]);
 
   const RightAction = useMemo(() => (
-    props.rightAction && (<div className='k-text-field__label__right-action'>{props.rightAction}</div>)
-  ), [props.rightAction]);
+    rightAction && (<div className='k-text-field__input__right-action'>{rightAction}</div>)
+  ), [rightAction]);
 
 
-  const PasswordIcon = useMemo(() => (
-    props.password && (
-      <KIcon className='k-text-field__icon' icon={isPasswdShow ? 'visibility' : 'visibility_off'}
-             clickable onClick={onPasswordShow} disabled={props.disabled}/>
-    )
-  ), [props.password, isPasswdShow, onPasswordShow, props.disabled])
+  const IconArea = useMemo(() => (
+    <div ref={iconAreaRef} className='k-text-field__input__icon'>
+      {
+        password && (
+          <KIcon className='k-text-field__input__icon-password' icon={isPasswdShow ? 'visibility' : 'visibility_off'}
+                 clickable onClick={onPasswordShow} disabled={disabled} size={18}/>
+        )
+      }
+      {
+        clearable && value && (
+          <KIcon className='k-text-field__input__icon-clearable' icon='close' clickable size={14}
+                 onClick={onClear} disabled={disabled}/>
+        )
+      }
+    </div>
+  ), [clearable, password, isPasswdShow, onPasswordShow, value, disabled, onClear]);
+
+  // endregion
 
 
-  const Clearable = useMemo(() => (
-    props.clearable && props.value && (
-      <KIcon className='k-text-field__icon k-text-field__clearable-icon' icon='close' clickable
-             onClick={onClear} disabled={props.disabled}/>
-    )
-  ), [props.clearable, props.value, props.disabled, onClear])
+  // region [Life Cycles]
+
+  useEffect(() => {
+    initializeInputPadding();
+  }, [password, clearable, value]);
 
   // endregion
 
 
   return (
-    <div className={`k-text-field ${rootClass}`} style={rootStyle} data-testid='k-text-field'>
-      {Label}
-      <div className='k-text-field__input__container' style={containerStyle}>
+    <div className={rootClass} style={rootStyle} data-testid='k-text-field'>
+
+      {
+        label && (
+          <span className='k-text-field__label' style={labelStyle}>
+            <label htmlFor={id} className='k-text-field__label__text'>
+              {label}
+              {required && <span className='k-text-field__label--required'>*</span>}
+            </label>
+          </span>
+        )
+      }
+
+      <div className='k-text-field__input'>
+
         {LeftAction}
-        <input id={props.id || uniqueId} ref={inputRef} className='k-text-field__input' style={inputStyle}
-               type={(props.password && !isPasswdShow) ? 'password' : 'input'} value={props.value}
-               onChange={onChangeValue} onFocus={onFocus} onBlur={onblur} onKeyDown={onKeyDownEnter}
-               disabled={props.disabled} placeholder={props.placeholder} maxLength={props.maxLength}
-               data-testid='k-text-field-input' autoComplete={props.autoComplete} autoCorrect={props.autoCorrect}
-               autoCapitalize={props.autoCapitalize}/>
-        {PasswordIcon}
-        {Clearable}
+
+        <input id={id} ref={inputRef} className='k-text-field__input__root' style={{ ...inputStyle, ...inputPadding }}
+               type={(password && !isPasswdShow) ? 'password' : 'input'} value={value}
+               onChange={onChangeValue} onFocus={onFocusInput} onBlur={onblurInput} onKeyDown={onKeyDownEnterInput}
+               disabled={disabled} placeholder={placeholder} maxLength={maxLength}
+               autoComplete={autoComplete} autoCorrect={autoCorrect} autoCapitalize={autoCapitalize}/>
+        {(clearable || password) && IconArea}
         {RightAction}
+
       </div>
     </div>
   );
 });
 
-
+const KTextField = memo(TextField);
+TextField.displayName = 'KTextField';
 KTextField.displayName = 'KTextField';
+
 export default memo(KTextField);

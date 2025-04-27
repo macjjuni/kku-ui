@@ -63,7 +63,7 @@
   --kku-text-size-large: 24px;
   --kku-text-size-medium: 16px;
   --kku-text-size-small: 14px;
-  --kku-text-size-xsize: 12px;
+  --kku-text-size-xsmall: 12px;
 
   /* Line height Size */
   --kku-line-height-xlarge: 34px;
@@ -169,11 +169,11 @@ $kku-text-size-large: var(--kku-text-size-large);
 $kku-text-size-xlarge: var(--kku-text-size-xlarge);
 
 /* Line height Size */
-$kku-line-height-xsmall: var(--kku-line-height-xlarge);
-$kku-line-height-small: var(--kku-line-height-large);
+$kku-line-height-xsmall: var(--kku-line-height-xsmall);
+$kku-line-height-small: var(--kku-line-height-small);
 $kku-line-height-medium: var(--kku-line-height-medium);
-$kku-line-height-large: var(--kku-line-height-small);
-$kku-line-height-xlarge: var(--kku-line-height-xsize);
+$kku-line-height-large: var(--kku-line-height-large);
+$kku-line-height-xlarge: var(--kku-line-height-xlarge);
 
 /* Spacing Size */
 $kku-spacing-2: var(--kku-spacing-2);

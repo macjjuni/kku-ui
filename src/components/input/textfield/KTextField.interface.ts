@@ -5,44 +5,45 @@ import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 export interface KTextFieldProps extends KBaseProp, KSizeProp {
 
   // Value
-  value: string
+  value: string;
 
   // Label
-  label?: string
+  label?: string;
+  labelAlign?: 'column' | 'row';
+  labelGap?: number;
 
   // Options
-  placeholder?: string
-  maxLength?: number
+  placeholder?: string;
+  maxLength?: number;
 
   // Types
-  disabled?: boolean
-  required?: boolean
-  clearable?: boolean
-  password?: boolean
+  disabled?: boolean;
+  required?: boolean;
+  clearable?: boolean;
+  password?: boolean;
 
   // Custom
-  leftAction?: ReactNode
-  rightAction?: ReactNode
+  leftAction?: ReactNode;
+  rightAction?: ReactNode;
 
   // Event
-  onChange?: (value: string) => void
-  onFocus?: () => void
-  onBlur?: () => void
-  onKeyDownEnter?: (e?: KeyboardEvent<HTMLInputElement>) => void
+  onChange?: (value: string) => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
+  onKeyDownEnter?: (e?: KeyboardEvent<HTMLInputElement>) => void;
 
   // Options
   autoComplete?: string;
-  autoCorrect?: string;
-  autoCapitalize?: string;
+  autoCorrect?: 'on' | 'off';
+  autoCapitalize?: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
 
   // Styles
-  width?: string
-  fullWidth?: boolean
+  width?: number;
   align?: 'left' | 'center' | 'right';
 }
 
 export interface KTextFieldRefs {
-  focus: () => void
-  blur: () => void
-  value: string
+  focus: () => void;
+  blur: () => void;
+  value: string;
 }

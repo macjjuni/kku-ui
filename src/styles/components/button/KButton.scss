@@ -19,9 +19,7 @@ $button-border-default-color-base: $kku-border-color-base;
 $button-border-default-color-hover: $kku-border-color-hover;
 $button-border-default-color-disabled: $kku-border-color-disabled;
 
-
 $button-border-radius: $kku-border-radius-default;
-
 
 // Primary
 $button-text-primary-color-base: $kku-white-color;
@@ -37,7 +35,6 @@ $button-border-primary-color-hover: $kku-primary-color-hover;
 $button-border-primary-color-disabled: $kku-primary-color-disabled;
 
 // endregion
-
 
 .k-button {
   position: relative;
@@ -57,25 +54,23 @@ $button-border-primary-color-disabled: $kku-primary-color-disabled;
 
   .k-button__content { color: inherit; }
   .k-ripple { background-color: $kku-background-color-ripple; }
-  &:focus-visible {
-    outline: 2px solid $kku-primary-color-base;
-    outline-offset: 2px;
+  &:focus-visible { @include kku-focus-visible; }
+
+  &[disabled] {
+    cursor: not-allowed;
+
+    &.k-button--color:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.16);
+    }
   }
 
-  &[disabled] { cursor: not-allowed; }
-  &[disabled].k-button--color:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.16);
-  }
-
-  .k-button__content {
-    white-space: nowrap;
-  }
+  .k-button__content { white-space: nowrap; }
 
   // region [Variant]
 

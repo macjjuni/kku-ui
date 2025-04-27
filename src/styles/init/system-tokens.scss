@@ -80,7 +80,7 @@ $kku-dark-mode-signature: 'dark';
 
 .#{$kku-dark-mode-signature}:root {
   --kku-text-color-primary: #{$kku-gray-color-100};
-  //--kku-text-color-secondary: #{$kku-gray-color-700};
+  --kku-text-color-secondary: #{$kku-gray-color-300};
   //--kku-text-color-tertiary: #{$kku-gray-color-500};
   --kku-text-color-disabled: #{$kku-gray-color-600};
   --kku-text-color-link: #{$kku-blue-color-400};
