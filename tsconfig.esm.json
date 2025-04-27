@@ -6,11 +6,9 @@
         "noEmit": false,
         "emitDeclarationOnly": false,
         "allowImportingTsExtensions": false,
-        "declaration": true, // 타입 선언 파일도 생성합니다.
-        "plugins": [{ "name": "typescript-plugin-css-modules" }]
+        "declaration": true,
     },
-    "include": [
-        "src/index.ts", "styles.d.ts"],
+    "include": ["src/index.ts", "styles.d.ts"],
     "exclude": [
         "stories/components/**/*.tsx",
         "__tests__",

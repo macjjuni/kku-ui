@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import compression from 'vite-plugin-compression2';
 import eslint from 'vite-plugin-eslint';
-
+import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +15,12 @@ export default defineConfig({
     compression({
       include: [/\.(js)$/, /\.(scss)$/],
       threshold: 1400,
+    }),
+    dts({
+      tsconfigPath: 'tsconfig.esm.json',
+      outDir: 'lib/es',
+      include: ['src/**/*'],
+      exclude: ['node_modules', 'lib'],
     }),
   ],
   resolve: {

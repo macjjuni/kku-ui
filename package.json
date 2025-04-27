@@ -3,9 +3,11 @@
   "version": "0.0.516",
   "type": "module",
   "module": "lib/es/index.js",
-  "main": "lib/es/index.js",
   "files": [
-    "lib/"
+    "lib/cjs",
+    "lib/es",
+    "lib/es/index.d.ts",
+    "lib/index.css"
   ],
   "keywords": [
     "react",
@@ -67,6 +69,7 @@
     "typescript": "5.3.3",
     "vite": "^6.3.3",
     "vite-plugin-compression2": "^1.3.3",
+    "vite-plugin-dts": "^4.5.3",
     "vite-plugin-eslint": "^1.8.1",
     "vitest": "^3.1.2"
   },
