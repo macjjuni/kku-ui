@@ -4,6 +4,7 @@ import { KIcon } from '@/components';
 import { initSize } from '@/common/util/variation';
 import { KModalProps } from '@/components/modal/KModal.interface';
 import { useCleanId } from '@/common/hook/useCleanId';
+import './KModal.scss';
 
 
 const rootTestId = 'k-modal-test-id';

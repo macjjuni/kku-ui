@@ -5,6 +5,7 @@ import {
 import { KIconProps, KIconRefs } from '@/components/icon/KIcon.interface';
 import { initDisabled } from '@/common/util/variation';
 import { getIcon } from '@/common/icons/icons';
+import './KIcon.scss';
 
 
 const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {

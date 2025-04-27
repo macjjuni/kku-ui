@@ -8,6 +8,7 @@ import {
 import useRipple from '@/common/hook/useRipple';
 import { initSize } from '@/common/util/variation';
 import { KButtonProps, KButtonRefs } from '@/components';
+import './KButton.scss';
 
 
 const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => {

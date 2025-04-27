@@ -1,4 +1,4 @@
-import { MotionType } from '@/common/component/motion/Motion.interface';
+import { MotionType } from '@/common/base/base.interface';
 
 const KSelectMotion: MotionType = {
   initial: { y: 0, opacity: 0 },

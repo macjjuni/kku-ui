@@ -53,6 +53,7 @@ export const Default: Story = {
       <>
         <p>Hello World!</p>
         <p>This is a content</p>
+        <p>Hello World!</p>
       </>
     ),
   },

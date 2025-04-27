@@ -9,18 +9,20 @@
         "declaration": true, // 타입 선언 파일도 생성합니다.
         "plugins": [{ "name": "typescript-plugin-css-modules" }]
     },
-    "include": ["index.ts", "styles.d.ts"],
+    "include": [
+        "src/index.ts", "styles.d.ts"],
     "exclude": [
         "stories/components/**/*.tsx",
         "__tests__",
         "setupTests.ts",
         "vitest.config.ts",
         "node_modules",
-        "./lib/**/*",
+        "./lib/**/*"
     ],
-    "files": ["index.ts", "styles.d.ts"],
+    "files": ["src/index.ts",
+        "styles.d.ts"],
     "tsc-alias": {
         "verbose": true,
-        "fileExtensions": ["js"],
+        "fileExtensions": ["js"]
     }
 }

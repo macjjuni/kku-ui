@@ -100,6 +100,9 @@
 
   /* Border radius Size */
   --kku-border-radius-default: 3px;
+
+  /* Font Family */
+  --kku-default-font-family: 'Arial', sans-serif;
 }
 
 /* Gray */
@@ -203,3 +206,6 @@ $kku-spacing-80: var(--kku-spacing-80);
 
 /* Border radius Size */
 $kku-border-radius-default: var(--kku-border-radius-default);
+
+/* Font Family */
+$kku-default-font-family: var(--kku-default-font-family);

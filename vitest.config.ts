@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitest/config';
-import path from 'path'; // ⬅️ 추가
+import path from 'path';
 import viteConfig from './vite.config';
 
 

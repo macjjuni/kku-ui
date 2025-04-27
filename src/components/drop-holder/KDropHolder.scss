@@ -1,0 +1,16 @@
+
+// region [Component Tokens]
+// endregion
+
+.k-drop-holder {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    .k-drop-holder__content {
+        position: fixed;
+        will-change: transform;
+    }
+}

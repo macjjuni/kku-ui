@@ -1,5 +1,6 @@
 import { CSSProperties, memo, useMemo } from 'react';
 import { KCardProps } from '@/components';
+import './KCard.scss';
 
 
 const KCard = ({ ...restProps }: KCardProps) => {

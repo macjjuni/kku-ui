@@ -1,8 +1,7 @@
 import { CSSProperties, KeyboardEvent, MouseEvent, RefObject, useRef } from 'react';
-// import colorUtil from '@/common/util/color';
 import lodashUtil from '@/common/util/lodashUtil';
 import styles from '@/common/util/style';
-
+import './useRipple.scss';
 
 const rippleElementTag = 'span';
 const rippleIdentityClass = 'k-ripple';

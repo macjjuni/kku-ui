@@ -3,7 +3,7 @@ import AnalyzerPlugin from 'esbuild-analyzer';
 import fs from 'fs';
 
 esbuild.build({
-  entryPoints: ['lib/esm/index.js'],
+  entryPoints: ['lib/es/index.js'],
   outdir: 'analyzer',
   bundle: true,
   metafile: true,

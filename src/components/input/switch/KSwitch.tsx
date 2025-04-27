@@ -1,7 +1,7 @@
 import { CSSProperties, forwardRef, Ref, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { initDisabled, initSize } from '@/common/util/variation';
 import { KSwitchProps, KSwitchRefs } from '@/components/input/switch/KSwitch.interface';
-
+import './KSwitch.scss';
 
 const KSwitch = forwardRef(({ ...restProps }: KSwitchProps, ref: Ref<KSwitchRefs>) => {
 
