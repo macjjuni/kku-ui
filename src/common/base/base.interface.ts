@@ -17,8 +17,8 @@ export interface KSizeProp {
 }
 
 // 🎁 - Variant Properties
-export const variants = { primary: 'primary', default: 'default' } as const;
-export type VariantType = (typeof variants)[keyof typeof variants];
+export const VARIANTS = { default: 'default', primary: 'primary' } as const;
+export type VariantType = (typeof VARIANTS)[keyof typeof VARIANTS];
 
 // 🌸 - Motion Properties
 export type MotionType = Pick<MotionProps, 'initial' | 'animate' | 'exit' | 'transition'>;

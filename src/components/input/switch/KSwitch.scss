@@ -1,72 +1,132 @@
+// region [Component Token]
+
+
+$switch-background-color-active: $kku-primary-color-base;
+$switch-background-color-inactive: $kku-gray-color-300;
+$switch-background-color-disabled: rgba(0, 0, 0, 0.16);;
+
+$switch-background-color-inactive-dark: $kku-gray-color-700;
+
+
+$switch-ball-color: $kku-white-color;
+$switch-ball-color-disabled: $kku-gray-color-300;
+
+$switch-width-size-medium: 54px;
+$switch-height-size-medium: 30px;
+$switch-border-radius-medium: 15px;
+$switch-ball-size-medium: 24px;
+
+$switch-width-size-small: 48px;
+$switch-height-size-small: 26px;
+$switch-border-radius-small: 13px;
+$switch-ball-size-small: 20px;
+
+
+// endregion
+
+
 .k-switch {
+  position: relative;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .k-switch__input {
+    display: none;
+  }
+
+  &.k-switch--on.k-switch--small {
+
+    .k-switch__label {
+      background-color: $switch-background-color-active;
+
+      .k-switch__label__ball {
+        left: calc(100% - (#{$switch-ball-size-small} + 3px));
+      }
+    }
+  }
+
+  &.k-switch--on.k-switch--medium {
+    .k-switch__label {
+      background-color: $switch-background-color-active;
+
+      .k-switch__label__ball {
+        left: calc(100% - (#{$switch-ball-size-medium} + 3px));
+      }
+    }
+  }
+
+
+  .k-switch__label {
     position: relative;
-    border: none;
+    width: 50px;
+    height: 24px;
+    background-color: $switch-background-color-inactive;
+    transition: background-color 0.24s ease-out;
     cursor: pointer;
-    margin: 0;
-    padding: 0;
-    background-color: var(--gray-color-200);
     overflow: hidden;
 
-    .k-switch__active-background, .k-switch__default-background {
+    .k-switch__label__ball {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      border-radius: 50%;
+      background-color: $switch-ball-color;
+      transition: left 0.24s ease;
+    }
+  }
+
+  &.k-switch--small {
+
+    .k-switch__label {
+
+      width: $switch-width-size-small;
+      height: $switch-height-size-small;
+      border-radius: $switch-border-radius-small;
+
+      .k-switch__label__ball {
+        width: $switch-ball-size-small;
+        height: $switch-ball-size-small;
+      }
+    }
+  }
+
+  &.k-switch--medium {
+
+    .k-switch__label {
+
+      width: $switch-width-size-medium;
+      height: $switch-height-size-medium;
+      border-radius: $switch-border-radius-medium;
+
+      .k-switch__label__ball {
+        width: $switch-ball-size-medium;
+        height: $switch-ball-size-medium;
+      }
+    }
+  }
+
+  &.k-switch--disabled {
+    .k-switch__label {
+      cursor: not-allowed;
+
+      &:after {
+        content: '';
         position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        opacity: 0;
-        transition: opacity 0.24s ease;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $switch-background-color-disabled;
+      }
     }
-
-    .k-switch__active-background { background-color: #068FFF; }
-
-    &.k-switch--on > .k-switch__active-background { opacity: 1; }
-    &.k-switch--on > .k-switch__default-background { opacity: 0; }
+  }
+}
 
 
-    &.k-switch--disabled {
-        cursor: not-allowed;
+.#{$kku-dark-mode-signature} .k-switch {
 
-        &:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--black-color);
-            opacity: 0.16;
-            z-index: 1;
-        }
-    }
-
-    .k-switch__toggle {
-        position: absolute;
-        font-size: 0;
-        background: var(--white-color);
-        border-radius: 50%;
-        transition: left 0.3s ease;
-        z-index: 1;
-    }
-
-    // region[Size]
-    &.k-switch--medium {
-        width: 54px;
-        height: 30px;
-        border-radius: 16px;
-
-        .k-switch__toggle { width: 24px; height: 24px;}
-
-        &.k-switch--on .k-switch__toggle { top: 3px; left: calc((100% - 30px) + 3px); }
-        &.k-switch--off .k-switch__toggle { top: 3px; left: 3px; }
-    }
-
-    &.k-switch--small {
-        width: 48px;
-        height: 26px;
-        border-radius: 14px;
-
-        .k-switch__toggle { width: 20px; height: 20px;}
-
-        &.k-switch--on .k-switch__toggle { top: 3px; left: calc((100% - 26px) + 3px); }
-        &.k-switch--off .k-switch__toggle { top: 3px; left: 3px; }
-    }
-    // endregion
+  .k-switch__label {
+    background-color: $switch-background-color-inactive-dark;
+  }
 }

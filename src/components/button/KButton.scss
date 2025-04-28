@@ -33,6 +33,9 @@ $button-border-primary-color-base: $kku-primary-color-base;
 $button-border-primary-color-hover: $kku-primary-color-hover;
 $button-border-primary-color-disabled: $kku-primary-color-disabled;
 
+$button-background-primary-color-base: $kku-primary-color-base;
+$button-background-primary-color-disabled: rgba(0, 0, 0, 0.16);
+
 // endregion
 
 .k-button {
@@ -65,7 +68,7 @@ $button-border-primary-color-disabled: $kku-primary-color-disabled;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.16);
+      background-color: $button-background-primary-color-base;
     }
   }
 
