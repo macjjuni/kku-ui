@@ -74,8 +74,8 @@ const Switch = forwardRef(({ ...restProps }: KSwitchProps, ref: Ref<KSwitchRefs>
   return (
     <div ref={rootRef} className={rootClass}>
       <button id={id} type='button' role='switch' style={rootStyle} aria-checked={value} aria-label='switch'
-              disabled={disabled} tabIndex={disabled ? -1 : 0} className='k-switch__input' onClick={onClickSwitch}/>
-      <label htmlFor={id} className='k-switch__label'>
+              disabled={disabled} className='k-switch__input' onClick={onClickSwitch}/>
+      <label htmlFor={id} className='k-switch__label' tabIndex={disabled ? -1 : 0}>
         <span className='k-switch__label__ball'/>
       </label>
     </div>

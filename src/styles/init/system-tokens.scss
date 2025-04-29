@@ -31,6 +31,8 @@
   --kku-error-color-base: #{$kku-red-color-400};
   --kku-error-color-hover: #{$kku-red-color-500};
 
+  --kku-focus-visible-color: #{$kku-blue-color-300};
+
   --kku-element-height-medium: 34px;
   --kku-element-height-small: 30px;
 }
@@ -65,6 +67,8 @@ $kku-warning-color-hover: var(--kku-warning-color-hover);
 
 $kku-error-color-base: var(--kku-error-color-base);
 $kku-error-color-hover: var(--kku-error-color-hover);
+
+$kku-focus-visible-color: var(--kku-focus-visible-color);
 
 $kku-text-size-x-large: var(--kku-text-size-x-large);
 $kku-text-size-large: var(--kku-text-size-large);

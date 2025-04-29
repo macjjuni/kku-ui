@@ -48,9 +48,8 @@ $button-background-primary-color-disabled: rgba(0, 0, 0, 0.16);
   border-width: 1px;
   border-style: solid;
   border-radius: $button-border-radius;
-  font-family: var(--font-family);
   cursor: pointer;
-  transition: 0.24s ease;
+  transition: border-color, background-color 0.24s ease;
   overflow: hidden;
   user-select: none;
 

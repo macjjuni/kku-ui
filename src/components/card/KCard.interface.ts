@@ -1,23 +1,25 @@
-import { KeyboardEvent, MouseEvent, ReactNode } from 'react';
-import { KBaseProp } from '@/common/base/base.interface';
+import { ReactNode } from 'react';
+import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 
-export interface KCardProps extends KBaseProp {
+export interface KCardProps extends KBaseProp, KSizeProp {
 
-  children?: ReactNode
+  children?: ReactNode;
 
-  title?: string
-  subTitle?: string
+  title?: string;
+  subTitle?: string;
 
-  clickable?: boolean
+  disabled?: boolean;
+  clickable?: boolean;
 
   // Styles
-  width?: string
-  height?: string
-  color?: string
-  fontColor?: string
-  padding?: string
-  borderRadius?: string
+  width?: number;
+  height?: number;
+  borderRadius?: number;
+  borderColor?: string;
+  padding?: number;
 
+  color?: string;
+  fontColor?: string;
 
-  onClick?: (e: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => void
+  onClick?: () => void;
 }

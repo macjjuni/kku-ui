@@ -81,8 +81,7 @@ $select-transition: color, border-color, background-color 0.24s ease;
     }
 
     &:focus-visible {
-      outline: 2px solid $kku-primary-color-base;
-      outline-offset: 2px;
+      @include kku-focus-visible;
     }
 
     .k-select__label__text {
@@ -144,10 +143,7 @@ $select-transition: color, border-color, background-color 0.24s ease;
         border-color: $select-border-default-color-hover;
         background-color: $select-background-default-color-hover;
       }
-      &:focus-visible {
-        outline: 2px solid $kku-primary-color-base;
-        outline-offset: 2px;
-      }
+      &:focus-visible { @include kku-focus-visible; }
       &:hover + .k-select__list__item { border-top: 1px solid $select-border-default-color-hover; }
       &:first-child {
         border-top-left-radius: $select-border-radius;

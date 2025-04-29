@@ -66,6 +66,10 @@ $switch-ball-size-small: 20px;
     cursor: pointer;
     overflow: hidden;
 
+    &:focus-visible {
+      @include kku-focus-visible;
+    }
+
     .k-switch__label__ball {
       position: absolute;
       top: 3px;
