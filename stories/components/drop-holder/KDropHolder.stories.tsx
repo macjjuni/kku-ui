@@ -50,11 +50,12 @@ export const Default: Story = {
   render: Template,
   args: {
     content: (
-      <>
-        <p>Hello World!</p>
+      <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.88)',
+                    borderRadius: '3px',
+                    color: '#fff',
+                    padding: '12px'}}>
         <p>This is a content</p>
-        <p>Hello World!</p>
-      </>
+      </div>
     ),
   },
 };
