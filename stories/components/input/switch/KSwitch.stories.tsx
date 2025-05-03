@@ -15,6 +15,7 @@ const meta: Meta<typeof KSwitch> = {
     onChange: {description: '값 변경 이벤트를 설정합니다.', defaultValue: {summary: () => {}}},
     ...onClickArgType,
   },
+  tags: ['autodocs'],
 };
 
 export default meta;
