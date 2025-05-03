@@ -87,6 +87,12 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) =>
 
   // region [Events]
 
+  const onClickButton = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    if (!disabled) {
+      onClick?.(e);
+    }
+  }, [disabled, onClick]);
+
   const onMouseDown = useCallback((e: MouseEvent<HTMLButtonElement>) => {
 
     if (!disabled) {
@@ -94,14 +100,10 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) =>
     }
   }, [ripple]);
 
-  const onMouseUp = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+  const onMouseUp = useCallback(() => {
 
     ripple.remove();
-
-    if (!disabled) {
-      onClick?.(e);
-    }
-  }, [ripple, disabled, onClick]);
+  }, [ripple]);
 
   const onMouseLeave = useCallback(() => {
 
@@ -130,7 +132,7 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) =>
   return (
     <button ref={rootRef} id={id} className={`k-button ${rootClass}`} style={rootStyle}
             type='button' aria-label={label} disabled={disabled}
-            onMouseDown={onMouseDown} onMouseLeave={onMouseLeave}
+            onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onClick={onClickButton}
             onMouseUp={onMouseUp} onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
       {(children || label) && (
         <span className='k-button__content'>{children || label}</span>)}

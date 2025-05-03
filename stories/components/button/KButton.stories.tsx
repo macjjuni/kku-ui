@@ -25,6 +25,8 @@ export const Default: Story = {
   render: Template,
   args: {
     label: '안녕하세요',
+    variant: 'default',
+    disabled: false,
   },
 };
 
