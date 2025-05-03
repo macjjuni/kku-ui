@@ -22,7 +22,6 @@ $text-field-text-placeholder-color-disabled: $kku-text-color-disabled;
 
 
 $text-field-background-default-color-base: $kku-background-color-base;
-$text-field-background-default-color-hover: $kku-background-color-hover;
 $text-field-background-default-color-disabled: $kku-background-color-disabled;
 
 $text-field-border-default-color-base: $kku-border-color-base;
@@ -114,7 +113,6 @@ $text-field-border-primary-color-disabled: $kku-primary-color-disabled;
       .k-text-field__input__root {
         color: $text-field-text-default-color-hover;
         border-color: $text-field-border-default-color-hover;
-        background-color: $text-field-background-default-color-hover;
       }
     }
   }

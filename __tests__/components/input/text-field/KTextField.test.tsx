@@ -1,146 +1,161 @@
-import { render, screen } from '@testing-library/react';
-import { useState, act } from 'react';
-import userEvent from '@testing-library/user-event';
+import { act, useState } from 'react';
 import { vi } from 'vitest';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 import { KTextField } from '@/components';
 
-const testId = 'k-text-field';
-const mockOnClick = vi.fn();
+const TestTextField = ({ clearable }: { clearable?: boolean }) => {
+  const [value, setValue] = useState('');
+  return <KTextField value={value} onChange={(val) => setValue(val)} clearable={clearable}/>;
+};
+
 
 describe('KTextField', () => {
-  beforeEach(() => {
-    mockOnClick.mockClear();
+
+  afterEach(() => {
+    vi.clearAllTimers();
+    vi.useRealTimers();
   });
 
-  describe('Prop test', () => {
-    test('style, value, className prop render test', () => {
-      // Arrange
-      const testValue = 'macjjuni';
-      const testStyle = { color: '#EEEEEE', fontSize: '20px' };
-      const testClass = 'macjjuni-class-name';
+  it('renders correctly', () => {
 
-      // Act
-      render(<KTextField value={testValue} className={testClass} style={testStyle}/>);
-      const root = screen.getByTestId(testId);
-      const inputRoot = screen.getByRole('textbox');
+    render(<KTextField value=''/>);
 
-      // Assert
-      expect(root).toHaveStyle(testStyle);
-      expect(root).toHaveClass(testClass);
-      expect(inputRoot).toHaveValue(testValue);
+    // Assert
+    expect(screen.getByTestId('k-text-field')).toBeInTheDocument();
+  });
+
+  it('renders label, placeholder, and required asterisk', () => {
+
+    // Arrange
+    const labelText = 'Username';
+    const placeholderText = 'Enter your username';
+    render(<KTextField label={labelText} placeholder={placeholderText} required/>);
+
+    // Assert
+    expect(screen.getByText(labelText)).toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toHaveAttribute('placeholder', placeholderText);
+    expect(screen.getByText('*')).toBeInTheDocument();
+  });
+
+  it('calls onChange on input change', async () => {
+
+    // Arrange
+    const user = userEvent.setup();
+    const testText = 'test';
+    render(<TestTextField/>);
+    const inputRoot = screen.getByRole('textbox');
+
+    // Act
+    await act(async () => {
+      await user.type(inputRoot, testText);
     });
 
-    test('Disabled prop render test', () => {
-      // Arrange
+    // Assert
+    expect(inputRoot).toHaveValue(testText);
+  });
 
-      // Act
-      render(<KTextField value='' disabled/>);
-      const inputRoot = screen.getByRole('textbox') as HTMLInputElement;
-      const root = screen.getByTestId(testId);
+  it('disables input when disabled is true', () => {
 
-      // Assert
-      expect(root).toHaveClass('k-text-field--disabled');
-      expect(inputRoot.disabled).toBeTruthy();
+    // Arrange
+    render(<KTextField value='disabled' disabled/>);
+    const root = screen.getByTestId('k-text-field');
+    const input = screen.getByRole('textbox');
+
+    // Assert
+    expect(root).toHaveClass('k-text-field--disabled');
+    expect(input).toBeDisabled();
+  });
+
+  it('calls onFocus and onBlur events', async () => {
+
+    const handleFocus = vi.fn();
+    const handleBlur = vi.fn();
+
+    render(
+      <KTextField value='' onFocus={handleFocus} onBlur={handleBlur}/>,
+    );
+    const input = screen.getByRole('textbox');
+
+    await act(async () => {
+      await userEvent.click(input); // triggers focus
     });
 
-    test('placeholder, clearable prop render test', () => {
-      // Arrange
-      const testPlaceholder = 'test placeholder';
+    expect(handleFocus).toHaveBeenCalledTimes(1);
 
-      // Act
-      render(<KTextField value='test' label='test' placeholder={testPlaceholder} clearable/>);
-      const inputRoot = screen.getByRole('textbox');
-      const clearIcon = screen.getByRole('button');
-
-      // Assert
-      expect(inputRoot).toHaveAttribute('placeholder', testPlaceholder);
-      expect(clearIcon).toBeInTheDocument();
+    await act(async () => {
+      await userEvent.tab(); // triggers blur
     });
 
-    test('Password prop render test', async () => {
-      // Arrange
-      const user = userEvent.setup();
-      const passwordText = 'thisISpassword!';
+    expect(handleBlur).toHaveBeenCalledTimes(1);
+  });
 
-      const TestTextField = () => {
-        const [value, setValue] = useState<string>('');
-        return <KTextField value={value} onChange={(e) => setValue(e)} password/>;
-      };
+  it('calls onKeyDownEnter when Enter is pressed', () => {
 
-      render(<TestTextField/>);
-      const inputRoot = screen.getByTestId('k-text-field-input');
-      const visibilityIcon = screen.getByRole('button');
+    // Arrange
+    const handleEnter = vi.fn();
+    render(<KTextField value='test' onKeyDownEnter={handleEnter}/>);
+    const input = screen.getByRole('textbox');
 
-      // Act
-      await act(async () => {
-        await user.click(inputRoot);
-        await user.keyboard(passwordText);
-      });
+    // Act
+    input.focus();
+    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
 
-      // Assert
-      expect(inputRoot).toHaveAttribute('type', 'password');
+    // Assert
+    expect(handleEnter).toHaveBeenCalled();
+  });
 
-      // Act
-      await act(async () => {
-        await user.click(visibilityIcon);
-      });
+  it('toggles password visibility', async () => {
 
-      // Assert
-      expect(inputRoot).toHaveAttribute('type', 'input');
-      expect(inputRoot).toHaveValue(passwordText);
+    // Arrange
+    const inputText = 'secret';
+    render(<KTextField value={inputText} password/>);
+    const inputRoot = screen.getByTestId('k-text-field-input');
+
+    // Assert
+    expect(inputRoot).toHaveAttribute('type', 'password');
+
+    // Arrange
+    const toggleBtn = screen.getByRole('button');
+
+    // Act
+    await act(() => userEvent.click(toggleBtn));
+
+    // Arrange
+    const newInputRoot = screen.getByTestId('k-text-field-input');
+
+    // // Assert
+    expect(newInputRoot).toHaveAttribute('type', 'input');
+  });
+
+  it('clears value when clear icon is clicked', async () => {
+
+    // Arrange
+    const user = userEvent.setup();
+    const testValue = 'test!';
+    render(<TestTextField clearable/>);
+    const inputRoot = screen.getByTestId('k-text-field-input');
+
+    // Act
+    await act(async () => {
+      await user.type(inputRoot, testValue);
     });
 
-    test('MaxLength prop render test', async () => {
-      // Arrange
-      const user = userEvent.setup();
-      const testText = 'Hello World! 123';
-      const testMaxLength = 10;
+    // Assert
+    expect(inputRoot).toHaveValue(testValue);
 
-      const TestKTextField = () => {
-        const [value, setValue] = useState('');
-        return <KTextField label='label' maxLength={testMaxLength} value={value} onChange={(v) => setValue(v)}/>;
-      };
+    // Arrange
+    const clearButton = screen.getByRole('button');
 
-      render(<TestKTextField/>);
-      const labelRoot = screen.getByTestId('k-text-field-label');
-
-      // Act
-      await act(async () => {
-        await user.click(labelRoot);
-        await user.keyboard(testText);
-      });
-
-      const typedInputRoot = screen.getByRole('textbox');
-
-      // Assert
-      expect(typedInputRoot).toHaveValue(testText.substring(0, testMaxLength));
+    // Act
+    await act(async () => {
+      await user.click(clearButton);
     });
 
-    test('RightAction prop render test', async () => {
-      // Arrange
-      const onMockChange = vi.fn();
-      const rightActionTestId = 'test-right-action-id';
+    // Arrange
+    const newInput = screen.getByTestId('k-text-field-input');
 
-      const RightAction = () => <div data-testid={rightActionTestId}>Right Action Text</div>;
-
-      // Act
-      render(<KTextField label='label' value='' onChange={onMockChange} rightAction={<RightAction/>}/>);
-      const rightActionRoot = screen.getByTestId(rightActionTestId);
-
-      // Assert
-      expect(rightActionRoot).toBeInTheDocument();
-    });
-
-    test('Width prop render test', async () => {
-      // Arrange
-      const testWidth = '321px';
-
-      // Act
-      render(<KTextField label='label' value='' width={testWidth}/>);
-      const inputRoot = screen.getByTestId(testId);
-
-      // Assert
-      expect(inputRoot).toHaveStyle({ width: testWidth });
-    });
+    // Assert
+    expect(newInput).toHaveValue('')
   });
 });

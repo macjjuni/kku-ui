@@ -221,7 +221,7 @@ const TextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KTextF
         <input id={id} ref={inputRef} className='k-text-field__input__root' style={{ ...inputStyle, ...inputPadding }}
                type={(password && !isPasswdShow) ? 'password' : 'input'} value={value}
                onChange={onChangeValue} onFocus={onFocusInput} onBlur={onblurInput} onKeyDown={onKeyDownEnterInput}
-               disabled={disabled} placeholder={placeholder} maxLength={maxLength}
+               disabled={disabled} placeholder={placeholder} maxLength={maxLength} data-testid='k-text-field-input'
                autoComplete={autoComplete} autoCorrect={autoCorrect} autoCapitalize={autoCapitalize}/>
         {(clearable || password) && IconArea}
         {RightAction}

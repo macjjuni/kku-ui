@@ -5,7 +5,7 @@ import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 export interface KTextFieldProps extends KBaseProp, KSizeProp {
 
   // Value
-  value: string;
+  value?: string;
 
   // Label
   label?: string;
@@ -45,5 +45,5 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
 export interface KTextFieldRefs {
   focus: () => void;
   blur: () => void;
-  value: string;
+  value?: string;
 }
