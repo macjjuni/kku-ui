@@ -22,7 +22,8 @@ const meta: Meta<KIconProps> = {
         id: {description: 'id 속성을 설정합니다.'},
         className: {description: 'class 속성을 설정합니다.'},
         style: {description: 'style 속성을 설정합니다.'},
-    }
+    },
+    tags: ['autodocs'],
 };
 
 export default meta;
@@ -47,6 +48,6 @@ export const Default: Story = {
 };
 export const AllIcons: Story = {
     render: Template,
-    args: {    },
+    args: {},
 };
 

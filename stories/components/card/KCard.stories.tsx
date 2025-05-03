@@ -21,6 +21,7 @@ const meta: Meta<KCardProps> = {
     ...baseArgTyp,
     ...sizeArgType
   },
+  tags: ['autodocs'],
 };
 
 export default meta;

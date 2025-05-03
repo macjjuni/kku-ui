@@ -21,6 +21,7 @@ const meta: Meta<typeof KTextField> = {
         leftAction: {description: '좌측에 Action 공간을 설정합니다.'},
         ...baseArgTyp, ...sizeArgType, ...disabledArgType,
     },
+    tags: ['autodocs'],
 };
 
 export default meta;
