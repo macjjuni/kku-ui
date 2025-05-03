@@ -1,5 +1,4 @@
 import { defineConfig } from 'vitest/config';
-import path from 'path';
 import viteConfig from './vite.config';
 
 
@@ -12,11 +11,6 @@ export default defineConfig({
     coverage: {
       provider: 'v8', // 코드 커버리지 제공자 설정 (v8 또는 istanbul)
       reporter: ['text', 'lcov'], // 커버리지 리포트 형식
-    },
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, 'src'), // ⬅️ alias 추가
-      },
     },
   },
 });
