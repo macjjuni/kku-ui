@@ -10,7 +10,7 @@ export interface KSelectItemType {
 
 export interface KSelectProps extends KBaseProp, KSizeProp {
 
-  value: string; // ✨ Required ✨
+  value?: string; // ✨ Required ✨
   items: KSelectItemType[];
 
   placeholder?: string;
@@ -34,7 +34,7 @@ export interface KSelectRefs {
 }
 
 export interface KSelectListProps {
-  value: string;
+  value?: string;
   items: KSelectItemType[];
   noDataText?: string;
   onFocus: () => void;

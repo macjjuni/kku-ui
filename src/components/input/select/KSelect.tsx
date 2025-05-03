@@ -182,12 +182,13 @@ const Select = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs>
 
 
   return (
-    <div ref={rootRef} id={id} className={rootClass} data-testid='k-select' style={rootStyle}>
+    <div ref={rootRef} id={id} className={rootClass} style={rootStyle} data-testid='k-select'>
 
       <div ref={labelRef} role='button' className='k-select__label' style={labelStyle}
            onMouseEnter={onMouseEnterLabel} onMouseLeave={onMouseLeaveLabel} onMouseDown={onMouseDownLabel}
            onMouseUp={onMouseUpLabel} onKeyDown={onKeyDownLabel} onKeyUp={onKeyUpLabel}
-           onFocus={onFocusLabel} onBlur={onBlurLabel} tabIndex={disabled ? -1 : 0} aria-expanded={open}>
+           onFocus={onFocusLabel} onBlur={onBlurLabel} tabIndex={disabled ? -1 : 0}
+           aria-expanded={open} aria-haspopup='listbox' aria-controls='dropdown-list'>
 
         <span className='k-select__label__text'>{displayTitle}</span>
         <KIcon className='k-select__label__arrow-icon' icon='keyboard_arrow_down' size={14}/>
@@ -196,7 +197,7 @@ const Select = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs>
 
       <AnimatePresence>
         { open && (
-          <motion.ul {...KSelectMotion} className='k-select__list' {...KSelectMotion}>
+          <motion.ul {...KSelectMotion} role='listbox' className='k-select__list' {...KSelectMotion}>
             <KSelectList value={value} items={items} noDataText={noDataText} onClick={onClickListItem}
                          onFocus={onFocusListItem} onKeyDown={onKeydownListItem}/>
           </motion.ul>

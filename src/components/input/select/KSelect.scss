@@ -16,12 +16,14 @@ $button-text-default-color-disabled: $kku-text-color-disabled;
 $select-text-default-color-placeholder: $kku-text-color-placeholder;
 
 $select-background-default-color-base: $kku-background-color-base;
-$select-background-default-color-hover: $kku-background-color-hover;
 $button-background-default-color-disabled: $kku-background-color-disabled;
 
 $select-border-default-color-base: $kku-border-color-base;
 $select-border-default-color-hover: $kku-border-color-hover;
 $select-border-default-color-disabled: $kku-border-color-disabled;
+
+$select-icon-color-base: $select-border-default-color-base;
+$select-icon-color-hover: $select-border-default-color-hover;
 
 $select-border-radius: $kku-border-radius-default;
 
@@ -39,9 +41,6 @@ $button-border-primary-color-base: $kku-primary-color-base;
 $button-border-primary-color-hover: $kku-primary-color-hover;
 $button-border-primary-color-disabled: $kku-primary-color-disabled;
 
-// Transition
-$select-transition: color, border-color, background-color 0.24s ease;
-
 // endregion
 
 
@@ -54,6 +53,7 @@ $select-transition: color, border-color, background-color 0.24s ease;
   user-select: none;
 
   &.k-select--open .k-select__label .k-select__label__arrow-icon {
+    color: $select-icon-color-hover;
     transform: rotate(180deg);
   }
 
@@ -63,39 +63,35 @@ $select-transition: color, border-color, background-color 0.24s ease;
     justify-content: space-between;
     align-items: center;
     gap: $kku-spacing-8;
-    overflow: hidden;
 
-    border: 1px solid $select-border-default-color-base;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $select-border-default-color-base;
     border-radius: $select-border-radius;
     background: $select-background-default-color-base;
-
-    transition: $select-transition;
+    transition: 0.24s ease;
+    transition-property: color, border-color;
+    overflow: hidden;
 
     &:hover {
       border-color: $select-border-default-color-hover;
-      background-color: $select-background-default-color-hover;
 
-      .k-select__label__text > .k-select__label__text__placeholder {
-        color: $select-text-default-color-base;
-      }
+      .k-select__label__arrow-icon { color: $select-icon-color-hover; }
+      .k-select__label__text > .k-select__label__text__placeholder { color: $select-text-default-color-base; }
     }
 
-    &:focus-visible {
-      @include kku-focus-visible;
-    }
+    &:focus-visible { @include kku-focus-visible; }
 
     .k-select__label__text {
       color: $select-text-default-color-base;
       @include kku-ellipsis;
 
-      .k-select__label__text__placeholder {
-        color: $select-text-default-color-placeholder;
-      }
+      .k-select__label__text__placeholder { color: $select-text-default-color-placeholder; }
     }
 
     .k-select__label__arrow-icon {
-      color: $kku-black-color;
-      transition: transform 0.3s ease;
+      color: $select-icon-color-base;
+      transition: color, transform 0.3s ease;
     }
     .k-ripple { background-color: $kku-background-color-ripple; }
   }
@@ -128,7 +124,8 @@ $select-transition: color, border-color, background-color 0.24s ease;
       align-items: center;
       border: 1px solid $select-border-default-color-base;
       background-color: $select-background-default-color-base;
-      transition: $select-transition;
+      transition: 0.24s ease;
+      transition-property: color, border, background-color;
 
       .select__list__item--check-icon {
         color: $kku-black-color;
@@ -139,10 +136,7 @@ $select-transition: color, border-color, background-color 0.24s ease;
         @include kku-ellipsis;
       }
 
-      &:hover {
-        border-color: $select-border-default-color-hover;
-        background-color: $select-background-default-color-hover;
-      }
+      &:hover { border-color: $select-border-default-color-hover; }
       &:focus-visible { @include kku-focus-visible; }
       &:hover + .k-select__list__item { border-top: 1px solid $select-border-default-color-hover; }
       &:first-child {
