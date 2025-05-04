@@ -14,7 +14,7 @@ const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
 
   const { id, className, style }: KIconProps = { ...resProps };
   const { icon, size = 'medium', onClick }: KIconProps = { ...resProps };
-  const { color, disabled, clickable }: KIconProps = { ...resProps };
+  const { color, disabled }: KIconProps = { ...resProps };
 
   const inputRef = useRef<HTMLButtonElement>(null);
   const uniqueId = `k-icon-${useId()}`;
@@ -42,17 +42,17 @@ const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
     if (className) {
       clazz.push(className);
     }
-    if (clickable) {
-      clazz.push('k-icon--clickable');
-    }
     if (typeof size === 'string') {
       clazz.push(`k-icon--${size}`);
+    }
+    if (onClick) {
+      clazz.push('k-icon--clickable');
     }
 
     initDisabled(clazz, 'k-icon', disabled);
 
     return clazz.join(' ');
-  }, [className, clickable, disabled, size, icon]);
+  }, [className, disabled, size, icon, onClick]);
 
 
   const rootStyle = useMemo((): CSSProperties => {

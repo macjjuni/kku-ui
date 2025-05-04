@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "sb": "storybook dev -p 6006",
-    "build": "vite build",
+    "build": "pnpm run test && vite build",
     "publish": "publish",
     "test": "vitest",
     "test-ui": "vitest --ui",
