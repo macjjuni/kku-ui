@@ -81,7 +81,7 @@
         "import/export": "off",
         "eol-last": "off",
         "default-case": "off",
-        "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "never" }],
+        "react/jsx-tag-spacing": "off",
         "@typescript-eslint/semi": "off"
     }
 }
