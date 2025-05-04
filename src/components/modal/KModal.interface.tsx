@@ -1,16 +1,22 @@
-import { ReactNode } from 'react';
-import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { KBaseProp } from '@/common/base/base.interface';
 
+export const KModalSizes = { medium: 'medium', small: 'small', large: 'large' } as const;
+export type KModalSizeType = (typeof KModalSizes)[keyof typeof KModalSizes];
 
-export interface KModalProps extends KBaseProp, KSizeProp {
+export interface KModalProps extends KBaseProp {
   isOpen: boolean;
-  onClose: () => void;
+  setIsOpen?: Dispatch<SetStateAction<boolean>>
+  onClose?: () => void;
 
-  title: string;
+  size?: KModalSizeType;
+  animation?: 'slide' | 'fade';
+
+  title?: string;
   content: ReactNode;
   footer?: ReactNode;
 
-  width?: string;
+  width?: number;
   isOverlay?: boolean;
   overlayOpacity?: number;
   overlayClosable?: boolean;

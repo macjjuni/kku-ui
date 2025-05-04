@@ -1,16 +1,34 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { KModal, KModalProps } from '@/components/modal';
 import { KButton } from '@/components';
+import { baseArgTyp } from '../common/argTypes';
 
 const meta: Meta<KModalProps> = {
   component: KModal,
   title: 'Components/Modal',
   argTypes: {
-    id: { description: 'id 속성을 설정합니다.', defaultValue: { summary: 'undefined' } },
-    className: { description: 'class 속성을 설정합니다.', defaultValue: { summary: 'undefined' } },
-    style: { description: 'style 속성을 설정합니다.', defaultValue: { summary: 'undefined' } },
-    size: { description: '모달 사이즈 속성을 설정합니다.', defaultValue: { summary: 'medium' } },
+    ...baseArgTyp,
+    size: {
+      description: '모달 사이즈 속성을 설정합니다.',
+      defaultValue: { summary: 'medium' },
+      control: { type: 'radio' },
+      options: ['small', 'medium', 'large']
+    },
+    title: { description: '모달 제목을 설정합니다.', control: { type: 'text' } },
+    content: { description: '모달 컨텐츠를 설정합니다.', type: 'function' },
+    footer: { description: '모달 푸터 컨텐츠를 설정합니다.', type: 'function' },
+    isOverlay: { description: '오버레이 여부를 설정합니다.', type: 'boolean', defaultValue: { summary: true } },
+    overlayOpacity: { description: '오버레이 불투명도 설정합니다.', type: 'number', defaultValue: { summary: 0.48 } },
+    overlayClosable: { description: '오버레이 클릭시 모달 종료 여부를 설정합니다.', type: 'boolean', defaultValue: { summary: false } },
+    animation: {
+      description: '모달 에니메이션 효과를 설정합니다.',
+      type: 'string',
+      defaultValue: { summary: 'slide' },
+      control: { type: 'radio' },
+      options: ['slide', 'fade']
+    },
+    width: { description: '모달 width 사이즈를 설정합니다.', type: 'number' },
   },
   tags: ['autodocs'],
 };
@@ -18,6 +36,17 @@ const meta: Meta<KModalProps> = {
 export default meta;
 
 type Story = StoryObj<typeof KModal>
+
+const Content = () => {
+  return (
+    <>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a type
+      specimen book.
+    </>
+  )
+}
 
 const Template = (args: KModalProps) => {
 
@@ -27,30 +56,19 @@ const Template = (args: KModalProps) => {
     setIsOpen(true);
   };
 
-
   const onClose = () => {
     setIsOpen(false);
   };
 
-  const content = useMemo(() => (
-    <>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-      when an unknown printer took a galley of type and scrambled it to make a type
-      specimen book.
-    </>
-  ), []);
-
-
   return (
     <>
       <KButton onClick={onOpen}>Open Modal!</KButton>
-      <KModal {...args}
-              title={'What is Lorem Ipsum?'}
-              isOpen={isOpen}
-              onClose={onClose}
-              content={content}
-              footer={<KButton onClick={onClose}>취소</KButton>}
+      <KModal {...args} isOpen={isOpen} setIsOpen={setIsOpen} footer={
+        <>
+          <KButton variant='primary' onClick={onClose}>확인</KButton>
+          <KButton onClick={onClose}>취소</KButton>
+        </>
+      }
       />
     </>
   );
@@ -58,5 +76,15 @@ const Template = (args: KModalProps) => {
 
 
 export const Default: Story = {
-  render: Template, args: {},
+  render: Template, args: {
+    title: "Lorem Ipsum is simply",
+    content: <Content />,
+    footer: <></>,
+    size: 'small',
+    animation: 'slide',
+    isOverlay: true,
+    overlayOpacity: 0.48,
+    overlayClosable: false,
+    width: undefined
+  },
 };

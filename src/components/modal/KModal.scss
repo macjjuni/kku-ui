@@ -1,137 +1,106 @@
-$k-modal__large: 1040px;
-$k-modal__medium: 824px;
-$k-modal__small: 640px;
+// region [Component Tokens]
 
-$k-modal__wrapper_zIndex: 1000;
-$k-modal__container_zIndex: 1002;
-$k-modal__overlay_zIndex: 1001;
+$modal-text-color: $kku-text-color-primary;
 
-$k-modal__header__font-size: 18px;
-$k-modal__header__line-height: 24px;
+$modal-overlay-z-index: $kku-modal-overlay-z-index;
+$modal-content-z-index: $kku-modal-content-z-index;
 
-$k-modal__overlay__background-color: var(--black-color);
-$k-modal__overlay__dark__background-color: var(--white-color);
-$k-modal__overlay__opacity: 0.16;
+$modal-content-width-small: 640px;
+$modal-content-width-medium: 824px;
+$modal-content-width-large: 1040px;
 
-@keyframes modalScaleUp {
-    from { transform: scale(1.0); }
-    to { transform: scale(1.016); }
-}
-@keyframes modalScaleDown {
-    from { transform: scale(1.016); }
-    to { transform: scale(1.0); }
-}
+$modal-content-border-color: $kku-gray-color-300;
+$modal-content-background-color: $kku-background-color-base;
+$modal-content-border-radius: $kku-border-radius-default;
+$modal-content-box-shadow: $kku-box-shadow-default;
 
-.k-modal__wrapper {
-    position: fixed;
+$modal-overlay-background-color: $kku-gray-color-900;
+$modal-overlay-background-color-dark: $kku-gray-color-200;
+$modal-overlay-opacity: 0.48;
+
+$modal-content-header-text-size: $kku-gray-color-900;
+
+// endregion
+
+.k-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  color: $modal-text-color;
+
+  .k-modal__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    background-color: $modal-content-background-color;
+    border-radius: $modal-content-border-radius;
+    box-shadow: $modal-content-box-shadow;
+    z-index: $modal-content-z-index;
+    overflow: hidden;
+
+    &.k-modal__container--small { max-width: $modal-content-width-small; }
+    &.k-modal__container--medium { max-width: $modal-content-width-medium; }
+    &.k-modal__container--large { max-width: $modal-content-width-large; }
+
+    .k-modal__container__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: $kku-spacing-12 $kku-spacing-16;
+      border-bottom: 0.5px solid $modal-content-border-color;
+
+      .k-modal__container__header__text {
+        @include kku-text-large;
+        font-weight: bold;
+      }
+    }
+
+    .k-modal__container__content {
+      padding: $kku-spacing-12 $kku-spacing-16;
+      @include kku-text-medium;
+    }
+
+    &.k-modal__container--no-title {
+      .k-modal__container__content { padding: $kku-spacing-16; }
+    }
+
+    .k-modal__container__footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 0 $kku-spacing-16 $kku-spacing-12 $kku-spacing-16;
+    }
+  }
+
+  .k-modal__overlay {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    color: var(--default-font-color);
-    //@include k-center-flex-wrap;
-    z-index: $k-modal__wrapper_zIndex;
-    //@include fade-in;
+    z-index: $modal-overlay-z-index;
 
-    &.k-modal__wrapper--close {
-        //@include fade-out;
-
-        // 컨테이너 종료 애니메이션
-        .k-modal__container {
-            animation: modalScaleUp 0.16s ease-in forwards;
-        }
+    &.k-modal__overlay--active {
+      background-color: $modal-overlay-background-color;
+      opacity: $modal-overlay-opacity;
     }
 
-    .k-modal__container {
-        z-index: $k-modal__container_zIndex;
-        border-radius: var(--default-border-radius);
-        background-color: var(--white-color);
-        box-shadow: var(--default-box-shadow);
-        overflow: hidden;
-
-        // 컨테이너 시작 애니메이션
-        animation: modalScaleDown 0.16s ease-out forwards;
-
-        .k-modal__container__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: var(--spacing-8) var(--spacing-12);
-            border-bottom: 1px solid var(--gray-color-100);
-
-            .k-modal__container__header__text{
-                font-size: $k-modal__header__font-size;
-                line-height: $k-modal__header__line-height;
-                font-weight: bold;
-            }
-
-            .k-modal__container__header__close-button {
-                position: relative;
-                padding: var(--spacing-2);
-                background: none;
-                border: none;
-                color: inherit;
-                cursor: pointer;
-                overflow: hidden;
-            }
-        }
-
-        .k-modal__container__content {
-            padding: var(--spacing-20) var(--spacing-16);
-        }
-
-        .k-modal__container__footer {
-            //@include k-center-flex-wrap;
-            gap: 8px;
-            padding: 0 var(--spacing-12) var(--spacing-12) var(--spacing-12);
-        }
-
-
-        // region [Sizes]
-        &.k-modal__container--medium {
-            max-width: $k-modal__medium;
-            width: 100%;
-        }
-        &.k-modal__container--small {
-            max-width: $k-modal__small;
-            width: 100%;
-        }
-        // endregion
+    &.k-modal-wrapper__overlay--transparent {
+      background-color: transparent;
+      opacity: 0;
     }
-
-    .k-modal-wrapper__overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: $k-modal__overlay_zIndex;
-
-        &.k-modal-wrapper__overlay--active {
-            background-color: $k-modal__overlay__background-color;
-            opacity: $k-modal__overlay__opacity;
-        }
-
-        &.k-modal-wrapper__overlay--transparent {
-            background-color: transparent;
-            opacity: 0;
-        }
-    }
+  }
 }
 
+.#{$kku-dark-mode-signature} .k-modal {
 
-@media screen and (max-width: $k-modal__large) {
-    .k-modal__wrapper .k-modal__container.k-modal__container--large {
-        max-width: calc(100% - (var(--spacing-32) * 2));
-    }
-}
-@media screen and (max-width: $k-modal__medium) {
-    .k-modal__wrapper .k-modal__container.k-modal__container--medium {
-        max-width: calc(100% - (var(--spacing-24) * 2));
-    }
-}
-@media screen and (max-width: $k-modal__small) {
-    .k-modal__wrapper .k-modal__container.k-modal__container--small {
-        max-width: calc(100% - (var(--spacing-16) * 2));
-    }
+  .k-modal__overlay.k-modal__overlay--active {
+      background-color: $modal-overlay-background-color-dark;
+  }
 }

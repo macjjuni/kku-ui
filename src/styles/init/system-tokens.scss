@@ -35,6 +35,9 @@
 
   --kku-element-height-medium: 34px;
   --kku-element-height-small: 30px;
+
+  --kku-modal-overlay-z-index: #{$kku-z-index-1000};
+  --kku-modal-content-z-index: #{$kku-z-index-1001};
 }
 
 
@@ -79,6 +82,8 @@ $kku-text-size-x-small: var(--kku-text-size-x-small);
 $kku-element-height-medium: var(--kku-element-height-medium);
 $kku-element-height-small: var(--kku-element-height-small);
 
+$kku-modal-overlay-z-index: var(--kku-modal-overlay-z-index);
+$kku-modal-content-z-index: var(--kku-modal-content-z-index);
 
 $kku-dark-mode-signature: 'dark';
 

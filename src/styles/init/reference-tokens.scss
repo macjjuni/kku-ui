@@ -59,15 +59,15 @@
   --kku-black-color: #000000;
 
   /* Text Size */
-  --kku-text-size-xlarge: 32px;
-  --kku-text-size-large: 24px;
+  --kku-text-size-xlarge: 24px;
+  --kku-text-size-large: 18px;
   --kku-text-size-medium: 16px;
   --kku-text-size-small: 14px;
   --kku-text-size-xsmall: 12px;
 
   /* Line height Size */
-  --kku-line-height-xlarge: 34px;
-  --kku-line-height-large: 26px;
+  --kku-line-height-xlarge: 26px;
+  --kku-line-height-large: 20px;
   --kku-line-height-medium: 18px;
   --kku-line-height-small: 16px;
   --kku-line-height-xsize: 14px;
@@ -103,6 +103,21 @@
 
   /* Font Family */
   --kku-default-font-family: 'Arial', sans-serif;
+
+  /* Z-Index */
+  --kku-z-idnex-0: 0;
+  --kku-z-idnex-1: 1;
+  --kku-z-idnex-10: 10;
+  --kku-z-idnex-100: 100;
+  --kku-z-idnex-200: 200;
+  --kku-z-idnex-500: 500;
+  --kku-z-idnex-1000: 1000;
+  --kku-z-idnex-1001: 1001;
+  --kku-z-idnex-5000: 5000;
+  --kku-z-idnex-9999: 9999;
+
+  /* Box-shadow */
+  --kku-box-shadow-default: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 /* Gray */
@@ -209,3 +224,17 @@ $kku-border-radius-default: var(--kku-border-radius-default);
 
 /* Font Family */
 $kku-default-font-family: var(--kku-default-font-family);
+
+/* Z-Index */
+$kku-z-index-0: var(--kku-z-idnex-0);
+$kku-z-index-10: var(--kku-z-idnex-10);
+$kku-z-index-100: var(--kku-z-idnex-100);
+$kku-z-index-200: var(--kku-z-idnex-200);
+$kku-z-index-500: var(--kku-z-idnex-500);
+$kku-z-index-1000: var(--kku-z-idnex-1000);
+$kku-z-index-1001: var(--kku-z-idnex-1001);
+$kku-z-index-5000: var(--kku-z-idnex-5000);
+$kku-z-index-9999: var(--kku-z-idnex-9999);
+
+/* Box-shadow */
+$kku-box-shadow-default: var(--kku-box-shadow-default);
