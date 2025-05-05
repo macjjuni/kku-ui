@@ -1,26 +1,19 @@
-import { CSSProperties, KeyboardEvent, memo, MouseEvent, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  CSSProperties, KeyboardEvent, memo, MouseEvent, useCallback,
+  useEffect, useMemo, useRef, useState,
+} from 'react';
 import { KAccordionProps } from '@/components/accordion/KAccordion.interface';
-import { initSize } from '@/common/util/variation';
-import KIcon from '@/components/icon/KIcon';
 import { useCleanId } from '@/common/hook/useCleanId';
+import { KIcon } from '@/components';
+import './KAccordion.scss';
 
 
-const KAccordion = ({ ...restProps }: KAccordionProps) => {
+const Accordion = ({ ...restProps }: KAccordionProps) => {
 
   // region [Hooks]
 
-  const {
-    id,
-    className,
-    size,
-    children,
-    summaryIconSize,
-    summary,
-    summaryIcon,
-    style,
-    width,
-    open,
-  }: KAccordionProps = { ...restProps };
+  const { id, className, style, children, width, size = 'medium' } = { ...restProps };
+  const { summaryIconSize, summary, summaryIcon, open }: KAccordionProps = { ...restProps };
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
   const root = useRef<HTMLDetailsElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -35,14 +28,10 @@ const KAccordion = ({ ...restProps }: KAccordionProps) => {
 
   const rootClass = useMemo(() => {
 
-    const clazz = [];
+    const clazz = ['k-accordion'];
 
-    if (className) {
-      clazz.push(className);
-    }
-
-    initSize(clazz, 'k-accordion', size);
-
+    if (className) { clazz.push(className); }
+    clazz.push(`k-accordion--${size}`);
     clazz.push(`k-accordion--${isOpen ? 'open' : 'close'}`);
 
     return clazz.join(' ');
@@ -53,11 +42,10 @@ const KAccordion = ({ ...restProps }: KAccordionProps) => {
 
     const styles: CSSProperties = { ...style };
 
-    if (width) {
-      styles.width = width;
-    }
+    if (width) { styles.width = width; }
+
     return styles;
-  }, [width]);
+  }, [style, width]);
 
   const contentStyle = useMemo((): CSSProperties => {
 
@@ -79,30 +67,30 @@ const KAccordion = ({ ...restProps }: KAccordionProps) => {
 
   // region [Privates]
 
-  const initializeRoot = () => {
+  const initializeRoot = useCallback(() => {
     root.current?.setAttribute('open', 'true');
-  }
+  }, []);
 
-  const initializeContent = () => {
+  const initializeContent = useCallback(() => {
     setContentHeight(contentRef.current?.scrollHeight || 0);
-  }
+  }, []);
 
   // endregion
 
 
   // region [Events]
 
-  const onClick = (e?: MouseEvent<HTMLElement>) => {
+  const onClick = useCallback((e?: MouseEvent<HTMLElement>) => {
     e?.preventDefault();
     setIsOpen((prev) => !prev);
-  }
+  }, []);
 
-  const onKeyDown = (e: KeyboardEvent<HTMLElement>) => {
+  const onKeyDown = useCallback((e: KeyboardEvent<HTMLElement>) => {
     e.preventDefault();
     if (e.key === 'Enter' || e.key === ' ') {
       onClick();
     }
-  }
+  }, []);
 
   // endregion
 
@@ -116,15 +104,11 @@ const KAccordion = ({ ...restProps }: KAccordionProps) => {
     }
 
     if (typeof summaryIcon === 'string') {
-      return (
-        <KIcon className='k-accordion__summary__icon'
-               icon={summaryIcon}
-               size={summaryIconSize}/>
-      );
+      return (<KIcon className='k-accordion__summary__icon' icon={summaryIcon} size={summaryIconSize}/>);
     }
 
     return summaryIcon;
-  }, [summaryIcon, summaryIconSize])
+  }, [summaryIcon, summaryIconSize]);
 
   // endregion
 
@@ -132,16 +116,15 @@ const KAccordion = ({ ...restProps }: KAccordionProps) => {
   // region [Life Cycles]
 
   useEffect(() => {
-
     initializeRoot();
     initializeContent();
-  }, []);
+  }, [width, size]);
 
   // endregion
 
 
   return (
-    <details ref={root} id={id} className={`k-accordion ${rootClass}`} open
+    <details ref={root} id={id} className={rootClass} open
              style={rootStyle} data-testid='k-accordion'>
 
       <summary role='button' id={summaryId} className='k-accordion__summary' onClick={onClick}
@@ -164,6 +147,8 @@ const KAccordion = ({ ...restProps }: KAccordionProps) => {
   );
 };
 
-
+const KAccordion = memo(Accordion);
 KAccordion.displayName = 'KAccordion';
-export default memo(KAccordion);
+Accordion.displayName = 'KAccordion';
+
+export default KAccordion;
