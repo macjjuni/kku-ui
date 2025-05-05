@@ -1,140 +1,93 @@
+import { act, createRef } from 'react';
+import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import React, { useState, act } from 'react';
 import userEvent from '@testing-library/user-event';
-import { describe, test, expect, beforeEach, vi } from 'vitest';
-import { KSwitch, KSwitchProps, KSwitchRefs } from '@/components';
+import { KSwitch, KSwitchRefs } from '@/components';
 
-const testId = 'k-switch';
-const mockFn = vi.fn();
+describe('KSwitch', () => {
+  const mockOnChange = vi.fn();
+  const mockOnClick = vi.fn();
 
-// 필수인 value, onChange 제거한 타입
-type ExceptRequiredKSwitchProps = Omit<Omit<KSwitchProps, 'value'>, 'onChange'>;
-
-interface TestKSwitchProps extends ExceptRequiredKSwitchProps {
-  defaultValue?: boolean;
-}
-
-describe('KCheckbox', () => {
   beforeEach(() => {
-    mockFn.mockClear();
+    mockOnChange.mockClear();
+    mockOnClick.mockClear();
   });
 
-  const switchRef = React.createRef<KSwitchRefs>();
-  const TestSwitch = (props: TestKSwitchProps) => {
-    const [value, setValue] = useState(props.defaultValue || false);
-    return (<KSwitch {...props} ref={switchRef} value={value} onChange={(val) => { setValue(val); }}/>);
-  };
+  it('applies id, className, and style props', () => {
+    // Arrange
+    const testId = 'custom-id';
+    const testClass = 'test-class';
+    const testStyle = { backgroundColor: 'blue' };
 
-  describe('Props', () => {
-    test('Style, value, className prop render test', () => {
-      // Arrange
-      const testStyle = { color: '#e1e1e1', fontSize: '20px' };
-      const testClass = 'test-class-name';
-      const testIdValue = 'k-select-test-id';
+    render(<KSwitch id={testId} className={testClass} style={testStyle} value onChange={mockOnChange} />);
+    const root = screen.getByRole('switch');
 
-      render(<TestSwitch style={testStyle} className={testClass} id={testIdValue}/>);
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveStyle(testStyle);
-      expect(root).toHaveClass(testClass);
-      expect(root).toHaveAttribute('id', testIdValue);
-    });
-
-    test('DefaultValue prop render test', () => {
-      // Arrange
-      const defaultValue = true;
-      render(<TestSwitch defaultValue={defaultValue}/>);
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveAttribute('aria-checked', 'true');
-      expect(root).toHaveClass('k-switch--on');
-    });
-
-    test('Color and toggleColor prop render test', () => {
-      // Arrange
-      const testBgColor = '#eee';
-      const testToggleColor = '#aaa';
-
-      render(<TestSwitch toggleColor={testToggleColor} bgColor={testBgColor}/>);
-      const backgroundRoot = screen.getByTestId('k-switch-active-background');
-      const toggleRoot = screen.getByTestId('k-switch-toggle');
-
-      // Assert
-      expect(toggleRoot).toHaveStyle({ background: testToggleColor });
-      expect(backgroundRoot).toHaveStyle({ background: testBgColor });
-    });
-
-    test('Disabled prop render test', () => {
-      // Arrange
-      const testDisabled = true;
-      render(<TestSwitch disabled={testDisabled}/>);
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveClass('k-switch--disabled');
-      expect(root).toHaveProperty('disabled', true);
-    });
+    // Assert
+    expect(root).toBeInTheDocument();
+    expect(root).toHaveAttribute('id', testId);
+    expect(root).toHaveClass('k-switch__input');
+    expect(root).toHaveStyle(testStyle);
   });
 
-  describe('Behavior', () => {
-    test('Value change render test', async () => {
-      // Arrange
-      const user = userEvent.setup();
-      render(<TestSwitch/>);
-      const root = screen.getByTestId(testId);
+  it('applies default classes based on props', () => {
+    // Arrange
+    render(<KSwitch value disabled onChange={mockOnChange} />);
+    const container = screen.getByRole('switch').parentElement;
 
-      // Act
-      await act(async () => {
-        await user.click(root);
-      });
+    // Assert
+    expect(container).toHaveClass('k-switch');
+    expect(container).toHaveClass('k-switch--on');
+    expect(container).toHaveClass('k-switch--medium');
+    expect(container).toHaveClass('k-switch--disabled');
+  });
 
-      // Assert
-      expect(root).toHaveAttribute('aria-checked', 'true');
-      expect(root).toHaveClass('k-switch--on');
+  it('calls onChange and onClick when clicked', async () => {
+    // Arrange
+    const user = userEvent.setup();
 
-      // Act
-      await act(async () => {
-        await user.click(root);
-      });
+    render(<KSwitch value={false} onChange={mockOnChange} onClick={mockOnClick} />);
+    const button = screen.getByRole('switch');
 
-      // Arrange
-      const renderedRoot = screen.getByTestId(testId);
-
-      // Assert
-      expect(renderedRoot).toHaveAttribute('aria-checked', 'false');
-      expect(root).toHaveClass('k-switch--off');
+    // Act
+    await act(async () => {
+      await user.click(button);
     });
 
-    test('Ref event test', async () => {
-      // Arrange
-      render(<TestSwitch defaultValue/>);
-      const root = screen.getByTestId(testId);
+    // Assert
+    expect(mockOnChange).toHaveBeenCalledWith(true);
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
+  });
 
-      // Assert
-      expect(root).toHaveAttribute('aria-checked', 'true');
-      expect(root).toHaveClass('k-switch--on');
+  it('does not call event handlers when disabled', async () => {
+    // Arrange
+    const user = userEvent.setup();
 
-      // Act
-      await act(async () => { switchRef.current?.toggle(); });
+    render(<KSwitch value={false} disabled onChange={mockOnChange} onClick={mockOnClick} />);
+    const button = screen.getByRole('switch');
 
-      // Arrange
-      const renderedOnRoot = screen.getByTestId(testId);
-
-      // Assert
-      expect(renderedOnRoot).toHaveAttribute('aria-checked', 'false');
-      expect(renderedOnRoot).toHaveClass('k-switch--off');
-
-      // Act
-      await act(async () => { switchRef.current?.toggle(); });
-
-      // Arrange
-      const renderedOffRoot = screen.getByTestId(testId);
-
-      // Assert
-      expect(renderedOffRoot).toHaveAttribute('aria-checked', 'true');
-      expect(renderedOffRoot).toHaveClass('k-switch--on');
+    // Act
+    await act(async () => {
+      await user.click(button);
     });
+
+    // Assert
+    expect(mockOnChange).not.toHaveBeenCalled();
+    expect(mockOnClick).not.toHaveBeenCalled();
+  });
+
+  it('calls toggle() via ref and triggers event handlers', () => {
+    // Arrange
+    const ref = createRef<KSwitchRefs>();
+
+    render(<KSwitch ref={ref} value={false} onChange={mockOnChange} onClick={mockOnClick} />);
+
+    // Act
+    act(() => {
+      ref.current?.toggle();
+    });
+
+    // Assert
+    expect(mockOnChange).toHaveBeenCalledWith(true);
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
 });

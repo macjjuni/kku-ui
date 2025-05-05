@@ -8,7 +8,7 @@ import { getIcon } from '@/common/icons/icons';
 import './KIcon.scss';
 
 
-const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
+const Icon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
 
   // region [Hooks]
 
@@ -113,5 +113,8 @@ const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
   );
 });
 
+const KIcon = memo(Icon)
 KIcon.displayName = 'KIcon';
-export default memo(KIcon);
+Icon.displayName = 'KIcon';
+
+export default KIcon;

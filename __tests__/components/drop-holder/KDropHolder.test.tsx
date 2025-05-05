@@ -1,4 +1,4 @@
-import { act, CSSProperties, ReactNode } from 'react';
+import { act } from 'react';
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
@@ -25,14 +25,6 @@ describe('KDropHolder', () => {
   const TestChildren = () => (<div>{childrenText}</div>);
   const TestContent = () => (<div>{contentText}</div>);
 
-  const TestDropHolder = ({ id, style, className, content }:
-
-                            { id?: string, style?: CSSProperties, className?: string, content?: ReactNode }) => (
-    <KDropHolder id={id} style={style} className={className} content={content}>
-      <TestChildren/>
-    </KDropHolder>
-  );
-
   describe('Props', () => {
 
     it('Style, value, className, id prop render test', () => {
@@ -42,7 +34,13 @@ describe('KDropHolder', () => {
       const testClass = 'test-class-name';
       const testId = 'k-select-test-id';
 
-      render(<TestDropHolder id={testId} className={testClass} style={testStyle} content={<TestContent/>} />);
+      render(
+        <>
+          <KDropHolder id={testId} className={testClass} style={testStyle} content={<TestContent/>}>
+            <TestChildren/>
+          </KDropHolder>
+        </>,
+      );
       const root = screen.getByTestId('k-drop-holder');
 
       // Assert
@@ -50,22 +48,78 @@ describe('KDropHolder', () => {
       expect(root).toHaveClass(testClass);
       expect(root).toHaveAttribute('id', testId);
     });
-  });
 
-  describe('Event', () => {
-
-    test('Click to render anchor element', async () => {
-
+    it('contentWidth prop render test', async () => {
       // Arrange
       const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
-      render(<TestDropHolder content={<TestContent />} />);
-
+      const testContentWidth = 300;
+      render(
+        <>
+          <KDropHolder content={<TestContent/>} contentWidth={testContentWidth}>
+            <TestChildren/>
+          </KDropHolder>
+        </>,
+      );
       const root = screen.getByText(childrenText);
 
       // Act
       await act(async () => {
         await user.click(root);
-        vi.advanceTimersByTime(300);
+      });
+
+      // Arrange
+      const contentRoot = screen.getByRole('tooltip');
+
+      // Assert
+      expect(contentRoot).toBeInTheDocument();
+      expect(contentRoot).toHaveStyle({ width: `${testContentWidth}px` });
+    });
+
+    it('openDelay prop render test', async () => {
+      // Arrange
+      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+      const testOpenDelay = 3000;
+      render(
+        <KDropHolder content={<TestContent/>} openDelay={testOpenDelay}>
+          <TestChildren/>
+        </KDropHolder>,
+      );
+      const root = screen.getByText(childrenText);
+
+      // Act
+      await act(async () => {
+        await user.click(root);
+      });
+
+      // Assert
+      expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+      await act(async () => {
+        vi.advanceTimersByTime(testOpenDelay);
+      });
+
+      // Arrange
+      expect(screen.getByRole('tooltip')).toBeInTheDocument();
+    });
+  });
+
+  describe('Event', () => {
+
+    it('Click to render anchor element', async () => {
+      // Arrange
+      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+      render(
+        <>
+          <KDropHolder content={<TestContent/>}>
+            <TestChildren/>
+          </KDropHolder>
+        </>,
+      );
+      const root = screen.getByText(childrenText);
+
+      // Act
+      await act(async () => {
+        await user.click(root);
       });
 
       // Arrange
@@ -75,35 +129,100 @@ describe('KDropHolder', () => {
       expect(contentRoot).toBeInTheDocument();
     });
 
-    test('Click to hide anchor element', async () => {
+    it('Hover to render anchor element', async () => {
+      // Arrange
       const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
-      const outsideText = 'Outside Element';
-
-      const ExtraContainTextDropHolder = () => (
+      render(
         <>
-          <button type='button'>{outsideText}</button>
-          <TestDropHolder content={<TestContent />} />
-        </>
+          <KDropHolder trigger='hover' content={<TestContent/>}>
+            <TestChildren/>
+          </KDropHolder>
+        </>,
+      );
+      const root = screen.getByText(childrenText);
+
+      // Act
+      await act(async () => {
+        await user.hover(root);
+      });
+
+      // Arrange
+      const contentRoot = screen.getByText(contentText);
+
+      // Assert
+      expect(contentRoot).toBeInTheDocument();
+    });
+
+    it('Hover to hide anchor element', async () => {
+      // Arrange
+      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+      const anotherText = 'test';
+
+      render(
+        <>
+          <button type='button' onClick={mockFn}>{anotherText}</button>
+          <KDropHolder trigger='hover' content={contentText}>
+            {childrenText}
+          </KDropHolder>
+        </>,
       );
 
-      render(<ExtraContainTextDropHolder />);
-
       const root = screen.getByText(childrenText);
-      // const outsideRoot = screen.getByText(outsideText);
 
+      // Act
       await act(async () => {
-        await user.click(root);
+        await user.hover(root);
+      });
+
+      // Assert
+      expect(screen.getByText(contentText)).toBeInTheDocument();
+      expect(mockFn).toHaveBeenCalledTimes(0);
+
+      // Act
+      await act(async () => {
+        await user.click(screen.getByText(anotherText));
         vi.advanceTimersByTime(300);
       });
 
-      expect(screen.getByText(contentText)).toBeInTheDocument();
+      // Assert
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(screen.getByText(childrenText)).toHaveClass('k-drop-holder--close');
+    });
 
-      // await act(async () => {
-      //   await user.click(document.body);
-      //   vi.advanceTimersByTime(500);
-      // });
-      //
-      // expect(screen.queryByText(contentText)).toBeNull();
+    it('Click to hide anchor element', async () => {
+      // Arrange
+      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+      const anotherText = 'test';
+
+      render(
+        <>
+          <button type='button' onClick={mockFn}>{anotherText}</button>
+          <KDropHolder content={contentText}>
+            {childrenText}
+          </KDropHolder>
+        </>,
+      );
+
+      const root = screen.getByText(childrenText);
+
+      // Act
+      await act(async () => {
+        await user.click(root);
+      });
+
+      // Assert
+      expect(screen.getByText(contentText)).toBeInTheDocument();
+      expect(mockFn).toHaveBeenCalledTimes(0);
+
+      // Act
+      await act(async () => {
+        await user.click(screen.getByText(anotherText));
+        vi.advanceTimersByTime(300);
+      });
+
+      // Assert
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(screen.getByText(childrenText)).toHaveClass('k-drop-holder--close');
     });
   });
 

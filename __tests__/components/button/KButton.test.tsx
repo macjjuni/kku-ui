@@ -1,132 +1,107 @@
+import { createRef, act } from 'react';
+import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { createRef } from 'react';
-import { describe, test, expect, vi, beforeEach } from 'vitest';
 import { KButton, KButtonRefs } from '@/components';
-
-const mockOnClick = vi.fn();
-
-vi.mock('@/common/util/color', () => ({
-  tintColor: vi.fn(() => 'red'),
-}));
+import { SIZE_LIST, VARIANT_LIST } from '@/common/base/base';
 
 describe('KButton', () => {
+
   const labelText = 'k-Button';
+  const mockFn = vi.fn();
 
   beforeEach(() => {
-    mockOnClick.mockClear();
+    mockFn.mockClear();
   });
 
-  test('style prop render test', () => {
+  it('renders with default style', () => {
     // Arrange
-    const testStyle = { color: '#aaa', fontSize: '20px' };
-
-    // Act
-    render(<KButton style={testStyle}>{labelText}</KButton>);
+    render(<KButton label={labelText}/>);
     const root = screen.getByRole('button');
 
     // Assert
-    expect(root).toHaveStyle(testStyle);
+    expect(root).toBeInTheDocument();
   });
 
-  test('id prop render test', () => {
+  it('applies id, className, and style props', () => {
     // Arrange
     const testId = 'k-button-test-id';
+    const testClass = 'k-button-test-class';
+    const testStyle = { color: 'red', fontSize: '20px' };
 
-    // Act
-    render(<KButton id={testId}>{labelText}</KButton>);
+    render(
+      <KButton id={testId} className={testClass} style={testStyle} label={labelText}/>,
+    );
     const root = screen.getByRole('button');
 
     // Assert
     expect(root).toHaveAttribute('id', testId);
+    expect(root).toHaveClass(testClass);
+    expect(root).toHaveStyle(testStyle);
   });
 
-  test('className prop render test', () => {
+  it('applies disabled prop correctly', () => {
     // Arrange
-    const testClassName = 'k-button-test-class-name';
-
-    // Act
-    render(<KButton className={testClassName}>{labelText}</KButton>);
+    render(<KButton label={labelText} disabled/>);
     const root = screen.getByRole('button');
 
     // Assert
-    expect(root).toHaveClass(testClassName);
+    expect(root).toHaveProperty('disabled', true);
+    expect(root).toHaveClass('k-button--disabled');
   });
 
-  test('label prop render test', () => {
-    // Act
-    render(<KButton label={labelText}/>);
-    const root = screen.getByText(labelText);
-
-    // Assert
-    expect(root).toBeInTheDocument();
-    expect(root).toHaveClass('k-button__content');
-  });
-
-  test('children prop render test', () => {
-    // Act
-    render(
-      <KButton>
-        <div data-testid='div-test-id'>labelText</div>
-      </KButton>,
-    );
-    const childrenRoot = screen.getByTestId('div-test-id');
-
-    // Assert
-    expect(childrenRoot).toBeInTheDocument();
-  });
-
-  test('disabled prop render test', () => {
-    // Act
-    render(<KButton disabled>{labelText}</KButton>);
-    const root = screen.getByRole('button');
-
-    // Assert
-    expect(root).toBeDisabled();
-  });
-
-  test('KButton click test', async () => {
+  it('calls onClick when button is clicked', async () => {
     // Arrange
     const user = userEvent.setup();
-    render(<KButton label={labelText} onClick={mockOnClick}/>);
-    const root = screen.getByText(labelText);
-
-    // Assert (before click)
-    expect(mockOnClick).toHaveBeenCalledTimes(0);
-
-    // Act
-    await user.click(root);
-
-    // Assert (after click)
-    expect(mockOnClick).toHaveBeenCalledTimes(1);
-  });
-
-  test('KButton Ref click test', () => {
-    // Arrange
-    const buttonRef = createRef<KButtonRefs>();
-    render(<KButton ref={buttonRef} label={labelText} onClick={mockOnClick}/>);
-
-    // Assert (before click)
-    expect(mockOnClick).toHaveBeenCalledTimes(0);
-
-    // Act
-    buttonRef.current?.click();
-
-    // Assert (after click)
-    expect(mockOnClick).toHaveBeenCalledTimes(1);
-  });
-
-  test('KButton Ref focus test', () => {
-    // Arrange
-    const buttonRef = createRef<KButtonRefs>();
-    render(<KButton ref={buttonRef} onClick={mockOnClick}>{labelText}</KButton>);
-
+    render(<KButton label={labelText} onClick={mockFn}/>);
     const root = screen.getByRole('button');
+
+    // Act
+    await act(async () => {
+      await user.click(root);
+    });
+
+    // Assert
+    expect(mockFn).toHaveBeenCalledTimes(1);
+  });
+
+  it.each(SIZE_LIST)('applies size prop "%s"', (size) => {
+    // Arrange
+    render(<KButton label={labelText} size={size}/>);
+    const root = screen.getByRole('button');
+
+    // Assert
+    expect(root).toHaveClass(`k-button--${size}`);
+  });
+
+  it.each(VARIANT_LIST)('applies variant prop "%s"', (variant) => {
+    // Arrange
+    render(<KButton label={labelText} variant={variant}/>);
+    const root = screen.getByRole('button');
+
+    // Assert
+    expect(root).toHaveClass(`k-button--${variant}`);
+  });
+
+  it('calls ref methods: focus and click', async () => {
+    // Arrange
+    const buttonRef = createRef<KButtonRefs>();
+
+    render(<KButton ref={buttonRef} label={labelText} onClick={mockFn}/>);
+    const button = screen.getByRole('button');
 
     // Act
     buttonRef.current?.focus();
 
     // Assert
-    expect(root).toHaveFocus();
+    expect(button).toHaveFocus();
+
+    // Act
+    await act(async () => {
+      buttonRef.current?.click?.();
+    });
+
+    // Assert
+    expect(mockFn).toHaveBeenCalledTimes(1);
   });
 });

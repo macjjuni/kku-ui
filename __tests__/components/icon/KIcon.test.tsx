@@ -3,11 +3,10 @@ import { act } from 'react';
 import userEvent from '@testing-library/user-event';
 import { ICON_SIZE, KIcon, KIconSize } from '@/components';
 
-const SIZE_LIST = Object.keys(ICON_SIZE) as KIconSize[];
+const KIconSizeList = Object.keys(ICON_SIZE) as KIconSize[];
 
 
 describe('KIcon', () => {
-
   const mockFn = vi.fn();
 
   beforeEach(() => {
@@ -15,13 +14,12 @@ describe('KIcon', () => {
   });
 
   describe('Props', () => {
-
-    it('Id, ClassName, style prop test', () => {
-
+    it('applies id, className, and style props', () => {
       // Arrange
       const testId = 'k-id-test';
       const testClassName = 'k-class-test';
       const testStyle = { color: '#aaa', fontSize: '20px' };
+
       render(<KIcon icon='close' id={testId} className={testClassName} style={testStyle}/>);
       const root = screen.getByRole('img');
 
@@ -31,8 +29,7 @@ describe('KIcon', () => {
       expect(root).toHaveStyle(testStyle);
     });
 
-    it.each(SIZE_LIST)('should render correctly with size "%s"', (size) => {
-
+    it.each(KIconSizeList)('applies size prop: %s', (size) => {
       // Arrange
       render(<KIcon icon='close' size={size}/>);
       const root = screen.getByRole('img');
@@ -41,8 +38,7 @@ describe('KIcon', () => {
       expect(root).toHaveClass(`k-icon--${size}`);
     });
 
-    it('Clickable prop render test', () => {
-
+    it('renders clickable icon when onClick is provided', () => {
       // Arrange
       render(<KIcon icon='close' onClick={() => {
       }}/>);
@@ -52,60 +48,52 @@ describe('KIcon', () => {
       expect(root).toHaveClass('k-icon--clickable');
     });
 
-    it('tabIndex prop render test.', async () => {
-
+    it('sets tabIndex based on onClick presence', () => {
+      // Arrange
       render(
         <>
           <KIcon icon='close' onClick={mockFn}/>
           <KIcon icon='close'/>
         </>,
       );
-
-      // Arrange
-      const buttonRoot = screen.getByRole('button');
-      const imgRoot = screen.getByRole('img');
+      const clickable = screen.getByRole('button');
+      const nonClickable = screen.getByRole('img');
 
       // Assert
-      expect(buttonRoot).toHaveAttribute('tabIndex', '0');
-      expect(imgRoot).toHaveAttribute('tabIndex', '-1');
+      expect(clickable).toHaveAttribute('tabIndex', '0');
+      expect(nonClickable).toHaveAttribute('tabIndex', '-1');
     });
   });
 
-  describe('Event', () => {
-
-    it('onClick event test', async () => {
-
+  describe('Events', () => {
+    it('calls onClick when icon is clicked', async () => {
       // Arrange
       const user = userEvent.setup();
       render(<KIcon icon='close' onClick={mockFn}/>);
-      const root = screen.getByRole('button');
-
-      expect(mockFn).toHaveBeenCalledTimes(0);
+      const button = screen.getByRole('button');
 
       // Act
       await act(async () => {
-        await user.click(root);
+        await user.click(button);
       });
 
       // Assert
       expect(mockFn).toHaveBeenCalledTimes(1);
     });
 
-    it('Disabled onClick event test', async () => {
-
+    it('does not call onClick when disabled', async () => {
       // Arrange
       const user = userEvent.setup();
       render(<KIcon icon='close' onClick={mockFn} disabled/>);
-      const root = screen.getByRole('button');
+      const button = screen.getByRole('button');
 
-      expect(mockFn).toHaveBeenCalledTimes(0);
       // Act
       await act(async () => {
-        await user.click(root);
+        await user.click(button);
       });
 
       // Assert
-      expect(mockFn).toHaveBeenCalledTimes(0);
+      expect(mockFn).not.toHaveBeenCalled();
     });
   });
 });

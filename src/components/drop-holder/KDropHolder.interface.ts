@@ -31,6 +31,7 @@ export interface KDropHolderProps extends KBaseProp, MotionType {
 
   openDelay?: number;
   closeDelay?: number;
+  autoClose?: boolean;
 
   children: ReactNode;
   content: ReactNode;

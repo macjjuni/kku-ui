@@ -26,10 +26,11 @@ const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDrop
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [isOpen, setOpen] = useState<boolean>(false);
-  const [dropHolderStyle, setDropHolderStyle] = useState<CSSProperties>({ width: contentWidth || 'auto' });
+  const [dropHolderStyle, setDropHolderStyle] = useState<CSSProperties>({});
 
   const uniqueId = useId();
 
+  const computedDropHolderStyle = useMemo(() => ({ ...dropHolderStyle, width: contentWidth || 'auto' }), [dropHolderStyle, contentWidth]);
   const computedTabIndex = useMemo(() => (trigger === 'click' ? 0 : -1), [trigger]);
   const computedCloseDelay = useMemo(() => {
 
@@ -57,9 +58,14 @@ const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDrop
     if (position) {
       clazz.push(`k-drop-holder--${position}`);
     }
+    if (isOpen) {
+      clazz.push('k-drop-holder--open');
+    } else {
+      clazz.push('k-drop-holder--close');
+    }
 
     return clazz.join(' ');
-  }, [className, position]);
+  }, [className, position, isOpen]);
 
   // endregion
 
@@ -192,10 +198,10 @@ const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDrop
 
   const onMouseEnterRoot = useCallback(() => {
     if (trigger === 'hover') {
-      setOpen(true);
+      openAfterDelay();
     }
     onHover?.();
-  }, [trigger, onHover]);
+  }, [openAfterDelay, trigger, onHover]);
 
   const onMouseLeaveRoot = useCallback(() => {
     if (trigger === 'hover') {
@@ -255,12 +261,11 @@ const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDrop
       {children}
       <AnimatePresence>
         { isOpen && (
-          <motion.div ref={contentRef} className='k-drop-holder__content' style={dropHolderStyle} role='tooltip'
+          <motion.div ref={contentRef} className='k-drop-holder__content' style={computedDropHolderStyle} role='tooltip'
                       initial={initial} animate={animate} exit={exit} transition={transition} aria-hidden={!isOpen}>
             {content}
           </motion.div>
         )}
-
       </AnimatePresence>
     </div>
   );

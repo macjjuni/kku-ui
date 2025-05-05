@@ -11,7 +11,7 @@ import { KButtonProps, KButtonRefs } from '@/components';
 import './KButton.scss';
 
 
-const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => {
+const Button = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => {
 
   const { children, id, className, style, onClick, label,
     disabled, size, color, fontColor, variant = 'default' }: KButtonProps = { ...restProps };
@@ -140,5 +140,8 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) =>
   );
 });
 
+const KButton = memo(Button);
+Button.displayName = 'KButton';
 KButton.displayName = 'KButton';
-export default memo(KButton);
+
+export default KButton;

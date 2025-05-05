@@ -176,12 +176,12 @@ const TextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KTextF
       {
         password && (
           <KIcon className='k-text-field__input__icon-password' icon={isPasswdShow ? 'visibility' : 'visibility_off'}
-                 clickable onClick={onPasswordShow} disabled={disabled} size={18}/>
+                 onClick={onPasswordShow} disabled={disabled} size={18}/>
         )
       }
       {
         clearable && value && (
-          <KIcon className='k-text-field__input__icon-clearable' icon='close' clickable size={14}
+          <KIcon className='k-text-field__input__icon-clearable' icon='close' size={14}
                  onClick={onClear} disabled={disabled}/>
         )
       }
@@ -235,4 +235,4 @@ const KTextField = memo(TextField);
 TextField.displayName = 'KTextField';
 KTextField.displayName = 'KTextField';
 
-export default memo(KTextField);
+export default KTextField

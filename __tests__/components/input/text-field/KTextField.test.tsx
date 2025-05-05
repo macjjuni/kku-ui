@@ -9,7 +9,6 @@ const TestTextField = ({ clearable }: { clearable?: boolean }) => {
   return <KTextField value={value} onChange={(val) => setValue(val)} clearable={clearable}/>;
 };
 
-
 describe('KTextField', () => {
 
   afterEach(() => {
@@ -17,8 +16,8 @@ describe('KTextField', () => {
     vi.useRealTimers();
   });
 
-  it('renders correctly', () => {
-
+  it('renders base element', () => {
+    // Arrange
     render(<KTextField value=''/>);
 
     // Assert
@@ -26,75 +25,58 @@ describe('KTextField', () => {
   });
 
   it('renders label, placeholder, and required asterisk', () => {
-
     // Arrange
-    const labelText = 'Username';
-    const placeholderText = 'Enter your username';
-    render(<KTextField label={labelText} placeholder={placeholderText} required/>);
+    render(<KTextField label='Username' placeholder='Enter your username' required value=''/>);
 
     // Assert
-    expect(screen.getByText(labelText)).toBeInTheDocument();
-    expect(screen.getByRole('textbox')).toHaveAttribute('placeholder', placeholderText);
+    expect(screen.getByText('Username')).toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toHaveAttribute('placeholder', 'Enter your username');
     expect(screen.getByText('*')).toBeInTheDocument();
   });
 
-  it('calls onChange on input change', async () => {
-
+  it('calls onChange when typing', async () => {
     // Arrange
     const user = userEvent.setup();
-    const testText = 'test';
     render(<TestTextField/>);
-    const inputRoot = screen.getByRole('textbox');
-
-    // Act
-    await act(async () => {
-      await user.type(inputRoot, testText);
-    });
-
-    // Assert
-    expect(inputRoot).toHaveValue(testText);
-  });
-
-  it('disables input when disabled is true', () => {
-
-    // Arrange
-    render(<KTextField value='disabled' disabled/>);
-    const root = screen.getByTestId('k-text-field');
     const input = screen.getByRole('textbox');
 
+    // Act
+    await act(async () => { await user.type(input, 'test'); });
+
     // Assert
-    expect(root).toHaveClass('k-text-field--disabled');
+    expect(input).toHaveValue('test');
+  });
+
+  it('applies disabled prop correctly', () => {
+    // Arrange
+    render(<KTextField value='disabled' disabled/>);
+    const container = screen.getByTestId('k-text-field');
+    const input = screen.getByRole('textbox');
+    // Assert
+    expect(container).toHaveClass('k-text-field--disabled');
     expect(input).toBeDisabled();
   });
 
-  it('calls onFocus and onBlur events', async () => {
-
-    const handleFocus = vi.fn();
-    const handleBlur = vi.fn();
-
-    render(
-      <KTextField value='' onFocus={handleFocus} onBlur={handleBlur}/>,
-    );
+  it('calls onFocus and onBlur handlers', async () => {
+    // Arrange
+    const onFocus = vi.fn();
+    const onBlur = vi.fn();
+    render(<KTextField value='' onFocus={onFocus} onBlur={onBlur}/>);
     const input = screen.getByRole('textbox');
 
-    await act(async () => {
-      await userEvent.click(input); // triggers focus
-    });
+    // Act
+    await act(async () => { await userEvent.click(input); });
+    await act(async () => { await userEvent.tab(); });
 
-    expect(handleFocus).toHaveBeenCalledTimes(1);
-
-    await act(async () => {
-      await userEvent.tab(); // triggers blur
-    });
-
-    expect(handleBlur).toHaveBeenCalledTimes(1);
+    // Assert
+    expect(onFocus).toHaveBeenCalledTimes(1);
+    expect(onBlur).toHaveBeenCalledTimes(1);
   });
 
-  it('calls onKeyDownEnter when Enter is pressed', () => {
-
+  it('calls onKeyDownEnter when Enter key is pressed', () => {
     // Arrange
-    const handleEnter = vi.fn();
-    render(<KTextField value='test' onKeyDownEnter={handleEnter}/>);
+    const onEnter = vi.fn();
+    render(<KTextField value='test' onKeyDownEnter={onEnter}/>);
     const input = screen.getByRole('textbox');
 
     // Act
@@ -102,60 +84,44 @@ describe('KTextField', () => {
     input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
 
     // Assert
-    expect(handleEnter).toHaveBeenCalled();
+    expect(onEnter).toHaveBeenCalled();
   });
 
-  it('toggles password visibility', async () => {
-
+  it('toggles password visibility on toggle button click', async () => {
     // Arrange
-    const inputText = 'secret';
-    render(<KTextField value={inputText} password/>);
-    const inputRoot = screen.getByTestId('k-text-field-input');
-
-    // Assert
-    expect(inputRoot).toHaveAttribute('type', 'password');
-
-    // Arrange
+    render(<KTextField value='secret' password/>);
+    const input = screen.getByTestId('k-text-field-input');
     const toggleBtn = screen.getByRole('button');
 
-    // Act
-    await act(() => userEvent.click(toggleBtn));
-
-    // Arrange
-    const newInputRoot = screen.getByTestId('k-text-field-input');
-
-    // // Assert
-    expect(newInputRoot).toHaveAttribute('type', 'input');
-  });
-
-  it('clears value when clear icon is clicked', async () => {
-
-    // Arrange
-    const user = userEvent.setup();
-    const testValue = 'test!';
-    render(<TestTextField clearable/>);
-    const inputRoot = screen.getByTestId('k-text-field-input');
+    // Assert
+    expect(input).toHaveAttribute('type', 'password');
 
     // Act
-    await act(async () => {
-      await user.type(inputRoot, testValue);
-    });
+    await act(async () => { await userEvent.click(toggleBtn); });
 
     // Assert
-    expect(inputRoot).toHaveValue(testValue);
+    expect(screen.getByTestId('k-text-field-input')).toHaveAttribute('type', 'input');
+  });
+
+  it('clears input value when clear button is clicked', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    render(<TestTextField clearable/>);
+    const input = screen.getByTestId('k-text-field-input');
+
+    // Act
+    await act(async () => { await user.type(input, 'test!'); });
+
+    // Assert
+    expect(input).toHaveValue('test!');
 
     // Arrange
     const clearButton = screen.getByRole('button');
 
     // Act
-    await act(async () => {
-      await user.click(clearButton);
-    });
-
-    // Arrange
-    const newInput = screen.getByTestId('k-text-field-input');
+    await act(async () => { await user.click(clearButton); });
 
     // Assert
-    expect(newInput).toHaveValue('')
+    expect(screen.getByTestId('k-text-field-input')).toHaveValue('');
   });
 });
