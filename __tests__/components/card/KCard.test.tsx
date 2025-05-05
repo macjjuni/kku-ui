@@ -1,112 +1,127 @@
 import { act } from 'react';
+import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, test, expect, vi, beforeEach } from 'vitest';
 import { KCard } from '@/components';
+import { SIZE_LIST } from '@/common/base/base';
 
-const testId = 'k-card-testid';
-const mockOnClick = vi.fn();
 
 describe('KCard', () => {
+
+  const testTitle = 'Card Title';
+  const testSubTitle = 'Card Subtitle';
+  const mockFn = vi.fn();
+
   beforeEach(() => {
-    mockOnClick.mockClear();
+    mockFn.mockClear();
   });
 
-  describe('Props', () => {
-    test('Style, value, className, id prop render test', () => {
-      // Arrange
-      const testStyle = { color: '#bbb', fontSize: '20px' };
-      const testClass = 'test-class-name';
-      const testIdValue = 'k-card-test-id';
+  it('renders with title and subtitle', () => {
+    // Arrange
+    render(<KCard title={testTitle} subTitle={testSubTitle}/>);
 
-      render(<KCard id={testIdValue} className={testClass} style={testStyle} data-testid={testId}/>);
-      const root = screen.getByTestId(testId);
+    // Assert
+    expect(screen.getByText(testTitle)).toBeInTheDocument();
+    expect(screen.getByText(testSubTitle)).toBeInTheDocument();
+  });
 
-      // Assert
-      expect(root).toHaveStyle(testStyle);
-      expect(root).toHaveClass(testClass);
-      expect(root).toHaveAttribute('id', testIdValue);
-    });
+  it('applies id, className, and style props', () => {
+    // Arrange
+    const testId = 'k-card-test-id';
+    const testClass = 'k-card-test-class';
+    const testStyle = { backgroundColor: 'lightgray' };
 
-    test('Title and subTitle prop render test', () => {
-      // Arrange
-      const testTitle = 'This is Title';
-      const testSubTitle = 'This is SubTitle';
+    render(<KCard id={testId} className={testClass} style={testStyle}/>);
+    const root = screen.getByTestId('k-card');
 
-      render(<KCard title={testTitle} subTitle={testSubTitle}/>);
+    // Assert
+    expect(root).toHaveAttribute('id', testId);
+    expect(root).toHaveClass(testClass);
+    expect(root).toHaveStyle(testStyle);
+  });
 
-      const titleRoot = screen.getByText(testTitle);
-      const subTitleRoot = screen.getByText(testSubTitle);
+  it('applies custom style props: width, height, padding, borderRadius, borderColor, fontColor', () => {
+    // Arrange
+    render(
+      <KCard width={300} height={200} padding={16} borderRadius={12} borderColor='blue' fontColor='black'/>,
+    );
+    const root = screen.getByTestId('k-card');
 
-      // Assert
-      expect(titleRoot).toHaveClass('k-card__title');
-      expect(subTitleRoot).toHaveClass('k-card__sub-title');
-    });
-
-    test('Children prop render test', () => {
-      // Arrange
-      const testText = 'This is Children';
-      const TestChildren = () => <>{testText}</>;
-
-      render(<KCard><TestChildren/></KCard>);
-
-      const root = screen.getByText(testText);
-
-      // Assert
-      expect(root).toBeInTheDocument();
-    });
-
-    test('Clickable prop render test', () => {
-      // Arrange
-      render(<KCard clickable data-testid={testId}/>);
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveClass('k-card__clickable');
-    });
-
-    test('Width, height prop render test', () => {
-      // Arrange
-      const testWidth = '300px';
-      const testHeight = '500px';
-
-      render(<KCard width={testWidth} height={testHeight} data-testid={testId}/>);
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveStyle({ width: testWidth, height: testHeight });
-    });
-
-    test('fontColor prop render test', () => {
-      // Arrange
-      const testFontColor = '#000';
-
-      render(<KCard fontColor={testFontColor} data-testid={testId}/>);
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveStyle({ color: testFontColor });
+    // Assert
+    expect(root).toHaveStyle({
+      width: '300px',
+      height: '200px',
+      padding: '16px',
+      borderRadius: '12px',
+      borderColor: 'blue',
+      color: 'black',
     });
   });
 
-  describe('Event', () => {
-    test('Onclick event prop test', async () => {
-      // Arrange
-      const user = userEvent.setup();
+  it('applies clickable prop and triggers onClick', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    render(<KCard onClick={mockFn}/>);
+    const root = screen.getByRole('button');
 
-      render(<KCard clickable onClick={mockOnClick} data-testid={testId}/>);
-      const root = screen.getByTestId(testId);
-
-      // Assert (before click)
-      expect(mockOnClick).toHaveBeenCalledTimes(0);
-
-      // Act
-      await act(async () => {
-        await user.click(root);
-      });
-
-      // Assert (after click)
-      expect(mockOnClick).toHaveBeenCalledTimes(1);
+    // Act
+    await act(async () => {
+      await user.click(root);
     });
+
+    // Assert
+    expect(mockFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not trigger onClick when disabled', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    render(<KCard disabled onClick={mockFn}/>);
+    const root = screen.getByRole('button');
+
+    // Act
+    await act(async () => {
+      await user.click(root);
+    });
+
+    // Assert
+    expect(mockFn).toHaveBeenCalledTimes(0);
+  });
+
+  it('calls onClick when Enter or Space key is pressed', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    render(<KCard title='test' onClick={mockFn}/>);
+
+    // Act
+    await act(async () => {
+      await user.tab();
+    });
+
+    // Assert
+    expect(screen.getByRole('button')).toHaveFocus();
+
+    // Act
+    await act(async () => {
+      await user.keyboard('{Enter}');
+    });
+
+    expect(mockFn).toHaveBeenCalledTimes(1);
+
+    await act(async () => {
+      await user.keyboard(' ');
+    });
+
+    // Assert
+    expect(mockFn).toHaveBeenCalledTimes(2);
+  });
+
+  it.each(SIZE_LIST)('applies size prop "% s"', (size) => {
+    // Arrange
+    render(<KCard size={size}/>);
+    const root = screen.getByTestId('k-card');
+
+    // Assert
+    expect(root).toHaveClass(`k-card--${size}`);
   });
 });

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { KCard } from '@/components/card';
 import { KCardProps } from '@/components';
-import { baseArgTyp, sizeArgType } from '../common/argTypes';
+import { baseArgTyp, disabledArgType, sizeArgType } from '../common/argTypes';
 import { SIZES, SizeType } from '@/common/base/base.interface';
 
 const Sizes = Object.keys(SIZES) as SizeType[];
@@ -19,7 +19,8 @@ const meta: Meta<KCardProps> = {
     color: { description: '카드 요소 메인 색상을 설정합니다.', defaultValue: { summary: 'undefined' } },
     fontColor: { description: '카드 요소 내부 텍스트 색상을 설정합니다.', defaultValue: { summary: 'undefined' } },
     ...baseArgTyp,
-    ...sizeArgType
+    ...sizeArgType,
+    ...disabledArgType
   },
   tags: ['autodocs'],
 };
@@ -41,10 +42,10 @@ const cardText = {
 };
 
 export const Default: Story = {
-  render: Template, args: { ...cardText, clickable: false },
+  render: Template, args: { ...cardText },
 };
 
 export const Clickable: Story = {
-  render: Template, args: { ...cardText, clickable: true },
+  render: Template, args: { ...cardText, onClick: () => {} },
 };
 

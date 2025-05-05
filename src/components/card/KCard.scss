@@ -15,7 +15,7 @@ $card-text-color-default: $kku-text-color-primary;
 $card-padding-size: $kku-spacing-12;
 $card-title-margin-top-size: $kku-spacing-8;
 
-$card-box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+$card-box-shadow: $kku-box-shadow-default;
 
 // endregion
 
@@ -40,11 +40,23 @@ $card-box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
   &.k-card--clickable {
     cursor: pointer;
-    transition: box-shadow, transform 0.24s ease;
+    transition: 0.24s ease;
+    transition-property: box-shadow, background-color, transform;
 
     &:hover {
       box-shadow: $card-box-shadow;
       transform: translateY(-2px);
+    }
+    &:focus-visible {
+      @include kku-focus-visible;
+    }
+  }
+
+  &.k-card--disabled {
+    cursor: not-allowed;
+    &:hover {
+      box-shadow: none;
+      transform: none;
     }
   }
 

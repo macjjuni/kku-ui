@@ -8,7 +8,7 @@ const Card = ({ ...restProps }: KCardProps) => {
   // region [Hooks]
 
   const { children, id, className, style } = { ...restProps };
-  const { title, subTitle, clickable, disabled } = { ...restProps };
+  const { title, subTitle, disabled } = { ...restProps };
   const { width, height, padding, color, fontColor, borderRadius = '8px', onClick } = { ...restProps };
   const { borderColor, size = 'medium' } = { ...restProps };
 
@@ -22,11 +22,12 @@ const Card = ({ ...restProps }: KCardProps) => {
     const clazz = ['k-card'];
 
     if (className) { clazz.push(className); }
-    if (clickable) { clazz.push('k-card--clickable'); }
+    if (onClick) { clazz.push('k-card--clickable'); }
+    if (disabled) { clazz.push('k-card--disabled'); }
     if (size) { clazz.push(`k-card--${size}`) }
 
     return clazz.join(' ');
-  }, [className, clickable, size]);
+  }, [className, onClick, size, disabled]);
 
 
   const rootStyle = useMemo(() => {
@@ -51,19 +52,22 @@ const Card = ({ ...restProps }: KCardProps) => {
 
   const onKeydownRoot = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      onClick?.();
+      if (!disabled) { onClick?.(); }
     }
-  }, [onClick]);
+  }, [disabled, onClick]);
 
+  const onClickRoot = useCallback(() => {
+    if (!disabled) { onClick?.(); }
+  }, [disabled, onClick]);
 
   // endregion
 
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div id={id} className={rootClass} style={rootStyle} tabIndex={onClick && !disabled ? 0 : undefined}
-         onClick={onClick} onKeyDown={onClick ? onKeydownRoot : undefined} role={onClick ? 'button' : undefined}
-         data-testid='k-card-testid'>
+    <div id={id} className={rootClass} style={rootStyle} tabIndex={onClick && !disabled ? 0 : -1}
+         onClick={onClickRoot} onKeyDown={onClick ? onKeydownRoot : undefined} role={onClick ? 'button' : undefined}
+         data-testid='k-card'>
       {title && (<h2 className='k-card__title'>{title}</h2>)}
       {subTitle && (<p className='k-card__sub-title'>{subTitle}</p>)}
       {children}
