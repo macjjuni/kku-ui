@@ -273,9 +273,7 @@ const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDrop
 
 
 const KDropHolder = memo(DropHolder);
-
 DropHolder.displayName = 'KDropHolder';
 KDropHolder.displayName = 'KDropHolder';
-
 
 export default KDropHolder;
