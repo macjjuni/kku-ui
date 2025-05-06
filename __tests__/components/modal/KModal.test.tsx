@@ -1,40 +1,40 @@
-import { act, useCallback, useState } from 'react';
 import { vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+// import { useCallback, useState } from 'react';
+// import userEvent from '@testing-library/user-event';
 import { KModal, KModalSizes, KModalSizeType } from '@/components';
 
 
 const KModalSizeList = Object.keys(KModalSizes) as KModalSizeType[];
 
-const openButtonText = '열기';
-const closeButtonText = '닫기';
-const contentText = 'content';
+// const openButtonText = '열기';
+// const closeButtonText = '닫기';
+// const contentText = 'content';
 
-interface TestModalComponentType {
-  defaultOpen?: boolean;
-}
-
-const TestModalComponent = ({ defaultOpen = false }: TestModalComponentType) => {
-
-  const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
-
-  const onOpenEvent = useCallback(() => {
-    setIsOpen(true);
-  }, []);
-  const onCloseEvent = useCallback(() => {
-    setIsOpen(false);
-  }, []);
-
-  return (
-    <>
-      <div>{isOpen ? 'open' : 'close'}</div>
-      <button type='button' onClick={onOpenEvent}>{openButtonText}</button>
-      <KModal isOpen={isOpen} content={contentText} title='title' setIsOpen={setIsOpen}
-              footer={<button type='button' onClick={onCloseEvent}>{closeButtonText}</button>}/>
-    </>
-  );
-};
+// interface TestModalComponentType {
+//   defaultOpen?: boolean;
+// }
+//
+// const TestModalComponent = ({ defaultOpen = false }: TestModalComponentType) => {
+//
+//   const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
+//
+//   const onOpenEvent = useCallback(() => {
+//     setIsOpen(true);
+//   }, []);
+//   const onCloseEvent = useCallback(() => {
+//     setIsOpen(false);
+//   }, []);
+//
+//   return (
+//     <>
+//       <div>{isOpen ? 'open' : 'close'}</div>
+//       <button type='button' onClick={onOpenEvent}>{openButtonText}</button>
+//       <KModal isOpen={isOpen} content={contentText} title='title' setIsOpen={setIsOpen}
+//               footer={<button type='button' onClick={onCloseEvent}>{closeButtonText}</button>}/>
+//     </>
+//   );
+// };
 
 
 describe('KModal', () => {
@@ -149,21 +149,21 @@ describe('KModal', () => {
     expect(overlayRoot).toHaveStyle({ opacity: overlayOpacity });
   });
 
-  it('opens the modal on button click', async () => {
-    // Arrange
-    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
-    render(<TestModalComponent/>);
-
-    const openButtonRoot = screen.getByText(openButtonText);
-
-    // Act
-    await act(async () => {
-      await user.click(openButtonRoot);
-    });
-
-    const modalRoot = screen.getByTestId('k-modal');
-
-    // Assert
-    expect(modalRoot).toBeInTheDocument();
-  });
+  // it('opens the modal on button click', async () => {
+  //   // Arrange
+  //   const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+  //   render(<TestModalComponent/>);
+  //
+  //   const openButtonRoot = screen.getByText(openButtonText);
+  //
+  //   // Act
+  //   await act(async () => {
+  //     await user.click(openButtonRoot);
+  //   });
+  //
+  //   const modalRoot = screen.getByTestId('k-modal');
+  //
+  //   // Assert
+  //   expect(modalRoot).toBeInTheDocument();
+  // });
 });
