@@ -17,7 +17,7 @@
   "scripts": {
     "sb": "storybook dev -p 6006",
     "build": "vitest --run && vite build",
-    "publish": "publish",
+    "publish": "npm publish --access public",
     "test": "vitest",
     "test-ui": "vitest --ui",
     "build-storybook": "storybook build",
