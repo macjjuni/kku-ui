@@ -14,10 +14,7 @@ const meta: Meta<KCardProps> = {
     subTitle: { description: '서브 타이틀 텍스트를 설정합니다..', defaultValue: { summary: '' }, control: { type: 'text'} },
     width: { description: 'width 크기를 설정합니다.', defaultValue: { summary: 'undefined' }, control: { type: 'number'} },
     height: { description: 'height 크기를 설정합니다.', defaultValue: { summary: 'undefined' }, control: { type: 'number'} },
-    padding: { description: 'padding 크기를 설정합니다.', defaultValue: { summary: 'undefined' }, control: { type: 'number'} },
-    borderRadius: { description: 'border radius 크기를 설정합니다.', defaultValue: { summary: 'undefined' }, control: { type: 'number'} },
-    color: { description: '카드 요소 메인 색상을 설정합니다.', defaultValue: { summary: 'undefined' } },
-    fontColor: { description: '카드 요소 내부 텍스트 색상을 설정합니다.', defaultValue: { summary: 'undefined' } },
+    aspectRatio: { description: 'aspectRatio 비율을 설정합니다.', defaultValue: { summary: 'undefined' }, type: 'string' },
     ...baseArgTyp,
     ...sizeArgType,
     ...disabledArgType
@@ -39,6 +36,7 @@ const cardText = {
   title: 'What is Lorem Ipsum?',
   subTitle: 'Lorem Ipsum is simply dummy text of the ...',
   size: Sizes[0],
+  aspectRatio: '5/3'
 };
 
 export const Default: Story = {
