@@ -17,9 +17,9 @@ const preview: Preview = {
       const isDark = ctx.globals.backgrounds?.value === '#1e1e1e'
 
       if (isDark) {
-        document.documentElement.classList.add('dark')
+        document.body.classList.add('dark')
       } else {
-        document.documentElement.classList.remove('dark')
+        document.body.classList.remove('dark')
       }
 
       return <Story />
