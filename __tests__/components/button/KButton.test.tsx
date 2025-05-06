@@ -2,8 +2,9 @@ import { createRef, act } from 'react';
 import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { KButton, KButtonRefs } from '@/components';
-import { SIZE_LIST, VARIANT_LIST } from '@/common/base/base';
+import { KButton, KButtonRefs, KButtonVariantList } from '@/components';
+import { SIZE_LIST } from '@/common/base/base';
+
 
 describe('KButton', () => {
 
@@ -74,7 +75,7 @@ describe('KButton', () => {
     expect(root).toHaveClass(`k-button--${size}`);
   });
 
-  it.each(VARIANT_LIST)('applies variant prop "%s"', (variant) => {
+  it.each(KButtonVariantList)('applies variant prop "%s"', (variant) => {
     // Arrange
     render(<KButton label={labelText} variant={variant}/>);
     const root = screen.getByRole('button');

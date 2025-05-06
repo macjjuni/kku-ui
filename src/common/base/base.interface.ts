@@ -16,9 +16,5 @@ export interface KSizeProp {
   size?: SizeType
 }
 
-// 🎁 - Variant Properties
-export const VARIANTS = { default: 'default', primary: 'primary' } as const;
-export type VariantType = (typeof VARIANTS)[keyof typeof VARIANTS];
-
 // 🌸 - Motion Properties
 export type MotionType = Pick<MotionProps, 'initial' | 'animate' | 'exit' | 'transition'>;

@@ -21,10 +21,10 @@ $text-field-text-placeholder-color-hover: $kku-text-color-primary;
 $text-field-text-placeholder-color-disabled: $kku-text-color-disabled;
 
 
-$text-field-background-default-color-base: $kku-background-color-base;
+$text-field-background-default-color-base: $kku-background-color-default;
 $text-field-background-default-color-disabled: $kku-background-color-disabled;
 
-$text-field-border-default-color-base: $kku-border-color-base;
+$text-field-border-default-color-base: $kku-border-color-default;
 $text-field-border-default-color-hover: $kku-border-color-hover;
 $text-field-border-default-color-disabled: $kku-border-color-disabled;
 
@@ -40,7 +40,7 @@ $text-field-primary-text-color-base: $kku-gray-color-100;
 $text-field-primary-text-color-hover: $kku-text-color-secondary;
 $text-field-primary-text-color-disabled: $kku-text-color-disabled;
 
-$text-field-border-primary-color-base: $kku-primary-color-base;
+$text-field-border-primary-color-base: $kku-primary-color-default;
 $text-field-border-primary-color-hover: $kku-primary-color-hover;
 $text-field-border-primary-color-disabled: $kku-primary-color-disabled;
 
@@ -64,7 +64,7 @@ $text-field-border-primary-color-disabled: $kku-primary-color-disabled;
     }
 
     .k-text-field__label--required {
-      color: $kku-error-color-base;
+      color: $kku-error-color-default;
       margin-left: $kku-spacing-2;
     }
   }

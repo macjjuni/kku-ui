@@ -15,10 +15,10 @@ $select-text-default-color-hover: $kku-text-color-secondary;
 $button-text-default-color-disabled: $kku-text-color-disabled;
 $select-text-default-color-placeholder: $kku-text-color-placeholder;
 
-$select-background-default-color-base: $kku-background-color-base;
+$select-background-default-color-base: $kku-background-color-default;
 $button-background-default-color-disabled: $kku-background-color-disabled;
 
-$select-border-default-color-base: $kku-border-color-base;
+$select-border-default-color-base: $kku-border-color-default;
 $select-border-default-color-hover: $kku-border-color-hover;
 $select-border-default-color-disabled: $kku-border-color-disabled;
 
@@ -26,20 +26,6 @@ $select-icon-color-base: $select-border-default-color-base;
 $select-icon-color-hover: $select-border-default-color-hover;
 
 $select-border-radius: $kku-border-radius-default;
-
-
-// Primary
-$button-text-primary-color-base: $kku-white-color;
-$button-text-primary-color-hover: $kku-white-color;
-$button-text-primary-color-disabled: $kku-gray-color-300;
-
-$button-primary-text-color-base: $kku-gray-color-100;
-$button-primary-text-color-hover: $kku-text-color-secondary;
-$button-primary-text-color-disabled: $kku-text-color-disabled;
-
-$button-border-primary-color-base: $kku-primary-color-base;
-$button-border-primary-color-hover: $kku-primary-color-hover;
-$button-border-primary-color-disabled: $kku-primary-color-disabled;
 
 // endregion
 

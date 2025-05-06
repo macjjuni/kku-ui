@@ -1,21 +1,33 @@
 import { MouseEvent, ReactNode } from 'react';
-import { KBaseProp, SizeType, VariantType } from '@/common/base/base.interface';
+import { KBaseProp, SizeType } from '@/common/base/base.interface';
+
+export const BUTTON_VARIANTS = {
+  default: 'default',
+  outlined: 'outlined',
+  primary: 'primary',
+  success: 'success',
+  warning: 'warning',
+  error: 'error',
+} as const;
+
+export type KButtonVariantType = (typeof BUTTON_VARIANTS)[keyof typeof BUTTON_VARIANTS];
+export const KButtonVariantList = Object.keys(BUTTON_VARIANTS) as KButtonVariantType[];
 
 export interface KButtonProps extends KBaseProp {
-  children?: ReactNode
-  label?: string
+  children?: ReactNode;
+  label?: string;
 
-  size?: SizeType
-  variant?: VariantType
+  size?: SizeType;
+  variant?: KButtonVariantType;
 
-  disabled?: boolean
-  color?: string
-  fontColor?: string
+  disabled?: boolean;
+  color?: string;
+  fontColor?: string;
 
-  onClick?: (e?: MouseEvent<HTMLButtonElement>) => void
+  onClick?: (e?: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export interface KButtonRefs {
-  focus: () => void
-  click: () => void
+  focus: () => void;
+  click: () => void;
 }

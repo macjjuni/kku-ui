@@ -1,24 +1,14 @@
 import { ArgTypes } from '@storybook/react';
-import { SIZES, VARIANTS } from '@/common/base/base.interface';
+import { SIZES } from '@/common/base/base.interface';
 
 const sizes = Object.keys(SIZES);
-const variants = Object.keys(VARIANTS);
 
-export const variantArgType: ArgTypes = {
-    variant: {
-        description: '형태를 설정합니다.',
-        defaultValue: { summary: variants[0] },
-        control: { type: 'select' },
-        options: variants,
-        type: 'string',
-    },
-};
 
 export const sizeArgType: ArgTypes = {
     size: {
         description: '요소의 크기를 설정합니다.',
         defaultValue: {summary: sizes[0]},
-        control: { type: 'select' },
+        control: { type: 'radio' },
         type: 'string',
         options: sizes
     },

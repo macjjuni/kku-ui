@@ -13,14 +13,14 @@ import './KButton.scss';
 
 const Button = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => {
 
-  const { children, id, className, style, onClick, label,
-    disabled, size, color, fontColor, variant = 'default' }: KButtonProps = { ...restProps };
+  // region [Hooks]
+
+  const { id, className, style, children, label } = { ...restProps };
+  const { onClick, disabled, size, color, fontColor, variant = 'default' } = { ...restProps };
 
   if (label && children) {
     throw Error('Error: label and children attributes cannot be duplicated.');
   }
-
-  // region [Hooks]
 
   const rootRef = useRef<HTMLButtonElement>(null);
   const ripple = useRipple(rootRef);
