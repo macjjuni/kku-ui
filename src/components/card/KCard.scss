@@ -1,12 +1,10 @@
 // region [Component Token]
 
 $card-border-color-base: $kku-border-color-default;
-
 $card-background-color-base: $kku-background-color-default;
 $card-background-color-disabled: $kku-background-color-disabled;
 
 $card-border-radius-size: $kku-border-radius-default;
-
 $card-text-color-base: $kku-text-color-primary;
 $card-text-color-disabled: $kku-text-color-disabled;
 
@@ -27,7 +25,7 @@ $card-box-shadow: $kku-box-shadow-default;
   .k-card__container {
     position: relative;
     flex-direction: column;
-    padding: $kku-spacing-12;
+    padding: $card-padding-size;
     background-color: $card-background-color-base;
     color: $card-text-color-base;
     font-family: var(--font-family);
@@ -37,12 +35,13 @@ $card-box-shadow: $kku-box-shadow-default;
       @include kku-text-large;
       font-weight: bold;
 
-      & + .k-card__sub-title {
+      & + .k-card__subtitle {
         margin-top: $card-title-margin-top-size;
       }
     }
   }
 
+  // Clickable Modifier
   &.k-card--clickable {
     transition: 0.24s ease;
     transition-property: box-shadow, background-color, transform;
@@ -58,8 +57,8 @@ $card-box-shadow: $kku-box-shadow-default;
     }
   }
 
+  // Disabled Modifier
   &.k-card--disabled {
-
     .k-card__container {
       cursor: not-allowed;
       background-color: $card-background-color-disabled;
@@ -71,5 +70,4 @@ $card-box-shadow: $kku-box-shadow-default;
       transform: none;
     }
   }
-
 }

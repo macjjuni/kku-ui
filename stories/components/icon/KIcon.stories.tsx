@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { KIcon } from '@/components/icon';
+import { KIconSizeList, KIcon } from '@/components/icon';
 import { KIconProps } from '@/components/icon/KIcon.interface';
 import { kIcons } from '@/common/icons/icons';
-import { baseArgTyp } from '../common/argTypes';
+import { baseArgTyp, colorArgType, disabledArgType } from '../common/argTypes';
 
 const ICON_LIST = Object.keys(kIcons);
 
@@ -15,11 +15,16 @@ const meta: Meta<KIconProps> = {
       control: { type: 'select' },
       options: ICON_LIST,
     },
-    size: { description: '크기를 설정합니다.' },
-    color: { description: '아이콘 색상을 설정합니다.' },
-    onClick: { description: '아이콘 클릭 이벤트를 설정합니다.' },
-    disabled: { description: '클릭 불가능 스타일을 설정합니다.' },
-    ...baseArgTyp
+    size: {
+      description: '크기를 설정합니다.',
+      defaultValue: { summary: KIconSizeList[1] },
+      control: { type: 'radio' },
+      options: KIconSizeList,
+    },
+    ...colorArgType,
+    ...disabledArgType,
+    onClick: { description: '아이콘 클릭 이벤트를 설정합니다.', type: 'function' },
+    ...baseArgTyp,
   },
   tags: ['autodocs'],
 };

@@ -1,48 +1,32 @@
-
 // region [Component Tokens]
 
 // Sizes
-$text-field-text-size-small: $kku-text-size-small;
-$text-field-text-size-medium: $kku-text-size-medium;
+$text-field-size-width-small: 200px;
+$text-field-size-width-medium: 280px;
 
-$text-field-label-text-size-small: $kku-text-size-xsmall;
-$text-field-label-text-size-medium: $kku-text-size-small;
+$text-field-size-text-small: $kku-text-size-small;
+$text-field-size-text-medium: $kku-text-size-medium;
 
-$text-field-width-size-small: 200px;
-$text-field-width-size-medium: 280px;
+$text-field-size-label-text-small: $kku-text-size-xsmall;
+$text-field-size-label-text-medium: $kku-text-size-small;
 
-// Default
-$text-field-text-default-color-base: $kku-text-color-primary;
-$text-field-text-default-color-hover: $kku-text-color-secondary;
-$text-field-text-default-color-disabled: $kku-text-color-disabled;
+// Default (Base)
+$text-field-color-text-base: $kku-text-color-primary;
+$text-field-color-text-hover: $kku-text-color-secondary;
+$text-field-color-text-disabled: $kku-text-color-disabled;
 
-$text-field-text-placeholder-color-base: $kku-text-color-secondary;
-$text-field-text-placeholder-color-hover: $kku-text-color-primary;
-$text-field-text-placeholder-color-disabled: $kku-text-color-disabled;
+$text-field-color-placeholder-base: $kku-text-color-secondary;
+$text-field-color-placeholder-hover: $kku-text-color-primary;
+$text-field-color-placeholder-disabled: $kku-text-color-disabled;
 
+$text-field-color-background-base: $kku-background-color-default;
+$text-field-color-background-disabled: $kku-background-color-disabled;
 
-$text-field-background-default-color-base: $kku-background-color-default;
-$text-field-background-default-color-disabled: $kku-background-color-disabled;
-
-$text-field-border-default-color-base: $kku-border-color-default;
-$text-field-border-default-color-hover: $kku-border-color-hover;
-$text-field-border-default-color-disabled: $kku-border-color-disabled;
+$text-field-color-border-base: $kku-border-color-default;
+$text-field-color-border-hover: $kku-border-color-hover;
+$text-field-color-border-disabled: $kku-border-color-disabled;
 
 $text-field-border-radius: $kku-border-radius-default;
-
-
-// Primary
-$text-field-text-primary-color-base: $kku-white-color;
-$text-field-text-primary-color-hover: $kku-white-color;
-$text-field-text-primary-color-disabled: $kku-gray-color-300;
-
-$text-field-primary-text-color-base: $kku-gray-color-100;
-$text-field-primary-text-color-hover: $kku-text-color-secondary;
-$text-field-primary-text-color-disabled: $kku-text-color-disabled;
-
-$text-field-border-primary-color-base: $kku-primary-color-default;
-$text-field-border-primary-color-hover: $kku-primary-color-hover;
-$text-field-border-primary-color-disabled: $kku-primary-color-disabled;
 
 // endregion
 
@@ -59,7 +43,7 @@ $text-field-border-primary-color-disabled: $kku-primary-color-disabled;
     width: auto;
 
     .k-text-field__label__text {
-      color: $text-field-text-default-color-base;
+      color: $text-field-color-text-base;
       white-space: nowrap;
     }
 
@@ -74,7 +58,8 @@ $text-field-border-primary-color-disabled: $kku-primary-color-disabled;
     display: inline-flex;
     width: 100%;
 
-    .k-text-field__input__left-action, .k-text-field__input__right-action {
+    .k-text-field__input__left-action,
+    .k-text-field__input__right-action {
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -83,58 +68,54 @@ $text-field-border-primary-color-disabled: $kku-primary-color-disabled;
     .k-text-field__input__root {
       width: 100%;
       height: 100%;
-      color: $text-field-text-default-color-base;
-      border: 1px solid $text-field-border-default-color-base;
-      background-color: $text-field-background-default-color-base;
+      color: $text-field-color-text-base;
+      border: 1px solid $text-field-color-border-base;
+      background-color: $text-field-color-background-base;
       border-radius: $text-field-border-radius;
-      transition: color, border-color, background-color 0.24s ease;
+      transition: 0.24s ease;
+      transition-property: color, border-color, background-color;
 
-      &:focus-visible { @include kku-focus-visible; }
+      &:focus-visible {
+        @include kku-focus-visible;
+      }
     }
 
     .k-text-field__input__icon {
       position: absolute;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100%;
 
-      .k-text-field__input__icon-password {
-        //color: $kku-white-color;
-      }
-
-      .k-text-field__input__icon-clearable {
-
-      }
+      .k-text-field__input__icon-password {}
+      .k-text-field__input__icon-clearable {}
     }
 
     &:hover {
       .k-text-field__input__root {
-        color: $text-field-text-default-color-hover;
-        border-color: $text-field-border-default-color-hover;
+        color: $text-field-color-text-hover;
+        border-color: $text-field-color-border-hover;
       }
     }
   }
 
-
   &.k-text-field--disabled {
-
-    .k-text-field__label{
-      .k-text-field__label__text { color: $text-field-text-default-color-disabled; }
+    .k-text-field__label .k-text-field__label__text {
+      color: $text-field-color-text-disabled;
     }
-    .k-text-field__input {
-      .k-text-field__input__root {
-        color: $text-field-text-default-color-disabled;
-        border-color: $text-field-border-default-color-disabled;
-        background-color: $text-field-background-default-color-disabled;
-        cursor: not-allowed;
-      }
+
+    .k-text-field__input .k-text-field__input__root {
+      color: $text-field-color-text-disabled;
+      border-color: $text-field-color-border-disabled;
+      background-color: $text-field-color-background-disabled;
+      cursor: not-allowed;
     }
   }
 
   &.k-text-field--small {
-    max-width: $text-field-width-size-small;
+    max-width: $text-field-size-width-small;
 
     .k-text-field__label {
       margin-bottom: $kku-spacing-6;
@@ -144,24 +125,29 @@ $text-field-border-primary-color-disabled: $kku-primary-color-disabled;
     .k-text-field__input {
       height: $kku-element-height-small;
 
-      .k-text-field__input__left-action { margin-right: $kku-spacing-4;}
-      .k-text-field__input__right-action { margin-left: $kku-spacing-4;}
+      .k-text-field__input__left-action {
+        margin-right: $kku-spacing-4;
+      }
+
+      .k-text-field__input__right-action {
+        margin-left: $kku-spacing-4;
+      }
 
       .k-text-field__input__root {
         padding: 0 $kku-spacing-6;
         @include kku-text-small;
       }
     }
+
     .k-text-field__input__icon {
       gap: $kku-spacing-4;
       padding: 0 $kku-spacing-6;
       z-index: 1;
     }
-
   }
 
   &.k-text-field--medium {
-    max-width: $text-field-width-size-medium;
+    max-width: $text-field-size-width-medium;
 
     .k-text-field__label {
       margin-bottom: $kku-spacing-8;
@@ -171,8 +157,13 @@ $text-field-border-primary-color-disabled: $kku-primary-color-disabled;
     .k-text-field__input {
       height: $kku-element-height-medium;
 
-      .k-text-field__input__left-action { margin-right: $kku-spacing-6;}
-      .k-text-field__input__right-action { margin-left: $kku-spacing-6;}
+      .k-text-field__input__left-action {
+        margin-right: $kku-spacing-6;
+      }
+
+      .k-text-field__input__right-action {
+        margin-left: $kku-spacing-6;
+      }
 
       .k-text-field__input__root {
         padding: 0 $kku-spacing-10;
@@ -187,13 +178,10 @@ $text-field-border-primary-color-disabled: $kku-primary-color-disabled;
   }
 }
 
-
 .#{$kku-dark-mode-signature} .k-text-field {
-
   &.k-text-field--disabled {
-
-    .k-text-field__label{
-      .k-text-field__label__text { color: $text-field-text-default-color-disabled; }
+    .k-text-field__label .k-text-field__label__text {
+      color: $text-field-color-text-disabled;
     }
   }
 }

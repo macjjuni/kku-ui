@@ -1,8 +1,8 @@
-
 // region [Component Token]
 
 $k-icon-light-color: $kku-gray-color-700;
 $k-icon-dark-color: $kku-gray-color-300;
+$k-icon-disabled-color: $kku-text-color-disabled;
 
 $k-icon-size-large: 42px;
 $k-icon-size-medium: 36px;
@@ -19,35 +19,45 @@ $k-icon-size-small: 28px;
   fill: $k-icon-light-color;
   user-select: none;
 
-  &.k-icon--clickable { cursor: pointer; }
-  &.k-icon--disabled { cursor: not-allowed; }
+  &.k-icon--clickable {
+    cursor: pointer;
+  }
+
+  &.k-icon--disabled {
+    color: $k-icon-disabled-color;
+    fill: $k-icon-disabled-color;
+    cursor: not-allowed;
+  }
+
+  // Size Modifiers
+  &.k-icon--large {
+    width: $k-icon-size-large;
+    height: $k-icon-size-large;
+  }
+
+  &.k-icon--medium {
+    width: $k-icon-size-medium;
+    height: $k-icon-size-medium;
+  }
+
+  &.k-icon--small {
+    width: $k-icon-size-small;
+    height: $k-icon-size-small;
+  }
 
   svg {
     width: 100%;
     height: 100%;
   }
-
-  // Sizes
-  &.k-icon--large > svg {
-    font-size: $k-icon-size-large;
-    width: $k-icon-size-large;
-    height: $k-icon-size-large;
-  }
-
-  &.k-icon--medium > svg {
-    font-size: $k-icon-size-medium;
-    width: $k-icon-size-medium;
-    height: $k-icon-size-medium;
-  }
-
-  &.k-icon--small > svg {
-    font-size: $k-icon-size-small;
-    width: $k-icon-size-small;
-    height: $k-icon-size-small;
-  }
 }
 
+// Dark mode override
 .#{$kku-dark-mode-signature} .k-icon {
   color: $k-icon-dark-color;
   fill: $k-icon-dark-color;
+
+  &.k-icon--disabled {
+    color: $k-icon-disabled-color;
+    fill: $k-icon-disabled-color;
+  }
 }

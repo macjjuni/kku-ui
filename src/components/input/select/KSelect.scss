@@ -1,4 +1,3 @@
-
 // region [Component Tokens]
 
 // Sizes
@@ -8,15 +7,14 @@ $select-text-size-medium: $kku-text-size-medium;
 $select-width-size-small: 120px;
 $select-width-size-medium: 144px;
 
-
 // Default
 $select-text-default-color-base: $kku-text-color-primary;
 $select-text-default-color-hover: $kku-text-color-secondary;
-$button-text-default-color-disabled: $kku-text-color-disabled;
+$select-text-default-color-disabled: $kku-text-color-disabled;
 $select-text-default-color-placeholder: $kku-text-color-placeholder;
 
 $select-background-default-color-base: $kku-background-color-default;
-$button-background-default-color-disabled: $kku-background-color-disabled;
+$select-background-default-color-disabled: $kku-background-color-disabled;
 
 $select-border-default-color-base: $kku-border-color-default;
 $select-border-default-color-hover: $kku-border-color-hover;
@@ -85,9 +83,9 @@ $select-border-radius: $kku-border-radius-default;
   &.k-select--disabled {
 
     .k-select__label {
-      color: $button-text-default-color-disabled;
+      color: $select-text-default-color-disabled;
       border-color: $select-border-default-color-disabled;
-      background: $button-background-default-color-disabled;
+      background: $select-background-default-color-disabled;
       cursor: not-allowed;
     }
   }

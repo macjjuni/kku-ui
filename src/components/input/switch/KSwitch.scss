@@ -1,14 +1,12 @@
 // region [Component Token]
 
-
 $switch-background-color-active: $kku-primary-color-default;
 $switch-background-color-inactive: $kku-gray-color-300;
-$switch-background-color-disabled: rgba(0, 0, 0, 0.16);;
+$switch-background-color-disabled: rgba(0, 0, 0, 0.16);
 
-$switch-background-color-inactive-dark: $kku-gray-color-700;
+$switch-background-color-inactive-dark-mode: $kku-gray-color-700;
 
-
-$switch-ball-color: $kku-white-color;
+$switch-ball-color-base: $kku-white-color;
 $switch-ball-color-disabled: $kku-gray-color-300;
 
 $switch-width-size-medium: 54px;
@@ -21,9 +19,7 @@ $switch-height-size-small: 26px;
 $switch-border-radius-small: 13px;
 $switch-ball-size-small: 20px;
 
-
 // endregion
-
 
 .k-switch {
   position: relative;
@@ -36,7 +32,6 @@ $switch-ball-size-small: 20px;
   }
 
   &.k-switch--on.k-switch--small {
-
     .k-switch__label {
       background-color: $switch-background-color-active;
 
@@ -56,7 +51,6 @@ $switch-ball-size-small: 20px;
     }
   }
 
-
   .k-switch__label {
     position: relative;
     width: 50px;
@@ -75,15 +69,13 @@ $switch-ball-size-small: 20px;
       top: 3px;
       left: 3px;
       border-radius: 50%;
-      background-color: $switch-ball-color;
+      background-color: $switch-ball-color-base;
       transition: left 0.24s ease;
     }
   }
 
   &.k-switch--small {
-
     .k-switch__label {
-
       width: $switch-width-size-small;
       height: $switch-height-size-small;
       border-radius: $switch-border-radius-small;
@@ -96,9 +88,7 @@ $switch-ball-size-small: 20px;
   }
 
   &.k-switch--medium {
-
     .k-switch__label {
-
       width: $switch-width-size-medium;
       height: $switch-height-size-medium;
       border-radius: $switch-border-radius-medium;
@@ -127,10 +117,8 @@ $switch-ball-size-small: 20px;
   }
 }
 
-
 .#{$kku-dark-mode-signature} .k-switch {
-
   .k-switch__label {
-    background-color: $switch-background-color-inactive-dark;
+    background-color: $switch-background-color-inactive-dark-mode;
   }
 }

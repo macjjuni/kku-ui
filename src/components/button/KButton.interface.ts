@@ -9,9 +9,8 @@ export const BUTTON_VARIANTS = {
   warning: 'warning',
   error: 'error',
 } as const;
-
-export type KButtonVariantType = (typeof BUTTON_VARIANTS)[keyof typeof BUTTON_VARIANTS];
-export const KButtonVariantList = Object.keys(BUTTON_VARIANTS) as KButtonVariantType[];
+export type KButtonVariantType = keyof typeof BUTTON_VARIANTS;
+export const KButtonVariantList = Object.values(BUTTON_VARIANTS);
 
 export interface KButtonProps extends KBaseProp {
   children?: ReactNode;

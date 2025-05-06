@@ -1,9 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { act } from 'react';
 import userEvent from '@testing-library/user-event';
-import { ICON_SIZE, KIcon, KIconSize } from '@/components';
-
-const KIconSizeList = Object.keys(ICON_SIZE) as KIconSize[];
+import { KIcon, KIconSizeList } from '@/components';
 
 
 describe('KIcon', () => {

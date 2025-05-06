@@ -91,7 +91,7 @@ $modal-content-header-text-size: $kku-gray-color-900;
       opacity: $modal-overlay-opacity;
     }
 
-    &.k-modal-wrapper__overlay--transparent {
+    &.k-modal__overlay--transparent {
       background-color: transparent;
       opacity: 0;
     }
@@ -101,6 +101,6 @@ $modal-content-header-text-size: $kku-gray-color-900;
 .#{$kku-dark-mode-signature} .k-modal {
 
   .k-modal__overlay.k-modal__overlay--active {
-      background-color: $modal-overlay-background-color-dark;
+    background-color: $modal-overlay-background-color-dark;
   }
 }
