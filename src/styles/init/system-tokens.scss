@@ -1,0 +1,112 @@
+@use "reference-tokens" as *;
+
+:root {
+  --kku-text-color-primary: #{$kku-gray-color-900};
+  --kku-text-color-secondary: #{$kku-gray-color-700};
+  --kku-text-color-tertiary: #{$kku-gray-color-500};
+  --kku-text-color-disabled: #{$kku-gray-color-400};
+  --kku-text-color-link: #{$kku-blue-color-400};
+  --kku-text-color-placeholder: #{$kku-gray-color-600};
+
+  --kku-border-color-default: #{$kku-gray-color-300};
+  --kku-border-color-hover: #{$kku-gray-color-500};
+  --kku-border-color-disabled: #{$kku-gray-color-300};
+
+  --kku-background-color-default: #{$kku-white-color};
+  --kku-background-color-hover: #{$kku-gray-color-100};
+  --kku-background-color-disabled: #{$kku-gray-color-200};
+
+  --kku-background-color-ripple: #{$kku-gray-color-900};
+
+  --kku-primary-color-default: #{$kku-blue-color-400};
+  --kku-primary-color-hover: #{$kku-blue-color-500};
+  --kku-primary-color-disabled: #{$kku-blue-color-800};
+
+  --kku-success-color-default: #{$kku-green-color-600};
+  --kku-success-color-hover: #{$kku-green-color-700};
+  --kku-success-color-disabled: #{$kku-green-color-800};
+
+  --kku-warning-color-default: #{$kku-orange-color-400};
+  --kku-warning-color-hover: #{$kku-orange-color-500};
+  --kku-warning-color-disabled: #{$kku-orange-color-800};
+
+  --kku-error-color-default: #{$kku-red-color-500};
+  --kku-error-color-hover: #{$kku-red-color-600};
+  --kku-error-color-disabled: #{$kku-red-color-800};
+
+  --kku-focus-visible-color: #{$kku-blue-color-300};
+
+  --kku-element-height-medium: 34px;
+  --kku-element-height-small: 30px;
+
+  --kku-modal-overlay-z-index: #{$kku-z-index-1000};
+  --kku-modal-content-z-index: #{$kku-z-index-1001};
+}
+
+
+$kku-text-color-primary: var(--kku-text-color-primary);
+$kku-text-color-secondary: var(--kku-text-color-secondary);
+$kku-text-color-tertiary: var(--kku-text-color-tertiary);
+$kku-text-color-disabled: var(--kku-text-color-disabled);
+$kku-text-color-link: var(--kku-text-color-link);
+$kku-text-color-placeholder: var(--kku-text-color-placeholder);
+
+$kku-border-color-default: var(--kku-border-color-default);
+$kku-border-color-hover: var(--kku-border-color-hover);
+$kku-border-color-disabled: var(--kku-border-color-disabled);
+
+$kku-background-color-default: var(--kku-background-color-default);
+$kku-background-color-hover: var(--kku-background-color-hover);
+$kku-background-color-disabled: var(--kku-background-color-disabled);
+
+$kku-background-color-ripple: var(--kku-background-color-ripple);
+
+$kku-primary-color-default: var(--kku-primary-color-default);
+$kku-primary-color-hover: var(--kku-primary-color-hover);
+$kku-primary-color-disabled: var(--kku-primary-color-disabled);
+
+$kku-success-color-default: var(--kku-success-color-default);
+$kku-success-color-hover: var(--kku-success-color-hover);
+$kku-success-color-disabled: var(--kku-success-color-disabled);
+
+$kku-warning-color-default: var(--kku-warning-color-default);
+$kku-warning-color-hover: var(--kku-warning-color-hover);
+$kku-warning-color-disabled: var(--kku-warning-color-disabled);
+
+$kku-error-color-default: var(--kku-error-color-default);
+$kku-error-color-hover: var(--kku-error-color-hover);
+$kku-error-color-disabled: var(--kku-error-color-disabled);
+
+$kku-focus-visible-color: var(--kku-focus-visible-color);
+
+$kku-text-size-x-large: var(--kku-text-size-x-large);
+$kku-text-size-large: var(--kku-text-size-large);
+$kku-text-size-medium: var(--kku-text-size-medium);
+$kku-text-size-small: var(--kku-text-size-small);
+$kku-text-size-x-small: var(--kku-text-size-x-small);
+
+$kku-element-height-medium: var(--kku-element-height-medium);
+$kku-element-height-small: var(--kku-element-height-small);
+
+$kku-modal-overlay-z-index: var(--kku-modal-overlay-z-index);
+$kku-modal-content-z-index: var(--kku-modal-content-z-index);
+
+$kku-dark-mode-signature: 'dark';
+
+.#{$kku-dark-mode-signature}:root {
+  --kku-text-color-primary: #{$kku-gray-color-100};
+  --kku-text-color-secondary: #{$kku-gray-color-300};
+  --kku-text-color-tertiary: #{$kku-gray-color-500};
+  --kku-text-color-disabled: #{$kku-gray-color-600};
+  --kku-text-color-link: #{$kku-blue-color-400};
+
+  --kku-border-color-default: #{$kku-gray-color-700};
+  --kku-border-color-hover: #{$kku-gray-color-700};
+  --kku-border-color-disabled: #{$kku-gray-color-700};
+
+  --kku-background-color-default: #{$kku-gray-color-900};
+  --kku-background-color-hover: #{$kku-gray-color-800};
+  --kku-background-color-disabled: #{$kku-gray-color-800};
+
+  --kku-background-color-ripple: #{$kku-gray-color-300};
+}

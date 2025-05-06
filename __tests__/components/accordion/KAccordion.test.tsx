@@ -1,93 +1,113 @@
-import { vi } from 'vitest';
+import { act } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { act } from 'react';
-import { KAccordion } from '@/components';
-import { sizes } from '@/common/base/base.interface';
+import { KAccordion, KAccordionSizes, KAccordionSizeType } from '@/components';
 
-const testId = 'k-accordion';
-const testChildrenId = 'k-test-children';
-const sizeArr = Object.values(sizes);
-const mockOnClick = vi.fn();
+
+const KAccordionSizeList = Object.keys(KAccordionSizes) as KAccordionSizeType[];
 
 describe('KAccordion', () => {
-  const TestChildren = () => <div data-testid={testChildrenId}/>;
 
-  beforeEach(() => {
-    mockOnClick.mockClear();
+  const summaryText = 'Accordion Summary';
+  const childrenText = 'Accordion Content';
+
+  it('renders with summary and children', () => {
+    // Arrange
+    render(<KAccordion summary={summaryText}>{childrenText}</KAccordion>);
+
+    // Assert
+    expect(screen.getByText(summaryText)).toBeInTheDocument();
+    expect(screen.getByText(childrenText)).toBeInTheDocument();
   });
 
-  describe('Props', () => {
-    test('Style, value, className, id, summary, children prop render test', () => {
+  it('applies id, className, and style props', () => {
+    // Arrange
+    const testId = 'k-accordion-id';
+    const testClass = 'k-accordion-class';
+    const testStyle = { backgroundColor: 'lightgray' };
 
-      // Arrange
-      const testStyle = { color: '#eee', fontSize: '20px' };
-      const testClass = 'test-class-name';
-      const testIdValue = 'k-accordion-test-id';
-      const summaryTest = 'k-accordion-summary';
+    render(
+      <KAccordion id={testId} className={testClass} style={testStyle} summary={summaryText}>
+        {childrenText}
+      </KAccordion>,
+    );
+    const root = screen.getByTestId('k-accordion');
 
-      render(
-        <KAccordion id={testIdValue} className={testClass} style={testStyle} summary={summaryTest}>
-          <TestChildren/>
-        </KAccordion>,
-      );
+    // Assert
+    expect(root).toHaveAttribute('id', testId);
+    expect(root).toHaveClass(testClass);
+    expect(root).toHaveStyle(testStyle);
+  });
 
-      const root = screen.getByTestId(testId);
-      const rootGetSummary = screen.getByText(summaryTest);
-      const rootGetChildren = screen.getByTestId(testChildrenId);
+  it.each(KAccordionSizeList)('applies size prop "%s"', (size) => {
+    // Arrange
+    render(
+      <KAccordion summary={summaryText} size={size}>
+        {childrenText}
+      </KAccordion>,
+    );
+    const root = screen.getByTestId('k-accordion');
 
-      // Assert
-      expect(root).toHaveStyle(testStyle);
-      expect(root).toHaveClass(testClass);
-      expect(root).toHaveAttribute('id', testIdValue);
-      expect(rootGetSummary).toBeInTheDocument();
-      expect(rootGetChildren).toBeInTheDocument();
+    // Assert
+    expect(root).toHaveClass(`k-accordion--${size}`);
+  });
+
+  it('renders open by default if open prop is true', () => {
+    // Arrange
+    render(<KAccordion summary={summaryText} open>{childrenText}</KAccordion>);
+    const root = screen.getByTestId('k-accordion');
+
+    // Assert
+    expect(root).toHaveClass('k-accordion--open');
+  });
+
+  it('toggles content on summary click', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    render(<KAccordion summary={summaryText}>{childrenText}</KAccordion>);
+    const summary = screen.getByTestId('k-accordion__summary');
+    const root = screen.getByTestId('k-accordion');
+
+    // Assert before click
+    expect(root).toHaveClass('k-accordion--close');
+
+    // Act
+    await act(async () => {
+      await user.click(summary);
     });
 
-    test.each(sizeArr)('%s Size Prop render test', (size) => {
+    // Assert after click
+    expect(root).toHaveClass('k-accordion--open');
 
-      // Arrange
-      const summaryText = 'summary-text';
-
-      render(
-        <KAccordion summary={summaryText} size={size}>
-          <TestChildren/>
-        </KAccordion>,
-      );
-
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveClass(`k-accordion--${size}`);
+    // Act again
+    await act(async () => {
+      await user.click(summary);
     });
 
-    test('Test className rendering based on accordion state', async () => {
+    // Assert close again
+    expect(root).toHaveClass('k-accordion--close');
+  });
 
-      // Arrange
-      const summaryText = 'text';
+  it('toggles on Enter and Space key', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    render(<KAccordion summary={summaryText}>{childrenText}</KAccordion>);
 
-      render(
-        <KAccordion summary={summaryText}>
-          <TestChildren/>
-        </KAccordion>,
-      );
+    // Act
+    await act(async () => {
+      await user.tab();
+      await user.keyboard('{Enter}');
+    })
 
-      const summaryRoot = screen.getByText(summaryText);
-      const rootClosetState = screen.getByTestId(testId);
+    // Assert
+    expect(screen.getByTestId('k-accordion')).toHaveClass('k-accordion--open');
 
-      // Assert
-      expect(rootClosetState).toHaveClass('k-accordion--close');
-
-      // Events
-      await act(async () => {
-        await userEvent.click(summaryRoot);
-      });
-
-      // Arrange
-      const rootOpenState = screen.getByTestId(testId);
-
-      // Assert
-      expect(rootOpenState).toHaveClass('k-accordion--open');
+    // Act
+    await act(async () => {
+      await user.keyboard(' ');
     });
+
+    // Assert
+    expect(screen.getByTestId('k-accordion')).toHaveClass('k-accordion--close');
   });
 });

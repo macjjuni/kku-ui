@@ -1,112 +1,97 @@
 import { render, screen } from '@testing-library/react';
 import { act } from 'react';
 import userEvent from '@testing-library/user-event';
-import { vi } from 'vitest';
-import { KIcon } from '@/components';
+import { KIcon, KIconSizeList } from '@/components';
+
 
 describe('KIcon', () => {
-  const mockOnClick = vi.fn();
+  const mockFn = vi.fn();
 
   beforeEach(() => {
-    mockOnClick.mockClear();
+    mockFn.mockClear();
   });
 
   describe('Props', () => {
-    test('style prop render test', () => {
+    it('applies id, className, and style props', () => {
       // Arrange
-      const testStyle = { color: '#aaaaaa', fontSize: '20px' };
-      render(<KIcon icon='close' style={testStyle}/>);
+      const testId = 'k-id-test';
+      const testClassName = 'k-class-test';
+      const testStyle = { color: '#aaa', fontSize: '20px' };
+
+      render(<KIcon icon='close' id={testId} className={testClassName} style={testStyle}/>);
       const root = screen.getByRole('img');
 
       // Assert
+      expect(root).toHaveAttribute('id', testId);
+      expect(root).toHaveClass(testClassName);
       expect(root).toHaveStyle(testStyle);
     });
 
-    test('ClassName prop render test', () => {
+    it.each(KIconSizeList)('applies size prop: %s', (size) => {
       // Arrange
-      const testClass = 'test-class-name';
-      render(<KIcon icon='close' className={testClass}/>);
+      render(<KIcon icon='close' size={size}/>);
       const root = screen.getByRole('img');
 
       // Assert
-      expect(root).toHaveClass(testClass);
+      expect(root).toHaveClass(`k-icon--${size}`);
     });
 
-    test('Size prop render test', () => {
+    it('renders clickable icon when onClick is provided', () => {
       // Arrange
-      const testSize = 77;
-      render(<KIcon icon='close' size={testSize}/>);
-      const root = screen.getByRole('img');
-
-      // Assert
-      expect(root).toHaveStyle({ fontSize: `${testSize}px` });
-    });
-
-    test('Clickable prop render test', () => {
-      // Arrange
-      render(<KIcon icon='close' clickable/>);
-      const root = screen.getByRole('img');
+      render(<KIcon icon='close' onClick={() => {
+      }}/>);
+      const root = screen.getByRole('button');
 
       // Assert
       expect(root).toHaveClass('k-icon--clickable');
     });
 
-    test('tabIndex prop render test.', async () => {
+    it('sets tabIndex based on onClick presence', () => {
       // Arrange
-      render(<KIcon icon='close' tabIndex={0} onClick={mockOnClick}/>);
-      render(<KIcon icon='close'/>);
-
-      const imgRoot = screen.getByRole('img');
-      const buttonRoot = screen.getByRole('button');
+      render(
+        <>
+          <KIcon icon='close' onClick={mockFn}/>
+          <KIcon icon='close'/>
+        </>,
+      );
+      const clickable = screen.getByRole('button');
+      const nonClickable = screen.getByRole('img');
 
       // Assert
-      expect(imgRoot).toHaveAttribute('tabIndex', '-1');
-      expect(buttonRoot).toHaveAttribute('tabIndex', '0');
+      expect(clickable).toHaveAttribute('tabIndex', '0');
+      expect(nonClickable).toHaveAttribute('tabIndex', '-1');
     });
   });
 
-  describe('Event', () => {
-    test('onClick event test', async () => {
+  describe('Events', () => {
+    it('calls onClick when icon is clicked', async () => {
       // Arrange
       const user = userEvent.setup();
-      render(<KIcon icon='close' onClick={mockOnClick}/>);
-      const root = screen.getByRole('button');
-
-      expect(mockOnClick).toHaveBeenCalledTimes(0);
+      render(<KIcon icon='close' onClick={mockFn}/>);
+      const button = screen.getByRole('button');
 
       // Act
       await act(async () => {
-        await user.click(root);
+        await user.click(button);
       });
 
       // Assert
-      expect(mockOnClick).toHaveBeenCalledTimes(1);
+      expect(mockFn).toHaveBeenCalledTimes(1);
     });
 
-    test('Disabled onClick event test', async () => {
+    it('does not call onClick when disabled', async () => {
       // Arrange
       const user = userEvent.setup();
-      render(<KIcon icon='close' onClick={mockOnClick} disabled/>);
-      const root = screen.getByRole('button');
-
-      expect(mockOnClick).toHaveBeenCalledTimes(0);
+      render(<KIcon icon='close' onClick={mockFn} disabled/>);
+      const button = screen.getByRole('button');
 
       // Act
       await act(async () => {
-        await user.click(root);
+        await user.click(button);
       });
 
       // Assert
-      expect(mockOnClick).toHaveBeenCalledTimes(0);
-    });
-
-    test('onClick prop style test', async () => {
-      // Arrange
-      render(<KIcon icon='close' onClick={mockOnClick} disabled/>);
-      const root = screen.getByRole('button');
-
-      // Assert
-      expect(root).toHaveStyle({ cursor: 'pointer' });
+      expect(mockFn).not.toHaveBeenCalled();
     });
   });
 });

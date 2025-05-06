@@ -1,20 +1,16 @@
-import { CSSProperties, forwardRef, Ref, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
-import { initDisabled, initSize } from '@/common/util/variation';
+import { forwardRef, memo, Ref, useCallback, useId, useImperativeHandle, useMemo, useRef } from 'react';
 import { KSwitchProps, KSwitchRefs } from '@/components/input/switch/KSwitch.interface';
+import './KSwitch.scss';
 
-
-const KSwitch = forwardRef(({ ...restProps }: KSwitchProps, ref: Ref<KSwitchRefs>) => {
+const Switch = forwardRef(({ ...restProps }: KSwitchProps, ref: Ref<KSwitchRefs>) => {
 
   // region [Hooks]
 
-  const { id, style, className, toggleColor, bgColor, onChange, disabled, value, size }:KSwitchProps = { ...restProps };
-  const inputRef = useRef<HTMLButtonElement | null>(null);
-
-  useImperativeHandle(ref, () => ({
-    toggle() {
-      inputRef.current?.click();
-    },
-  }));
+  const uniqueId = `k-switch${useId()}`;
+  const { id = uniqueId, style, className }: KSwitchProps = { ...restProps };
+  const { value, disabled, size = 'medium' }: KSwitchProps = { ...restProps };
+  const { onChange, onClick }: KSwitchProps = { ...restProps };
+  const rootRef = useRef<HTMLDivElement | null>(null);
 
   // endregion
 
@@ -23,7 +19,7 @@ const KSwitch = forwardRef(({ ...restProps }: KSwitchProps, ref: Ref<KSwitchRefs
 
   const rootClass = useMemo(() => {
 
-    const clazz = [];
+    const clazz = ['k-switch'];
 
     if (className) {
       clazz.push(className);
@@ -33,25 +29,27 @@ const KSwitch = forwardRef(({ ...restProps }: KSwitchProps, ref: Ref<KSwitchRefs
     } else {
       clazz.push('k-switch--off');
     }
-
-    initSize(clazz, 'k-switch', size);
-    initDisabled(clazz, 'k-switch', disabled);
+    if (size) {
+      clazz.push(`k-switch--${size}`);
+    }
+    if (disabled) {
+      clazz.push('k-switch--disabled');
+    }
 
     return clazz.join(' ');
   }, [value, className, size, disabled]);
 
 
   const rootStyle = useMemo(() => ({ ...style }), [style]);
-  const backgroundStyle = useMemo(() => (bgColor ? { background: bgColor } : {}), [bgColor]);
-  const toggleColorStyle = useMemo((): CSSProperties => ({ backgroundColor: toggleColor }), [toggleColor]);
 
   // endregion
 
 
   // region [Events]
 
-  const onClick = useCallback(() => {
+  const onClickSwitch = useCallback(() => {
     onChange(!value);
+    onClick?.();
   }, [onChange, value]);
 
   // endregion
@@ -62,25 +60,30 @@ const KSwitch = forwardRef(({ ...restProps }: KSwitchProps, ref: Ref<KSwitchRefs
   // endregion
 
 
-  // region [Template]
+  // region [APIs]
+
+  useImperativeHandle(ref, () => ({
+    toggle() {
+      onClickSwitch();
+    },
+  }));
 
   // endregion
 
 
   return (
-    <button ref={inputRef} id={id} role='switch' style={rootStyle}
-            type='button' aria-checked={value} aria-label='switch' disabled={disabled}
-            tabIndex={!disabled ? 0 : -1} className={`k-switch ${rootClass}`} onClick={onClick}
-            data-testid='k-switch'>
-
-      <span className='k-switch__active-background' style={backgroundStyle} data-testid='k-switch-active-background'/>
-      <span className='k-switch__default-background'/>
-      <span className='k-switch__toggle' style={toggleColorStyle} data-testid='k-switch-toggle'/>
-
-    </button>
+    <div ref={rootRef} className={rootClass}>
+      <button id={id} type='button' role='switch' style={rootStyle} aria-checked={value} aria-label='switch'
+              disabled={disabled} className='k-switch__input' onClick={onClickSwitch}/>
+      <label htmlFor={id} className='k-switch__label' tabIndex={disabled ? -1 : 0}>
+        <span className='k-switch__label__ball'/>
+      </label>
+    </div>
   );
 });
 
-
+const KSwitch = memo(Switch);
+Switch.displayName = 'KSwitch';
 KSwitch.displayName = 'KSwitch';
+
 export default KSwitch;

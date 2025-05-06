@@ -1,40 +1,24 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import {
-  CSSProperties,
-  forwardRef,
-  KeyboardEvent,
-  MouseEvent,
-  Ref,
-  useCallback,
-  useId,
-  useImperativeHandle,
-  useRef,
-  useMemo, memo,
+  CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref,
+  useCallback, useId, useImperativeHandle, useRef, useMemo, memo,
 } from 'react';
 import { KIconProps, KIconRefs } from '@/components/icon/KIcon.interface';
 import { initDisabled } from '@/common/util/variation';
-import { getIcon } from '@/common/base/icon';
+import { getIcon } from '@/common/icons/icons';
+import './KIcon.scss';
 
 
-const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
+const Icon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
 
   // region [Hooks]
 
-  const {
-    id,
-    className,
-    style,
-    icon,
-    size = 24,
-    onClick,
-    disabled,
-    tabIndex = 0,
-    color,
-    clickable,
-  }: KIconProps = { ...resProps };
+  const { id, className, style }: KIconProps = { ...resProps };
+  const { icon, size = 'medium', onClick }: KIconProps = { ...resProps };
+  const { color, disabled }: KIconProps = { ...resProps };
+
   const inputRef = useRef<HTMLButtonElement>(null);
   const uniqueId = `k-icon-${useId()}`;
+  const computedTabIndex = useMemo(() => (onClick ? 0 : -1), [onClick])
 
   if (!icon) {
     throw Error('Error: icon is required and must be provided.');
@@ -52,45 +36,36 @@ const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
   // region [Styles]
 
   const rootClass = useMemo(() => {
+
     const clazz = [];
 
     if (className) {
       clazz.push(className);
     }
-    if (clickable) {
-      clazz.push('k-icon--clickable');
+    if (typeof size === 'string') {
+      clazz.push(`k-icon--${size}`);
     }
-    if (icon) {
-      clazz.push(`k-icon--${icon}`);
+    if (onClick) {
+      clazz.push('k-icon--clickable');
     }
 
     initDisabled(clazz, 'k-icon', disabled);
 
     return clazz.join(' ');
-  }, [className, clickable, disabled, icon]);
+  }, [className, disabled, size, icon, onClick]);
 
 
-  const rootStyle = useMemo(() => {
-
-    const styles: CSSProperties = style || {};
+  const rootStyle = useMemo((): CSSProperties => {
+    const styles: CSSProperties = { ...style };
 
     if (typeof size === 'number') {
-      styles.width = `${size}px`;
-      styles.height = `${size}px`;
-      styles.fontSize = `${size}px`;
-    }
-    if (typeof size === 'string') {
       styles.width = size;
       styles.height = size;
       styles.fontSize = size;
     }
 
-    if (onClick) {
-      styles.cursor = 'pointer';
-    }
-
     return styles;
-  }, [size, onClick]);
+  }, [size]);
 
   // endregion
 
@@ -117,7 +92,7 @@ const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
     }
   }, [onClick, disabled]);
 
-  const onKeyUp = useCallback((e: KeyboardEvent<HTMLSpanElement>) => {
+  const onKeyDown = useCallback((e: KeyboardEvent<HTMLSpanElement>) => {
     if (e.key === 'enter' || e.key === ' ') {
       if (!disabled) {
         onClick?.(e);
@@ -129,14 +104,17 @@ const KIcon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
 
 
   return (
-    <span ref={inputRef} id={id || uniqueId} className={`k-icon ${rootClass}`}
-          style={rootStyle} data-testid='k-icon' onClick={onClickIcon} onKeyUp={onKeyUp}
-          role={onClick ? 'button' : 'img'}
-          tabIndex={onClick ? tabIndex : -1}>
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+    <span ref={inputRef} id={id || uniqueId} className={`k-icon ${rootClass}`} style={rootStyle}
+          role={onClick ? 'button' : 'img'} tabIndex={computedTabIndex} aria-label={`${icon} icon`}
+          onClick={onClickIcon} onKeyDown={onKeyDown}>
       {currentIcon}
     </span>
   );
 });
 
+const KIcon = memo(Icon)
 KIcon.displayName = 'KIcon';
-export default memo(KIcon);
+Icon.displayName = 'KIcon';
+
+export default KIcon;

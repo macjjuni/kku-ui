@@ -1,44 +1,30 @@
-import { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { KIcon } from '@/components';
-import { initSize } from '@/common/util/variation';
+import { AnimatePresence, motion } from 'motion/react';
+import { KModalMotion } from '@/components/modal/KModal.motion';
 import { KModalProps } from '@/components/modal/KModal.interface';
 import { useCleanId } from '@/common/hook/useCleanId';
+import { KIcon } from '@/components';
+import './KModal.scss';
 
 
-const rootTestId = 'k-modal-test-id';
-const headerTestId = 'k-modal__header-test-id';
-const containerTestId = 'k-modal__container-test-id';
-const closeButtonTestId = 'k-modal__close-button-test-id';
-
-
-function KModal({ ...restProps }: KModalProps) {
-
+const Modal = ({ ...restProps }: KModalProps) => {
 
   // region [Hooks]
 
-  const {
-    id,
-    style,
-    isOpen,
-    onClose,
-    title,
-    content,
-    footer,
-    size,
-    className,
-    isOverlay = true,
-    overlayOpacity,
-    overlayClosable,
-    headerClass = '',
-    contentClass,
-    footerClass,
-    escClosable = false,
-    width,
-  }: KModalProps = { ...restProps };
+  const { id, style, className } = { ...restProps };
+  const { content, footer } = { ...restProps };
+  const { isOpen, title, width, size = 'medium', setIsOpen, onClose } = { ...restProps };
+  const { headerClass = '', contentClass, footerClass, animation = 'fade' } = { ...restProps };
+  const { isOverlay = true, overlayOpacity, overlayClosable, escClosable = false }: KModalProps = { ...restProps };
+
   const modalWrapperRef = useRef<HTMLDivElement | null>(null);
-  const [isOpenModal, setIsOpenModal] = useState(false);
   const headerTitleId = useCleanId('k-modal-header-title');
+  const modalMotion = useMemo(() => KModalMotion[animation], [animation]);
+
+  if (setIsOpen === undefined && typeof onClose !== 'function') {
+    throw new Error('You must provide at least one of "setIsOpen" or "onClose".');
+  }
 
   // endregion
 
@@ -46,78 +32,61 @@ function KModal({ ...restProps }: KModalProps) {
   // region [Style]
 
   const rootClass = useMemo(() => {
+    const clazz = ['k-modal'];
 
-    const clazz: string[] = [];
-
-    initSize(clazz, 'k-modal__container', size);
-
-    if (className) {
-      clazz.push(className);
+    if (isOpen) {
+      clazz.push('k-modal__container--open');
+    }
+    if (!isOpen) {
+      clazz.push('k-modal__container--close');
     }
 
     return clazz.join(' ');
-  }, [size]);
+  }, [isOpen]);
+
+  const containerClass = useMemo(() => {
+
+    const clazz = ['k-modal__container'];
+    
+    clazz.push(`k-modal__container--${size}`);
+
+    if (className) { clazz.push(className); }
+    if (!title) { clazz.push('k-modal__container--no-title'); }
+
+    return clazz.join(' ');
+  }, [size, title]);
 
   const overlayClass = useMemo(() => {
 
+    const clazz = ['k-modal__overlay'];
+
     if (isOverlay) {
-      return 'k-modal-wrapper__overlay--active';
+      clazz.push('k-modal__overlay--active');
+    } else {
+      clazz.push('k-modal__overlay--transparent');
     }
 
-    return 'k-modal-wrapper__overlay--transparent';
+    return clazz.join(' ');
   }, [isOverlay]);
-
-  const containerStyle = useMemo(() => {
-
-    const styles: CSSProperties = {};
-
-    if (width) {
-      styles.width = width;
-    }
-
-    return styles;
-  }, [width]);
-
-  const overlayStyle = useMemo(() => {
-
-    const styles: CSSProperties = {};
-
-    if (overlayOpacity) {
-      styles.opacity = overlayOpacity.toString();
-    }
-
-    return styles;
-  }, [overlayOpacity]);
 
   // endregion
 
 
   // region [Privates]
 
-  const addCloseAnimation = useCallback(() => {
-    modalWrapperRef.current?.classList.add('k-modal__wrapper--close');
-  }, []);
-
   const closeModal = useCallback(() => {
-    addCloseAnimation();
-    setTimeout(() => {
-      onClose();
-      setIsOpenModal(false);
-    }, 160);
-  }, [addCloseAnimation]);
+    setIsOpen?.(false);
+    onClose?.();
+  }, [onClose]);
 
   // endregion
 
 
   // region [Events]
 
-  const onOpenModal = useCallback(() => {
-    setIsOpenModal(true);
-  }, []);
-
   const onCloseModal = useCallback(() => {
     closeModal();
-  }, [onClose, closeModal]);
+  }, [closeModal]);
 
   const onClickOverlay = useCallback(() => {
     if (overlayClosable) {
@@ -126,7 +95,7 @@ function KModal({ ...restProps }: KModalProps) {
   }, [onClose, overlayClosable]);
 
   const onKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.keyCode === 27) {
+    if (e.key === 'Escape') {
       closeModal();
     }
   }, [closeModal]);
@@ -150,7 +119,6 @@ function KModal({ ...restProps }: KModalProps) {
 
   useEffect(() => {
     if (isOpen) {
-      onOpenModal();
       addKeyEventListener();
     } else {
       onCloseModal();
@@ -165,49 +133,58 @@ function KModal({ ...restProps }: KModalProps) {
   // region [Templates]
 
   const modalHeader = useMemo(() => (
-    <div className={`k-modal__container__header ${headerClass}`} data-testid={headerTestId}>
-      <h1 id={headerTitleId} className='k-modal__container__header__text'>{title}</h1>
-      <KIcon className='k-modal__container__header__close-button' icon='close' size={22}
-             onClick={onCloseModal}/>
-    </div>
-  ), [headerClass, title, onCloseModal, headerTitleId, closeButtonTestId]);
+    title
+      ? (
+        <div className={`k-modal__container__header ${headerClass}`} data-testid='k-modal__header'>
+          <h1 id={headerTitleId} className='k-modal__container__header__text'>{title}</h1>
+          <KIcon className='k-modal__container__header__close-button' icon='close' size={18} onClick={onCloseModal}/>
+        </div>
+      ) : null
+  ), [headerClass, title, onCloseModal]);
 
   const modalContent = useMemo(() => (
     <section className={`k-modal__container__content${contentClass ? ` ${contentClass}` : ''}`}
-             aria-labelledby={headerTitleId}>
+             aria-labelledby={headerTitleId} data-testid='k-modal__container__content'>
       {content}
     </section>
-  ), [content, headerTitleId]);
+  ), [content, headerTitleId, contentClass]);
 
   const modalFooter = useMemo(() => (
-    footer && (<div className={`k-modal__container__footer ${footerClass}`}>{footer}</div>)
+    footer && (
+      <div className={`k-modal__container__footer${footerClass ? ` ${footerClass}` : ''}`} data-testid='k-modal__footer'>
+        {footer}
+      </div>
+    )
   ), [footer, footerClass]);
 
   // endregion
 
-
-  if (!isOpenModal) {
-    return null;
-  }
-
   return (
     createPortal(
-      <div ref={modalWrapperRef} id={id} className='k-modal__wrapper' style={style}
-           role='dialog' tabIndex={-1} aria-modal='true' aria-label={`${title}-modal-wrapper`}
-           data-testid={rootTestId}>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div ref={modalWrapperRef} id={id} className={rootClass} style={style} role='dialog' {...modalMotion}
+                      aria-modal='true' aria-label={`${title}-modal-wrapper`} data-testid='k-modal'>
 
-        <div className={`k-modal__container ${rootClass}`} style={containerStyle} data-testid={containerTestId}>
-          {modalHeader}
-          {modalContent}
-          {modalFooter}
-        </div>
-        <div style={overlayStyle} className={`k-modal-wrapper__overlay ${overlayClass}`} onClick={onClickOverlay}
-             aria-hidden='true' data-testid='k-modal-overlay-test-id'/>
-      </div>,
+            <div className={containerClass} style={{ width }} data-testid='k-modal-container'>
+              {modalHeader}
+              {modalContent}
+              {modalFooter}
+            </div>
+
+            <div className={overlayClass} onClick={onClickOverlay} style={{ opacity: overlayOpacity }}
+                 aria-hidden='true' data-testid='k-modal-overlay'/>
+
+          </motion.div>
+        )}
+      </AnimatePresence>,
       document.body,
     )
   );
-}
+};
 
+const KModal = memo(Modal);
+Modal.displayName = 'KModal';
 KModal.displayName = 'KModal';
+
 export default KModal;

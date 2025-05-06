@@ -1,73 +1,120 @@
-import userEvent from '@testing-library/user-event';
+import { act } from 'react';
 import { render, screen } from '@testing-library/react';
-import { CSSProperties, ReactNode, act } from 'react';
-import { describe, test, expect, vi, beforeEach, beforeAll } from 'vitest';
+import { vi } from 'vitest';
+import userEvent from '@testing-library/user-event';
 import { KDropHolder } from '@/components';
 
-const testId = 'k-drop-holder';
-const mockFn = vi.fn();
 
 describe('KDropHolder', () => {
+
+  const mockFn = vi.fn();
+
   beforeEach(() => {
     mockFn.mockClear();
+    vi.useFakeTimers();
   });
 
-  beforeAll(() => {
-    HTMLDivElement.prototype.animate = vi.fn().mockReturnValue({
-      onfinish: null,
-      play: vi.fn(),
-      pause: vi.fn(),
-      cancel: vi.fn(),
-      finish: vi.fn(),
-    });
+  afterEach(() => {
+    vi.clearAllTimers();
+    vi.useRealTimers();
   });
 
   const childrenText = 'test-children';
   const contentText = 'test-content';
 
-  const TestChildren = () => <div>{childrenText}</div>;
-  const TestContent = () => <div>{contentText}</div>;
-
-  const TestDropHolder = ({
-    id,
-    style,
-    className,
-    content,
-  }: {
-    id?: string;
-    style?: CSSProperties;
-    className?: string;
-    content?: ReactNode;
-  }) => (
-    <KDropHolder id={id} style={style} className={className} content={content}
-                 data-testid={testId}>
-      <TestChildren/>
-    </KDropHolder>
-  );
+  const TestChildren = () => (<div>{childrenText}</div>);
+  const TestContent = () => (<div>{contentText}</div>);
 
   describe('Props', () => {
-    test('Style, value, className, id prop render test', () => {
-      // Arrange
-      const testStyle = { color: '#cccccc', fontSize: '20px' };
-      const testClass = 'test-class-name';
-      const testIdValue = 'k-select-test-id';
 
-      render(<TestDropHolder id={testIdValue} className={testClass} style={testStyle} content={<TestContent/>}/>);
-      const root = screen.getByTestId(testId);
+    it('Style, value, className, id prop render test', () => {
+
+      // Arrange
+      const testStyle = { color: '#bbb', fontSize: '20px' };
+      const testClass = 'test-class-name';
+      const testId = 'k-select-test-id';
+
+      render(
+        <>
+          <KDropHolder id={testId} className={testClass} style={testStyle} content={<TestContent/>}>
+            <TestChildren/>
+          </KDropHolder>
+        </>,
+      );
+      const root = screen.getByTestId('k-drop-holder');
 
       // Assert
       expect(root).toHaveStyle(testStyle);
       expect(root).toHaveClass(testClass);
-      expect(root).toHaveAttribute('id', testIdValue);
+      expect(root).toHaveAttribute('id', testId);
+    });
+
+    it('contentWidth prop render test', async () => {
+      // Arrange
+      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+      const testContentWidth = 300;
+      render(
+        <>
+          <KDropHolder content={<TestContent/>} contentWidth={testContentWidth}>
+            <TestChildren/>
+          </KDropHolder>
+        </>,
+      );
+      const root = screen.getByText(childrenText);
+
+      // Act
+      await act(async () => {
+        await user.click(root);
+      });
+
+      // Arrange
+      const contentRoot = screen.getByRole('tooltip');
+
+      // Assert
+      expect(contentRoot).toBeInTheDocument();
+      expect(contentRoot).toHaveStyle({ width: `${testContentWidth}px` });
+    });
+
+    it('openDelay prop render test', async () => {
+      // Arrange
+      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+      const testOpenDelay = 3000;
+      render(
+        <KDropHolder content={<TestContent/>} openDelay={testOpenDelay}>
+          <TestChildren/>
+        </KDropHolder>,
+      );
+      const root = screen.getByText(childrenText);
+
+      // Act
+      await act(async () => {
+        await user.click(root);
+      });
+
+      // Assert
+      expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+      await act(async () => {
+        vi.advanceTimersByTime(testOpenDelay);
+      });
+
+      // Arrange
+      expect(screen.getByRole('tooltip')).toBeInTheDocument();
     });
   });
 
   describe('Event', () => {
-    test('Click to render anchor element', async () => {
-      // Arrange
-      const user = userEvent.setup();
-      render(<TestDropHolder content={<TestContent/>}/>);
 
+    it('Click to render anchor element', async () => {
+      // Arrange
+      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+      render(
+        <>
+          <KDropHolder content={<TestContent/>}>
+            <TestChildren/>
+          </KDropHolder>
+        </>,
+      );
       const root = screen.getByText(childrenText);
 
       // Act
@@ -82,40 +129,101 @@ describe('KDropHolder', () => {
       expect(contentRoot).toBeInTheDocument();
     });
 
-    test('Click to hide anchor element', async () => {
+    it('Hover to render anchor element', async () => {
       // Arrange
-      const user = userEvent.setup();
-      const outsideText = 'Outside Element';
-
-      const ExtraContainTextDropHolder = () => (
+      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+      render(
         <>
-          <div>{outsideText}</div>
-          <TestDropHolder content={<TestContent/>}/>
-        </>
+          <KDropHolder trigger='hover' content={<TestContent/>}>
+            <TestChildren/>
+          </KDropHolder>
+        </>,
       );
-
-      render(<ExtraContainTextDropHolder/>);
-
       const root = screen.getByText(childrenText);
-      const outsideRoot = screen.getByText(outsideText);
 
       // Act
       await act(async () => {
-        await user.click(root); // Click to render anchor element
+        await user.hover(root);
       });
 
-      // Assert
-      let contentRoot = screen.getByText(contentText);
-      expect(contentRoot).toBeInTheDocument();
-
-      // Act
-      await act(async () => {
-        await user.click(outsideRoot); // Click to hide anchor element
-      });
+      // Arrange
+      const contentRoot = screen.getByText(contentText);
 
       // Assert
-      contentRoot = screen.queryByText(contentText);
       expect(contentRoot).toBeInTheDocument();
     });
+
+    it('Hover to hide anchor element', async () => {
+      // Arrange
+      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+      const anotherText = 'test';
+
+      render(
+        <>
+          <button type='button' onClick={mockFn}>{anotherText}</button>
+          <KDropHolder trigger='hover' content={contentText}>
+            {childrenText}
+          </KDropHolder>
+        </>,
+      );
+
+      const root = screen.getByText(childrenText);
+
+      // Act
+      await act(async () => {
+        await user.hover(root);
+      });
+
+      // Assert
+      expect(screen.getByText(contentText)).toBeInTheDocument();
+      expect(mockFn).toHaveBeenCalledTimes(0);
+
+      // Act
+      await act(async () => {
+        await user.click(screen.getByText(anotherText));
+        vi.advanceTimersByTime(300);
+      });
+
+      // Assert
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(screen.getByText(childrenText)).toHaveClass('k-drop-holder--close');
+    });
+
+    it('Click to hide anchor element', async () => {
+      // Arrange
+      const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+      const anotherText = 'test';
+
+      render(
+        <>
+          <button type='button' onClick={mockFn}>{anotherText}</button>
+          <KDropHolder content={contentText}>
+            {childrenText}
+          </KDropHolder>
+        </>,
+      );
+
+      const root = screen.getByText(childrenText);
+
+      // Act
+      await act(async () => {
+        await user.click(root);
+      });
+
+      // Assert
+      expect(screen.getByText(contentText)).toBeInTheDocument();
+      expect(mockFn).toHaveBeenCalledTimes(0);
+
+      // Act
+      await act(async () => {
+        await user.click(screen.getByText(anotherText));
+        vi.advanceTimersByTime(300);
+      });
+
+      // Assert
+      expect(mockFn).toHaveBeenCalledTimes(1);
+      expect(screen.getByText(childrenText)).toHaveClass('k-drop-holder--close');
+    });
   });
+
 });

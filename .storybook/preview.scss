@@ -1,13 +1,6 @@
 
-.sb-main-padded.sb-show-main.dark {
-    background-color: #000 !important;
+.docs-story {
+  &:nth-child(2) {
+    z-index: 0;
+  }
 }
-
-.sb-show-main.sb-main-padded {
-    padding: 16px;
-}
-
-.dark :is(h1, h2,h3,h4,h5) {
-    color: #fff !important;
-}
-

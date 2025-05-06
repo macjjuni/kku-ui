@@ -1,31 +1,23 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import {KAccordionProps, KAccordion} from '../../../src/components';
+import { KAccordionProps, KAccordion, KAccordionSizes } from '../../../src/components';
+import { baseArgTyp } from '../common/argTypes';
 
 const meta: Meta<KAccordionProps> = {
     component: KAccordion,
     title: 'Components/Accordion',
     argTypes: {
-        size: {description: '크기를 설정합니다.', defaultValue: {summary: 'medium'}},
-        id: {description: 'id 속성을 설정합니다.', defaultValue: {summary: 'undefined'}},
-        className: {description: 'class 속성을 설정합니다.', defaultValue: {summary: 'undefined'}},
-        width: {description: 'width 속성을 설정합니다.', defaultValue: {summary: 'undefined'}},
-        style: {description: 'style 속성을 설정합니다.', defaultValue: {summary: 'undefined'}},
+        size: {description: '크기를 설정합니다.', defaultValue: {summary: 'medium'}, control: { type: 'radio' }, options: Object.keys(KAccordionSizes)},
+        width: {description: 'width 속성을 설정합니다.', defaultValue: {summary: 'undefined'}, type: 'number' },
+        ...baseArgTyp
     },
+    tags: ['autodocs'],
 };
 
 export default meta;
 
 type Story = StoryObj<typeof KAccordion>
 
-const Template = (args: KAccordionProps) => {
-
-
-    return (
-        <>
-            <KAccordion {...args} />
-        </>
-    );
-};
+const Template = (args: KAccordionProps) => (<KAccordion {...args}>{args.children}</KAccordion>);
 
 export const Default: Story = {
     render: Template,
@@ -38,6 +30,8 @@ export const Default: Story = {
             ' typesetting, remaining essentially unchanged. It was popularised in the 1960s with ' +
             'the release of Letraset sheets containing Lorem Ipsum passages, and more recently with ' +
             'desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+        size: 'medium',
+        width: undefined,
     },
 };
 

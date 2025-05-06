@@ -1,4 +1,5 @@
 import { CSSProperties } from 'react';
+import { MotionProps } from 'motion/react';
 
 // 🦴 - Base Properties
 export interface KBaseProp {
@@ -8,9 +9,12 @@ export interface KBaseProp {
 }
 
 // 🎁 - Size Properties
-export const sizes = { medium: 'medium', small: 'small' } as const;
-export type SizeType = (typeof sizes)[keyof typeof sizes];
+export const SIZES = { medium: 'medium', small: 'small' } as const;
+export type SizeType = (typeof SIZES)[keyof typeof SIZES];
 
 export interface KSizeProp {
   size?: SizeType
 }
+
+// 🌸 - Motion Properties
+export type MotionType = Pick<MotionProps, 'initial' | 'animate' | 'exit' | 'transition'>;

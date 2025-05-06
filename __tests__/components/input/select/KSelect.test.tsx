@@ -1,260 +1,148 @@
-import userEvent from '@testing-library/user-event';
+import { act } from 'react';
+import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { act, createRef, useState } from 'react';
-import { describe, it, beforeEach, beforeAll, expect, vi } from 'vitest';
-import { KSelect, KSelectRefs } from '@/components';
-
-const testId = 'k-select';
-const mockFn = vi.fn();
+import userEvent from '@testing-library/user-event';
+import { KSelect } from '@/components';
 
 const items = [
-  { title: '선택1', value: 'value1' },
-  { title: '선택2', value: 'value2' },
-  { title: '선택3', value: 'value3' },
+  { label: '선택1', value: 'value1' },
+  { label: '선택2', value: 'value2' },
+  { label: '선택3', value: 'value3' },
 ];
 
 describe('KSelect', () => {
+  const mockFn = vi.fn();
+  const mockValue = items[0].value;
+
   beforeEach(() => {
     mockFn.mockClear();
+    vi.useFakeTimers();
   });
 
-  beforeAll(() => {
-    // JSDOM에서는 animate 메서드가 없으므로 mock 처리
-    HTMLDivElement.prototype.animate = vi.fn().mockReturnValue({
-      onfinish: null,
-      play: vi.fn(),
-      pause: vi.fn(),
-      cancel: vi.fn(),
-      finish: vi.fn(),
-    });
+  afterEach(() => {
+    vi.clearAllTimers();
+    vi.useRealTimers();
   });
 
-  describe('Props', () => {
-    it('Style, value, className prop render test', () => {
-      // Arrange
-      const testValue = items[0].value;
-      const expectTitle = items[0].title;
-      const testStyle = { color: '#a1a1a1', fontSize: '20px' };
-      const testClass = 'test-class-name';
-      const testIdValue = 'k-select-test-id';
+  it('applies id, className, and style props', () => {
+    // Arrange
+    const testId = 'k-select-test-id';
+    const testClass = 'test-class-name';
+    const testStyle = { color: 'red', fontSize: '20px' };
 
-      render(
-        <KSelect value={testValue}
-                 id={testIdValue}
-                 items={items}
-                 onChange={mockFn}
-                 className={testClass}
-                 style={testStyle}/>,
-      );
+    render(<KSelect value={mockValue} items={items} onChange={mockFn} id={testId} className={testClass} style={testStyle} />);
+    const selectRoot = screen.getByTestId('k-select');
+    const labelRoot = screen.getByText(items[0].label);
 
-      const root = screen.getByTestId(testId);
-      screen.getByText(expectTitle);
-
-      // Assert
-      expect(root).toHaveStyle(testStyle);
-      expect(root).toHaveClass(testClass);
-      expect(root).toHaveAttribute('id', testIdValue);
-    });
-
-    it('Placeholder prop render test', () => {
-      // Arrange
-      const testPlaceholder = 'placeholder';
-      render(<KSelect value='' items={[]} onChange={mockFn} placeholder={testPlaceholder}/>);
-
-      const placeholderRoot = screen.getByText(testPlaceholder);
-
-      // Assert
-      expect(placeholderRoot).toHaveClass('k-select__label-text__placeholder');
-    });
-
-    it('Disabled prop render test', () => {
-      // Arrange
-      render(<KSelect value='' items={[]} onChange={mockFn} disabled/>);
-
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveClass('k-select--disabled');
-    });
-
-    it('Width prop render test', async () => {
-      // Arrange
-      const testWidth = '200px';
-      render(<KSelect value='' items={[]} onChange={mockFn} width={testWidth}/>);
-
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveStyle({ width: testWidth });
-    });
-
-    it('NoDataText prop render test', async () => {
-      // Arrange
-      const user = userEvent.setup();
-      const testNoDataText = 'No Data Text';
-      render(<KSelect value='' items={[]} noDataText={testNoDataText} onChange={mockFn}/>);
-      const root = screen.getByTestId(testId);
-
-      // Act
-      await act(async () => {
-        await user.click(root);
-      });
-
-      // Arrange
-      const noDataRoot = screen.getByText(testNoDataText);
-
-      // Assert
-      expect(noDataRoot).toHaveClass('k-select__menu-list__item-no-data');
-    });
+    // Assert
+    expect(labelRoot).toBeInTheDocument();
+    expect(selectRoot).toHaveAttribute('id', testId);
+    expect(selectRoot).toHaveClass(testClass);
+    expect(selectRoot).toHaveStyle(testStyle);
   });
 
-  describe('Event', () => {
-    it('Value onChange Event test', async () => {
-      // Arrange
-      const user = userEvent.setup();
+  it('renders placeholder when placeholder prop is set and value is undefined', () => {
+    // Arrange
+    const testPlaceholder = 'placeholder-test';
 
-      const TestSelect = () => {
-        const [value, setValue] = useState('');
-        const onChange = (e: string) => {
-          setValue(e);
-        };
+    render(<KSelect value={undefined} items={items} onChange={mockFn} placeholder={testPlaceholder} />);
+    const placeholder = screen.getByText(testPlaceholder);
 
-        return <KSelect value={value} items={items} onChange={onChange}/>;
-      };
+    // Assert
+    expect(placeholder).toBeInTheDocument();
+  });
 
-      render(<TestSelect/>);
-      const root = screen.getByTestId(testId);
-      const targetItem = items[1].title;
+  it('applies disabled prop', () => {
+    // Arrange
+    render(<KSelect value={mockValue} items={items} onChange={mockFn} disabled />);
+    const selectRoot = screen.getByTestId('k-select');
+    const input = screen.getByRole('button');
 
-      // Act
-      await act(async () => {
-        await user.click(root);
-      });
+    // Assert
+    expect(selectRoot).toHaveClass('k-select--disabled');
+    expect(input).toHaveAttribute('tabindex', '-1');
+  });
 
-      // Arrange
-      const selectItem = screen.getByText(targetItem);
+  it('applies width prop', () => {
+    // Arrange
+    const testWidth = 200;
 
-      // Act
-      await act(async () => {
-        await user.click(selectItem);
-      });
+    render(<KSelect value={mockValue} items={items} onChange={mockFn} width={testWidth} />);
+    const root = screen.getByRole('button');
 
-      // Arrange
-      const selectedRoot = screen.getAllByText(targetItem)[0];
+    // Assert
+    expect(root).toHaveStyle({ width: `${testWidth}px` });
+  });
 
-      // Assert
-      expect(selectedRoot).toHaveClass('k-select__label-text');
+  it('renders correct label based on value prop', () => {
+    // Arrange
+    const testItem = items[1];
+
+    render(<KSelect value={testItem.value} items={items} onChange={mockFn} />);
+    const label = screen.getByText(testItem.label);
+
+    // Assert
+    expect(label).toBeInTheDocument();
+  });
+
+  it('opens dropdown and renders noDataText when items is empty', async () => {
+    // Arrange
+    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+    const testNoDataText = 'No Data Text';
+    const outsideTestId = 'outside';
+
+    render(
+      <>
+        <div data-testid={outsideTestId} />
+        <KSelect value={undefined} items={[]} onChange={mockFn} noDataText={testNoDataText} />
+      </>,
+    );
+
+    const button = screen.getByRole('button');
+
+    // Act
+    await act(async () => {
+      await user.click(button);
     });
 
-    it('Focus event test', async () => {
-      // Arrange
-      const user = userEvent.setup();
+    // Assert
+    expect(screen.getByRole('listbox')).toBeInTheDocument();
+    expect(screen.getByText(testNoDataText)).toBeInTheDocument();
 
-      const TestSelect = () => {
-        const [value, setValue] = useState('');
-        const onChange = (e: string) => {
-          setValue(e);
-        };
-
-        return <KSelect value={value} items={items} onChange={onChange}/>;
-      };
-      render(<TestSelect/>);
-
-      // Act
-      await act(async () => {
-        await user.tab();
-      });
-
-      // Arrange
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveFocus();
+    // Act
+    await act(async () => {
+      await user.click(screen.getByTestId(outsideTestId));
+      vi.advanceTimersByTime(300);
     });
 
-    it('Disabled focus event test', async () => {
-      // Arrange
-      const user = userEvent.setup();
-      render(<KSelect value='' disabled items={items} onChange={() => {}}/>);
+    // Assert
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  });
 
-      // Act
-      await act(async () => {
-        await user.tab();
-      });
+  it('calls onChange with selected value when item is clicked', async () => {
+    // Arrange
+    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+    const testItems = [
+      { label: 'Option 1', value: 'option1' },
+      { label: 'Option 2', value: 'option2' },
+    ];
 
-      // Arrange
-      const root = screen.getByTestId(testId);
+    render(<KSelect value={undefined} items={testItems} onChange={mockFn} />);
+    const button = screen.getByRole('button');
 
-      // Assert
-      expect(root).not.toHaveFocus();
+    // Act
+    await act(async () => {
+      await user.click(button);
     });
 
-    it('Change Select value Using Keyboard Input', async () => {
-      // Arrange
-      const user = userEvent.setup();
-      const TestSelect = () => {
-        const [value, setValue] = useState('');
-        const onChange = (e: string) => {
-          setValue(e);
-        };
+    const targetItem = screen.getByText(testItems[1].label);
 
-        return <KSelect value={value} items={items} onChange={onChange}/>;
-      };
-      render(<TestSelect/>);
-
-      // Act
-      await act(async () => {
-        await user.tab();
-      });
-
-      // Arrange
-      const root = screen.getByTestId(testId);
-
-      // Assert
-      expect(root).toHaveFocus();
-
-      // Act
-      await act(async () => {
-        await user.keyboard('{enter}');
-      });
-      await act(async () => {
-        await user.tab();
-      });
-      await act(async () => {
-        await user.keyboard('{enter}');
-      });
-
-      // Arrange
-      const selectedRoot = screen.getAllByText(items[0].title)[0];
-
-      // Assert
-      expect(selectedRoot).toBeInTheDocument();
+    await act(async () => {
+      await user.click(targetItem);
     });
 
-    it('Open and close refs event test', async () => {
-      // Arrange
-      const selectRef = createRef<KSelectRefs>();
-      render(<KSelect ref={selectRef} value='' disabled items={items}
-                      onChange={() => {}}/>);
-
-      // Act
-      act(() => {
-        selectRef.current?.open();
-      });
-
-      // Arrange
-      const root = screen.getByTestId('k-select');
-
-      // Assert
-      expect(root).toHaveClass('k-select--open');
-
-      // Act
-      act(() => {
-        selectRef.current?.close();
-      });
-
-      // Assert
-      expect(root).not.toHaveClass('k-select--open');
-    });
+    // Assert
+    expect(mockFn).toHaveBeenCalledTimes(1);
+    expect(mockFn).toHaveBeenCalledWith(testItems[1].value);
   });
 });

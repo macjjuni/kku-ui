@@ -1,38 +1,37 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { act, useCallback, useState } from 'react';
-import { vi, describe, test, beforeEach, expect } from 'vitest';
-import { KModal } from '@/components';
+import { vi } from 'vitest';
+import { cleanup, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { KModal, KModalSizes, KModalSizeType } from '@/components';
 
 
-const mockOnClick = vi.fn();
-const rootTestId = 'k-modal-test-id';
-const containerTestId = 'k-modal__container-test-id';
-const closeButtonTestId = 'k-icon';
-const overlayTestId = 'k-modal-overlay-test-id';
-const testClass = 'k-modal-class';
-const testStyle = { color: '#ababab' };
-const titleText = 'this is Modal Title';
-const contentText = 'this is Modal Content';
-const footerText = 'this is footer';
-const Footer = () => <div data-testid='k-modal-footer-test-id'>{footerText}</div>;
+const KModalSizeList = Object.keys(KModalSizes) as KModalSizeType[];
 
+const openButtonText = '열기';
+const closeButtonText = '닫기';
+const contentText = 'content';
 
-// eslint-disable-next-line react/prop-types
-const TestModalComponent = ({ isOverlay = true, overlayOpacity, width }) => {
-  const [isOpen, setIsOpen] = useState(false);
+interface TestModalComponentType {
+  defaultOpen?: boolean;
+}
 
-  const onOpen = useCallback(() => setIsOpen(true), []);
-  const onClose = useCallback(() => setIsOpen(false), []);
+const TestModalComponent = ({ defaultOpen = false }: TestModalComponentType) => {
+
+  const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
+
+  const onOpenEvent = useCallback(() => {
+    setIsOpen(true);
+  }, []);
+  const onCloseEvent = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
   return (
     <>
-      <button type='button' onClick={onOpen}>Open</button>
-      <KModal isOpen={isOpen} onClose={onClose} className={testClass} id={rootTestId}
-              style={testStyle} isOverlay={isOverlay} overlayOpacity={overlayOpacity} title={titleText}
-              content={contentText} footer={<Footer/>} width={width}/>
-      {' '}
-
+      <div>{isOpen ? 'open' : 'close'}</div>
+      <button type='button' onClick={onOpenEvent}>{openButtonText}</button>
+      <KModal isOpen={isOpen} content={contentText} title='title' setIsOpen={setIsOpen}
+              footer={<button type='button' onClick={onCloseEvent}>{closeButtonText}</button>}/>
     </>
   );
 };
@@ -40,105 +39,131 @@ const TestModalComponent = ({ isOverlay = true, overlayOpacity, width }) => {
 
 describe('KModal', () => {
 
+  const mockFn = vi.fn();
+
   beforeEach(() => {
-    mockOnClick.mockClear();
+    mockFn.mockClear();
+    vi.useFakeTimers();
   });
 
-  describe('Props', () => {
-    test('IsOpen, Style, className, id, prop render test', async () => {
+  afterEach(() => {
+    vi.runOnlyPendingTimers(); // 잔여 타이머 모두 실행
+    vi.clearAllTimers();
+    vi.useRealTimers();
+    cleanup();
+  });
 
-      // Arrange
-      const user = userEvent.setup();
-      render(<TestModalComponent/>);
-      const openButton = screen.getByText('Open');
 
-      // Act
-      await act(async () => {
-        await user.click(openButton);
-      });
+  it('applies id, className, and style props', async () => {
+    // Arrange
+    const testId = 'test-id';
+    const testClass = 'test-id';
+    const testStyle = { color: '#eee', fontSize: '24px' };
 
-      // Assert
-      const rootModal = screen.getByTestId(rootTestId);
-      const rootContainer = screen.getByTestId(containerTestId);
-      expect(rootModal).toHaveStyle(testStyle);
-      expect(rootContainer).toHaveClass(testClass);
-      expect(rootModal).toHaveAttribute('id', rootTestId);
+    render(<KModal isOpen content={<></>} id={testId} className={testClass} style={testStyle} onClose={mockFn}/>);
+    const root = screen.getByRole('dialog');
+    const containerRoot = screen.getByTestId('k-modal-container');
+
+    // Assert
+    expect(root).toHaveAttribute('id', testId);
+    expect(root).toHaveStyle(testStyle);
+    expect(containerRoot).toHaveClass(testClass);
+  });
+
+  it('applies title, content, footer props', async () => {
+    // Arrange
+    const testTitle = 'This is a title';
+    const testContent = 'This is a content';
+    const testFooter = 'This is a footer';
+
+    render(<KModal isOpen title={testTitle} content={testContent} footer={testFooter} onClose={mockFn}/>);
+    const titleRoot = screen.getByText(testTitle);
+    const titleContent = screen.getByText(testContent);
+    const titleFooter = screen.getByText(testFooter);
+
+    // Assert
+    expect(titleRoot).toHaveClass('k-modal__container__header__text');
+    expect(titleContent).toHaveClass('k-modal__container__content');
+    expect(titleFooter).toHaveClass('k-modal__container__footer');
+  });
+
+  it('applies no title, footer props', async () => {
+    // Arrange
+    render(<KModal isOpen content='test' onClose={() => {
+    }}/>);
+
+    // Assert
+    expect(screen.queryByTestId('k-modal__header')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('k-modal__footer')).not.toBeInTheDocument();
+  });
+
+  it.each(KModalSizeList)('applies size prop "%s"', (size) => {
+    // Arrange
+    render(<KModal isOpen content='test' size={size} onClose={mockFn}/>);
+
+    const contentRoot = screen.getByTestId('k-modal-container');
+
+    // Assert
+    expect(contentRoot).toHaveClass(`k-modal__container--${size}`);
+  });
+
+  it('applies width props', async () => {
+    // Arrange
+    const testWidth = 500;
+    render(<KModal isOpen width={testWidth} content='test' onClose={mockFn}/>);
+
+    const containerRoot = screen.getByTestId('k-modal-container');
+
+    // Assert
+    expect(containerRoot).toHaveStyle({ width: `${testWidth}px` });
+  });
+
+  it('applies no isOverlay props', async () => {
+    // Arrange
+    render(<KModal isOpen isOverlay content='test' onClose={mockFn}/>);
+
+    const overlayRoot = screen.getByTestId('k-modal-overlay');
+
+    // Assert
+    expect(overlayRoot).toHaveClass('k-modal__overlay--active');
+  });
+
+  it('applies isOverlay props', async () => {
+    // Arrange
+    render(<KModal isOpen isOverlay={false} content='test' onClose={mockFn}/>);
+
+    const newOverlayRoot = screen.getByTestId('k-modal-overlay');
+
+    // Assert
+    expect(newOverlayRoot).toHaveClass('k-modal__overlay--transparent');
+  });
+
+  it('applies overlayOpacity props', async () => {
+    // Arrange
+    const overlayOpacity = 0.77;
+    render(<KModal isOpen overlayOpacity={overlayOpacity} content='test' onClose={mockFn}/>);
+
+    const overlayRoot = screen.getByTestId('k-modal-overlay');
+
+    // Assert
+    expect(overlayRoot).toHaveStyle({ opacity: overlayOpacity });
+  });
+
+  it('opens the modal on button click', async () => {
+    // Arrange
+    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+    render(<TestModalComponent/>);
+
+    const openButtonRoot = screen.getByText(openButtonText);
+
+    // Act
+    await act(async () => {
+      await user.click(openButtonRoot);
     });
 
-    test('Title, content, footer prop render test', async () => {
-      // Arrange
-      const user = userEvent.setup();
-      render(<TestModalComponent/>);
-      const openButton = screen.getByText('Open');
+    const modalRoot = screen.getByTestId('k-modal');
 
-      // Act
-      await act(async () => {
-        await user.click(openButton);
-      });
-
-      // Assert
-      expect(screen.getByText(titleText)).toBeInTheDocument();
-      expect(screen.getByText(contentText)).toBeInTheDocument();
-      expect(screen.getByText(footerText)).toBeInTheDocument();
-    });
-
-    test('onClose event test', async () => {
-      // Arrange
-      const user = userEvent.setup();
-      render(<TestModalComponent/>);
-      const openButton = screen.getByText('Open');
-
-      // Act
-      await act(async () => {
-        await user.click(openButton);
-      });
-
-      const closeButtonRoot = screen.getByTestId(closeButtonTestId);
-
-      // Act
-      await act(async () => {
-        await user.click(closeButtonRoot);
-      });
-
-      // Assert
-      await waitFor(() => expect(screen.queryByTestId(rootTestId)).not.toBeInTheDocument(), { timeout: 3100 });
-    });
-
-    test('IsOverlay, overlayOpacity prop render test', async () => {
-      // Arrange
-      const testIsOverlay = false;
-      const testOverlayOpacity = 0.77;
-      const user = userEvent.setup();
-      render(<TestModalComponent isOverlay={testIsOverlay} overlayOpacity={testOverlayOpacity}/>);
-      const openButton = screen.getByText('Open');
-
-      // Act
-      await act(async () => {
-        await user.click(openButton);
-      });
-
-      // Assert
-      const overlayRoot = screen.getByTestId(overlayTestId);
-      expect(overlayRoot).toHaveClass('k-modal-wrapper__overlay--transparent');
-      expect(overlayRoot).toHaveStyle({ opacity: testOverlayOpacity });
-    });
-
-    test('width prop render test', async () => {
-
-      // Arrange
-      const modalWidth = '777px';
-      const user = userEvent.setup();
-      render(<TestModalComponent width={modalWidth}/>);
-      const openButton = screen.getByText('Open');
-
-      // Act
-      await act(async () => {
-        await user.click(openButton);
-      });
-
-      // Assert
-      const rootContainer = screen.getByTestId(containerTestId);
-      expect(rootContainer).toHaveStyle({ width: modalWidth });
-    });
+    // Assert
+    expect(modalRoot).toBeInTheDocument();
   });
 });

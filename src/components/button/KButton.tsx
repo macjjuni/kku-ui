@@ -3,33 +3,24 @@ import {
   MouseEvent,
   forwardRef,
   useImperativeHandle,
-  useRef, useMemo, useCallback,
+  useRef, useMemo, useCallback, memo,
 } from 'react';
 import useRipple from '@/common/hook/useRipple';
 import { initSize } from '@/common/util/variation';
 import { KButtonProps, KButtonRefs } from '@/components';
+import './KButton.scss';
 
 
-const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => {
+const Button = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => {
 
-  const {
-    children,
-    id,
-    className,
-    style,
-    onClick,
-    label,
-    disabled,
-    size,
-    color,
-    fontColor,
-  }: KButtonProps = { ...restProps };
+  // region [Hooks]
+
+  const { id, className, style, children, label } = { ...restProps };
+  const { onClick, disabled, size, color, fontColor, variant = 'default' } = { ...restProps };
 
   if (label && children) {
     throw Error('Error: label and children attributes cannot be duplicated.');
   }
-
-  // region [Hooks]
 
   const rootRef = useRef<HTMLButtonElement>(null);
   const ripple = useRipple(rootRef);
@@ -63,11 +54,14 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) =>
     if (disabled) {
       clazz.push('k-button--disabled');
     }
+    if (variant) {
+      clazz.push(`k-button--${variant}`);
+    }
 
     initSize(clazz, 'k-button', size);
 
     return clazz.join(' ');
-  }, [className, disabled, size, color]);
+  }, [className, disabled, size, color, variant]);
 
   const rootStyle = useMemo(() => {
 
@@ -93,6 +87,12 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) =>
 
   // region [Events]
 
+  const onClickButton = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    if (!disabled) {
+      onClick?.(e);
+    }
+  }, [disabled, onClick]);
+
   const onMouseDown = useCallback((e: MouseEvent<HTMLButtonElement>) => {
 
     if (!disabled) {
@@ -100,14 +100,10 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) =>
     }
   }, [ripple]);
 
-  const onMouseUp = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+  const onMouseUp = useCallback(() => {
 
     ripple.remove();
-
-    if (!disabled) {
-      onClick?.(e);
-    }
-  }, [ripple, disabled, onClick]);
+  }, [ripple]);
 
   const onMouseLeave = useCallback(() => {
 
@@ -135,15 +131,17 @@ const KButton = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) =>
 
   return (
     <button ref={rootRef} id={id} className={`k-button ${rootClass}`} style={rootStyle}
-            type='button' disabled={disabled} onMouseDown={onMouseDown} onMouseLeave={onMouseLeave}
+            type='button' aria-label={label} disabled={disabled}
+            onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onClick={onClickButton}
             onMouseUp={onMouseUp} onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
-
       {(children || label) && (
         <span className='k-button__content'>{children || label}</span>)}
     </button>
   );
 });
 
-
+const KButton = memo(Button);
+Button.displayName = 'KButton';
 KButton.displayName = 'KButton';
+
 export default KButton;

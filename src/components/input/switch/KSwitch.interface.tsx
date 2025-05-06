@@ -3,19 +3,14 @@ import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 
 export interface KSwitchProps extends KBaseProp, KSizeProp {
 
-  value: boolean // ✨ Required ✨
+  value: boolean;
+  onChange: (value: boolean) => void;
+  onClick?: () => void;
 
-  // Types
-  toggleColor?: string
-  bgColor?: string
-
-  disabled?: boolean
-
-  // Event
-  onChange: (value: boolean) => void // ✨ Required ✨
+  disabled?: boolean;
 }
 
 
 export interface KSwitchRefs {
-  toggle: () => void
+  toggle: () => void;
 }

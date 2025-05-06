@@ -1,21 +1,46 @@
 import { ReactNode } from 'react';
-import { KBaseProp } from '@/common/base/base.interface';
+import { KBaseProp, MotionType } from '@/common/base/base.interface';
 
-// eslint-disable-next-line max-len
-type KDropHolderPositionType = 'bottom-center' | 'bottom-left' | 'bottom-right' | 'top-left' | 'top-center' | 'top-right';
+export type KDropHolderPositionType =
+  | 'top-start'
+  | 'top'
+  | 'top-end'
+  | 'right-start'
+  | 'right'
+  | 'right-end'
+  | 'bottom-start'
+  | 'bottom'
+  | 'bottom-end'
+  | 'left-start'
+  | 'left'
+  | 'left-end'
 
-export interface KDropHolderProps extends KBaseProp {
+export type KDropHolderTriggerType = 'hover' | 'click'
 
-  position?: KDropHolderPositionType
-  offset?: string
+export interface KDropHolderOffsetType {
+  x?: number;
+  y?: number;
+}
 
-  children: ReactNode
-  content: ReactNode
+export interface KDropHolderProps extends KBaseProp, MotionType {
 
-  onClick?: () => void
+  trigger?: KDropHolderTriggerType;
+  position?: KDropHolderPositionType;
+  offset?: KDropHolderOffsetType;
+  contentWidth?: number;
+
+  openDelay?: number;
+  closeDelay?: number;
+  autoClose?: boolean;
+
+  children: ReactNode;
+  content: ReactNode;
+
+  onClick?: () => void;
+  onHover?: () => void;
 }
 
 export interface KDropHolderRefs {
-  open: () => void
-  close: () => void
+  open: () => void;
+  close: () => void;
 }

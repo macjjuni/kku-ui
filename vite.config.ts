@@ -1,32 +1,65 @@
 import path from 'path';
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import compression from 'vite-plugin-compression2';
-import eslint from 'vite-plugin-eslint'
-
+import eslint from 'vite-plugin-eslint';
+import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [
-        react(),
-        eslint({
-            exclude: [/virtual:/, /node_modules/]
-        }),
-        compression({
-            include: [/\.(js)$/, /\.(scss)$/],
-            threshold: 1400,
-        }),
+  plugins: [
+    react(),
+    eslint({
+      exclude: [/virtual:/, /node_modules/],
+    }),
+    compression({
+      include: [/\.(js)$/, /\.(scss)$/],
+      threshold: 1400,
+    }),
+    dts({
+      tsconfigPath: 'tsconfig.esm.json',
+      outDir: 'lib/es',
+      include: ['src/**/*'],
+      exclude: ['node_modules', 'lib'],
+      insertTypesEntry: false,
+      copyDtsFiles: true,
+    }),
+  ],
+  resolve: {
+    extensions: ['.tsx', '.ts', '.scss', '.js'],
+    alias: [
+      { find: '@', replacement: path.resolve(__dirname, 'src') },
     ],
-    resolve: {
-        extensions: ['.tsx', '.ts', '.scss', '.js'],
-        alias: [{find: '@', replacement: path.resolve(__dirname, 'src')}]
+  },
+  // SCSS 전역 사용
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@use "@/styles/Entry.scss" as *;',
+      },
     },
-    // SCSS 전역 사용
-    css: {
-        preprocessorOptions: {
-            scss: {additionalData: '@import "/src/styles/Entry.scss";'},
+    devSourcemap: true,
+  },
+  build: {
+    outDir: 'lib',
+    lib: {
+      entry: path.resolve(__dirname, 'src/index.ts'),
+      name: 'kku-ui',
+      formats: ['cjs', 'es'],
+      fileName: (format) => `${format}/index.js`,
+    },
+    rollupOptions: {
+      external: ['react', 'react-dom'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
         },
-        devSourcemap: true,
+        assetFileNames: 'index.css',
+      },
     },
-    build: {outDir: 'dist'},
+    sourcemap: true,
+    target: 'esnext',
+    emptyOutDir: true,
+  },
 });
