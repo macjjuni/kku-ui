@@ -43,7 +43,7 @@
     "@storybook/react-vite": "^8.5.3",
     "@storybook/test": "^8.5.3",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^14.3.1",
+    "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/lodash-es": "^4.17.12",
     "@types/react": "^19.0.8",
