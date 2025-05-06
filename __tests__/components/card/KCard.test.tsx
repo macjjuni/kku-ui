@@ -26,7 +26,7 @@ describe('KCard', () => {
     // Arrange
     const testId = 'k-card-test-id';
     const testClass = 'k-card-test-class';
-    const testStyle = { backgroundColor: 'lightgray' };
+    const testStyle = { backgroundColor: '#eee' };
 
     render(<KCard id={testId} className={testClass} style={testStyle} />);
     const root = screen.getByTestId('k-card');

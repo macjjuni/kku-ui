@@ -24,7 +24,7 @@ describe('KAccordion', () => {
     // Arrange
     const testId = 'k-accordion-id';
     const testClass = 'k-accordion-class';
-    const testStyle = { backgroundColor: 'lightgray' };
+    const testStyle = { backgroundColor: '#eee' };
 
     render(
       <KAccordion id={testId} className={testClass} style={testStyle} summary={summaryText}>

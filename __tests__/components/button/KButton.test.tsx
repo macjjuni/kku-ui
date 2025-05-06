@@ -28,7 +28,7 @@ describe('KButton', () => {
     // Arrange
     const testId = 'k-button-test-id';
     const testClass = 'k-button-test-class';
-    const testStyle = { color: 'red', fontSize: '20px' };
+    const testStyle = { color: '#ffffff', fontSize: '20px' };
 
     render(
       <KButton id={testId} className={testClass} style={testStyle} label={labelText}/>,

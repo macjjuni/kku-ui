@@ -17,7 +17,7 @@ describe('KSwitch', () => {
     // Arrange
     const testId = 'custom-id';
     const testClass = 'test-class';
-    const testStyle = { backgroundColor: 'blue' };
+    const testStyle = { backgroundColor: '#ababab' };
 
     render(<KSwitch id={testId} className={testClass} style={testStyle} value onChange={mockOnChange} />);
     const root = screen.getByRole('switch');
