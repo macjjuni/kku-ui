@@ -2,7 +2,15 @@
   "name": "kku-ui",
   "version": "0.1.0",
   "type": "module",
+  "main": "lib/cjs/index.js",
   "module": "lib/es/index.js",
+  "exports": {
+    ".": {
+      "import": "./lib/es/index.js",
+      "require": "./lib/cjs/index.js"
+    }
+  },
+  "types": "lib/es/index.d.ts",
   "files": [
     "lib/cjs",
     "lib/es",
