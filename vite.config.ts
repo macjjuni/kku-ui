@@ -21,6 +21,8 @@ export default defineConfig({
       outDir: 'lib/es',
       include: ['src/**/*'],
       exclude: ['node_modules', 'lib'],
+      insertTypesEntry: false,
+      copyDtsFiles: true,
     }),
   ],
   resolve: {
