@@ -54,7 +54,6 @@ $button-background-primary-color-disabled: rgba(0, 0, 0, 0.16);
   user-select: none;
 
   .k-button__content { color: inherit; }
-  .k-ripple { background-color: $kku-background-color-ripple; }
   &:focus-visible { @include kku-focus-visible; }
 
   &[disabled] {

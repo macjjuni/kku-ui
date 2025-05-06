@@ -7,7 +7,8 @@ $card-background-color-disabled: $kku-background-color-disabled;
 
 $card-border-radius-size: $kku-border-radius-default;
 
-$card-text-color-default: $kku-text-color-primary;
+$card-text-color-base: $kku-text-color-primary;
+$card-text-color-disabled: $kku-text-color-disabled;
 
 $card-padding-size: $kku-spacing-12;
 $card-title-margin-top-size: $kku-spacing-8;
@@ -17,44 +18,58 @@ $card-box-shadow: $kku-box-shadow-default;
 // endregion
 
 .k-card {
-  position: relative;
   display: inline-flex;
-  flex-direction: column;
-  padding: $card-padding-size;
   border: 1px solid $card-border-color-base;
   border-radius: $card-border-radius-size;
-  background-color: $card-background-color-base;
-  font-family: var(--font-family);
-  color: $card-text-color-default;
   transition: 0.24s ease;
   transition-property: border, background-color;
 
-  .k-card__title {
-    @include kku-text-large;
-    font-weight: bold;
+  .k-card__container {
+    position: relative;
+    flex-direction: column;
+    padding: $kku-spacing-12;
+    background-color: $card-background-color-base;
+    color: $card-text-color-base;
+    font-family: var(--font-family);
+    overflow: hidden;
 
-    & + .k-card__sub-title { margin-top: $card-title-margin-top-size; }
+    .k-card__title {
+      @include kku-text-large;
+      font-weight: bold;
+
+      & + .k-card__sub-title {
+        margin-top: $card-title-margin-top-size;
+      }
+    }
   }
 
   &.k-card--clickable {
-    cursor: pointer;
     transition: 0.24s ease;
     transition-property: box-shadow, background-color, transform;
-
+    .k-card__container {
+      cursor: pointer;
+    }
     &:hover {
       box-shadow: $card-box-shadow;
       transform: translateY(-2px);
     }
-    &:focus-visible { @include kku-focus-visible; }
+    &:focus-visible {
+      @include kku-focus-visible;
+    }
   }
 
   &.k-card--disabled {
-    background-color: $card-background-color-disabled;
-    cursor: not-allowed;
+
+    .k-card__container {
+      cursor: not-allowed;
+      background-color: $card-background-color-disabled;
+      color: $card-text-color-disabled;
+    }
 
     &:hover {
       box-shadow: none;
       transform: none;
     }
   }
+
 }

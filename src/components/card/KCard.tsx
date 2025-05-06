@@ -1,6 +1,7 @@
-import { CSSProperties, memo, useCallback, useMemo, KeyboardEvent } from 'react';
+import { CSSProperties, memo, useCallback, useMemo, KeyboardEvent, useRef, MouseEvent } from 'react';
 import { KCardProps } from '@/components';
 import './KCard.scss';
+import useRipple from '@/common/hook/useRipple';
 
 const isValidAspectRatio = (value?: string): boolean => {
   return value ? /^\d+\/\d+$/.test(value) : false;
@@ -13,6 +14,8 @@ const Card = ({ ...restProps }: KCardProps) => {
   const { id, className, style, children } = restProps;
   const { title, subTitle, disabled } = restProps;
   const { width, height, aspectRatio, onClick } = restProps;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const ripple = useRipple(containerRef);
 
   // endregion
 
@@ -60,6 +63,16 @@ const Card = ({ ...restProps }: KCardProps) => {
     }
   }, [disabled, onClick]);
 
+  const onMouseDownRoot = useCallback((e: MouseEvent<HTMLDivElement>) => {
+    if (!disabled && onClick) {
+      ripple?.register(e);
+    }
+  }, [disabled, onClick])
+
+  const onMouseUpRoot = useCallback(() => {
+    if (onClick) { ripple.remove(); }
+  }, [onClick, ripple]);
+
   // endregion
 
 
@@ -68,9 +81,12 @@ const Card = ({ ...restProps }: KCardProps) => {
     <div id={id} className={rootClass} style={rootStyle} tabIndex={onClick && !disabled ? 0 : -1}
          role={onClick ? 'button' : undefined} onClick={onClickRoot} onKeyDown={onClick ? onKeydownRoot : undefined}
          data-testid='k-card'>
-      {title && <h2 className='k-card__title'>{title}</h2>}
-      {subTitle && <p className='k-card__sub-title'>{subTitle}</p>}
-      {children}
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+      <div ref={containerRef} className='k-card__container' onMouseDown={onMouseDownRoot} onMouseUp={onMouseUpRoot} >
+        {title && <h2 className='k-card__title'>{title}</h2>}
+        {subTitle && <p className='k-card__sub-title'>{subTitle}</p>}
+        {children}
+      </div>
     </div>
   );
 };
