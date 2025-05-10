@@ -10,7 +10,7 @@ export interface KModalProps extends KBaseProp {
   onClose?: () => void;
 
   size?: KModalSizeType;
-  animation?: 'slide' | 'fade';
+  animation?: 'slide' | 'fade' | 'scale';
 
   title?: string;
   content: ReactNode;

@@ -159,9 +159,8 @@ const Modal = ({ ...restProps }: KModalProps) => {
           <>
             <AnimatePresence>
               {isOpen && (
-                <motion.div ref={modalWrapperRef} id={id} className={rootClass} style={rootStyle}
-                            role="dialog" {...modalMotion}
-                            aria-modal="true" aria-label={`${title}-modal-wrapper`} data-testid="k-modal">
+                <motion.div ref={modalWrapperRef} id={id} className={rootClass} style={rootStyle} {...modalMotion}
+                            role="dialog" aria-modal="true" aria-label={`${title}-modal-wrapper`} data-testid="k-modal">
                   <div className={containerClass} data-testid="k-modal-container">
                     {modalHeader}
                     {modalContent}

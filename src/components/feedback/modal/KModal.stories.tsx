@@ -23,7 +23,7 @@ const meta: Meta<KModalProps> = {
       description: '모달 에니메이션 효과를 설정합니다.',
       type: 'string',
       control: { type: 'radio' },
-      options: ['slide', 'fade'],
+      options: ['slide', 'fade', 'scale'],
     },
     width: { description: '모달 width 사이즈를 설정합니다.', type: 'number' },
   },

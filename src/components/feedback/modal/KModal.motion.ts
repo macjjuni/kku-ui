@@ -8,9 +8,15 @@ export const KModalMotion: Record<string, MotionType> = {
     transition: { duration: 0.16, ease: 'easeInOut' },
   },
   slide: {
-    initial: { opacity: 0, y: -4, transform: 'translate(-50%, -50%)' },
-    animate: { opacity: 1, y: 0, transform: 'translate(-50%, -50%)' },
-    exit: { opacity: 0, y: -4, transform: 'translate(-50%, -50%)' },
+    initial: { opacity: 0, top: 'calc(50% - 8px)', left: '50%', transform: 'translate(-50%, -50%)' },
+    animate: { opacity: 1, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' },
+    exit: { opacity: 0, top: 'calc(50% - 8px)', left: '50%', transform: 'translate(-50%, -50%)' },
+    transition: { duration: 0.16, ease: 'easeInOut' },
+  },
+  scale: {
+    initial: { opacity: 0, top: '50%', left: '50%', transform: 'translate(-50%, -50%) scale(0.96)' },
+    animate: { opacity: 1, top: '50%', left: '50%', transform: 'translate(-50%, -50%) scale(1)' },
+    exit: { opacity: 0, top: '50%', left: '50%', transform: 'translate(-50%, -50%) scale(0.96)' },
     transition: { duration: 0.16, ease: 'easeInOut' },
   },
 };

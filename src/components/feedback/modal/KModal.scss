@@ -19,9 +19,6 @@ $modal-content-header-text-size: $kku-gray-color-900;
 
 .k-modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 100%;
   color: $modal-text-color;
   border-radius: $modal-content-border-radius;
