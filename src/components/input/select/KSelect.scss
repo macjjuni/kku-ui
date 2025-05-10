@@ -77,7 +77,7 @@ $select-border-radius: $kku-border-radius-default;
       color: $select-icon-color-base;
       transition: color, transform 0.3s ease;
     }
-    .k-ripple { background-color: $kku-background-color-ripple; }
+    .k-ripple { background-color: $kku-ripple-background-color; }
   }
 
   &.k-select--disabled {

@@ -16,7 +16,9 @@
   --kku-background-color-hover: #{$kku-gray-color-100};
   --kku-background-color-disabled: #{$kku-gray-color-200};
 
-  --kku-background-color-ripple: #{$kku-gray-color-900};
+  --kku-backdrop-background-color-light: #{$kku-gray-color-900};
+  --kku-backdrop-background-color-dark: #{$kku-gray-color-200};
+  --kku-ripple-background-color: #{$kku-gray-color-900};
 
   --kku-primary-color-default: #{$kku-blue-color-400};
   --kku-primary-color-hover: #{$kku-blue-color-500};
@@ -59,7 +61,9 @@ $kku-background-color-default: var(--kku-background-color-default);
 $kku-background-color-hover: var(--kku-background-color-hover);
 $kku-background-color-disabled: var(--kku-background-color-disabled);
 
-$kku-background-color-ripple: var(--kku-background-color-ripple);
+$kku-backdrop-background-color-light: var(--kku-backdrop-background-color-light);
+$kku-backdrop-background-color-dark: var(--kku-backdrop-background-color-dark);
+$kku-ripple-background-color: var(--kku-ripple-background-color);
 
 $kku-primary-color-default: var(--kku-primary-color-default);
 $kku-primary-color-hover: var(--kku-primary-color-hover);
@@ -108,5 +112,5 @@ $kku-dark-mode-signature: 'dark';
   --kku-background-color-hover: #{$kku-gray-color-800};
   --kku-background-color-disabled: #{$kku-gray-color-800};
 
-  --kku-background-color-ripple: #{$kku-gray-color-300};
+  --kku-ripple-background-color: #{$kku-gray-color-300};
 }
