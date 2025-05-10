@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { BUTTON_VARIANTS, KButton } from '@/components';
 import { KButtonProps } from '@/components/actions/button/KButton.interface';
-import { baseArgTyp, disabledArgType, onClickArgType, sizeArgType } from '../common/argTypes';
+import { baseArgTyp, disabledArgType, onClickArgType, sizeArgType } from '@/common/storybook/argTypes';
 
 const variants = Object.keys(BUTTON_VARIANTS);
 

@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { KSelect, KSelectProps, KSelectRefs } from '@/components';
-import { baseArgTyp, disabledArgType, sizeArgType } from '../../common/argTypes';
 import { RefAttributes, useCallback, useRef, useState } from 'react';
 import { JSX } from 'react/jsx-runtime';
+import type { Meta, StoryObj } from '@storybook/react';
+import { KSelect, KSelectProps, KSelectRefs } from '@/components';
+import { baseArgTyp, disabledArgType, sizeArgType } from '@/common/storybook/argTypes';
 
 const meta: Meta<typeof KSelect> = {
   component: KSelect,
@@ -49,7 +49,16 @@ const SelectStory = (args: JSX.IntrinsicAttributes & KSelectProps & RefAttribute
   return (
     <>
       <KSelect ref={rootRef} {...args} value={value} onChange={onChangeValue}/>
-      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
     </>
   );
 };

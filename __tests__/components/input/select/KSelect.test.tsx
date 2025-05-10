@@ -1,4 +1,4 @@
-import { vi } from 'vitest';
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 // import { act } from 'react';
 // import userEvent from '@testing-library/user-event';
@@ -30,59 +30,68 @@ describe('KSelect', () => {
     const testClass = 'test-class-name';
     const testStyle = { color: '#eeeeee', fontSize: '20px' };
 
-    render(<KSelect value={mockValue} items={items} onChange={mockFn} id={testId} className={testClass} style={testStyle} />);
+    render(<KSelect value={mockValue} items={items} onChange={mockFn} id={testId} className={testClass} style={testStyle}/>);
     const selectRoot = screen.getByTestId('k-select');
     const labelRoot = screen.getByText(items[0].label);
 
     // Assert
-    expect(labelRoot).toBeInTheDocument();
-    expect(selectRoot).toHaveAttribute('id', testId);
-    expect(selectRoot).toHaveClass(testClass);
-    expect(selectRoot).toHaveStyle(testStyle);
+    expect(labelRoot)
+      .toBeInTheDocument();
+    expect(selectRoot)
+      .toHaveAttribute('id', testId);
+    expect(selectRoot)
+      .toHaveClass(testClass);
+    expect(selectRoot)
+      .toHaveStyle(testStyle);
   });
 
   it('renders placeholder when placeholder prop is set and value is undefined', () => {
     // Arrange
     const testPlaceholder = 'placeholder-test';
 
-    render(<KSelect value={undefined} items={items} onChange={mockFn} placeholder={testPlaceholder} />);
+    render(<KSelect value={undefined} items={items} onChange={mockFn} placeholder={testPlaceholder}/>);
     const placeholder = screen.getByText(testPlaceholder);
 
     // Assert
-    expect(placeholder).toBeInTheDocument();
+    expect(placeholder)
+      .toBeInTheDocument();
   });
 
   it('applies disabled prop', () => {
     // Arrange
-    render(<KSelect value={mockValue} items={items} onChange={mockFn} disabled />);
+    render(<KSelect value={mockValue} items={items} onChange={mockFn} disabled/>);
     const selectRoot = screen.getByTestId('k-select');
     const input = screen.getByRole('button');
 
     // Assert
-    expect(selectRoot).toHaveClass('k-select--disabled');
-    expect(input).toHaveAttribute('tabindex', '-1');
+    expect(selectRoot)
+      .toHaveClass('k-select--disabled');
+    expect(input)
+      .toHaveAttribute('tabindex', '-1');
   });
 
   it('applies width prop', () => {
     // Arrange
     const testWidth = 200;
 
-    render(<KSelect value={mockValue} items={items} onChange={mockFn} width={testWidth} />);
+    render(<KSelect value={mockValue} items={items} onChange={mockFn} width={testWidth}/>);
     const root = screen.getByRole('button');
 
     // Assert
-    expect(root).toHaveStyle({ width: `${testWidth}px` });
+    expect(root)
+      .toHaveStyle({ width: `${testWidth}px` });
   });
 
   it('renders correct label based on value prop', () => {
     // Arrange
     const testItem = items[1];
 
-    render(<KSelect value={testItem.value} items={items} onChange={mockFn} />);
+    render(<KSelect value={testItem.value} items={items} onChange={mockFn}/>);
     const label = screen.getByText(testItem.label);
 
     // Assert
-    expect(label).toBeInTheDocument();
+    expect(label)
+      .toBeInTheDocument();
   });
 
   // it('opens dropdown and renders noDataText when items is empty', async () => {

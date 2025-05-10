@@ -1,5 +1,5 @@
 import { act, createRef } from 'react';
-import { vi } from 'vitest';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { KSwitch, KSwitchRefs } from '@/components';
@@ -19,33 +19,41 @@ describe('KSwitch', () => {
     const testClass = 'test-class';
     const testStyle = { backgroundColor: '#ababab' };
 
-    render(<KSwitch id={testId} className={testClass} style={testStyle} value onChange={mockOnChange} />);
+    render(<KSwitch id={testId} className={testClass} style={testStyle} value onChange={mockOnChange}/>);
     const root = screen.getByRole('switch');
 
     // Assert
-    expect(root).toBeInTheDocument();
-    expect(root).toHaveAttribute('id', testId);
-    expect(root).toHaveClass('k-switch__input');
-    expect(root).toHaveStyle(testStyle);
+    expect(root)
+      .toBeInTheDocument();
+    expect(root)
+      .toHaveAttribute('id', testId);
+    expect(root)
+      .toHaveClass('k-switch__input');
+    expect(root)
+      .toHaveStyle(testStyle);
   });
 
   it('applies default classes based on props', () => {
     // Arrange
-    render(<KSwitch value disabled onChange={mockOnChange} />);
+    render(<KSwitch value disabled onChange={mockOnChange}/>);
     const container = screen.getByRole('switch').parentElement;
 
     // Assert
-    expect(container).toHaveClass('k-switch');
-    expect(container).toHaveClass('k-switch--on');
-    expect(container).toHaveClass('k-switch--medium');
-    expect(container).toHaveClass('k-switch--disabled');
+    expect(container)
+      .toHaveClass('k-switch');
+    expect(container)
+      .toHaveClass('k-switch--on');
+    expect(container)
+      .toHaveClass('k-switch--medium');
+    expect(container)
+      .toHaveClass('k-switch--disabled');
   });
 
   it('calls onChange and onClick when clicked', async () => {
     // Arrange
     const user = userEvent.setup();
 
-    render(<KSwitch value={false} onChange={mockOnChange} onClick={mockOnClick} />);
+    render(<KSwitch value={false} onChange={mockOnChange} onClick={mockOnClick}/>);
     const button = screen.getByRole('switch');
 
     // Act
@@ -54,15 +62,17 @@ describe('KSwitch', () => {
     });
 
     // Assert
-    expect(mockOnChange).toHaveBeenCalledWith(true);
-    expect(mockOnClick).toHaveBeenCalledTimes(1);
+    expect(mockOnChange)
+      .toHaveBeenCalledWith(true);
+    expect(mockOnClick)
+      .toHaveBeenCalledTimes(1);
   });
 
   it('does not call event handlers when disabled', async () => {
     // Arrange
     const user = userEvent.setup();
 
-    render(<KSwitch value={false} disabled onChange={mockOnChange} onClick={mockOnClick} />);
+    render(<KSwitch value={false} disabled onChange={mockOnChange} onClick={mockOnClick}/>);
     const button = screen.getByRole('switch');
 
     // Act
@@ -71,15 +81,19 @@ describe('KSwitch', () => {
     });
 
     // Assert
-    expect(mockOnChange).not.toHaveBeenCalled();
-    expect(mockOnClick).not.toHaveBeenCalled();
+    expect(mockOnChange)
+      .not
+      .toHaveBeenCalled();
+    expect(mockOnClick)
+      .not
+      .toHaveBeenCalled();
   });
 
   it('calls toggle() via ref and triggers event handlers', () => {
     // Arrange
     const ref = createRef<KSwitchRefs>();
 
-    render(<KSwitch ref={ref} value={false} onChange={mockOnChange} onClick={mockOnClick} />);
+    render(<KSwitch ref={ref} value={false} onChange={mockOnChange} onClick={mockOnClick}/>);
 
     // Act
     act(() => {
@@ -87,7 +101,9 @@ describe('KSwitch', () => {
     });
 
     // Assert
-    expect(mockOnChange).toHaveBeenCalledWith(true);
-    expect(mockOnClick).toHaveBeenCalledTimes(1);
+    expect(mockOnChange)
+      .toHaveBeenCalledWith(true);
+    expect(mockOnClick)
+      .toHaveBeenCalledTimes(1);
   });
 });

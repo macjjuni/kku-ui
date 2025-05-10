@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { KModal, KModalProps } from '@/components';
-import { KButton } from '@/components';
-import { baseArgTyp } from '../common/argTypes';
+import { KButton, KModal, KModalProps } from '@/components';
+import { baseArgTyp } from '@/common/storybook/argTypes';
 
 const meta: Meta<KModalProps> = {
   component: KModal,
@@ -11,9 +10,8 @@ const meta: Meta<KModalProps> = {
     ...baseArgTyp,
     size: {
       description: '모달 사이즈 속성을 설정합니다.',
-      defaultValue: { summary: 'medium' },
       control: { type: 'radio' },
-      options: ['small', 'medium', 'large']
+      options: ['small', 'medium', 'large'],
     },
     title: { description: '모달 제목을 설정합니다.', control: { type: 'text' } },
     content: { description: '모달 컨텐츠를 설정합니다.', type: 'function' },
@@ -24,9 +22,8 @@ const meta: Meta<KModalProps> = {
     animation: {
       description: '모달 에니메이션 효과를 설정합니다.',
       type: 'string',
-      defaultValue: { summary: 'slide' },
       control: { type: 'radio' },
-      options: ['slide', 'fade']
+      options: ['slide', 'fade'],
     },
     width: { description: '모달 width 사이즈를 설정합니다.', type: 'number' },
   },
@@ -41,12 +38,12 @@ const Content = () => {
   return (
     <>
       Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+      Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s,
       when an unknown printer took a galley of type and scrambled it to make a type
       specimen book.
     </>
-  )
-}
+  );
+};
 
 const Template = (args: KModalProps) => {
 
@@ -63,13 +60,12 @@ const Template = (args: KModalProps) => {
   return (
     <>
       <KButton onClick={onOpen}>Open Modal!</KButton>
-      <KModal {...args} isOpen={isOpen} setIsOpen={setIsOpen} footer={
+      <KModal {...args} isOpen={isOpen} setIsOpen={setIsOpen} footer={(
         <>
-          <KButton variant='primary' onClick={onClose}>확인</KButton>
+          <KButton variant="primary" onClick={onClose}>확인</KButton>
           <KButton onClick={onClose}>취소</KButton>
         </>
-      }
-      />
+      )}/>
     </>
   );
 };
@@ -77,14 +73,14 @@ const Template = (args: KModalProps) => {
 
 export const Default: Story = {
   render: Template, args: {
-    title: "Lorem Ipsum is simply",
-    content: <Content />,
+    title: 'Lorem Ipsum is simply',
+    content: <Content/>,
     footer: <></>,
     size: 'small',
     animation: 'slide',
     isOverlay: true,
     overlayOpacity: 0.48,
     overlayClosable: false,
-    width: undefined
+    width: undefined,
   },
 };

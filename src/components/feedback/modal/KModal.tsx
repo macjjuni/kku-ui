@@ -31,7 +31,7 @@ const Modal = ({ ...restProps }: KModalProps) => {
 
   // region [Style]
 
-  const rootStyle = useMemo(() => ({ ...style, width }), [style, width])
+  const rootStyle = useMemo(() => ({ ...style, width }), [style, width]);
 
   const rootClass = useMemo(() => {
     const clazz = ['k-modal'];
@@ -127,16 +127,16 @@ const Modal = ({ ...restProps }: KModalProps) => {
   const modalHeader = useMemo(() => (
     title
       ? (
-        <div className={`k-modal__container__header ${headerClass}`} data-testid='k-modal__header'>
-          <h1 id={headerTitleId} className='k-modal__container__header__text'>{title}</h1>
-          <KIcon className='k-modal__container__header__close-button' icon='close' size={18} onClick={onCloseModal}/>
+        <div className={`k-modal__container__header ${headerClass}`} data-testid="k-modal__header">
+          <h1 id={headerTitleId} className="k-modal__container__header__text">{title}</h1>
+          <KIcon className="k-modal__container__header__close-button" icon="close" size={18} onClick={onCloseModal}/>
         </div>
       ) : null
   ), [headerClass, title, onCloseModal]);
 
   const modalContent = useMemo(() => (
     <section className={`k-modal__container__content${contentClass ? ` ${contentClass}` : ''}`}
-             aria-labelledby={headerTitleId} data-testid='k-modal__container__content'>
+             aria-labelledby={headerTitleId} data-testid="k-modal__container__content">
       {content}
     </section>
   ), [content, headerTitleId, contentClass]);
@@ -144,7 +144,7 @@ const Modal = ({ ...restProps }: KModalProps) => {
   const modalFooter = useMemo(() => (
     footer && (
       <div className={`k-modal__container__footer${footerClass ? ` ${footerClass}` : ''}`}
-           data-testid='k-modal__footer'>
+           data-testid="k-modal__footer">
         {footer}
       </div>
     )
@@ -153,24 +153,30 @@ const Modal = ({ ...restProps }: KModalProps) => {
   // endregion
 
   return (
-    createPortal(
-      <>
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div ref={modalWrapperRef} id={id} className={rootClass} style={rootStyle} role='dialog' {...modalMotion}
-                        aria-modal='true' aria-label={`${title}-modal-wrapper`} data-testid='k-modal'>
-              <div className={containerClass} data-testid='k-modal-container'>
-                {modalHeader}
-                {modalContent}
-                {modalFooter}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        {isOverlay && <KBackdrop open={isOpen} onClick={onClickOverlay} opacity={overlayOpacity}/>}
-      </>,
-      document.body,
-    )
+    <>
+      {
+        createPortal(
+          <>
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div ref={modalWrapperRef} id={id} className={rootClass} style={rootStyle}
+                            role="dialog" {...modalMotion}
+                            aria-modal="true" aria-label={`${title}-modal-wrapper`} data-testid="k-modal">
+                  <div className={containerClass} data-testid="k-modal-container">
+                    {modalHeader}
+                    {modalContent}
+                    {modalFooter}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+          </>,
+          document.body,
+        )
+      }
+      {isOverlay && <KBackdrop open={isOpen} onClick={onClickOverlay} opacity={overlayOpacity}/>}
+    </>
   );
 };
 

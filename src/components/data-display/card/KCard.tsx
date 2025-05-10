@@ -67,10 +67,12 @@ const Card = ({ ...restProps }: KCardProps) => {
     if (!disabled && onClick) {
       ripple?.register(e);
     }
-  }, [disabled, onClick])
+  }, [disabled, onClick]);
 
   const onMouseUpRoot = useCallback(() => {
-    if (onClick) { ripple.remove(); }
+    if (onClick) {
+      ripple.remove();
+    }
   }, [onClick, ripple]);
 
   // endregion
@@ -80,11 +82,11 @@ const Card = ({ ...restProps }: KCardProps) => {
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div id={id} className={rootClass} style={rootStyle} tabIndex={onClick && !disabled ? 0 : -1}
          role={onClick ? 'button' : undefined} onClick={onClickRoot} onKeyDown={onClick ? onKeydownRoot : undefined}
-         data-testid='k-card'>
+         data-testid="k-card">
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-      <div ref={containerRef} className='k-card__container' onMouseDown={onMouseDownRoot} onMouseUp={onMouseUpRoot} >
-        {title && <h2 className='k-card__title'>{title}</h2>}
-        {subTitle && <p className='k-card__sub-title'>{subTitle}</p>}
+      <div ref={containerRef} className="k-card__container" onMouseDown={onMouseDownRoot} onMouseUp={onMouseUpRoot}>
+        {title && <h2 className="k-card__title">{title}</h2>}
+        {subTitle && <p className="k-card__sub-title">{subTitle}</p>}
         {children}
       </div>
     </div>

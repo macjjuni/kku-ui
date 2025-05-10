@@ -1,5 +1,7 @@
-import { forwardRef, KeyboardEvent, MouseEvent, memo, CSSProperties,
-  Ref, useCallback, useId, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import {
+  forwardRef, KeyboardEvent, MouseEvent, memo, CSSProperties,
+  Ref, useCallback, useId, useImperativeHandle, useMemo, useRef, useState,
+} from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import type { KSelectItemType, KSelectProps, KSelectRefs } from '@/components/input/select/KSelect.interface';
 import { KIcon } from '@/components';
@@ -71,7 +73,7 @@ const Select = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs>
   const displayTitle = useMemo(() => {
 
     if ((!value || value === '') && placeholder) {
-      return (<span className='k-select__label__text__placeholder'>{placeholder}</span>);
+      return (<span className="k-select__label__text__placeholder">{placeholder}</span>);
     }
 
     const selectedItem = items?.find((item) => (item.value === value));
@@ -182,22 +184,22 @@ const Select = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs>
 
 
   return (
-    <div ref={rootRef} id={id} className={rootClass} style={rootStyle} data-testid='k-select'>
+    <div ref={rootRef} id={id} className={rootClass} style={rootStyle} data-testid="k-select">
 
-      <div ref={labelRef} role='button' className='k-select__label' style={labelStyle}
+      <div ref={labelRef} role="button" className="k-select__label" style={labelStyle}
            onMouseEnter={onMouseEnterLabel} onMouseLeave={onMouseLeaveLabel} onMouseDown={onMouseDownLabel}
            onMouseUp={onMouseUpLabel} onKeyDown={onKeyDownLabel} onKeyUp={onKeyUpLabel}
            onFocus={onFocusLabel} onBlur={onBlurLabel} tabIndex={disabled ? -1 : 0}
-           aria-expanded={open} aria-haspopup='listbox' aria-controls='dropdown-list'>
+           aria-expanded={open} aria-haspopup="listbox" aria-controls="dropdown-list">
 
-        <span className='k-select__label__text'>{displayTitle}</span>
-        <KIcon className='k-select__label__arrow-icon' icon='keyboard_arrow_down' size={14}/>
+        <span className="k-select__label__text">{displayTitle}</span>
+        <KIcon className="k-select__label__arrow-icon" icon="keyboard_arrow_down" size={14}/>
 
       </div>
 
       <AnimatePresence>
-        { open && (
-          <motion.ul {...KSelectMotion} role='listbox' className='k-select__list' {...KSelectMotion}>
+        {open && (
+          <motion.ul {...KSelectMotion} role="listbox" className="k-select__list" {...KSelectMotion}>
             <KSelectList value={value} items={items} noDataText={noDataText} onClick={onClickListItem}
                          onFocus={onFocusListItem} onKeyDown={onKeydownListItem}/>
           </motion.ul>

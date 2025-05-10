@@ -80,7 +80,7 @@ const Button = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => 
     }
 
     return styles;
-  }, [style, color, fontColor])
+  }, [style, color, fontColor]);
 
   // endregion
 
@@ -131,11 +131,11 @@ const Button = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => 
 
   return (
     <button ref={rootRef} id={id} className={`k-button ${rootClass}`} style={rootStyle}
-            type='button' aria-label={label} disabled={disabled}
+            type="button" aria-label={label} disabled={disabled}
             onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onClick={onClickButton}
             onMouseUp={onMouseUp} onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
       {(children || label) && (
-        <span className='k-button__content'>{children || label}</span>)}
+        <span className="k-button__content">{children || label}</span>)}
     </button>
   );
 });

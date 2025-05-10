@@ -1,5 +1,5 @@
 import { act } from 'react';
-import { vi } from 'vitest';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { KCard } from '@/components';
@@ -15,11 +15,13 @@ describe('KCard', () => {
 
   it('renders with title and subtitle', () => {
     // Arrange
-    render(<KCard title={testTitle} subTitle={testSubTitle} />);
+    render(<KCard title={testTitle} subTitle={testSubTitle}/>);
 
     // Assert
-    expect(screen.getByText(testTitle)).toBeInTheDocument();
-    expect(screen.getByText(testSubTitle)).toBeInTheDocument();
+    expect(screen.getByText(testTitle))
+      .toBeInTheDocument();
+    expect(screen.getByText(testSubTitle))
+      .toBeInTheDocument();
   });
 
   it('applies id, className, and style props', () => {
@@ -28,13 +30,16 @@ describe('KCard', () => {
     const testClass = 'k-card-test-class';
     const testStyle = { backgroundColor: '#eee' };
 
-    render(<KCard id={testId} className={testClass} style={testStyle} />);
+    render(<KCard id={testId} className={testClass} style={testStyle}/>);
     const root = screen.getByTestId('k-card');
 
     // Assert
-    expect(root).toHaveAttribute('id', testId);
-    expect(root).toHaveClass(testClass);
-    expect(root).toHaveStyle(testStyle);
+    expect(root)
+      .toHaveAttribute('id', testId);
+    expect(root)
+      .toHaveClass(testClass);
+    expect(root)
+      .toHaveStyle(testStyle);
   });
 
   it('applies custom style props: width, height, and aspectRatio', () => {
@@ -44,26 +49,31 @@ describe('KCard', () => {
     const root = screen.getByTestId('k-card');
 
     // Assert
-    expect(root).toHaveStyle({
-      width: '300px',
-      height: '200px',
-    });
-    expect(root).not.toHaveStyle({
-      aspectRatio: '16/9',
-    });
+    expect(root)
+      .toHaveStyle({
+        width: '300px',
+        height: '200px',
+      });
+    expect(root)
+      .not
+      .toHaveStyle({
+        aspectRatio: '16/9',
+      });
   });
 
   it('applies aspectRatio when height is not defined', () => {
     // Arrange
     const testWidth = 300;
     const testAspectRatio = '16/9';
-    render(<KCard width={testWidth} aspectRatio={testAspectRatio} />);
+    render(<KCard width={testWidth} aspectRatio={testAspectRatio}/>);
     const root = screen.getByTestId('k-card');
     const computedStyle = getComputedStyle(root);
 
     // Assert
-    expect(computedStyle).toHaveProperty('width', `${testWidth}px`);
-    expect(root.style.aspectRatio).toBe(testAspectRatio);
+    expect(computedStyle)
+      .toHaveProperty('width', `${testWidth}px`);
+    expect(root.style.aspectRatio)
+      .toBe(testAspectRatio);
   });
 
   it('ignores invalid aspectRatio value', () => {
@@ -73,18 +83,21 @@ describe('KCard', () => {
     const root = screen.getByTestId('k-card');
 
     // Assert
-    expect(root).toHaveStyle({
-      width: '300px',
-    });
-    expect(root).not.toHaveStyle({
-      aspectRatio: 'invalid-ratio',
-    });
+    expect(root)
+      .toHaveStyle({
+        width: '300px',
+      });
+    expect(root)
+      .not
+      .toHaveStyle({
+        aspectRatio: 'invalid-ratio',
+      });
   });
 
   it('applies clickable prop and triggers onClick', async () => {
     // Arrange
     const user = userEvent.setup();
-    render(<KCard onClick={mockFn} />);
+    render(<KCard onClick={mockFn}/>);
     const root = screen.getByRole('button');
 
     // Act
@@ -93,13 +106,14 @@ describe('KCard', () => {
     });
 
     // Assert
-    expect(mockFn).toHaveBeenCalledTimes(1);
+    expect(mockFn)
+      .toHaveBeenCalledTimes(1);
   });
 
   it('does not trigger onClick when disabled', async () => {
     // Arrange
     const user = userEvent.setup();
-    render(<KCard disabled onClick={mockFn} />);
+    render(<KCard disabled onClick={mockFn}/>);
     const root = screen.getByRole('button');
 
     // Act
@@ -108,27 +122,31 @@ describe('KCard', () => {
     });
 
     // Assert
-    expect(mockFn).not.toHaveBeenCalled();
+    expect(mockFn)
+      .not
+      .toHaveBeenCalled();
   });
 
   it('calls onClick when Enter or Space key is pressed', async () => {
     // Arrange
     const user = userEvent.setup();
-    render(<KCard title='test' onClick={mockFn} />);
+    render(<KCard title="test" onClick={mockFn}/>);
 
     // Act
     await act(async () => {
       await user.tab();
     });
 
-    expect(screen.getByRole('button')).toHaveFocus();
+    expect(screen.getByRole('button'))
+      .toHaveFocus();
 
     await act(async () => {
       await user.keyboard('{Enter}');
     });
 
     // Assert
-    expect(mockFn).toHaveBeenCalledTimes(1);
+    expect(mockFn)
+      .toHaveBeenCalledTimes(1);
 
     // Act
     await act(async () => {
@@ -136,6 +154,7 @@ describe('KCard', () => {
     });
 
     // Assert
-    expect(mockFn).toHaveBeenCalledTimes(2);
+    expect(mockFn)
+      .toHaveBeenCalledTimes(2);
   });
 });

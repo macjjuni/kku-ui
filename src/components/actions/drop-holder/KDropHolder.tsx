@@ -30,7 +30,10 @@ const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDrop
 
   const uniqueId = useId();
 
-  const computedDropHolderStyle = useMemo(() => ({ ...dropHolderStyle, width: contentWidth || 'auto' }), [dropHolderStyle, contentWidth]);
+  const computedDropHolderStyle = useMemo(() => ({
+    ...dropHolderStyle,
+    width: contentWidth || 'auto',
+  }), [dropHolderStyle, contentWidth]);
   const computedTabIndex = useMemo(() => (trigger === 'click' ? 0 : -1), [trigger]);
   const computedCloseDelay = useMemo(() => {
 
@@ -104,7 +107,9 @@ const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDrop
 
   const calculateTooltipPosition = useCallback(() => {
 
-    if (!rootRef.current || !contentRef.current) { return; }
+    if (!rootRef.current || !contentRef.current) {
+      return;
+    }
 
     const styles: CSSProperties = {};
     const triggerRect = rootRef.current?.getBoundingClientRect();
@@ -117,7 +122,7 @@ const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDrop
 
     switch (position) {
       case 'top-start':
-        x = (dropHolderRect.width - triggerRect.width) / 2 + offsetX
+        x = (dropHolderRect.width - triggerRect.width) / 2 + offsetX;
         y = -((dropHolderRect.height / 2) + (triggerRect.height / 2)) + offsetY;
         break;
       case 'top':
@@ -256,12 +261,12 @@ const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDrop
 
   return (
     <div ref={rootRef} id={id || uniqueId} className={rootClass} tabIndex={computedTabIndex} style={rootStyle}
-         role='button' onClick={onClickRoot} onKeyUp={onKeyUpRoot} onMouseEnter={onMouseEnterRoot}
-         onMouseLeave={onMouseLeaveRoot} onFocus={onFocusRoot} onBlur={onBlurRoot} data-testid='k-drop-holder'>
+         role="button" onClick={onClickRoot} onKeyUp={onKeyUpRoot} onMouseEnter={onMouseEnterRoot}
+         onMouseLeave={onMouseLeaveRoot} onFocus={onFocusRoot} onBlur={onBlurRoot} data-testid="k-drop-holder">
       {children}
       <AnimatePresence>
-        { isOpen && (
-          <motion.div ref={contentRef} className='k-drop-holder__content' style={computedDropHolderStyle} role='tooltip'
+        {isOpen && (
+          <motion.div ref={contentRef} className="k-drop-holder__content" style={computedDropHolderStyle} role="tooltip"
                       initial={initial} animate={animate} exit={exit} transition={transition} aria-hidden={!isOpen}>
             {content}
           </motion.div>

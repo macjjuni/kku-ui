@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { KIconProps, KIconSizeList, KIcon } from '@/components';
 import { kIcons } from '@/common/icons/icons';
-import { baseArgTyp, colorArgType, disabledArgType } from '../common/argTypes';
+import { baseArgTyp, colorArgType, disabledArgType } from '@/common/storybook/argTypes';
 
 const ICON_LIST = Object.keys(kIcons);
 

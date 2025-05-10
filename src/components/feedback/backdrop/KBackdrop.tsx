@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { KeyboardEvent, memo, useCallback, useId, useMemo } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { KBackdropProps } from '@/components/feedback/backdrop/KBackdrop.interface';
@@ -6,7 +7,6 @@ import './KBackdrop.scss';
 
 
 const Backdrop = ({ ...restProps }: KBackdropProps) => {
-
 
   // region [Hooks]
 
@@ -35,8 +35,11 @@ const Backdrop = ({ ...restProps }: KBackdropProps) => {
   }, [style, opacity, zIndex]);
 
   const BackdropMotion = useMemo(() => {
-    return { ...KBackdropMotion, animate: { opacity } };
-  }, []);
+    if (opacity) {
+      return { ...KBackdropMotion, animate: { opacity, zIndex } };
+    }
+    return KBackdropMotion;
+  }, [opacity, zIndex]);
 
   // endregion
 
@@ -57,15 +60,20 @@ const Backdrop = ({ ...restProps }: KBackdropProps) => {
 
 
   return (
-    <AnimatePresence>
-      {
-        open && (
-          // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-          <motion.div id={id} className={rootClass} style={rootStyle} onClick={onClickBackdrop} onKeyDown={onkeydown}
-                      tabIndex={tabIndex} {...BackdropMotion} aria-hidden='true'/>
-        )
-      }
-    </AnimatePresence>
+    createPortal(
+      <>
+        <AnimatePresence>
+          {
+            open && (
+              // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+              <motion.div id={id} className={rootClass} style={rootStyle} onClick={onClickBackdrop} onKeyDown={onkeydown}
+                          tabIndex={tabIndex} {...BackdropMotion} aria-hidden="true" data-testid="k-backdrop"/>
+            )
+          }
+        </AnimatePresence>
+      </>,
+      document.body,
+    )
   );
 };
 

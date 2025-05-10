@@ -163,25 +163,25 @@ const TextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KTextF
   // region [Templates]
 
   const LeftAction = useMemo(() => (
-    leftAction && (<div className='k-text-field__input__left-action'>{leftAction}</div>)
+    leftAction && (<div className="k-text-field__input__left-action">{leftAction}</div>)
   ), [leftAction]);
 
   const RightAction = useMemo(() => (
-    rightAction && (<div className='k-text-field__input__right-action'>{rightAction}</div>)
+    rightAction && (<div className="k-text-field__input__right-action">{rightAction}</div>)
   ), [rightAction]);
 
 
   const IconArea = useMemo(() => (
-    <div ref={iconAreaRef} className='k-text-field__input__icon'>
+    <div ref={iconAreaRef} className="k-text-field__input__icon">
       {
         password && (
-          <KIcon className='k-text-field__input__icon-password' icon={isPasswdShow ? 'visibility' : 'visibility_off'}
+          <KIcon className="k-text-field__input__icon-password" icon={isPasswdShow ? 'visibility' : 'visibility_off'}
                  onClick={onPasswordShow} disabled={disabled} size={18}/>
         )
       }
       {
         clearable && value && (
-          <KIcon className='k-text-field__input__icon-clearable' icon='close' size={14}
+          <KIcon className="k-text-field__input__icon-clearable" icon="close" size={14}
                  onClick={onClear} disabled={disabled}/>
         )
       }
@@ -201,27 +201,27 @@ const TextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KTextF
 
 
   return (
-    <div className={rootClass} style={rootStyle} data-testid='k-text-field'>
+    <div className={rootClass} style={rootStyle} data-testid="k-text-field">
 
       {
         label && (
-          <span className='k-text-field__label' style={labelStyle}>
-            <label htmlFor={id} className='k-text-field__label__text'>
+          <span className="k-text-field__label" style={labelStyle}>
+            <label htmlFor={id} className="k-text-field__label__text">
               {label}
-              {required && <span className='k-text-field__label--required'>*</span>}
+              {required && <span className="k-text-field__label--required">*</span>}
             </label>
           </span>
         )
       }
 
-      <div className='k-text-field__input'>
+      <div className="k-text-field__input">
 
         {LeftAction}
 
-        <input id={id} ref={inputRef} className='k-text-field__input__root' style={{ ...inputStyle, ...inputPadding }}
+        <input id={id} ref={inputRef} className="k-text-field__input__root" style={{ ...inputStyle, ...inputPadding }}
                type={(password && !isPasswdShow) ? 'password' : 'input'} value={value}
                onChange={onChangeValue} onFocus={onFocusInput} onBlur={onblurInput} onKeyDown={onKeyDownEnterInput}
-               disabled={disabled} placeholder={placeholder} maxLength={maxLength} data-testid='k-text-field-input'
+               disabled={disabled} placeholder={placeholder} maxLength={maxLength} data-testid="k-text-field-input"
                autoComplete={autoComplete} autoCorrect={autoCorrect} autoCapitalize={autoCapitalize}/>
         {(clearable || password) && IconArea}
         {RightAction}
@@ -235,4 +235,4 @@ const KTextField = memo(TextField);
 TextField.displayName = 'KTextField';
 KTextField.displayName = 'KTextField';
 
-export default KTextField
+export default KTextField;

@@ -1,6 +1,6 @@
-import { memo, useCallback } from 'react';
-import { KSelectListProps } from '@/components/input/select/KSelect.interface';
-import { KIcon } from '@/components';
+import { memo, useCallback } from "react";
+import { KSelectListProps } from "@/components/input/select/KSelect.interface";
+import { KIcon } from "@/components";
 
 
 const SelectList = ({ ...restProp }: KSelectListProps) => {
@@ -11,11 +11,11 @@ const SelectList = ({ ...restProp }: KSelectListProps) => {
 
   const rootClass = useCallback((val: string) => {
 
-    const clazz = ['k-select__list__item'];
+    const clazz = ["k-select__list__item"];
 
-    if (value === val) { clazz.push('k-select__list__item--active') }
+    if (value === val) { clazz.push("k-select__list__item--active") }
 
-    return clazz.join(' ');
+    return clazz.join(" ");
   }, [value, items]);
 
   // endregion
@@ -25,19 +25,19 @@ const SelectList = ({ ...restProp }: KSelectListProps) => {
     <>
       {
         items.map((item, idx) => (
-          <li key={item.value} className={rootClass(item.value)} role='menuitem' tabIndex={0} onFocus={onFocus}
+          <li key={item.value} className={rootClass(item.value)} role="menuitem" tabIndex={0} onFocus={onFocus}
               onClick={() => { onClick(item); }} onKeyDown={(e) => { onKeyDown(e, item, idx); }}>
-            { value === item.value && (<KIcon icon='check' size={14} className='select__list__item--check-icon'/>) }
-            <span className='k-select__list__item__text'>{item.label}</span>
+            { value === item.value && (<KIcon icon="check" size={14} className="select__list__item--check-icon"/>) }
+            <span className="k-select__list__item__text">{item.label}</span>
           </li>
         ))
       }
       {
         items.length === 0 && (
-          <li role='menuitem' tabIndex={0} className='k-select__list__item k-select__list__item--no-data'
+          <li role="menuitem" tabIndex={0} className="k-select__list__item k-select__list__item--no-data"
               onFocus={onFocus} onClick={() => { onClick(null); }}
               onKeyDown={(e) => { onKeyDown(e, null, -1); }}>
-            <span className='k-select__list__item__text'>{noDataText}</span>
+            <span className="k-select__list__item__text">{noDataText}</span>
           </li>
         )
       }
@@ -46,7 +46,7 @@ const SelectList = ({ ...restProp }: KSelectListProps) => {
 };
 
 const KSelectList = memo(SelectList);
-KSelectList.displayName = 'KSelectList';
-KSelectList.displayName = 'KSelectList';
+KSelectList.displayName = "KSelectList";
+KSelectList.displayName = "KSelectList";
 
 export default KSelectList;

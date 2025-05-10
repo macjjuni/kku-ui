@@ -10,10 +10,11 @@
     },
     "include": ["src/index.ts", "styles.d.ts"],
     "exclude": [
-        "stories/components/**/*.tsx",
+        "/**/*.tsx",
+        "src/**/*.stories.tsx",
         "__tests__",
-        "setupTests.ts",
         "vitest.config.ts",
+        "vitest.setup.ts",
         "node_modules",
         "./lib/**/*"
     ],

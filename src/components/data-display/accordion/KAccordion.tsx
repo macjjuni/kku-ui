@@ -30,7 +30,9 @@ const Accordion = ({ ...restProps }: KAccordionProps) => {
 
     const clazz = ['k-accordion'];
 
-    if (className) { clazz.push(className); }
+    if (className) {
+      clazz.push(className);
+    }
     clazz.push(`k-accordion--${size}`);
     clazz.push(`k-accordion--${isOpen ? 'open' : 'close'}`);
 
@@ -42,7 +44,9 @@ const Accordion = ({ ...restProps }: KAccordionProps) => {
 
     const styles: CSSProperties = { ...style };
 
-    if (width) { styles.width = width; }
+    if (width) {
+      styles.width = width;
+    }
 
     return styles;
   }, [style, width]);
@@ -104,7 +108,7 @@ const Accordion = ({ ...restProps }: KAccordionProps) => {
     }
 
     if (typeof summaryIcon === 'string') {
-      return (<KIcon className='k-accordion__summary__icon' icon={summaryIcon} size={summaryIconSize}/>);
+      return (<KIcon className="k-accordion__summary__icon" icon={summaryIcon} size={summaryIconSize}/>);
     }
 
     return summaryIcon;
@@ -125,22 +129,22 @@ const Accordion = ({ ...restProps }: KAccordionProps) => {
 
   return (
     <details ref={root} id={id} className={rootClass} open
-             style={rootStyle} data-testid='k-accordion'>
+             style={rootStyle} data-testid="k-accordion">
 
-      <summary role='button' id={summaryId} className='k-accordion__summary' onClick={onClick}
+      <summary role="button" id={summaryId} className="k-accordion__summary" onClick={onClick}
                onKeyDown={onKeyDown} tabIndex={0}>
-        <div className='k-accordion__summary__container' data-testid='k-accordion__summary'>
+        <div className="k-accordion__summary__container" data-testid="k-accordion__summary">
           {SummaryIcon}
-          <span className='k-accordion__summary__text'>{summary}</span>
+          <span className="k-accordion__summary__text">{summary}</span>
         </div>
-        <div className='k-accordion__summary__icon__wrapper'>
-          <KIcon className='k-accordion__summary__icon' icon='keyboard_arrow_down' size={iconSize}/>
+        <div className="k-accordion__summary__icon__wrapper">
+          <KIcon className="k-accordion__summary__icon" icon="keyboard_arrow_down" size={iconSize}/>
         </div>
       </summary>
 
-      <div ref={contentRef} id={contentId} className='k-accordion__content' style={contentStyle}
+      <div ref={contentRef} id={contentId} className="k-accordion__content" style={contentStyle}
            aria-labelledby={summaryId}>
-        <div className='k-accordion__content__wrapper'>{children}</div>
+        <div className="k-accordion__content__wrapper">{children}</div>
       </div>
 
     </details>
