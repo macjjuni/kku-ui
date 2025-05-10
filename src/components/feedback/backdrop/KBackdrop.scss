@@ -1,0 +1,23 @@
+// region [Component Tokens]
+
+$backdrop-background-color: $kku-gray-color-900;
+$backdrop-background-color-dark: $kku-gray-color-200;
+$backdrop-opacity: 0.48;
+$backdrop-z-index: $kku-backdrop-z-index;
+
+// endregion
+
+.k-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: $backdrop-background-color;
+  opacity: $backdrop-opacity;
+  z-index: $backdrop-z-index;
+}
+
+.#{$kku-dark-mode-signature} .k-backdrop {
+  background-color: $backdrop-background-color-dark;
+}
