@@ -4,7 +4,7 @@ import { KDropHolderProps } from '@/components';
 
 const meta: Meta<KDropHolderProps> = {
   component: KDropHolder,
-  title: 'Components/DropHolder',
+  title: 'Actions/DropHolder',
   argTypes: {
     children: { description: '내부에 표시할 콘텐츠를 정의합니다.', type: 'function' },
     content: { description: '트리거 이후 표시될 컨텐츠를 정의합니다.', type: 'function' },

@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { KSelect } from '@/components/input/select';
-import { KSelectProps, KSelectRefs } from '@/components/input/select/KSelect.interface';
+import { KSelect, KSelectProps, KSelectRefs } from '@/components';
 import { baseArgTyp, disabledArgType, sizeArgType } from '../../common/argTypes';
 import { RefAttributes, useCallback, useRef, useState } from 'react';
 import { JSX } from 'react/jsx-runtime';

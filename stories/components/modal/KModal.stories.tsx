@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { KModal, KModalProps } from '@/components/modal';
+import { KModal, KModalProps } from '@/components';
 import { KButton } from '@/components';
 import { baseArgTyp } from '../common/argTypes';
 
 const meta: Meta<KModalProps> = {
   component: KModal,
-  title: 'Components/Modal',
+  title: 'Feedbacks/Modal',
   argTypes: {
     ...baseArgTyp,
     size: {

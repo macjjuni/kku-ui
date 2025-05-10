@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { KIconSizeList, KIcon } from '@/components/icon';
-import { KIconProps } from '@/components/icon/KIcon.interface';
+import { KIconProps, KIconSizeList, KIcon } from '@/components';
 import { kIcons } from '@/common/icons/icons';
 import { baseArgTyp, colorArgType, disabledArgType } from '../common/argTypes';
 
@@ -8,7 +7,7 @@ const ICON_LIST = Object.keys(kIcons);
 
 const meta: Meta<KIconProps> = {
   component: KIcon,
-  title: 'Components/Icon',
+  title: 'Foundations/Icon',
   argTypes: {
     icon: {
       description: '아이콘 형태를 설정합니다.',

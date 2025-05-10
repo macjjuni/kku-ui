@@ -1,10 +1,10 @@
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'motion/react';
-import { KModalMotion } from '@/components/modal/KModal.motion';
-import { KModalProps } from '@/components/modal/KModal.interface';
+import { KModalMotion } from '@/components/feedback/modal/KModal.motion';
+import { KModalProps } from '@/components/feedback/modal/KModal.interface';
 import { useCleanId } from '@/common/hook/useCleanId';
-import { KIcon } from '@/components';
+import { KBackdrop, KIcon } from '@/components';
 import './KModal.scss';
 
 
@@ -31,43 +31,35 @@ const Modal = ({ ...restProps }: KModalProps) => {
 
   // region [Style]
 
+  const rootStyle = useMemo(() => ({ ...style, width }), [style, width])
+
   const rootClass = useMemo(() => {
     const clazz = ['k-modal'];
 
     if (isOpen) {
-      clazz.push('k-modal__container--open');
+      clazz.push('k-modal--open');
     }
     if (!isOpen) {
-      clazz.push('k-modal__container--close');
+      clazz.push('k-modal--close');
     }
+    clazz.push(`k-modal--${size}`);
 
     return clazz.join(' ');
-  }, [isOpen]);
+  }, [isOpen, size]);
 
   const containerClass = useMemo(() => {
 
     const clazz = ['k-modal__container'];
-    
-    clazz.push(`k-modal__container--${size}`);
 
-    if (className) { clazz.push(className); }
-    if (!title) { clazz.push('k-modal__container--no-title'); }
-
-    return clazz.join(' ');
-  }, [size, title]);
-
-  const overlayClass = useMemo(() => {
-
-    const clazz = ['k-modal__overlay'];
-
-    if (isOverlay) {
-      clazz.push('k-modal__overlay--active');
-    } else {
-      clazz.push('k-modal__overlay--transparent');
+    if (className) {
+      clazz.push(className);
+    }
+    if (!title) {
+      clazz.push('k-modal__container--no-title');
     }
 
     return clazz.join(' ');
-  }, [isOverlay]);
+  }, [title]);
 
   // endregion
 
@@ -151,7 +143,8 @@ const Modal = ({ ...restProps }: KModalProps) => {
 
   const modalFooter = useMemo(() => (
     footer && (
-      <div className={`k-modal__container__footer${footerClass ? ` ${footerClass}` : ''}`} data-testid='k-modal__footer'>
+      <div className={`k-modal__container__footer${footerClass ? ` ${footerClass}` : ''}`}
+           data-testid='k-modal__footer'>
         {footer}
       </div>
     )
@@ -161,23 +154,21 @@ const Modal = ({ ...restProps }: KModalProps) => {
 
   return (
     createPortal(
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div ref={modalWrapperRef} id={id} className={rootClass} style={style} role='dialog' {...modalMotion}
-                      aria-modal='true' aria-label={`${title}-modal-wrapper`} data-testid='k-modal'>
-
-            <div className={containerClass} style={{ width }} data-testid='k-modal-container'>
-              {modalHeader}
-              {modalContent}
-              {modalFooter}
-            </div>
-
-            <div className={overlayClass} onClick={onClickOverlay} style={{ opacity: overlayOpacity }}
-                 aria-hidden='true' data-testid='k-modal-overlay'/>
-
-          </motion.div>
-        )}
-      </AnimatePresence>,
+      <>
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div ref={modalWrapperRef} id={id} className={rootClass} style={rootStyle} role='dialog' {...modalMotion}
+                        aria-modal='true' aria-label={`${title}-modal-wrapper`} data-testid='k-modal'>
+              <div className={containerClass} data-testid='k-modal-container'>
+                {modalHeader}
+                {modalContent}
+                {modalFooter}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        {isOverlay && <KBackdrop open={isOpen} onClick={onClickOverlay} opacity={overlayOpacity}/>}
+      </>,
       document.body,
     )
   );

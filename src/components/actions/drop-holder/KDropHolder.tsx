@@ -3,9 +3,9 @@ import {
   useImperativeHandle, useMemo, useRef, useState, memo, useId,
 } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { KDropHolderProps, KDropHolderRefs } from '@/components/drop-holder/KDropHolder.interface';
+import { KDropHolderProps, KDropHolderRefs } from '@/components/actions/drop-holder/KDropHolder.interface';
 import useClickOutside from '@/common/hook/useClickOutside';
-import KDropHolderMotion from '@/components/drop-holder/KDropHolder.motion';
+import KDropHolderMotion from '@/components/actions/drop-holder/KDropHolder.motion';
 import './KDropHolder.scss';
 
 

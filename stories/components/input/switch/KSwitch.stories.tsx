@@ -1,13 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { KSwitch } from '@/components/input/switch';
-import { KSwitchProps } from '@/components/input/switch';
+import { KSwitch, KSwitchProps } from '@/components';
 import { useCallback, useState } from 'react';
 import { baseArgTyp, disabledArgType, onClickArgType, sizeArgType } from '../../common/argTypes';
 
 
 const meta: Meta<typeof KSwitch> = {
   component: KSwitch,
-  title: 'Input/Switch',
+  title: 'Actions/Switch',
   argTypes: {
     ...sizeArgType,
     ...disabledArgType,

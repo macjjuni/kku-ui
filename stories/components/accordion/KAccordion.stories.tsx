@@ -1,10 +1,10 @@
 import type {Meta, StoryObj} from '@storybook/react';
-import { KAccordionProps, KAccordion, KAccordionSizes } from '../../../src/components';
+import { KAccordionProps, KAccordion, KAccordionSizes } from '@/components';
 import { baseArgTyp } from '../common/argTypes';
 
 const meta: Meta<KAccordionProps> = {
     component: KAccordion,
-    title: 'Components/Accordion',
+    title: 'Data Display/Accordion',
     argTypes: {
         size: {description: '크기를 설정합니다.', defaultValue: {summary: 'medium'}, control: { type: 'radio' }, options: Object.keys(KAccordionSizes)},
         width: {description: 'width 속성을 설정합니다.', defaultValue: {summary: 'undefined'}, type: 'number' },

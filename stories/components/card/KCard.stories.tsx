@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { KCard } from '@/components/card';
-import { KCardProps } from '@/components';
+import { KCard, KCardProps } from '@/components';
 import { baseArgTyp, disabledArgType, sizeArgType } from '../common/argTypes';
 import { SIZES, SizeType } from '@/common/base/base.interface';
 
@@ -8,7 +7,7 @@ const Sizes = Object.keys(SIZES) as SizeType[];
 
 const meta: Meta<KCardProps> = {
   component: KCard,
-  title: 'Components/Card',
+  title: 'Data Display/Card',
   argTypes: {
     title: { description: '타이틀 텍스트를 설정합니다..', defaultValue: { summary: '' }, control: { type: 'text'} },
     subTitle: { description: '서브 타이틀 텍스트를 설정합니다..', defaultValue: { summary: '' }, control: { type: 'text'} },

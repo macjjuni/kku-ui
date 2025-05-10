@@ -2,7 +2,6 @@
 
 $modal-text-color: $kku-text-color-primary;
 
-$modal-overlay-z-index: $kku-modal-overlay-z-index;
 $modal-content-z-index: $kku-modal-content-z-index;
 
 $modal-content-width-small: 640px;
@@ -14,37 +13,30 @@ $modal-content-background-color: $kku-background-color-default;
 $modal-content-border-radius: $kku-border-radius-default;
 $modal-content-box-shadow: $kku-box-shadow-default;
 
-$modal-overlay-background-color: $kku-gray-color-900;
-$modal-overlay-background-color-dark: $kku-gray-color-200;
-$modal-overlay-opacity: 0.48;
-
 $modal-content-header-text-size: $kku-gray-color-900;
 
 // endregion
 
 .k-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100dvw;
-  height: 100dvh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: $modal-text-color;
+  border-radius: $modal-content-border-radius;
+  box-shadow: $modal-content-box-shadow;
+  z-index: $modal-content-z-index;
+  overflow: hidden;
+
+  &.k-modal--small { max-width: $modal-content-width-small; }
+  &.k-modal--medium { max-width: $modal-content-width-medium; }
+  &.k-modal--large { max-width: $modal-content-width-large; }
 
   .k-modal__container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 100%;
     background-color: $modal-content-background-color;
-    border-radius: $modal-content-border-radius;
-    box-shadow: $modal-content-box-shadow;
-    z-index: $modal-content-z-index;
-    overflow: hidden;
 
-    &.k-modal__container--small { max-width: $modal-content-width-small; }
-    &.k-modal__container--medium { max-width: $modal-content-width-medium; }
-    &.k-modal__container--large { max-width: $modal-content-width-large; }
+
 
     .k-modal__container__header {
       display: flex;
@@ -76,31 +68,5 @@ $modal-content-header-text-size: $kku-gray-color-900;
       gap: 8px;
       padding: 0 $kku-spacing-16 $kku-spacing-12 $kku-spacing-16;
     }
-  }
-
-  .k-modal__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: $modal-overlay-z-index;
-
-    &.k-modal__overlay--active {
-      background-color: $modal-overlay-background-color;
-      opacity: $modal-overlay-opacity;
-    }
-
-    &.k-modal__overlay--transparent {
-      background-color: transparent;
-      opacity: 0;
-    }
-  }
-}
-
-.#{$kku-dark-mode-signature} .k-modal {
-
-  .k-modal__overlay.k-modal__overlay--active {
-    background-color: $modal-overlay-background-color-dark;
   }
 }

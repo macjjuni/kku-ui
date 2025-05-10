@@ -101,10 +101,10 @@ describe('KModal', () => {
     // Arrange
     render(<KModal isOpen content='test' size={size} onClose={mockFn}/>);
 
-    const contentRoot = screen.getByTestId('k-modal-container');
+    const contentRoot = screen.getByTestId('k-modal');
 
     // Assert
-    expect(contentRoot).toHaveClass(`k-modal__container--${size}`);
+    expect(contentRoot).toHaveClass(`k-modal--${size}`);
   });
 
   it('applies width props', async () => {
@@ -112,41 +112,10 @@ describe('KModal', () => {
     const testWidth = 500;
     render(<KModal isOpen width={testWidth} content='test' onClose={mockFn}/>);
 
-    const containerRoot = screen.getByTestId('k-modal-container');
+    const containerRoot = screen.getByTestId('k-modal');
 
     // Assert
     expect(containerRoot).toHaveStyle({ width: `${testWidth}px` });
-  });
-
-  it('applies no isOverlay props', async () => {
-    // Arrange
-    render(<KModal isOpen isOverlay content='test' onClose={mockFn}/>);
-
-    const overlayRoot = screen.getByTestId('k-modal-overlay');
-
-    // Assert
-    expect(overlayRoot).toHaveClass('k-modal__overlay--active');
-  });
-
-  it('applies isOverlay props', async () => {
-    // Arrange
-    render(<KModal isOpen isOverlay={false} content='test' onClose={mockFn}/>);
-
-    const newOverlayRoot = screen.getByTestId('k-modal-overlay');
-
-    // Assert
-    expect(newOverlayRoot).toHaveClass('k-modal__overlay--transparent');
-  });
-
-  it('applies overlayOpacity props', async () => {
-    // Arrange
-    const overlayOpacity = 0.77;
-    render(<KModal isOpen overlayOpacity={overlayOpacity} content='test' onClose={mockFn}/>);
-
-    const overlayRoot = screen.getByTestId('k-modal-overlay');
-
-    // Assert
-    expect(overlayRoot).toHaveStyle({ opacity: overlayOpacity });
   });
 
   // it('opens the modal on button click', async () => {

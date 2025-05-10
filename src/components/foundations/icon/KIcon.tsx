@@ -2,7 +2,7 @@ import {
   CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref,
   useCallback, useId, useImperativeHandle, useRef, useMemo, memo,
 } from 'react';
-import { KIconProps, KIconRefs } from '@/components/icon/KIcon.interface';
+import { KIconProps, KIconRefs } from '@/components/foundations/icon/KIcon.interface';
 import { initDisabled } from '@/common/util/variation';
 import { getIcon } from '@/common/icons/icons';
 import './KIcon.scss';
