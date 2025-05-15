@@ -5,7 +5,7 @@ import compression from 'vite-plugin-compression2';
 import eslint from 'vite-plugin-eslint';
 import dts from 'vite-plugin-dts';
 
-// https://vitejs.dev/config/
+
 export default defineConfig({
   plugins: [
     react(),
@@ -30,15 +30,6 @@ export default defineConfig({
     alias: [
       { find: '@', replacement: path.resolve(__dirname, 'src') },
     ],
-  },
-  // SCSS 전역 사용
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: '@use "@/styles/Entry.scss" as *;',
-      },
-    },
-    devSourcemap: true,
   },
   build: {
     outDir: 'lib',

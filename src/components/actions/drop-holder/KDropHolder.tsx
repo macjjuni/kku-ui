@@ -6,7 +6,6 @@ import { AnimatePresence, motion } from 'motion/react';
 import { KDropHolderProps, KDropHolderRefs } from '@/components/actions/drop-holder/KDropHolder.interface';
 import useClickOutside from '@/common/hook/useClickOutside';
 import KDropHolderMotion from '@/components/actions/drop-holder/KDropHolder.motion';
-import './KDropHolder.scss';
 
 
 const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDropHolderRefs>) => {

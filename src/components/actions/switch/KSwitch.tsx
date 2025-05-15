@@ -1,6 +1,6 @@
 import { forwardRef, memo, Ref, useCallback, useId, useImperativeHandle, useMemo, useRef } from 'react';
 import { KSwitchProps, KSwitchRefs } from '@/components/actions/switch/KSwitch.interface';
-import './KSwitch.scss';
+
 
 const Switch = forwardRef(({ ...restProps }: KSwitchProps, ref: Ref<KSwitchRefs>) => {
 

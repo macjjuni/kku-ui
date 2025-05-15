@@ -4,7 +4,6 @@ import {
 } from 'react';
 import { KTextFieldProps, KTextFieldRefs } from '@/components/input/textfield/KTextField.interface';
 import { KIcon } from '@/components';
-import './KTextField.scss';
 
 
 const TextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KTextFieldRefs>) => {

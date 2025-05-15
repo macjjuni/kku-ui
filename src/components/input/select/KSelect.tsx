@@ -9,7 +9,6 @@ import KSelectList from '@/components/input/select/KSelectList';
 import KSelectMotion from '@/components/input/select/KSelect.motion';
 import useClickOutside from '@/common/hook/useClickOutside';
 import useRipple from '@/common/hook/useRipple';
-import './KSelect.scss';
 
 
 const Select = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs>) => {

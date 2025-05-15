@@ -5,7 +5,6 @@ import { KModalMotion } from '@/components/feedback/modal/KModal.motion';
 import { KModalProps } from '@/components/feedback/modal/KModal.interface';
 import { useCleanId } from '@/common/hook/useCleanId';
 import { KBackdrop, KIcon } from '@/components';
-import './KModal.scss';
 
 
 const Modal = ({ ...restProps }: KModalProps) => {

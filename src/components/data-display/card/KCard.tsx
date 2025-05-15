@@ -1,7 +1,7 @@
 import { CSSProperties, memo, useCallback, useMemo, KeyboardEvent, useRef, MouseEvent } from 'react';
 import { KCardProps } from '@/components';
-import './KCard.scss';
 import useRipple from '@/common/hook/useRipple';
+
 
 const isValidAspectRatio = (value?: string): boolean => {
   return value ? /^\d+\/\d+$/.test(value) : false;

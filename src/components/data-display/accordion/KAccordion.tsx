@@ -5,7 +5,6 @@ import {
 import { KAccordionProps } from '@/components/data-display/accordion/KAccordion.interface';
 import { useCleanId } from '@/common/hook/useCleanId';
 import { KIcon } from '@/components';
-import './KAccordion.scss';
 
 
 const Accordion = ({ ...restProps }: KAccordionProps) => {

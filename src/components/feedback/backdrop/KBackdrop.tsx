@@ -3,7 +3,6 @@ import { KeyboardEvent, memo, useCallback, useId, useMemo } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { KBackdropProps } from '@/components/feedback/backdrop/KBackdrop.interface';
 import KBackdropMotion from '@/components/feedback/backdrop/KBackdrop.motion';
-import './KBackdrop.scss';
 
 
 const Backdrop = ({ ...restProps }: KBackdropProps) => {
