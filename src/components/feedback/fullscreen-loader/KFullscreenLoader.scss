@@ -1,0 +1,16 @@
+@use '../../../styles/Entry' as *;
+
+// region [Component Tokens]
+// endregion
+
+.k-fullscreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: $kku-full-screen-loader-z-index;
+}
+
+.#{$kku-dark-mode-signature} .k-fullscreen {}
+
+
