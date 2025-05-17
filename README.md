@@ -8,19 +8,21 @@
 
 ## 🎁 Components
 
-| 컴포넌트&nbsp; \ &nbsp; 지원 |&nbsp;&nbsp;&nbsp;기능&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;디자인&nbsp;&nbsp;| 접근성 |테스트 코드|&nbsp;스토리북&nbsp;| 사용/배포 |
-|:-----------------------|:---:|:-------------------------:|:---:|:----:|:---:|:-----:|
-| `<KButton />`          |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| `<KTextField /> `      |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| `<KIcon />`            |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| `<KSelect />`          |✅|             ✅             |  ✅   |  ✅   |✅|✅|
-| `<KDropHolder />`      |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| `<KSwitch />`          |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| `<KCard />`            |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| `<KAccordion />`       |✅|             ✅              |  ✅  |   ✅   |✅|✅|
-| `<KModal />`           |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| 🏃🏻‍♂️..              |✨|             ✨             |  ✨  |  ✨   |✨|✨|
-
+| 컴포넌트&nbsp; \ &nbsp; 지원  |&nbsp;&nbsp;&nbsp;기능&nbsp;&nbsp;&nbsp;|&nbsp;스토리북&nbsp;| 사용/배포 |
+|:------------------------|:---:|:---:|:-----:|
+| `<KButton />`           |✅|✅|✅|
+| `<KTextField /> `       |✅|✅|✅|
+| `<KIcon />`             |✅|✅|✅|
+| `<KSelect />`           |✅|✅|✅|
+| `<KDropHolder />`       |✅|✅|✅|
+| `<KSwitch />`           |✅|✅|✅|
+| `<KCard />`             |✅|✅|✅|
+| `<KAccordion />`        |✅|✅|✅|
+| `<KModal />`            |✅|✅|✅|
+| `<KBackdrop />`         |✅|✅|✅|
+| `<KSpinner />`          |✅|✅|✅|
+| `<KFullscreenLoader />` |✅|✅|✅|
+| 🏃🏻‍♂️..               |✨|✨|✨|
 
 ✅ Good ⚠️ Not Good 🧑🏻‍💻 Trying 
 
