@@ -88,7 +88,6 @@ $button-error-border-color-disabled: $kku-error-color-disabled;
 
 // Common
 $button-border-radius: $kku-border-radius-default;
-
 // endregion
 
 
@@ -103,24 +102,26 @@ $button-border-radius: $kku-border-radius-default;
   border-style: solid;
   border-radius: $button-border-radius;
   cursor: pointer;
-  transition: border-color, background-color 0.24s ease;
+  transition: border-color, 0.24s ease;
   overflow: hidden;
   user-select: none;
+
+  & + & { margin-left: $kku-spacing-8; }
 
   .k-button__content { color: inherit; }
   &:focus-visible { @include kku-focus-visible; }
 
-  &[disabled] {
+  &.k-button--disabled {
     cursor: not-allowed;
 
-    &.k-button--color::after {
+    &.k-button--colorful::after {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: $button-primary-background-color-default;
+      background-color: rgba(0, 0, 0, 0.32);
     }
   }
 
@@ -138,7 +139,7 @@ $button-border-radius: $kku-border-radius-default;
       background-color: $button-default-background-color-hover;
     }
 
-    &[disabled] {
+    &.k-button--disabled {
       color: $button-default-text-color-disabled;
       border-color: $button-default-border-color-disabled;
       background-color: $button-default-background-color-disabled;
@@ -156,7 +157,7 @@ $button-border-radius: $kku-border-radius-default;
       background-color: $button-primary-border-color-hover;
     }
 
-    &[disabled] {
+    &.k-button--disabled {
       color: $button-primary-text-color-disabled;
       border-color: $button-primary-border-color-disabled;
       background-color: $button-primary-background-color-disabled;
@@ -173,7 +174,7 @@ $button-border-radius: $kku-border-radius-default;
       background-color: $button-default-background-color-hover;
     }
 
-    &[disabled] {
+    &.k-button--disabled {
       color: $button-outlined-text-color-disabled-light;
       border-color: $button-outlined-border-color-disabled-light;
       background-color: $button-outlined-background-color-disabled-light;
@@ -191,7 +192,7 @@ $button-border-radius: $kku-border-radius-default;
       background-color: $button-success-background-color-hover;
     }
 
-    &[disabled] {
+    &.k-button--disabled {
       color: $button-success-text-color-disabled;
       border-color: $button-success-border-color-disabled;
       background-color: $button-success-background-color-disabled;
@@ -209,7 +210,7 @@ $button-border-radius: $kku-border-radius-default;
       background-color: $button-warning-background-color-hover;
     }
 
-    &[disabled] {
+    &.k-button--disabled {
       color: $button-warning-text-color-disabled;
       border-color: $button-warning-border-color-disabled;
       background-color: $button-warning-background-color-disabled;
@@ -227,7 +228,7 @@ $button-border-radius: $kku-border-radius-default;
       background-color: $button-error-background-color-hover;
     }
 
-    &[disabled] {
+    &.k-button--disabled {
       color: $button-error-text-color-disabled;
       border-color: $button-error-border-color-disabled;
       background-color: $button-error-background-color-disabled;
@@ -262,7 +263,7 @@ $button-border-radius: $kku-border-radius-default;
       color: $button-outlined-text-color-hover-dark;
     }
 
-    &[disabled] {
+    &.k-button--disabled {
       color: $button-outlined-text-color-disabled-dark;
       border-color: $button-outlined-border-color-disabled-dark;
       background-color: $button-outlined-background-color-disabled-dark;

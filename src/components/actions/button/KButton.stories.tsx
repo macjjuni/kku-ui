@@ -12,7 +12,6 @@ const meta: Meta<KButtonProps> = {
     label: { description: '내부 텍스트를 설정합니다.' },
     variant: {
       description: '형태를 설정합니다.',
-      defaultValue: { summary: variants[0] },
       control: { type: 'select' },
       options: variants,
       type: 'string',
@@ -26,15 +25,25 @@ export default meta;
 
 type Story = StoryObj<typeof KButton>
 
-const Template = (args: KButtonProps) => {
-  return (<KButton {...args}/>);
-};
+// const Template = (args: KButtonProps) => {
+//   return (<KButton {...args}/>);
+// };
 
 const commonArgs: KButtonProps = { label: '안녕하세요', size: 'medium', disabled: false };
 
-export const Default: Story = { render: Template, args: { variant: 'default', ...commonArgs } };
-export const Outlined: Story = { render: Template, args: { variant: 'outlined', ...commonArgs } };
-export const Primary: Story = { render: Template, args: { variant: 'primary', ...commonArgs } };
-export const Success: Story = { render: Template, args: { variant: 'success', ...commonArgs } };
-export const Warning: Story = { render: Template, args: { variant: 'warning', ...commonArgs } };
-export const Error: Story = { render: Template, args: { variant: 'error', ...commonArgs } };
+const ColorfulButtons = (args: KButtonProps) => {
+  return (
+    <>
+      <KButton {...args} variant="success"/>
+      <KButton {...args} variant="warning"/>
+      <KButton {...args} variant="error"/>
+      <KButton {...args} variant="default" color="violet" />
+    </>
+  );
+};
+
+export const Default: Story = { args: { variant: 'default', ...commonArgs } };
+export const Outlined: Story = { args: { variant: 'outlined', ...commonArgs } };
+export const Primary: Story = { args: { variant: 'primary', ...commonArgs } };
+export const Colorful: Story = { render: ColorfulButtons, args: { variant: 'success', ...commonArgs } };
+

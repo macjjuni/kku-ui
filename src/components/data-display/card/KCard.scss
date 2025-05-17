@@ -28,6 +28,7 @@ $card-box-shadow: $kku-box-shadow-default;
     position: relative;
     flex-direction: column;
     padding: $card-padding-size;
+    border-radius: $card-border-radius-size;
     background-color: $card-background-color-base;
     color: $card-text-color-base;
     font-family: var(--font-family);

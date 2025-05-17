@@ -28,9 +28,12 @@ const Button = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => 
     focus() {
       rootRef.current?.focus();
     },
+    blur() {
+      rootRef.current?.blur();
+    },
     click() {
       if (!disabled) {
-        onClick?.();
+        rootRef.current?.click();
       }
     },
   }));
@@ -44,18 +47,10 @@ const Button = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => 
 
     const clazz = [];
 
-    if (className) {
-      clazz.push(className);
-    }
-    if (color) {
-      clazz.push('k-button--color');
-    }
-    if (disabled) {
-      clazz.push('k-button--disabled');
-    }
-    if (variant) {
-      clazz.push(`k-button--${variant}`);
-    }
+    if (className) { clazz.push(className); }
+    if (color) { clazz.push('k-button--colorful'); }
+    if (disabled) { clazz.push('k-button--disabled'); }
+    if (variant) { clazz.push(`k-button--${variant}`); }
 
     initSize(clazz, 'k-button', size);
 
@@ -70,13 +65,9 @@ const Button = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => 
       styles.borderColor = color;
       styles.backgroundColor = color;
 
-      if (!fontColor) {
-        styles.color = '#fff';
-      }
+      if (!fontColor) { styles.color = '#fff'; }
     }
-    if (fontColor) {
-      styles.color = fontColor;
-    }
+    if (fontColor) { styles.color = fontColor; }
 
     return styles;
   }, [style, color, fontColor]);

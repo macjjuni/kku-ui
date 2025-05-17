@@ -28,5 +28,6 @@ export interface KButtonProps extends KBaseProp {
 
 export interface KButtonRefs {
   focus: () => void;
+  blur: () => void;
   click: () => void;
 }
