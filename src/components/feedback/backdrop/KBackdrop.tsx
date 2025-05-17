@@ -10,7 +10,7 @@ const Backdrop = ({ ...restProps }: KBackdropProps) => {
   // region [Hooks]
 
   const uniqueId = useId();
-  const { id = `k-backdrop-${uniqueId}`, className, style } = { ...restProps };
+  const { id = `k-backdrop-${uniqueId}`, className, style, children } = { ...restProps };
   const { open, opacity, zIndex, onClick } = { ...restProps };
   const tabIndex = useMemo(() => (onClick ? 0 : -1), [onClick]);
 
@@ -66,7 +66,9 @@ const Backdrop = ({ ...restProps }: KBackdropProps) => {
             open && (
               // eslint-disable-next-line jsx-a11y/no-static-element-interactions
               <motion.div id={id} className={rootClass} style={rootStyle} onClick={onClickBackdrop} onKeyDown={onkeydown}
-                          tabIndex={tabIndex} {...BackdropMotion} aria-hidden="true" data-testid="k-backdrop"/>
+                          tabIndex={tabIndex} {...BackdropMotion} aria-hidden="true" data-testid="k-backdrop">
+                {children}
+              </motion.div>
             )
           }
         </AnimatePresence>

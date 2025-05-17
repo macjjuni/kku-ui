@@ -5,10 +5,9 @@ import {
 import { AnimatePresence, motion } from 'motion/react';
 import type { KSelectItemType, KSelectProps, KSelectRefs } from '@/components/input/select/KSelect.interface';
 import { KIcon } from '@/components';
+import { useRipple, useClickOutside } from '@/common/hooks';
 import KSelectList from '@/components/input/select/KSelectList';
 import KSelectMotion from '@/components/input/select/KSelect.motion';
-import useClickOutside from '@/common/hook/useClickOutside';
-import useRipple from '@/common/hook/useRipple';
 
 
 const Select = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs>) => {

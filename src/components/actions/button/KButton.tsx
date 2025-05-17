@@ -5,7 +5,7 @@ import {
   useImperativeHandle,
   useRef, useMemo, useCallback, memo,
 } from 'react';
-import useRipple from '@/common/hook/useRipple';
+import { useRipple } from '@/common/hooks';
 import { initSize } from '@/common/util/variation';
 import { KButtonProps, KButtonRefs } from '@/components';
 

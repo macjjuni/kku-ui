@@ -9,6 +9,10 @@
       "import": "./lib/es/index.js",
       "require": "./lib/cjs/index.js"
     },
+    "./hooks": {
+      "import": "./lib/es/hooks.js",
+      "require": "./lib/cjs/hooks.js"
+    },
     "./index.css": "./lib/index.css"
   },
   "types": "lib/es/index.d.ts",
@@ -36,7 +40,8 @@
     "lodash-es": "^4.17.21",
     "motion": "^12.9.2",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "zustand": "^5.0.4"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1",

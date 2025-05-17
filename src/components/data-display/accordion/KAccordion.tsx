@@ -3,7 +3,7 @@ import {
   useEffect, useMemo, useRef, useState,
 } from 'react';
 import { KAccordionProps } from '@/components/data-display/accordion/KAccordion.interface';
-import { useCleanId } from '@/common/hook/useCleanId';
+import { useCleanId } from '@/common/hooks';
 import { KIcon } from '@/components';
 
 

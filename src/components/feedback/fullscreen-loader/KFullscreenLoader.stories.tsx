@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
+import { useFullLoader } from '@/common/hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { KButton, KFullscreenLoader, KInitializer } from '@/components';
 import { useFullLoader } from '@/common/hooks';
 import { baseArgTyp } from '@/common/storybook/argTypes';
-import { useFullLoader } from '@/common/hook';
 
 const meta: Meta = {
   component: KFullscreenLoader,

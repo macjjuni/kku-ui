@@ -3,8 +3,8 @@ import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { KModalMotion } from '@/components/feedback/modal/KModal.motion';
 import { KModalProps } from '@/components/feedback/modal/KModal.interface';
-import { useCleanId } from '@/common/hook/useCleanId';
 import { KBackdrop, KIcon } from '@/components';
+import { useCleanId } from '@/common/hooks';
 
 
 const Modal = ({ ...restProps }: KModalProps) => {

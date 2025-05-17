@@ -1,6 +1,6 @@
 import { CSSProperties, memo, useCallback, useMemo, KeyboardEvent, useRef, MouseEvent } from 'react';
 import { KCardProps } from '@/components';
-import useRipple from '@/common/hook/useRipple';
+import { useRipple } from '@/common/hooks';
 
 
 const isValidAspectRatio = (value?: string): boolean => {

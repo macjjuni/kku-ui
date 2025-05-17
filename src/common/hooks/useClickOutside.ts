@@ -23,7 +23,7 @@ export default function useClickOutside(
     };
     setTimeout(() => {
       window.addEventListener('mousedown', handleClickOutside);
-    }, 0)
+    }, 0);
 
 
     return () => {

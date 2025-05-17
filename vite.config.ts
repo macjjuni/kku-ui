@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [
     react(),
     eslint({
-      exclude: [/virtual:/, /node_modules/],
+      exclude: ['node_modules', 'virtual:']
     }),
     compression({
       include: [/\.(js)$/, /\.(scss)$/],
@@ -34,10 +34,13 @@ export default defineConfig({
   build: {
     outDir: 'lib',
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
+      entry: {
+        index: path.resolve(__dirname, 'src/index.ts'),         // for `kku-ui`
+        hooks: path.resolve(__dirname, 'src/common/hooks/index.ts'),   // for `kku-ui/hooks`
+      },
       name: 'kku-ui',
       formats: ['cjs', 'es'],
-      fileName: (format) => `${format}/index.js`,
+      fileName: (format, entry) => `${format}/${entry}.js`,
     },
     rollupOptions: {
       external: ['react', 'react-dom'],

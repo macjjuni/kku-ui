@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { KBackdrop, KSpinner } from '@/components';
-import { useFullLoader } from '@/common/hook';
+import { useFullLoader } from '@/common/hooks';
 
 
 const FullscreenLoader = () => {
