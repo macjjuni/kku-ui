@@ -30,7 +30,7 @@ const Template = () => {
   return (
     <>
       <KInitializer/>
-      <KButton label="open" onClick={onShow}/>
+      <KButton label="열기" onClick={onShow}/>
     </>
   );
 };
@@ -43,11 +43,21 @@ export const Default: Story = {
     docs: {
       source: {
         code: `
-import { useFullLoader } from "kku-ui/hooks"; // Import
+import { KButton, KInitializer } from "kku-ui";
+import { useFullLoader } from "kku-ui/hooks";
 
-const { open } = useFullLoader();             // Define
+const Example = () => {
+  const { open } = useFullLoader();
 
-open();                                       // Usage`,
+  return (
+    <>
+      <KInitializer /> {/* 앱 전체에서 한 번만 사용되어야 합니다 */}
+      <KButton label="Open Loader" onClick={open} />
+    </>
+  );
+};
+
+export default Example;`,
         language: 'tsx',
       },
     },

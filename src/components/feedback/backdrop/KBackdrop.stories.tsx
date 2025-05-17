@@ -32,7 +32,7 @@ const Template = (args: KBackdropProps) => {
 
   return (
     <>
-      <KButton label="Open" onClick={onClickButton}/>
+      <KButton label="열기" onClick={onClickButton}/>
       <KBackdrop open={open} opacity={args.opacity} onClick={onClickBackdrop} />
     </>
   );

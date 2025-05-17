@@ -1,4 +1,4 @@
-import { fullLoaderStore } from '@/common/store';
+import fullLoaderStore from '@/components/feedback/fullscreen-loader/KFullscreenLoader.store';
 
 
 export default function useFullLoader() {
