@@ -23,7 +23,7 @@ describe('KModal', () => {
     const testStyle = { color: '#eee', fontSize: '24px' };
 
     render(<KBackdrop open id={testId} className={testClass} style={testStyle}/>);
-    const root = screen.getByTestId('k-backdrop');
+    const root = screen.getByRole('presentation', { hidden: true });
 
     // Assert
     expect(root)
@@ -38,9 +38,7 @@ describe('KModal', () => {
     // Arrange
     render(<KBackdrop open={false}/>);
     // Assert
-    expect(screen.queryByTestId('k-backdrop'))
-      .not
-      .toBeInTheDocument();
+    expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
   });
 
   // it('applies onClick props', async () => {

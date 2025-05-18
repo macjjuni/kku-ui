@@ -13,7 +13,7 @@ const FullscreenLoader = () => {
 
   return (
     <KBackdrop open={isOpen} className="k-fullscreen">
-      <KSpinner/>
+      <KSpinner className="k-fullscreen__spinner"/>
     </KBackdrop>
   );
 };

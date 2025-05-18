@@ -64,11 +64,11 @@ const Backdrop = ({ ...restProps }: KBackdropProps) => {
         <AnimatePresence>
           {
             open && (
-              // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-              <motion.div id={id} className={rootClass} style={rootStyle} onClick={onClickBackdrop} onKeyDown={onkeydown}
-                          tabIndex={tabIndex} {...BackdropMotion} aria-hidden="true" data-testid="k-backdrop">
+              <>
+                <motion.div id={id} className={rootClass} style={rootStyle} onClick={onClickBackdrop} onKeyDown={onkeydown}
+                            tabIndex={tabIndex} {...BackdropMotion} role="presentation" aria-hidden="true"/>
                 {children}
-              </motion.div>
+              </>
             )
           }
         </AnimatePresence>

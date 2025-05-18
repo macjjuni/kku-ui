@@ -16,7 +16,7 @@
   --kku-background-color-hover: #{$kku-gray-color-100};
   --kku-background-color-disabled: #{$kku-gray-color-200};
 
-  --kku-backdrop-background-color-light: #{$kku-gray-color-900};
+  --kku-backdrop-background-color-light: #{$kku-black-color};
   --kku-backdrop-background-color-dark: #{$kku-gray-color-200};
   --kku-ripple-background-color: #{$kku-gray-color-900};
 
@@ -44,7 +44,7 @@
   --kku-backdrop-z-index: #{$kku-z-index-1000};
   --kku-modal-content-z-index: #{$kku-z-index-1001};
   --kku-bottom-sheet-z-index: #{$kku-z-index-1001};
-  --kku-full-screen-loader-z-index: #{$kku-z-index-2000};
+  --kku-full-screen-loader-z-index: #{$kku-z-index-1001};
 }
 
 
