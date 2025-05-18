@@ -34,7 +34,7 @@ const Backdrop = ({ ...restProps }: KBackdropProps) => {
   }, [style, opacity, zIndex]);
 
   const BackdropMotion = useMemo(() => {
-    if (opacity) {
+    if (typeof opacity === 'number') {
       return { ...KBackdropMotion, animate: { opacity, zIndex } };
     }
     return KBackdropMotion;
