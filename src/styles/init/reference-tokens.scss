@@ -100,6 +100,7 @@
 
   /* Border radius Size */
   --kku-border-radius-default: 3px;
+  --kku-bottom-sheet-border-radius: 16px;
 
   /* Font Family */
   --kku-default-font-family: 'Arial', sans-serif;
@@ -112,8 +113,9 @@
   --kku-z-idnex-200: 200;
   --kku-z-idnex-500: 500;
   --kku-z-idnex-1000: 1000;
-  --kku-z-idnex-2000: 2000;
   --kku-z-idnex-1001: 1001;
+  --kku-z-idnex-2000: 2000;
+  --kku-z-idnex-2001: 2001;
   --kku-z-idnex-5000: 5000;
   --kku-z-idnex-9999: 9999;
 
@@ -222,6 +224,7 @@ $kku-spacing-80: var(--kku-spacing-80);
 
 /* Border radius Size */
 $kku-border-radius-default: var(--kku-border-radius-default);
+$kku-bottom-sheet-border-radius: var(--kku-bottom-sheet-border-radius);
 
 /* Font Family */
 $kku-default-font-family: var(--kku-default-font-family);
@@ -235,6 +238,7 @@ $kku-z-index-500: var(--kku-z-idnex-500);
 $kku-z-index-1000: var(--kku-z-idnex-1000);
 $kku-z-index-1001: var(--kku-z-idnex-1001);
 $kku-z-index-2000: var(--kku-z-idnex-2000);
+$kku-z-index-2001: var(--kku-z-idnex-2001);
 $kku-z-index-5000: var(--kku-z-idnex-5000);
 $kku-z-index-9999: var(--kku-z-idnex-9999);
 

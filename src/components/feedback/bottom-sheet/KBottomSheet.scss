@@ -1,0 +1,29 @@
+@use '../../../styles/Entry' as *;
+
+// region [Component Tokens]
+
+$kku-bottom-sheet-background-color: $kku-background-color-default;
+$kku-bottom-sheet-padding: $kku-spacing-12;
+
+// endregion
+
+.k-bottom-sheet-backdrop {}
+
+.k-bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  padding: $kku-bottom-sheet-padding;
+  background-color: $kku-bottom-sheet-background-color;
+  border-top-left-radius: $kku-bottom-sheet-border-radius;
+  border-top-right-radius: $kku-bottom-sheet-border-radius;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  z-index: $kku-bottom-sheet-z-index;
+}
+
+
+.#{$kku-dark-mode-signature} .k-bottom-sheet {
+
+}
