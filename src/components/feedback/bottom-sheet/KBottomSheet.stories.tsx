@@ -55,6 +55,7 @@ export const Default: Story = {
     height: 300,
     overlayClosable: true,
     overlayOpacity: undefined,
+    escClosable: true,
   },
 };
 

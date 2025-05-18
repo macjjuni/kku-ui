@@ -6,6 +6,7 @@ export interface KBottomSheetProps extends KBaseProp {
 
   defaultOpen: boolean;
   overlayClosable?: boolean;
+  escClosable?: boolean;
 
   // Styles
   overlayOpacity?: number;

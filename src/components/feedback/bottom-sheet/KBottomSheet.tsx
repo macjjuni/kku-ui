@@ -1,4 +1,4 @@
-import { forwardRef, memo, MouseEvent, useCallback, useId, useImperativeHandle, useMemo, useState } from 'react';
+import { forwardRef, memo, MouseEvent, useCallback, useEffect, useId, useImperativeHandle, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { KBackdrop, KBottomSheetProps } from '@/components';
@@ -12,7 +12,8 @@ const BottomSheet = forwardRef<KBottomSheetRefs, KBottomSheetProps>(({ ...restPr
 
   const uniqueId = useId();
   const { id = `k-backdrop-${uniqueId}`, className, style, children } = { ...restProps };
-  const { defaultOpen = false, overlayClosable = false, overlayOpacity = 0.64, height } = { ...restProps };
+  const { defaultOpen = false, overlayOpacity = 0.56, height } = { ...restProps };
+  const { overlayClosable = false, escClosable = false } = { ...restProps };
 
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
@@ -31,7 +32,7 @@ const BottomSheet = forwardRef<KBottomSheetRefs, KBottomSheetProps>(({ ...restPr
     return clazz.join(' ');
   }, [className]);
 
-  const rootStyle = useMemo(() => ({ ...style, height }), [style, height])
+  const rootStyle = useMemo(() => ({ ...style, height }), [style, height]);
 
   // endregion
 
@@ -61,8 +62,26 @@ const BottomSheet = forwardRef<KBottomSheetRefs, KBottomSheetProps>(({ ...restPr
     e.stopPropagation();
   }, []);
 
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  }, []);
 
   // endregion
+
+
+  // region [Life Cycles]
+
+  useEffect(() => {
+    if (!isOpen || !escClosable) return;
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, escClosable]);
+
+  // endregion
+
 
   // region [APIs]
 
@@ -86,7 +105,8 @@ const BottomSheet = forwardRef<KBottomSheetRefs, KBottomSheetProps>(({ ...restPr
           <AnimatePresence>
             {
               isOpen && (
-                <motion.div id={id} className={rootClass} style={rootStyle} onClick={onClickBody} {...KBottomSheetMotion}>
+                <motion.div id={id} className={rootClass} style={rootStyle} onClick={onClickBody} {...KBottomSheetMotion}
+                            role="dialog">
                   {children}
                 </motion.div>
               )
