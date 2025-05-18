@@ -168,7 +168,6 @@ const Modal = ({ ...restProps }: KModalProps) => {
                 </motion.div>
               )}
             </AnimatePresence>
-
           </>,
           document.body,
         )
