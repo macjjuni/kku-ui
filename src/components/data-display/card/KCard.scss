@@ -2,35 +2,35 @@
 
 // region [Component Token]
 
-$card-border-color-base: $kku-border-color-default;
-$card-background-color-base: $kku-background-color-default;
-$card-background-color-disabled: $kku-background-color-disabled;
+$kku-card-border-color-base: $kku-border-color-default;
+$kku-card-background-color-base: $kku-background-color-default;
+$kku-card-background-color-disabled: $kku-background-color-disabled;
 
-$card-border-radius-size: $kku-border-radius-default;
-$card-text-color-base: $kku-text-color-primary;
-$card-text-color-disabled: $kku-text-color-disabled;
+$kku-card-border-radius-size: $kku-border-radius-default;
+$kku-card-text-color-base: $kku-text-color-primary;
+$kku-card-text-color-disabled: $kku-text-color-disabled;
 
-$card-padding-size: $kku-spacing-12;
-$card-title-margin-top-size: $kku-spacing-8;
+$kku-card-padding-size: $kku-spacing-12;
+$kku-card-title-margin-top-size: $kku-spacing-8;
 
-$card-box-shadow: $kku-box-shadow-default;
+$kku-card-box-shadow: $kku-box-shadow-default;
 
 // endregion
 
 .k-card {
   display: inline-flex;
-  border: 1px solid $card-border-color-base;
-  border-radius: $card-border-radius-size;
+  border: 1px solid $kku-card-border-color-base;
+  border-radius: $kku-card-border-radius-size;
   transition: 0.24s ease;
   transition-property: border, background-color;
 
   .k-card__container {
     position: relative;
     flex-direction: column;
-    padding: $card-padding-size;
-    border-radius: $card-border-radius-size;
-    background-color: $card-background-color-base;
-    color: $card-text-color-base;
+    padding: $kku-card-padding-size;
+    border-radius: $kku-card-border-radius-size;
+    background-color: $kku-card-background-color-base;
+    color: $kku-card-text-color-base;
     font-family: var(--font-family);
     overflow: hidden;
 
@@ -39,7 +39,7 @@ $card-box-shadow: $kku-box-shadow-default;
       font-weight: bold;
 
       & + .k-card__subtitle {
-        margin-top: $card-title-margin-top-size;
+        margin-top: $kku-card-title-margin-top-size;
       }
     }
   }
@@ -52,7 +52,7 @@ $card-box-shadow: $kku-box-shadow-default;
       cursor: pointer;
     }
     &:hover {
-      box-shadow: $card-box-shadow;
+      box-shadow: $kku-card-box-shadow;
       transform: translateY(-2px);
     }
     &:focus-visible {
@@ -64,8 +64,8 @@ $card-box-shadow: $kku-box-shadow-default;
   &.k-card--disabled {
     .k-card__container {
       cursor: not-allowed;
-      background-color: $card-background-color-disabled;
-      color: $card-text-color-disabled;
+      background-color: $kku-card-background-color-disabled;
+      color: $kku-card-text-color-disabled;
     }
 
     &:hover {
