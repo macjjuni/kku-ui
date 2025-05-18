@@ -3,8 +3,8 @@ import { KFullscreenLoaderStoreProps } from '@/components';
 
 const useFullLoader = create<KFullscreenLoaderStoreProps>((set) => ({
   isOpen: false,
-  show: () => set({ isOpen: true }),
-  hide: () => set({ isOpen: false }),
+  open: () => set({ isOpen: true }),
+  close: () => set({ isOpen: false }),
   set: (open) => set({ isOpen: open }),
 }));
 

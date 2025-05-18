@@ -18,12 +18,12 @@ export default meta;
 
 const Template = () => {
 
-  const { show, hide } = useFullLoader();
+  const { open, close } = useFullLoader();
 
   const onShow = useCallback(() => {
-    show();
+    open();
     setTimeout(() => {
-      hide();
+      close();
     }, 3000);
   }, []);
 

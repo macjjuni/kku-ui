@@ -3,7 +3,7 @@ import fullLoaderStore from '@/components/feedback/fullscreen-loader/KFullscreen
 
 export default function useFullLoader() {
 
-  const { isOpen, hide, show, set } = fullLoaderStore();
+  const { isOpen, open, close, set } = fullLoaderStore();
 
-  return { isOpen, hide, show, set };
+  return { isOpen, open, close, set };
 }

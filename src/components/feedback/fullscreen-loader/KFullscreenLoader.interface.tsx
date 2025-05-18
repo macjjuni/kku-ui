@@ -1,6 +1,6 @@
 export interface KFullscreenLoaderStoreProps {
   isOpen: boolean;
-  show: () => void;
-  hide: () => void;
+  open: () => void;
+  close: () => void;
   set: (val: boolean) => void;
 }
