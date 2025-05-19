@@ -1,40 +1,43 @@
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { Transition } from 'motion';
 import { cleanup, render, screen } from '@testing-library/react';
-// import { useCallback, useState } from 'react';
-// import userEvent from '@testing-library/user-event';
+import { act, useCallback, useState } from 'react';
+import userEvent from '@testing-library/user-event';
 import { KModal, KModalSizes, KModalSizeType } from '@/components';
+import { KModalMotion } from '@/components/feedback/modal/KModal.motion';
 
 
 const KModalSizeList = Object.keys(KModalSizes) as KModalSizeType[];
 
-// const openButtonText = '열기';
-// const closeButtonText = '닫기';
-// const contentText = 'content';
+const openButtonText = '열기';
+const closeButtonText = '닫기';
+const contentText = 'content';
+const motionTime = ((KModalMotion.fade.transition as Transition).duration as number) * 1000;
 
-// interface TestModalComponentType {
-//   defaultOpen?: boolean;
-// }
-//
-// const TestModalComponent = ({ defaultOpen = false }: TestModalComponentType) => {
-//
-//   const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
-//
-//   const onOpenEvent = useCallback(() => {
-//     setIsOpen(true);
-//   }, []);
-//   const onCloseEvent = useCallback(() => {
-//     setIsOpen(false);
-//   }, []);
-//
-//   return (
-//     <>
-//       <div>{isOpen ? 'open' : 'close'}</div>
-//       <button type='button' onClick={onOpenEvent}>{openButtonText}</button>
-//       <KModal isOpen={isOpen} content={contentText} title='title' setIsOpen={setIsOpen}
-//               footer={<button type='button' onClick={onCloseEvent}>{closeButtonText}</button>}/>
-//     </>
-//   );
-// };
+interface TestModalComponentType {
+  defaultOpen?: boolean;
+}
+
+const TestModalComponent = ({ defaultOpen = false }: TestModalComponentType) => {
+
+  const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
+
+  const onOpenEvent = useCallback(() => {
+    setIsOpen(true);
+  }, []);
+  const onCloseEvent = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  return (
+    <>
+      <div>{isOpen ? 'open' : 'close'}</div>
+      <button type="button" onClick={onOpenEvent}>{openButtonText}</button>
+      <KModal isOpen={isOpen} content={contentText} title="title" setIsOpen={setIsOpen}
+              footer={<button type="button" onClick={onCloseEvent}>{closeButtonText}</button>}/>
+    </>
+  );
+};
 
 
 describe('KModal', () => {
@@ -43,13 +46,10 @@ describe('KModal', () => {
 
   beforeEach(() => {
     mockFn.mockClear();
-    vi.useFakeTimers();
+    vi.useRealTimers();
   });
 
   afterEach(() => {
-    vi.runOnlyPendingTimers(); // 잔여 타이머 모두 실행
-    vi.clearAllTimers();
-    vi.useRealTimers();
     cleanup();
   });
 
@@ -110,7 +110,6 @@ describe('KModal', () => {
   it.each(KModalSizeList)('applies size prop "%s"', (size) => {
     // Arrange
     render(<KModal isOpen content="test" size={size} onClose={mockFn}/>);
-
     const contentRoot = screen.getByTestId('k-modal');
 
     // Assert
@@ -122,7 +121,6 @@ describe('KModal', () => {
     // Arrange
     const testWidth = 500;
     render(<KModal isOpen width={testWidth} content="test" onClose={mockFn}/>);
-
     const containerRoot = screen.getByTestId('k-modal');
 
     // Assert
@@ -130,21 +128,26 @@ describe('KModal', () => {
       .toHaveStyle({ width: `${testWidth}px` });
   });
 
-  // it('opens the modal on button click', async () => {
-  //   // Arrange
-  //   const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
-  //   render(<TestModalComponent/>);
-  //
-  //   const openButtonRoot = screen.getByText(openButtonText);
-  //
-  //   // Act
-  //   await act(async () => {
-  //     await user.click(openButtonRoot);
-  //   });
-  //
-  //   const modalRoot = screen.getByTestId('k-modal');
-  //
-  //   // Assert
-  //   expect(modalRoot).toBeInTheDocument();
-  // });
+  it('opens the modal on button click', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    render(<TestModalComponent/>);
+
+    const openButtonRoot = screen.getByText(openButtonText);
+
+    // Act
+    await act(async () => {
+      await user.click(openButtonRoot);
+      await new Promise((r) => {
+        setTimeout(r, motionTime + 10);
+      });
+    });
+
+    // Arrange
+    const modalRoot = screen.getByTestId('k-modal');
+
+    // Assert
+    expect(modalRoot)
+      .toBeInTheDocument();
+  });
 });

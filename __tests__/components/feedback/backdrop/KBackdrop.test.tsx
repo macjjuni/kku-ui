@@ -1,6 +1,9 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { act } from 'react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import { KBackdrop } from '@/components';
+
 
 describe('KModal', () => {
 
@@ -8,11 +11,6 @@ describe('KModal', () => {
 
   beforeEach(() => {
     mockFn.mockClear();
-    vi.useFakeTimers();
-  });
-
-  afterEach(() => {
-    vi.clearAllTimers();
     vi.useRealTimers();
   });
 
@@ -34,25 +32,37 @@ describe('KModal', () => {
       .toHaveClass(testClass);
   });
 
-  it('applies open props', async () => {
+  it('applies open, close props', async () => {
     // Arrange
     render(<KBackdrop open={false}/>);
     // Assert
-    expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
+    expect(screen.queryByRole('presentation'))
+      .not
+      .toBeInTheDocument();
+    // Arrange
+    render(<KBackdrop open/>);
+    // Assert
+    expect(screen.queryByRole('presentation'))
+      .not
+      .toBeInTheDocument();
   });
 
-  // it('applies onClick props', async () => {
-  //   const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
-  //   render(<KBackdrop open onClick={mockFn} />);
-  //   const root = screen.getByTestId('k-backdrop');
-  //
-  //   expect(mockFn).toHaveBeenCalledTimes(0);
-  //
-  //   await act(async () => {
-  //     await user.click(root);
-  //     vi.runAllTimers(); // 추가
-  //   });
-  //
-  //   expect(mockFn).toHaveBeenCalledTimes(1);
-  // });
+  it('applies onClick props', async () => {
+    const user = userEvent.setup();
+    render(<KBackdrop open onClick={mockFn}/>);
+    const root = screen.getByRole('presentation', { hidden: true });
+
+    expect(mockFn)
+      .toHaveBeenCalledTimes(0);
+
+    await act(async () => {
+      await user.click(root);
+      await new Promise((r) => {
+        setTimeout(r, 300);
+      });
+    });
+
+    expect(mockFn)
+      .toHaveBeenCalledTimes(1);
+  });
 });

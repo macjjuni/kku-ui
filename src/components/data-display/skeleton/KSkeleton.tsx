@@ -35,7 +35,10 @@ const Skeleton = ({ ...restProps }: KSkeletonProps) => {
 
   // endregion
 
-  return (<div id={id} className={rootClass} style={rootStyle} aria-hidden="true" onClick={onClick} />);
+  return (
+    <div id={id} className={rootClass} style={rootStyle} onClick={onClick}
+         role="presentation" aria-hidden="true"/>
+  );
 };
 
 const KSkeleton = memo(Skeleton);

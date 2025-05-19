@@ -1,27 +1,26 @@
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { act } from 'react';
+import { Transition } from 'motion';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-// import { act } from 'react';
-// import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import { KSelect } from '@/components';
+import KSelectMotion from '@/components/input/select/KSelect.motion';
 
 const items = [
   { label: '선택1', value: 'value1' },
   { label: '선택2', value: 'value2' },
   { label: '선택3', value: 'value3' },
 ];
+const motionTime = ((KSelectMotion.transition as Transition).duration as number) * 1000;
+
 
 describe('KSelect', () => {
+
   const mockFn = vi.fn();
   const mockValue = items[0].value;
 
   beforeEach(() => {
     mockFn.mockClear();
-    vi.useRealTimers();
-    vi.useFakeTimers();
-  });
-
-  afterEach(() => {
-    vi.clearAllTimers();
   });
 
   it('applies id, className, and style props', () => {
@@ -94,65 +93,75 @@ describe('KSelect', () => {
       .toBeInTheDocument();
   });
 
-  // it('opens dropdown and renders noDataText when items is empty', async () => {
-  //   // Arrange
-  //   const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
-  //   const testNoDataText = 'No Data Text';
-  //   const outsideTestId = 'outside';
-  //
-  //   render(
-  //     <>
-  //       <div data-testid={outsideTestId} />
-  //       <KSelect value={undefined} items={[]} onChange={mockFn} noDataText={testNoDataText} />
-  //     </>,
-  //   );
-  //
-  //   const button = screen.getByRole('button');
-  //
-  //   // Act
-  //   await act(async () => {
-  //     await user.click(button);
-  //     vi.advanceTimersByTime(300); // 닫힘 애니메이션 시간만큼
-  //   });
-  //
-  //   // Assert
-  //   expect(screen.getByRole('listbox')).toBeInTheDocument();
-  //   expect(screen.getByText(testNoDataText)).toBeInTheDocument();
-  //
-  //   // Act
-  //   await act(async () => {
-  //     await user.click(screen.getByTestId(outsideTestId));
-  //     // vi.advanceTimersByTime(300);
-  //   });
-  //
-  //   // Assert
-  //   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
-  // });
-  //
-  // it('calls onChange with selected value when item is clicked', async () => {
-  //   // Arrange
-  //   const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
-  //   const testItems = [
-  //     { label: 'Option 1', value: 'option1' },
-  //     { label: 'Option 2', value: 'option2' },
-  //   ];
-  //
-  //   render(<KSelect value={undefined} items={testItems} onChange={mockFn} />);
-  //   const button = screen.getByRole('button');
-  //
-  //   // Act
-  //   await act(async () => {
-  //     await user.click(button);
-  //   });
-  //
-  //   const targetItem = screen.getByText(testItems[1].label);
-  //
-  //   await act(async () => {
-  //     await user.click(targetItem);
-  //   });
-  //
-  //   // Assert
-  //   expect(mockFn).toHaveBeenCalledTimes(1);
-  //   expect(mockFn).toHaveBeenCalledWith(testItems[1].value);
-  // });
+  it('opens dropdown and renders noDataText when items is empty', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    const testNoDataText = 'No Data Text';
+    const outsideTestId = 'outside';
+
+    render(
+      <>
+        <div data-testid={outsideTestId} />
+        <KSelect value={undefined} items={[]} onChange={mockFn} noDataText={testNoDataText} />
+      </>,
+    );
+
+    const button = screen.getByRole('button');
+
+    // Act
+    await act(async () => {
+      await user.click(button);
+      await new Promise((r) => {
+        setTimeout(r, motionTime + 10);
+      });
+    });
+
+    // Assert
+    expect(screen.getByRole('listbox')).toBeInTheDocument();
+    expect(screen.getByText(testNoDataText)).toBeInTheDocument();
+
+    // Act
+    await act(async () => {
+      await user.click(screen.getByTestId(outsideTestId));
+      await new Promise((r) => {
+        setTimeout(r, motionTime + 10);
+      });
+    });
+
+    // Assert
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  });
+
+  it('calls onChange with selected value when item is clicked', async () => {
+    // Arrange
+    const user = userEvent.setup();
+    const testItems = [
+      { label: 'Option 1', value: 'option1' },
+      { label: 'Option 2', value: 'option2' },
+    ];
+
+    render(<KSelect value={undefined} items={testItems} onChange={mockFn} />);
+    const button = screen.getByRole('button');
+
+    // Act
+    await act(async () => {
+      await user.click(button);
+      await new Promise((r) => {
+        setTimeout(r, motionTime + 10);
+      });
+    });
+
+    const targetItem = screen.getByText(testItems[1].label);
+
+    await act(async () => {
+      await user.click(targetItem);
+      await new Promise((r) => {
+        setTimeout(r, motionTime + 10);
+      });
+    });
+
+    // Assert
+    expect(mockFn).toHaveBeenCalledTimes(1);
+    expect(mockFn).toHaveBeenCalledWith(testItems[1].value);
+  });
 });
