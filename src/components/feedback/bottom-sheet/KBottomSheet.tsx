@@ -74,6 +74,7 @@ const BottomSheet = forwardRef<KBottomSheetRefs, KBottomSheetProps>(({ ...restPr
   // region [Life Cycles]
 
   useEffect(() => {
+
     if (!isOpen || !escClosable) return;
 
     window.addEventListener('keydown', handleKeyDown);
@@ -105,8 +106,8 @@ const BottomSheet = forwardRef<KBottomSheetRefs, KBottomSheetProps>(({ ...restPr
           <AnimatePresence>
             {
               isOpen && (
-                <motion.div id={id} className={rootClass} style={rootStyle} onClick={onClickBody} {...KBottomSheetMotion}
-                            role="dialog">
+                <motion.div id={id} className={rootClass} style={rootStyle} onClick={onClickBody}
+                            role="dialog" {...KBottomSheetMotion}>
                   {children}
                 </motion.div>
               )
