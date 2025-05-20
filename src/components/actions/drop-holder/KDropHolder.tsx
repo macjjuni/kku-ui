@@ -15,7 +15,6 @@ const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDrop
   const { id, className, style, content, children } = { ...restProp };
   const { trigger = 'click', position = 'top', offset = { x: 0, y: 0 } } = { ...restProp };
   const { openDelay = 0, closeDelay, contentWidth } = { ...restProp };
-  const { initial, animate, exit, transition } = { ...restProp, ...KDropHolderMotion };
   const { onClick, onHover } = { ...restProp };
 
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -266,7 +265,7 @@ const DropHolder = forwardRef(({ ...restProp }: KDropHolderProps, ref: Ref<KDrop
       <AnimatePresence>
         {isOpen && (
           <motion.div ref={contentRef} className="k-drop-holder__content" style={computedDropHolderStyle} role="tooltip"
-                      initial={initial} animate={animate} exit={exit} transition={transition} aria-hidden={!isOpen}>
+                      aria-hidden={!isOpen} {...KDropHolderMotion}>
             {content}
           </motion.div>
         )}
