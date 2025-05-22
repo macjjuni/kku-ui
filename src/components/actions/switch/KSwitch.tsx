@@ -2,14 +2,14 @@ import { forwardRef, memo, Ref, useCallback, useId, useImperativeHandle, useMemo
 import { KSwitchProps, KSwitchRefs } from '@/components/actions/switch/KSwitch.interface';
 
 
-const Switch = forwardRef(({ ...restProps }: KSwitchProps, ref: Ref<KSwitchRefs>) => {
+const Switch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
 
   // region [Hooks]
 
   const uniqueId = `k-switch${useId()}`;
-  const { id = uniqueId, style, className }: KSwitchProps = { ...restProps };
-  const { value, disabled, size = 'medium' }: KSwitchProps = { ...restProps };
-  const { onChange, onClick }: KSwitchProps = { ...restProps };
+  const { id = uniqueId, style, className, value, disabled, size = 'medium',
+    onChange, onClick } = props;
+
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   // endregion
@@ -56,7 +56,6 @@ const Switch = forwardRef(({ ...restProps }: KSwitchProps, ref: Ref<KSwitchRefs>
 
 
   // region [Life Cycles]
-
   // endregion
 
 
