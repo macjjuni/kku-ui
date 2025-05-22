@@ -1,23 +1,22 @@
 import {
-  ChangeEvent, CSSProperties, forwardRef, KeyboardEvent, memo, Ref, useCallback, useEffect,
+  ChangeEvent, CSSProperties, FocusEvent, forwardRef, KeyboardEvent, memo, Ref, useCallback, useEffect,
   useId, useImperativeHandle, useMemo, useRef, useState,
 } from 'react';
 import { KTextFieldProps, KTextFieldRefs } from '@/components/input/textfield/KTextField.interface';
 import { KIcon } from '@/components';
 
 
-const TextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KTextFieldRefs>) => {
+const TextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>) => {
 
   // region [Hooks]
 
   const uniqueId = `k-text-field-${useId()}`;
-  const { id = uniqueId, style, className } = { ...restProps };
-  const { value, placeholder, maxLength } = { ...restProps };
-  const { onChange, onKeyDownEnter, onFocus, onBlur } = { ...restProps };
-  const { password, clearable, disabled, align = 'left', size = 'medium', width, required } = { ...restProps };
-  const { label, labelAlign = 'column', labelGap = size === 'small' ? 10 : 12 } = { ...restProps };
-  const { autoComplete, autoCorrect, autoCapitalize } = { ...restProps };
-  const { leftAction, rightAction } = { ...restProps };
+  const {
+    id = uniqueId, style, className, value, placeholder, maxLength, password, clearable, disabled,
+    onChange, onKeyDownEnter, align = 'left', size = 'medium', width, required,
+    label, labelAlign = 'column', labelGap = size === 'small' ? 10 : 12, autoComplete, autoCorrect,
+    autoCapitalize, leftAction, rightAction, ...restProps
+  } = props;
 
   const inputRef = useRef<HTMLInputElement>(null);
   const iconAreaRef = useRef<HTMLDivElement>(null);
@@ -72,7 +71,6 @@ const TextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KTextF
     return clazz.join(' ');
   }, [className, size, disabled, password, clearable, required, isFocus, label, labelAlign]);
 
-
   const rootStyle = useMemo(() => ({
     ...style,
     maxWidth: width !== undefined ? width : undefined,
@@ -117,22 +115,24 @@ const TextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KTextF
   const onChangeValue = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 
     const changeValue = e.target.value;
-    if (onChange) onChange(changeValue);
+    if (onChange) {
+      onChange(changeValue);
+    }
   }, [onChange]);
 
-  const onFocusInput = useCallback(() => {
-    onFocus?.();
+  const onFocusInput = useCallback((e: FocusEvent<HTMLInputElement>) => {
+    restProps?.onFocus?.(e);
     if (label) {
       setIsFocus(true);
     }
-  }, [label]);
+  }, [label, restProps.onFocus]);
 
-  const onblurInput = useCallback(() => {
-    onBlur?.();
+  const onBlurInput = useCallback((e: FocusEvent<HTMLInputElement>) => {
+    restProps?.onBlur?.(e);
     if (label) {
       setIsFocus(false);
     }
-  }, [label]);
+  }, [label, restProps.onBlur]);
 
   const onClear = useCallback(() => {
 
@@ -146,15 +146,16 @@ const TextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KTextF
     setIsPasswdShow((prev) => !prev);
   }, []);
 
-  const onKeyDownEnterInput = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDownButton = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
 
+    restProps?.onKeyDown?.(e);
     if (e.nativeEvent.isComposing) {
       return;
     }
     if ((e.key === 'Enter' || e.key === '')) {
       onKeyDownEnter?.(e);
     }
-  }, [onKeyDownEnter]);
+  }, [onKeyDownEnter, restProps.onKeyDown]);
 
   // endregion
 
@@ -217,9 +218,9 @@ const TextField = forwardRef(({ ...restProps }: KTextFieldProps, ref: Ref<KTextF
 
         {LeftAction}
 
-        <input id={id} ref={inputRef} className="k-text-field__input__root" style={{ ...inputStyle, ...inputPadding }}
-               type={(password && !isPasswdShow) ? 'password' : 'input'} value={value}
-               onChange={onChangeValue} onFocus={onFocusInput} onBlur={onblurInput} onKeyDown={onKeyDownEnterInput}
+        <input {...restProps} id={id} ref={inputRef} className="k-text-field__input__root" value={value}
+               style={{ ...inputStyle, ...inputPadding }} type={(password && !isPasswdShow) ? 'password' : 'input'}
+               onChange={onChangeValue} onFocus={onFocusInput} onBlur={onBlurInput} onKeyDown={onKeyDownButton}
                disabled={disabled} placeholder={placeholder} maxLength={maxLength} data-testid="k-text-field-input"
                autoComplete={autoComplete} autoCorrect={autoCorrect} autoCapitalize={autoCapitalize}/>
         {(clearable || password) && IconArea}

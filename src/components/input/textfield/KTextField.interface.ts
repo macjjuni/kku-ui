@@ -1,8 +1,10 @@
-import { KeyboardEvent, ReactNode } from 'react';
+import { InputHTMLAttributes, KeyboardEvent, ReactNode } from 'react';
 import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
 
 
-export interface KTextFieldProps extends KBaseProp, KSizeProp {
+type ExceptedInputAttributeType = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'value' | 'onChange'>;
+
+export interface KTextFieldProps extends KBaseProp, KSizeProp, ExceptedInputAttributeType {
 
   // Value
   value?: string;
@@ -28,8 +30,6 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
 
   // Event
   onChange?: (value: string) => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
   onKeyDownEnter?: (e?: KeyboardEvent<HTMLInputElement>) => void;
 
   // Options
