@@ -10,12 +10,12 @@ import { initSize } from '@/common/util/variation';
 import { KButtonProps, KButtonRefs } from '@/components';
 
 
-const Button = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => {
+const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
   // region [Hooks]
 
-  const { id, className, style, children, label } = { ...restProps };
-  const { onClick, disabled, size, color, fontColor, variant = 'default' } = { ...restProps };
+  const { type = 'button', className, style, label, onClick, disabled,
+    size, color, fontColor, variant = 'default', children, ...restProps } = props;
 
   if (label && children) {
     throw Error('Error: label and children attributes cannot be duplicated.');
@@ -47,10 +47,18 @@ const Button = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => 
 
     const clazz = [];
 
-    if (className) { clazz.push(className); }
-    if (color) { clazz.push('k-button--colorful'); }
-    if (disabled) { clazz.push('k-button--disabled'); }
-    if (variant) { clazz.push(`k-button--${variant}`); }
+    if (className) {
+      clazz.push(className);
+    }
+    if (color) {
+      clazz.push('k-button--colorful');
+    }
+    if (disabled) {
+      clazz.push('k-button--disabled');
+    }
+    if (variant) {
+      clazz.push(`k-button--${variant}`);
+    }
 
     initSize(clazz, 'k-button', size);
 
@@ -65,9 +73,13 @@ const Button = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => 
       styles.borderColor = color;
       styles.backgroundColor = color;
 
-      if (!fontColor) { styles.color = '#fff'; }
+      if (!fontColor) {
+        styles.color = '#fff';
+      }
     }
-    if (fontColor) { styles.color = fontColor; }
+    if (fontColor) {
+      styles.color = fontColor;
+    }
 
     return styles;
   }, [style, color, fontColor]);
@@ -84,44 +96,45 @@ const Button = forwardRef<KButtonRefs, KButtonProps>(({ ...restProps }, ref) => 
   }, [disabled, onClick]);
 
   const onMouseDown = useCallback((e: MouseEvent<HTMLButtonElement>) => {
-
+    restProps?.onMouseDown?.(e);
     if (!disabled) {
       ripple?.register(e);
     }
-  }, [ripple]);
+  }, [ripple, restProps.onMouseDown]);
 
-  const onMouseUp = useCallback(() => {
-
+  const onMouseUp = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    restProps?.onMouseUp?.(e);
     ripple.remove();
-  }, [ripple]);
+  }, [ripple, restProps.onMouseUp]);
 
-  const onMouseLeave = useCallback(() => {
-
+  const onMouseLeave = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    restProps?.onMouseLeave?.(e);
     if (!rootRef?.current) {
       throw Error('Invalid rootRef.');
     }
 
     ripple.remove();
-  }, [ripple]);
+  }, [ripple, restProps.onMouseLeave]);
 
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLButtonElement>) => {
-
+    restProps?.onKeyDown?.(e);
     ripple?.register(e);
-  }, [ripple]);
+  }, [ripple, restProps.onKeyDown]);
 
   const onKeyUp = useCallback((e: KeyboardEvent<HTMLButtonElement>) => {
-
+    restProps?.onKeyUp?.(e);
     if (e.key === 'Enter' || e.key === ' ') {
       ripple.remove();
       onClick?.();
     }
-  }, [ripple, onClick]);
+  }, [ripple, onClick, restProps.onKeyUp]);
 
   // endregion
 
   return (
-    <button ref={rootRef} id={id} className={`k-button ${rootClass}`} style={rootStyle}
-            type="button" aria-label={label} disabled={disabled}
+    // eslint-disable-next-line react/button-has-type
+    <button ref={rootRef} type={type} {...restProps} className={`k-button ${rootClass}`}
+            style={rootStyle} aria-label={label} disabled={disabled}
             onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onClick={onClickButton}
             onMouseUp={onMouseUp} onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
       {(children || label) && (

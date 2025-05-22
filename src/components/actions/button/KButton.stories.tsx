@@ -32,12 +32,13 @@ type Story = StoryObj<typeof KButton>
 const commonArgs: KButtonProps = { label: '안녕하세요', size: 'medium', disabled: false };
 
 const ColorfulButtons = (args: KButtonProps) => {
+
   return (
     <>
       <KButton {...args} variant="success"/>
       <KButton {...args} variant="warning"/>
       <KButton {...args} variant="error"/>
-      <KButton {...args} variant="default" color="violet" />
+      <KButton {...args} variant="default" color="violet"/>
     </>
   );
 };
