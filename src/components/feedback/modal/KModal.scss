@@ -69,3 +69,21 @@ $modal-content-header-text-size: $kku-gray-color-900;
     }
   }
 }
+
+@media screen and (max-width: #{$modal-content-width-large}) {
+  .k-modal.k-modal--large {
+    max-width: calc(100dvw - #{$kku-spacing-32});
+  }
+}
+
+@media screen and (max-width: #{$modal-content-width-medium}) {
+  .k-modal.k-modal--medium {
+    max-width: calc(100dvw - #{$kku-spacing-24});
+  }
+}
+
+@media screen and (max-width: #{$modal-content-width-small}) {
+  .k-modal.k-modal--small {
+    max-width: calc(100dvw - #{$kku-spacing-16});
+  }
+}

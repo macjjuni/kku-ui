@@ -31,16 +31,19 @@ $kku-card-box-shadow: $kku-box-shadow-default;
     border-radius: $kku-card-border-radius-size;
     background-color: $kku-card-background-color-base;
     color: $kku-card-text-color-base;
-    font-family: var(--font-family);
     overflow: hidden;
 
     .k-card__title {
       @include kku-text-large;
       font-weight: bold;
 
-      & + .k-card__subtitle {
+      & + .k-card__sub-title {
         margin-top: $kku-card-title-margin-top-size;
       }
+    }
+
+    .k-card__sub-title {
+      @include kku-text-medium;
     }
   }
 
