@@ -1,3 +1,4 @@
-export * from './button'
-export * from './drop-holder'
-export * from './switch'
+export * from './button';
+export * from './button-group';
+export * from './drop-holder';
+export * from './switch';
