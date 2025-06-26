@@ -86,6 +86,7 @@
         "object-property-newline": "off",
         "react/jsx-curly-brace-presence": ["error", { "props": "never", "children": "never" }],
         "@typescript-eslint/quotes": "off",
-        "operator-linebreak": "off"
+        "operator-linebreak": "off",
+        "@typescript-eslint/no-use-before-define": "off"
     }
 }
