@@ -43,7 +43,7 @@ export default defineConfig({
       fileName: (format, entry) => `${format}/${entry}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', 'motion', 'zustand', 'lodash-es'],
       output: {
         globals: {
           react: 'React',
