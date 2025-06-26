@@ -1,9 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { KCard, KCardProps } from '@/components';
-import { SIZES, SizeType } from '@/common/base/base.interface';
+import { SIZES } from '@/common/base/base.interface';
 import { baseArgTyp, disabledArgType, sizeArgType } from '@/common/storybook/argTypes';
-
-const Sizes = Object.keys(SIZES) as SizeType[];
 
 const meta: Meta<KCardProps> = {
   component: KCard,
@@ -34,7 +32,7 @@ const Template = (args: KCardProps) => {
 const cardText = {
   title: 'What is Lorem Ipsum?',
   subTitle: 'Lorem Ipsum is simply dummy text of the ...',
-  size: Sizes[0],
+  size: SIZES[0],
   aspectRatio: '5/3',
 };
 

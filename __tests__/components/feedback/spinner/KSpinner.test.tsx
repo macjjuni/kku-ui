@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { KSpinner } from '@/components';
-import { SIZE_LIST } from '@/common/base/base';
+import { SIZES } from '@/common/base/base.interface';
 
 
 describe('KSpinner', () => {
@@ -30,7 +30,7 @@ describe('KSpinner', () => {
     expect(root).toHaveStyle({ width: `${testSize}px`, height: `${testSize}px` });
   });
 
-  it.each(SIZE_LIST)(`applies size("%s") class when size is a string`, (size) => {
+  it.each(SIZES)(`applies size("%s") class when size is a string`, (size) => {
     // arrange
     render(<KSpinner size={size} />);
 

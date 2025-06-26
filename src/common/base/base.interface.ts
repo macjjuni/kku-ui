@@ -9,8 +9,8 @@ export interface KBaseProp {
 }
 
 // 🎁 - Size Properties
-export const SIZES = { medium: 'medium', small: 'small' } as const;
-export type SizeType = (typeof SIZES)[keyof typeof SIZES];
+export const SIZES = ['small', 'medium'];
+export type SizeType = (typeof SIZES)[number];
 
 export interface KSizeProp {
   size?: SizeType

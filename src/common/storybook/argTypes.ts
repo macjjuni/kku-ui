@@ -1,15 +1,12 @@
 import { ArgTypes } from '@storybook/react';
 import { SIZES } from '@/common/base/base.interface';
 
-const sizes = Object.keys(SIZES);
-
-
 export const sizeArgType: ArgTypes = {
   size: {
     description: '요소의 크기를 설정합니다.',
     control: { type: 'radio' },
     type: 'string',
-    options: sizes,
+    options: SIZES,
   },
 };
 

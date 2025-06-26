@@ -3,7 +3,7 @@ import { vi, describe, beforeEach, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { KButton, KButtonRefs, KButtonVariantList } from '@/components';
-import { SIZE_LIST } from '@/common/base/base';
+import { SIZES } from '@/common/base/base.interface';
 
 
 describe('KButton', () => {
@@ -66,7 +66,7 @@ describe('KButton', () => {
     expect(mockFn).toHaveBeenCalledTimes(1);
   });
 
-  it.each(SIZE_LIST)('applies size prop "%s"', (size) => {
+  it.each(SIZES)('applies size prop "%s"', (size) => {
     // Arrange
     render(<KButton label={labelText} size={size}/>);
     const root = screen.getByRole('button');
