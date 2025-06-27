@@ -108,7 +108,6 @@ $button-border-radius: $kku-border-radius-default;
 
   & + & { margin-left: $kku-spacing-8; }
 
-  .k-button__content { color: inherit; }
   &:focus-visible { @include kku-focus-visible; }
 
   &.k-button--disabled {
@@ -124,8 +123,6 @@ $button-border-radius: $kku-border-radius-default;
       background-color: rgba(0, 0, 0, 0.32);
     }
   }
-
-  .k-button__content { white-space: nowrap; }
 
   // region [Variant]
 
@@ -242,13 +239,13 @@ $button-border-radius: $kku-border-radius-default;
   &.k-button--small {
     height: $kku-element-height-small;
     padding: 0 $kku-spacing-10;
-    .k-button__content { @include kku-text-small; }
+    @include kku-text-small;
   }
 
   &.k-button--medium {
     height: $kku-element-height-medium;
     padding: 0 $kku-spacing-16;
-    .k-button__content { @include kku-text-medium; }
+    @include kku-text-medium;
   }
 
   // endregion

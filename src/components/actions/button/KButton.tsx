@@ -1,12 +1,6 @@
-import {
-  KeyboardEvent,
-  MouseEvent,
-  forwardRef,
-  useImperativeHandle,
-  useRef, useMemo, useCallback, memo,
-} from 'react';
+import { forwardRef, KeyboardEvent, memo, MouseEvent, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
+import { Button as CoreButton } from '@/core';
 import { useRipple } from '@/common/hooks';
-import { initSize } from '@/common/util/variation';
 import { KButtonProps, KButtonRefs } from '@/components';
 
 
@@ -14,12 +8,10 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
   // region [Hooks]
 
-  const { type = 'button', className, style, label, onClick, disabled,
-    size, color, fontColor, variant = 'default', children, ...restProps } = props;
-
-  if (label && children) {
-    throw Error('Error: label and children attributes cannot be duplicated.');
-  }
+  const {
+    type = 'button', className, style, label, onClick, disabled,
+    size, color, fontColor, variant = 'default', children, ...restProps
+  } = props;
 
   const rootRef = useRef<HTMLButtonElement>(null);
   const ripple = useRipple(rootRef);
@@ -45,22 +37,12 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
   const rootClass = useMemo(() => {
 
-    const clazz = [];
+    const clazz = ['k-button', `k-button--${size}`];
 
-    if (className) {
-      clazz.push(className);
-    }
-    if (color) {
-      clazz.push('k-button--colorful');
-    }
-    if (disabled) {
-      clazz.push('k-button--disabled');
-    }
-    if (variant) {
-      clazz.push(`k-button--${variant}`);
-    }
-
-    initSize(clazz, 'k-button', size);
+    if (className) { clazz.push(className); }
+    if (color) { clazz.push('k-button--colorful'); }
+    if (disabled) { clazz.push('k-button--disabled'); }
+    if (variant) { clazz.push(`k-button--${variant}`); }
 
     return clazz.join(' ');
   }, [className, disabled, size, color, variant]);
@@ -133,13 +115,9 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
   return (
     // eslint-disable-next-line react/button-has-type
-    <button ref={rootRef} type={type} {...restProps} className={`k-button ${rootClass}`}
-            style={rootStyle} aria-label={label} disabled={disabled}
-            onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onClick={onClickButton}
-            onMouseUp={onMouseUp} onKeyDown={onKeyDown} onKeyUp={onKeyUp}>
-      {(children || label) && (
-        <span className="k-button__content">{children || label}</span>)}
-    </button>
+    <CoreButton ref={rootRef} type={type} {...restProps} label={label} style={rootStyle} disabled={disabled}
+                onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onClick={onClickButton}
+                className={rootClass} onMouseUp={onMouseUp} onKeyDown={onKeyDown} onKeyUp={onKeyUp}/>
   );
 });
 

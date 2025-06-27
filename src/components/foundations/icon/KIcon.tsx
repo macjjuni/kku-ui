@@ -1,9 +1,17 @@
 import {
-  CSSProperties, forwardRef, KeyboardEvent, MouseEvent, Ref,
-  useCallback, useId, useImperativeHandle, useRef, useMemo, memo,
+  CSSProperties,
+  forwardRef,
+  KeyboardEvent,
+  memo,
+  MouseEvent,
+  Ref,
+  useCallback,
+  useId,
+  useImperativeHandle,
+  useMemo,
+  useRef,
 } from 'react';
 import { KIconProps, KIconRefs } from '@/components/foundations/icon/KIcon.interface';
-import { initDisabled } from '@/common/util/variation';
 import { getIcon } from '@/common/icons/icons';
 
 
@@ -17,7 +25,7 @@ const Icon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
 
   const inputRef = useRef<HTMLButtonElement>(null);
   const uniqueId = `k-icon-${useId()}`;
-  const computedTabIndex = useMemo(() => (onClick ? 0 : -1), [onClick])
+  const computedTabIndex = useMemo(() => (onClick ? 0 : -1), [onClick]);
 
   if (!icon) {
     throw Error('Error: icon is required and must be provided.');
@@ -47,12 +55,12 @@ const Icon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
     if (onClick) {
       clazz.push('k-icon--clickable');
     }
-
-    initDisabled(clazz, 'k-icon', disabled);
+    if (disabled) {
+      clazz.push(`k-icon--${disabled}`);
+    }
 
     return clazz.join(' ');
   }, [className, disabled, size, icon, onClick]);
-
 
   const rootStyle = useMemo((): CSSProperties => {
     const styles: CSSProperties = { ...style };
@@ -112,7 +120,7 @@ const Icon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
   );
 });
 
-const KIcon = memo(Icon)
+const KIcon = memo(Icon);
 KIcon.displayName = 'KIcon';
 Icon.displayName = 'KIcon';
 

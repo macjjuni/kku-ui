@@ -1,5 +1,6 @@
-import { ButtonHTMLAttributes, MouseEvent, ReactNode } from 'react';
-import { KBaseProp, SizeType } from '@/common/base/base.interface';
+import { MouseEvent, ReactNode } from 'react';
+import { SizeType } from '@/common/base/base.interface';
+import { ButtonProps } from '@/core';
 
 export const BUTTON_VARIANTS = {
   default: 'default',
@@ -12,14 +13,13 @@ export const BUTTON_VARIANTS = {
 export type KButtonVariantType = keyof typeof BUTTON_VARIANTS;
 export const KButtonVariantList = Object.values(BUTTON_VARIANTS);
 
-export interface KButtonProps extends KBaseProp, ButtonHTMLAttributes<HTMLButtonElement> {
+export interface KButtonProps extends ButtonProps {
   children?: ReactNode;
   label?: string;
 
   size?: SizeType;
   variant?: KButtonVariantType;
 
-  disabled?: boolean;
   color?: string;
   fontColor?: string;
 
