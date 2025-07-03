@@ -3,17 +3,13 @@ import { Button as CoreButton } from '@/core';
 import { useRipple } from '@/common/hooks';
 import { KButtonProps, KButtonRefs } from '@/components';
 
-/**
- * KButton 컴포넌트는 다양한 스타일 옵션과 크기를 지원하는 버튼입니다.
- * @param props KButtonProps
- */
+
 const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
   // region [Hooks]
-
   const {
-    type = 'button', className, style, label, onClick, disabled,
-    size = 'medium', color, fontColor, variant = 'default', children,
+    type = 'button', className, label, onClick, disabled,
+    size = 'medium', variant = 'default', children,
     onMouseDown, onMouseLeave, onMouseUp, onKeyDown, onKeyUp,
     ...restProps
   } = props;
@@ -34,48 +30,28 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
       }
     },
   }));
-
   // endregion
 
-
   // region [Styles]
-
   const rootClass = useMemo(() => {
 
     const clazz = ['k-button', `k-button--${size}`];
 
-    if (className) { clazz.push(className); }
-    if (color) { clazz.push('k-button--colorful'); }
-    if (disabled) { clazz.push('k-button--disabled'); }
-    if (variant) { clazz.push(`k-button--${variant}`); }
+    if (className) {
+      clazz.push(className);
+    }
+    if (disabled) {
+      clazz.push('k-button--disabled');
+    }
+    if (variant) {
+      clazz.push(`k-button--${variant}`);
+    }
 
     return clazz.join(' ');
-  }, [className, disabled, size, color, variant]);
-
-  const rootStyle = useMemo(() => {
-
-    const styles = { ...style };
-
-    if (color) {
-      styles.borderColor = color;
-      styles.backgroundColor = color;
-
-      if (!fontColor) {
-        styles.color = '#fff';
-      }
-    }
-    if (fontColor) {
-      styles.color = fontColor;
-    }
-
-    return styles;
-  }, [style, color, fontColor]);
-
+  }, [className, disabled, size, variant]);
   // endregion
 
-
   // region [Events]
-
   const onClickRoot = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     if (!disabled) {
       onClick?.(e);
@@ -99,7 +75,6 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
     if (!rootRef?.current) {
       throw Error('Invalid rootRef.');
     }
-
     ripple.remove();
   }, [ripple, onMouseLeave]);
 
@@ -112,16 +87,14 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
     onKeyUp?.(e);
     if (e.key === 'Enter' || e.key === ' ') {
       ripple.remove();
-      onClick?.();
     }
-  }, [ripple, onClick, onKeyUp]);
-
+  }, [ripple, onKeyUp]);
   // endregion
 
   return (
-    <CoreButton ref={rootRef} type={type} {...restProps} label={label} style={rootStyle} className={rootClass}
+    <CoreButton ref={rootRef} {...restProps} type={type} label={label} className={rootClass}
                 disabled={disabled} onMouseDown={onMouseDownRoot} onMouseLeave={onMouseLeaveRoot} onClick={onClickRoot}
-                onMouseUp={onMouseUpRoot} onKeyDown={onKeyDownRoot} onKeyUp={onKeyUpRoot}/>
+                onMouseUp={onMouseUpRoot} onKeyDown={onKeyDownRoot} onKeyUp={onKeyUpRoot} />
   );
 });
 

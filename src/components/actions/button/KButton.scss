@@ -102,13 +102,13 @@ $button-border-radius: $kku-border-radius-default;
   border-style: solid;
   border-radius: $button-border-radius;
   cursor: pointer;
-  transition: border-color, 0.24s ease;
   overflow: hidden;
   user-select: none;
 
-  & + & { margin-left: $kku-spacing-8; }
+  @include kku-focus-visible;
 
-  &:focus-visible { @include kku-focus-visible; }
+
+  & + & { margin-left: $kku-spacing-8; }
 
   &.k-button--disabled {
     cursor: not-allowed;

@@ -60,11 +60,8 @@ $switch-ball-size-small: 20px;
     background-color: $switch-background-color-inactive;
     transition: background-color 0.24s ease-out;
     cursor: pointer;
-    overflow: hidden;
 
-    &:focus-visible {
-      @include kku-focus-visible;
-    }
+    @include kku-focus-visible;
 
     .k-switch__label__ball {
       position: absolute;

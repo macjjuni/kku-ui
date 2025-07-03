@@ -41,7 +41,7 @@
     "vitest.config.ts",
     "vitest.setup.ts",
     "analyzer.js",
-    ".storybook/preview.tsx"
+    ".storybook/*"
   ],
   "exclude": ["node_modules", "./lib/**/*"],
   "references": [{"path": "./tsconfig.node.json"}]

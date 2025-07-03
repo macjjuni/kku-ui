@@ -10,11 +10,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   }
 
   const AriaLabel = useMemo(() => (!children && label ? label : undefined), [children, label]);
+  const TabIndex = useMemo(() => (disabled ? -1 : 0), [disabled])
 
   return (
     // eslint-disable-next-line react/button-has-type
     <button ref={ref} type={type ?? 'button'} {...rest} disabled={disabled}
-            aria-label={AriaLabel} aria-disabled={disabled}>
+            aria-label={AriaLabel} aria-disabled={disabled} tabIndex={TabIndex}>
       {label || children}
     </button>
   );

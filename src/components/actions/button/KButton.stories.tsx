@@ -15,7 +15,11 @@ export default meta;
 
 type Story = StoryObj<typeof KButton>
 
-const commonArgs: KButtonProps = { label: '안녕하세요', size: 'medium', disabled: false };
+const commonArgs: KButtonProps = {
+  label: '안녕하세요',
+  size: 'medium',
+  disabled: false,
+};
 
 export const Default: Story = { args: { variant: 'default', ...commonArgs } };
 export const Outlined: Story = { args: { variant: 'outlined', ...commonArgs } };

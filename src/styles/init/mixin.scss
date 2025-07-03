@@ -22,10 +22,14 @@
   line-height: $kku-line-height-xlarge;
 }
 
-@mixin kku-focus-visible {
-  outline: 2px solid $kku-focus-visible-color;
-  outline-offset: 2px;
-  border-radius: $kku-border-radius-default;
+@mixin kku-focus-visible($radius: $kku-border-radius-default, $offset: $kku-spacing-2) {
+
+  &:focus-visible {
+    outline: 2px solid $kku-focus-visible-color;
+    outline-offset: $offset;
+    border-radius: $radius;
+    z-index: 1;
+  }
 }
 
 @mixin kku-ellipsis {
