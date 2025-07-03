@@ -1,8 +1,9 @@
 import { ReactNode } from 'react';
-import { KBaseProp, SizeType } from '@/common/base/base.interface';
+import { KBaseProp } from '@/common/base/base.interface';
+import { KIconSize } from '@/components';
 
-export const KAccordionSizes = { large: 'large', medium: 'medium', small: 'small' } as const;
-export type KAccordionSizeType = (typeof KAccordionSizes)[keyof typeof KAccordionSizes];
+export const KAccordionSizes = ['small', 'medium', 'large'] as const;
+export type KAccordionSizeType = (typeof KAccordionSizes)[number];
 
 
 export interface KAccordionProps extends KBaseProp {
@@ -13,7 +14,7 @@ export interface KAccordionProps extends KBaseProp {
   size?: KAccordionSizeType;
 
   summaryIcon?: string | ReactNode;
-  summaryIconSize?: SizeType | number;
+  summaryIconSize?: KIconSize | number;
 
   open?: boolean;
 

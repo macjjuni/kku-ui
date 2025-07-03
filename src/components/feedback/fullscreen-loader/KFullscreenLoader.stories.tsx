@@ -1,14 +1,13 @@
 import { useCallback } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KButton, KFullscreenLoader, KInitializer } from '@/components';
 import { useFullLoader } from '@/common/hooks';
-import { baseArgTyp } from '@/common/storybook/argTypes';
+
 
 const meta: Meta = {
   component: KFullscreenLoader,
   title: 'Feedbacks/FullscreenLoader',
   argTypes: {
-    ...baseArgTyp,
   },
   tags: ['autodocs'],
 };

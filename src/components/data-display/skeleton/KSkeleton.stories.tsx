@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KSkeleton, KSkeletonProps } from '@/components';
-import { baseArgTyp } from '@/common/storybook/argTypes';
 
 
 const meta: Meta<KSkeletonProps> = {
@@ -16,7 +15,6 @@ const meta: Meta<KSkeletonProps> = {
       },
     },
     animation: { description: '애니메이션 효과를 설정합니다.', control: { type: 'radio' }, options: ['pulse', 'wave'] },
-    ...baseArgTyp,
   },
   tags: ['autodocs'],
 };

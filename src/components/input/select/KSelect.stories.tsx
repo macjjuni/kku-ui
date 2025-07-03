@@ -1,8 +1,8 @@
 import { RefAttributes, useCallback, useRef, useState } from 'react';
 import { JSX } from 'react/jsx-runtime';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KSelect, KSelectProps, KSelectRefs } from '@/components';
-import { baseArgTyp, disabledArgType, sizeArgType } from '@/common/storybook/argTypes';
+import {  disabledArgType, sizeArgType } from '@/common/storybook/argTypes';
 
 const meta: Meta<typeof KSelect> = {
   component: KSelect,
@@ -21,7 +21,7 @@ const meta: Meta<typeof KSelect> = {
       control: { type: 'number' },
     },
     noDataText: { description: '값이 없을 때 보여줄 텍스트를 설정합니다.', control: { type: 'text' } },
-    ...disabledArgType, ...sizeArgType, ...baseArgTyp,
+    ...disabledArgType, ...sizeArgType
   },
 };
 

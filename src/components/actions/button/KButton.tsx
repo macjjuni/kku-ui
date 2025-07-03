@@ -3,14 +3,19 @@ import { Button as CoreButton } from '@/core';
 import { useRipple } from '@/common/hooks';
 import { KButtonProps, KButtonRefs } from '@/components';
 
-
+/**
+ * KButton 컴포넌트는 다양한 스타일 옵션과 크기를 지원하는 버튼입니다.
+ * @param props KButtonProps
+ */
 const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
   // region [Hooks]
 
   const {
     type = 'button', className, style, label, onClick, disabled,
-    size, color, fontColor, variant = 'default', children, ...restProps
+    size = 'medium', color, fontColor, variant = 'default', children,
+    onMouseDown, onMouseLeave, onMouseUp, onKeyDown, onKeyUp,
+    ...restProps
   } = props;
 
   const rootRef = useRef<HTMLButtonElement>(null);
@@ -71,53 +76,52 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
   // region [Events]
 
-  const onClickButton = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+  const onClickRoot = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     if (!disabled) {
       onClick?.(e);
     }
   }, [disabled, onClick]);
 
-  const onMouseDown = useCallback((e: MouseEvent<HTMLButtonElement>) => {
-    restProps?.onMouseDown?.(e);
+  const onMouseDownRoot = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    onMouseDown?.(e);
     if (!disabled) {
       ripple?.register(e);
     }
-  }, [ripple, restProps.onMouseDown]);
+  }, [ripple, onMouseDown]);
 
-  const onMouseUp = useCallback((e: MouseEvent<HTMLButtonElement>) => {
-    restProps?.onMouseUp?.(e);
+  const onMouseUpRoot = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    onMouseUp?.(e);
     ripple.remove();
-  }, [ripple, restProps.onMouseUp]);
+  }, [ripple, onMouseUp]);
 
-  const onMouseLeave = useCallback((e: MouseEvent<HTMLButtonElement>) => {
-    restProps?.onMouseLeave?.(e);
+  const onMouseLeaveRoot = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    onMouseLeave?.(e);
     if (!rootRef?.current) {
       throw Error('Invalid rootRef.');
     }
 
     ripple.remove();
-  }, [ripple, restProps.onMouseLeave]);
+  }, [ripple, onMouseLeave]);
 
-  const onKeyDown = useCallback((e: KeyboardEvent<HTMLButtonElement>) => {
-    restProps?.onKeyDown?.(e);
+  const onKeyDownRoot = useCallback((e: KeyboardEvent<HTMLButtonElement>) => {
+    onKeyDown?.(e);
     ripple?.register(e);
-  }, [ripple, restProps.onKeyDown]);
+  }, [ripple, onKeyDown]);
 
-  const onKeyUp = useCallback((e: KeyboardEvent<HTMLButtonElement>) => {
-    restProps?.onKeyUp?.(e);
+  const onKeyUpRoot = useCallback((e: KeyboardEvent<HTMLButtonElement>) => {
+    onKeyUp?.(e);
     if (e.key === 'Enter' || e.key === ' ') {
       ripple.remove();
       onClick?.();
     }
-  }, [ripple, onClick, restProps.onKeyUp]);
+  }, [ripple, onClick, onKeyUp]);
 
   // endregion
 
   return (
-    // eslint-disable-next-line react/button-has-type
-    <CoreButton ref={rootRef} type={type} {...restProps} label={label} style={rootStyle} disabled={disabled}
-                onMouseDown={onMouseDown} onMouseLeave={onMouseLeave} onClick={onClickButton}
-                className={rootClass} onMouseUp={onMouseUp} onKeyDown={onKeyDown} onKeyUp={onKeyUp}/>
+    <CoreButton ref={rootRef} type={type} {...restProps} label={label} style={rootStyle} className={rootClass}
+                disabled={disabled} onMouseDown={onMouseDownRoot} onMouseLeave={onMouseLeaveRoot} onClick={onClickRoot}
+                onMouseUp={onMouseUpRoot} onKeyDown={onKeyDownRoot} onKeyUp={onKeyUpRoot}/>
   );
 });
 

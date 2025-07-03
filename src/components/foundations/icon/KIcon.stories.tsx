@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KIconProps, KIconSizeList, KIcon } from '@/components';
 import { kIcons } from '@/common/icons/icons';
-import { baseArgTyp, colorArgType, disabledArgType } from '@/common/storybook/argTypes';
+import { colorArgType, disabledArgType } from '@/common/storybook/argTypes';
 
 const ICON_LIST = Object.keys(kIcons);
 
@@ -23,7 +23,6 @@ const meta: Meta<KIconProps> = {
     ...colorArgType,
     ...disabledArgType,
     onClick: { description: '아이콘 클릭 이벤트를 설정합니다.', type: 'function' },
-    ...baseArgTyp,
   },
   tags: ['autodocs'],
 };

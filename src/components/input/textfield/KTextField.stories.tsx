@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import KTextField from '@/components/input/textfield/KTextField';
 import { KTextFieldProps } from '@/components/input/textfield/KTextField.interface';
-import { baseArgTyp, disabledArgType, sizeArgType } from '@/common/storybook/argTypes';
 
 
 const meta: Meta<typeof KTextField> = {
@@ -23,7 +22,6 @@ const meta: Meta<typeof KTextField> = {
     width: { description: '스타일 width 값을 설정합니다.' },
     rightAction: { description: '우측에 Action 공간을 설정합니다.' },
     leftAction: { description: '좌측에 Action 공간을 설정합니다.' },
-    ...baseArgTyp, ...sizeArgType, ...disabledArgType,
   },
   tags: ['autodocs'],
 };

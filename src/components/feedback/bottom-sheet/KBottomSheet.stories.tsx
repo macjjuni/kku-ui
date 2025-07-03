@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KBottomSheet, KBottomSheetProps, KButton } from '@/components';
 import { KBottomSheetRefs } from '@/components/feedback/bottom-sheet/KBottomSheet.interface';
 

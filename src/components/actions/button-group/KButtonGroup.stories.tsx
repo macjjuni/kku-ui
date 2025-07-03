@@ -1,11 +1,11 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import { KButton, KButtonGroup, KButtonGroupProps } from '@/components';
-import { baseArgTyp } from '@/common/storybook/argTypes';
+
 
 const meta: Meta<KButtonGroupProps> = {
   component: KButtonGroup,
   title: 'Actions/ButtonGroup',
-  argTypes: { ...baseArgTyp },
+  argTypes: { },
   tags: ['autodocs'],
 };
 

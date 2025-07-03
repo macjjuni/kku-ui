@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KAccordion, KAccordionProps, KAccordionSizes } from '@/components';
-import { baseArgTyp } from '@/common/storybook/argTypes';
+
 
 const meta: Meta<KAccordionProps> = {
   component: KAccordion,
@@ -12,7 +12,6 @@ const meta: Meta<KAccordionProps> = {
       options: Object.keys(KAccordionSizes),
     },
     width: { description: 'width 속성을 설정합니다.', type: 'number' },
-    ...baseArgTyp,
   },
   tags: ['autodocs'],
 };

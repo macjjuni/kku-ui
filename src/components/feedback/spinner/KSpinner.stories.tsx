@@ -1,12 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KSpinner, KSpinnerProps } from '@/components';
-import { baseArgTyp } from '@/common/storybook/argTypes';
 
 const meta: Meta<KSpinnerProps> = {
   component: KSpinner,
   title: 'Feedbacks/Spinner',
   argTypes: {
-    ...baseArgTyp,
     size: {
       description: '요소의 크기를 설정합니다.',
       control: { type: 'text' },

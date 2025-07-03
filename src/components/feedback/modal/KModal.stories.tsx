@@ -1,13 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { KButton, KModal, KModalProps } from '@/components';
-import { baseArgTyp } from '@/common/storybook/argTypes';
+
 
 const meta: Meta<KModalProps> = {
   component: KModal,
   title: 'Feedbacks/Modal',
   argTypes: {
-    ...baseArgTyp,
     size: {
       description: '모달 사이즈 속성을 설정합니다.',
       control: { type: 'radio' },

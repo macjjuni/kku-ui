@@ -2,7 +2,7 @@ import { createRef, act } from 'react';
 import { vi, describe, beforeEach, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { KButton, KButtonRefs, KButtonVariantList } from '@/components';
+import { KButton, KButtonRefs, BUTTON_VARIANTS } from '@/components';
 import { SIZES } from '@/common/base/base.interface';
 
 
@@ -75,7 +75,7 @@ describe('KButton', () => {
     expect(root).toHaveClass(`k-button--${size}`);
   });
 
-  it.each(KButtonVariantList)('applies variant prop "%s"', (variant) => {
+  it.each(BUTTON_VARIANTS)('applies variant prop "%s"', (variant) => {
     // Arrange
     render(<KButton label={labelText} variant={variant}/>);
     const root = screen.getByRole('button');

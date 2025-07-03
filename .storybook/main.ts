@@ -1,15 +1,13 @@
 import { mergeConfig } from 'vite';
 import type { StorybookConfig } from '@storybook/react-vite';
 
-
 const config: StorybookConfig = {
     stories: ['../**/*.stories.@(ts|tsx|js|jsx)'],
     addons: [
         '@storybook/addon-links',
-        '@storybook/addon-essentials',
         '@chromatic-com/storybook',
-        '@storybook/addon-interactions',
         'storybook-dark-mode',
+        '@storybook/addon-docs',
     ],
 
     framework: {
@@ -18,8 +16,6 @@ const config: StorybookConfig = {
     },
 
     docs: {},
-
-    core: {},
 
     async viteFinal(config) {
         return mergeConfig(config, {
@@ -31,7 +27,6 @@ const config: StorybookConfig = {
 
     typescript: {
         check: true,
-        reactDocgen: 'react-docgen-typescript',
     },
 };
 

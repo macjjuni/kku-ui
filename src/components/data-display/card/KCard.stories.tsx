@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KCard, KCardProps } from '@/components';
 import { SIZES } from '@/common/base/base.interface';
-import { baseArgTyp, disabledArgType, sizeArgType } from '@/common/storybook/argTypes';
+import { disabledArgType, sizeArgType } from '@/common/storybook/argTypes';
 
 const meta: Meta<KCardProps> = {
   component: KCard,
@@ -12,7 +12,6 @@ const meta: Meta<KCardProps> = {
     width: { description: 'width 크기를 설정합니다.', defaultValue: { summary: 'undefined' }, control: { type: 'number' } },
     height: { description: 'height 크기를 설정합니다.', defaultValue: { summary: 'undefined' }, control: { type: 'number' } },
     aspectRatio: { description: 'aspectRatio 비율을 설정합니다.', defaultValue: { summary: 'undefined' }, type: 'string' },
-    ...baseArgTyp,
     ...sizeArgType,
     ...disabledArgType,
   },
