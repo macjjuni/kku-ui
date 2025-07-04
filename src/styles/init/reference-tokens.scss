@@ -58,6 +58,12 @@
   --kku-white-color: #ffffff;
   --kku-black-color: #000000;
 
+  /* White/Black Dim */
+  --kku-white-hover-dim: rgba(255, 255, 255, 0.16);
+  --kku-white-active-dim: rgba(255, 255, 255, 0.24);
+  --kku-black-hover-dim: rgba(0, 0, 0, 0.16);
+  --kku-black-active-dim: rgba(0, 0, 0, 0.24);
+
   /* Text Size */
   --kku-text-size-xlarge: 24px;
   --kku-text-size-large: 18px;
@@ -181,6 +187,12 @@ $kku-red-color-900: var(--kku-red-color-900);
 /* Base Color */
 $kku-white-color: var(--kku-white-color);
 $kku-black-color: var(--kku-black-color);
+
+/* White/Black Dim */
+$kku-white-hover-dim: var(--kku-white-hover-dim);
+$kku-white-active-dim: var(--kku-white-active-dim);
+$kku-black-hover-dim: var(--kku-black-hover-dim);
+$kku-black-active-dim: var(--kku-black-active-dim);
 
 /* Text Size */
 $kku-text-size-xsmall: var(--kku-text-size-xsmall);

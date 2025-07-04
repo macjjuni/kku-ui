@@ -1,83 +1,39 @@
-import { forwardRef, memo, Ref, useCallback, useId, useImperativeHandle, useMemo, useRef } from 'react';
+import { forwardRef, memo, useImperativeHandle, useMemo, useRef } from 'react';
+import { Switch as CoreSwitch } from '@/core/switch';
 import { KSwitchProps, KSwitchRefs } from '@/components/actions/switch/KSwitch.interface';
 
 
-const Switch = forwardRef((props: KSwitchProps, ref: Ref<KSwitchRefs>) => {
+const Switch = forwardRef<KSwitchRefs, KSwitchProps>((props, ref) => {
 
   // region [Hooks]
-
-  const uniqueId = `k-switch${useId()}`;
-  const { id = uniqueId, style, className, value, disabled, size = 'medium',
-    onChange, onClick } = props;
-
-  const rootRef = useRef<HTMLDivElement | null>(null);
-
+  const { className, value, disabled, size = 'medium', ...restProps } = props;
+  const rootRef = useRef<HTMLButtonElement>(null);
   // endregion
 
-
   // region [Styles]
-
   const rootClass = useMemo(() => {
 
-    const clazz = ['k-switch'];
+    const clazz = ['k-switch', `k-switch--${value ? 'on' : 'off'}`];
 
-    if (className) {
-      clazz.push(className);
-    }
-    if (value) {
-      clazz.push('k-switch--on');
-    } else {
-      clazz.push('k-switch--off');
-    }
-    if (size) {
-      clazz.push(`k-switch--${size}`);
-    }
-    if (disabled) {
-      clazz.push('k-switch--disabled');
-    }
+    if (className) { clazz.push(className); }
+    if (size) { clazz.push(`k-switch--${size}`); }
+    if (disabled) { clazz.push('k-switch--disabled'); }
 
     return clazz.join(' ');
   }, [value, className, size, disabled]);
-
-
-  const rootStyle = useMemo(() => ({ ...style }), [style]);
-
   // endregion
-
-
-  // region [Events]
-
-  const onClickSwitch = useCallback(() => {
-    onChange(!value);
-    onClick?.();
-  }, [onChange, value]);
-
-  // endregion
-
-
-  // region [Life Cycles]
-  // endregion
-
 
   // region [APIs]
-
   useImperativeHandle(ref, () => ({
-    toggle() {
-      onClickSwitch();
-    },
+    toggle: () => rootRef.current?.click(),
   }));
-
   // endregion
 
 
   return (
-    <div ref={rootRef} className={rootClass}>
-      <button id={id} type="button" role="switch" style={rootStyle} aria-checked={value} aria-label="switch"
-              disabled={disabled} className="k-switch__input" onClick={onClickSwitch}/>
-      <label htmlFor={id} className="k-switch__label" tabIndex={disabled ? -1 : 0}>
-        <span className="k-switch__label__ball"/>
-      </label>
-    </div>
+    <CoreSwitch ref={rootRef} {...restProps} value={value} className={rootClass} disabled={disabled}>
+      <span className="k-switch__toggle"/>
+    </CoreSwitch>
   );
 });
 

@@ -28,7 +28,7 @@ describe('KSwitch', () => {
     expect(root)
       .toHaveAttribute('id', testId);
     expect(root)
-      .toHaveClass('k-switch__input');
+      .toHaveClass('k-switch');
     expect(root)
       .toHaveStyle(testStyle);
   });
@@ -36,16 +36,16 @@ describe('KSwitch', () => {
   it('applies default classes based on props', () => {
     // Arrange
     render(<KSwitch value disabled onChange={mockOnChange}/>);
-    const container = screen.getByRole('switch').parentElement;
+    const root = screen.getByRole('switch');
 
     // Assert
-    expect(container)
+    expect(root)
       .toHaveClass('k-switch');
-    expect(container)
+    expect(root)
       .toHaveClass('k-switch--on');
-    expect(container)
+    expect(root)
       .toHaveClass('k-switch--medium');
-    expect(container)
+    expect(root)
       .toHaveClass('k-switch--disabled');
   });
 

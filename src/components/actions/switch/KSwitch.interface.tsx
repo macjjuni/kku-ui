@@ -1,13 +1,9 @@
-import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
+import { SwitchProps } from '@/core/switch/Switch.interface';
+import { SizeType } from '@/common/base/base.interface';
 
 
-export interface KSwitchProps extends KBaseProp, KSizeProp {
-
-  value: boolean;
-  onChange: (value: boolean) => void;
-  onClick?: () => void;
-
-  disabled?: boolean;
+export interface KSwitchProps extends SwitchProps {
+  size?: SizeType
 }
 
 

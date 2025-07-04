@@ -4,6 +4,7 @@ import type { StorybookConfig } from '@storybook/react-vite';
 const config: StorybookConfig = {
     stories: ['../**/*.stories.@(ts|tsx|js|jsx)'],
     addons: [
+        '@storybook/addon-a11y',
         '@storybook/addon-links',
         '@chromatic-com/storybook',
         'storybook-dark-mode',
