@@ -77,9 +77,7 @@ $text-field-border-radius: $kku-border-radius-default;
       transition: 0.24s ease;
       transition-property: color, border-color, background-color;
 
-      &:focus-visible {
-        @include kku-focus-visible;
-      }
+      @include kku-focus-visible;
     }
 
     .k-text-field__input__icon {

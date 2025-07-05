@@ -2,7 +2,7 @@
 
 // region [Component Token]
 
-$kku-skeleton-background-color-light: $kku-gray-color-300;
+$kku-skeleton-background-color-light: $kku-gray-color-200;
 $kku-skeleton-background-color-dark: $kku-gray-color-800;
 
 // endregion
@@ -26,7 +26,7 @@ $kku-skeleton-background-color-dark: $kku-gray-color-800;
     left: -150px;
     height: 100%;
     width: 25%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.48), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.56), transparent);
     animation: wave 1.6s linear infinite;
   }
 }

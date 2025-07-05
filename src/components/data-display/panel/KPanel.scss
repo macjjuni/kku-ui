@@ -1,0 +1,9 @@
+@use '../../../styles/Entry' as *;
+
+.k-panel {
+  display: block;
+  padding: $kku-spacing-12;
+  border: 1px solid $kku-border-color-default;
+  border-radius: $kku-border-radius-default;
+  background: $kku-background-color-default;
+}
