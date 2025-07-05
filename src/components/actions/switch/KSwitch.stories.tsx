@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KSwitch, KSwitchProps } from '@/components';
-import { disabledArgType, onClickArgType, sizeArgType } from '@/common/storybook/argTypes';
+import { disabledArgType, sizeArgType } from '@/common/storybook/argTypes';
 
 
 const meta: Meta<typeof KSwitch> = {
@@ -11,7 +11,6 @@ const meta: Meta<typeof KSwitch> = {
     ...sizeArgType,
     ...disabledArgType,
     onChange: { description: '값 변경 이벤트를 설정합니다.' },
-    ...onClickArgType,
   },
   tags: ['autodocs'],
 };

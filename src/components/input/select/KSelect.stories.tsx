@@ -2,7 +2,7 @@ import { RefAttributes, useCallback, useRef, useState } from 'react';
 import { JSX } from 'react/jsx-runtime';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KSelect, KSelectProps, KSelectRefs } from '@/components';
-import {  disabledArgType, sizeArgType } from '@/common/storybook/argTypes';
+import { disabledArgType, sizeArgType } from '@/common/storybook/argTypes';
 
 const meta: Meta<typeof KSelect> = {
   component: KSelect,
@@ -11,17 +11,15 @@ const meta: Meta<typeof KSelect> = {
   argTypes: {
     value: {
       description: '선택된 요소의 값',
-      defaultValue: { summary: 'undefined' },
       control: { type: 'text' },
     },
     items: { description: '선택 요소를 설정합니다. { title: string, value: string }', defaultValue: { summary: '[]' } },
     width: {
       description: '요소의 width 크기를 설정합니다.',
-      defaultValue: { summary: 'undefined' },
       control: { type: 'number' },
     },
     noDataText: { description: '값이 없을 때 보여줄 텍스트를 설정합니다.', control: { type: 'text' } },
-    ...disabledArgType, ...sizeArgType
+    ...disabledArgType, ...sizeArgType,
   },
 };
 

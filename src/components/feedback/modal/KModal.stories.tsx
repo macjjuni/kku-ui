@@ -33,17 +33,6 @@ export default meta;
 
 type Story = StoryObj<typeof KModal>
 
-const Content = () => {
-  return (
-    <>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s,
-      when an unknown printer took a galley of type and scrambled it to make a type
-      specimen book.
-    </>
-  );
-};
-
 const Template = (args: KModalProps) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -58,11 +47,11 @@ const Template = (args: KModalProps) => {
 
   return (
     <>
-      <KButton onClick={onOpen}>Open Modal!</KButton>
+      <KButton label="모달 열기" onClick={onOpen} />
       <KModal {...args} isOpen={isOpen} setIsOpen={setIsOpen} footer={(
         <>
-          <KButton variant="primary" onClick={onClose}>확인</KButton>
-          <KButton onClick={onClose}>취소</KButton>
+          <KButton variant="primary" label="확인" onClick={onClose}/>
+          <KButton label="취소" onClick={onClose} />
         </>
       )}/>
     </>
@@ -72,8 +61,8 @@ const Template = (args: KModalProps) => {
 
 export const Default: Story = {
   render: Template, args: {
-    title: 'Lorem Ipsum is simply',
-    content: <Content/>,
+    title: '제목',
+    content: '컨텐츠',
     footer: <></>,
     size: 'small',
     animation: 'slide',

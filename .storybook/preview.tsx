@@ -4,6 +4,7 @@ import '../src/components/index.scss'
 
 const preview: Preview = {
   parameters: {
+    controls: { expanded: true },
     backgrounds: {
       default: 'white',
       values: [

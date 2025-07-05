@@ -1,13 +1,23 @@
 import { Meta, StoryObj } from '@storybook/react-vite';
-import { KButton } from '@/components';
+import { BUTTON_VARIANTS, KButton } from '@/components';
 import { KButtonProps } from '@/components/actions/button/KButton.interface';
-
-// const variants = Object.keys(BUTTON_VARIANTS);
+import { disabledArgType, sizeArgType } from '@/common/storybook/argTypes';
 
 const meta: Meta<KButtonProps> = {
   component: KButton,
   title: 'Actions/Button',
-  argTypes: {},
+  argTypes: {
+    label: {
+      description: '내부 컨턴츠 내용을 설정합니다.',
+    },
+    variant: {
+      description: '컴포넌트의 형태를 설정합니다.',
+      control: { type: 'select' },
+      options: BUTTON_VARIANTS,
+    },
+    ...disabledArgType,
+    ...sizeArgType,
+  },
   tags: ['autodocs'],
 } satisfies Meta<typeof KButton>;
 

@@ -25,7 +25,7 @@ const Icon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
 
   const inputRef = useRef<HTMLButtonElement>(null);
   const uniqueId = `k-icon-${useId()}`;
-  const computedTabIndex = useMemo(() => (onClick ? 0 : -1), [onClick]);
+  const computedTabIndex = useMemo(() => (onClick ? 0 : undefined), [onClick]);
 
   if (!icon) {
     throw Error('Error: icon is required and must be provided.');

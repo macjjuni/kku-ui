@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KSpinner, KSpinnerProps } from '@/components';
+import { SIZES } from '@/common/base/base.interface';
 
 const meta: Meta<KSpinnerProps> = {
   component: KSpinner,
@@ -7,9 +8,10 @@ const meta: Meta<KSpinnerProps> = {
   argTypes: {
     size: {
       description: '요소의 크기를 설정합니다.',
-      control: { type: 'text' },
+      control: { type: 'radio' },
+      options: SIZES,
       table: {
-        type: { summary: 'medium | small | number' },
+        type: { summary: SIZES.concat('number').join(' | ') },
       },
     },
     color: { description: '테두리 색상을 설정합니다.', type: 'string' },
