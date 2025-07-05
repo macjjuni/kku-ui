@@ -1,14 +1,14 @@
 import { act } from 'react';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { KAccordion, KAccordionSizes, KAccordionSizeType } from '@/components';
+import { KAccordion } from '@/components';
+import { SIZES } from '@/common/base/base.interface';
 
-
-const KAccordionSizeList = Object.keys(KAccordionSizes) as KAccordionSizeType[];
 
 describe('KAccordion', () => {
 
+  const testId = 'k-accordion-id';
   const summaryText = 'Accordion Summary';
   const childrenText = 'Accordion Content';
 
@@ -17,37 +17,41 @@ describe('KAccordion', () => {
     render(<KAccordion summary={summaryText}>{childrenText}</KAccordion>);
 
     // Assert
-    expect(screen.getByText(summaryText)).toBeInTheDocument();
-    expect(screen.getByText(childrenText)).toBeInTheDocument();
+    expect(screen.getByText(summaryText))
+      .toBeInTheDocument();
+    expect(screen.getByText(childrenText))
+      .toBeInTheDocument();
   });
 
   it('applies id, className, and style props', () => {
     // Arrange
-    const testId = 'k-accordion-id';
     const testClass = 'k-accordion-class';
     const testStyle = { backgroundColor: '#eee' };
 
     render(
-      <KAccordion id={testId} className={testClass} style={testStyle} summary={summaryText}>
+      <KAccordion id={testId} className={testClass} style={testStyle} summary={summaryText} data-testid={testId}>
         {childrenText}
       </KAccordion>,
     );
-    const root = screen.getByTestId('k-accordion');
+    const root = screen.getByTestId(testId);
 
     // Assert
-    expect(root).toHaveAttribute('id', testId);
-    expect(root).toHaveClass(testClass);
-    expect(root).toHaveStyle(testStyle);
+    expect(root)
+      .toHaveAttribute('id', testId);
+    expect(root)
+      .toHaveClass(testClass);
+    expect(root)
+      .toHaveStyle(testStyle);
   });
 
-  it.each(KAccordionSizeList)('applies size prop "%s"', (size) => {
+  it.each(SIZES)('applies size prop "%s"', (size) => {
     // Arrange
     render(
-      <KAccordion summary={summaryText} size={size}>
+      <KAccordion summary={summaryText} size={size} data-testid={testId}>
         {childrenText}
       </KAccordion>,
     );
-    const root = screen.getByTestId('k-accordion');
+    const root = screen.getByTestId(testId);
 
     // Assert
     expect(root).toHaveClass(`k-accordion--${size}`);
@@ -55,22 +59,23 @@ describe('KAccordion', () => {
 
   it('renders open by default if open prop is true', () => {
     // Arrange
-    render(<KAccordion summary={summaryText} open>{childrenText}</KAccordion>);
-    const root = screen.getByTestId('k-accordion');
+    render(<KAccordion summary={summaryText} data-testid={testId} defaultOpen>{childrenText}</KAccordion>);
+    const root = screen.getByTestId(testId);
 
     // Assert
-    expect(root).toHaveClass('k-accordion--open');
+    expect(root).toHaveAttribute('data-open', 'true');
   });
 
   it('toggles content on summary click', async () => {
     // Arrange
     const user = userEvent.setup();
-    render(<KAccordion summary={summaryText}>{childrenText}</KAccordion>);
-    const summary = screen.getByTestId('k-accordion__summary');
-    const root = screen.getByTestId('k-accordion');
+    render(<KAccordion summary={summaryText} data-testid={testId}>{childrenText}</KAccordion>);
+    const summary = screen.getByRole('button');
+    const root = screen.getByTestId(testId);
 
     // Assert before click
-    expect(root).toHaveClass('k-accordion--close');
+    expect(root)
+      .toHaveAttribute('data-open', 'false');
 
     // Act
     await act(async () => {
@@ -78,7 +83,7 @@ describe('KAccordion', () => {
     });
 
     // Assert after click
-    expect(root).toHaveClass('k-accordion--open');
+    expect(root).toHaveAttribute('data-open', 'true')
 
     // Act again
     await act(async () => {
@@ -86,22 +91,23 @@ describe('KAccordion', () => {
     });
 
     // Assert close again
-    expect(root).toHaveClass('k-accordion--close');
+    expect(root).toHaveAttribute('data-open', 'false')
   });
 
   it('toggles on Enter and Space key', async () => {
     // Arrange
     const user = userEvent.setup();
-    render(<KAccordion summary={summaryText}>{childrenText}</KAccordion>);
+    render(<KAccordion summary={summaryText} data-testid={testId}>{childrenText}</KAccordion>);
+    const root = screen.getByTestId(testId)
 
     // Act
     await act(async () => {
       await user.tab();
       await user.keyboard('{Enter}');
-    })
+    });
 
     // Assert
-    expect(screen.getByTestId('k-accordion')).toHaveClass('k-accordion--open');
+    expect(root).toHaveAttribute('data-open', 'true')
 
     // Act
     await act(async () => {
@@ -109,6 +115,6 @@ describe('KAccordion', () => {
     });
 
     // Assert
-    expect(screen.getByTestId('k-accordion')).toHaveClass('k-accordion--close');
+    expect(root).toHaveAttribute('data-open', 'false')
   });
 });

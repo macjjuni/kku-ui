@@ -1,15 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { KAccordion, KAccordionProps, KAccordionSizes } from '@/components';
+import { KAccordion, KAccordionProps } from '@/components';
+import { sizeArgType } from '@/common/storybook/argTypes';
 
 
 const meta: Meta<KAccordionProps> = {
   component: KAccordion,
   title: 'Data Display/Accordion',
   argTypes: {
-    size: {
-      description: '크기를 설정합니다.',
-      control: { type: 'radio' },
-      options: Object.keys(KAccordionSizes),
+    defaultOpen: {
+      control: { type: 'boolean' },
+    },
+    ...sizeArgType,
+    children: {
+      description: '컨텐츠 내용을 설정합니다.',
+      table: { type: { summary: 'ReactNode' } },
     },
     width: { description: 'width 속성을 설정합니다.', type: 'number' },
   },
@@ -29,10 +33,7 @@ export const Default: Story = {
     children: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ' +
       'Lorem Ipsum has been the industry standard dummy text ever since the 1500s, ' +
       'when an unknown printer took a galley of type and scrambled it to make a type ' +
-      'specimen book. It has survived not only five centuries, but also the leap into electronic' +
-      ' typesetting, remaining essentially unchanged. It was popularised in the 1960s with ' +
-      'the release of Letraset sheets containing Lorem Ipsum passages, and more recently with ' +
-      'desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+      'specimen book. It has survived not only five centuries, but also the leap into electronic',
     size: 'medium',
     width: undefined,
   },

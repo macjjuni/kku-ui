@@ -8,7 +8,9 @@ $accordion-background-color-hover: $kku-background-color-hover;
 $accordion-text-color: $kku-text-color-primary;
 
 $accordion-border-radius: $kku-border-radius-default;
-$accordion-transition: 0.3s ease;
+
+$accordion-width-small: 480px;
+$accordion-width-medium: 640px;
 
 // endregion
 
@@ -18,12 +20,10 @@ $accordion-transition: 0.3s ease;
   color: $accordion-text-color;
   background-color: $accordion-background-color-base;
 
-  &.k-accordion--open .k-accordion__summary__icon__wrapper .k-accordion__summary__icon {
-    transform: rotate(180deg);
-  }
-
-  &.k-accordion--open .k-accordion__summary {
-    border-bottom: 1px solid $accordion-border-color;
+  &[data-open="true"] {
+    .k-accordion__summary {
+      border-bottom: 1px solid $accordion-border-color;
+    }
   }
 
   .k-accordion__summary {
@@ -31,15 +31,13 @@ $accordion-transition: 0.3s ease;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid transparent;
-    transition: $accordion-transition;
-    transition-property: border, background-color;
     list-style-type: none; // #Marker Style[Other Browser]
     user-select: none;
     cursor: pointer;
 
-    &:focus-visible {
-      @include kku-focus-visible;
-    }
+    @include kku-transition;
+    @include kku-focus-visible;
+    transition-property: background, border-bottom-color;
 
     &:hover {
       background-color: $accordion-background-color-hover;
@@ -56,67 +54,36 @@ $accordion-transition: 0.3s ease;
       justify-content: flex-start;
       color: var(--default-font-color);
     }
-
-    .k-accordion__summary__icon__wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .k-accordion__summary__icon {
-        transition: $accordion-transition;
-        transition-property: transform;
-        cursor: pointer;
-      }
-    }
   }
 
   .k-accordion__content {
-    max-height: 0;
-    height: auto;
+    @include kku-transition;
+    transition-property: max-height;
     background-color: var(--white-color);
     overflow: hidden;
-    transition: max-height 0.3s ease;
   }
 
-  // Size Variants
-  &.k-accordion--large {
-    @include kku-text-large;
+  &.k-accordion--small {
+    width: 100%;
+    max-width: $accordion-width-small;
+    @include kku-text-small;
 
-    .k-accordion__summary, .k-accordion__content__wrapper {
-      padding: $kku-spacing-16;
-    }
-
-    .k-accordion__summary__icon ~ .k-accordion__summary__text {
-      margin-left: $kku-spacing-12;
+    .k-accordion__summary, .k-accordion__content > .k-accordion__content__container {
+      padding: $kku-spacing-8 $kku-spacing-12;
     }
   }
 
   &.k-accordion--medium {
+    width: 100%;
+    max-width: $accordion-width-medium;
     @include kku-text-medium;
 
-    .k-accordion__summary, .k-accordion__content__wrapper {
+    .k-accordion__summary, .k-accordion__content > .k-accordion__content__container {
       padding: $kku-spacing-12 $kku-spacing-16;
-    }
-
-    .k-accordion__summary__icon ~ .k-accordion__summary__text {
-      margin-left: $kku-spacing-10;
-    }
-  }
-
-  &.k-accordion--small {
-    @include kku-text-small;
-
-    .k-accordion__summary, .k-accordion__content__wrapper {
-      padding: $kku-spacing-8 $kku-spacing-12;
-    }
-
-    .k-accordion__summary__icon ~ .k-accordion__summary__text {
-      margin-left: $kku-spacing-8;
     }
   }
 }
 
 
 .#{$kku-dark-mode-signature} .k-accordion {
-
 }
