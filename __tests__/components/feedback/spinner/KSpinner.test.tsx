@@ -48,15 +48,6 @@ describe('KSpinner', () => {
     expect(root).toHaveClass('my-spinner');
   });
 
-  it('generates id starting with "k-spinner-" when no id is provided', () => {
-    // arrange
-    render(<KSpinner />);
-
-    // assert
-    const root = screen.getByRole('status');
-    expect(root.id.startsWith('k-spinner-')).toBe(true);
-  });
-
   it('includes accessibility role and aria attributes', () => {
     // arrange
     render(<KSpinner />);

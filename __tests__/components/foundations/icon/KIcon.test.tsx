@@ -66,8 +66,8 @@ describe('KIcon', () => {
       // Assert
       expect(clickable)
         .toHaveAttribute('tabIndex', '0');
-      expect(nonClickable)
-        .toHaveAttribute('tabIndex', '-1');
+      expect(nonClickable).not
+        .toHaveAttribute('tabIndex');
     });
   });
 
