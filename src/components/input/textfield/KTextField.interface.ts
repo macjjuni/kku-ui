@@ -1,36 +1,17 @@
-import { InputHTMLAttributes, KeyboardEvent, ReactNode } from 'react';
-import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
+import { ReactNode } from 'react';
+import { TextFieldProps } from '@/core';
+import { SizeType } from '@/common/base/base.interface';
 
 
-type ExceptedInputAttributeType = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'value' | 'onChange'>;
-
-export interface KTextFieldProps extends KBaseProp, KSizeProp, ExceptedInputAttributeType {
-
-  // Value
+export interface KTextFieldProps extends Omit<TextFieldProps, 'onChange' | 'size'> {
   value?: string;
 
-  // Label
-  label?: string;
-  labelAlign?: 'column' | 'row';
-  labelGap?: number;
-
-  // Options
-  placeholder?: string;
-  maxLength?: number;
-
-  // Types
-  disabled?: boolean;
-  required?: boolean;
-  clearable?: boolean;
-  password?: boolean;
-
-  // Custom
-  leftAction?: ReactNode;
-  rightAction?: ReactNode;
+  // Content
+  leftContent?: ReactNode;
+  rightContent?: ReactNode;
 
   // Event
   onChange?: (value: string) => void;
-  onKeyDownEnter?: (e?: KeyboardEvent<HTMLInputElement>) => void;
 
   // Options
   autoComplete?: string;
@@ -38,12 +19,18 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp, ExceptedInputAttr
   autoCapitalize?: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
 
   // Styles
-  width?: number;
+  size?: SizeType;
+  width?: number | string;
   align?: 'left' | 'center' | 'right';
+  required?: boolean;
+
+  // APIS
+  rules?: (((value?: string) => string | boolean) | Promise<(value?: string) => string | boolean>)[];
 }
 
 export interface KTextFieldRefs {
   focus: () => void;
   blur: () => void;
   value?: string;
+  onValidate: () => Promise<boolean> | boolean;
 }

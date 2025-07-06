@@ -1,153 +1,118 @@
-import { act, useState } from 'react';
-import { describe, it, expect, afterEach, vi } from 'vitest';
+import { useState } from 'react';
+import { describe, expect, it, vi } from 'vitest';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
 import { KTextField } from '@/components';
 
-const TestTextField = ({ clearable }: { clearable?: boolean }) => {
-  const [value, setValue] = useState('');
-  return <KTextField value={value} onChange={(val) => setValue(val)} clearable={clearable}/>;
-};
 
 describe('KTextField', () => {
 
-  afterEach(() => {
-    vi.clearAllTimers();
-    vi.useRealTimers();
-  });
-
-  it('renders base element', () => {
-    // Arrange
-    render(<KTextField value=""/>);
-
-    // Assert
-    expect(screen.getByTestId('k-text-field'))
+  it('should render the component', () => {
+    const label = 'Username';
+    render(<KTextField label={label} value=""/>);
+    const input = screen.getByLabelText(label);
+    expect(input)
       .toBeInTheDocument();
   });
 
-  it('renders label, placeholder, and required asterisk', () => {
-    // Arrange
-    render(<KTextField label="Username" placeholder="Enter your username" required value=""/>);
-
-    // Assert
-    expect(screen.getByText('Username'))
-      .toBeInTheDocument();
-    expect(screen.getByRole('textbox'))
-      .toHaveAttribute('placeholder', 'Enter your username');
-    expect(screen.getByText('*'))
-      .toBeInTheDocument();
-  });
-
-  it('calls onChange when typing', async () => {
-    // Arrange
+  it('should call onChange when user types', async () => {
     const user = userEvent.setup();
-    render(<TestTextField/>);
-    const input = screen.getByRole('textbox');
+    const handleChange = vi.fn();
 
-    // Act
+    const Wrapper = () => {
+      const [val, setVal] = useState('');
+      return (
+        <KTextField label="Username" value={val}
+                    onChange={(v) => {
+                      setVal(v);
+                      handleChange(v);
+                    }} />
+      );
+    };
+
+    render(<Wrapper/>);
+    const input = screen.getByLabelText('Username');
+
     await act(async () => {
-      await user.type(input, 'test');
+      await user.type(input, 'hello');
     });
 
-    // Assert
-    expect(input)
-      .toHaveValue('test');
+    expect(handleChange)
+      .toHaveBeenCalledTimes(5);
+    expect(handleChange)
+      .toHaveBeenLastCalledWith('hello');
   });
 
-  it('applies disabled prop correctly', () => {
-    // Arrange
-    render(<KTextField value="disabled" disabled/>);
-    const container = screen.getByTestId('k-text-field');
-    const input = screen.getByRole('textbox');
-    // Assert
-    expect(container)
-      .toHaveClass('k-text-field--disabled');
-    expect(input)
-      .toBeDisabled();
-  });
 
-  it('calls onFocus and onBlur handlers', async () => {
-    // Arrange
-    const onFocus = vi.fn();
-    const onBlur = vi.fn();
-    render(<KTextField value="" onFocus={onFocus} onBlur={onBlur}/>);
-    const input = screen.getByRole('textbox');
+  it('should toggle focus class on focus and blur', async () => {
+    render(<KTextField label="Username" value=""/>);
+    const input = screen.getByLabelText('Username');
+    const wrapper = input.closest('.k-text-field') as HTMLElement;
 
-    // Act
     await act(async () => {
       await userEvent.click(input);
     });
+
+    const hasFocusClass = wrapper.classList.contains('k-text-field--focus');
+    expect(hasFocusClass)
+      .toBe(true);
+
     await act(async () => {
-      await userEvent.tab();
+      input.blur();
     });
 
-    // Assert
-    expect(onFocus)
-      .toHaveBeenCalledTimes(1);
-    expect(onBlur)
-      .toHaveBeenCalledTimes(1);
+    const hasFocusAfterBlur = wrapper.classList.contains('k-text-field--focus');
+    expect(hasFocusAfterBlur)
+      .toBe(false);
   });
 
-  it('calls onKeyDownEnter when Enter key is pressed', () => {
-    // Arrange
-    const onEnter = vi.fn();
-    render(<KTextField value="test" onKeyDownEnter={onEnter}/>);
-    const input = screen.getByRole('textbox');
-
-    // Act
-    input.focus();
-    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
-
-    // Assert
-    expect(onEnter)
-      .toHaveBeenCalled();
+  it('should render password visibility toggle icon', () => {
+    render(<KTextField label="Password" value="" type="password"/>);
+    const icon = screen.getByRole('button');
+    expect(icon)
+      .toBeInTheDocument();
   });
 
-  it('toggles password visibility on toggle button click', async () => {
-    // Arrange
-    render(<KTextField value="secret" password/>);
-    const input = screen.getByTestId('k-text-field-input');
-    const toggleBtn = screen.getByRole('button');
+  it('should show error message when validation fails', async () => {
+    const errorMessage = 'This field is required';
+    // eslint-disable-next-line no-confusing-arrow
+    const rule = vi.fn((val?: string) => (val ? true : errorMessage));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const ref = { current: null as any };
 
-    // Assert
-    expect(input)
-      .toHaveAttribute('type', 'password');
+    render(<KTextField label="Username" value="" rules={[rule]} ref={ref}/>);
 
-    // Act
+    let result: boolean;
+
     await act(async () => {
-      await userEvent.click(toggleBtn);
+      result = await ref.current.onValidate();
     });
 
-    // Assert
-    expect(screen.getByTestId('k-text-field-input'))
-      .toHaveAttribute('type', 'input');
+    const errorText = screen.getByText(errorMessage);
+    expect(result)
+      .toBe(false);
+    expect(errorText)
+      .toBeInTheDocument();
   });
 
-  it('clears input value when clear button is clicked', async () => {
-    // Arrange
-    const user = userEvent.setup();
-    render(<TestTextField clearable/>);
-    const input = screen.getByTestId('k-text-field-input');
+  it('should clear error message when validation passes', async () => {
+    const rule = vi.fn(() => true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const ref = { current: null as any };
 
-    // Act
+    render(<KTextField label="Username" value="valid" rules={[rule]} ref={ref}/>);
+
+    let result: boolean;
+
     await act(async () => {
-      await user.type(input, 'test!');
+      result = await ref.current.onValidate();
     });
 
-    // Assert
-    expect(input)
-      .toHaveValue('test!');
-
-    // Arrange
-    const clearButton = screen.getByRole('button');
-
-    // Act
-    await act(async () => {
-      await user.click(clearButton);
-    });
-
-    // Assert
-    expect(screen.getByTestId('k-text-field-input'))
-      .toHaveValue('');
+    const errorText = screen.queryByText(/required/i);
+    expect(result)
+      .toBe(true);
+    expect(errorText)
+      .not
+      .toBeInTheDocument();
   });
 });
