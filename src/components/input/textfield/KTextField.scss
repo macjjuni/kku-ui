@@ -23,11 +23,12 @@ $kku-text-field-legend-height: 16px;
       border-color: $kku-border-color-hover;
 
       .k-text-field__fieldset__legend > .k-text-field__fieldset__legend__label {
-        color: $kku-border-color-hover;
+        color: $kku-text-color-primary;
       }
     }
 
     .k-text-field__fieldset__legend {
+
       .k-text-field__fieldset__legend__label {
         height: $kku-text-field-legend-height;
         color: $kku-text-color-label;
@@ -36,6 +37,7 @@ $kku-text-field-legend-height: 16px;
 
         &.k-text-field__fieldset__legend__label--show { padding: 0 $kku-spacing-2; }
       }
+
       .k-text-field__fieldset__legend__label__required {
         margin-left: $kku-spacing-2;
         color: $kku-error-color-default;

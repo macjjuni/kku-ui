@@ -1,14 +1,14 @@
 :root {
   /* Gray */
-  --kku-gray-color-100: #F2F3F4;
-  --kku-gray-color-200: #ECEDEF;
-  --kku-gray-color-300: #DBDADE;
-  --kku-gray-color-400: #808793;
-  --kku-gray-color-500: #737A84;
-  --kku-gray-color-600: #6A707A;
-  --kku-gray-color-700: #60656E;
-  --kku-gray-color-800: #4D5158;
-  --kku-gray-color-900: #3A3D42;
+  --kku-slate-color-100: #f7f8fb;
+  --kku-slate-color-200: #f3f5f8;
+  --kku-slate-color-300: #e7ebf1;
+  --kku-slate-color-400: #b0bdd2;
+  --kku-slate-color-500: #9eaabd;
+  --kku-slate-color-600: #8d97a8;
+  --kku-slate-color-700: #848e9e;
+  --kku-slate-color-800: #6a717e;
+  --kku-slate-color-900: #4f555e;
 
   /* Blue */
   --kku-blue-color-100: #E6F1FE;
@@ -55,6 +55,7 @@
   --kku-red-color-900: #6C0202;
 
   /* Base Color */
+  --kku-text-color: #212121;
   --kku-white-color: #ffffff;
   --kku-black-color: #000000;
 
@@ -130,15 +131,15 @@
 }
 
 /* Gray */
-$kku-gray-color-100: var(--kku-gray-color-100);
-$kku-gray-color-200: var(--kku-gray-color-200);
-$kku-gray-color-300: var(--kku-gray-color-300);
-$kku-gray-color-400: var(--kku-gray-color-400);
-$kku-gray-color-500: var(--kku-gray-color-500);
-$kku-gray-color-600: var(--kku-gray-color-600);
-$kku-gray-color-700: var(--kku-gray-color-700);
-$kku-gray-color-800: var(--kku-gray-color-800);
-$kku-gray-color-900: var(--kku-gray-color-900);
+$kku-slate-color-100: var(--kku-slate-color-100);
+$kku-slate-color-200: var(--kku-slate-color-200);
+$kku-slate-color-300: var(--kku-slate-color-300);
+$kku-slate-color-400: var(--kku-slate-color-400);
+$kku-slate-color-500: var(--kku-slate-color-500);
+$kku-slate-color-600: var(--kku-slate-color-600);
+$kku-slate-color-700: var(--kku-slate-color-700);
+$kku-slate-color-800: var(--kku-slate-color-800);
+$kku-slate-color-900: var(--kku-slate-color-900);
 
 /* Blue */
 $kku-blue-color-100: var(--kku-blue-color-100);
@@ -185,14 +186,9 @@ $kku-red-color-800: var(--kku-red-color-800);
 $kku-red-color-900: var(--kku-red-color-900);
 
 /* Base Color */
+$kku-text-color: var(--kku-text-color);
 $kku-white-color: var(--kku-white-color);
 $kku-black-color: var(--kku-black-color);
-
-/* White/Black Dim */
-$kku-white-hover-dim: var(--kku-white-hover-dim);
-$kku-white-active-dim: var(--kku-white-active-dim);
-$kku-black-hover-dim: var(--kku-black-hover-dim);
-$kku-black-active-dim: var(--kku-black-active-dim);
 
 /* Text Size */
 $kku-text-size-xsmall: var(--kku-text-size-xsmall);

@@ -31,6 +31,7 @@ $accordion-width-medium: 640px;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid transparent;
+    background: $kku-slate-color-100;
     list-style-type: none; // #Marker Style[Other Browser]
     user-select: none;
     cursor: pointer;
@@ -40,7 +41,7 @@ $accordion-width-medium: 640px;
     transition-property: background, border-bottom-color;
 
     &:hover {
-      background-color: $accordion-background-color-hover;
+      background-color: $kku-slate-color-200;
     }
 
     // #Marker Style[Safari]

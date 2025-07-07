@@ -26,12 +26,22 @@ export default meta;
 type Story = StoryObj<typeof KButton>
 
 const commonArgs: KButtonProps = {
-  label: '안녕하세요',
+  label: 'Button',
   size: 'medium',
   disabled: false,
 };
 
-export const Default: Story = { args: { variant: 'default', ...commonArgs } };
-export const Outlined: Story = { args: { variant: 'outlined', ...commonArgs } };
-export const Primary: Story = { args: { variant: 'primary', ...commonArgs } };
+export const Default: Story = { args: { variant: 'outlined', ...commonArgs } };
+export const Variant: Story = {
+  render: (args) => (
+    <>
+      {
+        BUTTON_VARIANTS.map((variant) => (
+          <KButton key={variant} {...args} variant={variant}>{variant}</KButton>
+        ))
+      }
+    </>
+  ),
+  args: { variant: 'outlined', ...commonArgs },
+};
 

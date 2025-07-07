@@ -9,13 +9,16 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
   // region [Hooks]
   const {
     type = 'button', className, label, onClick, disabled,
-    size = 'medium', variant = 'default', children,
+    size = 'medium', variant = 'outlined', children,
     onMouseDown, onMouseLeave, onMouseUp, onKeyDown, onKeyUp,
     ...restProps
   } = props;
 
   const rootRef = useRef<HTMLButtonElement>(null);
   const ripple = useRipple(rootRef);
+  const isNoRipple = useMemo(() => (
+    variant === 'plain'
+  ), [variant]);
 
   useImperativeHandle(ref, () => ({
     focus() {
@@ -60,32 +63,38 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
   const onMouseDownRoot = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     onMouseDown?.(e);
-    if (!disabled) {
+    if (!disabled && !isNoRipple) {
       ripple?.register(e);
     }
-  }, [ripple, onMouseDown]);
+  }, [ripple, isNoRipple, onMouseDown]);
 
   const onMouseUpRoot = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     onMouseUp?.(e);
-    ripple.remove();
-  }, [ripple, onMouseUp]);
+    if (!isNoRipple) {
+      ripple.remove();
+    }
+  }, [ripple, isNoRipple, onMouseUp]);
 
   const onMouseLeaveRoot = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     onMouseLeave?.(e);
     if (!rootRef?.current) {
       throw Error('Invalid rootRef.');
     }
-    ripple.remove();
-  }, [ripple, onMouseLeave]);
+    if (!isNoRipple) {
+      ripple.remove();
+    }
+  }, [ripple, isNoRipple, onMouseLeave]);
 
   const onKeyDownRoot = useCallback((e: KeyboardEvent<HTMLButtonElement>) => {
     onKeyDown?.(e);
-    ripple?.register(e);
+    if (!isNoRipple) {
+      ripple?.register(e);
+    }
   }, [ripple, onKeyDown]);
 
   const onKeyUpRoot = useCallback((e: KeyboardEvent<HTMLButtonElement>) => {
     onKeyUp?.(e);
-    if (e.key === 'Enter' || e.key === ' ') {
+    if ((e.key === 'Enter' || e.key === ' ') && !isNoRipple) {
       ripple.remove();
     }
   }, [ripple, onKeyUp]);
@@ -94,7 +103,7 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
   return (
     <CoreButton ref={rootRef} {...restProps} type={type} label={label} className={rootClass}
                 disabled={disabled} onMouseDown={onMouseDownRoot} onMouseLeave={onMouseLeaveRoot} onClick={onClickRoot}
-                onMouseUp={onMouseUpRoot} onKeyDown={onKeyDownRoot} onKeyUp={onKeyUpRoot} />
+                onMouseUp={onMouseUpRoot} onKeyDown={onKeyDownRoot} onKeyUp={onKeyUpRoot}/>
   );
 });
 

@@ -2,7 +2,7 @@ import { MouseEvent, ReactNode } from 'react';
 import { SizeType } from '@/common/base/base.interface';
 import { ButtonProps } from '@/core';
 
-export const BUTTON_VARIANTS = ['default', 'outlined', 'primary', 'success', 'warning', 'error'] as const;
+export const BUTTON_VARIANTS = ['outlined', 'solid', 'primary', 'subtle', 'plain'] as const;
 export type KButtonVariantType = (typeof BUTTON_VARIANTS)[number];
 
 

@@ -2,11 +2,14 @@
 
 // region [Component Token]
 
-$switch-background-color-active: $kku-primary-color-default;
-$switch-background-color-inactive: $kku-gray-color-300;
+$switch-background-color-active-normal: $kku-primary-color-default;
+$switch-background-color-active-hover: $kku-blue-color-500;
+
+$switch-background-color-inactive-normal: $kku-slate-color-400;
+$switch-background-color-inactive-hover: $kku-slate-color-500;
 
 $switch-ball-color-base: $kku-white-color;
-$switch-ball-color-disabled: $kku-gray-color-300;
+$switch-ball-color-disabled: $kku-slate-color-300;
 
 $switch-width-size-medium: 52px;
 $switch-height-size-medium: 30px;
@@ -30,7 +33,8 @@ $switch-ball-size-small: 20px;
 
   width: 50px;
   height: 24px;
-  transition: background 0.24s ease-in-out;
+  @include kku-transition;
+  transition-property: background;
   cursor: pointer;
 
   @include kku-focus-visible;
@@ -67,10 +71,10 @@ $switch-ball-size-small: 20px;
   }
 
   &.k-switch--on {
-    background: $switch-background-color-active;
+    background: $switch-background-color-active-normal;
 
     &:hover:not(.k-switch--disabled) {
-      background: linear-gradient($kku-black-hover-dim, $kku-black-hover-dim), $switch-background-color-active;
+      background: $switch-background-color-active-hover;
     }
 
     &.k-switch--small {
@@ -83,10 +87,10 @@ $switch-ball-size-small: 20px;
   }
 
   &.k-switch--off {
-    background: $switch-background-color-inactive;
+    background: $switch-background-color-inactive-normal;
 
     &:hover:not(.k-switch--disabled) {
-      background: linear-gradient($kku-black-hover-dim, $kku-black-hover-dim), $switch-background-color-inactive;
+      background: $switch-background-color-inactive-hover;
     }
   }
 
@@ -94,7 +98,7 @@ $switch-ball-size-small: 20px;
     cursor: not-allowed;
     background: $kku-background-color-disabled;
 
-    .k-switch__toggle { background: $kku-gray-color-300; }
+    .k-switch__toggle { background: $kku-slate-color-300; }
   }
 
 }

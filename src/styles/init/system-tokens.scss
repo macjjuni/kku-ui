@@ -1,25 +1,23 @@
 @use "reference-tokens" as *;
 
 :root {
-  --kku-text-color-primary: #{$kku-gray-color-900};
-  --kku-text-color-secondary: #{$kku-gray-color-700};
-  --kku-text-color-tertiary: #{$kku-gray-color-500};
-  --kku-text-color-disabled: #{$kku-gray-color-400};
+  --kku-text-color-primary: #{$kku-text-color};
+  --kku-text-color-disabled: #{$kku-slate-color-500};
   --kku-text-color-link: #{$kku-blue-color-400};
-  --kku-text-color-label: #{$kku-gray-color-900};
-  --kku-text-color-placeholder: #{$kku-gray-color-600};
+  --kku-text-color-label: #{$kku-slate-color-700};
+  --kku-text-color-placeholder: #{$kku-slate-color-600};
 
-  --kku-border-color-default: #{$kku-gray-color-300};
-  --kku-border-color-hover: #{$kku-gray-color-800};
-  --kku-border-color-disabled: #{$kku-gray-color-300};
+  --kku-border-color-default: #{$kku-slate-color-500};
+  --kku-border-color-hover: #{$kku-slate-color-800};
+  --kku-border-color-disabled: #{$kku-slate-color-400};
 
   --kku-background-color-default: #{$kku-white-color};
-  --kku-background-color-hover: #{$kku-gray-color-100};
-  --kku-background-color-disabled: #{$kku-gray-color-500};
+  --kku-background-color-hover: #{$kku-slate-color-100};
+  --kku-background-color-disabled: #{$kku-slate-color-100};
 
   --kku-backdrop-background-color-light: #{$kku-black-color};
-  --kku-backdrop-background-color-dark: #{$kku-gray-color-200};
-  --kku-ripple-background-color: #{$kku-gray-color-900};
+  --kku-backdrop-background-color-dark: #{$kku-slate-color-200};
+  --kku-ripple-background-color: #{$kku-slate-color-900};
 
   --kku-primary-color-default: #{$kku-blue-color-400};
   --kku-primary-color-hover: #{$kku-blue-color-500};
@@ -104,19 +102,19 @@ $kku-full-screen-loader-z-index: var(--kku-full-screen-loader-z-index);
 $kku-dark-mode-signature: 'dark';
 
 :root .#{$kku-dark-mode-signature} {
-  --kku-text-color-primary: #{$kku-gray-color-100};
-  --kku-text-color-secondary: #{$kku-gray-color-300};
-  --kku-text-color-tertiary: #{$kku-gray-color-500};
-  --kku-text-color-disabled: #{$kku-gray-color-600};
+  --kku-text-color-primary: #{$kku-slate-color-100};
+  --kku-text-color-secondary: #{$kku-slate-color-300};
+  --kku-text-color-tertiary: #{$kku-slate-color-500};
+  --kku-text-color-disabled: #{$kku-slate-color-600};
   --kku-text-color-link: #{$kku-blue-color-400};
 
-  --kku-border-color-default: #{$kku-gray-color-700};
-  --kku-border-color-hover: #{$kku-gray-color-700};
-  --kku-border-color-disabled: #{$kku-gray-color-700};
+  --kku-border-color-default: #{$kku-slate-color-700};
+  --kku-border-color-hover: #{$kku-slate-color-700};
+  --kku-border-color-disabled: #{$kku-slate-color-700};
 
-  --kku-background-color-default: #{$kku-gray-color-900};
-  --kku-background-color-hover: #{$kku-gray-color-800};
-  --kku-background-color-disabled: #{$kku-gray-color-800};
+  --kku-background-color-default: #{$kku-slate-color-900};
+  --kku-background-color-hover: #{$kku-slate-color-800};
+  --kku-background-color-disabled: #{$kku-slate-color-800};
 
-  --kku-ripple-background-color: #{$kku-gray-color-300};
+  --kku-ripple-background-color: #{$kku-slate-color-300};
 }

@@ -2,92 +2,18 @@
 
 // region [Component Tokens]
 
-// Sizes
-$button-text-size-small: $kku-text-size-small;
-$button-text-size-medium: $kku-text-size-medium;
-
-// Default
-$button-default-text-color-default: $kku-text-color-primary;
-$button-default-text-color-hover: $kku-text-color-secondary;
-$button-default-text-color-disabled: $kku-text-color-disabled;
-
-$button-default-background-color-default: $kku-background-color-default;
-$button-default-background-color-hover: $kku-background-color-hover;
-$button-default-background-color-disabled: $kku-background-color-disabled;
-
-$button-default-border-color-default: $kku-border-color-default;
-$button-default-border-color-hover: $kku-border-color-hover;
-$button-default-border-color-disabled: $kku-border-color-disabled;
-
-// Outlined Light Mode
-$button-outlined-border-color-default-light: $kku-gray-color-900;
-$button-outlined-border-color-disabled-light: $kku-gray-color-600;
-$button-outlined-background-color-default-light: none;
-$button-outlined-background-color-disabled-light: $kku-gray-color-100;
-$button-outlined-text-color-hover-light: $kku-text-color-secondary;
-$button-outlined-text-color-disabled-light: $kku-text-color-disabled;
-
-// Outlined Dark Mode
-$button-outlined-border-color-default-dark: $kku-gray-color-100;
-$button-outlined-border-color-disabled-dark: $kku-gray-color-400;
-$button-outlined-background-color-default-dark: none;
-$button-outlined-background-color-disabled-dark: $kku-gray-color-900;
-$button-outlined-text-color-hover-dark: $kku-text-color-secondary;
-$button-outlined-text-color-disabled-dark: $kku-text-color-disabled;
-
-// Primary
-$button-primary-text-color-default: $kku-white-color;
-$button-primary-text-color-hover: $kku-white-color;
-$button-primary-text-color-disabled: $kku-gray-color-300;
-
-$button-primary-border-color-default: $kku-primary-color-default;
-$button-primary-border-color-hover: $kku-primary-color-hover;
-$button-primary-border-color-disabled: $kku-primary-color-disabled;
-
-$button-primary-background-color-default: $kku-primary-color-default;
-$button-primary-background-color-disabled: $kku-primary-color-disabled;
-
-// Success
-$button-success-text-color-default: $kku-white-color;
-$button-success-text-color-hover: $kku-white-color;
-$button-success-text-color-disabled: $kku-gray-color-300;
-
-$button-success-background-color-default: $kku-success-color-default;
-$button-success-background-color-hover: $kku-success-color-hover;
-$button-success-background-color-disabled: $kku-success-color-disabled;
-
-$button-success-border-color-default: $kku-success-color-default;
-$button-success-border-color-hover: $kku-success-color-hover;
-$button-success-border-color-disabled: $kku-success-color-disabled;
-
-// Warning
-$button-warning-text-color-default: $kku-white-color;
-$button-warning-text-color-hover: $kku-white-color;
-$button-warning-text-color-disabled: $kku-gray-color-300;
-
-$button-warning-background-color-default: $kku-warning-color-default;
-$button-warning-background-color-hover: $kku-warning-color-hover;
-$button-warning-background-color-disabled: $kku-warning-color-disabled;
-
-$button-warning-border-color-default: $kku-warning-color-default;
-$button-warning-border-color-hover: $kku-warning-color-hover;
-$button-warning-border-color-disabled: $kku-warning-color-disabled;
-
 // Error
-$button-error-text-color-default: $kku-white-color;
-$button-error-text-color-hover: $kku-white-color;
-$button-error-text-color-disabled: $kku-gray-color-300;
-
-$button-error-background-color-default: $kku-error-color-default;
-$button-error-background-color-hover: $kku-error-color-hover;
-$button-error-background-color-disabled: $kku-error-color-disabled;
-
-$button-error-border-color-default: $kku-error-color-default;
-$button-error-border-color-hover: $kku-error-color-hover;
-$button-error-border-color-disabled: $kku-error-color-disabled;
-
-// Common
-$button-border-radius: $kku-border-radius-default;
+//$button-error-text-color-default: $kku-white-color;
+//$button-error-text-color-hover: $kku-white-color;
+//$button-error-text-color-disabled: $kku-slate-color-300;
+//
+//$button-error-background-color-default: $kku-error-color-default;
+//$button-error-background-color-hover: $kku-error-color-hover;
+//$button-error-background-color-disabled: $kku-error-color-disabled;
+//
+//$button-error-border-color-default: $kku-error-color-default;
+//$button-error-border-color-hover: $kku-error-color-hover;
+//$button-error-border-color-disabled: $kku-error-color-disabled;
 // endregion
 
 
@@ -100,170 +26,141 @@ $button-border-radius: $kku-border-radius-default;
   margin: 0;
   border-width: 1px;
   border-style: solid;
-  border-radius: $button-border-radius;
+  border-radius: $kku-border-radius-default;
   cursor: pointer;
   overflow: hidden;
   user-select: none;
-
   @include kku-focus-visible;
+  @include kku-transition;
+  transition-property: background, border-color;
 
-
-  & + & { margin-left: $kku-spacing-8; }
+  & + & {
+    margin-left: $kku-spacing-8;
+  }
 
   &.k-button--disabled {
     cursor: not-allowed;
-
-    &.k-button--colorful::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.32);
-    }
   }
 
   // region [Variant]
 
-  &.k-button--default {
-    color: $button-default-text-color-default;
-    border-color: $button-default-border-color-default;
-    background-color: $button-default-background-color-default;
+  &.k-button--outlined {
+    color: $kku-text-color-primary;
+    border-color: $kku-border-color-default;
+    background: $kku-background-color-default;
 
-    &:hover {
-      border-color: $button-default-border-color-hover;
-      background-color: $button-default-background-color-hover;
+    &:hover:not(.k-button--disabled) {
+      border-color: $kku-slate-color-700;
+      background: $kku-background-color-hover;
     }
 
     &.k-button--disabled {
-      color: $button-default-text-color-disabled;
-      border-color: $button-default-border-color-disabled;
-      background-color: $button-default-background-color-disabled;
+      color: $kku-text-color-disabled;
+      border-color: $kku-border-color-disabled;
+      background: $kku-background-color-disabled;
+    }
+  }
+
+  &.k-button--solid {
+    color: $kku-white-color;
+    border-color: $kku-black-color;
+    background-color: $kku-black-color;
+
+    &:hover:not(.k-button--disabled) {
+      border-color: $kku-border-color-hover;
+      background: linear-gradient(
+                      0deg,
+                      #{rgba(255, 255, 255, 0.15)} 0%,
+                      #{rgba(255, 255, 255, 0.15)} 100%
+      ),
+      #{$kku-black-color};
+    }
+
+    &.k-button--disabled {
+      color: $kku-slate-color-500;
+      border-color: $kku-slate-color-900;
+      background: $kku-slate-color-900;
     }
   }
 
   &.k-button--primary {
-    color: $button-primary-text-color-default;
-    border-color: $button-primary-border-color-default;
-    background-color: $button-primary-background-color-default;
+    color: $kku-white-color;
+    border-color: $kku-primary-color-default;
+    background-color: $kku-primary-color-default;
 
     &:hover {
-      color: $button-primary-text-color-hover;
-      border-color: $button-primary-border-color-hover;
-      background-color: $button-primary-border-color-hover;
+      color: $kku-white-color;
+      border-color: $kku-primary-color-hover;
+      background-color: $kku-primary-color-hover;
     }
 
     &.k-button--disabled {
-      color: $button-primary-text-color-disabled;
-      border-color: $button-primary-border-color-disabled;
-      background-color: $button-primary-background-color-disabled;
+      color: $kku-slate-color-300;
+      border-color: $kku-primary-color-disabled;
+      background-color: $kku-primary-color-disabled;
     }
   }
 
-  &.k-button--outlined {
-    color: $button-default-text-color-default;
-    border-color: $button-outlined-border-color-default-light;
-    background: $button-outlined-background-color-default-light;
+  &.k-button--subtle {
+    color: $kku-text-color-primary;
+    border-color: $kku-slate-color-200;
+    background: $kku-slate-color-200;;
 
-    &:hover {
-      color: $button-outlined-text-color-hover-light;
-      background-color: $button-default-background-color-hover;
+    &:hover:not(.k-button--disabled) {
+      border-color: $kku-slate-color-300;
+      background: $kku-slate-color-300;
     }
 
     &.k-button--disabled {
-      color: $button-outlined-text-color-disabled-light;
-      border-color: $button-outlined-border-color-disabled-light;
-      background-color: $button-outlined-background-color-disabled-light;
+      color: $kku-slate-color-600;
     }
   }
 
-  &.k-button--success {
-    color: $button-success-text-color-default;
-    border-color: $button-success-border-color-default;
-    background-color: $button-success-background-color-default;
-
-    &:hover {
-      color: $button-success-text-color-hover;
-      border-color: $button-success-border-color-hover;
-      background-color: $button-success-background-color-hover;
-    }
+  &.k-button--plain {
+    color: $kku-text-color-primary;
+    border-color: transparent;
+    background: transparent;
 
     &.k-button--disabled {
-      color: $button-success-text-color-disabled;
-      border-color: $button-success-border-color-disabled;
-      background-color: $button-success-background-color-disabled;
+      color: $kku-text-color-disabled;
     }
   }
 
-  &.k-button--warning {
-    color: $button-warning-text-color-default;
-    border-color: $button-warning-border-color-default;
-    background-color: $button-warning-background-color-default;
 
-    &:hover {
-      color: $button-warning-text-color-hover;
-      border-color: $button-warning-border-color-hover;
-      background-color: $button-warning-background-color-hover;
-    }
-
-    &.k-button--disabled {
-      color: $button-warning-text-color-disabled;
-      border-color: $button-warning-border-color-disabled;
-      background-color: $button-warning-background-color-disabled;
-    }
-  }
-
-  &.k-button--error {
-    color: $button-error-text-color-default;
-    border-color: $button-error-border-color-default;
-    background-color: $button-error-background-color-default;
-
-    &:hover {
-      color: $button-error-text-color-hover;
-      border-color: $button-error-border-color-hover;
-      background-color: $button-error-background-color-hover;
-    }
-
-    &.k-button--disabled {
-      color: $button-error-text-color-disabled;
-      border-color: $button-error-border-color-disabled;
-      background-color: $button-error-background-color-disabled;
-    }
-  }
+  //&.k-button--error {
+  //  color: $button-error-text-color-default;
+  //  border-color: $button-error-border-color-default;
+  //  background-color: $button-error-background-color-default;
+  //
+  //  &:hover {
+  //    color: $button-error-text-color-hover;
+  //    border-color: $button-error-border-color-hover;
+  //    background-color: $button-error-background-color-hover;
+  //  }
+  //
+  //  &.k-button--disabled {
+  //    color: $button-error-text-color-disabled;
+  //    border-color: $button-error-border-color-disabled;
+  //    background-color: $button-error-background-color-disabled;
+  //  }
+  //}
 
   // endregion
 
   // region [Size]
-
   &.k-button--small {
     height: $kku-element-height-small;
-    padding: 0 $kku-spacing-10;
+    padding: 0 $kku-spacing-12;
     @include kku-text-small;
   }
 
   &.k-button--medium {
     height: $kku-element-height-medium;
-    padding: 0 $kku-spacing-16;
+    padding: 0 $kku-spacing-20;
     @include kku-text-medium;
   }
-
   // endregion
 }
 
 .#{$kku-dark-mode-signature} .k-button {
-  &.k-button--outlined {
-    border-color: $button-outlined-border-color-default-dark;
-    background-color: $button-outlined-background-color-default-dark;
-
-    &:hover {
-      color: $button-outlined-text-color-hover-dark;
-    }
-
-    &.k-button--disabled {
-      color: $button-outlined-text-color-disabled-dark;
-      border-color: $button-outlined-border-color-disabled-dark;
-      background-color: $button-outlined-background-color-disabled-dark;
-    }
-  }
 }
