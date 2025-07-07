@@ -6,9 +6,7 @@ import { useFullLoader } from '@/common/hooks';
 const FullscreenLoader = () => {
 
   // region [Hooks]
-
   const { isOpen } = useFullLoader();
-
   // endregion
 
   return (

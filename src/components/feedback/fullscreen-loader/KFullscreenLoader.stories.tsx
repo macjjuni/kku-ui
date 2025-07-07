@@ -6,9 +6,16 @@ import { useFullLoader } from '@/common/hooks';
 
 const meta: Meta = {
   component: KFullscreenLoader,
+  decorators: [
+    (Story) => (
+      <>
+        <KInitializer/>
+        <Story/>
+      </>
+    ),
+  ],
   title: 'Feedbacks/FullscreenLoader',
-  argTypes: {
-  },
+  argTypes: {},
   tags: ['autodocs'],
 };
 
@@ -26,12 +33,7 @@ const Template = () => {
     }, 3000);
   }, []);
 
-  return (
-    <>
-      <KInitializer/>
-      <KButton label="열기" onClick={onShow}/>
-    </>
-  );
+  return (<KButton label="열기" onClick={onShow}/>);
 };
 
 type Story = StoryObj<typeof KFullscreenLoader>
@@ -50,7 +52,7 @@ const Example = () => {
 
   return (
     <>
-      <KInitializer /> {/* 앱 전체에서 한 번만 사용되어야 합니다 */}
+      <KInitializer />
       <KButton label="Open Loader" onClick={open} />
     </>
   );

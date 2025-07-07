@@ -38,9 +38,9 @@ export const Default: Story = {
     );
   },
   args: {
-    label: '아이디',
+    label: 'Label',
     value: '',
-    placeholder: '아이디를 입력해주세요',
+    placeholder: 'Placeholder',
     disabled: false,
     readOnly: false,
     size: 'medium',
