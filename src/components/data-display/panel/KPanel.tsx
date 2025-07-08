@@ -1,44 +1,36 @@
-import { CSSProperties, ElementType, forwardRef, HTMLAttributes, memo, useMemo } from 'react';
-import { Panel as CorePanel } from '@/core/panel'
-import { KPanelProps } from '@/components';
+import { ComponentPropsWithoutRef, ElementType, forwardRef, memo, Ref, useMemo } from 'react';
+import { KPanelProps } from './KPanel.interface';
+import { Panel } from "@/core";
 
+type Props<T extends ElementType> = KPanelProps<T> & ComponentPropsWithoutRef<T> & {
+  ref?: Ref<HTMLElement>;
+};
 
-const Panel = forwardRef<HTMLAttributes<ElementType>, KPanelProps>((props, refs) => {
+const KPanel = forwardRef<HTMLElement, Props<ElementType>>(
+  (
+    props,
+    ref,
+  ) => {
+    const { children, className, ...restProps } = props;
 
-  // region [Hooks]
-  const { className, style, width, height, children, ...restProps } = props;
-  // endregion
+    const rootClass = useMemo(() => {
+      const clazz = ['k-panel'];
+      if (className) {
+        clazz.push(className)
+      }
+      return clazz.join(' ')
+    }, [className])
 
-  // region [Styles]
-  const rootClass = useMemo(() => {
-    const clazz = ['k-panel'];
+    return (
+      <Panel ref={ref} className={rootClass} {...restProps}>
+        {children}
+      </Panel>
+    );
+  },
+);
 
-    if (className) clazz.push(className);
-
-    return clazz.join(' ');
-  }, [className]);
-
-  const rootStyle = useMemo(() => {
-    const styles: CSSProperties = { ...style };
-
-    if (width !== undefined) styles.width = width;
-    if (height !== undefined) {
-      styles.height = height;
-    }
-
-    return styles;
-  }, [style, width, height]);
-  // endregion
-
-  return (
-    <CorePanel ref={refs} {...restProps} className={rootClass} style={rootStyle}>
-      {children}
-    </CorePanel>
-  );
-});
-
-const KPanel = memo(Panel);
-Panel.displayName = 'KPanel';
+const MemoizedKPanel = memo(KPanel);
 KPanel.displayName = 'KPanel';
+MemoizedKPanel.displayName = 'KPanel';
 
-export default KPanel;
+export default MemoizedKPanel;
