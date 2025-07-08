@@ -25,8 +25,8 @@ describe('Panel', () => {
     const ratio = '4/3';
     render(<Panel ratio={ratio}>{content}</Panel>);
     const panel = screen.getByText(content);
-    expect(panel)
-      .toHaveStyle({ aspectRatio: '4 / 3' });
+    expect(getComputedStyle(panel).aspectRatio)
+      .toBe(ratio);
   });
 
   it('does not apply aspect-ratio when invalid ratio is given', () => {
@@ -51,10 +51,13 @@ describe('Panel', () => {
   it('applies both ratio and custom styles together', () => {
     const content = 'Combined styles';
     const ratio = '16/9';
-    const customStyle = { color: '#000' };
-    render(<Panel ratio={ratio} style={customStyle}>{content}</Panel>);
+    const color = 'rgb(0, 0, 0)';
+    render(<Panel ratio={ratio} style={{ color }}>{content}</Panel>);
     const panel = screen.getByText(content);
-    expect(panel)
-      .toHaveStyle({ aspectRatio: '16 / 9', ...customStyle });
+
+    expect(getComputedStyle(panel).aspectRatio)
+      .toBe(ratio);
+    expect(getComputedStyle(panel).color)
+      .toBe(color);
   });
 });
