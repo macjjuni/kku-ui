@@ -1,38 +1,46 @@
-import { memo, useMemo } from 'react';
-import { KButtonGroupProps } from '@/components';
+import { Children, cloneElement, isValidElement, memo, ReactElement, ReactNode, useMemo } from 'react';
+import { KButton, KButtonGroupProps, KButtonProps } from '@/components';
+import lodashUtil from '@/common/util/lodashUtil';
 
 
 const ButtonGroup = (props: KButtonGroupProps) => {
 
   // region [Hooks]
-
-  const { id, className, style, children } = props;
-
+  const { className, variant = 'outlined', children, ...restProps } = props;
   // endregion
 
 
   // region [Styles]
-
   const rootClass = useMemo(() => {
-
     const clazz = ['k-button-group'];
-
     if (className) {
       clazz.push(className);
     }
-
     return clazz.join(' ');
   }, [className]);
-
   // endregion
 
 
-  // region [Events]
+  // region [Templates]
+  const Buttons = useMemo(() => {
+    const buttons: ReactNode[] = []
+
+    Children.forEach(children, (child) => {
+      if (!isValidElement(child)) {
+        return
+      }
+      if (child.type === KButton) {
+        const childItem = child as ReactElement<KButtonProps>
+        buttons.push(cloneElement(childItem, { ...childItem.props, variant, key: lodashUtil.uniqueId('k-button-') }))
+      }
+    })
+    return buttons
+  }, [children, variant])
   // endregion
 
   return (
-    <div id={id} className={rootClass} style={style} role="group">
-      {children}
+    <div {...restProps} className={rootClass} role="group">
+      {Buttons}
     </div>
   );
 };
