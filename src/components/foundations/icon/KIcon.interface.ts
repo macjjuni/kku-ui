@@ -2,7 +2,7 @@ import { MouseEvent, KeyboardEvent } from 'react';
 import { KBaseProp } from '@/common/base/base.interface';
 
 
-export const ICON_SIZES = ['small', 'medium', 'large'] as const;
+export const ICON_SIZES = ['xsmall', 'small', 'medium', 'large', 'xlarge'] as const;
 export type KIconSize = (typeof ICON_SIZES)[number]
 export const KIconSizeList = Object.values(ICON_SIZES);
 
