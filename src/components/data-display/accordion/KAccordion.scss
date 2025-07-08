@@ -2,7 +2,7 @@
 
 // region [Component Token]
 
-$accordion-border-color: $kku-border-color-default;
+$accordion-border-color: $kku-slate-color-400;
 $accordion-background-color-base: $kku-background-color-default;
 $accordion-background-color-hover: $kku-background-color-hover;
 $accordion-text-color: $kku-text-color-primary;
@@ -15,14 +15,12 @@ $accordion-width-medium: 640px;
 // endregion
 
 .k-accordion {
-  border: 1px solid $accordion-border-color;
-  border-radius: $accordion-border-radius;
   color: $accordion-text-color;
-  background-color: $accordion-background-color-base;
+  border-bottom: 1px solid $accordion-border-color;
 
   &[data-open="true"] {
-    .k-accordion__summary {
-      border-bottom: 1px solid $accordion-border-color;
+    .k-accordion__summary__icon {
+      transform: rotate(180deg);
     }
   }
 
@@ -30,8 +28,6 @@ $accordion-width-medium: 640px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid transparent;
-    background: $kku-slate-color-100;
     list-style-type: none; // #Marker Style[Other Browser]
     user-select: none;
     cursor: pointer;
@@ -40,25 +36,24 @@ $accordion-width-medium: 640px;
     @include kku-focus-visible;
     transition-property: background, border-bottom-color;
 
-    &:hover {
-      background-color: $kku-slate-color-200;
-    }
-
     // #Marker Style[Safari]
     &::-webkit-details-marker {
       display: none;
     }
 
-    .k-accordion__summary__container {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      color: var(--default-font-color);
+    .k-accordion__summary__text {
+      font-size: inherit;
+    }
+    .k-accordion__summary__icon {
+      @include kku-transition;
+      transition-duration: 0.2s;
+      transition-property: transform;
     }
   }
 
   .k-accordion__content {
     @include kku-transition;
+    transition-duration: 0.2s;
     transition-property: max-height;
     background-color: var(--white-color);
     overflow: hidden;
@@ -70,7 +65,7 @@ $accordion-width-medium: 640px;
     @include kku-text-small;
 
     .k-accordion__summary, .k-accordion__content > .k-accordion__content__container {
-      padding: $kku-spacing-8 $kku-spacing-12;
+      padding: $kku-spacing-8 $kku-spacing-2;
     }
   }
 
@@ -80,7 +75,7 @@ $accordion-width-medium: 640px;
     @include kku-text-medium;
 
     .k-accordion__summary, .k-accordion__content > .k-accordion__content__container {
-      padding: $kku-spacing-12 $kku-spacing-16;
+      padding: $kku-spacing-12 $kku-spacing-2;
     }
   }
 }

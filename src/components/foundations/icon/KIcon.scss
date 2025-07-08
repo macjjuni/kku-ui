@@ -6,9 +6,11 @@ $k-icon-light-color: $kku-slate-color-800;
 $k-icon-dark-color: $kku-slate-color-300;
 $k-icon-disabled-color: $kku-text-color-disabled;
 
-$k-icon-size-large: 42px;
-$k-icon-size-medium: 36px;
-$k-icon-size-small: 28px;
+$k-icon-size-xlarge: 28px;
+$k-icon-size-large: 24px;
+$k-icon-size-medium: 20px;
+$k-icon-size-small: 16px;
+$k-icon-size-xsmall: 12px;
 
 // endregion
 
@@ -32,6 +34,11 @@ $k-icon-size-small: 28px;
   }
 
   // Size Modifiers
+  &.k-icon--xlarge {
+    width: $k-icon-size-xlarge;
+    height: $k-icon-size-xlarge;
+  }
+
   &.k-icon--large {
     width: $k-icon-size-large;
     height: $k-icon-size-large;
@@ -45,6 +52,11 @@ $k-icon-size-small: 28px;
   &.k-icon--small {
     width: $k-icon-size-small;
     height: $k-icon-size-small;
+  }
+
+  &.k-icon--xsmall {
+    width: $k-icon-size-xsmall;
+    height: $k-icon-size-xsmall;
   }
 
   svg {

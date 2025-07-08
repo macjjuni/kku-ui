@@ -1,6 +1,7 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAccordionContext } from '@/core/accordion/Accordion.context';
 import { AccordionContentProps } from '@/core/accordion/Accordion.interface';
+import { Panel } from "@/core";
 
 const AccordionContent = (props: AccordionContentProps) => {
 
@@ -49,10 +50,10 @@ const AccordionContent = (props: AccordionContentProps) => {
 
 
   return (
-    <div ref={contentRef} role="region" {...restProps} style={rootStyle}
-         aria-labelledby={summaryId}>
+    <Panel as="div" ref={contentRef} role="region" {...restProps} style={rootStyle}
+           aria-labelledby={summaryId}>
       {typeof children === 'function' ? children({ isOpen }) : children}
-    </div>
+    </Panel>
   );
 };
 
