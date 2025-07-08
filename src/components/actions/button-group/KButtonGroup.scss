@@ -27,8 +27,5 @@ $k-button-border-radius: $kku-border-radius-default;
     margin-right: -1px;
   }
   // Default
-  .k-button.k-button--default:hover { z-index: 1; }
-  .k-button.k-button--default:hover + .k-button.k-button--default {
-    border-left-color: transparent;
-  }
+  .k-button.k-button--outlined:hover { z-index: 1; }
 }

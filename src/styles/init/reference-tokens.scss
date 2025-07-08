@@ -1,5 +1,16 @@
 :root {
   /* Gray */
+  --kku-gray-color-100: #eaeaea;
+  --kku-gray-color-200: #e6e6e6;
+  --kku-gray-color-300: #e1e1e1;
+  --kku-gray-color-400: #d1d1d1;
+  --kku-gray-color-500: #b2b2b2;
+  --kku-gray-color-600: #999999;
+  --kku-gray-color-700: #494949;
+  --kku-gray-color-800: #343434;
+  --kku-gray-color-900: #171717;
+
+  /* Slate */
   --kku-slate-color-100: #f7f8fb;
   --kku-slate-color-200: #f3f5f8;
   --kku-slate-color-300: #e7ebf1;
@@ -11,21 +22,21 @@
   --kku-slate-color-900: #4f555e;
 
   /* Blue */
-  --kku-blue-color-100: #E6F1FE;
-  --kku-blue-color-200: #D5E9FF;
-  --kku-blue-color-300: #A1CFFF;
-  --kku-blue-color-400: #0074F0;
-  --kku-blue-color-500: #0068D8;
-  --kku-blue-color-600: #005DC0;
-  --kku-blue-color-700: #0057B4;
-  --kku-blue-color-800: #004690;
-  --kku-blue-color-900: #00346C;
+  --kku-blue-color-100: #e6effc;
+  --kku-blue-color-200: #d9e7fa;
+  --kku-blue-color-300: #b0cdf5;
+  --kku-blue-color-400: #005ee0;
+  --kku-blue-color-500: #0055ca;
+  --kku-blue-color-600: #004bb3;
+  --kku-blue-color-700: #0047a8;
+  --kku-blue-color-800: #003886;
+  --kku-blue-color-900: #002a65;
 
   /* Green */
   --kku-green-color-100: #F1FEEE;
   --kku-green-color-200: #EAFFEE;
   --kku-green-color-300: #D4FFCB;
-  --kku-green-color-400: #73F557;
+  --kku-green-color-400: #0f6bff;
   --kku-green-color-500: #68E64E;
   --kku-green-color-600: #5CCC46;
   --kku-green-color-700: #58BF41;
@@ -45,8 +56,8 @@
 
   /* Red */
   --kku-red-color-100: #FEE6E6;
-  --kku-red-color-200: #FDDD9D;
-  --kku-red-color-300: #FBBB1B;
+  --kku-red-color-200: #fdd9d9;
+  --kku-red-color-300: #fbb1b1;
   --kku-red-color-400: #F10404;
   --kku-red-color-500: #D90404;
   --kku-red-color-600: #C10303;
@@ -131,6 +142,17 @@
 }
 
 /* Gray */
+$kku-gray-color-100: var(--kku-gray-color-100);
+$kku-gray-color-200: var(--kku-gray-color-200);
+$kku-gray-color-300: var(--kku-gray-color-300);
+$kku-gray-color-400: var(--kku-gray-color-400);
+$kku-gray-color-500: var(--kku-gray-color-500);
+$kku-gray-color-600: var(--kku-gray-color-600);
+$kku-gray-color-700: var(--kku-gray-color-700);
+$kku-gray-color-800: var(--kku-gray-color-800);
+$kku-gray-color-900: var(--kku-gray-color-900);
+
+/* Slate */
 $kku-slate-color-100: var(--kku-slate-color-100);
 $kku-slate-color-200: var(--kku-slate-color-200);
 $kku-slate-color-300: var(--kku-slate-color-300);

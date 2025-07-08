@@ -9,7 +9,7 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
   // region [Hooks]
   const {
     type = 'button', className, label, onClick, disabled,
-    size = 'medium', variant = 'outlined', children,
+    isDanger, size = 'medium', variant = 'outlined', children,
     onMouseDown, onMouseLeave, onMouseUp, onKeyDown, onKeyUp,
     ...restProps
   } = props;
@@ -40,18 +40,13 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
     const clazz = ['k-button', `k-button--${size}`];
 
-    if (className) {
-      clazz.push(className);
-    }
-    if (disabled) {
-      clazz.push('k-button--disabled');
-    }
-    if (variant) {
-      clazz.push(`k-button--${variant}`);
-    }
+    if (className) { clazz.push(className); }
+    if (disabled) { clazz.push('k-button--disabled'); }
+    if (variant) { clazz.push(`k-button--${variant}`); }
+    if (isDanger) { clazz.push(`k-button--danger`); }
 
     return clazz.join(' ');
-  }, [className, disabled, size, variant]);
+  }, [className, disabled, size, variant, isDanger]);
   // endregion
 
   // region [Events]

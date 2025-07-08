@@ -6,19 +6,17 @@ import styles from '@/common/util/style';
 const rippleElementTag = 'span';
 const rippleIdentityClass = 'k-ripple';
 const rippleAnimationName = 'ripple-effect';
-const rippleAnimationTime = 400;
+const rippleCreateAnimationTime = 400;
+const rippleRemoveAnimationTime = 240;
 
 
 export default function useRipple(elementRef: RefObject<HTMLElement | null>) {
 
   // region [Hooks]
-
   const rippleTaskRef = useRef<Promise<string>>(null);
-
   // endregion
 
   // region [Privates]
-
   const register = (event: MouseEvent | KeyboardEvent<HTMLElement>) => {
 
     // 키보드 이벤트 제어
@@ -47,16 +45,23 @@ export default function useRipple(elementRef: RefObject<HTMLElement | null>) {
       ripple.classList.add(rippleIdentityClass);
       ripple.classList.add(uniqueRippleId);
 
-      // const baseColor = window.getComputedStyle(elementRef.current!)
-      //   .getPropertyValue('background-color');
+      const computedStyle = window.getComputedStyle(elementRef.current!);
+      const textColor = computedStyle.color || 'rgb(0, 0, 0)';
+
+      const rgbMatch = textColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+      let rippleTextColor = 'rgba(0, 0, 0, 0.1)'; // 기본값
+      if (rgbMatch) {
+        const [, r, g, b] = rgbMatch;
+        rippleTextColor = `rgba(${r}, ${g}, ${b}, 0.4)`;
+      }
 
       const rippleStyle: CSSProperties = {
         top: `${((clientY - y - radius) / height) * 100}%`,
         left: `${((clientX - x - radius) / width) * 100}%`,
         width: `${radius * 2}px`,
         height: `${radius * 2}px`,
-        // background: colorUtil.tintColor(baseColor, 8),
-        animation: `${rippleAnimationTime / 1000}s ${rippleAnimationName} ease`,
+        animation: `${rippleCreateAnimationTime / 1000}s ${rippleAnimationName} ease`,
+        background: rippleTextColor,
       };
 
       styles.setStyleElement(ripple, rippleStyle);
@@ -65,9 +70,8 @@ export default function useRipple(elementRef: RefObject<HTMLElement | null>) {
       setTimeout(() => {
 
         resolve(uniqueRippleId);
-      }, rippleAnimationTime);
+      }, rippleCreateAnimationTime);
     });
-
   };
 
   const remove = () => {
@@ -75,12 +79,17 @@ export default function useRipple(elementRef: RefObject<HTMLElement | null>) {
     rippleTaskRef.current?.then((rippleId) => {
 
       const rippleElements = elementRef.current?.getElementsByClassName(rippleId);
-      if (rippleElements) {
-        rippleElements[0]?.remove();
+      const el = rippleElements?.[0];
+      if (el && el instanceof HTMLElement) {
+        styles.setStyleElement(el, {
+          animation: `${rippleRemoveAnimationTime / 1000}s ripple-hide-effect ease`,
+        })
+        setTimeout(() => {
+          rippleElements[0]?.remove();
+        }, rippleRemoveAnimationTime)
       }
     });
   };
-
   // endregion
 
   return { register, remove };

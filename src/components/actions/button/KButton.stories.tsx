@@ -29,6 +29,7 @@ const commonArgs: KButtonProps = {
   label: 'Button',
   size: 'medium',
   disabled: false,
+  isDanger: false,
 };
 
 export const Default: Story = { args: { variant: 'outlined', ...commonArgs } };
@@ -37,7 +38,8 @@ export const Variant: Story = {
     <>
       {
         BUTTON_VARIANTS.map((variant) => (
-          <KButton key={variant} {...args} variant={variant}>{variant}</KButton>
+          <KButton key={variant} {...args} variant={variant}
+                   label={variant.charAt(0).toUpperCase() + variant.slice(1)}/>
         ))
       }
     </>

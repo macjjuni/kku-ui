@@ -17,7 +17,7 @@
 
   --kku-backdrop-background-color-light: #{$kku-black-color};
   --kku-backdrop-background-color-dark: #{$kku-slate-color-200};
-  --kku-ripple-background-color: #{$kku-slate-color-900};
+  --kku-ripple-background-color: #{$kku-gray-color-500};
 
   --kku-primary-color-default: #{$kku-blue-color-400};
   --kku-primary-color-hover: #{$kku-blue-color-500};
@@ -35,7 +35,7 @@
   --kku-error-color-hover: #{$kku-red-color-700};
   --kku-error-color-disabled: #{$kku-red-color-800};
 
-  --kku-focus-visible-color: #{$kku-blue-color-800};
+  --kku-focus-visible-color: #{$kku-blue-color-400};
 
   --kku-element-height-medium: 36px;
   --kku-element-height-small: 28px;

@@ -4,10 +4,14 @@
   position: absolute;
   opacity: 0.1;
   border-radius: 50%;
-  background-color: $kku-ripple-background-color;
 }
 
 @keyframes ripple-effect {
   0% { transform: scale(0.1); opacity: 0.32; }
   100% { transform: scale(1); opacity: 0.1; }
+}
+
+@keyframes ripple-hide-effect {
+  0% { opacity: 0.1; }
+  100% { opacity: 0; }
 }

@@ -18,10 +18,10 @@ export const Default: Story = {
   args: {
     children: (
       <>
-        <KButton variant="default" label="Menu1"/>
-        <KButton variant="default" label="Menu2"/>
-        <KButton variant="default" label="Menu3"/>
-        <KButton variant="default" label="Menu4"/>
+        <KButton label="Menu1"/>
+        <KButton label="Menu2"/>
+        <KButton label="Menu3"/>
+        <KButton label="Menu4"/>
       </>
     ),
   },

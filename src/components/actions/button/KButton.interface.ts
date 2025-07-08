@@ -1,4 +1,4 @@
-import { MouseEvent, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { SizeType } from '@/common/base/base.interface';
 import { ButtonProps } from '@/core';
 
@@ -10,7 +10,7 @@ export interface KButtonProps extends ButtonProps {
   children?: ReactNode;
   size?: SizeType;
   variant?: KButtonVariantType;
-  onClick?: (e?: MouseEvent<HTMLButtonElement>) => void;
+  isDanger?: boolean;
 }
 
 export interface KButtonRefs {
