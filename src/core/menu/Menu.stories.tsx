@@ -1,8 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Menu, MenuProps } from './index';
+import { MenuItem } from '@/core/menu-item';
 
 const meta: Meta<typeof Menu> = {
   component: Menu,
+  subcomponents: {
+    MenuItem,
+  },
   argTypes: {},
   title: 'Core/Menu',
   tags: ['autodocs'],
@@ -10,11 +14,13 @@ const meta: Meta<typeof Menu> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Menu>
+type Story = StoryObj<MenuProps>
 
 const Template = (args: MenuProps) => (
   <Menu {...args}>
-    <li>123</li>
+    <MenuItem>Menu1</MenuItem>
+    <MenuItem>Menu2</MenuItem>
+    <MenuItem>Menu3</MenuItem>
   </Menu>
 );
 
@@ -24,4 +30,3 @@ export const Default: Story = {
     as: 'ul',
   },
 };
-

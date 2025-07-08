@@ -51,6 +51,19 @@ describe('KButton', () => {
     expect(root).toHaveClass('k-button--disabled');
   });
 
+  it('applies width, height prop correctly', () => {
+    // Arrange
+    const buttonSize = {
+      width: '120px',
+      height: '50px',
+    }
+    render(<KButton label={labelText} {...buttonSize} />);
+    const root = screen.getByRole('button');
+
+    // Assert
+    expect(root).toHaveStyle(buttonSize);
+  });
+
   it('calls onClick when button is clicked', async () => {
     // Arrange
     const user = userEvent.setup();

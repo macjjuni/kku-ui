@@ -44,6 +44,6 @@ export const Variant: Story = {
       }
     </>
   ),
-  args: { variant: 'outlined', ...commonArgs },
+  args: { variant: 'outlined', ...commonArgs, width: 104 },
 };
 

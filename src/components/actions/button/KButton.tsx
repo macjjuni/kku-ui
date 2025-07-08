@@ -8,10 +8,11 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
   // region [Hooks]
   const {
-    type = 'button', className, label, onClick, disabled,
-    isDanger, size = 'medium', variant = 'outlined', children,
-    onMouseDown, onMouseLeave, onMouseUp, onKeyDown, onKeyUp,
-    ...restProps
+    type = 'button', className, label, disabled,
+    isDanger, size = 'medium', variant = 'outlined',
+    children, width, height, style,
+    onClick, onMouseDown, onMouseLeave, onMouseUp,
+    onKeyDown, onKeyUp, ...restProps
   } = props;
 
   const rootRef = useRef<HTMLButtonElement>(null);
@@ -47,6 +48,8 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
     return clazz.join(' ');
   }, [className, disabled, size, variant, isDanger]);
+
+  const rootStyle = useMemo(() => ({ ...style, width, height }), [])
   // endregion
 
   // region [Events]
@@ -96,7 +99,7 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
   // endregion
 
   return (
-    <CoreButton ref={rootRef} {...restProps} type={type} label={label} className={rootClass}
+    <CoreButton ref={rootRef} {...restProps} type={type} label={label} className={rootClass} style={rootStyle}
                 disabled={disabled} onMouseDown={onMouseDownRoot} onMouseLeave={onMouseLeaveRoot} onClick={onClickRoot}
                 onMouseUp={onMouseUpRoot} onKeyDown={onKeyDownRoot} onKeyUp={onKeyUpRoot}/>
   );

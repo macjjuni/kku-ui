@@ -3,7 +3,7 @@ import { KPanel, KPanelProps } from '@/components';
 
 const meta: Meta<KPanelProps> = {
   component: KPanel,
-  title: 'Data Display/Panel',
+  title: 'Layout/Panel',
   argTypes: {
     width: { description: 'width 크기를 설정합니다.', defaultValue: { summary: 'undefined' }, control: { type: 'number' } },
     height: { description: 'height 크기를 설정합니다.', defaultValue: { summary: 'undefined' }, control: { type: 'number' } },

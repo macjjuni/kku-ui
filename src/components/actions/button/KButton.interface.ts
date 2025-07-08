@@ -11,6 +11,9 @@ export interface KButtonProps extends ButtonProps {
   size?: SizeType;
   variant?: KButtonVariantType;
   isDanger?: boolean;
+
+  width?: number | string
+  height?: number | string
 }
 
 export interface KButtonRefs {
