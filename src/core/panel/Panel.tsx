@@ -1,41 +1,44 @@
-import { CSSProperties, ElementType, forwardRef, HTMLAttributes, memo, useMemo } from 'react';
+import {
+  ComponentPropsWithoutRef,
+  ElementType,
+  forwardRef,
+  CSSProperties,
+  memo, Ref,
+} from 'react';
 import { PanelProps } from './Panel.interface';
 
+const isValidRatio = (value: string): value is `${number}/${number}` => /^\d+\/\d+$/.test(value);
 
-const isValidRatio = (value: string): value is `${number}/${number}` => {
-  return /^\d+\/\d+$/.test(value);
+type Props<T extends ElementType> = PanelProps<T> & ComponentPropsWithoutRef<T> & {
+  ref?: Ref<HTMLElement>;
 };
 
-const Panel = forwardRef<HTMLAttributes<ElementType>, PanelProps>((props, refs) => {
+const Panel = forwardRef<HTMLElement, Props<ElementType>>(
+  (
+    {
+      as: Component = 'div',
+      ratio,
+      style,
+      children,
+      ...restProps
+    },
+    ref,
+  ) => {
+    const rootStyle: CSSProperties = {
+      ...style,
+      ...(ratio && isValidRatio(ratio) ? { aspectRatio: ratio } : {}),
+    };
 
-  // region [Hooks]
-  const { as: Component = 'div', ratio, style, children, ...restProps } = props;
-  // endregion
-
-  // region [Styles]
-  const rootStyle = useMemo(() => {
-    const mergedStyle: CSSProperties = { ...style };
-
-    if (ratio && isValidRatio(ratio)) {
-      const [num, denom] = ratio.split('/').map(Number);
-      if (num > 0 && denom > 0) {
-        mergedStyle.aspectRatio = `${num} / ${denom}`;
-      }
-    }
-
-    return mergedStyle;
-  }, [ratio, style]);
-  // endregion
-
-  return (
-    <Component ref={refs} style={rootStyle} {...restProps}>
-      {children}
-    </Component>
-  );
-});
+    return (
+      <Component ref={ref} style={rootStyle} {...restProps}>
+        {children}
+      </Component>
+    );
+  },
+);
 
 const MemoizedPanel = memo(Panel);
 Panel.displayName = 'Panel';
 MemoizedPanel.displayName = 'Panel';
 
-export default Panel;
+export default MemoizedPanel;
