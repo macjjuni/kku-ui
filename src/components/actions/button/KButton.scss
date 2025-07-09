@@ -26,7 +26,7 @@
   // region [Variant]
 
   &.k-button--outlined {
-    color: $kku-text-color-primary;
+    color: $kku-text-color-default;
     border-color: $kku-border-color-default;
     background: $kku-background-color-default;
 
@@ -82,7 +82,7 @@
   }
 
   &.k-button--subtle {
-    color: $kku-text-color-primary;
+    color: $kku-text-color-default;
     border-color: $kku-slate-color-200;
     background: $kku-slate-color-200;;
 
@@ -97,9 +97,14 @@
   }
 
   &.k-button--plain {
-    color: $kku-text-color-primary;
+    color: $kku-text-color-default;
     border-color: transparent;
     background: transparent;
+
+    &:hover {
+      color: $kku-text-color-hover;
+      //border-color: $kku-text-color-hover;
+    }
 
     &.k-button--disabled {
       color: $kku-text-color-disabled;

@@ -1,12 +1,12 @@
 @use '../../../styles/Entry' as *;
 
 // region [Component Tokens]
-
 $k-button-border-radius: $kku-border-radius-default;
 // endregion
 
 
 .k-button-group {
+  white-space: nowrap;
 
   // Common
   .k-button:first-child {

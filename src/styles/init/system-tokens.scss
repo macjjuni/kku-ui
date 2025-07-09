@@ -1,8 +1,9 @@
 @use "reference-tokens" as *;
 
 :root {
-  --kku-text-color-primary: #{$kku-text-color};
-  --kku-text-color-disabled: #{$kku-slate-color-500};
+  --kku-text-color-default: var(--kku-gray-color-900);
+  --kku-text-color-hover: var(--kku-gray-color-900);
+  --kku-text-color-disabled: var(--kku-slate-color-400);
   --kku-text-color-link: #{$kku-blue-color-400};
   --kku-text-color-label: #{$kku-slate-color-700};
   --kku-text-color-placeholder: #{$kku-slate-color-600};
@@ -47,9 +48,8 @@
 }
 
 
-$kku-text-color-primary: var(--kku-text-color-primary);
-$kku-text-color-secondary: var(--kku-text-color-secondary);
-$kku-text-color-tertiary: var(--kku-text-color-tertiary);
+$kku-text-color-default: var(--kku-text-color-default);
+$kku-text-color-hover: var(--kku-text-color-hover);
 $kku-text-color-disabled: var(--kku-text-color-disabled);
 $kku-text-color-link: var(--kku-text-color-link);
 $kku-text-color-label: var(--kku-text-color-label);
@@ -102,10 +102,6 @@ $kku-full-screen-loader-z-index: var(--kku-full-screen-loader-z-index);
 $kku-dark-mode-signature: 'dark';
 
 :root .#{$kku-dark-mode-signature} {
-  --kku-text-color-primary: #{$kku-slate-color-100};
-  --kku-text-color-secondary: #{$kku-slate-color-300};
-  --kku-text-color-tertiary: #{$kku-slate-color-500};
-  --kku-text-color-disabled: #{$kku-slate-color-600};
   --kku-text-color-link: #{$kku-blue-color-400};
 
   --kku-border-color-default: #{$kku-slate-color-700};
