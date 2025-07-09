@@ -1,6 +1,10 @@
 @use "./reference-tokens" as *;
 @use "./system-tokens" as *;
 
+@mixin kku-text-xxsmall {
+  font-size: $kku-text-size-xxsmall;
+  line-height: $kku-line-height-xxsmall;
+}
 @mixin kku-text-xsmall {
   font-size: $kku-text-size-xsmall;
   line-height: $kku-line-height-xsmall;
@@ -28,7 +32,6 @@
     outline: 2px solid $kku-focus-visible-color;
     outline-offset: $offset;
     border-radius: $radius;
-    background: $kku-blue-color-100;
     z-index: 1;
   }
 }

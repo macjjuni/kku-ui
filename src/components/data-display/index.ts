@@ -1,3 +1,3 @@
-export * from '../layout/panel';
 export * from './accordion';
+export * from './menu';
 export * from './skeleton';
