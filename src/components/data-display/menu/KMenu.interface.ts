@@ -12,5 +12,6 @@ export interface KMenuItemProps extends MenuItemProps {
   rightContent?: ReactNode;
   shortcut?: string;
   label?: string;
+
   size?: SizeType;
 }

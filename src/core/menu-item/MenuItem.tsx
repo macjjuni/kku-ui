@@ -4,19 +4,19 @@ import { Panel } from '@/core';
 
 
 type Props<T extends MenuItemElementType> = MenuItemProps<T> & ComponentPropsWithoutRef<T> & {
-  ref?: Ref<HTMLElement>;
+  ref?: Ref<HTMLDivElement | HTMLButtonElement | HTMLLIElement>;
 };
 
-const MenuItem = forwardRef<HTMLElement, Props<MenuItemElementType>>(
+const MenuItem = forwardRef<HTMLDivElement | HTMLButtonElement | HTMLLIElement, Props<MenuItemElementType>>(
   (
     props,
     ref,
   ) => {
 
-    const { as = 'li', children, ...restProps } = props;
+    const { as = 'li', children, disabled, ...restProps } = props;
 
     return (
-      <Panel ref={ref} as={as} role="menuitem" {...restProps}>
+      <Panel ref={ref} as={as} role="menuitem" aria-disabled={disabled} tabIndex={disabled ? -1 : 0} {...restProps}>
         {children}
       </Panel>
     );

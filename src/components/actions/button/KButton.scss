@@ -16,6 +16,7 @@
   cursor: pointer;
   overflow: hidden;
   user-select: none;
+  @include kku-font-family;
   @include kku-focus-visible;
   @include kku-transition;
   transition-property: background, border-color;

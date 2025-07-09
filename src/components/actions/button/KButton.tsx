@@ -2,6 +2,7 @@ import { forwardRef, KeyboardEvent, memo, MouseEvent, useCallback, useImperative
 import { Button as CoreButton } from '@/core';
 import { useRipple } from '@/common/hooks';
 import { KButtonProps, KButtonRefs } from '@/components';
+import { handleKeyInteraction } from '@/common/util/keyboard';
 
 
 const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
@@ -92,8 +93,8 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
   const onKeyUpRoot = useCallback((e: KeyboardEvent<HTMLButtonElement>) => {
     onKeyUp?.(e);
-    if ((e.key === 'Enter' || e.key === ' ') && !isNoRipple) {
-      ripple.remove();
+    if (!isNoRipple) {
+      handleKeyInteraction(e, () => ripple.remove())
     }
   }, [ripple, onKeyUp]);
   // endregion

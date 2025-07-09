@@ -1,11 +1,11 @@
-import { Children, cloneElement, isValidElement, memo, ReactElement, ReactNode, useMemo } from 'react';
+import { Children, cloneElement, forwardRef, isValidElement, memo, ReactElement, ReactNode, useMemo } from 'react';
 import { KMenuItemProps, KMenuProps } from "./KMenu.interface";
 import { Menu as CoreMenu } from "@/core";
 import { KMenuItem } from "@/components";
 import lodashUtil from "@/common/util/lodashUtil";
 
 
-const Menu = (props: KMenuProps) => {
+const Menu = forwardRef<HTMLUListElement, KMenuProps>((props, ref) => {
 
   // region [Hooks]
   const { children, className, style, width, size = 'medium', ...restProps } = props;
@@ -43,11 +43,11 @@ const Menu = (props: KMenuProps) => {
   // endregion
 
   return (
-    <CoreMenu {...restProps} as="div" className={rootClass} style={rootStyle}>
+    <CoreMenu {...restProps} as="ul" ref={ref} className={rootClass} style={rootStyle}>
       {MenuItems}
     </CoreMenu>
   );
-};
+});
 
 const KMenu = memo(Menu);
 KMenu.displayName = 'KAccordion';

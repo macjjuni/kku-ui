@@ -66,9 +66,9 @@ $kku-menu-item-height-size-medium: 34px;
 
   @include kku-transition;
   transition-property: background;
-  &:hover { background: $kku-menu-background-color-hover; }
-  &:active { background: $kku-menu-background-color-active; }
-
+  &:hover:not(.k-menu-item--disabled) {
+    background: $kku-menu-background-color-hover;
+  }
 
   .k-menu-item__left-content, .k-menu-item__right-content {
     display: inline-flex;
@@ -79,6 +79,7 @@ $kku-menu-item-height-size-medium: 34px;
   .k-menu-item__label {
     flex: 1 1 auto;
     text-align: left;
+    color: $kku-text-color-default;
     @include kku-ellipsis;
   }
 
@@ -115,6 +116,13 @@ $kku-menu-item-height-size-medium: 34px;
       padding: 0 $kku-spacing-4;
     }
     .k-menu-item__right-content { margin-left: $kku-spacing-6; }
+  }
+
+  &.k-menu-item--disabled {
+    cursor: not-allowed;
+
+    .k-menu-item__label { color: $kku-text-color-disabled; }
+    .k-menu-item__shortcut { color: $kku-text-color-disabled; }
   }
 }
 
