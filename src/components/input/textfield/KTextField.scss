@@ -28,14 +28,16 @@ $kku-text-field-legend-height: 16px;
     }
 
     .k-text-field__fieldset__legend {
+      height: $kku-text-field-legend-height;
 
       .k-text-field__fieldset__legend__label {
-        height: $kku-text-field-legend-height;
         color: $kku-text-color-label;
         @include kku-transition;
         transition-property: color;
 
-        &.k-text-field__fieldset__legend__label--show { padding: 0 $kku-spacing-2; }
+        &.k-text-field__fieldset__legend__label--show {
+          padding: 0 $kku-spacing-2;
+        }
       }
 
       .k-text-field__fieldset__legend__label__required {
@@ -56,6 +58,7 @@ $kku-text-field-legend-height: 16px;
         .k-text-field__fieldset__legend__label {
           color: $kku-focus-visible-color;
         }
+
         .k-text-field__fieldset__legend__label__required {
           color: $kku-focus-visible-color;
         }
@@ -66,16 +69,19 @@ $kku-text-field-legend-height: 16px;
   &.k-text-field--error {
     .k-text-field__fieldset {
       border-color: $kku-error-color-default;
+
       .k-text-field__fieldset__legend {
         .k-text-field__fieldset__legend__label {
           color: $kku-error-color-default;
         }
+
         .k-text-field__fieldset__legend__label__required {
           color: $kku-error-color-default;
         }
       }
     }
   }
+
   .k-text-field__fieldset__message {
     padding: $kku-spacing-4 0 0 $kku-spacing-4;
     color: $kku-error-color-default;
@@ -185,6 +191,7 @@ $kku-text-field-legend-height: 16px;
       .k-text-field__fieldset__legend > .k-text-field__fieldset__legend__label {
         color: $kku-text-color-disabled;
       }
+
       .k-text-field__fieldset__container {
 
         .k-text-field__fieldset__container__input {
