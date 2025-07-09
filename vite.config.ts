@@ -24,6 +24,25 @@ export default defineConfig({
       insertTypesEntry: false,
       copyDtsFiles: true,
     }),
+    {
+      name: 'update-font-paths',
+      apply: 'build',
+      enforce: 'post',
+      generateBundle(_, bundle) {
+        for (const file of Object.values(bundle)) {
+          if (
+            file.type === 'asset' &&
+            file.fileName.endsWith('.css') &&
+            typeof file.source === 'string'
+          ) {
+            file.source = file.source.replace(
+              /url\(\s*['"]?\/(fonts\/[a-zA-Z0-9_\-./]+)['"]?\s*\)/g,
+              'url("$1")'
+            )
+          }
+        }
+      },
+    },
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.scss', '.js'],
