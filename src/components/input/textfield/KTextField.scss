@@ -23,7 +23,7 @@ $kku-text-field-legend-height: 16px;
       border-color: $kku-border-color-hover;
 
       .k-text-field__fieldset__legend > .k-text-field__fieldset__legend__label {
-        color: $kku-text-color-primary;
+        color: $kku-text-color-default;
       }
     }
 
@@ -47,7 +47,7 @@ $kku-text-field-legend-height: 16px;
     }
   }
 
-  &.k-text-field--focus {
+  &.k-text-field--focus:not(.k-text-field--readOnly) {
     .k-text-field__fieldset {
       outline: none;
       border-color: $kku-focus-visible-color;
@@ -170,6 +170,24 @@ $kku-text-field-legend-height: 16px;
 
     .k-text-field__fieldset__message {
       @include kku-text-small;
+    }
+  }
+
+
+  &.k-text-field--disabled {
+    .k-text-field__fieldset {
+      border-color: $kku-border-color-disabled;
+      background: $kku-background-color-disabled;
+
+      .k-text-field__fieldset__legend > .k-text-field__fieldset__legend__label {
+        color: $kku-text-color-disabled;
+      }
+      .k-text-field__fieldset__container {
+
+        .k-text-field__fieldset__container__input {
+          cursor: not-allowed;
+        }
+      }
     }
   }
 }
