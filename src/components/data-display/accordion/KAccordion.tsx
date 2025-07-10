@@ -1,7 +1,7 @@
 import { memo, useMemo } from 'react';
 import { KAccordionProps } from '@/components/data-display/accordion/KAccordion.interface';
-import { Accordion as CoreAccordion, AccordionContent, AccordionSummary } from '@/core/accordion';
-import { KIcon } from "@/components";
+import { Accordion as CoreAccordion } from '@/core/accordion';
+import { KIcon } from '@/components';
 
 
 const Accordion = (props: KAccordionProps) => {
@@ -27,17 +27,17 @@ const Accordion = (props: KAccordionProps) => {
 
   return (
     <CoreAccordion className={rootClass} style={rootStyle} defaultOpen={defaultOpen} {...restProps}>
-      <AccordionSummary className="k-accordion__summary">
+      <CoreAccordion.Summary className="k-accordion__summary">
         <p className="k-accordion__summary__text">
           {summary}
         </p>
         <KIcon icon="keyboard_arrow_down" size="small" className="k-accordion__summary__icon"/>
-      </AccordionSummary>
-      <AccordionContent className="k-accordion__content">
+      </CoreAccordion.Summary>
+      <CoreAccordion.Content className="k-accordion__content">
         <div className="k-accordion__content__container">
           {children}
         </div>
-      </AccordionContent>
+      </CoreAccordion.Content>
     </CoreAccordion>
   );
 };

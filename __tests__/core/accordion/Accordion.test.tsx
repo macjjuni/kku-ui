@@ -2,15 +2,14 @@ import { describe, expect, it } from 'vitest';
 import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Accordion from '@/core/accordion/Accordion';
-import AccordionSummary from '@/core/accordion/AccordionSummary';
-import AccordionContent from '@/core/accordion/AccordionContent';
+
 
 describe('Accordion', () => {
   it('renders properly', () => {
     render(
       <Accordion>
-        <AccordionSummary>Title</AccordionSummary>
-        <AccordionContent>Content</AccordionContent>
+        <Accordion.Summary>Title</Accordion.Summary>
+        <Accordion.Content>Content</Accordion.Content>
       </Accordion>,
     );
 
@@ -21,8 +20,8 @@ describe('Accordion', () => {
   it('is initially closed by default', () => {
     render(
       <Accordion>
-        <AccordionSummary>Title</AccordionSummary>
-        <AccordionContent>Content</AccordionContent>
+        <Accordion.Summary>Title</Accordion.Summary>
+        <Accordion.Content>Content</Accordion.Content>
       </Accordion>,
     );
 
@@ -33,8 +32,8 @@ describe('Accordion', () => {
   it('opens by default if defaultOpen is true', () => {
     render(
       <Accordion defaultOpen>
-        <AccordionSummary>Title</AccordionSummary>
-        <AccordionContent>Content</AccordionContent>
+        <Accordion.Summary>Title</Accordion.Summary>
+        <Accordion.Content>Content</Accordion.Content>
       </Accordion>,
     );
 
@@ -45,8 +44,8 @@ describe('Accordion', () => {
   it('toggles open and close on click', async () => {
     render(
       <Accordion>
-        <AccordionSummary>Title</AccordionSummary>
-        <AccordionContent>Content</AccordionContent>
+        <Accordion.Summary>Title</Accordion.Summary>
+        <Accordion.Content>Content</Accordion.Content>
       </Accordion>,
     );
 
@@ -63,8 +62,8 @@ describe('Accordion', () => {
   it('toggles with Enter and Space keys', async () => {
     render(
       <Accordion>
-        <AccordionSummary>Title</AccordionSummary>
-        <AccordionContent>Content</AccordionContent>
+        <Accordion.Summary>Title</Accordion.Summary>
+        <Accordion.Content>Content</Accordion.Content>
       </Accordion>,
     );
 
@@ -81,10 +80,10 @@ describe('Accordion', () => {
   it('passes isOpen to children if function', async () => {
     render(
       <Accordion>
-        <AccordionSummary>
+        <Accordion.Summary>
           {({ isOpen }) => <span>{isOpen ? 'Open' : 'Closed'}</span>}
-        </AccordionSummary>
-        <AccordionContent>Content</AccordionContent>
+        </Accordion.Summary>
+        <Accordion.Content>Content</Accordion.Content>
       </Accordion>,
     );
 

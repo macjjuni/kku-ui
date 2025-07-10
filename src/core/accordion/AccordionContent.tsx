@@ -58,7 +58,7 @@ const AccordionContent = (props: AccordionContentProps) => {
 };
 
 const MemoizedAccordionContent = memo(AccordionContent);
-MemoizedAccordionContent.displayName = 'AccordionContent';
-AccordionContent.displayName = 'AccordionContent';
+MemoizedAccordionContent.displayName = 'Accordion.Content';
+AccordionContent.displayName = 'Accordion.Content';
 
 export default MemoizedAccordionContent;

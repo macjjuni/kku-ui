@@ -1,4 +1,4 @@
-import { Children, isValidElement, memo, ReactNode, useMemo, useRef, useState } from 'react';
+import { Children, ForwardRefExoticComponent, isValidElement, memo, ReactNode, RefAttributes, useMemo, useRef, useState } from 'react';
 import AccordionSummary from './AccordionSummary';
 import AccordionContent from './AccordionContent';
 import { AccordionProps } from './Accordion.interface';
@@ -50,8 +50,16 @@ const Accordion = (props: AccordionProps) => {
   );
 };
 
-const MemoizedAccordion = memo(Accordion);
-MemoizedAccordion.displayName = 'Accordion';
-Accordion.displayName = 'Accordion';
+interface AccordionNamespace extends ForwardRefExoticComponent<AccordionProps & RefAttributes<HTMLDetailsElement>> {
+  Summary: typeof AccordionSummary;
+  Content: typeof AccordionContent;
+}
 
-export default MemoizedAccordion;
+const KAccordion = memo(Accordion) as unknown as AccordionNamespace;
+Accordion.displayName = 'Accordion';
+KAccordion.displayName = 'Accordion';
+
+KAccordion.Summary = AccordionSummary;
+KAccordion.Content = AccordionContent;
+
+export default KAccordion;

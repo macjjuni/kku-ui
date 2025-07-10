@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Accordion, AccordionContent, AccordionProps, AccordionSummary } from './index';
+import { Accordion, AccordionProps } from './index';
 
 
 const meta: Meta<AccordionProps> = {
   component: Accordion,
   subcomponents: {
-    AccordionSummary,
-    AccordionContent,
+    AccordionSummary: Accordion.Summary,
+    AccordionContent: Accordion.Content,
   },
   argTypes: {
     defaultOpen: {
@@ -23,14 +23,14 @@ type Story = StoryObj<typeof Accordion>
 
 const Template = (args: AccordionProps) => (
   <Accordion {...args}>
-    <AccordionSummary>
+    <Accordion.Summary>
       Lorem Ipsum
-    </AccordionSummary>
-    <AccordionContent>
+    </Accordion.Summary>
+    <Accordion.Content>
       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
       <p>when an unknown printer took a galley of type and scrambled it to make a type</p>
       <p>specimen book. It has survived not only five centuries, but also the leap into electronic</p>
-    </AccordionContent>
+    </Accordion.Content>
   </Accordion>
 );
 

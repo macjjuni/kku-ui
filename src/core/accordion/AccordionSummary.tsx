@@ -40,7 +40,7 @@ const AccordionSummary = (props: AccordionSummaryProps) => {
 };
 
 const MemoizedAccordionSummary = memo(AccordionSummary);
-MemoizedAccordionSummary.displayName = 'AccordionSummary';
-AccordionSummary.displayName = 'AccordionSummary';
+MemoizedAccordionSummary.displayName = 'Accordion.Summary';
+AccordionSummary.displayName = 'Accordion.Summary';
 
 export default MemoizedAccordionSummary;
