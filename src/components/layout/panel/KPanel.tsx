@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, ElementType, forwardRef, memo, Ref, useMemo }
 import { KPanelProps } from './KPanel.interface';
 import { Panel } from "@/core";
 
-type Props<T extends ElementType> = KPanelProps<T> & ComponentPropsWithoutRef<T> & {
+type Props<T extends ElementType> = KPanelProps & ComponentPropsWithoutRef<T> & {
   ref?: Ref<HTMLElement>;
 };
 
@@ -11,8 +11,11 @@ const KPanel = forwardRef<HTMLElement, Props<ElementType>>(
     props,
     ref,
   ) => {
-    const { children, className, ...restProps } = props;
+    // region [Hooks]
+    const { children, className, style, width, height, ...restProps } = props;
+    // endregion
 
+    // region [Styles]
     const rootClass = useMemo(() => {
       const clazz = ['k-panel'];
       if (className) {
@@ -21,8 +24,13 @@ const KPanel = forwardRef<HTMLElement, Props<ElementType>>(
       return clazz.join(' ')
     }, [className])
 
+    const rootStyle = useMemo(() => ({
+      style, width, height,
+    }), [style, width, height])
+    // endregion
+
     return (
-      <Panel ref={ref} className={rootClass} {...restProps}>
+      <Panel ref={ref} className={rootClass} style={rootStyle} {...restProps}>
         {children}
       </Panel>
     );

@@ -1,34 +1,41 @@
-import { ComponentPropsWithoutRef, CSSProperties, ElementType, forwardRef, memo, Ref } from 'react';
-import { PanelProps } from './Panel.interface';
+import { ComponentPropsWithoutRef, CSSProperties, ElementType, forwardRef, memo, ReactNode, Ref } from 'react';
 
-const isValidRatio = (value: string): value is `${number}/${number}` => /^\d+\/\d+$/.test(value);
+type RatioString = `${number}/${number}`;
 
-type Props<T extends ElementType> = PanelProps<T> & ComponentPropsWithoutRef<T> & {
-  ref?: Ref<HTMLElement>;
-};
+interface BaseProps<T extends ElementType> {
+  as?: T;
+  ratio?: RatioString;
+  children?: ReactNode;
+  style?: CSSProperties;
+}
 
-const Panel = forwardRef<HTMLElement, Props<ElementType>>(
-  (
-    props,
-    ref,
+type Props<T extends ElementType> =
+  BaseProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof BaseProps<T>>;
+
+const isValidRatio = (value: string): value is RatioString => (/^\d+\/\d+$/.test(value));
+
+const Panel = forwardRef(
+  <T extends ElementType = 'div'>(
+    props: Props<T>,
+    ref: Ref<HTMLElement>,
   ) => {
+    const { as, ratio, style, children, ...restProps } = props;
+    const Component = as || 'div';
 
-    const { as: Component = 'div', ratio, style, children, ...restProps } = props;
     const rootStyle: CSSProperties = {
       ...style,
       ...(ratio && isValidRatio(ratio) ? { aspectRatio: ratio } : {}),
     };
 
     return (
-      <Component ref={ref} style={rootStyle} {...restProps}>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      <Component ref={ref as any} style={rootStyle} {...restProps}>
         {children}
       </Component>
     );
   },
 );
 
-const MemoizedPanel = memo(Panel);
 Panel.displayName = 'Panel';
-MemoizedPanel.displayName = 'Panel';
 
-export default MemoizedPanel;
+export default memo(Panel);

@@ -3,7 +3,7 @@ import { JSX } from 'react/jsx-runtime';
 
 type RatioString = `${number}/${number}`;
 
-type ElementFromTag<T extends keyof JSX.IntrinsicElements> =
+export type ElementFromTag<T extends keyof JSX.IntrinsicElements> =
   T extends 'ul' ? HTMLUListElement :
     T extends 'ol' ? HTMLOListElement :
       T extends 'li' ? HTMLLIElement :
