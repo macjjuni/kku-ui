@@ -21,7 +21,7 @@ const DropdownTrigger = forwardRef<HTMLDivElement, KDropdownTriggerProps>((props
 
   // region [Hooks]
   const { children, onClick, onMouseEnter, onMouseLeave, onKeyDown, onFocus, onBlur, ...restProps } = props;
-  const { triggerRef, contentRef, trigger, open, onOpen, onClose, onFocusContent } = useKDropdownContext();
+  const { id, triggerRef, contentRef, trigger, open, onOpen, onClose, onFocusContent } = useKDropdownContext();
 
   useImperativeHandle(ref, () => triggerRef.current!, []);
   // endregion
@@ -90,9 +90,10 @@ const DropdownTrigger = forwardRef<HTMLDivElement, KDropdownTriggerProps>((props
 
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex,jsx-a11y/no-static-element-interactions
-    <div {...restProps} tabIndex={0} ref={triggerRef} className="k-dropdown__trigger" onKeyDown={onKeyDownRoot}
-         onClick={onClickRoot} onMouseEnter={onMouseEnterRoot} onMouseLeave={onMouseLeaveRoot} onFocus={onFocusRoot}
-         onBlur={onBlurRoot}>
+    <div {...restProps} tabIndex={0} ref={triggerRef} className="k-dropdown__trigger"
+         role="button" id={id} aria-controls={open ? id : undefined} aria-expanded={open} aria-haspopup="true"
+         onKeyDown={onKeyDownRoot} onClick={onClickRoot} onMouseEnter={onMouseEnterRoot}
+         onMouseLeave={onMouseLeaveRoot} onFocus={onFocusRoot} onBlur={onBlurRoot}>
       {Content}
     </div>
   );

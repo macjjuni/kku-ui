@@ -5,7 +5,7 @@ import {
   memo,
   ReactElement,
   RefAttributes,
-  useCallback,
+  useCallback, useId,
   useMemo,
   useRef,
   useState,
@@ -23,6 +23,7 @@ const Dropdown = (props: KDropdownProps) => {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const uniqueId = `k-dropdown-${useId()}`
   // endregion
 
 
@@ -77,7 +78,8 @@ const Dropdown = (props: KDropdownProps) => {
   // endregion
 
   const contextValue = useMemo(() => ({
-    open, onOpen, onClose, onFocusContent, onBlurContent, triggerRef, contentRef, trigger, position,
+    open, onOpen, onClose, onFocusContent, onBlurContent, triggerRef,
+    id: uniqueId, contentRef, trigger, position,
   }), [open, trigger, position]);
 
   return (

@@ -20,6 +20,7 @@ export interface KDropdownContextProps {
   onFocusContent: () => void;
   onBlurContent: (e: KeyboardEvent<HTMLElement>) => void;
 
+  id: string;
   triggerRef: RefObject<HTMLDivElement | null>;
   contentRef: RefObject<HTMLDivElement | null>;
 
