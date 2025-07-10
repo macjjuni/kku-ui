@@ -102,7 +102,7 @@ const MenuItem = forwardRef<HTMLLIElement, KMenuItemProps>((props, ref) => {
 });
 
 const KMenuItem = memo(MenuItem);
-KMenuItem.displayName = 'KMenuItem';
-MenuItem.displayName = 'KMenuItem';
+KMenuItem.displayName = 'KMenu.Item';
+MenuItem.displayName = 'KMenu.Item';
 
 export default KMenuItem;

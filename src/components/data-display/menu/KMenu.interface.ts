@@ -1,10 +1,10 @@
-import { ReactNode } from "react";
-import { MenuItemProps, MenuProps } from "@/core";
-import { SizeType } from "@/common/base/base.interface";
+import { ReactNode } from 'react';
+import { MenuItemProps, MenuProps } from '@/core';
+import { SizeType } from '@/common/base/base.interface';
 
 export interface KMenuProps extends MenuProps<'div'> {
   size?: SizeType;
-  width?: number | string
+  width?: number | string;
 }
 
 export interface KMenuItemProps extends MenuItemProps {

@@ -1,6 +1,5 @@
 import { Children, cloneElement, isValidElement, memo, ReactElement, ReactNode, useMemo } from 'react';
 import { KButton, KButtonGroupProps, KButtonProps } from '@/components';
-import lodashUtil from '@/common/util/lodashUtil';
 
 
 const ButtonGroup = (props: KButtonGroupProps) => {
@@ -23,19 +22,19 @@ const ButtonGroup = (props: KButtonGroupProps) => {
 
   // region [Templates]
   const Buttons = useMemo(() => {
-    const buttons: ReactNode[] = []
+    const buttons: ReactNode[] = [];
 
-    Children.forEach(children, (child) => {
+    Children.forEach(children, (child, index) => {
       if (!isValidElement(child)) {
-        return
+        return;
       }
       if (child.type === KButton) {
-        const childItem = child as ReactElement<KButtonProps>
-        buttons.push(cloneElement(childItem, { ...childItem.props, variant, key: lodashUtil.uniqueId('k-button-') }))
+        const childItem = child as ReactElement<KButtonProps>;
+        buttons.push(cloneElement(childItem, { ...childItem.props, variant, key: child.key ?? `k-button--${index}}` }));
       }
-    })
-    return buttons
-  }, [children, variant])
+    });
+    return buttons;
+  }, [children, variant]);
   // endregion
 
   return (
