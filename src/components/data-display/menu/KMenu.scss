@@ -43,18 +43,18 @@ $kku-menu-item-height-size-medium: 34px;
   border: none;
   outline: 0;
   width: 100%;
-  overflow: hidden;
-
   background: $kku-menu-background-color-default;
+  overflow: hidden;
   cursor: pointer;
 
   &:after {
+    $kku-menu-item-focus-width: 2px;
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(100% - 3.5px);
-    height: calc(100% - 5px);
-    border: 2px solid $kku-primary-color-default;
+    width: calc(100% - #{$kku-menu-item-focus-width} * 2);
+    height: calc(100% - #{$kku-menu-item-focus-width} * 2);
+    border: $kku-menu-item-focus-width solid $kku-primary-color-default;
     z-index: 1;
   }
 
@@ -66,6 +66,7 @@ $kku-menu-item-height-size-medium: 34px;
 
   @include kku-transition;
   transition-property: background;
+
   &:hover:not(.k-menu-item--disabled) {
     background: $kku-menu-background-color-hover;
   }

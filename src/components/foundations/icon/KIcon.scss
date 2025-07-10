@@ -2,8 +2,8 @@
 
 // region [Component Token]
 
-$k-icon-light-color: $kku-slate-color-800;
-$k-icon-dark-color: $kku-slate-color-300;
+$k-icon-light-color: $kku-gray-color-600;
+$k-icon-dark-color: $kku-gray-color-300;
 $k-icon-disabled-color: $kku-text-color-disabled;
 
 $k-icon-size-xlarge: 28px;
@@ -66,12 +66,14 @@ $k-icon-size-xsmall: 12px;
 }
 
 // Dark mode override
-.#{$kku-dark-mode-signature} .k-icon {
-  color: $k-icon-dark-color;
-  fill: $k-icon-dark-color;
+.#{$kku-dark-mode-signature} {
+  .k-icon {
+    color: $k-icon-dark-color;
+    fill: $k-icon-dark-color;
 
-  &.k-icon--disabled {
-    color: $k-icon-disabled-color;
-    fill: $k-icon-disabled-color;
+    &.k-icon--disabled {
+      color: $k-icon-disabled-color;
+      fill: $k-icon-disabled-color;
+    }
   }
 }
