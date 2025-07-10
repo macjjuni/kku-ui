@@ -27,6 +27,12 @@ describe('Button 컴포넌트', () => {
       .toThrow('Button 컴포넌트에 label과 children을 동시에 넣을 수 없습니다.');
   });
 
+  it('특정 TabIndex 속성이 적용된다. ', () => {
+    const testTabIndex = -1;
+    render(<Button tabIndex={testTabIndex} />);
+    expect(screen.getByRole('button')).toHaveAttribute('tabIndex', testTabIndex.toString());
+  });
+
   it('type 기본값은 "button"이다', () => {
     render(<Button label="테스트" />);
     expect(screen.getByRole('button')).toHaveAttribute('type', 'button');
