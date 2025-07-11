@@ -2,10 +2,9 @@
 
 // region [Component Tokens]
 
-$backdrop-background-color: $kku-backdrop-background-color-light;
-$backdrop-background-color-dark: $kku-backdrop-background-color-dark;
-$backdrop-opacity: 0.48;
-$backdrop-z-index: $kku-backdrop-z-index;
+$backdrop-background-color: rgba(0, 0, 0, 0.48);
+$backdrop-background-color-dark: rgba(255, 255, 255, 0.48);
+$backdrop-z-index: 10;
 
 // endregion
 
@@ -16,8 +15,22 @@ $backdrop-z-index: $kku-backdrop-z-index;
   width: 100dvw;
   height: 100dvh;
   background-color: $backdrop-background-color;
-  opacity: $backdrop-opacity;
   z-index: $backdrop-z-index;
+
+
+  .k-backdrop__container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @include kku-focus-visible(null, -3px);
+    z-index: $backdrop-z-index;
+
+    & ~ * {
+      z-index: calc(#{$backdrop-z-index} + 1);
+    }
+  }
 }
 
 .#{$kku-dark-mode-signature} .k-backdrop {

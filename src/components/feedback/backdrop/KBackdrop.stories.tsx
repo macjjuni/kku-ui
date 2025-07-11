@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KBackdrop, KBackdropProps, KButton } from '@/components';
 
@@ -30,10 +30,18 @@ const Template = (args: KBackdropProps) => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    setOpen(args.open);
+  }, [args.open]);
+
   return (
     <>
       <KButton label="열기" onClick={onClickButton}/>
-      <KBackdrop open={open} opacity={args.opacity} onClick={onClickBackdrop} />
+      <KBackdrop open={open} opacity={args.opacity} onClick={onClickBackdrop}>
+        <KButton label="Hello World"/>
+        <KButton label="Hello World"/>
+        <KButton label="Hello World"/>
+      </KBackdrop>
     </>
   );
 };
@@ -42,9 +50,9 @@ export const Default: Story = {
   render: Template,
   args: {
     open: false,
-    opacity: 0.4,
     zIndex: undefined,
-    onClick: () => {},
+    onClick: () => {
+    },
   },
 };
 

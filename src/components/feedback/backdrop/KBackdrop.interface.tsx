@@ -1,11 +1,11 @@
-import { ReactNode } from 'react';
-import { KBaseProp } from '@/common/base/base.interface';
+import { HTMLAttributes, MouseEvent, ReactNode } from 'react';
 
-export interface KBackdropProps extends KBaseProp {
+export interface KBackdropProps extends HTMLAttributes<HTMLDivElement> {
   open: boolean;
-  onClick?: () => void;
   zIndex?: number;
   opacity?: number;
 
+  onClick: (e?: MouseEvent<HTMLDivElement>) => void
+  container?: HTMLElement;
   children?: ReactNode;
 }

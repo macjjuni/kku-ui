@@ -50,13 +50,13 @@ describe('KModal', () => {
   it('applies onClick props', async () => {
     const user = userEvent.setup();
     render(<KBackdrop open onClick={mockFn}/>);
-    const root = screen.getByRole('presentation', { hidden: true });
+    const background = screen.getByRole('button', { hidden: true });
 
     expect(mockFn)
       .toHaveBeenCalledTimes(0);
 
     await act(async () => {
-      await user.click(root);
+      await user.click(background);
       await new Promise((r) => {
         setTimeout(r, 300);
       });
