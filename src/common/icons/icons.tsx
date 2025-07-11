@@ -741,19 +741,11 @@ const kIcons: Icons = {
     </svg>
   ),
   check: (color = DEFAULT_COLOR) => (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+    <svg fill={color} viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
       <g strokeWidth="0"/>
       <g strokeLinecap="round" strokeLinejoin="round"/>
       <g>
-        <g clipPath="url(#clip0_429_11249)">
-          <path d="M20 7.00018L10 17.0002L5 12.0002" stroke={color} strokeWidth="2.5" strokeLinecap="round"
-                strokeLinejoin="round"/>
-        </g>
-        <defs>
-          <clipPath>
-            <rect width="24" height="24" fill="white"/>
-          </clipPath>
-        </defs>
+        <path d="M5 16.577l2.194-2.195 5.486 5.484L24.804 7.743 27 9.937l-14.32 14.32z"/>
       </g>
     </svg>
   ),
