@@ -1,5 +1,6 @@
 import { HTMLAttributes, KeyboardEvent, ReactNode, RefObject } from 'react';
 
+
 export const K_DROPDOWN_POSITIONS = [
   'top-start', 'top', 'top-end',
   'right-start', 'right', 'right-end',
@@ -8,6 +9,7 @@ export const K_DROPDOWN_POSITIONS = [
 ] as const;
 export type KDropdownPositionType = typeof K_DROPDOWN_POSITIONS[number];
 export type KDropdownTriggerType = 'hover' | 'click';
+
 export interface KDropdownOffsetType {
   x: number;
   y: number;
@@ -28,10 +30,18 @@ export interface KDropdownContextProps {
   position: KDropdownPositionType;
 }
 
+export interface KDropdownRefs {
+  onOpen: () => void;
+  onClose: () => void;
+}
+
+export type DropdownElementType = 'div' | 'ul' | 'li' | 'p' | 'span';
+
 export interface KDropdownProps {
+  as?: DropdownElementType;
+  children?: ReactNode;
   trigger?: KDropdownTriggerType;
   position?: KDropdownPositionType;
-  children: ReactNode;
 }
 
 export interface KDropdownTriggerProps extends HTMLAttributes<HTMLDivElement> {

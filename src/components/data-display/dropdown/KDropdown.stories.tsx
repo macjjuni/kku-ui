@@ -10,6 +10,11 @@ const meta: Meta<KDropdownProps> = {
     KDropdownContent: KDropdown.Content,
   },
   argTypes: {
+    as: {
+      description: '',
+      control: { type: 'select' },
+      options: ['div', 'ul', 'li', 'p', 'span'],
+    },
     trigger: {
       control: { type: 'radio' },
       options: ['hover', 'click'],
@@ -49,6 +54,7 @@ const Template = (args: KDropdownProps) => (
 export const Default: Story = {
   render: Template,
   args: {
+    as: 'div',
     trigger: 'hover',
     position: 'bottom-start',
   },
