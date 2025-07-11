@@ -1,27 +1,23 @@
-import { ComponentPropsWithoutRef, forwardRef, memo, Ref, useMemo } from 'react';
-import { MenuItemElementType, MenuItemProps } from './MenuItem.interface';
-import { Panel } from '@/core';
+import { forwardRef, memo, useMemo } from 'react';
+import { MenuItemProps } from './MenuItem.interface';
 
 
-type Props<T extends MenuItemElementType> = MenuItemProps<T> & ComponentPropsWithoutRef<T> & {
-  ref?: Ref<HTMLDivElement | HTMLButtonElement | HTMLLIElement>;
-};
-
-const MenuItem = forwardRef<HTMLDivElement | HTMLButtonElement | HTMLLIElement, Props<MenuItemElementType>>(
+const MenuItem = forwardRef<HTMLDivElement | HTMLLIElement, MenuItemProps>(
   (
     props,
     ref,
   ) => {
 
-    const { as = 'li', children, disabled, tabIndex, ...restProps } = props;
+    const { as, children, disabled, tabIndex, ...restProps } = props;
+    const Component = as || 'li';
     const TabIndex = useMemo(() => (
       disabled ? undefined : tabIndex ?? 0
-    ), [disabled, tabIndex])
+    ), [disabled, tabIndex]);
 
     return (
-      <Panel ref={ref} as={as} role="menuitem" aria-disabled={disabled} tabIndex={TabIndex} {...restProps}>
+      <Component ref={ref} as={as} role="menuitem" aria-disabled={disabled} tabIndex={TabIndex} {...restProps}>
         {children}
-      </Panel>
+      </Component>
     );
   },
 );

@@ -1,30 +1,20 @@
-import { ComponentPropsWithoutRef, forwardRef, memo, Ref } from 'react';
-import { MenuElementType, MenuProps } from './Menu.interface';
-import { Panel } from "@/core";
+import { forwardRef, memo } from 'react';
+import { MenuElementType, MenuElementTypeMap, MenuProps } from './Menu.interface';
 
-
-type Props<T extends MenuElementType> = MenuProps<T> & ComponentPropsWithoutRef<T> & {
-  ref?: Ref<HTMLElement>;
-};
-
-const Menu = forwardRef<HTMLElement, Props<MenuElementType>>(
-  (
-    props,
-    ref,
-  ) => {
-
-    const { as = 'ul', children, ...restProps } = props;
+const Menu = forwardRef<MenuElementTypeMap[MenuElementType], MenuProps>(
+  ({ as, children, ...rest }, ref) => {
+    const Component = as || 'ul';
 
     return (
-      <Panel ref={ref} as={as} role="menu" {...restProps}>
+      <Component ref={ref} role="menu" {...rest}>
         {children}
-      </Panel>
+      </Component>
     );
   },
 );
 
-const MemoizedMenu = memo(Menu);
+const MemoizedMenu = memo(Menu)
 Menu.displayName = 'Menu';
 MemoizedMenu.displayName = 'Menu';
 
-export default MemoizedMenu;
+export default Menu;

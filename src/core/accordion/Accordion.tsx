@@ -4,8 +4,6 @@ import AccordionContent from './AccordionContent';
 import { AccordionProps } from './Accordion.interface';
 import { AccordionContext } from './Accordion.context';
 import { useCleanId } from '@/common/hooks';
-import { Panel } from "@/core";
-
 
 const Accordion = (props: AccordionProps) => {
 
@@ -41,12 +39,12 @@ const Accordion = (props: AccordionProps) => {
   // endregion
 
   return (
-    <Panel as="details" ref={root} {...restProps} open data-open={String(isOpen)}>
+    <details ref={root} {...restProps} open data-open={String(isOpen)}>
       <AccordionContext.Provider value={ContextValue}>
         {SummaryElement}
         {ContentElement}
       </AccordionContext.Provider>
-    </Panel>
+    </details>
   );
 };
 

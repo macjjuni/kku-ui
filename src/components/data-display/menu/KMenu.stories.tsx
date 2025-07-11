@@ -8,6 +8,8 @@ const meta: Meta<KMenuProps> = {
   component: KMenu,
   subcomponents: {
     MenuItem: KMenu.Item,
+    MenuItemSelectable: KMenu.ItemSelectable,
+    MenuItemDivider: KMenu.ItemDivider,
   },
   title: 'Data Display/Menu',
   argTypes: {

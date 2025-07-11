@@ -28,6 +28,7 @@ const preview: Preview = {
           'Input',
           ['TextField', 'Select'],
           'Data Display',
+          ['Accordion', 'Menu', 'Dropdown', 'Skeleton'],
           'Feedbacks',
           'Layout',
           'Foundations',

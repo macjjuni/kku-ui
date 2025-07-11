@@ -1,5 +1,4 @@
 import { Dispatch, HTMLAttributes, ReactNode, RefObject, SetStateAction } from 'react';
-import { PanelProps } from "@/core";
 
 
 export interface AccordionContextProps {
@@ -9,7 +8,7 @@ export interface AccordionContextProps {
   summaryId: string;
 }
 
-export interface AccordionProps extends PanelProps<'details'> {
+export interface AccordionProps extends HTMLAttributes<HTMLDetailsElement> {
   defaultOpen?: boolean;
   children?: ReactNode;
 }

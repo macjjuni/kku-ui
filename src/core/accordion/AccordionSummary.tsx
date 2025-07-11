@@ -2,7 +2,6 @@ import { KeyboardEvent, memo, MouseEvent, useCallback } from 'react';
 import { useAccordionContext } from '@/core/accordion/Accordion.context';
 import { AccordionSummaryProps } from '@/core/accordion/Accordion.interface';
 import { handleKeyInteraction } from '@/common/util/keyboard';
-import { Panel } from "@/core";
 
 
 const AccordionSummary = (props: AccordionSummaryProps) => {
@@ -32,10 +31,10 @@ const AccordionSummary = (props: AccordionSummaryProps) => {
   // endregion
 
   return (
-    <Panel as="summary" role="button" id={summaryId} tabIndex={0} {...restProps} onClick={onClickSummary}
-           onKeyDown={onKeyDownRoot}>
+    <summary role="button" id={summaryId} tabIndex={0} {...restProps} onClick={onClickSummary}
+             onKeyDown={onKeyDownRoot}>
       {typeof children === 'function' ? children({ isOpen }) : children}
-    </Panel>
+    </summary>
   );
 };
 

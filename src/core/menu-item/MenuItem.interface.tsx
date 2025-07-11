@@ -1,10 +1,17 @@
 import { ReactNode } from 'react';
-import { PanelProps } from "@/core";
 
 export type MenuItemElementType = 'li' | 'div';
 
-export type MenuItemProps<T extends MenuItemElementType = 'li'> = Omit<PanelProps<T>, 'ratio' | 'children'> & {
-  as?: T;
+export interface MenuItemElementTypeMap {
+  li: HTMLLIElement;
+  div: HTMLDivElement;
+}
+
+export interface MenuItemProps {
+  as?: MenuItemElementType;
   disabled?: boolean;
   children?: ReactNode;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 }
