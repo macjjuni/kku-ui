@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { MenuItemProps, MenuProps } from '@/core';
 import { SizeType } from '@/common/base/base.interface';
 
@@ -14,4 +14,11 @@ export interface KMenuItemProps extends MenuItemProps {
   label?: string;
 
   size?: SizeType;
+}
+
+export interface KMenuItemSelectableProps extends Omit<KMenuItemProps, 'leftContent'> {
+  selected?: boolean
+}
+
+export interface KMenuItemDividerProps extends HTMLAttributes<HTMLLIElement> {
 }

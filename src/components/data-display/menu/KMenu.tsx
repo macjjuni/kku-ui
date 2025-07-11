@@ -1,9 +1,19 @@
 import {
-  Children, cloneElement, forwardRef, isValidElement, memo,
-  ReactElement, ReactNode, useMemo, ForwardRefExoticComponent, RefAttributes,
+  Children,
+  cloneElement,
+  forwardRef,
+  ForwardRefExoticComponent,
+  isValidElement,
+  memo,
+  ReactElement,
+  ReactNode,
+  RefAttributes,
+  useMemo,
 } from 'react';
 import { KMenuItemProps, KMenuProps } from './KMenu.interface';
 import KMenuItem from './KMenuItem';
+import KMenuItemSelectable from './KMenuItemSelectable';
+import KMenuItemDivider from './KMenuItemDivider';
 import { Menu as CoreMenu } from '@/core';
 
 const Menu = forwardRef<HTMLUListElement, KMenuProps>((props, ref) => {
@@ -28,19 +38,19 @@ const Menu = forwardRef<HTMLUListElement, KMenuProps>((props, ref) => {
 
   // region [Templates]
   const MenuItems = useMemo((): ReactNode[] => {
-    const menuItems: ReactNode[] = []
+    const menuItems: ReactNode[] = [];
 
     Children.forEach(children, (child, index) => {
       if (!isValidElement(child)) {
-        return
+        return;
       }
-      if (child.type === KMenuItem) {
-        const MenuItem = child as ReactElement<KMenuItemProps>
-        menuItems.push(cloneElement(MenuItem, { ...MenuItem.props, size, key: child.key ?? `k-menu-item-${index}` }))
+      if (child.type === KMenuItem || child.type === KMenuItemSelectable || child.type === KMenuItemDivider) {
+        const MenuItem = child as ReactElement<KMenuItemProps>;
+        menuItems.push(cloneElement(MenuItem, { ...MenuItem.props, size, key: child.key ?? `k-menu-item-${index}` }));
       }
-    })
-    return menuItems
-  }, [children, size])
+    });
+    return menuItems;
+  }, [children, size]);
   // endregion
 
   return (
@@ -56,9 +66,13 @@ Menu.displayName = 'KMenu';
 
 interface KMenuNamespace extends ForwardRefExoticComponent<KMenuProps & RefAttributes<HTMLUListElement>> {
   Item: typeof KMenuItem;
+  ItemSelectable: typeof KMenuItemSelectable;
+  ItemDivider: typeof KMenuItemDivider
 }
 
 const KMenu = KMenuBase as KMenuNamespace;
 KMenu.Item = KMenuItem;
+KMenu.ItemSelectable = KMenuItemSelectable;
+KMenu.ItemDivider = KMenuItemDivider;
 
 export default KMenu;
