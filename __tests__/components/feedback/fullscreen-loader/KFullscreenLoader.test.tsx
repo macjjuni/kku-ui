@@ -37,11 +37,11 @@ describe('KFullscreenLoader', () => {
   it('applies open props', async () => {
     // Arrange
     const user = userEvent.setup();
-    render(<TestFullscreenLoader/>);
+    render(<TestFullscreenLoader />);
     const openButton = screen.getByText(openText);
 
     // Assert
-    expect(screen.queryByRole('presentation'))
+    expect(document.querySelector('.k-fullscreen'))
       .not
       .toBeInTheDocument();
 
@@ -52,11 +52,9 @@ describe('KFullscreenLoader', () => {
         setTimeout(r, 300);
       });
     });
-    const root = screen.getByRole('presentation', { hidden: true });
 
     // Assert
-    expect(root)
-      .toBeInTheDocument();
+    const root = document.querySelector('.k-fullscreen');
+    expect(root).toBeInTheDocument();
   });
-
 });
