@@ -1,4 +1,4 @@
-import { CSSProperties, KeyboardEvent } from 'react';
+import { CSSProperties, HTMLAttributes, KeyboardEvent } from 'react';
 import { SizeType } from '@/common/base/base.interface';
 import { KInputValidateType } from '@/components';
 
@@ -8,7 +8,7 @@ export interface KSelectItemType {
   ['label']: string;
 }
 
-export interface KSelectProps extends KInputValidateType {
+export interface KSelectProps extends KInputValidateType, Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   value?: string | number;
   items: KSelectItemType[];
 

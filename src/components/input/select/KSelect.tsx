@@ -12,7 +12,7 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
   const {
     id = `k-select-${uniqueId}`, className, rules, validateOnChange,
     value, items, label, required, noDataText = 'No Data', placeholder, width, size, disabled,
-    onChange,
+    onChange, ...restProps
   } = props;
 
   const ValueLabel = useMemo(() => {
@@ -138,7 +138,7 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
 
 
   return (
-    <KDropdown className={rootClass} trigger="click" position="bottom-start">
+    <KDropdown className={rootClass} trigger="click" position="bottom-start" {...restProps}>
       <KDropdown.Trigger className="k-select__trigger" disabled={disabled}>
         <fieldset className="k-select__fieldset" style={{ width }}>
           <legend className="k-select__fieldset__legend">
