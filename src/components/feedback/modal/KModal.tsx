@@ -172,7 +172,7 @@ const Modal = ({ ...restProps }: KModalProps) => {
           document.body,
         )
       }
-      {isOverlay && <KBackdrop open={isOpen} onClick={onClickOverlay} opacity={overlayOpacity}/>}
+      {isOverlay && <KBackdrop isOpen={isOpen} onClick={onClickOverlay} opacity={overlayOpacity}/>}
     </>
   );
 };
