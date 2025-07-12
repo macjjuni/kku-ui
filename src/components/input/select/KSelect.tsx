@@ -1,46 +1,40 @@
-import {
-  forwardRef, KeyboardEvent, MouseEvent, memo, CSSProperties,
-  Ref, useCallback, useId, useImperativeHandle, useMemo, useRef, useState,
-} from 'react';
-import { AnimatePresence, motion } from 'motion/react';
-import type { KSelectItemType, KSelectProps, KSelectRefs } from '@/components/input/select/KSelect.interface';
-import { KIcon } from '@/components';
-import { useRipple, useClickOutside } from '@/common/hooks';
-import KSelectList from '@/components/input/select/KSelectList';
-import KSelectMotion from '@/components/input/select/KSelect.motion';
+import { forwardRef, memo, MouseEvent, useCallback, useEffect, useId, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import type { KSelectProps, KSelectRefs } from './KSelect.interface';
+import { KDropdown, KDropdownRefs, KMenu } from '@/components';
+import { useRipple } from '@/common/hooks';
 
 
-const Select = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs>) => {
+const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
 
   // region [Hooks]
 
   const uniqueId = useId();
-  const { id = `k-select-${uniqueId}`, className, style } = { ...restProps };
-  const { value, items, noDataText = 'No Data', placeholder } = { ...restProps };
-  const { width, size, disabled } = { ...restProps };
-  const { onChange, onFocus, onBlur } = { ...restProps };
+  const {
+    id = `k-select-${uniqueId}`, className, rules, validateOnChange,
+    value, items, label, required, noDataText = 'No Data', placeholder, width, size, disabled,
+    onChange,
+  } = props;
 
-  const rootRef = useRef<HTMLDivElement>(null);
-  const labelRef = useRef<HTMLDivElement>(null);
+  const ValueLabel = useMemo(() => {
+    const selectedValue = items.find((item) => item.value === value);
+    return selectedValue?.label || null;
+  }, [value, items]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<KDropdownRefs>(null);
 
-  const isOnMouse = useRef<boolean>(false);
-  const [open, setOpen] = useState<boolean>(false);
-  const ripple = useRipple(labelRef);
+  const [menuWidth, setMenuWidth] = useState<number | 'auto'>('auto');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const contentGap = useMemo(() => (errorMessage ? -16 : 4), [errorMessage]);
+  const ripple = useRipple(containerRef);
 
   // endregion
 
 
   // region [Styles]
-
   const rootClass = useMemo(() => {
-
     const clazz = ['k-select'];
-
     if (className) {
       clazz.push(className);
-    }
-    if (open) {
-      clazz.push('k-select--open');
     }
     if (size) {
       clazz.push(`k-select--${size}`);
@@ -48,166 +42,139 @@ const Select = forwardRef(({ ...restProps }: KSelectProps, ref: Ref<KSelectRefs>
     if (disabled) {
       clazz.push('k-select--disabled');
     }
+    if (errorMessage) {
+      clazz.push('k-select--error');
+    }
 
     return clazz.join(' ');
-  }, [open, className, size, disabled]);
-
-  const rootStyle = useMemo(() => ({ ...style }), [style]);
-  const labelStyle = useMemo((): CSSProperties => (width !== undefined ? { width } : {}), [width]);
-
+  }, [className, size, errorMessage, disabled]);
   // endregion
 
 
   // region [Privates]
-
-  const onSelectOpen = useCallback(() => {
-    setOpen(true);
+  const initializeWidth = useCallback(() => {
+    const selectWidth = containerRef.current?.getBoundingClientRect().width ?? 'auto';
+    setMenuWidth(selectWidth);
   }, []);
 
-  const onSelectClose = useCallback(() => {
-    setOpen(false);
-  }, []);
-
-  const displayTitle = useMemo(() => {
-
-    if ((!value || value === '') && placeholder) {
-      return (<span className="k-select__label__text__placeholder">{placeholder}</span>);
+  const onValidate = useCallback(async (targetValue?: string | number) => {
+    if (!rules) {
+      console.warn('not found rules.');
+      return true;
     }
 
-    const selectedItem = items?.find((item) => (item.value === value));
+    const checkValue = targetValue ?? value;
 
-    return (selectedItem?.label || value);
-  }, [value, items, placeholder]);
+    for (let i = 0; i < rules.length; i++) {
+      const rule = await rules[i];
+      const result = await rule(checkValue?.toString());
+      const errorMessage = typeof result === 'string' ? result : null;
 
+      if (errorMessage) {
+        setErrorMessage(errorMessage);
+        return false;
+      }
+    }
+
+    setErrorMessage(null);
+    return true;
+  }, [rules, value]);
   // endregion
-
 
   // region [Events]
+  const onChangeRoot = useCallback((val: string | number) => {
+    onChange(val);
+    if (validateOnChange) {
+      onValidate(val);
+    }
+  }, [onChange, validateOnChange, onValidate]);
 
-  const onMouseDownLabel = useCallback((e: MouseEvent<HTMLDivElement>) => {
-
+  const onMouseDownFieldSet = useCallback((e: MouseEvent<HTMLDivElement>) => {
     if (!disabled) {
       ripple?.register(e);
-      setOpen((prev) => !prev);
     }
-  }, [ripple]);
+  }, [disabled]);
 
-  const onMouseUpLabel = useCallback(() => {
-    ripple.remove();
-  }, [ripple, disabled]);
-
-  const onFocusLabel = useCallback(() => {
-    onFocus?.();
-  }, []);
-
-  const onBlurLabel = useCallback(() => {
-    if (open && !isOnMouse.current) {
-      onSelectClose();
-    }
-    onBlur?.();
-  }, []);
-
-  const onMouseEnterLabel = useCallback(() => {
-    isOnMouse.current = true;
-  }, []);
-
-  const onMouseLeaveLabel = useCallback(() => {
-    isOnMouse.current = false;
-  }, []);
-
-  const onKeyDownLabel = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
-
-    ripple?.register(e);
-  }, [ripple]);
-
-  const onKeyUpLabel = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
-
-    if (e.key === 'Enter' || e.key === ' ') {
+  const onMouseUpFieldSet = useCallback(() => {
+    if (!disabled) {
       ripple.remove();
-
-      if (!open) {
-        onSelectOpen();
-        return;
-      }
-      onSelectClose();
     }
+  }, [disabled]);
 
-    if (e.key === 'Tab') {
-      isOnMouse.current = true;
+  const onMouseLeaveFieldSet = useCallback(() => {
+    if (!disabled) {
+      ripple.remove();
     }
-  }, [open]);
-
-  const onClickListItem = useCallback((item: KSelectItemType | null) => {
-
-    if (item === null) {
-      return;
-    }
-
-    onChange(item.value);
-    onSelectClose();
-  }, [onChange]);
-
-  const onFocusListItem = useCallback(() => {
-    isOnMouse.current = false;
-  }, []);
-
-  const onKeydownListItem = useCallback((e: KeyboardEvent<HTMLLIElement>, item: KSelectItemType | null, idx: number) => {
-
-    if (item && (e.key === 'Enter' || e.key === ' ')) {
-      onChange(item.value);
-      onSelectClose();
-    }
-
-    if ((items.length - 1 === idx || idx === -1) && (!e.shiftKey && e.key === 'Tab')) {
-      onSelectClose();
-    }
-  }, [onChange, items]);
-
+  }, [disabled]);
   // endregion
 
+  // region [Templates]
+  const rootLabel = useMemo(() => {
+    const clazz = ['k-select__fieldset__legend__label'];
+    if (label) {
+      clazz.push('k-select__fieldset__legend__label--show');
+    }
+    return clazz.join(' ');
+  }, [label]);
+  // endregion
+
+  // region [LifeCycles]
+  useEffect(() => {
+    initializeWidth();
+  }, [size]);
+  // endregion
 
   // region [APIs]
-
   useImperativeHandle(ref, () => ({
-    open: onSelectOpen,
-    close: onSelectClose,
+    onOpen: () => {
+      dropdownRef.current?.onOpen();
+    },
+    onClose: () => {
+      dropdownRef.current?.onClose();
+    },
+    onValidate: () => onValidate(),
   }));
-
   // endregion
-
-
-  useClickOutside(labelRef, () => {
-    onSelectClose();
-  });
 
 
   return (
-    <div ref={rootRef} id={id} className={rootClass} style={rootStyle} data-testid="k-select">
-
-      <div ref={labelRef} role="button" className="k-select__label" style={labelStyle}
-           onMouseEnter={onMouseEnterLabel} onMouseLeave={onMouseLeaveLabel} onMouseDown={onMouseDownLabel}
-           onMouseUp={onMouseUpLabel} onKeyDown={onKeyDownLabel} onKeyUp={onKeyUpLabel}
-           onFocus={onFocusLabel} onBlur={onBlurLabel} tabIndex={disabled ? -1 : 0}
-           aria-expanded={open} aria-haspopup="listbox" aria-controls="dropdown-list">
-
-        <span className="k-select__label__text">{displayTitle}</span>
-        <KIcon className="k-select__label__arrow-icon" icon="keyboard_arrow_down" size={14}/>
-
-      </div>
-
-      <AnimatePresence>
-        {open && (
-          <motion.ul {...KSelectMotion} role="listbox" className="k-select__list" {...KSelectMotion}>
-            <KSelectList value={value} items={items} noDataText={noDataText} onClick={onClickListItem}
-                         onFocus={onFocusListItem} onKeyDown={onKeydownListItem}/>
-          </motion.ul>
-        )}
-      </AnimatePresence>
-
-    </div>
+    <KDropdown className={rootClass} trigger="click" position="bottom-start">
+      <KDropdown.Trigger className="k-select__trigger" disabled={disabled}>
+        <fieldset className="k-select__fieldset" style={{ width }}>
+          <legend className="k-select__fieldset__legend">
+            <label htmlFor={id} className={rootLabel}>
+              {label}
+              {label && required && <span className="k-select__fieldset__legend__label__required">*</span>}
+            </label>
+          </legend>
+          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+          <div ref={containerRef} className="k-select__fieldset__container" onMouseDown={onMouseDownFieldSet}
+               onMouseUp={onMouseUpFieldSet} onMouseLeave={onMouseLeaveFieldSet}>
+            {ValueLabel && (
+              <span className="k-select__fieldset__container__value">{ValueLabel}</span>
+            )}
+            {value === undefined && placeholder && (
+              <span className="k-select__fieldset__container__placeholder">{placeholder}</span>
+            )}
+          </div>
+        </fieldset>
+        {errorMessage && (<div className="k-select__fieldset__message">{errorMessage}</div>)}
+      </KDropdown.Trigger>
+      <KDropdown.Content className="k-select__content" gap={contentGap}>
+        <KMenu width={menuWidth} size="medium" className={`k-select__content__menu k-select__content__menu--${size}`}>
+          {
+            items.map((item) => (
+              <KMenu.ItemSelectable key={item.value} label={item.label} selected={value === item.value}
+                                    onClick={() => {
+                                      onChangeRoot(item.value);
+                                    }}/>
+            ))
+          }
+          {items.length === 0 && <KMenu.Item label={noDataText}/>}
+        </KMenu>
+      </KDropdown.Content>
+    </KDropdown>
   );
-
-  // endregion
 });
 
 

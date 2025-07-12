@@ -1,7 +1,6 @@
-import { RefAttributes, useCallback, useRef, useState } from 'react';
-import { JSX } from 'react/jsx-runtime';
+import { useCallback, useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { KSelect, KSelectProps, KSelectRefs } from '@/components';
+import { KButton, KSelect, KSelectProps, KSelectRefs } from '@/components';
 import { disabledArgType, sizeArgType } from '@/common/storybook/argTypes';
 
 const meta: Meta<typeof KSelect> = {
@@ -20,6 +19,13 @@ const meta: Meta<typeof KSelect> = {
     },
     noDataText: { description: '값이 없을 때 보여줄 텍스트를 설정합니다.', control: { type: 'text' } },
     ...disabledArgType, ...sizeArgType,
+    rules: {
+      description: '입력값에 대한 유효성 검사 규칙을 설정합니다. 배열 형태로 전달하며, 각 규칙은 boolean을 반환하는 함수 또는 오류 메시지를 반환하는 함수입니다.',
+    },
+    validateOnChange: {
+      description: '사용자가 입력할 때마다 유효성 검사를 수행할지 여부를 설정합니다.',
+      control: { type: 'boolean' },
+    },
   },
 };
 
@@ -28,35 +34,51 @@ export default meta;
 type Story = StoryObj<KSelectProps>
 
 
+const isRequired = (val?: string) => {
+  return val ? true : '필수 입력 항목입니다.';
+};
+
 const itemTemplates = [
-  { label: 'Home 🏠', value: 'home' },
-  { label: 'Playground ⚽️', value: 'playground' },
-  { label: 'Library 📚', value: 'library' },
-  { label: 'Mountain ⛰️', value: 'mountain' },
+  { label: 'Select1', value: 'Select1' },
+  { label: 'Select2', value: 'Select2' },
+  { label: 'Select3', value: 'Select3' },
+  { label: 'Select4', value: 'Select4' },
 ];
 
-const SelectStory = (args: JSX.IntrinsicAttributes & KSelectProps & RefAttributes<KSelectRefs>) => {
+const SelectStory = (args: KSelectProps) => {
 
   const rootRef = useRef(null);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(args.value);
 
-  const onChangeValue = useCallback((val: string) => {
+  const onChangeValue = useCallback((val: string | number) => {
     setValue(val);
+  }, []);
+
+  return (<KSelect ref={rootRef} {...args} value={value} onChange={onChangeValue}/>);
+};
+
+const ValidateStory = (args: KSelectProps) => {
+
+  const rootRef = useRef<KSelectRefs>(null);
+  const [value, setValue] = useState<string | number | undefined>(args?.value);
+
+  const onChangeValue = useCallback((val: string | number) => {
+    setValue(val);
+  }, []);
+
+  const onValidate = useCallback(() => {
+    rootRef.current?.onValidate();
+  }, []);
+
+  const onClear = useCallback(() => {
+    setValue(undefined);
   }, []);
 
   return (
     <>
       <KSelect ref={rootRef} {...args} value={value} onChange={onChangeValue}/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+      <KButton variant="primary" label="Validate" onClick={onValidate} size={args.size} style={{ marginLeft: '0.5rem' }}/>
+      <KButton label="Clear" onClick={onClear} size={args.size} style={{ marginLeft: '0.5rem' }}/>
     </>
   );
 };
@@ -65,12 +87,33 @@ const SelectStory = (args: JSX.IntrinsicAttributes & KSelectProps & RefAttribute
 export const Default: Story = {
   render: SelectStory,
   args: {
+    label: 'Label',
     items: itemTemplates,
     value: undefined,
     width: undefined,
     placeholder: 'placeholder',
     size: 'medium',
     disabled: false,
+    onChange: () => {
+    },
+    noDataText: undefined,
+    rules: [],
+    validateOnChange: false,
+  },
+};
+
+export const Validate: Story = {
+  render: ValidateStory,
+  args: {
+    label: 'Label',
+    items: itemTemplates,
+    value: undefined,
+    width: undefined,
+    placeholder: 'placeholder',
+    size: 'medium',
+    disabled: false,
+    rules: [isRequired],
+    validateOnChange: false,
     onChange: () => {
     },
     noDataText: undefined,

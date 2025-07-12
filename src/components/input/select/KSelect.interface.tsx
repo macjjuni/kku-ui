@@ -1,36 +1,43 @@
-import { KeyboardEvent } from 'react';
-import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
+import { CSSProperties, KeyboardEvent } from 'react';
+import { SizeType } from '@/common/base/base.interface';
+import { KInputValidateType } from '@/components';
 
 
 export interface KSelectItemType {
-  ['value']: string;
+  ['value']: string | number;
   ['label']: string;
 }
 
-
-export interface KSelectProps extends KBaseProp, KSizeProp {
-
-  value?: string; // ✨ Required ✨
+export interface KSelectProps extends KInputValidateType {
+  value?: string | number;
   items: KSelectItemType[];
 
+  label?: string;
   placeholder?: string;
   noDataText?: string;
 
   disabled?: boolean;
+  required?: boolean;
 
   // Event
-  onChange: (value: string) => void; // ✨ Required ✨
+  onChange: (val: string | number) => void;
   onFocus?: () => void;
   onBlur?: () => void;
 
   // Styles
+  size?: SizeType;
   width?: number;
+
+  id?: string;
+  className?: string;
+  style?: CSSProperties;
 }
 
 
 export interface KSelectRefs {
-  open: () => void;
-  close: () => void;
+  onOpen: () => void;
+  onClose: () => void;
+  onValidate: () => Promise<boolean> | boolean;
 }
 
 export interface KSelectListProps {
