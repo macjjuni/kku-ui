@@ -38,14 +38,16 @@ type Story = StoryObj<typeof KDropdown>
 const Template = (args: KDropdownProps) => (
   <KDropdown {...args}>
     <KDropdown.Trigger>
-      <KIcon icon="dev" size={28}/>
+      <KIcon icon="open" size="large"/>
     </KDropdown.Trigger>
     <KDropdown.Content gap={2} offset={{ x: 0, y: 0 }} autoClose>
       <KMenu>
-        <KMenu.Item leftContent={<KIcon icon="react"/>} label="React"/>
-        <KMenu.Item leftContent={<KIcon icon="vue"/>} label="Vue"/>
-        <KMenu.Item leftContent={<KIcon icon="typescript"/>} label="TypeScript"/>
-        <KMenu.Item leftContent={<KIcon icon="javascript"/>} label="JavaScript"/>
+        <KMenu.Item label="복사" shortcut="⌘C"/>
+        <KMenu.Item label="붙여넣기" disabled shortcut="⌘V"/>
+        <KMenu.Item label="잘라내기" shortcut="⌘X"/>
+        <KMenu.Item label="모두선택" shortcut="⌘A"/>
+        <KMenu.ItemDivider/>
+        <KMenu.Item label="더보기" shortcut="⌘E"/>
       </KMenu>
     </KDropdown.Content>
   </KDropdown>

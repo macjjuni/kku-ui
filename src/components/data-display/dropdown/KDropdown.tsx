@@ -18,21 +18,30 @@ import DropdownContent from './KDropdownContent';
 import { KDropdownProps, KDropdownRefs } from '@/components/data-display/dropdown/KDropdown.interface';
 import { KDropdownContext } from '@/components/data-display/dropdown/KDropdown.context';
 
-const Dropdown = forwardRef<KDropdownRefs, KDropdownProps>(({
-  as,
-  trigger = 'hover',
-  position = 'top-end',
-  children,
-  ...restProps
-}, ref) => {
+const Dropdown = forwardRef<KDropdownRefs, KDropdownProps>((props, ref) => {
 
 
   // region [Hooks]
+  const {
+    as, trigger = 'hover', position = 'top-end', children,
+    className, ...restProps
+  } = props;
+
   const Component = as || 'div';
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const uniqueId = `k-dropdown-${useId()}`;
+  // endregion
+
+  // region [Styles]
+  const rootClass = useMemo(() => {
+    const clazz = ['k-dropdown'];
+    if (className) {
+      clazz.push(className);
+    }
+    return clazz.join(' ');
+  }, [className]);
   // endregion
 
   // region [Privates]
@@ -43,7 +52,7 @@ const Dropdown = forwardRef<KDropdownRefs, KDropdownProps>(({
   // region [APIs]
   useImperativeHandle(ref, () => ({
     onOpen, onClose,
-  }))
+  }));
   // endregion
 
   // region [Template]
@@ -97,7 +106,7 @@ const Dropdown = forwardRef<KDropdownRefs, KDropdownProps>(({
   );
 
   return (
-    <Component {...restProps} className="k-dropdown">
+    <Component {...restProps} {...restProps} className={rootClass}>
       <KDropdownContext value={contextValue}>
         {Trigger}
         {Content}

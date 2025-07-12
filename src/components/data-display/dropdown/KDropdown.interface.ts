@@ -37,7 +37,7 @@ export interface KDropdownRefs {
 
 export type DropdownElementType = 'div' | 'ul' | 'li' | 'p' | 'span';
 
-export interface KDropdownProps {
+export interface KDropdownProps extends HTMLAttributes<HTMLElement> {
   as?: DropdownElementType;
   children?: ReactNode;
   trigger?: KDropdownTriggerType;
