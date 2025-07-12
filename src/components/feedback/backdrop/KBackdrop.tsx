@@ -1,26 +1,32 @@
 import { createPortal } from 'react-dom';
-import { KeyboardEvent, memo, MouseEvent, useCallback, useId, useMemo } from 'react';
+import { KeyboardEvent, memo, MouseEvent, useCallback, useMemo } from 'react';
+import { handleKeyInteraction } from '@/common/util/keyboard';
+import { useSafePortalContainer } from '@/common/hooks';
 import { KBackdropProps } from './KBackdrop.interface';
 import KBackdropMotion from './KBackdrop.motion';
-import { useSafePortalContainer } from '@/common/hooks';
 import { Transition } from '@/core';
-import { handleKeyInteraction } from '@/common/util/keyboard';
 
 
 const Backdrop = (props: KBackdropProps) => {
 
   // region [Hooks]
-  const uniqueId = useId();
   const {
-    id = `k-backdrop-${uniqueId}`, className, style, children,
-    open, opacity = 1, zIndex, onClick, onKeyDown, container,
+    isOpen, className, style, children, role, opacity = 1, zIndex,
+    onClick, onKeyDown, container, ...restProps
   } = props;
   const defaultContainer = useSafePortalContainer(container);
+  const TabIndex = useMemo(() => (onClick ? 0 : undefined), [onClick]);
+  const RoleAndLabel = useMemo(() => {
+    if (onClick) {
+      return { role: 'button', 'aria-label': 'backdrop' };
+    }
+    return { role, 'aria-label': restProps['aria-label'] };
+  }, [onClick, role]);
   // endregion
 
   // region [Styles]
   const rootClass = useMemo(() => {
-    const clazz = ['k-backdrop'];
+    const clazz = ['k-backdrop__container'];
     if (className) {
       clazz.push(className);
     }
@@ -45,7 +51,9 @@ const Backdrop = (props: KBackdropProps) => {
   }, [onClick]);
 
   const onKeyDownRoot = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
-    handleKeyInteraction(e, onClick)
+    handleKeyInteraction(e, () => {
+      onClick?.();
+    });
     onKeyDown?.(e);
   }, [onKeyDown]);
   // endregion
@@ -55,7 +63,7 @@ const Backdrop = (props: KBackdropProps) => {
     if (children) {
       return {}; // children 있을 땐 aria-hidden, role 제거
     }
-    return { role: 'presentation', 'aria-hidden': true };
+    return { role: 'presentation' };
   }, [children]);
   // endregion
 
@@ -67,9 +75,10 @@ const Backdrop = (props: KBackdropProps) => {
   return (
     createPortal(
       <>
-        <Transition as="div" id={id} isOpen={open} className={rootClass} style={rootStyle} {...{ ...BackdropMotion, ...a11yProps }}>
-          <div role="button" aria-label="backdrop" tabIndex={0} className="k-backdrop__container"
-               onClick={onClickRoot} onKeyDown={onKeyDownRoot} />
+        <Transition as="div" isOpen={isOpen} className="k-backdrop" {...{ ...BackdropMotion, ...a11yProps }}>
+          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+          <div {...RoleAndLabel} className={rootClass} style={rootStyle} {...restProps} tabIndex={TabIndex}
+               onClick={onClickRoot} onKeyDown={onKeyDownRoot}/>
           {children}
         </Transition>
       </>,

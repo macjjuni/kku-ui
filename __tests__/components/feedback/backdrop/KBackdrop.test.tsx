@@ -7,6 +7,7 @@ import { KBackdrop } from '@/components';
 
 describe('KModal', () => {
 
+  const testId = 'test-id';
   const mockFn = vi.fn();
 
   beforeEach(() => {
@@ -16,40 +17,38 @@ describe('KModal', () => {
 
   it('applies id, className, and style props', async () => {
     // Arrange
-    const testId = 'test-id';
     const testClass = 'test-id';
     const testStyle = { color: '#eee', fontSize: '24px' };
 
-    render(<KBackdrop open id={testId} className={testClass} style={testStyle}/>);
-    const root = screen.getByRole('presentation', { hidden: true });
+    render(<KBackdrop isOpen id={testId} className={testClass} style={testStyle} data-testid={testId}/>);
+    const root = screen.getByTestId(testId);
 
     // Assert
     expect(root)
-      .toHaveAttribute('id', testId);
+      .toHaveClass(testClass);
     expect(root)
       .toHaveStyle(testStyle);
     expect(root)
-      .toHaveClass(testClass);
+      .toHaveAttribute('id', testId);
   });
 
-  it('applies open, close props', async () => {
+  it('applies isOpen, close props', async () => {
     // Arrange
-    render(<KBackdrop open={false}/>);
+    render(<KBackdrop isOpen={false} data-testid={testId} />);
     // Assert
-    expect(screen.queryByRole('presentation'))
+    expect(screen.queryByTestId(testId))
       .not
       .toBeInTheDocument();
     // Arrange
-    render(<KBackdrop open/>);
+    render(<KBackdrop isOpen data-testid={testId} />);
     // Assert
-    expect(screen.queryByRole('presentation'))
-      .not
+    expect(screen.queryByTestId(testId))
       .toBeInTheDocument();
   });
 
   it('applies onClick props', async () => {
     const user = userEvent.setup();
-    render(<KBackdrop open onClick={mockFn}/>);
+    render(<KBackdrop isOpen onClick={mockFn}/>);
     const background = screen.getByRole('button', { hidden: true });
 
     expect(mockFn)

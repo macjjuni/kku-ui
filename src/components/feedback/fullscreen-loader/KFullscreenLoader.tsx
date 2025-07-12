@@ -10,7 +10,7 @@ const FullscreenLoader = () => {
   // endregion
 
   return (
-    <KBackdrop open={isOpen} className="k-fullscreen">
+    <KBackdrop isOpen={isOpen} className="k-fullscreen">
       <KSpinner className="k-fullscreen__spinner"/>
     </KBackdrop>
   );
