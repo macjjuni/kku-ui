@@ -160,17 +160,20 @@
 
   // endregion
 
+  $kku-button-height-small: 30px;
+  $kku-button-height-medium: 36px;
+
   // region [Size]
   &.k-button--small {
-    height: $kku-element-height-small;
+    height: $kku-button-height-small;
     padding: 0 $kku-spacing-12;
     @include kku-text-small;
   }
 
   &.k-button--medium {
-    height: $kku-element-height-medium;
+    height: $kku-button-height-medium;
     padding: 0 $kku-spacing-20;
-    @include kku-text-medium;
+    @include kku-text-small;
   }
   // endregion
 }

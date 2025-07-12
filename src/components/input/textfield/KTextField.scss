@@ -1,7 +1,7 @@
 @use '../../../styles/Entry' as *;
 
 
-$kku-text-field-height-small: 44px;
+$kku-text-field-height-small: 42px;
 $kku-text-field-height-medium: 48px;
 $kku-text-field-legend-height: 16px;
 
@@ -14,6 +14,7 @@ $kku-text-field-legend-height: 16px;
   .k-text-field__fieldset {
     display: inline-flex;
     color: $kku-text-color-label;
+    min-inline-size: 0;
     border: 1px solid $kku-border-color-default;
     border-radius: $kku-border-radius-default;
     @include kku-transition;
@@ -106,6 +107,10 @@ $kku-text-field-legend-height: 16px;
       background: transparent;
       @include kku-transition;
       transition-property: background, color;
+
+      &::placeholder {
+        color: $kku-text-color-placeholder;
+      }
     }
   }
 
@@ -166,7 +171,7 @@ $kku-text-field-legend-height: 16px;
 
         .k-text-field__fieldset__container__input {
           padding: 0 $kku-spacing-10;
-          @include kku-text-medium;
+          @include kku-text-small;
         }
 
         .k-text-field__fieldset__container__right, .k-text-field__fieldset__container__icon {
@@ -178,7 +183,7 @@ $kku-text-field-legend-height: 16px;
     }
 
     .k-text-field__fieldset__message {
-      @include kku-text-small;
+      @include kku-text-xsmall;
     }
   }
 

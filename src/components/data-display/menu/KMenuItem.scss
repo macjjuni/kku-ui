@@ -3,8 +3,8 @@
 $kku-menu-item-background-color-default: $kku-white-color;
 $kku-menu-item-background-color-hover: $kku-slate-color-200;
 
-$kku-menu-item-height-size-small: 28px;
-$kku-menu-item-height-size-medium: 34px;
+$kku-menu-item-height-size-small: 30px;
+$kku-menu-item-height-size-medium: 36px;
 $kku-menu-item-focus-width: 2px;
 
 
@@ -114,7 +114,9 @@ $kku-menu-item-focus-width: 2px;
       &.k-menu-item-selectable--selected { padding-left: $kku-spacing-2; }
     }
 
-    &.k-menu-item-selectable--selected { font-weight: bold; }
+    &.k-menu-item-selectable--selected {
+      background: $kku-slate-color-300;
+    }
   }
 }
 
