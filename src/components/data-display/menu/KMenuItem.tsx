@@ -2,7 +2,7 @@ import { forwardRef, KeyboardEvent, memo, MouseEvent, useCallback, useImperative
 import { KMenuItemProps } from './KMenu.interface';
 import { MenuItem as CoreMenuItem } from '@/core';
 import { useRipple } from '@/common/hooks';
-import { handleKeyInteraction } from '@/common/util/keyboard';
+import { handleEnterOrSpacePress } from '@/common/util/keyboard';
 
 
 const MenuItem = forwardRef<HTMLLIElement, KMenuItemProps>((props, ref) => {
@@ -63,14 +63,14 @@ const MenuItem = forwardRef<HTMLLIElement, KMenuItemProps>((props, ref) => {
   const onKeyDownRoot = useCallback((e: KeyboardEvent<HTMLLIElement>) => {
     onKeyDown?.(e);
     ripple?.register(e);
-    handleKeyInteraction(e, () => {
+    handleEnterOrSpacePress(e, () => {
       onClick?.();
     });
   }, [ripple, onKeyDown]);
 
   const onKeyUpRoot = useCallback((e: KeyboardEvent<HTMLLIElement>) => {
     onKeyUp?.(e);
-    handleKeyInteraction(e, () => ripple.remove());
+    handleEnterOrSpacePress(e, () => ripple.remove());
   }, [ripple, onKeyUp]);
   // endregion
 

@@ -12,10 +12,10 @@ import {
   useMemo,
 } from 'react';
 import { KDropdownContentProps } from './KDropdown.interface';
-import { useDropdownPosition, useSafePortalContainer } from '@/common/hooks';
+import { useDropdownPosition, useEscapeKey, useSafePortalContainer } from '@/common/hooks';
 import { useKDropdownContext } from '@/components/data-display/dropdown/KDropdown.context';
 import { Transition } from '@/core';
-import { handleKeyInteraction } from '@/common/util/keyboard';
+import { handleEnterOrSpacePress } from '@/common/util/keyboard';
 
 
 const TRANSITION_DELAY = 240;
@@ -38,6 +38,7 @@ const DropdownContent = forwardRef<HTMLDivElement | null, KDropdownContentProps>
     gap,
   });
   const defaultContainer = useSafePortalContainer(container);
+  useEscapeKey(onClose);
   useImperativeHandle(ref, () => contentRef.current!);
   // endregion
 
@@ -81,7 +82,7 @@ const DropdownContent = forwardRef<HTMLDivElement | null, KDropdownContentProps>
   }, [trigger, onMouseLeave]);
 
   const onKeyDownRoot = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
-    handleKeyInteraction(e, onClose);
+    handleEnterOrSpacePress(e, onClose);
     if (e.key === 'Tab' && e.shiftKey) {
       onBlurContent(e);
     }
@@ -110,7 +111,9 @@ const DropdownContent = forwardRef<HTMLDivElement | null, KDropdownContentProps>
   }, [open]);
   // endregion
 
-  if (!defaultContainer) { return; }
+  if (!defaultContainer) {
+    return;
+  }
 
   return createPortal(
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions

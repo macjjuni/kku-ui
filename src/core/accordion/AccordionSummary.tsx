@@ -1,7 +1,7 @@
 import { KeyboardEvent, memo, MouseEvent, useCallback } from 'react';
 import { useAccordionContext } from '@/core/accordion/Accordion.context';
 import { AccordionSummaryProps } from '@/core/accordion/Accordion.interface';
-import { handleKeyInteraction } from '@/common/util/keyboard';
+import { handleEnterOrSpacePress } from '@/common/util/keyboard';
 
 
 const AccordionSummary = (props: AccordionSummaryProps) => {
@@ -26,7 +26,7 @@ const AccordionSummary = (props: AccordionSummaryProps) => {
 
   const onKeyDownRoot = useCallback((e: KeyboardEvent<HTMLElement>) => {
     onKeyDown?.(e);
-    handleKeyInteraction(e, onToggle);
+    handleEnterOrSpacePress(e, onToggle);
   }, [onKeyDown]);
   // endregion
 

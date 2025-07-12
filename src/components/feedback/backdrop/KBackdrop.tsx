@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 import { KeyboardEvent, memo, MouseEvent, useCallback, useMemo } from 'react';
-import { handleKeyInteraction } from '@/common/util/keyboard';
+import { handleEnterOrSpacePress } from '@/common/util/keyboard';
 import { useSafePortalContainer } from '@/common/hooks';
 import { KBackdropProps } from './KBackdrop.interface';
 import KBackdropMotion from './KBackdrop.motion';
@@ -51,7 +51,7 @@ const Backdrop = (props: KBackdropProps) => {
   }, [onClick]);
 
   const onKeyDownRoot = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
-    handleKeyInteraction(e, () => {
+    handleEnterOrSpacePress(e, () => {
       onClick?.();
     });
     onKeyDown?.(e);
