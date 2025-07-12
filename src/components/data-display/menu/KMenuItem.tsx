@@ -63,6 +63,9 @@ const MenuItem = forwardRef<HTMLLIElement, KMenuItemProps>((props, ref) => {
   const onKeyDownRoot = useCallback((e: KeyboardEvent<HTMLLIElement>) => {
     onKeyDown?.(e);
     ripple?.register(e);
+    handleKeyInteraction(e, () => {
+      onClick?.();
+    });
   }, [ripple, onKeyDown]);
 
   const onKeyUpRoot = useCallback((e: KeyboardEvent<HTMLLIElement>) => {
