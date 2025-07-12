@@ -46,6 +46,7 @@ export interface KDropdownProps extends HTMLAttributes<HTMLElement> {
 
 export interface KDropdownTriggerProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
+  disabled?: boolean;
 }
 
 export interface KDropdownContentProps extends HTMLAttributes<HTMLDivElement> {

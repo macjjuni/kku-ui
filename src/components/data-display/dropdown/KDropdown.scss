@@ -9,6 +9,10 @@
     justify-content: center;
     align-items: center;
     @include kku-focus-visible;
+
+    &.k-dropdown__trigger--disabled {
+      cursor: not-allowed;
+    }
   }
 
   .k-dropdown__content {

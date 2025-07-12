@@ -48,9 +48,13 @@ const DropdownTrigger = forwardRef<HTMLDivElement, KDropdownTriggerProps>((props
   const onClickRoot = useCallback((e: MouseEvent<HTMLDivElement>) => {
     onClick?.(e);
     if (trigger === 'click' && !disabled) {
-      onOpen();
+      if (!open) {
+        onOpen();
+      } else {
+        onClose();
+      }
     }
-  }, [onClick, trigger, disabled]);
+  }, [open, onClick, trigger, disabled]);
 
   const onMouseEnterRoot = useCallback((e: MouseEvent<HTMLDivElement>) => {
     onMouseEnter?.(e);
