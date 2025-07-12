@@ -26,7 +26,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
     id = uniqueId, value, type = 'text', placeholder, maxLength, disabled, readOnly,
     required, align = 'left', onChange, onFocus, onBlur, onKeyDown, autoCapitalize,
     autoCorrect, autoComplete, leftContent, rightContent, label, width, style,
-    size = 'medium', className, rules, ...rest
+    size = 'medium', className, rules, validateOnChange, ...restProps
   } = props;
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -67,19 +67,50 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
   }, [className, disabled, readOnly, type, errorMessage, size, isFocus]);
 
   const rootLabel = useMemo(() => {
-    const clazz = ['k-text-field__fieldset__legend__label']
-    if (label) { clazz.push('k-text-field__fieldset__legend__label--show') }
-    return clazz.join(' ')
-  }, [label])
+    const clazz = ['k-text-field__fieldset__legend__label'];
+    if (label) {
+      clazz.push('k-text-field__fieldset__legend__label--show');
+    }
+    return clazz.join(' ');
+  }, [label]);
 
   const rootStyle = useMemo(() => ({ ...style, width }), [style, width]);
   const inputStyle = useMemo(() => ({ textAlign: align }), [align]);
   // endregion
 
+  // region [Privates]
+  const onValidate = useCallback(async (targetValue?: string) => {
+    if (!rules) {
+      console.warn('not found rules.');
+      return true;
+    }
+
+    const checkValue = targetValue ?? value;
+
+    for (let i = 0; i < rules.length; i++) {
+      const rule = await rules[i];
+      const result = await rule(checkValue);
+      const errorMessage = typeof result === 'string' ? result : null;
+
+      if (errorMessage) {
+        setErrorMessage(errorMessage);
+        return false;
+      }
+    }
+
+    setErrorMessage(null);
+    return true;
+  }, [rules, value]);
+  // endregion
+
   // region [Events]
   const onChangeRoot = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
-  }, [onChange]);
+
+    if (validateOnChange) {
+      onValidate(e.target.value);
+    }
+  }, [onChange, onValidate, validateOnChange]);
 
   const onFocusRoot = useCallback((e: FocusEvent<HTMLInputElement>) => {
     setIsFocus(true);
@@ -100,35 +131,12 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
   }, [type]);
   // endregion
 
-  // region [Privates]
-  const onValidate = useCallback(async () => {
-    if (!rules) {
-      console.warn('not found rules.');
-      return true;
-    }
-
-    for (let i = 0; i < rules.length; i++) {
-      const rule = await rules[i];
-      const result = await rule(value);
-      const errorMessage = typeof result === 'string' ? result : null;
-
-      if (errorMessage) {
-        setErrorMessage(errorMessage);
-        return false;
-      }
-    }
-
-    setErrorMessage(null);
-    return true;
-  }, [rules, value]);
-  // endregion
-
   // region [APIs]
   useImperativeHandle(ref, () => ({
     value,
     focus: () => inputRef.current?.focus(),
     blur: () => inputRef.current?.blur(),
-    onValidate,
+    onValidate: () => onValidate(),
   }));
   // endregion
 
@@ -149,7 +157,7 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
                      value={value} disabled={disabled} readOnly={readOnly} placeholder={placeholder} maxLength={maxLength}
                      onChange={onChangeRoot} onFocus={onFocusRoot} onBlur={onBlurRoot} onKeyDown={onKeyDownRoot}
                      autoComplete={autoComplete} autoCorrect={autoCorrect} autoCapitalize={autoCapitalize}
-                     style={inputStyle} {...rest}/>
+                     style={inputStyle} {...restProps}/>
 
           {(isPasswordMode) && (
             <KIcon icon={isPasswordMode ? 'visibility' : 'visibility_off'} size={18}

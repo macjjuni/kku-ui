@@ -82,7 +82,7 @@ describe('KTextField', () => {
 
     render(<KTextField label="Username" value="" rules={[rule]} ref={ref}/>);
 
-    let result: boolean;
+    let result: boolean = false;
 
     await act(async () => {
       result = await ref.current.onValidate();
@@ -102,7 +102,7 @@ describe('KTextField', () => {
 
     render(<KTextField label="Username" value="valid" rules={[rule]} ref={ref}/>);
 
-    let result: boolean;
+    let result: boolean = false;
 
     await act(async () => {
       result = await ref.current.onValidate();

@@ -2,8 +2,12 @@ import { ReactNode } from 'react';
 import { TextFieldProps } from '@/core';
 import { SizeType } from '@/common/base/base.interface';
 
+export interface KInputValidateType {
+  rules?: (((value?: string) => string | boolean) | Promise<(value?: string) => string | boolean>)[];
+  validateOnChange?: boolean;
+}
 
-export interface KTextFieldProps extends Omit<TextFieldProps, 'onChange' | 'size'> {
+export interface KTextFieldProps extends Omit<TextFieldProps, 'onChange' | 'size'>, KInputValidateType {
   value?: string;
 
   // Content
@@ -23,9 +27,6 @@ export interface KTextFieldProps extends Omit<TextFieldProps, 'onChange' | 'size
   width?: number | string;
   align?: 'left' | 'center' | 'right';
   required?: boolean;
-
-  // APIS
-  rules?: (((value?: string) => string | boolean) | Promise<(value?: string) => string | boolean>)[];
 }
 
 export interface KTextFieldRefs {

@@ -1,7 +1,9 @@
+import { useCallback, useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import KTextField from '@/components/input/textfield/KTextField';
-import { KTextFieldProps } from '@/components/input/textfield/KTextField.interface';
+import { KTextFieldProps, KTextFieldRefs } from '@/components/input/textfield/KTextField.interface';
 import { sizeArgType } from '@/common/storybook/argTypes';
+import { KButton } from '@/components';
 
 
 const meta: Meta<typeof KTextField> = {
@@ -15,6 +17,13 @@ const meta: Meta<typeof KTextField> = {
       control: { type: 'boolean' },
     },
     readOnly: {
+      control: { type: 'boolean' },
+    },
+    rules: {
+      description: '입력값에 대한 유효성 검사 규칙을 설정합니다. 배열 형태로 전달하며, 각 규칙은 boolean을 반환하는 함수 또는 오류 메시지를 반환하는 함수입니다.',
+    },
+    validateOnChange: {
+      description: '사용자가 입력할 때마다 유효성 검사를 수행할지 여부를 설정합니다.',
       control: { type: 'boolean' },
     },
     maxLength: { description: 'Input 에 최대 입력 수를 설정합니다.' },
@@ -31,11 +40,36 @@ export default meta;
 
 type Story = StoryObj<KTextFieldProps>
 
+
+const isRequired = (val?: string) => {
+  return val ? true : '필수 입력 항목입니다.';
+};
+
+const ErrorTemplate = (args: KTextFieldProps) => {
+
+  const inputRef = useRef<KTextFieldRefs>(null);
+  const [value, setValue] = useState('');
+
+  const onChangeValue = useCallback((val: string) => {
+    setValue(val);
+  }, []);
+
+  const onValidate = useCallback(() => {
+    inputRef.current?.onValidate();
+  }, []);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <KTextField ref={inputRef} {...args} value={value} onChange={onChangeValue}/>
+      <KButton variant="solid" label="Validate" onClick={onValidate}/>
+    </div>
+  );
+};
+
+
 export const Default: Story = {
   render: (args: KTextFieldProps) => {
-    return (
-      <KTextField {...args}/>
-    );
+    return (<KTextField {...args}/>);
   },
   args: {
     label: 'Label',
@@ -46,5 +80,25 @@ export const Default: Story = {
     size: 'medium',
     required: true,
     type: 'text',
+    align: 'left',
+    validateOnChange: false,
   },
 };
+
+export const Validate: Story = {
+  render: ErrorTemplate,
+  args: {
+    label: 'Label',
+    value: '',
+    placeholder: 'Placeholder',
+    rules: [isRequired],
+    validateOnChange: false,
+    disabled: false,
+    readOnly: false,
+    size: 'medium',
+    required: true,
+    type: 'text',
+    align: 'left',
+  },
+};
+
