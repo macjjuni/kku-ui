@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -24,13 +23,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'  # ← pnpm 캐시로 변경
+          cache: 'pnpm' # ⬅ pnpm 캐시
 
       - name: Install pnpm
-        run: npm install -g pnpm
+        run: npm install -g pnpm # ⬅ 필수 추가
 
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Execute all unit tests
+      - name: Run Unit Tests
         run: pnpm vitest run
