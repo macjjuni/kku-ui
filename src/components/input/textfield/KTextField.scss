@@ -30,6 +30,7 @@ $kku-text-field-legend-height: 16px;
 
     .k-text-field__fieldset__legend {
       height: $kku-text-field-legend-height;
+      z-index: 0;
 
       .k-text-field__fieldset__legend__label {
         color: $kku-text-color-label;

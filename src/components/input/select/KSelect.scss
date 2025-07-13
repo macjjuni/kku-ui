@@ -30,25 +30,26 @@ $kku-select-legend-height: 16px;
     &:hover {
       border-color: $kku-border-color-hover;
 
-      .k-select__fieldset__legend > .k-select__fieldset__legend__label {
+      .k-select__fieldset__legend {
         color: $kku-text-color-default;
       }
     }
 
     .k-select__fieldset__legend {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
       height: $kku-select-legend-height;
+      color: $kku-text-color-label;
+      @include kku-transition;
+      transition-property: color;
+      z-index: 0;
 
-      .k-select__fieldset__legend__label {
-        color: $kku-text-color-label;
-        @include kku-transition;
-        transition-property: color;
-
-        &.k-select__fieldset__legend__label--show {
-          padding: 0 $kku-spacing-2;
-        }
+      &.k-select__fieldset__legend--show {
+        padding: 0 $kku-spacing-2;
       }
 
-      .k-select__fieldset__legend__label__required {
+      .k-select__fieldset__legend__required {
         margin-left: $kku-spacing-2;
         color: $kku-error-color-default;
         @include kku-transition;
@@ -90,11 +91,9 @@ $kku-select-legend-height: 16px;
       border-color: $kku-focus-visible-color;
 
       .k-select__fieldset__legend {
-        .k-select__fieldset__legend__label {
-          color: $kku-focus-visible-color;
-        }
+        color: $kku-focus-visible-color;
 
-        .k-select__fieldset__legend__label__required {
+        .k-select__fieldset__legend__required {
           color: $kku-focus-visible-color;
         }
       }
@@ -106,11 +105,9 @@ $kku-select-legend-height: 16px;
       border-color: $kku-error-color-default;
 
       .k-select__fieldset__legend {
-        .k-select__fieldset__legend__label {
           color: $kku-error-color-default;
-        }
 
-        .k-select__fieldset__legend__label__required {
+        .k-select__fieldset__legend__required {
           color: $kku-error-color-default;
         }
       }
@@ -136,10 +133,7 @@ $kku-select-legend-height: 16px;
 
       .k-select__fieldset__legend {
         margin-left: $kku-spacing-10;
-
-        .k-select__fieldset__legend__label {
-          @include kku-text-xsmall;
-        }
+        @include kku-text-xsmall;
       }
 
       .k-select__fieldset__container {
@@ -172,10 +166,7 @@ $kku-select-legend-height: 16px;
 
       .k-select__fieldset__legend {
         margin-left: $kku-spacing-12;
-
-        .k-select__fieldset__legend__label {
-          @include kku-text-small;
-        }
+        @include kku-text-small;
       }
 
       .k-select__fieldset__container {
@@ -205,7 +196,7 @@ $kku-select-legend-height: 16px;
       border-color: $kku-border-color-disabled;
       background: $kku-background-color-disabled;
 
-      .k-select__fieldset__legend > .k-select__fieldset__legend__label {
+      .k-select__fieldset__legend {
         color: $kku-text-color-disabled;
       }
 

@@ -1,4 +1,4 @@
-import { forwardRef, memo, MouseEvent, useCallback, useEffect, useId, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import { forwardRef, memo, MouseEvent, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import type { KSelectProps, KSelectRefs } from './KSelect.interface';
 import { KDropdown, KDropdownRefs, KMenu } from '@/components';
 import { useRipple } from '@/common/hooks';
@@ -8,9 +8,8 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
 
   // region [Hooks]
 
-  const uniqueId = useId();
   const {
-    id = `k-select-${uniqueId}`, className, rules, validateOnChange,
+    className, rules, validateOnChange,
     value, items, label, required, noDataText = 'No Data', placeholder, width, size, disabled,
     onChange, ...restProps
   } = props;
@@ -110,9 +109,9 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
 
   // region [Templates]
   const rootLabel = useMemo(() => {
-    const clazz = ['k-select__fieldset__legend__label'];
+    const clazz = ['k-select__fieldset__legend'];
     if (label) {
-      clazz.push('k-select__fieldset__legend__label--show');
+      clazz.push('k-select__fieldset__legend--show');
     }
     return clazz.join(' ');
   }, [label]);
@@ -141,11 +140,9 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
     <KDropdown className={rootClass} trigger="click" position="bottom-start" {...restProps}>
       <KDropdown.Trigger className="k-select__trigger" disabled={disabled}>
         <fieldset className="k-select__fieldset" style={{ width }}>
-          <legend className="k-select__fieldset__legend">
-            <label htmlFor={id} className={rootLabel}>
-              {label}
-              {label && required && <span className="k-select__fieldset__legend__label__required">*</span>}
-            </label>
+          <legend className={rootLabel}>
+            {label}
+            {label && required && <span className="k-select__fieldset__legend__required">*</span>}
           </legend>
           {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <div ref={containerRef} className="k-select__fieldset__container" onMouseDown={onMouseDownFieldSet}
