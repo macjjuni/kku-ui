@@ -24,10 +24,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: 'pnpm'  # ← pnpm 캐시로 변경
+
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       - name: Install Dependencies
-        run: npm install --legacy-peer-deps
+        run: pnpm install
 
       - name: Execute all unit tests
-        run: npx vitest run
+        run: pnpm vitest run
