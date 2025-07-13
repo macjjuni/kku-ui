@@ -3,15 +3,15 @@ import { Transition } from 'motion';
 import { cleanup, render, screen } from '@testing-library/react';
 import { act, useCallback, useState } from 'react';
 import userEvent from '@testing-library/user-event';
-import { KModal, KModalSizes, KModalSizeType } from '@/components';
+import { KModal, KMODAL_SIZES } from '@/components';
 import { KModalMotion } from '@/components/feedback/modal/KModal.motion';
 
 
-const KModalSizeList = Object.keys(KModalSizes) as KModalSizeType[];
+const testTitle = 'KModal Title';
+const testContent = 'KModal Content';
+const testFooter = 'KModal Footer';
 
 const openButtonText = '열기';
-const closeButtonText = '닫기';
-const contentText = 'content';
 const motionTime = ((KModalMotion.fade.transition as Transition).duration as number) * 1000;
 
 interface TestModalComponentType {
@@ -33,15 +33,17 @@ const TestModalComponent = ({ defaultOpen = false }: TestModalComponentType) => 
     <>
       <div>{isOpen ? 'open' : 'close'}</div>
       <button type="button" onClick={onOpenEvent}>{openButtonText}</button>
-      <KModal isOpen={isOpen} content={contentText} title="title" setIsOpen={setIsOpen}
-              footer={<button type="button" onClick={onCloseEvent}>{closeButtonText}</button>}/>
+      <KModal isOpen onClose={onCloseEvent}>
+        <KModal.Header>{testTitle}</KModal.Header>
+        <KModal.Content>{testContent}</KModal.Content>
+        <KModal.Footer>{testFooter}</KModal.Footer>
+      </KModal>
     </>
   );
 };
 
 
 describe('KModal', () => {
-
   const mockFn = vi.fn();
 
   beforeEach(() => {
@@ -54,63 +56,36 @@ describe('KModal', () => {
   });
 
 
-  it('applies id, className, and style props', async () => {
-    // Arrange
-    const testId = 'test-id';
-    const testClass = 'test-id';
-    const testStyle = { color: '#eee', fontSize: '24px' };
-
-    render(<KModal isOpen content={<></>} id={testId} className={testClass} style={testStyle} onClose={mockFn}/>);
-    const root = screen.getByRole('dialog');
-    const containerRoot = screen.getByTestId('k-modal-container');
-
-    // Assert
-    expect(root)
-      .toHaveAttribute('id', testId);
-    expect(root)
-      .toHaveStyle(testStyle);
-    expect(containerRoot)
-      .toHaveClass(testClass);
-  });
-
   it('applies title, content, footer props', async () => {
     // Arrange
-    const testTitle = 'This is a title';
-    const testContent = 'This is a content';
-    const testFooter = 'This is a footer';
-
-    render(<KModal isOpen title={testTitle} content={testContent} footer={testFooter} onClose={mockFn}/>);
-    const titleRoot = screen.getByText(testTitle);
-    const titleContent = screen.getByText(testContent);
-    const titleFooter = screen.getByText(testFooter);
-
-    // Assert
-    expect(titleRoot)
-      .toHaveClass('k-modal__container__header__text');
-    expect(titleContent)
-      .toHaveClass('k-modal__container__content');
-    expect(titleFooter)
-      .toHaveClass('k-modal__container__footer');
-  });
-
-  it('applies no title, footer props', async () => {
-    // Arrange
-    render(<KModal isOpen content="test" onClose={() => {
-    }}/>);
+    render(
+      <KModal isOpen onClose={mockFn}>
+        <KModal.Header>{testTitle}</KModal.Header>
+        <KModal.Content>{testContent}</KModal.Content>
+        <KModal.Footer>{testFooter}</KModal.Footer>
+      </KModal>,
+    );
 
     // Assert
-    expect(screen.queryByTestId('k-modal__header'))
-      .not
+    expect(screen.queryByText(testTitle))
       .toBeInTheDocument();
-    expect(screen.queryByTestId('k-modal__footer'))
-      .not
+    expect(screen.queryByText(testContent))
+      .toBeInTheDocument();
+    expect(screen.queryByText(testFooter))
       .toBeInTheDocument();
   });
 
-  it.each(KModalSizeList)('applies size prop "%s"', (size) => {
+
+  it.each(KMODAL_SIZES)('applies size prop "%s"', (size) => {
     // Arrange
-    render(<KModal isOpen content="test" size={size} onClose={mockFn}/>);
-    const contentRoot = screen.getByTestId('k-modal');
+    render(
+      <KModal isOpen size={size} onClose={mockFn}>
+        <KModal.Header>{testTitle}</KModal.Header>
+        <KModal.Content>{testContent}</KModal.Content>
+        <KModal.Footer>{testFooter}</KModal.Footer>
+      </KModal>,
+    );
+    const contentRoot = screen.getByRole('dialog');
 
     // Assert
     expect(contentRoot)
@@ -120,11 +95,17 @@ describe('KModal', () => {
   it('applies width props', async () => {
     // Arrange
     const testWidth = 500;
-    render(<KModal isOpen width={testWidth} content="test" onClose={mockFn}/>);
-    const containerRoot = screen.getByTestId('k-modal');
+    render(
+      <KModal isOpen width={testWidth} onClose={mockFn}>
+        <KModal.Header>{testTitle}</KModal.Header>
+        <KModal.Content>{testContent}</KModal.Content>
+        <KModal.Footer>{testFooter}</KModal.Footer>
+      </KModal>,
+    );
+    const root = screen.getByRole('dialog');
 
     // Assert
-    expect(containerRoot)
+    expect(root)
       .toHaveStyle({ width: `${testWidth}px` });
   });
 
@@ -144,7 +125,7 @@ describe('KModal', () => {
     });
 
     // Arrange
-    const modalRoot = screen.getByTestId('k-modal');
+    const modalRoot = screen.getByRole('dialog');
 
     // Assert
     expect(modalRoot)

@@ -42,12 +42,12 @@ const Template = (args: KDropdownProps) => (
     </KDropdown.Trigger>
     <KDropdown.Content gap={2} offset={{ x: 0, y: 0 }} autoClose>
       <KMenu>
-        <KMenu.Item label="복사" shortcut="⌘C"/>
-        <KMenu.Item label="붙여넣기" disabled shortcut="⌘V"/>
-        <KMenu.Item label="잘라내기" shortcut="⌘X"/>
-        <KMenu.Item label="모두선택" shortcut="⌘A"/>
+        <KMenu.Item label="Copy" shortcut="⌘C"/>
+        <KMenu.Item label="Paste" disabled shortcut="⌘V"/>
+        <KMenu.Item label="Cut" shortcut="⌘X"/>
+        <KMenu.Item label="Select All" shortcut="⌘A"/>
         <KMenu.ItemDivider/>
-        <KMenu.Item label="더보기" shortcut="⌘E"/>
+        <KMenu.Item label="More" shortcut="⌘M"/>
       </KMenu>
     </KDropdown.Content>
   </KDropdown>

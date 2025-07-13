@@ -32,7 +32,7 @@ type Story = StoryObj<typeof KModal>
 
 const Template = (args: KModalProps) => {
 
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onOpen = () => {
     setIsOpen(true);
@@ -44,15 +44,15 @@ const Template = (args: KModalProps) => {
 
   return (
     <>
-      <KButton label="모달 열기" onClick={onOpen}/>
+      <KButton label="Open Modal" onClick={onOpen}/>
       <KModal {...args} isOpen={isOpen} setIsOpen={setIsOpen}>
         <KModal.Header>Title</KModal.Header>
         <KModal.Content>
           <p>Content</p>
         </KModal.Content>
         <KModal.Footer>
-          <KButton variant="primary" label="확인" onClick={onClose}/>
-          <KButton label="취소" onClick={onClose}/>
+          <KButton variant="primary" label="Confirm" onClick={onClose}/>
+          <KButton label="Cancel" onClick={onClose}/>
         </KModal.Footer>
       </KModal>
     </>

@@ -27,12 +27,12 @@ type Story = StoryObj<typeof KMenu>
 
 const Template = (args: KMenuProps) => (
   <KMenu {...args}>
-    <KMenu.Item label="복사" shortcut="⌘C"/>
-    <KMenu.Item label="붙여넣기" disabled shortcut="⌘V"/>
-    <KMenu.Item label="잘라내기" shortcut="⌘X"/>
-    <KMenu.Item label="모두선택" shortcut="⌘A"/>
+    <KMenu.Item label="Copy" shortcut="⌘C"/>
+    <KMenu.Item label="Paste" disabled shortcut="⌘V"/>
+    <KMenu.Item label="Cut" shortcut="⌘X"/>
+    <KMenu.Item label="Select All" shortcut="⌘A"/>
     <KMenu.ItemDivider />
-    <KMenu.Item label="더보기" shortcut="⌘E"/>
+    <KMenu.Item label="More" shortcut="⌘M"/>
   </KMenu>
 );
 
@@ -45,13 +45,13 @@ const SelectableTemplate = (args: KMenuProps) => {
   };
   return (
     <KMenu {...args}>
-      <KMenu.Item label="복사" shortcut="⌘C"/>
-      <KMenu.Item label="붙여넣기" disabled shortcut="⌘V"/>
+      <KMenu.Item label="Copy" shortcut="⌘C"/>
+      <KMenu.Item label="Paste" disabled shortcut="⌘V"/>
       <KMenu.ItemDivider />
-      <KMenu.ItemSelectable selected={selected === '1'} label="선택1" onClick={() => onChangeSelected('1')}/>
-      <KMenu.ItemSelectable selected={selected === '2'} label="선택2" onClick={() => onChangeSelected('2')}/>
-      <KMenu.ItemSelectable selected={selected === '3'} label="선택3" onClick={() => onChangeSelected('3')}/>
-      <KMenu.ItemSelectable selected={selected === '4'} label="선택4" disabled onClick={() => onChangeSelected('3')}/>
+      <KMenu.ItemSelectable selected={selected === '1'} label="Select1" onClick={() => onChangeSelected('1')}/>
+      <KMenu.ItemSelectable selected={selected === '2'} label="Select2" onClick={() => onChangeSelected('2')}/>
+      <KMenu.ItemSelectable selected={selected === '3'} label="Select3" onClick={() => onChangeSelected('3')}/>
+      <KMenu.ItemSelectable selected={selected === '4'} label="Select4" disabled onClick={() => onChangeSelected('3')}/>
     </KMenu>
   );
 };
