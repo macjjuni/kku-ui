@@ -1,15 +1,14 @@
-import { mergeConfig } from 'vite';
 import type { StorybookConfig } from '@storybook/react-vite';
 
-
 const config: StorybookConfig = {
-    stories: ['../stories/**/*.stories.@(ts|tsx|js|jsx)'],
+    stories: ['../**/*.stories.@(ts|tsx|js|jsx)'],
+
     addons: [
+        '@storybook/addon-a11y',
         '@storybook/addon-links',
-        '@storybook/addon-essentials',
         '@chromatic-com/storybook',
-        '@storybook/addon-interactions',
         'storybook-dark-mode',
+        '@storybook/addon-docs',
     ],
 
     framework: {
@@ -19,19 +18,21 @@ const config: StorybookConfig = {
 
     docs: {},
 
-    core: {},
-
     async viteFinal(config) {
-        return mergeConfig(config, {
-            optimizeDeps: {
-                include: ['storybook-dark-mode'],
-            },
-        });
+        config.optimizeDeps = {
+            ...config.optimizeDeps,
+            include: ['storybook-dark-mode'],
+        };
+        return config;
     },
 
     typescript: {
         check: true,
         reactDocgen: 'react-docgen-typescript',
+        reactDocgenTypescriptOptions: {
+            shouldExtractLiteralValuesFromEnum: true,
+            shouldRemoveUndefinedFromOptional: true,
+        },
     },
 };
 

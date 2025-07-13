@@ -1,36 +1,21 @@
-import { KeyboardEvent, ReactNode } from 'react';
-import { KBaseProp, KSizeProp } from '@/common/base/base.interface';
+import { ReactNode } from 'react';
+import { TextFieldProps } from '@/core';
+import { SizeType } from '@/common/base/base.interface';
 
+export interface KInputValidateType {
+  rules?: (((value?: string) => string | boolean) | Promise<(value?: string) => string | boolean>)[];
+  validateOnChange?: boolean;
+}
 
-export interface KTextFieldProps extends KBaseProp, KSizeProp {
-
-  // Value
+export interface KTextFieldProps extends Omit<TextFieldProps, 'onChange' | 'size'>, KInputValidateType {
   value?: string;
 
-  // Label
-  label?: string;
-  labelAlign?: 'column' | 'row';
-  labelGap?: number;
-
-  // Options
-  placeholder?: string;
-  maxLength?: number;
-
-  // Types
-  disabled?: boolean;
-  required?: boolean;
-  clearable?: boolean;
-  password?: boolean;
-
-  // Custom
-  leftAction?: ReactNode;
-  rightAction?: ReactNode;
+  // Content
+  leftContent?: ReactNode;
+  rightContent?: ReactNode;
 
   // Event
   onChange?: (value: string) => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
-  onKeyDownEnter?: (e?: KeyboardEvent<HTMLInputElement>) => void;
 
   // Options
   autoComplete?: string;
@@ -38,12 +23,15 @@ export interface KTextFieldProps extends KBaseProp, KSizeProp {
   autoCapitalize?: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters';
 
   // Styles
-  width?: number;
+  size?: SizeType;
+  width?: number | string;
   align?: 'left' | 'center' | 'right';
+  required?: boolean;
 }
 
 export interface KTextFieldRefs {
   focus: () => void;
   blur: () => void;
   value?: string;
+  onValidate: () => Promise<boolean> | boolean;
 }

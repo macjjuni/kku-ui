@@ -1,6 +1,14 @@
 @use "./reference-tokens" as *;
 @use "./system-tokens" as *;
 
+@mixin kku-font-family {
+  font-family: $kku-default-font-family;
+}
+
+@mixin kku-text-xxsmall {
+  font-size: $kku-text-size-xxsmall;
+  line-height: $kku-line-height-xxsmall;
+}
 @mixin kku-text-xsmall {
   font-size: $kku-text-size-xsmall;
   line-height: $kku-line-height-xsmall;
@@ -22,13 +30,22 @@
   line-height: $kku-line-height-xlarge;
 }
 
-@mixin kku-focus-visible {
-  outline: 2px solid $kku-focus-visible-color;
-  outline-offset: 2px;
+@mixin kku-focus-visible($radius: $kku-border-radius-default, $offset: $kku-spacing-2) {
+
+  &:focus-visible {
+    outline: 2px solid $kku-focus-visible-color;
+    outline-offset: $offset;
+    border-radius: $radius;
+    z-index: 1;
+  }
 }
 
 @mixin kku-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@mixin kku-transition {
+  transition: 0.16s ease;
 }

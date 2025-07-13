@@ -2,32 +2,34 @@ name: Unit-Test
 
 on:
   pull_request:
-    branches:
-      - main
-      - dev
+    branches: [main, dev]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version:
-          - 20.x
+        node-version: [20.x]
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8 # 원하는 pnpm 버전 지정 (최신 버전 권장)
+
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: 'pnpm'
 
-      - name: Install Dependencies
-        run: npm install --legacy-peer-deps
+      - name: Check pnpm version
+        run: pnpm --version
 
-      - name: Execute all unit tests
-        run: npx vitest run
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run tests
+        run: pnpm vitest run

@@ -1,36 +1,53 @@
-<h1 align="center">✨ KKU-UI: React Components Libirary ✨</h1>
+# ✨ KKU-UI ✨
+### React Component Library for Modern UI Development<br>
 
-<br>
+### 🎨 스토리북
 
-<div align="center">
-  <img width="360" height="360" src="https://github.com/macjjuni/kku-ui/assets/38034518/9b93b70e-a5d5-4d5e-8794-e4b206bff57a" alt="kku-ui thumbnail" >
-</div>
+ 🔗 [Link](https://macjjuni.github.io/kku-ui)
 
-## 🎁 Components
+### 소개
 
-| 컴포넌트&nbsp; \ &nbsp; 지원 |&nbsp;&nbsp;&nbsp;기능&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;디자인&nbsp;&nbsp;| 접근성 |테스트 코드|&nbsp;스토리북&nbsp;| 사용/배포 |
-|:-----------------------|:---:|:-------------------------:|:---:|:----:|:---:|:-----:|
-| `<KButton />`          |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| `<KTextField /> `      |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| `<KIcon />`            |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| `<KSelect />`          |✅|             ✅             |  ✅   |  ✅   |✅|✅|
-| `<KDropHolder />`      |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| `<KSwitch />`          |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| `<KCard />`            |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| `<KAccordion />`       |✅|             ✅              |  ✅  |   ✅   |✅|✅|
-| `<KModal />`           |✅|             ✅             |  ✅  |  ✅   |✅|✅|
-| 🏃🏻‍♂️..              |✨|             ✨             |  ✨  |  ✨   |✨|✨|
+kku-ui는 React 기반의 컴포넌트 라이브러리로, 컴포넌트 간 유연한 조합을 위해 컴파운드 패턴과 동적인 UI 구성을 위한 Render Props 패턴이 적용되어 있습니다. 
+이를 통해 재사용성과 확장성을 높이며, 가볍게 사용할 수 있도록 만들어졌습니다.
 
+### 컴포넌트 구조
 
-✅ Good ⚠️ Not Good 🧑🏻‍💻 Trying 
+프로젝트 내 컴포넌트는 크게 **Main 컴포넌트**와 **Core 컴포넌트**로 분리되어 있습니다.
 
-<br>
+#### **Main 컴포넌트**
+  다지안이 적용된 최종 UI 컴포넌트입니다.
 
-## 📆 Planning
+| 컴포넌트 | 기능 | 스토리북 | a11y |
+|:-----------------------|:----:|:--------:|:----:|
+| `<KButton/>`          | ✅   | ✅       | ✅   |
+| `<KButtonGroup/>`     | ✅   | ✅       | ✅   |
+| `<KSwitch/>`          | ✅   | ✅       | ✅   |
+| `<KTextField/>`       | ✅   | ✅       | ✅   |
+| `<KSelect/>`          | ✅   | ✅       | ✅   |
+| `<KAccordion/>`       | ✅   | ✅       | ✅   |
+| `<KMenu/>`            | ✅   | ✅       | ✅   |
+| `<KDropdown/>`        | ✅   | ✅       | ✅   |
+| `<KBackdrop/>`        | ✅   | ✅       | ✅   |
+| `<KModal/>`           | ✅   | ✅       | ✅   |
+| `<KSpinner/>`         | ✅   | ✅       | ✅   |
+| `<KIcon/>`            | ✅   | ✅       | ✅   |
+| 🏃🏻‍♂                 
 
-### 📌 <a href="https://github.com/users/macjjuni/projects/1/views/1" target="_blank" >GitHub Project</a>
+#### **Core 컴포넌트**  
+  디자인 없이 기본 로직과 접근성(A11y) 처리만 포함된 단일 컴포넌트입니다.  
+  Main 컴포넌트 내부에서 재사용되며, 재사용성과 별도의 디자인을 적용하기 위해 만들어 졌습니다.
 
-<br>
+| 컴포넌트                    | 기능 | 스토리북 | a11y |
+|:------------------------|:----:|:--------:|:----:|
+| `<Button/>`            | ✅   | ✅       | ✅   |
+| `<TextField/>`         | ✅  | ✅       | ✅   |
+| `<Switch/>`            | ✅   | ✅       | ✅   |
+| `<Menu/>`              | ✅   | ✅       | ✅   |
+| `<MenuItem/>`          | ✅   | ✅       | ✅   |
+| `<Accordion/>`         | ✅  | ✅       | ✅   |
+| `<Accordion.Summary/>` | ✅  | ✅       | ✅   |
+| `<Accordion.Content/>` | ✅  | ✅       | ✅   |
+
 
 ## 📦 Install
 ```
@@ -39,8 +56,9 @@ npm install kku-ui
 ```
 yarn add kku-ui
 ```
-
-<br>
+```
+pnpm add kku-ui
+```
 
 ## ⚙️ Initial Setting
 ```typescript
@@ -49,23 +67,17 @@ yarn add kku-ui
 import 'kku-ui/lib/styles/index.css'
 ```
 
-<br>
-
 ## 🧑🏻‍💻 Use Examples
 
 ```typescript
 import { KButton } from 'kku-ui'
 
 export default function Component() {
- return (<KButton primary label="Hello World!" />);
+  return (
+    <KButton label="Hello World!"/>
+  );
 } 
 ```
-
-<br>
-
-## 🕺🏻 Preview
-
-###  🔗 [StoryBook](https://macjjuni.github.io/kku-ui)
 
 
 

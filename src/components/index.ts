@@ -1,9 +1,6 @@
-export * from '@/components/button';
-export * from '@/components/input/textfield';
-export * from '@/components/icon';
-export * from '@/components/input/select';
-export * from '@/components/drop-holder';
-export * from '@/components/input/switch';
-export * from '@/components/card';
-export * from '@/components/accordion';
-export * from '@/components/modal';
+export * from '@/components/actions';
+export * from '@/components/data-display';
+export * from '@/components/feedback';
+export * from '@/components/foundations';
+export * from '@/components/input';
+
