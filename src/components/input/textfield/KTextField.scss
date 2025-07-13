@@ -1,8 +1,10 @@
 @use '../../../styles/Entry' as *;
 
+$kku-text-field-width-small: 220px;
+$kku-text-field-width-medium: 220px;
 
-$kku-text-field-height-small: 42px;
-$kku-text-field-height-medium: 48px;
+$kku-text-field-height-small: 38px;
+$kku-text-field-height-medium: 44px;
 $kku-text-field-legend-height: 16px;
 
 .k-text-field {
@@ -116,6 +118,7 @@ $kku-text-field-legend-height: 16px;
   }
 
   &.k-text-field--small {
+    width: $kku-text-field-width-small;
 
     .k-text-field__fieldset {
       height: $kku-text-field-height-small;
@@ -154,6 +157,7 @@ $kku-text-field-legend-height: 16px;
   }
 
   &.k-text-field--medium {
+    width: $kku-text-field-width-medium;
 
     .k-text-field__fieldset {
       height: $kku-text-field-height-medium;
