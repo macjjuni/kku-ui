@@ -45,7 +45,7 @@ jobs:
       - name: Build Storybook
         run: |
           set -x
-          pnpm run build-storybook
+          pnpm run build-storybook -- --debug
           ls -l ./storybook-static
 
       # Setup Pages
