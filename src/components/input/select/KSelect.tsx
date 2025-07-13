@@ -52,8 +52,13 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
 
   // region [Privates]
   const initializeWidth = useCallback(() => {
-    const selectWidth = containerRef.current?.getBoundingClientRect().width ?? 'auto';
-    setMenuWidth(selectWidth);
+    const selectWidth = containerRef.current?.getBoundingClientRect().width;
+    const borderWidth = 2;
+    if (selectWidth) {
+      setMenuWidth(selectWidth + borderWidth)
+    } else {
+      setMenuWidth('auto');
+    }
   }, []);
 
   const onValidate = useCallback(async (targetValue?: string | number) => {
