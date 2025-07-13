@@ -14,14 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8 # 원하는 pnpm 버전 지정 (최신 버전 권장)
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
-
-      - name: Install pnpm globally
-        run: npm install -g pnpm
 
       - name: Check pnpm version
         run: pnpm --version
