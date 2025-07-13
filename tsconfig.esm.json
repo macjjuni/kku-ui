@@ -4,6 +4,8 @@
         "module": "ESNext",
         "moduleResolution": "Node",
         "noEmit": false,
+        "importHelpers": true,
+        "noEmitHelpers": true,
         "emitDeclarationOnly": false,
         "allowImportingTsExtensions": false,
         "declaration": true,
