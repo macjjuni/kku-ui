@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     strategy:
@@ -23,15 +24,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-
-      - name: Enable Corepack
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate  # pnpm 최신 버전 활성화
+          cache: 'npm'
 
       - name: Install Dependencies
-        run: pnpm install
+        run: npm install --legacy-peer-deps
 
       - name: Execute all unit tests
-        run: pnpm vitest run
+        run: npx vitest run
+여기서 추가해줘
