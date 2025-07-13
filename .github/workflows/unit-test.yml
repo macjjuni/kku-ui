@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -24,10 +23,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'  # pnpm 캐시 설정
+          cache: 'pnpm'
 
-      - name: Enable Corepack for pnpm
-        run: corepack enable  # pnpm 활성화
+      - name: Enable Corepack
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate  # pnpm 최신 버전 활성화
 
       - name: Install Dependencies
         run: pnpm install
