@@ -1,24 +1,31 @@
-import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
+import {
+  Children, ForwardRefExoticComponent, isValidElement, memo,
+  ReactElement, ReactNode, useCallback, useMemo, useState,
+} from 'react';
 import { createPortal } from 'react-dom';
-import { AnimatePresence, motion } from 'motion/react';
-import { KModalMotion } from '@/components/feedback/modal/KModal.motion';
-import { KModalProps } from '@/components/feedback/modal/KModal.interface';
-import { KBackdrop, KIcon } from '@/components';
-import { useCleanId } from '@/common/hooks';
+import { useEscapeKey, useSafePortalContainer } from '@/common/hooks';
+import { KModalProps } from './KModal.interface';
+import { ModalContext } from './KModal.context';
+import { KModalMotion } from './KModal.motion';
+import KModalHeader from './KModalHeader';
+import KModalContent from './KModalContent';
+import KModalFooter from './KModalFooter';
+import { KBackdrop } from '@/components';
+import { Transition } from '@/core';
 
 
-const Modal = ({ ...restProps }: KModalProps) => {
+const Modal = (props: KModalProps) => {
 
   // region [Hooks]
 
-  const { id, style, className } = { ...restProps };
-  const { content, footer } = { ...restProps };
-  const { isOpen, title, width, size = 'medium', setIsOpen, onClose } = { ...restProps };
-  const { headerClass = '', contentClass, footerClass, animation = 'fade' } = { ...restProps };
-  const { isOverlay = true, overlayOpacity, overlayClosable, escClosable = false }: KModalProps = { ...restProps };
+  const {
+    isOpen, width, height, size = 'medium', setIsOpen, onClose, className, style,
+    animation = 'fade', isOverlay = true, overlayOpacity, overlayClosable,
+    escClosable = false, children, container,
+  } = props;
+  const defaultContainer = useSafePortalContainer(container);
+  const [title, setTitle] = useState<string | null>(null);
 
-  const modalWrapperRef = useRef<HTMLDivElement | null>(null);
-  const headerTitleId = useCleanId('k-modal-header-title');
   const modalMotion = useMemo(() => KModalMotion[animation], [animation]);
 
   if (setIsOpen === undefined && typeof onClose !== 'function') {
@@ -29,147 +36,93 @@ const Modal = ({ ...restProps }: KModalProps) => {
 
 
   // region [Style]
-
-  const rootStyle = useMemo(() => ({ ...style, width }), [style, width]);
+  const rootStyle = useMemo(() => ({ ...style, width, height }), [style, width, height]);
 
   const rootClass = useMemo(() => {
-    const clazz = ['k-modal'];
-
+    const clazz = ['k-modal', `k-modal--${size}`];
     if (isOpen) {
       clazz.push('k-modal--open');
     }
     if (!isOpen) {
       clazz.push('k-modal--close');
     }
-    clazz.push(`k-modal--${size}`);
-
-    return clazz.join(' ');
-  }, [isOpen, size]);
-
-  const containerClass = useMemo(() => {
-
-    const clazz = ['k-modal__container'];
-
     if (className) {
       clazz.push(className);
     }
-    if (!title) {
-      clazz.push('k-modal__container--no-title');
-    }
-
     return clazz.join(' ');
-  }, [title]);
-
+  }, [isOpen, size, className]);
   // endregion
 
 
   // region [Privates]
-
-  const closeModal = useCallback(() => {
-    setIsOpen?.(false);
+  const onCloseAction = useCallback(() => {
     onClose?.();
-  }, [onClose]);
-
+    setIsOpen?.(false);
+  }, [onClose, setIsOpen]);
   // endregion
 
 
   // region [Events]
-
-  const onCloseModal = useCallback(() => {
-    closeModal();
-  }, [closeModal]);
-
   const onClickOverlay = useCallback(() => {
     if (overlayClosable) {
-      closeModal();
+      onCloseAction();
     }
-  }, [onClose, overlayClosable]);
-
-  const onKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      closeModal();
-    }
-  }, [closeModal]);
-
-  const addKeyEventListener = useCallback(() => {
-    if (escClosable) {
-      window.addEventListener('keydown', onKeyDown);
-    }
-  }, [escClosable]);
-
-  const removeKeyEventListener = useCallback(() => {
-    if (escClosable) {
-      window.addEventListener('keydown', onKeyDown);
-    }
-  }, [escClosable]);
+  }, [overlayClosable, onCloseAction]);
 
   // endregion
-
-
-  // region [Life Cycles]
-
-  useEffect(() => {
-    if (isOpen) {
-      addKeyEventListener();
-    } else {
-      onCloseModal();
-    }
-
-    return () => removeKeyEventListener();
-  }, [isOpen]);
-
-  // endregion
-
 
   // region [Templates]
+  const { modalHeader, modalContent, modalFooter } = useMemo(() => {
+    let modalHeader: ReactElement | null = null;
+    let modalContent: ReactElement | null = null;
+    let modalFooter: ReactElement | null = null;
 
-  const modalHeader = useMemo(() => (
-    title
-      ? (
-        <div className={`k-modal__container__header ${headerClass}`} data-testid="k-modal__header">
-          <h1 id={headerTitleId} className="k-modal__container__header__text">{title}</h1>
-          <KIcon className="k-modal__container__header__close-button" icon="close" size={18} onClick={onCloseModal}/>
-        </div>
-      ) : null
-  ), [headerClass, title, onCloseModal]);
+    Children.forEach(children, (child: ReactNode) => {
+      if (!isValidElement(child)) return;
+      if (child.type === KModalHeader) {
+        modalHeader = child;
+      }
+      if (child.type === KModalContent) {
+        modalContent = child;
+      }
+      if (child.type === KModalFooter) {
+        modalFooter = child;
+      }
+    });
 
-  const modalContent = useMemo(() => (
-    <section className={`k-modal__container__content${contentClass ? ` ${contentClass}` : ''}`}
-             aria-labelledby={headerTitleId} data-testid="k-modal__container__content">
-      {content}
-    </section>
-  ), [content, headerTitleId, contentClass]);
-
-  const modalFooter = useMemo(() => (
-    footer && (
-      <div className={`k-modal__container__footer${footerClass ? ` ${footerClass}` : ''}`}
-           data-testid="k-modal__footer">
-        {footer}
-      </div>
-    )
-  ), [footer, footerClass]);
-
+    return { modalHeader, modalContent, modalFooter };
+  }, [children]);
   // endregion
+
+
+  const ContextValue = useMemo(() => ({
+    isOpen, title, setTitle,
+  }), [isOpen, title]);
+
+  useEscapeKey(() => {
+    if (escClosable) {
+      onCloseAction();
+    }
+  });
+
+
+  if (!defaultContainer) {
+    return null;
+  }
 
   return (
     <>
       {
         createPortal(
-          <>
-            <AnimatePresence>
-              {isOpen && (
-                <motion.div ref={modalWrapperRef} id={id} className={rootClass} style={rootStyle} {...modalMotion}
-                            role="dialog" aria-modal="true" aria-label={`${title}-modal-wrapper`} data-testid="k-modal">
-                  <div className={containerClass} data-testid="k-modal-container">
-                    {modalHeader}
-                    {modalContent}
-                    {modalFooter}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </>,
-          document.body,
+          <ModalContext.Provider value={ContextValue}>
+            <Transition isOpen={isOpen} className={rootClass} style={rootStyle} {...modalMotion}
+                        role="dialog" aria-modal="true" aria-label={title ?? undefined}>
+              {modalHeader}
+              {modalContent}
+              {modalFooter}
+            </Transition>
+          </ModalContext.Provider>,
+          defaultContainer,
         )
       }
       {isOverlay && <KBackdrop isOpen={isOpen} onClick={onClickOverlay} opacity={overlayOpacity}/>}
@@ -177,8 +130,19 @@ const Modal = ({ ...restProps }: KModalProps) => {
   );
 };
 
-const KModal = memo(Modal);
-Modal.displayName = 'KModal';
+interface KModalNamespace extends ForwardRefExoticComponent<KModalProps> {
+  Header: typeof KModalHeader;
+  Content: typeof KModalContent;
+  Footer: typeof KModalFooter;
+}
+
+const KModal = memo(Modal) as unknown as KModalNamespace;
 KModal.displayName = 'KModal';
+Modal.displayName = 'KModal';
+
+
+KModal.Header = KModalHeader;
+KModal.Content = KModalContent;
+KModal.Footer = KModalFooter;
 
 export default KModal;

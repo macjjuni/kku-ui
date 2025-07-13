@@ -12,9 +12,6 @@ const meta: Meta<KModalProps> = {
       control: { type: 'radio' },
       options: ['small', 'medium', 'large'],
     },
-    title: { description: '모달 제목을 설정합니다.', control: { type: 'text' } },
-    content: { description: '모달 컨텐츠를 설정합니다.', type: 'function' },
-    footer: { description: '모달 푸터 컨텐츠를 설정합니다.', type: 'function' },
     isOverlay: { description: '오버레이 여부를 설정합니다.', type: 'boolean', defaultValue: { summary: true } },
     overlayOpacity: { description: '오버레이 불투명도 설정합니다.', type: 'number', defaultValue: { summary: 0.48 } },
     overlayClosable: { description: '오버레이 클릭시 모달 종료 여부를 설정합니다.', type: 'boolean', defaultValue: { summary: false } },
@@ -35,7 +32,7 @@ type Story = StoryObj<typeof KModal>
 
 const Template = (args: KModalProps) => {
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   const onOpen = () => {
     setIsOpen(true);
@@ -47,13 +44,17 @@ const Template = (args: KModalProps) => {
 
   return (
     <>
-      <KButton label="모달 열기" onClick={onOpen} />
-      <KModal {...args} isOpen={isOpen} setIsOpen={setIsOpen} footer={(
-        <>
+      <KButton label="모달 열기" onClick={onOpen}/>
+      <KModal {...args} isOpen={isOpen} setIsOpen={setIsOpen}>
+        <KModal.Header>Title</KModal.Header>
+        <KModal.Content>
+          <p>Content</p>
+        </KModal.Content>
+        <KModal.Footer>
           <KButton variant="primary" label="확인" onClick={onClose}/>
-          <KButton label="취소" onClick={onClose} />
-        </>
-      )}/>
+          <KButton label="취소" onClick={onClose}/>
+        </KModal.Footer>
+      </KModal>
     </>
   );
 };
@@ -61,14 +62,12 @@ const Template = (args: KModalProps) => {
 
 export const Default: Story = {
   render: Template, args: {
-    title: '제목',
-    content: '컨텐츠',
-    footer: <></>,
     size: 'small',
     animation: 'slide',
     isOverlay: true,
     overlayOpacity: 0.48,
     overlayClosable: false,
+    escClosable: false,
     width: undefined,
   },
 };

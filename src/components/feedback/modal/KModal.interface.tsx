@@ -1,29 +1,48 @@
-import { Dispatch, ReactNode, SetStateAction } from 'react';
-import { KBaseProp } from '@/common/base/base.interface';
+import { Dispatch, HTMLAttributes, ReactNode, SetStateAction } from 'react';
 
-export const KModalSizes = { medium: 'medium', small: 'small', large: 'large' } as const;
-export type KModalSizeType = (typeof KModalSizes)[keyof typeof KModalSizes];
+export const KMODAL_SIZES = ['medium', 'small', 'large'] as const;
+export type KModalSizeType = (typeof KMODAL_SIZES)[number];
 
-export interface KModalProps extends KBaseProp {
+
+export interface KModalContextProps {
   isOpen: boolean;
-  setIsOpen?: Dispatch<SetStateAction<boolean>>
+  title: string | null;
+  setTitle: Dispatch<SetStateAction<string | null>>;
+}
+
+
+export interface KModalProps extends HTMLAttributes<HTMLElement> {
+  isOpen: boolean;
+  setIsOpen?: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
+  container?: HTMLElement;
+  children: ReactNode;
 
   size?: KModalSizeType;
   animation?: 'slide' | 'fade' | 'scale';
 
-  title?: string;
-  content: ReactNode;
-  footer?: ReactNode;
+  // Styles
+  width?: number | string;
+  height?: number | string;
 
-  width?: number;
+  // Options
   isOverlay?: boolean;
   overlayOpacity?: number;
   overlayClosable?: boolean;
   escClosable?: boolean;
+}
 
-  // styles
-  headerClass?: string;
-  contentClass?: string;
-  footerClass?: string;
+
+export interface KModalHeaderProps extends HTMLAttributes<HTMLDivElement> {
+  title?: string;
+  children: ReactNode;
+}
+
+export interface KModalContentProps extends HTMLAttributes<HTMLDivElement> {
+  children?: ReactNode;
+}
+
+export interface KModalFooterProps extends HTMLAttributes<HTMLDivElement> {
+  children?: ReactNode;
+  align?: 'left' | 'center' | 'right';
 }
