@@ -2,7 +2,7 @@ name: Deploy storybook-static to Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -23,32 +23,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Setup pnpm
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 8
 
-      # Setup Node.js with version 20.x and cache
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20.x"
           cache: 'pnpm'
 
-      # Install dependencies
+      - name: Clear cache
+        run: |
+          rm -rf node_modules/.cache storybook-static
+
       - name: Install dependencies
         run: |
           pnpm install
 
-      # Build storybook
       - name: Build Storybook
         run: |
           set -x
           pnpm run build-storybook -- --debug
           ls -l ./storybook-static
 
-      # Setup Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
