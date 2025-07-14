@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react-swc';
 import compression from 'vite-plugin-compression2';
 import eslint from 'vite-plugin-eslint';
 import dts from 'vite-plugin-dts';
-// import { visualizer } from 'rollup-plugin-visualizer';
 
 
 export default defineConfig({
@@ -44,12 +43,6 @@ export default defineConfig({
         }
       },
     },
-    // visualizer({
-    //   filename: 'lib/stats.html', // 시각화 결과 저장 위치
-    //   open: true, // 빌드 후 자동으로 브라우저 열기
-    //   gzipSize: true,
-    //   brotliSize: true,
-    // }),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.scss', '.js'],

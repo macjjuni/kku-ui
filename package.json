@@ -77,7 +77,6 @@
     "eslint-plugin-storybook": "^9.0.15",
     "jsdom": "^26.1.0",
     "react-docgen-typescript": "^2.4.0",
-    "rollup-plugin-visualizer": "^6.0.3",
     "sass": "^1.86.3",
     "storybook": "^9.0.15",
     "storybook-dark-mode": "^4.0.2",
