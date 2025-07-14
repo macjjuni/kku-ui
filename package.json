@@ -33,7 +33,7 @@
     "publish": "npm publish --access public",
     "test": "vitest",
     "test-ui": "vitest --ui",
-    "build-storybook": "storybook build || echo 'storybook build failed, but continuing...'",
+    "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_8a400cd81ccf1b2"
   },
   "dependencies": {
@@ -49,7 +49,7 @@
     "@storybook/addon-docs": "^9.0.15",
     "@storybook/addon-links": "^9.0.15",
     "@storybook/addon-onboarding": "^9.0.15",
-    "@storybook/builder-vite": "^9.0.16",
+    "@storybook/builder-vite": "^9.0.15",
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/preview-api": "^8.6.14",
     "@storybook/react-vite": "^9.0.15",

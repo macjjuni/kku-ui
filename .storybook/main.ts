@@ -21,26 +21,16 @@ const config: StorybookConfig = {
     docs: {},
 
     async viteFinal(config) {
-        config.optimizeDeps = {
-            ...(config.optimizeDeps ?? {}),
-            include: [...(config.optimizeDeps?.include ?? []), 'storybook-dark-mode'],
-            exclude: ['some-problematic-lib'],
-        };
-        config.ssr = {
-            ...(config.ssr ?? {}),
-            noExternal: ['some-lib-to-bundle'],
-        };
         return config;
     },
 
     typescript: {
-        check: false,
-        // reactDocgen: 'react-docgen-typescript',
-        reactDocgen: false,
-        // reactDocgenTypescriptOptions: {
-        //     shouldExtractLiteralValuesFromEnum: true,
-        //     shouldRemoveUndefinedFromOptional: true,
-        // },
+        check: true,
+        reactDocgen: 'react-docgen-typescript',
+        reactDocgenTypescriptOptions: {
+            shouldExtractLiteralValuesFromEnum: true,
+            shouldRemoveUndefinedFromOptional: true,
+        },
     },
 };
 
