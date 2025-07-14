@@ -1,12 +1,9 @@
-import type { StorybookConfig } from '@storybook/react-vite';
 import { mergeConfig } from 'vite';
 import path from 'path';
 
-const config: StorybookConfig = {
+export default {
     stories: ['../**/*.stories.@(ts|tsx|js|jsx)'],
-    core: {
-        builder: '@storybook/builder-vite',
-    },
+    core: { builder: '@storybook/builder-vite' },
     addons: [
         '@storybook/addon-a11y',
         '@storybook/addon-links',
@@ -14,12 +11,9 @@ const config: StorybookConfig = {
         'storybook-dark-mode',
         '@storybook/addon-docs',
     ],
-    framework: {
-        name: '@storybook/react-vite',
-        options: {},
-    },
+    framework: { name: '@storybook/react-vite', options: {} },
     docs: {},
-    async viteFinal(config) {
+    async viteFinal(config: any) {
         return mergeConfig(config, {
             cacheDir: './.vite-cache',
             optimizeDeps: {
@@ -28,13 +22,11 @@ const config: StorybookConfig = {
             },
             resolve: {
                 alias: {
-                    '@sb-common-assets': path.resolve(__dirname, '../node_modules/@storybook/core-common/dist/assets'),
+                    '@sb-common-assets': path.resolve(__dirname, '../public/fonts'),
                 },
             },
             build: {
-                rollupOptions: {
-                    external: [],
-                },
+                rollupOptions: { external: [] },
             },
         });
     },
@@ -47,5 +39,3 @@ const config: StorybookConfig = {
         },
     },
 };
-
-export default config;
