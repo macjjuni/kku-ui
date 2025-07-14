@@ -31,25 +31,26 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20.x"
+          node-version: "20.1"
           cache: 'pnpm'
 
       - name: Clear cache
         run: |
-          rm -rf node_modules/.cache storybook-static
+          rm -rf node_modules/.cache storybook-static .vite-cache
           pnpm config set store-dir .pnpm-store || true
-          pnpm store prune || true
 
       - name: Install dependencies
         run: |
-          pnpm install --no-frozen-lockfile
+          rm -rf node_modules pnpm-lock.yaml
+          pnpm install
 
       - name: Build Storybook
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          DEBUG: vite:*
         run: |
           set -x
-          pnpm run build-storybook --loglevel verbose
+          pnpm run build-storybook
           ls -l ./storybook-static
 
       - name: Setup Pages

@@ -20,8 +20,16 @@ const config: StorybookConfig = {
     docs: {},
     async viteFinal(config) {
         return mergeConfig(config, {
+            cacheDir: './.vite-cache',
             optimizeDeps: {
-                include: ['@storybook/react', '@storybook/addon-docs', '@storybook/addon-a11y'],
+                force: true,
+                include: ['react', 'react-dom', '@storybook/react', '@storybook/addon-docs', '@storybook/addon-a11y'],
+            },
+            build: {
+                rollupOptions: {
+                    // Storybook에서 external 설정 무시
+                    external: [],
+                },
             },
         });
     },
