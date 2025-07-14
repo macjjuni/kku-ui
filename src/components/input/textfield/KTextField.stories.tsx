@@ -59,10 +59,10 @@ const ErrorTemplate = (args: KTextFieldProps) => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <>
       <KTextField ref={inputRef} {...args} value={value} onChange={onChangeValue}/>
-      <KButton variant="solid" label="Validate" onClick={onValidate}/>
-    </div>
+      <KButton variant="solid" label="Validate" onClick={onValidate} style={{ marginLeft: '0.5rem' }}/>
+    </>
   );
 };
 
