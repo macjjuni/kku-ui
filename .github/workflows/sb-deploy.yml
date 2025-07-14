@@ -35,9 +35,9 @@ jobs:
           node-version: "20.17.0"
           cache: 'pnpm'
 
-      - name: Clear cache
+      - name: Clear cache (lockfile 유지)
         run: |
-          rm -rf node_modules pnpm-lock.yaml storybook-static .vite-cache .pnpm-store
+          rm -rf node_modules storybook-static .vite-cache .pnpm-store
 
       - name: Install dependencies
         run: |
