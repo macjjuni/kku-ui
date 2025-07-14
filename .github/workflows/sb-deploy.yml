@@ -37,15 +37,16 @@ jobs:
       - name: Clear cache
         run: |
           rm -rf node_modules/.cache storybook-static
+          pnpm store prune
 
       - name: Install dependencies
         run: |
-          pnpm install
+          pnpm install --frozen-lockfile
 
       - name: Build Storybook
         run: |
           set -x
-          pnpm run build-storybook -- --debug
+          pnpm run build-storybook --loglevel debug
           ls -l ./storybook-static
 
       - name: Setup Pages
