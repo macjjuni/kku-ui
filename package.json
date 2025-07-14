@@ -36,18 +36,16 @@
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_8a400cd81ccf1b2"
   },
+  "pnpm": {
+    "overrides": {
+      "rollup": "4.44.2"
+    }
+  },
   "dependencies": {
     "lodash-es": "^4.17.21",
     "motion": "^12.9.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "vite": {
-        "rollup": "4.44.2"
-      }
-    }
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",
