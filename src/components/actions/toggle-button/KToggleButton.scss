@@ -1,0 +1,60 @@
+@use '../../../styles/Entry' as *;
+
+
+.k-toggle-button {
+  white-space: nowrap;
+
+  // Common
+  .k-button:first-child {
+    border-top-left-radius: $kku-border-radius-default;
+    border-bottom-left-radius: $kku-border-radius-default;
+  }
+  .k-button:last-child {
+    border-top-right-radius: $kku-border-radius-default;
+    border-bottom-right-radius: $kku-border-radius-default;
+    margin-right: -1px;
+  }
+  .k-button {
+    margin-left: 0;
+    margin-right: -1px;
+    border-radius: 0;
+
+    //@include kku-transition;
+    //transition-property: color, background;
+  }
+
+  .k-button--selected {
+
+    &.k-button--outlined {
+      background: $kku-gray-color-200;
+      &:hover { background: $kku-gray-color-200; }
+    }
+    &.k-button--solid {
+      background: $kku-gray-color-400;
+      &:hover { background: $kku-gray-color-400; }
+    }
+    &.k-button--primary {
+      background: $kku-blue-color-800;
+      &:hover { background: $kku-blue-color-800; }
+    }
+    &.k-button--subtle {
+      background: $kku-gray-color-200;
+      &:hover { background: $kku-gray-color-200; }
+    }
+    &.k-button--plain {
+      font-weight: bold;
+    }
+  }
+
+
+
+  .k-button--primary, .k-button--subtle {
+    border: none;
+  }
+
+  .k-button + .k-button {
+    margin-right: -1px;
+  }
+  // Default
+  .k-button.k-button--outlined:hover { z-index: 1; }
+}

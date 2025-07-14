@@ -24,7 +24,7 @@ const preview: Preview = {
       storySort: {
         order: [
           'Actions',
-          ['Button', 'ButtonGroup', 'Switch'],
+          ['Button', 'ButtonGroup', 'ToggleButton', 'Switch'],
           'Input',
           ['TextField', 'Select'],
           'Data Display',

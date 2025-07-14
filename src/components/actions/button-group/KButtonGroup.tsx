@@ -46,6 +46,6 @@ const ButtonGroup = (props: KButtonGroupProps) => {
 
 const KButtonGroup = memo(ButtonGroup);
 KButtonGroup.displayName = 'KButtonGroup';
-KButtonGroup.displayName = 'KButtonGroup';
+ButtonGroup.displayName = 'KButtonGroup';
 
 export default KButtonGroup;

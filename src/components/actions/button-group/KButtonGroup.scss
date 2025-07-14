@@ -23,6 +23,11 @@ $k-button-border-radius: $kku-border-radius-default;
     margin-right: -1px;
     border-radius: 0;
   }
+
+  .k-button--primary, .k-button--subtle {
+    border: none;
+  }
+
   .k-button + .k-button {
     margin-right: -1px;
   }
