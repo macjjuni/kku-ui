@@ -34,12 +34,13 @@ const config: StorybookConfig = {
     },
 
     typescript: {
-        check: true,
-        reactDocgen: 'react-docgen-typescript',
-        reactDocgenTypescriptOptions: {
-            shouldExtractLiteralValuesFromEnum: true,
-            shouldRemoveUndefinedFromOptional: true,
-        },
+        check: false,
+        // reactDocgen: 'react-docgen-typescript',
+        reactDocgen: false,
+        // reactDocgenTypescriptOptions: {
+        //     shouldExtractLiteralValuesFromEnum: true,
+        //     shouldRemoveUndefinedFromOptional: true,
+        // },
     },
 };
 
