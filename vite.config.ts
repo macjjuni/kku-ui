@@ -83,4 +83,5 @@ export default defineConfig({
     target: 'esnext',
     emptyOutDir: true,
   },
+  assetsInclude: ['**/*.woff2'],
 });

@@ -1,7 +1,6 @@
 import { mergeConfig } from 'vite';
 
 export default {
-  staticDirs: ['../sb-common-assets'],
   stories: ['../**/*.stories.@(ts|tsx|js|jsx)'],
   core: { builder: '@storybook/builder-vite' },
   addons: [
