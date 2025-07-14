@@ -26,7 +26,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 8.15.8
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -37,16 +37,19 @@ jobs:
       - name: Clear cache
         run: |
           rm -rf node_modules/.cache storybook-static
-          pnpm store prune
+          pnpm config set store-dir .pnpm-store || true
+          pnpm store prune || true
 
       - name: Install dependencies
         run: |
           pnpm install --frozen-lockfile
 
       - name: Build Storybook
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
         run: |
           set -x
-          pnpm run build-storybook --loglevel debug
+          pnpm run build-storybook --loglevel verbose
           ls -l ./storybook-static
 
       - name: Setup Pages
