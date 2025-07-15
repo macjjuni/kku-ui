@@ -186,7 +186,7 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
             {value === undefined && placeholder && (
               <span className="k-select__fieldset__container__placeholder">{placeholder}</span>
             )}
-            <KIcon className={iconClass} icon="keyboard_arrow_down"/>
+            <KIcon className={iconClass} icon="keyboard_arrow_down" size={size}/>
           </div>
         </fieldset>
         {errorMessage && (<div className="k-select__fieldset__message">{errorMessage}</div>)}

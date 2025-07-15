@@ -16,10 +16,12 @@ const meta: Meta<KDropdownProps> = {
       options: ['div', 'ul', 'li', 'p', 'span'],
     },
     trigger: {
+      description: '드롭다운을 열기 위한 트리거 방식을 설정합니다.',
       control: { type: 'radio' },
       options: ['hover', 'click'],
     },
     position: {
+      description: '드롭다운이 표시될 위치를 설정합니다.',
       control: { type: 'select' },
       options: K_DROPDOWN_POSITIONS,
     },
