@@ -42,6 +42,9 @@ export interface KDropdownProps extends HTMLAttributes<HTMLElement> {
   children?: ReactNode;
   trigger?: KDropdownTriggerType;
   position?: KDropdownPositionType;
+
+  onDropdownOpen?: () => void
+  onDropdownClose?: () => void
 }
 
 export interface KDropdownTriggerProps extends HTMLAttributes<HTMLDivElement> {

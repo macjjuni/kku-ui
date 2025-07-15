@@ -24,7 +24,7 @@ const Dropdown = forwardRef<KDropdownRefs, KDropdownProps>((props, ref) => {
   // region [Hooks]
   const {
     as, trigger = 'hover', position = 'top-end', children,
-    className, ...restProps
+    className, onDropdownOpen, onDropdownClose, ...restProps
   } = props;
 
   const Component = as || 'div';
@@ -45,8 +45,14 @@ const Dropdown = forwardRef<KDropdownRefs, KDropdownProps>((props, ref) => {
   // endregion
 
   // region [Privates]
-  const onOpen = useCallback(() => setOpen(true), []);
-  const onClose = useCallback(() => setOpen(false), []);
+  const onOpen = useCallback(() => {
+    setOpen(true)
+    onDropdownOpen?.();
+  }, [onDropdownOpen]);
+  const onClose = useCallback(() => {
+    setOpen(false)
+    onDropdownClose?.();
+  }, [onDropdownClose]);
   // endregion
 
   // region [APIs]
