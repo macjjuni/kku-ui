@@ -15,7 +15,7 @@ const meta: Meta<KAccordionProps> = {
       description: '컨텐츠 내용을 설정합니다.',
       table: { type: { summary: 'ReactNode' } },
     },
-    width: { description: 'width 속성을 설정합니다.', type: 'number' },
+    width: { description: '요소의 width 크기를 설정합니다.', type: 'number' },
   },
   tags: ['autodocs'],
 };

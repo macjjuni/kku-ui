@@ -15,7 +15,9 @@ const meta: Meta<KMenuProps> = {
   argTypes: {
     ...sizeArgType,
     width: {
+      description: '요소의 width 크기를 설정합니다.',
       control: { type: 'number' },
+      table: { type: { summary: 'number | string' } },
     },
   },
   tags: ['autodocs'],
