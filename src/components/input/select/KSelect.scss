@@ -58,6 +58,9 @@ $kku-select-legend-height: 16px;
     }
 
     .k-select__fieldset__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       position: relative;
       width: 100%;
       overflow: hidden;
@@ -73,6 +76,14 @@ $kku-select-legend-height: 16px;
 
       .k-select__fieldset__container__placeholder {
         color: $kku-text-color-placeholder;
+      }
+
+      .k-select__fieldset__container__icon {
+        @include kku-transition;
+        transition-property: transform;
+        &.k-select__fieldset__container__icon--open {
+          transform: rotate(180deg);
+        }
       }
     }
   }
@@ -148,7 +159,6 @@ $kku-select-legend-height: 16px;
 
         .k-select__fieldset__container__right, .k-select__fieldset__container__icon {
           flex: 0 0 $kku-text-size-medium;
-          margin-right: $kku-spacing-8;
         }
       }
     }
@@ -177,7 +187,6 @@ $kku-select-legend-height: 16px;
 
         .k-select__fieldset__container__right, .k-select__fieldset__container__icon {
           flex: 0 0 $kku-text-size-large;
-          margin-right: $kku-spacing-10;
         }
       }
 
@@ -202,6 +211,9 @@ $kku-select-legend-height: 16px;
 
       .k-select__fieldset__container {
         .k-select__fieldset__container__value {
+          color: $kku-text-color-disabled;
+        }
+        .k-select__fieldset__container__icon {
           color: $kku-text-color-disabled;
         }
       }

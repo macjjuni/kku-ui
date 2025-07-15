@@ -1,6 +1,16 @@
-import { forwardRef, memo, MouseEvent, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import {
+  forwardRef,
+  memo,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import type { KSelectProps, KSelectRefs } from './KSelect.interface';
-import { KDropdown, KDropdownRefs, KMenu } from '@/components';
+import { KDropdown, KDropdownRefs, KIcon, KMenu } from '@/components';
 import { useRipple } from '@/common/hooks';
 
 
@@ -18,6 +28,7 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
     const selectedValue = items.find((item) => item.value === value);
     return selectedValue?.label || null;
   }, [value, items]);
+  const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<KDropdownRefs>(null);
 
@@ -47,6 +58,14 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
 
     return clazz.join(' ');
   }, [className, size, errorMessage, disabled]);
+  const iconClass = useMemo(() => {
+    const clazz = ['k-select__fieldset__container__icon'];
+    if (isOpen) {
+      clazz.push('k-select__fieldset__container__icon--open')
+    }
+    return clazz.join(' ');
+  }, [isOpen])
+
   // endregion
 
 
@@ -59,6 +78,14 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
     } else {
       setMenuWidth('auto');
     }
+  }, []);
+
+  const onOpenContentAction = useCallback(() => {
+    setIsOpen(true);
+  }, []);
+
+  const onCloseContentAction = useCallback(() => {
+    setIsOpen(false);
   }, []);
 
   const onValidate = useCallback(async (targetValue?: string | number) => {
@@ -142,7 +169,8 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
 
 
   return (
-    <KDropdown className={rootClass} trigger="click" position="bottom-start" {...restProps}>
+    <KDropdown className={rootClass} trigger="click" position="bottom-start" {...restProps}
+               onDropdownOpen={onOpenContentAction} onDropdownClose={onCloseContentAction}>
       <KDropdown.Trigger className="k-select__trigger" disabled={disabled}>
         <fieldset className="k-select__fieldset" style={{ width }}>
           <legend className={rootLabel}>
@@ -158,6 +186,7 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
             {value === undefined && placeholder && (
               <span className="k-select__fieldset__container__placeholder">{placeholder}</span>
             )}
+            <KIcon className={iconClass} icon="keyboard_arrow_down"/>
           </div>
         </fieldset>
         {errorMessage && (<div className="k-select__fieldset__message">{errorMessage}</div>)}
