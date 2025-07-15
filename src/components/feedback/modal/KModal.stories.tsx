@@ -19,7 +19,7 @@ const meta: Meta<KModalProps> = {
       description: '모달 에니메이션 효과를 설정합니다.',
       type: 'string',
       control: { type: 'radio' },
-      options: ['slide', 'fade', 'scale'],
+      options: ['fade', 'slide', 'scale'],
     },
     width: { description: '모달 width 사이즈를 설정합니다.', type: 'number' },
   },
@@ -63,7 +63,7 @@ const Template = (args: KModalProps) => {
 export const Default: Story = {
   render: Template, args: {
     size: 'small',
-    animation: 'slide',
+    animation: 'fade',
     isOverlay: true,
     overlayOpacity: 0.48,
     overlayClosable: false,
