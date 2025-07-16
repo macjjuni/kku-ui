@@ -9,6 +9,7 @@ export default {
     '@chromatic-com/storybook',
     'storybook-dark-mode',
     '@storybook/addon-docs',
+    '@storybook/addon-themes',
   ],
   framework: { name: '@storybook/react-vite', options: {} },
   docs: {},

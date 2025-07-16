@@ -53,6 +53,7 @@
     "@storybook/addon-docs": "^9.0.15",
     "@storybook/addon-links": "^9.0.15",
     "@storybook/addon-onboarding": "^9.0.15",
+    "@storybook/addon-themes": "^9.0.17",
     "@storybook/builder-vite": "^9.0.15",
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/preview-api": "^8.6.14",
