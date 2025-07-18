@@ -29,10 +29,10 @@ const preview: Preview = {
     controls: { expanded: true },
     backgrounds: {
       default: 'white',
-      options: {
-        dark: { name: 'Dark', value: '#000000' },
-        light: { name: 'Light', value: '#ffffff' },
-      },
+      values: [
+        { name: 'white', value: '#ffffff' },
+        { name: 'dark', value: '#1f2124' },
+      ],
     },
     options: {
       storySort: {
