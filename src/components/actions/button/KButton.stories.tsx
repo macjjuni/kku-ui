@@ -39,11 +39,11 @@ export const Variant: Story = {
       {
         BUTTON_VARIANTS.map((variant) => (
           <KButton key={variant} {...args} variant={variant}
-                   label={variant.charAt(0).toUpperCase() + variant.slice(1)}/>
+                   label={variant.charAt(0)
+                     .toUpperCase() + variant.slice(1)}/>
         ))
       }
     </>
   ),
   args: { variant: 'outlined', ...commonArgs, width: 104 },
 };
-

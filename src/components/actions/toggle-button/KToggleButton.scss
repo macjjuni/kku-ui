@@ -18,9 +18,6 @@
     margin-left: 0;
     margin-right: -1px;
     border-radius: 0;
-
-    //@include kku-transition;
-    //transition-property: color, background;
   }
 
   .k-button--selected {
@@ -46,8 +43,6 @@
     }
   }
 
-
-
   .k-button--primary, .k-button--subtle {
     border: none;
   }
@@ -57,4 +52,32 @@
   }
   // Default
   .k-button.k-button--outlined:hover { z-index: 1; }
+}
+
+
+.#{$kku-dark-mode-signature} .k-toggle-button {
+
+  .k-button.k-button--selected {
+
+    &.k-button--outlined {
+      background: $kku-gray-color-400;
+      &:hover { background: $kku-gray-color-400; }
+    }
+    &.k-button--solid {
+      background: $kku-gray-color-300;
+      &:hover { background: $kku-gray-color-300; }
+    }
+    &.k-button--primary {
+      background: $kku-blue-color-800;
+      &:hover { background: $kku-blue-color-800; }
+    }
+    &.k-button--subtle {
+      background: $kku-slate-color-500;
+      &:hover { background: $kku-slate-color-500; }
+    }
+    &.k-button--plain {
+      font-weight: bold;
+    }
+  }
+
 }

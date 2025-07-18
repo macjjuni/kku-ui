@@ -1,5 +1,4 @@
-import type { Preview, ReactRenderer } from '@storybook/react-vite';
-import { withThemeByClassName } from '@storybook/addon-themes';
+import type { Preview } from '@storybook/react-vite';
 import '../src/components/index.scss';
 import './preview.scss';
 
@@ -12,15 +11,15 @@ export const globalTypes = {
 };
 
 const setHtmlDataTheme = (theme: string) => {
-  const element = document.documentElement;
+  const body = document.querySelector('body');
   const isDark = theme === 'dark';
 
   if (isDark) {
-    element.classList.remove('light');
-    element.classList.add('dark');
+    body!.classList.remove('light');
+    body!.classList.add('dark');
   } else {
-    element.classList.remove('dark');
-    element.classList.add('light');
+    body!.classList.remove('dark');
+    body!.classList.add('light');
   }
 };
 
@@ -32,7 +31,7 @@ const preview: Preview = {
       default: 'white',
       values: [
         { name: 'white', value: '#ffffff' },
-        { name: 'dark', value: '#212121' },
+        { name: 'dark', value: '#1f2124' },
       ],
     },
     options: {
@@ -58,15 +57,9 @@ const preview: Preview = {
 
       const theme = context.globals.backgrounds.value || 'light';
       setHtmlDataTheme(theme);
+
       return <Story {...context} />;
     },
-    withThemeByClassName<ReactRenderer>({
-      themes: {
-        light: 'light',
-        dark: 'dark',
-      },
-      defaultTheme: 'light',
-    }),
   ],
 };
 
