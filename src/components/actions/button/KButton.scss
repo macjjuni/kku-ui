@@ -204,8 +204,8 @@
     background: $kku-slate-color-800;;
 
     &:hover:not(.k-button--disabled) {
-      border-color: $kku-background-color-disabled;
-      background: $kku-background-color-disabled;
+      border-color: $kku-slate-color-700;
+      background: $kku-slate-color-700;
     }
 
     &.k-button--disabled {
