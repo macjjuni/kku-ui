@@ -65,7 +65,7 @@ pnpm add kku-ui
 ```typescript
 // Entry Point 🏃🏻‍♂️
 
-import 'kku-ui/lib/styles/index.css'
+import 'kku-ui/lib/index.css'
 ```
 
 ## 🧑🏻‍💻 Use Examples
