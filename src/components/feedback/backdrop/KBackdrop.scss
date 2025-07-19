@@ -3,7 +3,6 @@
 // region [Component Tokens]
 
 $backdrop-background-color: rgba(0, 0, 0, 0.48);
-$backdrop-background-color-dark: rgba(255, 255, 255, 0.48);
 $backdrop-z-index: 10;
 
 // endregion
@@ -31,8 +30,4 @@ $backdrop-z-index: 10;
       z-index: calc(#{$backdrop-z-index} + 1);
     }
   }
-}
-
-.#{$kku-dark-mode-signature} .k-backdrop {
-  background-color: $backdrop-background-color-dark;
 }

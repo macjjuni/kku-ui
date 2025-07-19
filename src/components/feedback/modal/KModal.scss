@@ -113,3 +113,8 @@ $modal-content-header-text-size: $kku-slate-color-900;
     max-width: calc(100dvw - #{$kku-spacing-16});
   }
 }
+
+
+.#{$kku-dark-mode-signature} .k-modal {
+  box-shadow: $kku-box-shadow-dark;
+}
