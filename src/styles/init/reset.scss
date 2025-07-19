@@ -1,4 +1,5 @@
 @use "./reference-tokens" as *;
+@use "./system-tokens" as *;
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -45,3 +46,10 @@ table {
     border-spacing: 0;
 }
 * { box-sizing: border-box; }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}

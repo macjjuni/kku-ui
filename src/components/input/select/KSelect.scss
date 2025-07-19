@@ -40,13 +40,15 @@ $kku-select-legend-height: 16px;
       justify-content: flex-start;
       align-items: center;
       height: $kku-select-legend-height;
+      padding-top: 2px;
       color: $kku-text-color-label;
+      @include kku-font-family;
       @include kku-transition;
       transition-property: color;
       z-index: 0;
 
       &.k-select__fieldset__legend--show {
-        padding: 0 $kku-spacing-2;
+        padding: $kku-spacing-2 $kku-spacing-2 0 $kku-spacing-2;
       }
 
       .k-select__fieldset__legend__required {
@@ -64,6 +66,7 @@ $kku-select-legend-height: 16px;
       position: relative;
       width: 100%;
       overflow: hidden;
+      @include kku-font-family;
 
       .k-select__fieldset__container__value, .k-select__fieldset__container__placeholder {
         display: block;
@@ -176,7 +179,7 @@ $kku-select-legend-height: 16px;
 
       .k-select__fieldset__legend {
         margin-left: $kku-spacing-12;
-        @include kku-text-small;
+        @include kku-text-xsmall;
       }
 
       .k-select__fieldset__container {
@@ -214,6 +217,10 @@ $kku-select-legend-height: 16px;
           color: $kku-text-color-disabled;
         }
         .k-select__fieldset__container__icon {
+          color: $kku-text-color-disabled;
+        }
+
+        .k-select__fieldset__container__placeholder {
           color: $kku-text-color-disabled;
         }
       }

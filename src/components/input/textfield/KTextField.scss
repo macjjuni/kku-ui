@@ -12,6 +12,8 @@ $kku-text-field-legend-height: 16px;
   display: inline-flex;
   flex-direction: column;
   width: 100%;
+  @include kku-font-family;
+
 
   .k-text-field__fieldset {
     display: inline-flex;
@@ -33,6 +35,7 @@ $kku-text-field-legend-height: 16px;
     .k-text-field__fieldset__legend {
       height: $kku-text-field-legend-height;
       z-index: 0;
+      @include kku-font-family;
 
       .k-text-field__fieldset__legend__label {
         color: $kku-text-color-label;
@@ -49,23 +52,6 @@ $kku-text-field-legend-height: 16px;
         color: $kku-error-color-default;
         @include kku-transition;
         transition-property: color;
-      }
-    }
-  }
-
-  &.k-text-field--focus:not(.k-text-field--readOnly) {
-    .k-text-field__fieldset {
-      outline: none;
-      border-color: $kku-focus-visible-color;
-
-      .k-text-field__fieldset__legend {
-        .k-text-field__fieldset__legend__label {
-          color: $kku-focus-visible-color;
-        }
-
-        .k-text-field__fieldset__legend__label__required {
-          color: $kku-focus-visible-color;
-        }
       }
     }
   }
@@ -105,9 +91,11 @@ $kku-text-field-legend-height: 16px;
       width: 100%;
       height: 100%;
       padding: 0;
+      color: $kku-text-color-default;
       font-size: inherit;
       line-height: inherit;
       background: transparent;
+      @include kku-font-family;
       @include kku-transition;
       transition-property: background, color;
 
@@ -207,6 +195,10 @@ $kku-text-field-legend-height: 16px;
         .k-text-field__fieldset__container__input {
           color: $kku-text-color-disabled;
           cursor: not-allowed;
+
+          &::placeholder {
+            color: $kku-text-color-disabled;
+          }
         }
       }
     }
@@ -215,4 +207,6 @@ $kku-text-field-legend-height: 16px;
 
 
 .#{$kku-dark-mode-signature} .k-text-field {
+
+
 }

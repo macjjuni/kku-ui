@@ -77,10 +77,10 @@ $switch-ball-size-small: 20px;
   }
 
   &.k-switch--off {
-    background: $kku-slate-color-400;
+    background: $kku-slate-color-300;
 
     &:hover:not(.k-switch--disabled) {
-      background: $kku-slate-color-500;
+      background: $kku-gray-color-300;
     }
   }
 
