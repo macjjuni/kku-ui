@@ -1,16 +1,6 @@
 @use '../../../styles/Entry' as *;
 
 // region [Component Token]
-
-$switch-background-color-active-normal: $kku-primary-color-default;
-$switch-background-color-active-hover: $kku-blue-color-500;
-
-$switch-background-color-inactive-normal: $kku-slate-color-400;
-$switch-background-color-inactive-hover: $kku-slate-color-500;
-
-$switch-ball-color-base: $kku-white-color;
-$switch-ball-color-disabled: $kku-slate-color-300;
-
 $switch-width-size-medium: 52px;
 $switch-height-size-medium: 30px;
 $switch-border-radius-medium: 15px;
@@ -44,7 +34,7 @@ $switch-ball-size-small: 20px;
     top: 3px;
     left: 3px;
     border-radius: 50%;
-    background: $switch-ball-color-base;
+    background: $kku-white-color;
     transition: left 0.24s ease;
   }
 
@@ -71,10 +61,10 @@ $switch-ball-size-small: 20px;
   }
 
   &.k-switch--on {
-    background: $switch-background-color-active-normal;
+    background: $kku-primary-color-default;
 
     &:hover:not(.k-switch--disabled) {
-      background: $switch-background-color-active-hover;
+      background: $kku-blue-color-500;
     }
 
     &.k-switch--small {
@@ -87,10 +77,10 @@ $switch-ball-size-small: 20px;
   }
 
   &.k-switch--off {
-    background: $switch-background-color-inactive-normal;
+    background: $kku-slate-color-400;
 
     &:hover:not(.k-switch--disabled) {
-      background: $switch-background-color-inactive-hover;
+      background: $kku-slate-color-500;
     }
   }
 
@@ -104,4 +94,22 @@ $switch-ball-size-small: 20px;
 }
 
 .#{$kku-dark-mode-signature} .k-switch {
+
+  .k-switch__toggle {
+    background: $kku-slate-color-200;
+  }
+
+  &.k-switch--off {
+    background: $kku-slate-color-600;
+
+    &:hover:not(.k-switch--disabled) {
+      background: $kku-slate-color-500;
+    }
+  }
+
+  &.k-switch--disabled {
+    background: $kku-background-color-disabled;
+
+    .k-switch__toggle { background: $kku-slate-color-300; }
+  }
 }
