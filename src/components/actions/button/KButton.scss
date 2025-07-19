@@ -32,7 +32,7 @@
     background: $kku-background-color-default;
 
     &:hover:not(.k-button--disabled) {
-      border-color: $kku-slate-color-700;
+      border-color: $kku-border-color-hover;
       background: $kku-background-color-hover;
     }
 
@@ -76,7 +76,7 @@
     }
 
     &.k-button--disabled {
-      color: $kku-slate-color-300;
+      color: $kku-text-color-disabled;
       border-color: $kku-primary-color-disabled;
       background-color: $kku-primary-color-disabled;
     }
@@ -85,7 +85,7 @@
   &.k-button--subtle {
     color: $kku-text-color-default;
     border-color: $kku-slate-color-200;
-    background: $kku-slate-color-200;;
+    background: $kku-slate-color-200;
 
     &:hover:not(.k-button--disabled) {
       border-color: $kku-slate-color-300;
@@ -104,7 +104,6 @@
 
     &:hover {
       color: $kku-text-color-hover;
-      //border-color: $kku-text-color-hover;
     }
 
     &.k-button--disabled {
@@ -179,4 +178,59 @@
 }
 
 .#{$kku-dark-mode-signature} .k-button {
+
+  &.k-button--solid {
+    color: $kku-black-color;
+    background-color: $kku-white-color;
+
+    &:hover:not(.k-button--disabled) {
+      background: linear-gradient(
+                      0deg,
+                      #{rgba(0, 0, 0, 0.15)} 0%,
+                      #{rgba(0, 0, 0, 0.15)} 100%
+      ),
+      #{$kku-white-color};
+    }
+
+    &.k-button--disabled {
+      color: $kku-slate-color-600;
+      border-color: $kku-border-color-disabled;
+      background: $kku-background-color-disabled;
+    }
+  }
+
+  &.k-button--subtle {
+    border-color: $kku-slate-color-800;
+    background: $kku-slate-color-800;;
+
+    &:hover:not(.k-button--disabled) {
+      border-color: $kku-slate-color-700;
+      background: $kku-slate-color-700;
+    }
+
+    &.k-button--disabled {
+      color: $kku-slate-color-600;
+      border-color: $kku-background-color-disabled;
+      background: $kku-background-color-disabled;
+    }
+  }
+
+  &.k-button--danger {
+    &.k-button--solid, &.k-button--primary, &.k-button--subtle {
+      color: $kku-white-color;
+      border-color: $kku-error-color-default;
+      background-color: $kku-error-color-default;
+
+      &:hover {
+        border-color: $kku-error-color-hover;
+        background-color: $kku-error-color-hover;
+      }
+
+      &.k-button--disabled {
+        color: $kku-text-color-disabled;
+        border-color: $kku-error-color-disabled;
+        background-color: $kku-error-color-disabled;
+      }
+    }
+  }
 }

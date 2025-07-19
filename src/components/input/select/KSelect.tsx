@@ -66,6 +66,11 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
     return clazz.join(' ');
   }, [isOpen])
 
+  const iconSize = useMemo(() => {
+    if (!size || size === 'medium') { return 'medium'; }
+    return 'small';
+  }, [size])
+
   // endregion
 
 
@@ -170,7 +175,7 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
 
   return (
     <KDropdown className={rootClass} trigger="click" position="bottom-start" {...restProps}
-               onDropdownOpen={onOpenContentAction} onDropdownClose={onCloseContentAction}>
+               onDropdownOpen={onOpenContentAction} onDropdownClose={onCloseContentAction} aria-disabled={disabled}>
       <KDropdown.Trigger className="k-select__trigger" disabled={disabled}>
         <fieldset className="k-select__fieldset" style={{ width }}>
           <legend className={rootLabel}>
@@ -186,7 +191,7 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
             {value === undefined && placeholder && (
               <span className="k-select__fieldset__container__placeholder">{placeholder}</span>
             )}
-            <KIcon className={iconClass} icon="keyboard_arrow_down" size={size}/>
+            <KIcon className={iconClass} icon="keyboard_arrow_down" size={iconSize}/>
           </div>
         </fieldset>
         {errorMessage && (<div className="k-select__fieldset__message">{errorMessage}</div>)}

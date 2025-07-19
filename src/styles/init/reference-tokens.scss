@@ -11,15 +11,15 @@
   --kku-gray-color-900: #202020;
 
   /* Slate */
-  --kku-slate-color-100: #f7f8fb;
-  --kku-slate-color-200: #f3f5f8;
-  --kku-slate-color-300: #e7ebf1;
-  --kku-slate-color-400: #b0bdd2;
-  --kku-slate-color-500: #9eaabd;
-  --kku-slate-color-600: #8d97a8;
-  --kku-slate-color-700: #848e9e;
-  --kku-slate-color-800: #6a717e;
-  --kku-slate-color-900: #4f555e;
+  --kku-slate-color-100: #f1f3f5;
+  --kku-slate-color-200: #eaecef;
+  --kku-slate-color-300: #d4d8de;
+  --kku-slate-color-400: #748296;
+  --kku-slate-color-500: #687587;
+  --kku-slate-color-600: #5d6878;
+  --kku-slate-color-700: #576271;
+  --kku-slate-color-800: #464e5a;
+  --kku-slate-color-900: #343a44;
 
   /* Blue */
   --kku-blue-color-100: #e6effc;
@@ -140,6 +140,7 @@
 
   /* Box-shadow */
   --kku-box-shadow-default: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  --kku-box-shadow-dark: rgba(255, 255, 255, 0.04) 0px 12px 28px 0px, rgba(255, 255, 255, 0.05) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 }
 
 /* Gray */
@@ -276,3 +277,4 @@ $kku-z-index-9999: var(--kku-z-idnex-9999);
 
 /* Box-shadow */
 $kku-box-shadow-default: var(--kku-box-shadow-default);
+$kku-box-shadow-dark: var(--kku-box-shadow-dark);

@@ -5,16 +5,16 @@
   --kku-text-color-hover: var(--kku-gray-color-900);
   --kku-text-color-disabled: var(--kku-slate-color-400);
   --kku-text-color-link: #{$kku-blue-color-400};
-  --kku-text-color-label: #{$kku-slate-color-800};
+  --kku-text-color-label: #{$kku-slate-color-900};
   --kku-text-color-placeholder: #{$kku-slate-color-800};
 
   --kku-border-color-default: #{$kku-slate-color-500};
   --kku-border-color-hover: #{$kku-slate-color-800};
-  --kku-border-color-disabled: #{$kku-slate-color-400};
+  --kku-border-color-disabled: #{$kku-slate-color-300};
 
   --kku-background-color-default: #{$kku-white-color};
   --kku-background-color-hover: #{$kku-slate-color-100};
-  --kku-background-color-disabled: #{$kku-slate-color-100};
+  --kku-background-color-disabled: #{$kku-slate-color-200};
 
   --kku-backdrop-background-color-light: #{$kku-black-color};
   --kku-backdrop-background-color-dark: #{$kku-slate-color-200};
@@ -100,15 +100,20 @@ $kku-full-screen-loader-z-index: var(--kku-full-screen-loader-z-index);
 $kku-dark-mode-signature: 'dark';
 
 :root .#{$kku-dark-mode-signature} {
-  --kku-text-color-link: #{$kku-blue-color-400};
+  --kku-text-color-default: var(--kku-gray-color-100);
+  --kku-text-color-hover: var(--kku-gray-color-100);
+  --kku-text-color-disabled: var(--kku-slate-color-400);
 
-  --kku-border-color-default: #{$kku-slate-color-700};
-  --kku-border-color-hover: #{$kku-slate-color-700};
-  --kku-border-color-disabled: #{$kku-slate-color-700};
+  --kku-text-color-label: #{$kku-slate-color-200};
+  --kku-text-color-placeholder: #{$kku-slate-color-300};
 
-  --kku-background-color-default: #{$kku-slate-color-900};
-  --kku-background-color-hover: #{$kku-slate-color-800};
-  --kku-background-color-disabled: #{$kku-slate-color-800};
+  --kku-border-color-default: #{$kku-slate-color-400};
+  --kku-border-color-hover: #{$kku-slate-color-100};
+  --kku-border-color-disabled: #{$kku-slate-color-800};
+
+  --kku-background-color-default: #{$kku-gray-color-900};
+  --kku-background-color-hover: #{$kku-gray-color-800};
+  --kku-background-color-disabled: #{$kku-gray-color-900};
 
   --kku-ripple-background-color: #{$kku-slate-color-300};
 }

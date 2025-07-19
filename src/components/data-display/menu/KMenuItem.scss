@@ -1,8 +1,5 @@
 @use '../../../styles/Entry' as *;
 
-$kku-menu-item-background-color-default: $kku-white-color;
-$kku-menu-item-background-color-hover: $kku-slate-color-200;
-
 $kku-menu-item-height-size-small: 30px;
 $kku-menu-item-height-size-medium: 36px;
 $kku-menu-item-focus-width: 2px;
@@ -16,7 +13,8 @@ $kku-menu-item-focus-width: 2px;
   border: none;
   outline: 0;
   width: 100%;
-  background: $kku-menu-item-background-color-default;
+  color: $kku-text-color-default;
+  background: $kku-white-color;
   overflow: hidden;
   cursor: pointer;
 
@@ -40,7 +38,7 @@ $kku-menu-item-focus-width: 2px;
   transition-property: background;
 
   &:hover:not(.k-menu-item--disabled) {
-    background: $kku-menu-item-background-color-hover;
+    background: $kku-slate-color-100;
   }
 
   .k-menu-item__left-content, .k-menu-item__right-content {
@@ -52,7 +50,6 @@ $kku-menu-item-focus-width: 2px;
   .k-menu-item__label {
     flex: 1 1 auto;
     text-align: left;
-    color: $kku-text-color-default;
     @include kku-ellipsis;
   }
 
@@ -115,16 +112,64 @@ $kku-menu-item-focus-width: 2px;
     }
 
     &.k-menu-item-selectable--selected {
-      background: $kku-slate-color-300;
+      background: $kku-slate-color-200;
     }
   }
 }
 
 .k-menu-item-divider {
-  background: $kku-slate-color-300;
+  position: relative;
   height: 1px;
-  margin: $kku-spacing-6 $kku-spacing-12;
+  padding: $kku-spacing-6 0;
+  background: $kku-white-color;
+  @include kku-transition;
+  transition-property: background;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: $kku-spacing-10;
+    width: calc(100% - #{$kku-spacing-10} * 2);
+    height: 1px;
+    background: $kku-slate-color-200;
+  }
 }
 
-.#{$kku-dark-mode-signature} .k-menu {
+
+.#{$kku-dark-mode-signature} .k-menu-item {
+
+  background: $kku-gray-color-900;
+
+  &:hover:not(.k-menu-item--disabled) {
+    background: $kku-gray-color-800;
+  }
+
+  .k-menu-item__shortcut {
+    background: $kku-slate-color-900;
+    color: $kku-slate-color-100;
+  }
+
+  &.k-menu-item--disabled {
+
+    .k-menu-item__label { color: $kku-text-color-disabled; }
+    .k-menu-item__shortcut { color: $kku-text-color-disabled; }
+  }
+
+
+  &.k-menu-item-selectable {
+    &.k-menu-item-selectable--selected {
+      background: $kku-gray-color-700;
+    }
+  }
+}
+
+
+.#{$kku-dark-mode-signature} .k-menu-item-divider {
+  background: $kku-gray-color-900;
+
+    &:after {
+      background: $kku-slate-color-600;
+    }
+
 }
