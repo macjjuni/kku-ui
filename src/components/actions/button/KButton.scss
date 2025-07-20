@@ -172,7 +172,7 @@
   &.k-button--medium {
     height: $kku-button-height-medium;
     padding: 0 $kku-spacing-20;
-    @include kku-text-small;
+    @include kku-text-medium;
   }
   // endregion
 }
