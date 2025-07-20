@@ -1,2 +1,2 @@
 export { default as TextField } from './TextField'
-export type { TextFieldProps } from './TextField.interface'
+export * from './TextField.interface'
