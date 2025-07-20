@@ -174,10 +174,10 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
 
 
   return (
-    <KDropdown className={rootClass} trigger="click" position="bottom-start" {...restProps}
+    <KDropdown className={rootClass} trigger="click" position="bottom-start" {...restProps} style={{ width }}
                onDropdownOpen={onOpenContentAction} onDropdownClose={onCloseContentAction} aria-disabled={disabled}>
       <KDropdown.Trigger className="k-select__trigger" disabled={disabled}>
-        <fieldset className="k-select__fieldset" style={{ width }}>
+        <fieldset className="k-select__fieldset">
           <legend className={rootLabel}>
             {label}
             {label && required && <span className="k-select__fieldset__legend__required">*</span>}

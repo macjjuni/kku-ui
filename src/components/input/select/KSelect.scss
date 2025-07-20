@@ -186,7 +186,7 @@ $kku-select-legend-height: 16px;
         height: calc(#{$kku-select-height-medium} - #{$kku-select-legend-height} / 2);
         padding: 0 $kku-spacing-10;
         margin-top: calc(-1 * #{$kku-select-legend-height} / 2);
-        @include kku-text-small;
+        @include kku-text-medium;
 
         .k-select__fieldset__container__right, .k-select__fieldset__container__icon {
           flex: 0 0 $kku-text-size-large;
