@@ -18,7 +18,7 @@ import { Transition } from '@/core';
 import { handleEnterOrSpacePress } from '@/common/util/keyboard';
 
 
-const TRANSITION_DELAY = 240;
+const TRANSITION_DELAY = 160;
 
 const DropdownContent = forwardRef<HTMLDivElement | null, KDropdownContentProps>((props, ref) => {
 
