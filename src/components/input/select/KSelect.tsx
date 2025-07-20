@@ -197,7 +197,7 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
         {errorMessage && (<div className="k-select__fieldset__message">{errorMessage}</div>)}
       </KDropdown.Trigger>
       <KDropdown.Content className="k-select__content" gap={contentGap}>
-        <KMenu width={menuWidth} size="medium" className={`k-select__content__menu k-select__content__menu--${size}`}>
+        <KMenu width={menuWidth} size={size} className={`k-select__content__menu k-select__content__menu--${size}`}>
           {
             items.map((item) => (
               <KMenu.ItemSelectable key={item.value} label={item.label} selected={value === item.value}

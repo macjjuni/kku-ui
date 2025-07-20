@@ -65,7 +65,7 @@ $kku-menu-item-focus-width: 2px;
   &.k-menu-item--small {
     height: $kku-menu-item-height-size-small;
     padding: 0 $kku-spacing-12;
-    @include kku-text-xsmall;
+    @include kku-text-small;
 
     .k-menu-item__left-content { margin-right: $kku-spacing-4; }
     .k-menu-item__shortcut {
@@ -78,7 +78,7 @@ $kku-menu-item-focus-width: 2px;
   &.k-menu-item--medium {
     height: $kku-menu-item-height-size-medium;
     padding: 0 $kku-spacing-12;
-    @include kku-text-small;
+    @include kku-text-medium;
 
     .k-menu-item__left-content { margin-right: $kku-spacing-6; }
     .k-menu-item__shortcut {
