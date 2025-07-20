@@ -164,7 +164,7 @@ $kku-text-field-legend-height: 16px;
 
         .k-text-field__fieldset__container__input {
           padding: 0 $kku-spacing-10;
-          @include kku-text-small;
+          @include kku-text-medium;
         }
 
         .k-text-field__fieldset__container__right, .k-text-field__fieldset__container__icon {
