@@ -20,7 +20,7 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
 
   const {
     className, rules, validateOnChange,
-    value, items, label, required, noDataText = 'No Data', placeholder, width, size, disabled,
+    value, items, label, required, noDataText = 'No Data', placeholder, width, size = 'medium', disabled,
     onChange, ...restProps
   } = props;
 
