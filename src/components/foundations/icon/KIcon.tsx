@@ -15,13 +15,14 @@ import { KIconProps, KIconRefs } from '@/components/foundations/icon/KIcon.inter
 import { getIcon } from '@/common/icons/icons';
 
 
-const Icon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
+const Icon = forwardRef((props: KIconProps, ref: Ref<KIconRefs>) => {
 
   // region [Hooks]
 
-  const { id, className, style }: KIconProps = { ...resProps };
-  const { icon, size = 'medium', onClick }: KIconProps = { ...resProps };
-  const { color, disabled }: KIconProps = { ...resProps };
+  const {
+    id, className, style, icon, size = 'medium',
+    onClick, color, disabled, ...restProps
+  }: KIconProps = props;
 
   const inputRef = useRef<HTMLButtonElement>(null);
   const uniqueId = `k-icon-${useId()}`;
@@ -114,7 +115,7 @@ const Icon = forwardRef(({ ...resProps }: KIconProps, ref: Ref<KIconRefs>) => {
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <span ref={inputRef} id={id || uniqueId} className={`k-icon ${rootClass}`} style={rootStyle}
           role={onClick ? 'button' : 'img'} tabIndex={computedTabIndex} aria-label={`${icon} icon`}
-          onClick={onClickIcon} onKeyDown={onKeyDown}>
+          onClick={onClickIcon} onKeyDown={onKeyDown} {...restProps}>
       {currentIcon}
     </span>
   );
