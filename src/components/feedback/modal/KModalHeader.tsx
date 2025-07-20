@@ -1,13 +1,14 @@
 import { forwardRef, memo, useCallback, useEffect, useMemo } from 'react';
 import { KModalHeaderProps } from './KModal.interface';
 import { useModal } from '@/components/feedback/modal/KModal.context';
+import { KIcon } from '@/components';
 
 
 const ModalHeader = forwardRef<HTMLDivElement, KModalHeaderProps>((props, ref) => {
 
   // region [Hooks]
   const { title, children, className, ...restProps } = props;
-  const { setTitle } = useModal();
+  const { setTitle, onCloseAction } = useModal();
   // endregion
 
   // region [Style]
@@ -31,13 +32,22 @@ const ModalHeader = forwardRef<HTMLDivElement, KModalHeaderProps>((props, ref) =
   }, [title, children]);
   // endregion
 
+  // region [Templates]
+  const CloseButton = useMemo(() => {
+    return (<KIcon icon="close" onClick={onCloseAction} size={16} className="k-modal__header__close"/>);
+  }, [onCloseAction]);
+  // endregion
+
+  // region [Life Cycles]
   useEffect(() => {
     initializeModalTitle();
   }, [title, children]);
+  // endregion
 
   return (
     <div ref={ref} {...restProps} className={rootClass}>
       {title ?? children}
+      {CloseButton}
     </div>
   );
 });

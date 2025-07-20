@@ -1,7 +1,4 @@
-import {
-  Children, ForwardRefExoticComponent, isValidElement, memo,
-  ReactElement, ReactNode, useCallback, useMemo, useState,
-} from 'react';
+import { Children, ForwardRefExoticComponent, isValidElement, memo, ReactElement, ReactNode, useCallback, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useEscapeKey, useSafePortalContainer } from '@/common/hooks';
 import { KModalProps } from './KModal.interface';
@@ -96,8 +93,8 @@ const Modal = (props: KModalProps) => {
 
 
   const ContextValue = useMemo(() => ({
-    isOpen, title, setTitle,
-  }), [isOpen, title]);
+    isOpen, title, setTitle, onCloseAction,
+  }), [isOpen, title, onCloseAction]);
 
   useEscapeKey(() => {
     if (escClosable) {

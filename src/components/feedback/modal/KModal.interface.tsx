@@ -8,6 +8,7 @@ export interface KModalContextProps {
   isOpen: boolean;
   title: string | null;
   setTitle: Dispatch<SetStateAction<string | null>>;
+  onCloseAction: () => void
 }
 
 

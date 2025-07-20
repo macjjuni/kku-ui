@@ -53,14 +53,22 @@ $modal-content-header-text-size: $kku-slate-color-900;
 
 
   .k-modal__header {
+    position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex: 0 0 44px;
     width: 100%;
-    padding: $kku-spacing-12 $kku-spacing-16;
+    padding: $kku-spacing-12 $kku-spacing-36 $kku-spacing-12 $kku-spacing-16;
     border-bottom: 1px solid $modal-content-border-color;
     @include kku-text-large;
+
+    .k-modal__header__close {
+      position: absolute;
+      top: 50%;
+      right: $kku-spacing-12;
+      transform: translateY(-50%);
+    }
   }
 
   .k-modal__content {
