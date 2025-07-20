@@ -73,7 +73,6 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
     }
     return clazz.join(' ');
   }, [label]);
-
   const rootStyle = useMemo(() => ({ ...style, width }), [style, width]);
   const inputStyle = useMemo(() => ({ textAlign: align }), [align]);
   // endregion
@@ -142,8 +141,8 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
 
 
   return (
-    <div className={rootClass}>
-      <fieldset className="k-text-field__fieldset" style={rootStyle}>
+    <div className={rootClass} style={rootStyle}>
+      <fieldset className="k-text-field__fieldset">
         <legend className="k-text-field__fieldset__legend">
           <label htmlFor={id} className={rootLabel}>
             {label}
