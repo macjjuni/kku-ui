@@ -46,14 +46,14 @@ $accordion-width-medium: 640px;
     }
     .k-accordion__summary__icon {
       @include kku-transition;
-      transition-duration: 0.2s;
+      transition-duration: 0.24s;
       transition-property: transform;
     }
   }
 
   .k-accordion__content {
     @include kku-transition;
-    transition-duration: 0.2s;
+    transition-duration: 0.24s;
     transition-property: max-height;
     background-color: var(--white-color);
     overflow: hidden;
