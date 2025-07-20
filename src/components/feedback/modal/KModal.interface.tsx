@@ -35,7 +35,7 @@ export interface KModalProps extends HTMLAttributes<HTMLElement> {
 
 export interface KModalHeaderProps extends HTMLAttributes<HTMLDivElement> {
   title?: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export interface KModalContentProps extends HTMLAttributes<HTMLDivElement> {
