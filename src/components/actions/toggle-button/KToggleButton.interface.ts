@@ -1,9 +1,5 @@
-import { HTMLAttributes, ReactNode } from 'react';
-import { KButtonVariantType } from "@/components";
+import { KButtonProps } from "@/components";
 
-export interface KToggleButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
-  variant?: KButtonVariantType
-  children: ReactNode;
-
-  multiple?: boolean;
+export interface KToggleButtonProps extends KButtonProps {
+  value: string
 }
