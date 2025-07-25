@@ -11,7 +11,8 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
   const {
     type = 'button', className, label, disabled,
     isDanger, size = 'medium', variant = 'outlined',
-    width, height, style, onClick, onMouseDown, onMouseLeave, onMouseUp,
+    children, width, height, style,
+    onClick, onMouseDown, onMouseLeave, onMouseUp,
     onKeyDown, onKeyUp, ...restProps
   } = props;
 

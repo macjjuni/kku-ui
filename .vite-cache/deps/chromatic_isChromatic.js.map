@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../node_modules/.pnpm/chromatic@10.9.6/node_modules/chromatic/isChromatic.mjs"],
-  "sourcesContent": ["/* eslint-env browser */\n\nexport default function isChromatic(windowArg) {\n  const windowToCheck = windowArg || (typeof window !== 'undefined' && window);\n  return !!(\n    windowToCheck &&\n    (windowToCheck.navigator.userAgent.match(/Chromatic/) ||\n      windowToCheck.location.href.match(/chromatic=true/))\n  );\n}\n"],
-  "mappings": ";;;AAEe,SAAR,YAA6B,WAAW;AAC7C,QAAM,gBAAgB,aAAc,OAAO,WAAW,eAAe;AACrE,SAAO,CAAC,EACN,kBACC,cAAc,UAAU,UAAU,MAAM,WAAW,KAClD,cAAc,SAAS,KAAK,MAAM,gBAAgB;AAExD;",
-  "names": []
-}
