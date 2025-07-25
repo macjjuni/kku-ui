@@ -9,11 +9,10 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
   // region [Hooks]
   const {
-    type = 'button', className, label, disabled,
-    isDanger, size = 'medium', variant = 'outlined',
-    children, width, height, style,
-    onClick, onMouseDown, onMouseLeave, onMouseUp,
-    onKeyDown, onKeyUp, ...restProps
+    type = 'button', className, label, disabled, isDanger,
+    size = 'medium', variant = 'outlined', width, height, style,
+    onClick, onMouseDown, onMouseLeave, onMouseUp, onKeyDown, onKeyUp,
+    ...restProps
   } = props;
 
   const rootRef = useRef<HTMLButtonElement>(null);
