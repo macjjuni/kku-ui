@@ -111,6 +111,13 @@
     }
   }
 
+  // Icon Color
+  &.k-button--primary, &.k-button--solid {
+    .k-icon {
+      color: $kku-white-color;
+    }
+  }
+
 
   &.k-button--danger {
 
@@ -231,6 +238,14 @@
         border-color: $kku-error-color-disabled;
         background-color: $kku-error-color-disabled;
       }
+    }
+  }
+
+
+  // Icon Color
+  &.k-button--primary, &.k-button--solid {
+    .k-icon {
+      color: $kku-black-color;
     }
   }
 }

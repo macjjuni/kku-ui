@@ -5,7 +5,7 @@ import { KButton, KButtonGroupProps, KButtonProps } from '@/components';
 const ButtonGroup = (props: KButtonGroupProps) => {
 
   // region [Hooks]
-  const { className, variant = 'outlined', children, ...restProps } = props;
+  const { className, variant = 'outlined', size = 'medium', children, ...restProps } = props;
   // endregion
 
 
@@ -30,11 +30,16 @@ const ButtonGroup = (props: KButtonGroupProps) => {
       }
       if (child.type === KButton) {
         const childItem = child as ReactElement<KButtonProps>;
-        buttons.push(cloneElement(childItem, { ...childItem.props, variant, key: child.key ?? `k-button--${index}}` }));
+        buttons.push(cloneElement(childItem, {
+          ...childItem.props,
+          key: child.key ?? `k-button--${index}}`,
+          size,
+          variant,
+        }));
       }
     });
     return buttons;
-  }, [children, variant]);
+  }, [children, variant, size]);
   // endregion
 
   return (
