@@ -18,6 +18,7 @@ const ToggleButtonGroup = ({
   multiple,
   className,
   variant = 'outlined',
+  size = 'medium',
   children,
   ...restProps
 }: KToggleButtonGroupProps) => {
@@ -77,14 +78,15 @@ const ToggleButtonGroup = ({
 
         return cloneElement(childItem, {
           ...childItem.props,
-          variant,
-          className: isSelected ? 'k-toggle-button--selected' : undefined,
           key: child.key ?? `k-toggle-button--${value}`,
+          className: isSelected ? 'k-toggle-button--selected' : undefined,
+          variant,
+          size,
           onClick: handleClick,
           onKeyDown: handleKeyDown,
         });
       });
-  }, [children, variant, getIsSelected, onChangeSelected]);
+  }, [children, size, variant, getIsSelected, onChangeSelected]);
   // endregion
 
   return (

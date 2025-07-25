@@ -2,6 +2,7 @@
 
 
 .k-toggle-button-group {
+  display: inline-flex;
   white-space: nowrap;
 
   // Common
@@ -18,9 +19,6 @@
     margin-left: 0;
     margin-right: -1px;
     border-radius: 0;
-
-    //@include kku-transition;
-    //transition-property: color, background;
   }
 
   .k-button.k-toggle-button--selected {
@@ -38,7 +36,7 @@
       &:hover { background: $kku-blue-color-800; }
     }
     &.k-button--subtle {
-      background: $kku-gray-color-200;
+      background: $kku-gray-color-300;
       &:hover { background: $kku-gray-color-200; }
     }
     &.k-button--plain {
