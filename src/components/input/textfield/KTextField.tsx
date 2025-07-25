@@ -13,11 +13,11 @@ import {
   useState,
 } from 'react';
 import { KTextFieldProps, KTextFieldRefs } from '@/components/input/textfield/KTextField.interface';
-import { TextField } from '@/core';
+import { TextField as CoreTextField } from '@/core';
 import { KIcon } from '@/components';
 
 
-const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>) => {
+const TextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>) => {
 
   // region [Hooks]
   const uniqueId = `k-text-field-${useId()}`;
@@ -152,11 +152,11 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
         <div className="k-text-field__fieldset__container">
           {leftContent && <div className="k-text-field__fieldset__container__left">{leftContent}</div>}
 
-          <TextField ref={inputRef} id={id} className="k-text-field__fieldset__container__input" type={Type} label={label}
-                     value={value} disabled={disabled} readOnly={readOnly} placeholder={placeholder} maxLength={maxLength}
-                     onChange={onChangeRoot} onFocus={onFocusRoot} onBlur={onBlurRoot} onKeyDown={onKeyDownRoot}
-                     autoComplete={autoComplete} autoCorrect={autoCorrect} autoCapitalize={autoCapitalize}
-                     style={inputStyle} {...restProps}/>
+          <CoreTextField ref={inputRef} id={id} className="k-text-field__fieldset__container__input" type={Type} label={label}
+                         value={value} disabled={disabled} readOnly={readOnly} placeholder={placeholder} maxLength={maxLength}
+                         onChange={onChangeRoot} onFocus={onFocusRoot} onBlur={onBlurRoot} onKeyDown={onKeyDownRoot}
+                         autoComplete={autoComplete} autoCorrect={autoCorrect} autoCapitalize={autoCapitalize}
+                         style={inputStyle} {...restProps}/>
 
           {(isPasswordMode) && (
             <KIcon icon={isPasswordMode ? 'visibility' : 'visibility_off'} size={18}
@@ -171,5 +171,8 @@ const KTextField = forwardRef((props: KTextFieldProps, ref: Ref<KTextFieldRefs>)
   );
 });
 
+const KTextField = memo(TextField);
+TextField.displayName = 'KTextField';
 KTextField.displayName = 'KTextField';
-export default memo(KTextField);
+
+export default KTextField;
