@@ -4,6 +4,7 @@
   position: absolute;
   opacity: 0.1;
   border-radius: 50%;
+  user-select: none;
 }
 
 @keyframes ripple-effect {

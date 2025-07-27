@@ -156,6 +156,10 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
 
   // region [LifeCycles]
   useEffect(() => {
+    dropdownRef.current?.onClose();
+  }, [value]);
+
+  useEffect(() => {
     initializeWidth();
   }, [size]);
   // endregion
@@ -201,10 +205,7 @@ const Select = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
           {
             items.map((item) => (
               <KMenu.ItemSelectable key={item.value} label={item.label} selected={value === item.value}
-                                    onPointerDown={() => {
-                                      onChangeRoot(item.value);
-                                      dropdownRef.current?.onClose();
-                                    }}/>
+                                    onClick={() => { onChangeRoot(item.value); }}/>
             ))
           }
           {items.length === 0 && <KMenu.Item label={noDataText}/>}

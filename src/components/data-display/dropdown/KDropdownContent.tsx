@@ -1,16 +1,5 @@
 import { createPortal } from 'react-dom';
-import {
-  CSSProperties,
-  FocusEvent,
-  forwardRef,
-  KeyboardEvent,
-  memo,
-  MouseEvent,
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-} from 'react';
+import { CSSProperties, FocusEvent, forwardRef, KeyboardEvent, memo, MouseEvent, useCallback, useImperativeHandle, useMemo } from 'react';
 import { KDropdownContentProps } from './KDropdown.interface';
 import { useDropdownPosition, useEscapeKey, useSafePortalContainer } from '@/common/hooks';
 import { useKDropdownContext } from '@/components/data-display/dropdown/KDropdown.context';
@@ -104,11 +93,6 @@ const DropdownContent = forwardRef<HTMLDivElement | null, KDropdownContentProps>
   // endregion
 
   // region [LifeCycles]
-  useEffect(() => {
-    if (open) {
-      // onFocusFirstItem();
-    }
-  }, [open]);
   // endregion
 
   if (!defaultContainer) {

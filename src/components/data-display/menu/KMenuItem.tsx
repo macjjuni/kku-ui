@@ -37,12 +37,6 @@ const MenuItem = forwardRef<HTMLLIElement, KMenuItemProps>((props, ref) => {
   // endregion
 
   // region [Events]
-  const onClickRoot = useCallback((e: MouseEvent<HTMLLIElement>) => {
-    if (!disabled) {
-      onClick?.(e);
-    }
-  }, [disabled, onClick]);
-
   const onMouseDownRoot = useCallback((e: MouseEvent<HTMLLIElement>) => {
     if (!disabled) {
       onMouseDown?.(e);
@@ -74,6 +68,7 @@ const MenuItem = forwardRef<HTMLLIElement, KMenuItemProps>((props, ref) => {
 
   const onPointerDownRoot = useCallback((e: PointerEvent<HTMLLIElement>) => {
     if (!disabled) {
+      onClick?.(e as MouseEvent<HTMLLIElement>)
       ripple?.register(e);
     }
     onPointerDown?.(e);
@@ -82,7 +77,7 @@ const MenuItem = forwardRef<HTMLLIElement, KMenuItemProps>((props, ref) => {
   const onPointerUpRoot = useCallback((e: PointerEvent<HTMLLIElement>) => {
     ripple.remove();
     onPointerUp?.(e);
-  }, [ripple, onMouseUp]);
+  }, [ripple]);
   // endregion
 
   // region [Templates]
@@ -105,7 +100,7 @@ const MenuItem = forwardRef<HTMLLIElement, KMenuItemProps>((props, ref) => {
 
   return (
     <CoreMenuItem as="li" ref={rootRef} {...restProps} className={rootClass} style={rootStyle} disabled={disabled}
-                  onClick={onClickRoot} onMouseDown={onMouseDownRoot} onMouseUp={onMouseUpRoot}
+                  onMouseDown={onMouseDownRoot} onMouseUp={onMouseUpRoot}
                   onPointerDown={onPointerDownRoot} onPointerUp={onPointerUpRoot}
                   onMouseLeave={onMouseLeaveRoot} onKeyDown={onKeyDownRoot} onKeyUp={onKeyUpRoot}>
       {LeftContent}

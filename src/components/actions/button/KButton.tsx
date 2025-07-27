@@ -1,4 +1,5 @@
-import { forwardRef, KeyboardEvent, memo, MouseEvent, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
+import { forwardRef, KeyboardEvent, memo, MouseEvent, PointerEvent,
+  useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { Button as CoreButton } from '@/core';
 import { useRipple } from '@/common/hooks';
 import { KButtonProps, KButtonRefs } from '@/components';
@@ -11,8 +12,8 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
   const {
     type = 'button', className, label, disabled, isDanger,
     size = 'medium', variant = 'outlined', width, height, style,
-    onClick, onMouseDown, onMouseLeave, onMouseUp, onKeyDown, onKeyUp,
-    ...restProps
+    onClick, onMouseLeave, onKeyDown, onKeyUp,
+    onPointerDown, onPointerUp, ...restProps
   } = props;
 
   const rootRef = useRef<HTMLButtonElement>(null);
@@ -59,20 +60,6 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
     }
   }, [disabled, onClick]);
 
-  const onMouseDownRoot = useCallback((e: MouseEvent<HTMLButtonElement>) => {
-    onMouseDown?.(e);
-    if (!disabled && !isNoRipple) {
-      ripple?.register(e);
-    }
-  }, [ripple, isNoRipple, onMouseDown]);
-
-  const onMouseUpRoot = useCallback((e: MouseEvent<HTMLButtonElement>) => {
-    onMouseUp?.(e);
-    if (!isNoRipple) {
-      ripple.remove();
-    }
-  }, [ripple, isNoRipple, onMouseUp]);
-
   const onMouseLeaveRoot = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     onMouseLeave?.(e);
     if (!rootRef?.current) {
@@ -85,10 +72,7 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
 
   const onKeyDownRoot = useCallback((e: KeyboardEvent<HTMLButtonElement>) => {
     onKeyDown?.(e);
-    if (!isNoRipple) {
-      ripple?.register(e);
-    }
-  }, [ripple, onKeyDown]);
+  }, [onKeyDown]);
 
   const onKeyUpRoot = useCallback((e: KeyboardEvent<HTMLButtonElement>) => {
     onKeyUp?.(e);
@@ -96,12 +80,25 @@ const Button = forwardRef<KButtonRefs, KButtonProps>((props, ref) => {
       handleEnterOrSpacePress(e, () => ripple.remove())
     }
   }, [ripple, onKeyUp]);
+
+  const onPointerDownRoot = useCallback((e: PointerEvent<HTMLButtonElement>) => {
+    onPointerDown?.(e);
+    if (!disabled && !isNoRipple) {
+      ripple?.register(e);
+    }
+  }, [ripple, disabled]);
+
+  const onPointerUpRoot = useCallback((e: PointerEvent<HTMLButtonElement>) => {
+    ripple.remove();
+    onPointerUp?.(e);
+  }, [ripple]);
   // endregion
 
   return (
     <CoreButton ref={rootRef} {...restProps} type={type} label={label} className={rootClass} style={rootStyle}
-                disabled={disabled} onMouseDown={onMouseDownRoot} onMouseLeave={onMouseLeaveRoot} onClick={onClickRoot}
-                onMouseUp={onMouseUpRoot} onKeyDown={onKeyDownRoot} onKeyUp={onKeyUpRoot}/>
+                disabled={disabled} onMouseLeave={onMouseLeaveRoot} onClick={onClickRoot}
+                onKeyDown={onKeyDownRoot} onKeyUp={onKeyUpRoot} onPointerDown={onPointerDownRoot}
+                onPointerUp={onPointerUpRoot}/>
   );
 });
 
