@@ -1,4 +1,4 @@
-import { forwardRef, KeyboardEvent, memo, MouseEvent, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
+import { forwardRef, KeyboardEvent, memo, MouseEvent, PointerEvent, useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 import { KMenuItemProps } from './KMenu.interface';
 import { MenuItem as CoreMenuItem } from '@/core';
 import { useRipple } from '@/common/hooks';
@@ -12,7 +12,7 @@ const MenuItem = forwardRef<HTMLLIElement, KMenuItemProps>((props, ref) => {
     children, className, style, size = 'medium',
     leftContent, label, rightContent, shortcut,
     disabled, onClick, onMouseDown, onMouseLeave,
-    onMouseUp, onKeyDown, onKeyUp,
+    onMouseUp, onKeyDown, onKeyUp, onPointerUp, onPointerDown,
     ...restProps
   } = props;
   const rootRef = useRef<HTMLLIElement>(null);
@@ -44,11 +44,10 @@ const MenuItem = forwardRef<HTMLLIElement, KMenuItemProps>((props, ref) => {
   }, [disabled, onClick]);
 
   const onMouseDownRoot = useCallback((e: MouseEvent<HTMLLIElement>) => {
-    onMouseDown?.(e);
     if (!disabled) {
-      ripple?.register(e);
+      onMouseDown?.(e);
     }
-  }, [ripple, onMouseDown]);
+  }, [ripple, onMouseDown, disabled]);
 
   const onMouseUpRoot = useCallback((e: MouseEvent<HTMLLIElement>) => {
     onMouseUp?.(e);
@@ -72,6 +71,18 @@ const MenuItem = forwardRef<HTMLLIElement, KMenuItemProps>((props, ref) => {
     onKeyUp?.(e);
     handleEnterOrSpacePress(e, () => ripple.remove());
   }, [ripple, onKeyUp]);
+
+  const onPointerDownRoot = useCallback((e: PointerEvent<HTMLLIElement>) => {
+    if (!disabled) {
+      ripple?.register(e);
+    }
+    onPointerDown?.(e);
+  }, [ripple, disabled, onMouseDown]);
+
+  const onPointerUpRoot = useCallback((e: PointerEvent<HTMLLIElement>) => {
+    ripple.remove();
+    onPointerUp?.(e);
+  }, [ripple, onMouseUp]);
   // endregion
 
   // region [Templates]
@@ -95,6 +106,7 @@ const MenuItem = forwardRef<HTMLLIElement, KMenuItemProps>((props, ref) => {
   return (
     <CoreMenuItem as="li" ref={rootRef} {...restProps} className={rootClass} style={rootStyle} disabled={disabled}
                   onClick={onClickRoot} onMouseDown={onMouseDownRoot} onMouseUp={onMouseUpRoot}
+                  onPointerDown={onPointerDownRoot} onPointerUp={onPointerUpRoot}
                   onMouseLeave={onMouseLeaveRoot} onKeyDown={onKeyDownRoot} onKeyUp={onKeyUpRoot}>
       {LeftContent}
       {Label}

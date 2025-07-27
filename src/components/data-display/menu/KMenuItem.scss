@@ -17,6 +17,7 @@ $kku-menu-item-focus-width: 2px;
   background: $kku-white-color;
   overflow: hidden;
   cursor: pointer;
+  user-select: none;
 
   &:after {
     position: absolute;

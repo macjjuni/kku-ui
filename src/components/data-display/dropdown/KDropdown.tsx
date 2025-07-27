@@ -46,11 +46,11 @@ const Dropdown = forwardRef<KDropdownRefs, KDropdownProps>((props, ref) => {
 
   // region [Privates]
   const onOpen = useCallback(() => {
-    setOpen(true)
+    setOpen(true);
     onDropdownOpen?.();
   }, [onDropdownOpen]);
   const onClose = useCallback(() => {
-    setOpen(false)
+    setOpen(false);
     onDropdownClose?.();
   }, [onDropdownClose]);
   // endregion
@@ -121,7 +121,7 @@ const Dropdown = forwardRef<KDropdownRefs, KDropdownProps>((props, ref) => {
   );
 });
 
-interface DropdownNamespace extends ForwardRefExoticComponent<KDropdownProps & RefAttributes<HTMLElement>> {
+interface DropdownNamespace extends ForwardRefExoticComponent<KDropdownProps & RefAttributes<KDropdownRefs>> {
   Trigger: typeof DropdownTrigger;
   Content: typeof DropdownContent;
 }
