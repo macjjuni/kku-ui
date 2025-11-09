@@ -112,7 +112,7 @@ const Dropdown = forwardRef<KDropdownRefs, KDropdownProps>((props, ref) => {
   );
 
   return (
-    <Component {...restProps} {...restProps} className={rootClass}>
+    <Component {...restProps} className={rootClass}>
       <KDropdownContext value={contextValue}>
         {Trigger}
         {Content}
