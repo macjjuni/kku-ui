@@ -34,6 +34,7 @@ $accordion-width-medium: 640px;
 
     @include kku-transition;
     @include kku-focus-visible;
+    @include remove-tap-highlight;
     transition-property: background, border-bottom-color;
 
     // #Marker Style[Safari]
@@ -57,6 +58,9 @@ $accordion-width-medium: 640px;
     transition-property: max-height;
     background-color: var(--white-color);
     overflow: hidden;
+
+    will-change: height, max-height;
+    transform: translateZ(0); /* GPU 가속 활성화 */
   }
 
   &.k-accordion--small {

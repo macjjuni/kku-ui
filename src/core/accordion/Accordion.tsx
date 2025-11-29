@@ -23,15 +23,9 @@ const Accordion = (props: AccordionProps) => {
     let ContentElement: ReactNode | null = null;
 
     Children.forEach(children, (child: ReactNode) => {
-      if (!isValidElement(child)) {
-        return;
-      }
-      if (child?.type === AccordionSummary) {
-        SummaryElement = child;
-      }
-      if (child?.type === AccordionContent) {
-        ContentElement = child;
-      }
+      if (!isValidElement(child)) { return; }
+      if (child?.type === AccordionSummary) { SummaryElement = child; }
+      if (child?.type === AccordionContent) { ContentElement = child; }
     });
 
     return { SummaryElement, ContentElement };

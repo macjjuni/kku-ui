@@ -25,6 +25,7 @@ $kku-select-legend-height: 16px;
     border: 1px solid $kku-border-color-default;
     border-radius: $kku-border-radius-default;
     @include kku-transition;
+    @include remove-tap-highlight;
     transition-property: border-color;
 
     &:hover {

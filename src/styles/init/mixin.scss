@@ -49,3 +49,9 @@
 @mixin kku-transition {
   transition: 0.16s ease;
 }
+
+@mixin remove-tap-highlight {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  user-select: none;
+}
