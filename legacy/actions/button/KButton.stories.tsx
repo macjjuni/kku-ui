@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react-vite';
 import { BUTTON_VARIANTS, KButton } from 'src/components';
-import { KButtonProps } from 'legacy/actions/button/KButton.interface';
+import { KButtonProps } from 'legacy/actions/button/KSwitch.interface';
 import { disabledArgType, sizeArgType } from 'src/common/storybook/argTypes';
 
 const meta: Meta<KButtonProps> = {
   component: KButton,
-  title: 'Actions/KButton',
+  title: 'Actions/KSwitch',
   argTypes: {
     label: {
       description: '내부 컨턴츠 내용을 설정합니다.',
@@ -26,7 +26,7 @@ export default meta;
 type Story = StoryObj<typeof KButton>
 
 const commonArgs: KButtonProps = {
-  label: 'KButton',
+  label: 'KSwitch',
   size: 'medium',
   disabled: false,
   isDanger: false,

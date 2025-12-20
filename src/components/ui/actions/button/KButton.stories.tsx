@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KButton, KButtonProps } from './KButton';
 
 const meta: Meta<typeof KButton> = {
-  title: "UI/Actions/Button",
+  title: "Actions/Button",
   component: KButton,
   tags: ["autodocs"],
   argTypes: {

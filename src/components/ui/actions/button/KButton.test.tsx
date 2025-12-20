@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { KButton } from './KButton';
 
-describe('KButton', () => {
+describe('KSwitch', () => {
   const labelText = 'Click me';
   const mockFn = vi.fn();
 

@@ -19,7 +19,7 @@ kku-ui는 React 기반의 컴포넌트 라이브러리로, 컴포넌트 간 유�
 
 | 컴포넌트               | 기능 | 스토리북 | a11y |
 |:-------------------|:----:|:--------:|:----:|
-| `<KButton/>`       | ✅   | ✅       | ✅   |
+| `<KSwitch/>`       | ✅   | ✅       | ✅   |
 | `<KButtonGroup/>`  | ✅   | ✅       | ✅   |
 | `<KToggleButton/>` | ✅   | ✅       | ✅   |
 | `<KSwitch/>`       | ✅   | ✅       | ✅   |
@@ -40,7 +40,7 @@ kku-ui는 React 기반의 컴포넌트 라이브러리로, 컴포넌트 간 유�
 
 | 컴포넌트                    | 기능 | 스토리북 | a11y |
 |:------------------------|:----:|:--------:|:----:|
-| `<KButton/>`            | ✅   | ✅       | ✅   |
+| `<KSwitch/>`            | ✅   | ✅       | ✅   |
 | `<TextField/>`         | ✅  | ✅       | ✅   |
 | `<Switch/>`            | ✅   | ✅       | ✅   |
 | `<Menu/>`              | ✅   | ✅       | ✅   |
@@ -71,11 +71,11 @@ import 'kku-ui/lib/index.css'
 ## 🧑🏻‍💻 Use Examples
 
 ```typescript
-import { KButton } from 'kku-ui'
+import { KSwitch } from 'kku-ui'
 
 export default function Component() {
   return (
-    <KButton label="Hello World!"/>
+    <KSwitch label="Hello World!"/>
   );
 } 
 ```

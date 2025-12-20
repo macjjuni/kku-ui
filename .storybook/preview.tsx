@@ -28,17 +28,17 @@ const preview: Preview = {
   parameters: {
     controls: { expanded: true },
     backgrounds: {
-      default: 'white',
+      default: '#fff',
       values: [
-        { name: 'white', value: '#ffffff' },
-        { name: 'dark', value: '#1f2124' },
+        { name: 'white', value: '#fff' },
+        { name: 'dark', value: '#000' },
       ],
     },
     options: {
       storySort: {
         order: [
           'Actions',
-          ['KButton', 'ButtonGroup', 'ToggleButton', 'Switch'],
+          ['KSwitch', 'ButtonGroup', 'ToggleButton', 'Switch'],
           'Input',
           ['TextField', 'Select'],
           'Data Display',
@@ -47,7 +47,7 @@ const preview: Preview = {
           'Layout',
           'Foundations',
           'Core',
-          ['KButton', 'TextField', 'Switch', 'Menu', 'Accordion', 'Panel'],
+          ['KSwitch', 'TextField', 'Switch', 'Menu', 'Accordion', 'Panel'],
         ],
       },
     },
