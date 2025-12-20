@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { KTextField, KTextFieldRefs } from './KTextField';
 
-describe('KTextField 컴포넌트 테스트', () => {
+describe('KSelect 컴포넌트 테스트', () => {
 
   // region [Basic Tests]
   it('라벨과 헬퍼 텍스트가 정상적으로 렌더링되어야 한다', () => {

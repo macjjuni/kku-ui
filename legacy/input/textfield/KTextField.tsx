@@ -12,7 +12,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { KTextFieldProps, KTextFieldRefs } from 'legacy/input/textfield/KTextField.interface';
+import { KTextFieldProps, KTextFieldRefs } from 'legacy/input/textfield/KSelect.interface';
 import { TextField as CoreTextField } from 'src/core';
 import { KIcon } from 'src/components';
 

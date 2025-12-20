@@ -29,7 +29,7 @@
         //react: https://github.com/jsx-eslint/eslint-plugin-react/tree/master/docs/rules
         "react/react-in-jsx-scope": "off", // import React from "react" 구문 체크하지 않음
         "react/jsx-indent-props": ["error", "first"], // JSX Element 내 attribute 정렬은 첫 attribute 시작점에 맞춤
-        "react/jsx-first-prop-new-line": ["error", "never"], // 첫 번째 속성을 새로운 줄로 시작하지 않음
+        "react/jsx-first-prop-new-line": "off", // 첫 번째 속성을 새로운 줄로 시작하지 않음
         "react/jsx-max-props-per-line": ["error", { "maximum": 6 }], // 한 줄에 최대 4개의 속성 허용
         "react/jsx-closing-bracket-location": ["error", "after-props"], // 닫는 괄호를 마지막 속성 바로 뒤에 위치
         "indent": ["error", 2, { "SwitchCase": 1, "ignoredNodes": ["JSXAttribute"]}], // 4칸 들여쓰기를 하지만 jsx 내 attribute 는 체크하지 않음

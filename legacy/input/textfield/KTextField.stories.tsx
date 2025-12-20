@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import KTextField from 'legacy/input/textfield/KTextField';
-import { KTextFieldProps, KTextFieldRefs } from 'legacy/input/textfield/KTextField.interface';
+import KTextField from 'legacy/input/textfield/KSelect';
+import { KTextFieldProps, KTextFieldRefs } from 'legacy/input/textfield/KSelect.interface';
 import { sizeArgType } from 'src/common/storybook/argTypes';
 import { KButton } from 'src/components';
 

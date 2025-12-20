@@ -11,6 +11,10 @@ const meta: Meta<typeof KTextField> = {
       control: 'select',
       options: ['sm', 'default', 'lg'],
     },
+    width: {
+      control: 'select',
+      options: ['sm', 'md', 'lg', 'auto', 'full'],
+    },
     required: {
       control: 'boolean',
     },

@@ -23,7 +23,7 @@ kku-ui는 React 기반의 컴포넌트 라이브러리로, 컴포넌트 간 유�
 | `<KButtonGroup/>`  | ✅   | ✅       | ✅   |
 | `<KToggleButton/>` | ✅   | ✅       | ✅   |
 | `<KSwitch/>`       | ✅   | ✅       | ✅   |
-| `<KTextField/>`    | ✅   | ✅       | ✅   |
+| `<KSelect/>`    | ✅   | ✅       | ✅   |
 | `<KSelect/>`       | ✅   | ✅       | ✅   |
 | `<KAccordion/>`    | ✅   | ✅       | ✅   |
 | `<KMenu/>`         | ✅   | ✅       | ✅   |
