@@ -1,7 +1,7 @@
 import { mergeConfig } from 'vite';
 
 export default {
-  stories: ['../**/*.stories.@(ts|tsx|js|jsx)'],
+  stories: ['../src/**/*.stories.@(ts|tsx|js|jsx)'],
   core: { builder: '@storybook/builder-vite' },
   addons: [
     '@storybook/addon-a11y',

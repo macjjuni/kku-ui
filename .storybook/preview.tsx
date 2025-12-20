@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/react-vite';
-import '../src/components/index.scss';
+import '../src/styles/index.css';
 import './preview.scss';
 
 export const globalTypes = {
@@ -38,7 +38,7 @@ const preview: Preview = {
       storySort: {
         order: [
           'Actions',
-          ['Button', 'ButtonGroup', 'ToggleButton', 'Switch'],
+          ['KButton', 'ButtonGroup', 'ToggleButton', 'Switch'],
           'Input',
           ['TextField', 'Select'],
           'Data Display',
@@ -47,7 +47,7 @@ const preview: Preview = {
           'Layout',
           'Foundations',
           'Core',
-          ['Button', 'TextField', 'Switch', 'Menu', 'Accordion', 'Panel'],
+          ['KButton', 'TextField', 'Switch', 'Menu', 'Accordion', 'Panel'],
         ],
       },
     },

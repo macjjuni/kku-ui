@@ -1,0 +1,36 @@
+@use '../../../src/styles/Entry' as *;
+
+// region [Component Tokens]
+$k-button-border-radius: $kku-border-radius-default;
+// endregion
+
+
+.k-button-group {
+  white-space: nowrap;
+
+  // Common
+  .k-button:first-child {
+    border-top-left-radius: $k-button-border-radius;
+    border-bottom-left-radius: $k-button-border-radius;
+  }
+  .k-button:last-child {
+    border-top-right-radius: $k-button-border-radius;
+    border-bottom-right-radius: $k-button-border-radius;
+    margin-right: -1px;
+  }
+  .k-button {
+    margin-left: 0;
+    margin-right: -1px;
+    border-radius: 0;
+  }
+
+  .k-button--primary, .k-button--subtle {
+    border: none;
+  }
+
+  .k-button + .k-button {
+    margin-right: -1px;
+  }
+  // Default
+  .k-button.k-button--outlined:hover { z-index: 1; }
+}

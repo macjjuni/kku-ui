@@ -1,5 +1,5 @@
 import { RefObject, useEffect, useState } from 'react';
-import { KDropdownOffsetType, KDropdownPositionType } from '@/components/data-display/dropdown/KDropdown.interface';
+import { KDropdownOffsetType, KDropdownPositionType } from '../../../legacy/data-display/dropdown/KDropdown.interface';
 
 
 interface Position {

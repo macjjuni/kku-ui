@@ -1,0 +1,23 @@
+@use '../../../src/styles/Entry' as *;
+
+
+.k-dropdown {
+  display: inline-flex;
+
+  .k-dropdown__trigger {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    @include kku-focus-visible;
+
+    &.k-dropdown__trigger--disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .k-dropdown__content {
+    &:focus-visible {
+      outline: 0;
+    }
+  }
+}

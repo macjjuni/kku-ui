@@ -4,7 +4,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 import { act, useCallback, useState } from 'react';
 import userEvent from '@testing-library/user-event';
 import { KModal, KMODAL_SIZES } from '@/components';
-import { KModalMotion } from '@/components/feedback/modal/KModal.motion';
+import { KModalMotion } from '../../../../legacy/feedback/modal/KModal.motion';
 
 
 const testTitle = 'KModal Title';

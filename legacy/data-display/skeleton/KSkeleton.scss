@@ -1,0 +1,36 @@
+@use '../../../src/styles/Entry' as *;
+
+// region [Component Token]
+
+$kku-skeleton-background-color-light: $kku-slate-color-300;
+$kku-skeleton-background-color-dark: $kku-slate-color-900;
+
+// endregion
+
+
+.k-skeleton {
+  position: relative;
+  display: inline-block;
+  background-color: $kku-skeleton-background-color-light;
+  border-radius: $kku-border-radius-default;
+  overflow: hidden;
+
+  &--pulse {
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+
+  &--wave::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150px;
+    height: 100%;
+    width: 25%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.56), transparent);
+    animation: wave 1.6s linear infinite;
+  }
+}
+
+.#{$kku-dark-mode-signature} .k-skeleton {
+  background-color: $kku-skeleton-background-color-dark;
+}

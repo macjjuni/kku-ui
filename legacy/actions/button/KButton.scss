@@ -1,0 +1,251 @@
+@use '../../../src/styles/Entry' as *;
+
+// region [Component Tokens]
+
+
+.k-button {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: $kku-border-radius-default;
+  cursor: pointer;
+  overflow: hidden;
+  user-select: none;
+  @include kku-font-family;
+  @include kku-focus-visible;
+  @include kku-transition;
+  transition-property: background, border-color;
+
+  & + & { margin-left: $kku-spacing-8; }
+  &.k-button--disabled { cursor: not-allowed; }
+
+  // region [Variant]
+
+  &.k-button--outlined {
+    color: $kku-text-color-default;
+    border-color: $kku-border-color-default;
+    background: $kku-background-color-default;
+
+    &:hover:not(.k-button--disabled) {
+      border-color: $kku-border-color-hover;
+      background: $kku-background-color-hover;
+    }
+
+    &.k-button--disabled {
+      color: $kku-text-color-disabled;
+      border-color: $kku-border-color-disabled;
+      background: $kku-background-color-disabled;
+    }
+  }
+
+  &.k-button--solid {
+    color: $kku-white-color;
+    border: none;
+    background-color: $kku-black-color;
+
+    &:hover:not(.k-button--disabled) {
+      background: linear-gradient(
+                      0deg,
+                      #{rgba(255, 255, 255, 0.15)} 0%,
+                      #{rgba(255, 255, 255, 0.15)} 100%
+      ),
+      #{$kku-black-color};
+    }
+
+    &.k-button--disabled {
+      color: $kku-slate-color-500;
+      border-color: $kku-slate-color-900;
+      background: $kku-slate-color-900;
+    }
+  }
+
+  &.k-button--primary {
+    color: $kku-white-color;
+    border-color: $kku-primary-color-default;
+    background-color: $kku-primary-color-default;
+
+    &:hover {
+      color: $kku-white-color;
+      border-color: $kku-primary-color-hover;
+      background-color: $kku-primary-color-hover;
+    }
+
+    &.k-button--disabled {
+      color: $kku-text-color-disabled;
+      border-color: $kku-primary-color-disabled;
+      background-color: $kku-primary-color-disabled;
+    }
+  }
+
+  &.k-button--subtle {
+    color: $kku-text-color-default;
+    border-color: $kku-slate-color-200;
+    background: $kku-slate-color-200;
+
+    &:hover:not(.k-button--disabled) {
+      border-color: $kku-slate-color-300;
+      background: $kku-slate-color-300;
+    }
+
+    &.k-button--disabled {
+      color: $kku-slate-color-600;
+    }
+  }
+
+  &.k-button--plain {
+    color: $kku-text-color-default;
+    border-color: transparent;
+    background: transparent;
+
+    &:hover {
+      color: $kku-text-color-hover;
+    }
+
+    &.k-button--disabled {
+      color: $kku-text-color-disabled;
+    }
+  }
+
+  // Icon Color
+  &.k-button--primary, &.k-button--solid {
+    .k-icon {
+      color: $kku-white-color;
+    }
+  }
+
+
+  &.k-button--danger {
+
+    &.k-button--outlined {
+      color: $kku-error-color-default;
+      border-color: $kku-error-color-default;
+      background-color: $kku-background-color-default;
+
+      &:hover {
+        color: $kku-error-color-hover;
+        border-color: $kku-error-color-hover;
+        background-color: $kku-background-color-default;
+      }
+
+      &.k-button--disabled {
+        border-color: $kku-error-color-disabled;
+        background-color: $kku-background-color-disabled;
+      }
+    }
+
+    &.k-button--solid, &.k-button--primary, &.k-button--subtle {
+      color: $kku-white-color;
+      border-color: $kku-error-color-default;
+      background-color: $kku-error-color-default;
+
+      &:hover {
+        border-color: $kku-error-color-hover;
+        background-color: $kku-error-color-hover;
+      }
+
+      &.k-button--disabled {
+        color: $kku-text-color-disabled;
+        border-color: $kku-error-color-disabled;
+        background-color: $kku-error-color-disabled;
+      }
+    }
+
+    &.k-button--plain {
+      color: $kku-error-color-default;
+
+      &:hover { color: $kku-error-color-hover; }
+      &.k-button--disabled { color: $kku-error-color-disabled; }
+    }
+
+  }
+
+  // endregion
+
+  $kku-button-height-small: 30px;
+  $kku-button-height-medium: 36px;
+
+  // region [Size]
+  &.k-button--small {
+    height: $kku-button-height-small;
+    padding: 0 $kku-spacing-12;
+    @include kku-text-small;
+  }
+
+  &.k-button--medium {
+    height: $kku-button-height-medium;
+    padding: 0 $kku-spacing-20;
+    @include kku-text-medium;
+  }
+  // endregion
+}
+
+.#{$kku-dark-mode-signature} .k-button {
+
+  &.k-button--solid {
+    color: $kku-black-color;
+    background-color: $kku-white-color;
+
+    &:hover:not(.k-button--disabled) {
+      background: linear-gradient(
+                      0deg,
+                      #{rgba(0, 0, 0, 0.15)} 0%,
+                      #{rgba(0, 0, 0, 0.15)} 100%
+      ),
+      #{$kku-white-color};
+    }
+
+    &.k-button--disabled {
+      color: $kku-slate-color-600;
+      border-color: $kku-border-color-disabled;
+      background: $kku-background-color-disabled;
+    }
+  }
+
+  &.k-button--subtle {
+    border-color: $kku-slate-color-800;
+    background: $kku-slate-color-800;;
+
+    &:hover:not(.k-button--disabled) {
+      border-color: $kku-slate-color-700;
+      background: $kku-slate-color-700;
+    }
+
+    &.k-button--disabled {
+      color: $kku-slate-color-600;
+      border-color: $kku-background-color-disabled;
+      background: $kku-background-color-disabled;
+    }
+  }
+
+  &.k-button--danger {
+    &.k-button--solid, &.k-button--primary, &.k-button--subtle {
+      color: $kku-white-color;
+      border-color: $kku-error-color-default;
+      background-color: $kku-error-color-default;
+
+      &:hover {
+        border-color: $kku-error-color-hover;
+        background-color: $kku-error-color-hover;
+      }
+
+      &.k-button--disabled {
+        color: $kku-text-color-disabled;
+        border-color: $kku-error-color-disabled;
+        background-color: $kku-error-color-disabled;
+      }
+    }
+  }
+
+
+  // Icon Color
+  &.k-button--primary, &.k-button--solid {
+    .k-icon {
+      color: $kku-black-color;
+    }
+  }
+}

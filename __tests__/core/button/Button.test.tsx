@@ -9,7 +9,7 @@ beforeEach(() => {
   user = userEvent.setup();
 });
 
-describe('Button 컴포넌트', () => {
+describe('KButton 컴포넌트', () => {
   it('label prop으로 텍스트를 렌더링한다', () => {
     const buttonLabel = 'Click me!';
     render(<Button label={buttonLabel} />);
@@ -24,7 +24,7 @@ describe('Button 컴포넌트', () => {
     const labelText = 'Label';
 
     expect(() => render(<Button label={labelText}>{childText}</Button>))
-      .toThrow('Button 컴포넌트에 label과 children을 동시에 넣을 수 없습니다.');
+      .toThrow('KButton 컴포넌트에 label과 children을 동시에 넣을 수 없습니다.');
   });
 
   it('특정 TabIndex 속성이 적용된다. ', () => {

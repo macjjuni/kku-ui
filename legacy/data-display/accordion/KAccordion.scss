@@ -1,0 +1,89 @@
+@use '../../../src/styles/Entry' as *;
+
+// region [Component Token]
+
+$accordion-border-color: $kku-slate-color-400;
+$accordion-background-color-base: $kku-background-color-default;
+$accordion-background-color-hover: $kku-background-color-hover;
+$accordion-text-color: $kku-text-color-default;
+
+$accordion-border-radius: $kku-border-radius-default;
+
+$accordion-width-small: 480px;
+$accordion-width-medium: 640px;
+
+// endregion
+
+.k-accordion {
+  color: $accordion-text-color;
+  border-bottom: 1px solid $accordion-border-color;
+
+  &[data-open="true"] {
+    .k-accordion__summary__icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  .k-accordion__summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none; // #Marker Style[Other Browser]
+    user-select: none;
+    cursor: pointer;
+
+    @include kku-transition;
+    @include kku-focus-visible;
+    @include remove-tap-highlight;
+    transition-property: background, border-bottom-color;
+
+    // #Marker Style[Safari]
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    .k-accordion__summary__text {
+      font-size: inherit;
+    }
+    .k-accordion__summary__icon {
+      @include kku-transition;
+      transition-duration: 0.24s;
+      transition-property: transform;
+    }
+  }
+
+  .k-accordion__content {
+    @include kku-transition;
+    transition-duration: 0.24s;
+    transition-property: max-height;
+    background-color: var(--white-color);
+    overflow: hidden;
+
+    will-change: height, max-height;
+    transform: translateZ(0); /* GPU 가속 활성화 */
+  }
+
+  &.k-accordion--small {
+    width: 100%;
+    max-width: $accordion-width-small;
+    @include kku-text-small;
+
+    .k-accordion__summary, .k-accordion__content > .k-accordion__content__container {
+      padding: $kku-spacing-8 $kku-spacing-2;
+    }
+  }
+
+  &.k-accordion--medium {
+    width: 100%;
+    max-width: $accordion-width-medium;
+    @include kku-text-medium;
+
+    .k-accordion__summary, .k-accordion__content > .k-accordion__content__container {
+      padding: $kku-spacing-12 $kku-spacing-2;
+    }
+  }
+}
+
+
+.#{$kku-dark-mode-signature} .k-accordion {
+}

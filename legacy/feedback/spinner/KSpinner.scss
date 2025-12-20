@@ -1,0 +1,40 @@
+@use '../../../src/styles/Entry' as *;
+
+// region [Component Tokens]
+
+$kku-spinner-circle-color-light: $kku-slate-color-300;
+$kku-spinner-circle-color-dark: $kku-slate-color-600;
+
+$kku-spinner-size-small: 32px;
+$kku-spinner-size-medium: 48px;
+
+$kku-spinner-padding: $kku-spacing-4;
+
+// endregion
+
+.k-spinner {
+  padding: $kku-spinner-padding;
+
+  .k-spinner__body {
+    animation: spin 0.96s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+
+    .k-spinner__body__circle { color: $kku-spinner-circle-color-light; }
+  }
+  &.k-spinner--small {
+    width: $kku-spinner-size-small;
+    height: $kku-spinner-size-small;
+  }
+  &.k-spinner--medium {
+    width: $kku-spinner-size-medium;
+    height: $kku-spinner-size-medium;
+  }
+}
+
+.#{$kku-dark-mode-signature} .k-spinner {
+
+  .k-spinner__body {
+    .k-spinner__body__circle { color: $kku-spinner-circle-color-dark; }
+  }
+}
+
+

@@ -1,0 +1,128 @@
+@use '../../../src/styles/Entry' as *;
+
+// region [Component Tokens]
+
+$modal-text-color: $kku-text-color-default;
+
+$modal-content-z-index: $kku-modal-content-z-index;
+
+$modal-content-width-small: 640px;
+$modal-content-height-small: 400px;
+
+$modal-content-width-medium: 800px;
+$modal-content-height-medium: 460px;
+
+$modal-content-width-large: 1040px;
+$modal-content-height-large: 600px;
+
+$modal-content-border-color: $kku-slate-color-300;
+$modal-content-background-color: $kku-background-color-default;
+$modal-content-border-radius: $kku-border-radius-default;
+$modal-content-box-shadow: $kku-box-shadow-default;
+
+$modal-content-header-text-size: $kku-slate-color-900;
+
+// endregion
+
+.k-modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: $modal-text-color;
+  border-radius: $modal-content-border-radius;
+  background-color: $modal-content-background-color;
+  box-shadow: $modal-content-box-shadow;
+  z-index: $modal-content-z-index;
+  overflow: hidden;
+
+  &.k-modal--small {
+    max-width: $modal-content-width-small;
+    height: $modal-content-height-small;
+  }
+
+  &.k-modal--medium {
+    max-width: $modal-content-width-medium;
+    height: $modal-content-height-medium;
+  }
+
+  &.k-modal--large {
+    max-width: $modal-content-width-large;
+    height: $modal-content-height-large;
+  }
+
+
+  .k-modal__header {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 0 0 44px;
+    width: 100%;
+    padding: $kku-spacing-12 $kku-spacing-36 $kku-spacing-12 $kku-spacing-16;
+    border-bottom: 1px solid $modal-content-border-color;
+    @include kku-text-large;
+
+    .k-modal__header__close {
+      position: absolute;
+      top: 50%;
+      right: $kku-spacing-12;
+      transform: translateY(-50%);
+    }
+  }
+
+  .k-modal__content {
+    flex: 1 1 100%;
+    padding: $kku-spacing-12 $kku-spacing-16;
+    @include kku-text-medium;
+    overflow: auto;
+  }
+
+  &.k-modal__container--no-title {
+    .k-modal__content {
+      padding: $kku-spacing-16;
+    }
+  }
+
+  .k-modal__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 0;
+    padding: 0 $kku-spacing-16 $kku-spacing-12 $kku-spacing-16;
+
+    &.k-modal__footer--left {
+      justify-content: flex-start;
+    }
+    &.k-modal__footer--center {
+      justify-content: center;
+    }
+    &.k-modal__footer--right {
+      justify-content: flex-end;
+    }
+  }
+
+}
+
+@media screen and (max-width: #{$modal-content-width-large}) {
+  .k-modal.k-modal--large {
+    max-width: calc(100dvw - #{$kku-spacing-32});
+  }
+}
+
+@media screen and (max-width: #{$modal-content-width-medium}) {
+  .k-modal.k-modal--medium {
+    max-width: calc(100dvw - #{$kku-spacing-24});
+  }
+}
+
+@media screen and (max-width: #{$modal-content-width-small}) {
+  .k-modal.k-modal--small {
+    max-width: calc(100dvw - #{$kku-spacing-16});
+  }
+}
+
+
+.#{$kku-dark-mode-signature} .k-modal {
+  box-shadow: $kku-box-shadow-dark;
+}
