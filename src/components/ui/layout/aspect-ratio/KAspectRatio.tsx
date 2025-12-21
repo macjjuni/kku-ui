@@ -14,7 +14,7 @@ const KAspectRatio = memo(
       const isValidRatio = ratio > 0;
 
       if (!isValidRatio) {
-        throw Error(`[KAspectRatio]: ratio는 0보다 커야 합니다. 현재 입력값: ${ratio}`);
+        console.warn(`[KAspectRatio]: ratio는 0보다 커야 합니다. 현재 입력값: ${ratio}`);
       }
 
       const safeRatio = useMemo(() => (isValidRatio ? ratio : 1), [isValidRatio, ratio]);
