@@ -9,7 +9,7 @@ lerna-debug.log*
 
 node_modules
 dist
-lib
+/lib
 dist-ssr
 *.local
 .vite-cache
