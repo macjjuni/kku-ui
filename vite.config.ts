@@ -1,3 +1,4 @@
+/// <reference types="vitest" />  // <-- 이 줄을 반드시 파일 최상단에 추가하세요.
 import path from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
@@ -46,6 +47,13 @@ export default defineConfig({
       },
     },
   ],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    }
+  },
   resolve: {
     extensions: ['.tsx', '.ts', '.scss', '.js'],
     alias: [
