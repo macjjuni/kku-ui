@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/react-vite';
-import '../src/components/index.scss';
+import '../src/styles/index.css';
 import './preview.scss';
 
 export const globalTypes = {
@@ -28,26 +28,26 @@ const preview: Preview = {
   parameters: {
     controls: { expanded: true },
     backgrounds: {
-      default: 'white',
+      default: '#fff',
       values: [
-        { name: 'white', value: '#ffffff' },
-        { name: 'dark', value: '#1f2124' },
+        { name: 'white', value: '#fff' },
+        { name: 'dark', value: '#000' },
       ],
     },
     options: {
       storySort: {
         order: [
           'Actions',
-          ['Button', 'ButtonGroup', 'ToggleButton', 'Switch'],
+          ['KSwitch', 'ButtonGroup', 'ToggleButton', 'Switch'],
           'Input',
           ['TextField', 'Select'],
           'Data Display',
-          ['Accordion', 'Menu', 'Dropdown', 'Skeleton'],
+          ['KAccordion', 'Menu', 'Dropdown', 'Skeleton'],
           'Feedbacks',
           'Layout',
           'Foundations',
           'Core',
-          ['Button', 'TextField', 'Switch', 'Menu', 'Accordion', 'Panel'],
+          ['KSwitch', 'TextField', 'Switch', 'Menu', 'KAccordion', 'Panel'],
         ],
       },
     },

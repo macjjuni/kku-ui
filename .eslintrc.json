@@ -29,14 +29,14 @@
         //react: https://github.com/jsx-eslint/eslint-plugin-react/tree/master/docs/rules
         "react/react-in-jsx-scope": "off", // import React from "react" 구문 체크하지 않음
         "react/jsx-indent-props": ["error", "first"], // JSX Element 내 attribute 정렬은 첫 attribute 시작점에 맞춤
-        "react/jsx-first-prop-new-line": ["error", "never"], // 첫 번째 속성을 새로운 줄로 시작하지 않음
+        "react/jsx-first-prop-new-line": "off", // 첫 번째 속성을 새로운 줄로 시작하지 않음
         "react/jsx-max-props-per-line": ["error", { "maximum": 6 }], // 한 줄에 최대 4개의 속성 허용
-        "react/jsx-closing-bracket-location": ["error", "after-props"], // 닫는 괄호를 마지막 속성 바로 뒤에 위치
+        "react/jsx-closing-bracket-location": "off",
         "indent": ["error", 2, { "SwitchCase": 1, "ignoredNodes": ["JSXAttribute"]}], // 4칸 들여쓰기를 하지만 jsx 내 attribute 는 체크하지 않음
-        "@typescript-eslint/indent": ["error", 2, { "SwitchCase": 1, "ignoredNodes": ["JSXAttribute"]}],
-        "max-len": ["warn", {"code": 140}], // 라인당 140자까지 허용
+        "@typescript-eslint/indent": "off",
+        "max-len": ["warn", {"code": 240}], // 라인당 240자까지 허용
         "no-tabs": "error", // 탭 문자 불허
-        "no-multiple-empty-lines": ["error", {"max": 2, "maxBOF": 1, "maxEOF": 1}], // 파일의 시작과 끝에는 1줄씩 빈줄 허용, 중간에는 2줄 허용
+        "no-multiple-empty-lines": ["error", {"max": 2, "maxBOF": 1, "maxEOF": 1}], //   파일의 시작과 끝에는 1줄씩 빈줄 허용, 중간에는 2줄 허용
         "object-curly-spacing": ["error"], // {} 내부에 공백 없게 입력  예) {foo: "bar"}
         "object-curly-newline": ["error", {"consistent": true}], // {} 시작시 줄바꿈 했으면 종료할 때도 줄바꿈해야 함
         "no-trailing-spaces": ["error", {"skipBlankLines": true}], // 라인의 맨 뒤에 불필요한 공백 불허, 공백라인인 경우 허용
@@ -50,7 +50,7 @@
         "no-plusplus": "off", // ++ 연산 사용 가능
         "arrow-body-style": "off", // arrow function 이 아니어도 됩
         "lines-between-class-members": "off", // 클래스 멤버변수 사이 한줄 띄우지 않아도 됨
-//        "@typescript-eslint/no-explicit-any": "off", // any 사용 가능
+        "react/jsx-no-constructed-context-values": "off",
         "@typescript-eslint/ban-ts-comment": "off",
         "react/jsx-filename-extension": [1, {"extensions": [".ts", ".tsx"]}],
         "react/function-component-definition": [

@@ -12,24 +12,27 @@ jobs:
         node-version: [20.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4 # v3 -> v4 업데이트 (더 빠름)
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 8 # 원하는 pnpm 버전 지정 (최신 버전 권장)
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4 # v3 -> v4 업데이트
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
-      - name: Check pnpm version
-        run: pnpm --version
-
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      # [중요] 여기서 파일 존재 여부와 대소문자를 눈으로 직접 확인합니다.
+      - name: Debug Path & Case Sensitivity
+        run: |
+          echo "Checking src/lib directory:"
+          ls -R src/lib
+          echo "Checking if utils.ts exists in lowercase:"
+          find src/lib -name "utils.ts"
 
       - name: Run tests
         run: pnpm vitest run

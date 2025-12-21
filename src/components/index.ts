@@ -1,6 +1,6 @@
-export * from '@/components/actions';
-export * from '@/components/data-display';
-export * from '@/components/feedback';
-export * from '@/components/foundations';
-export * from '@/components/input';
-
+export * from '@/components/ui/actions'
+export * from '@/components/ui/data-display'
+export * from '@/components/ui/feedback'
+export * from '@/components/ui/input'
+export * from '@/components/ui/layout'
+export * from '@/components/ui/foundation/icon'
