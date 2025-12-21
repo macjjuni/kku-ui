@@ -82,6 +82,7 @@ export default defineConfig({
           react: 'React',
           'react-dom': 'ReactDOM',
         },
+        assetFileNames: 'index.css',
         entryFileNames: 'es/[name].js',
         chunkFileNames: 'es/chunks/[name]-[hash].js',
       },
