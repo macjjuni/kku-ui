@@ -26,31 +26,29 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 8.15.8
+        # package.json에 packageManager가 있다면 version 필드는 지우는 게 충돌 방지에 좋습니다.
+        # 명시해야 한다면 로컬과 동일하게 10.x 혹은 9.x로 맞추세요.
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20.17.0"
+          node-version: "20"
           cache: 'pnpm'
 
-      - name: Clear cache (lockfile 유지)
-        run: |
-          rm -rf node_modules storybook-static .vite-cache .pnpm-store
-
       - name: Install dependencies
-        run: |
-          pnpm install --no-frozen-lockfile
+        # --no-frozen-lockfile 대신 캐시를 활용하되 lockfile을 존중하는 방식 권장
+        run: pnpm install --frozen-lockfile
 
       - name: Build Storybook
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          DEBUG: vite:*
         run: |
-          set -x
           pnpm run build-storybook
-          ls -l ./storybook-static
+          # 빌드 결과물이 실제로 생성되었는지 확인
+          if [ ! -d "./storybook-static" ]; then
+            echo "Error: storybook-static directory not found!"
+            exit 1
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
