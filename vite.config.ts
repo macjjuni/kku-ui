@@ -13,14 +13,16 @@ export default defineConfig({
     react(),
     eslint({
       cache: false,
-      include: ['src/**/*.ts', 'src/**/*.tsx'], // src 내부만 검사하도록 한정
-      exclude: ['/virtual:/**', 'node_modules/**'], // 가상 파일 제외
+      include: ['src/**/*.ts', 'src/**/*.tsx'],
+      exclude: ['/virtual:/**', 'node_modules/**'],
     }),
     compression({
       include: [/\.(js)$/, /\.(scss)$/],
       threshold: 1400,
     }),
-    tsconfigPaths(),
+    tsconfigPaths({
+      projects: ['tsconfig.json', 'tsconfig.esm.json'],
+    }),
     dts({
       tsconfigPath: 'tsconfig.esm.json',
       outDir: 'lib/es',
@@ -52,15 +54,10 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    }
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.scss', '.js'],
-    alias: [
-      { find: '@', replacement: path.resolve(__dirname, 'src') },
-    ],
+    alias: { '@': path.resolve(__dirname, './src') },
   },
   build: {
     outDir: 'lib',
