@@ -16,7 +16,8 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        # version: 8 제거 (package.json의 packageManager 필드나 최신 버전 자동 감지)
+        with:
+          version: 10
 
       - name: Setup Node.js
         uses: actions/setup-node@v4 # v3 -> v4 업데이트
