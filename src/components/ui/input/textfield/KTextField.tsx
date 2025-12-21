@@ -44,7 +44,8 @@ export interface KTextFieldRefs {
 }
 
 const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
-  const { className, type, size, label, required, width = 'full', helperText, id, rules, onChange, ...restProps } = props;
+  const { id, className, type, size, label, required, readOnly, width = 'full', helperText,
+    maxLength, rules, onChange, ...restProps } = props;
 
   // region [Hooks]
   const generatedId = useId();
@@ -117,8 +118,8 @@ const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
           {required && <span className="text-danger ml-0.5">*</span>}
         </label>
       )}
-      <input {...restProps} id={inputId} ref={inputRef} type={type} onChange={onChangeTextField}
-             className={cn(inputVariants({ size, width }), errorMessage && 'border-destructive focus-visible:ring-destructive', className)}/>
+      <input {...restProps} id={inputId} ref={inputRef} type={type} onChange={onChangeTextField} readOnly={readOnly}
+             maxLength={maxLength} className={cn(inputVariants({ size, width }), errorMessage && 'border-destructive focus-visible:ring-destructive', className)}/>
       {errorMessage ? (
         <p className="text-xs font-medium text-danger text-destructive">{errorMessage}</p>
       ) : (

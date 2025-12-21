@@ -14,6 +14,7 @@ const meta: Meta<typeof KButton> = {
       control: "select",
       options: ["default", "sm", "lg", "icon"],
     },
+    width: { control: 'select', options: ["default", "full"] },
     disabled: { control: "boolean" },
   },
 };
@@ -21,12 +22,12 @@ const meta: Meta<typeof KButton> = {
 export default meta;
 type Story = StoryObj<typeof KButton>;
 
-export const Default: Story = { args: { children: "Default", variant: "default" } };
-export const Outline: Story = { args: { children: "Outline", variant: "outline" } };
-export const Primary: Story = { args: { children: "Primary", variant: "primary" } };
-export const Danger: Story = { args: { children: "Danger", variant: "danger" } };
-export const Ghost: Story = { args: { children: "Ghost", variant: "ghost" } };
-export const Link: Story = { args: { children: "Link", variant: "link" } };
+export const Default: Story = { args: { children: "Default", variant: "default", width: "default" } };
+export const Outline: Story = { args: { children: "Outline", variant: "outline", width: "default" } };
+export const Primary: Story = { args: { children: "Primary", variant: "primary", width: "default" } };
+export const Danger: Story = { args: { children: "Danger", variant: "danger", width: "default" } };
+export const Ghost: Story = { args: { children: "Ghost", variant: "ghost", width: "default" } };
+export const Link: Story = { args: { children: "Link", variant: "link", width: "default" } };
 
 // 한 페이지에서 모두 확인하고 싶을 때 유용한 모음
 export const AllVariants: Story = {

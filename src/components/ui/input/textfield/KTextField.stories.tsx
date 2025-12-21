@@ -15,9 +15,9 @@ const meta: Meta<typeof KTextField> = {
       control: 'select',
       options: ['sm', 'md', 'lg', 'auto', 'full'],
     },
-    required: {
-      control: 'boolean',
-    },
+    required: { control: 'boolean' },
+    readOnly: { control: 'boolean' },
+    maxLength: { control: 'number' },
   },
 };
 

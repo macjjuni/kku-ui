@@ -29,10 +29,15 @@ const buttonVariants = cva(
         lg: 'h-10 rounded-md px-8',
         icon: 'h-9 w-9',
       },
+      width: {
+        default: 'w-fit',
+        full: 'w-full',
+      },
     },
     defaultVariants: {
       variant: 'default',
       size: 'default',
+      width: 'default',
     },
   },
 );
@@ -42,13 +47,14 @@ export interface KButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, V
 }
 
 const KButton = forwardRef<HTMLButtonElement, KButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, width = "default", asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
     return (
-      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+      <Comp className={cn(buttonVariants({ variant, size, width, className }))} ref={ref} {...props} />
     );
   },
 );
+
 KButton.displayName = 'KButton';
 
 export { KButton, buttonVariants };

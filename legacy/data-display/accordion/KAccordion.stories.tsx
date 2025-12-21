@@ -5,7 +5,7 @@ import { sizeArgType } from 'src/common/storybook/argTypes';
 
 const meta: Meta<KAccordionProps> = {
   component: KAccordion,
-  title: 'Data Display/Accordion',
+  title: 'Data Display/KAccordion',
   argTypes: {
     defaultOpen: {
       control: { type: 'boolean' },

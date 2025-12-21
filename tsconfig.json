@@ -42,7 +42,6 @@
     "vitest.setup.ts",
     "analyzer.js",
     ".storybook/*",
-    "node_modules/.pnpm/vitest@3.2.4_@types+node@24.0.10_@vitest+ui@3.2.4_jiti@1.21.7_jsdom@26.1.0_sass@1.89.2_terser@5.43.1_yaml@2.8.2/node_modules/vitest/globals.d.ts"
   ],
   "exclude": ["node_modules", "./lib/**/*"],
   "references": [{"path": "./tsconfig.node.json"}]
