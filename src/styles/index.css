@@ -1,6 +1,17 @@
+@import "./fonts.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
+
+  @font-face {
+    font-family: 'Pretendard';
+  }
+}
 
 :root {
   --background: 0 0% 100%;
@@ -108,9 +119,4 @@
   --shadow-lg: 0px 0px 1px 0px hsl(0 0% 0% / 0.12), 0px 4px 6px -1px hsl(0 0% 0% / 0.12);
   --shadow-xl: 0px 0px 1px 0px hsl(0 0% 0% / 0.12), 0px 8px 10px -1px hsl(0 0% 0% / 0.12);
   --shadow-2xl: 0px 0px 1px 0px hsl(0 0% 0% / 0.30);
-}
-
-@layer base {
-  * { @apply border-border; }
-  body { @apply bg-background text-foreground; }
 }

@@ -1,9 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import {
-  KBottomSheet, KBottomSheetTrigger, KBottomSheetContent, KBottomSheetHeader,
-  KBottomSheetFooter, KBottomSheetTitle, KBottomSheetDescription, KBottomSheetClose,
-} from "./KBottomSheet";
-import { KButton, KSwitch } from "@/components";
+import { KBottomSheet, KBottomSheetTrigger, KBottomSheetContent, KBottomSheetHeader, KBottomSheetFooter,
+  KBottomSheetTitle, KBottomSheetDescription, KBottomSheetClose, KButton, KSwitch } from "@/components";
 
 const meta: Meta<typeof KBottomSheet> = {
   title: "DataDisplay/BottomSheet",

@@ -15,25 +15,46 @@ import {
   KDropdownMenuSub,
   KDropdownMenuSubContent,
   KDropdownMenuSubTrigger,
-  KDropdownMenuRadioGroup,
-} from "./KDropdownMenu";
+  KDropdownMenuRadioGroup, KDropdownMenuProps,
+} from './KDropdownMenu';
 import { KButton } from '@/components';
+
+// 가상 Props 타입 정의
+type KDropdownMenuStoryArgs = KDropdownMenuProps & {
+  side?: "top" | "right" | "bottom" | "left";
+  align?: "start" | "center" | "end";
+};
 
 const meta: Meta<typeof KDropdownMenu> = {
   title: "DataDisplay/DropdownMenu",
   component: KDropdownMenu,
   tags: ["autodocs"],
   argTypes: {
-    size: { control: "radio", options: ["small", "medium"] },
+    size: {
+      control: "select",
+      options: ["sm", "md"],
+    },
+    side: {
+      control: "select",
+      options: ["top", "right", "bottom", "left"],
+      table: { category: "Custom Content Props" },
+    },
+    align: {
+      control: "select",
+      options: ["start", "center", "end"],
+      table: { category: "Custom Content Props" },
+    },
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof KDropdownMenu>;
+type Story = StoryObj<KDropdownMenuStoryArgs>;
 
 export const Default: Story = {
   args: {
-    size: "medium",
+    size: "md",
+    side: "bottom",
+    align: "end",
   },
   render: (args) => (
     <KDropdownMenu {...args}>
@@ -79,7 +100,9 @@ export const Default: Story = {
 
 export const Selection: Story = {
   args: {
-    size: "small",
+    size: "md",
+    side: "bottom",
+    align: "end",
   },
   render: (args) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -132,7 +155,9 @@ export const PositionTest: Story = {
 
 export const CustomTrigger: Story = {
   args: {
-    size: "medium",
+    size: "md",
+    side: "bottom",
+    align: "end",
   },
   render: (args) => (
     <div className="flex h-[200px] w-full items-center justify-center gap-8">

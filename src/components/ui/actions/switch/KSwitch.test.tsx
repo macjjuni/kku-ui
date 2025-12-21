@@ -10,7 +10,6 @@ describe("KSwitch", () => {
 
     const switchElement = screen.getByTestId("switch")
 
-    // 기본값 꺼짐 (Radix 특성상 aria-checked로 확인)
     expect(switchElement).toHaveAttribute("aria-checked", "false")
 
     await user.click(switchElement)

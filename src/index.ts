@@ -1,3 +1,2 @@
-import './components/index.scss';
+import './styles/index.css';
 export * from './components';
-export * from './core';

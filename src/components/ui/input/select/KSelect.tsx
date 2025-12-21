@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useId, useImperativeHandle, useMemo, useState } from 'react';
+import { forwardRef, useCallback, useId, useImperativeHandle, useMemo, useState, ComponentPropsWithoutRef } from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
@@ -32,7 +32,6 @@ const selectVariants = cva(
   },
 );
 
-// 아이템 전용 스타일 추가
 const itemVariants = cva(
   'relative flex w-full cursor-default select-none items-center rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
   {
@@ -61,18 +60,18 @@ export type KSelectOption = {
 
 export type KSelectRule<T = KSelectValue> = (value: T) => boolean | string | Promise<boolean | string>;
 
-export interface KSelectProps extends VariantProps<typeof selectVariants> {
+// Radix의 onValueChange를 생략하고 커스텀 onChange를 추가
+export interface KSelectProps extends Omit<ComponentPropsWithoutRef<typeof SelectPrimitive.Root>, 'onValueChange'>, VariantProps<typeof selectVariants> {
   label?: string;
   options: KSelectOption[];
-  value?: KSelectValue;
-  onChange?: (value: KSelectValue) => void;
   helperText?: string;
   rules?: KSelectRule<KSelectValue>[];
   placeholder?: string;
   className?: string;
-  disabled?: boolean;
   id?: string;
   required?: boolean;
+  /** 값이 변경될 때 호출되는 콜백 함수 */
+  onChange?: (value: KSelectValue) => void;
 }
 
 export interface KSelectRefs {
@@ -81,10 +80,16 @@ export interface KSelectRefs {
   value: KSelectValue | undefined;
 }
 
+export interface KSelectTriggerProps extends ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> {}
+export interface KSelectContentProps extends ComponentPropsWithoutRef<typeof SelectPrimitive.Content> {}
+export interface KSelectItemProps extends ComponentPropsWithoutRef<typeof SelectPrimitive.Item> {}
 // endregion
 
 const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
-  const { label, options, value, onChange, helperText, rules, placeholder, className, disabled, id, size, width = 'full', required } = props;
+  const {
+    label, options, value, onChange, helperText, rules,
+    placeholder, className, disabled, id, size, width = 'full', required, ...rest
+  } = props;
 
   // region [Hooks]
   const generatedId = useId();
@@ -94,12 +99,9 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
   useImperativeHandle(ref, () => ({
     validate,
     reset: () => setErrorMessage(null),
-    get value() {
-      return value;
-    },
+    value,
   }));
   // endregion
-
 
   // region [Styles]
   const containerClass = useMemo(() => (
@@ -110,7 +112,6 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
       className,
     )), [width, className]);
   // endregion
-
 
   // region [Privates]
   const validate = useCallback(async () => {
@@ -135,12 +136,11 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
   // endregion
 
   // region [Events]
-  const onChangeSelect = useCallback((val: KSelectValue) => {
+  const handleValueChange = useCallback((val: KSelectValue) => {
     if (errorMessage) setErrorMessage(null);
-    onChange?.(val);
+    onChange?.(val); // 외부에서 전달받은 onChange 호출
   }, [errorMessage, onChange]);
   // endregion
-
 
   return (
     <div className={containerClass}>
@@ -151,7 +151,12 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
         </label>
       )}
 
-      <SelectPrimitive.Root value={value} onValueChange={onChangeSelect} disabled={disabled}>
+      <SelectPrimitive.Root
+        value={value}
+        onValueChange={handleValueChange} // 내부적으로는 Radix의 prop에 연결
+        disabled={disabled}
+        {...rest}
+      >
         <SelectPrimitive.Trigger
           id={selectId}
           className={cn(
@@ -180,7 +185,12 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
 
             <SelectPrimitive.Viewport className="p-1">
               {options.map((opt) => (
-                <SelectPrimitive.Item key={opt.value} value={opt.value} disabled={opt.disabled} className={cn(itemVariants({ size }))}>
+                <SelectPrimitive.Item
+                  key={opt.value}
+                  value={opt.value}
+                  disabled={opt.disabled}
+                  className={cn(itemVariants({ size }))}
+                >
                   <SelectPrimitive.ItemText>{opt.label}</SelectPrimitive.ItemText>
                   <span className={cn('absolute flex items-center justify-center', size === 'lg' ? 'right-3' : 'right-2')}>
                     <SelectPrimitive.ItemIndicator>
@@ -199,7 +209,7 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
       </SelectPrimitive.Root>
 
       {errorMessage ? (
-        <p className="text-xs font-medium text-danger text-destructive">{errorMessage}</p>
+        <p className="text-xs font-medium text-danger">{errorMessage}</p>
       ) : (
         helperText && <p className="text-xs text-muted-foreground">{helperText}</p>
       )}

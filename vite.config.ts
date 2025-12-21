@@ -10,7 +10,9 @@ export default defineConfig({
   plugins: [
     react(),
     eslint({
-      exclude: ['node_modules', 'virtual:']
+      cache: false,
+      include: ['src/**/*.ts', 'src/**/*.tsx'], // src 내부만 검사하도록 한정
+      exclude: ['/virtual:/**', 'node_modules/**'], // 가상 파일 제외
     }),
     compression({
       include: [/\.(js)$/, /\.(scss)$/],
@@ -54,21 +56,28 @@ export default defineConfig({
     outDir: 'lib',
     lib: {
       entry: {
-        index: path.resolve(__dirname, 'src/index.ts'),         // for `kku-ui`
-        hooks: path.resolve(__dirname, 'src/common/hooks/index.ts'),   // for `kku-ui/hooks`
+        index: path.resolve(__dirname, 'src/index.ts'),               // for `kku-ui`
+        hooks: path.resolve(__dirname, 'src/common/hooks/index.ts'),  // for `kku-ui/hooks`
       },
       name: 'kku-ui',
       formats: ['es'],
       fileName: (format, entry) => `${format}/${entry}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'motion', 'lodash-es'],
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        'lucide-react',
+      ],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
         },
         assetFileNames: 'index.css',
+        entryFileNames: '[name].js',
+        chunkFileNames: 'chunks/[name]-[hash].js',
       },
     },
     sourcemap: false,

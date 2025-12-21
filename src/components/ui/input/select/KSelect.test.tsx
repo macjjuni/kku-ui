@@ -2,7 +2,7 @@ import { act, createRef } from 'react';
 import { render, screen } from '@testing-library/react';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import { KSelect, KSelectRefs } from './KSelect';
+import { KSelect, KSelectRefs } from '@/components';
 
 
 beforeAll(() => {

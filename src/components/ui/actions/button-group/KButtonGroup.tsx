@@ -1,8 +1,8 @@
 import { Children, cloneElement, isValidElement, ReactNode, useMemo } from 'react';
-import { cn } from '@/lib/utils';
 import { KButtonProps } from '@/components';
+import { cn } from '@/lib/utils';
 
-interface KButtonGroupProps extends Pick<KButtonProps, 'variant' | 'size' | 'disabled'> {
+export interface KButtonGroupProps extends Pick<KButtonProps, 'variant' | 'size' | 'disabled'> {
   children: ReactNode;
   className?: string;
   vertical?: boolean;
@@ -30,6 +30,7 @@ const KButtonGroup = (props: KButtonGroupProps) => {
 
   return (
     <div
+      role="group"
       className={cn(
         'inline-flex',
         vertical ? 'flex-col' : 'flex-row',

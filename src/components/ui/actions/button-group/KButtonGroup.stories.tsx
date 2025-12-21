@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { KButtonGroup } from './KButtonGroup';
-import { KButton } from '@/components';
+import { KButton, KButtonGroup } from '@/components';
 
 const meta: Meta<typeof KButtonGroup> = {
   title: 'Actions/ButtonGroup',
@@ -35,7 +34,7 @@ type Story = StoryObj<typeof KButtonGroup>;
 export const Default: Story = {
   args: {
     variant: 'outline',
-    size: 'default',
+    size: 'md',
   },
   render: (args) => (
     <KButtonGroup {...args}>

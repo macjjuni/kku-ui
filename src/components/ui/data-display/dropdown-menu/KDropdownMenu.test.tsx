@@ -34,7 +34,7 @@ describe('KDropdownMenu 상호작용 테스트', () => {
     const user = userEvent.setup();
 
     render(
-      <KDropdownMenu size="small">
+      <KDropdownMenu size="sm">
         <KDropdownMenuTrigger>열기</KDropdownMenuTrigger>
         <KDropdownMenuContent>
           <KDropdownMenuItem>작은 아이템</KDropdownMenuItem>

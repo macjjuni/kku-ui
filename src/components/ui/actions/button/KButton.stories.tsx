@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { KButton, KButtonProps } from './KButton';
+import { KButton, KButtonProps } from '@/components';
 
 const meta: Meta<typeof KButton> = {
   title: "Actions/Button",
@@ -12,7 +12,7 @@ const meta: Meta<typeof KButton> = {
     },
     size: {
       control: "select",
-      options: ["default", "sm", "lg", "icon"],
+      options: ["md", "sm", "lg", "icon"],
     },
     width: { control: 'select', options: ["default", "full"] },
     disabled: { control: "boolean" },

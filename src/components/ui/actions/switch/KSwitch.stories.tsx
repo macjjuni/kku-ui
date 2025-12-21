@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { KSwitch } from './KSwitch';
+import { KSwitch } from '@/components';
 
 const meta: Meta<typeof KSwitch> = {
   title: 'Actions/Switch',
