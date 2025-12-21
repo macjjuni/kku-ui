@@ -99,6 +99,7 @@
     "vite-plugin-compression2": "^2.2.0",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-eslint": "^1.8.1",
+    "vite-tsconfig-paths": "^6.0.3",
     "vitest": "^3.2.4"
   },
   "license": "MIT"

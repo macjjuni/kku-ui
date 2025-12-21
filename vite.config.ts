@@ -3,6 +3,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import compression from 'vite-plugin-compression2';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import eslint from 'vite-plugin-eslint';
 import dts from 'vite-plugin-dts';
 
@@ -19,6 +20,7 @@ export default defineConfig({
       include: [/\.(js)$/, /\.(scss)$/],
       threshold: 1400,
     }),
+    tsconfigPaths(),
     dts({
       tsconfigPath: 'tsconfig.esm.json',
       outDir: 'lib/es',
