@@ -21,6 +21,7 @@ export default meta;
 type Story = StoryObj<typeof KAspectRatio>;
 
 
+// eslint-disable-next-line max-len
 const imageUrl = 'https://media.istockphoto.com/id/1361394182/ko/%EC%82%AC%EC%A7%84/%EC%9E%AC%EB%AF%B8-%EC%98%81%EA%B5%AD-%EC%A7%A7%EC%9D%80-%EB%A8%B8%EB%A6%AC-%EA%B3%A0%EC%96%91%EC%9D%B4-%EC%B4%88%EC%83%81%ED%99%94-%EB%8A%94-%EC%B6%A9%EA%B2%A9%EB%98%90%EB%8A%94-%EB%86%80%EB%9D%BC%EA%B2%8C-%EC%B0%BE%EA%B3%A0.jpg?s=2048x2048&w=is&k=20&c=pT06EYZ86Jx70uV4YuKv2lX80YFsRFcYq-dqc4yfbMA=';
 
 export const Square: Story = {

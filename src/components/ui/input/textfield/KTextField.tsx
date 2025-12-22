@@ -1,17 +1,17 @@
 import { ComponentProps, forwardRef, useId, useState, useImperativeHandle, useRef, useCallback, ChangeEvent, useMemo } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { KInput } from '@/components';
 import { cn } from '@/lib/utils';
 
 const inputVariants = cva(
-  'flex rounded-md border border-input bg-background ring-offset-background transition-colors ' +
-  'file:border-0 file:bg-transparent file:font-medium placeholder:text-muted-foreground focus-visible:outline-none ' +
-  'focus-ring disabled:cursor-not-allowed disabled:opacity-50',
+  // KInput과 중복되는 border, bg, ring 스타일은 제거하고 레이아웃만 관리
+  'w-full transition-all',
   {
     variants: {
       size: {
-        default: 'h-9 px-2 py-2 text-sm',
-        sm: 'h-8 px-1.5 py-1 text-xs',
-        lg: 'h-10 px-2.5 py-2.5 text-base',
+        md: 'h-9 px-3 py-2 text-sm',
+        sm: 'h-8 px-2 py-1 text-xs',
+        lg: 'h-10 px-3 py-2 text-base',
       },
       width: {
         auto: 'w-auto',
@@ -23,7 +23,7 @@ const inputVariants = cva(
       },
     },
     defaultVariants: {
-      size: 'default',
+      size: 'md',
       width: 'md',
     },
   },
@@ -44,10 +44,9 @@ export interface KTextFieldRefs {
 }
 
 const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
-  const { id, className, type, size, label, required, readOnly, width = 'full', helperText,
+  const { id, className, type, label, required, readOnly, size = 'md', width = 'full', helperText,
     maxLength, rules, onChange, ...restProps } = props;
 
-  // region [Hooks]
   const generatedId = useId();
   const inputId = id || generatedId;
   const inputRef = useRef<HTMLInputElement>(null);
@@ -60,10 +59,7 @@ const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
       return inputRef.current?.value || '';
     },
   }));
-  // endregion
 
-
-  // region [Styles]
   const containerClass = useMemo(() => (
     cn(
       'grid items-center gap-1.5',
@@ -71,10 +67,7 @@ const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
       width === 'auto' && 'w-fit',
       className,
     )), [width, className]);
-  // endregion
 
-
-  // region [Privates]
   const validate = useCallback(async () => {
     if (!rules) return true;
     const val = inputRef.current?.value || '';
@@ -94,34 +87,38 @@ const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
     setErrorMessage(null);
     return true;
   }, [rules]);
-  // endregion
 
-
-  // region [Events]
   const onChangeTextField = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (errorMessage) {
       setErrorMessage(null);
     }
     onChange?.(e);
   }, [errorMessage, onChange]);
-  // endregion
-
-
-  // region [Life Cycles]
-  // endregion
 
   return (
     <div className={containerClass}>
       {label && (
-        <label htmlFor={inputId} className={cn('font-medium', size === 'sm' ? 'text-xs' : 'text-sm')}>
+        <label htmlFor={inputId} className={cn('font-medium', size === 'sm' ? 'text-sm' : 'text-md')}>
           {label}
           {required && <span className="text-danger ml-0.5">*</span>}
         </label>
       )}
-      <input {...restProps} id={inputId} ref={inputRef} type={type} onChange={onChangeTextField} readOnly={readOnly}
-             maxLength={maxLength} className={cn(inputVariants({ size, width }), errorMessage && 'border-destructive focus-visible:ring-destructive', className)}/>
+      <KInput
+        {...restProps}
+        id={inputId}
+        ref={inputRef}
+        type={type}
+        onChange={onChangeTextField}
+        readOnly={readOnly}
+        maxLength={maxLength}
+        className={cn(
+          inputVariants({ size, width }),
+          errorMessage && 'border-danger focus-visible:ring-danger',
+          className,
+        )}
+      />
       {errorMessage ? (
-        <p className="text-xs font-medium text-danger text-destructive">{errorMessage}</p>
+        <p className="text-xs font-medium text-danger">{errorMessage}</p>
       ) : (
         helperText && <p className="text-xs text-muted-foreground">{helperText}</p>
       )}

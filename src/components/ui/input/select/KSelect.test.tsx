@@ -66,7 +66,7 @@ describe('KSelect 컴포넌트 테스트', () => {
       const errorMsg = screen.getByText('필수 선택입니다.');
       expect(errorMsg).toBeInTheDocument();
       expect(errorMsg).toHaveClass('text-danger');
-      expect(screen.getByRole('combobox')).toHaveClass('border-destructive');
+      expect(screen.getByRole('combobox')).toHaveClass('border-danger');
     });
 
     it('비동기 rules 검증이 정상 작동해야 한다', async () => {

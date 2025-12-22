@@ -161,7 +161,7 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
           id={selectId}
           className={cn(
             selectVariants({ size, width }),
-            errorMessage && 'border-destructive focus:ring-destructive',
+            errorMessage && 'border-danger focus:ring-destructive',
             '[&>span]:line-clamp-1 [&>span]:flex-1 [&>span]:text-left',
           )}>
           <SelectPrimitive.Value placeholder={placeholder}/>

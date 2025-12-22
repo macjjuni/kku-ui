@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { KSelect, KSelectProps, KSelectRefs } from './KSelect';
 
 const meta: Meta<typeof KSelect> = {
-  title: 'Input/Select',
+  title: 'KInput/Select',
   component: KSelect,
   tags: ['autodocs'],
   argTypes: {
