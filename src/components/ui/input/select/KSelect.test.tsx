@@ -1,120 +1,74 @@
-import { act, createRef } from 'react';
-import { render, screen } from '@testing-library/react';
-import { beforeAll, describe, expect, it, vi } from 'vitest';
-import userEvent from '@testing-library/user-event';
-import { KSelect, KSelectRefs } from '@/components';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { KSelect } from './KSelect';
+
+const mockOptions = [
+  { label: '사과', value: 'apple' },
+  { label: '바나나', value: 'banana' },
+  { label: '포도', value: 'grape', disabled: true },
+];
 
 
-beforeAll(() => {
-  if (!global.Element.prototype.hasPointerCapture) {
-    global.Element.prototype.hasPointerCapture = vi.fn(() => false);
-  }
-  global.Element.prototype.scrollIntoView = vi.fn();
-});
+describe('KSelect Component', () => {
 
-describe('KSelect 컴포넌트 테스트', () => {
-  const mockOptions = [
-    { label: 'React', value: 'react' },
-    { label: 'Vue', value: 'vue' },
-  ];
-
-  it('라벨과 필수 표시(*)가 정상적으로 렌더링되어야 한다', () => {
-    render(<KSelect label="프레임워크" required options={mockOptions}/>);
-    expect(screen.getByText('프레임워크'))
-      .toBeInTheDocument();
-    expect(screen.getByText('*'))
-      .toHaveClass('text-danger');
+  beforeEach(() => {
+    // 테스트 실행 전 메서드 모킹
+    window.HTMLElement.prototype.scrollIntoView = vi.fn();
   });
 
-  it('항목 선택 시 onChange가 호출되어야 한다', async () => {
-    const user = userEvent.setup();
-    const handleChange = vi.fn();
-    render(<KSelect options={mockOptions} onChange={handleChange}/>);
+  it('플레이스홀더가 정상적으로 노출되어야 한다.', () => {
+    render(<KSelect options={mockOptions} placeholder="과일을 선택하세요" />);
+    expect(screen.getByText('과일을 선택하세요')).toBeInTheDocument();
+  });
 
-    // 1. 트리거 클릭
+  it('클릭 시 옵션 리스트가 나타나야 한다.', async () => {
+    render(<KSelect options={mockOptions} />);
+
     const trigger = screen.getByRole('combobox');
-    await user.click(trigger);
+    fireEvent.click(trigger);
 
-    // 2. 포털에 뜬 옵션 대기 및 클릭
-    const option = await screen.findByText('React');
-    await user.click(option);
-
-    expect(handleChange)
-      .toHaveBeenCalledWith('react');
-  });
-
-  it('width prop에 따라 부모 컨테이너 클래스가 변경되어야 한다', () => {
-    const { container } = render(<KSelect options={mockOptions} width="xs"/>);
-    // container.firstChild는 KSelect의 가장 바깥 div
-    expect(container.firstChild)
-      .toHaveClass('w-full');
-  });
-
-  describe('Validation (검증 로직)', () => {
-    it('rules 검증 실패 시 text-danger 컬러로 에러 메시지를 표시해야 한다', async () => {
-      const selectRef = createRef<KSelectRefs>();
-      const rules = [(v: string) => !!v || '필수 선택입니다.'];
-
-      render(<KSelect ref={selectRef} options={mockOptions} value="" rules={rules}/>);
-
-      await act(async () => {
-        const isValid = await selectRef.current?.validate();
-        expect(isValid)
-          .toBe(false);
-      });
-
-      const errorMsg = screen.getByText('필수 선택입니다.');
-      expect(errorMsg).toBeInTheDocument();
-      expect(errorMsg).toHaveClass('text-danger');
-      expect(screen.getByRole('combobox')).toHaveClass('border-danger');
-    });
-
-    it('비동기 rules 검증이 정상 작동해야 한다', async () => {
-      const selectRef = createRef<KSelectRefs>();
-
-      const asyncRule = async (v: string) => {
-        await new Promise((res) => {
-          setTimeout(res, 10);
-        });
-        return v === 'vue' ? 'Vue는 선택 불가' : true;
-      };
-
-      render(<KSelect ref={selectRef} options={mockOptions} value="vue" rules={[asyncRule]} />);
-
-      let isValid;
-      await act(async () => {
-        isValid = await selectRef.current?.validate();
-      });
-
-      expect(isValid).toBe(false);
-      expect(screen.getByText('Vue는 선택 불가')).toBeInTheDocument();
-      expect(screen.getByText('Vue는 선택 불가')).toHaveClass('text-danger');
-    });
-
-    it('reset() 호출 시 에러 메시지가 사라져야 한다', async () => {
-      const selectRef = createRef<KSelectRefs>();
-      render(<KSelect ref={selectRef} options={mockOptions} rules={[() => '에러']}/>);
-
-      await act(async () => {
-        await selectRef.current?.validate();
-      });
-      expect(screen.getByText('에러'))
-        .toBeInTheDocument();
-
-      act(() => {
-        selectRef.current?.reset();
-      });
-
-      expect(screen.queryByText('에러'))
-        .not
-        .toBeInTheDocument();
+    // Radix Portal을 통해 렌더링되므로 await waitFor 사용 권장
+    await waitFor(() => {
+      expect(screen.getByText('사과')).toBeInTheDocument();
+      expect(screen.getByText('바나나')).toBeInTheDocument();
     });
   });
 
-  it('value getter를 통해 현재 값을 가져올 수 있어야 한다', () => {
-    const selectRef = createRef<KSelectRefs>();
-    render(<KSelect ref={selectRef} options={mockOptions} value="react"/>);
-    expect(selectRef.current?.value)
-      .toBe('react');
+  it('옵션을 선택하면 onChange 콜백이 호출되어야 한다.', async () => {
+    const handleChange = vi.fn();
+    render(<KSelect options={mockOptions} onChange={handleChange} />);
+
+    fireEvent.click(screen.getByRole('combobox'));
+
+    const option = await screen.findByText('사과');
+    fireEvent.click(option);
+
+    expect(handleChange).toHaveBeenCalledWith('apple');
+  });
+
+  it('disabled된 옵션은 클릭해도 onChange가 호출되지 않아야 한다.', async () => {
+    const handleChange = vi.fn();
+    render(<KSelect options={mockOptions} onChange={handleChange} />);
+
+    fireEvent.click(screen.getByRole('combobox'));
+
+    const disabledOption = await screen.findByText('포도');
+    fireEvent.click(disabledOption);
+
+    expect(handleChange).not.toHaveBeenCalled();
+  });
+
+  it('error props 전달 시 에러 스타일(border-danger)이 적용되어야 한다.', () => {
+    render(<KSelect options={mockOptions} error />);
+    const trigger = screen.getByRole('combobox');
+    expect(trigger).toHaveClass('border-danger');
+  });
+
+  it('width props에 따라 적절한 클래스가 적용되어 sostiene.', () => {
+    const { rerender } = render(<KSelect options={mockOptions} width="xs" />);
+    expect(screen.getByRole('combobox')).toHaveClass('max-w-[120px]');
+
+    rerender(<KSelect options={mockOptions} width="full" />);
+    expect(screen.getByRole('combobox')).toHaveClass('w-full');
   });
 });
