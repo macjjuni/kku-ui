@@ -1,9 +1,10 @@
-import { ComponentPropsWithoutRef, forwardRef, useCallback, useId, useImperativeHandle } from 'react';
+import { ComponentPropsWithoutRef, forwardRef, useCallback, useId, useImperativeHandle, useMemo } from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+// region [Styles]
 const selectVariants = cva(
   'flex items-center justify-between rounded-md border border-input bg-background ' +
   'px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none ' +
@@ -26,7 +27,7 @@ const selectVariants = cva(
     },
     defaultVariants: {
       size: 'md',
-      width: 'full',
+      width: 'md',
     },
   },
 );
@@ -46,31 +47,57 @@ const itemVariants = cva(
     },
   },
 );
+// endregion
 
+// region [Types]
 export type KSelectValue = string;
 export type KSelectOption = { label: string; value: KSelectValue; disabled?: boolean };
 
-export interface KSelectProps extends Omit<ComponentPropsWithoutRef<typeof SelectPrimitive.Root>, 'onValueChange'>, VariantProps<typeof selectVariants> {
+export interface KSelectProps
+  extends Omit<ComponentPropsWithoutRef<typeof SelectPrimitive.Root>, 'onValueChange'>,
+    Omit<VariantProps<typeof selectVariants>, 'width'> {
   options: KSelectOption[];
+  /** 리스트 상단에 노출될 라벨 */
+  selectLabel?: string;
   placeholder?: string;
   className?: string;
   id?: string;
   onChange?: (value: KSelectValue) => void;
-  error?: boolean; // 에러 상태일 때 테두리 색상 변경용
+  error?: boolean;
+  /** 너비를 프리셋(xs~lg) 혹은 숫자(px)로 설정 */
+  width?: VariantProps<typeof selectVariants>['width'] | number;
 }
 
 export interface KSelectRefs {
   value: KSelectValue | undefined;
 }
 
+// endregion
+
 const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
   const {
-    options, value, onChange, placeholder, className, disabled, id,
-    size = 'md', width = 'full', error, ...rest
+    options,
+    value,
+    onChange,
+    placeholder,
+    className,
+    disabled,
+    id,
+    size = 'md',
+    width = 'md',
+    error,
+    selectLabel,
+    ...rest
   } = props;
 
   const generatedId = useId();
   const selectId = id || generatedId;
+
+  // 숫자형 너비 판별 및 스타일 생성
+  const isNumericWidth = typeof width === 'number';
+  const triggerStyle = useMemo(() => ({
+    width: isNumericWidth ? `${width}px` : undefined,
+  }), [width, isNumericWidth]);
 
   useImperativeHandle(ref, () => ({ value }));
 
@@ -87,12 +114,14 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
     >
       <SelectPrimitive.Trigger
         id={selectId}
+        style={triggerStyle}
         className={cn(
-          selectVariants({ size, width }),
+          selectVariants({ size, width: isNumericWidth ? undefined : (width as never) }),
           error && 'border-danger focus:ring-danger',
-          '[&>span]:line-clamp-1 [&>span]:flex-1 [&>span]:text-left min-w-0', // min-w-0: flex/grid 내부 찌그러짐 방지
+          'min-w-0 [&>span]:line-clamp-1 [&>span]:flex-1 [&>span]:text-left',
           className,
-        )}>
+        )}
+      >
         <SelectPrimitive.Value placeholder={placeholder}/>
         <SelectPrimitive.Icon asChild>
           <ChevronDown className={cn('opacity-50 shrink-0 ml-2', size === 'sm' ? 'h-3 w-3' : 'h-4 w-4')}/>
@@ -113,21 +142,30 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
           </SelectPrimitive.ScrollUpButton>
 
           <SelectPrimitive.Viewport className="p-1">
-            {options.map((opt) => (
-              <SelectPrimitive.Item
-                key={opt.value}
-                value={opt.value}
-                disabled={opt.disabled}
-                className={cn(itemVariants({ size }))}
-              >
-                <SelectPrimitive.ItemText>{opt.label}</SelectPrimitive.ItemText>
-                <span className="absolute right-2 flex items-center justify-center">
-                  <SelectPrimitive.ItemIndicator>
-                    <Check className={cn(size === 'sm' ? 'h-3 w-3' : 'h-4 w-4')}/>
-                  </SelectPrimitive.ItemIndicator>
-                </span>
-              </SelectPrimitive.Item>
-            ))}
+            <SelectPrimitive.Group>
+
+              {selectLabel && (
+                <SelectPrimitive.Label className="px-2 py-1.5 text-xs text-muted-foreground">
+                  {selectLabel}
+                </SelectPrimitive.Label>
+              )}
+
+              {options.map((opt) => (
+                <SelectPrimitive.Item
+                  key={opt.value}
+                  value={opt.value}
+                  disabled={opt.disabled}
+                  className={cn(itemVariants({ size }))}
+                >
+                  <SelectPrimitive.ItemText>{opt.label}</SelectPrimitive.ItemText>
+                  <span className="absolute right-2 flex items-center justify-center">
+                    <SelectPrimitive.ItemIndicator>
+                      <Check className={cn(size === 'sm' ? 'h-3 w-3' : 'h-4 w-4')}/>
+                    </SelectPrimitive.ItemIndicator>
+                  </span>
+                </SelectPrimitive.Item>
+              ))}
+            </SelectPrimitive.Group>
           </SelectPrimitive.Viewport>
 
           <SelectPrimitive.ScrollDownButton className="flex cursor-default items-center justify-center py-1">

@@ -71,4 +71,17 @@ describe('KSelect Component', () => {
     rerender(<KSelect options={mockOptions} width="full" />);
     expect(screen.getByRole('combobox')).toHaveClass('w-full');
   });
+
+  it('width가 숫자로 전달되면 style 속성에 px 단위로 적용되어야 한다', () => {
+    const customWidth = 350;
+    render(<KSelect options={mockOptions} width={customWidth} />);
+
+    const trigger = screen.getByRole('combobox');
+
+    // 1. 실제 인라인 스타일 객체 검증
+    expect(trigger.style.width).toBe(`${customWidth}px`);
+
+    // 2. 또는 RTL matchers 사용 (권장)
+    expect(trigger).toHaveStyle({ width: '350px' });
+  });
 });

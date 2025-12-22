@@ -12,7 +12,7 @@ const meta: Meta<typeof KSelect> = {
     },
     width: {
       control: 'select',
-      options: ['auto', 'full', 'xs', 'sm', 'md', 'lg'],
+      options: ['auto', 'full', 'xs', 'sm', 'md', 'lg', 80, 220, 360, 560],
     },
     onChange: { action: 'changed' },
   },
@@ -34,6 +34,7 @@ type Story = StoryObj<typeof KSelect>;
 export const Default: Story = {
   args: {
     width: 'md',
+    selectLabel: 'Select',
   },
 };
 
