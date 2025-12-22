@@ -49,7 +49,7 @@ const KBottomSheetOverlay = forwardRef<ComponentRef<typeof DrawerPrimitive.Overl
     return (
       <DrawerPrimitive.Overlay
         ref={ref}
-        className={cn('fixed inset-0 z-50', className)}
+        className={cn('k-bottom-sheet__overlay fixed inset-0 z-50', className)}
         style={{
           backgroundColor: `rgba(0, 0, 0, ${(opacity ?? 80) / 100})`,
           backdropFilter: `blur(${blur ?? 4}px)`,
@@ -71,6 +71,7 @@ const KBottomSheetContent = forwardRef<ComponentRef<typeof DrawerPrimitive.Conte
         <DrawerPrimitive.Content
           ref={ref}
           className={cn(
+            'k-bottom-sheet__content',
             'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background shadow-lg outline-none',
             size === 'sm' ? 'max-w-md mx-auto' : 'w-full',
             className,
@@ -88,12 +89,12 @@ const KBottomSheetContent = forwardRef<ComponentRef<typeof DrawerPrimitive.Conte
 );
 
 const KBottomSheetHeader = ({ className, ...props }: KBottomSheetHeaderProps) => (
-  <div className={cn('grid gap-1.5 text-center sm:text-left', className)} {...props} />
+  <div className={cn('k-bottom-sheet__header grid gap-1.5 text-center sm:text-left', className)} {...props} />
 );
 
 const KBottomSheetFooter = ({ className, ...props }: KBottomSheetFooterProps) => {
   const { size } = useContext(KBottomSheetContext);
-  return <div className={cn('mt-auto flex flex-col gap-2', size === 'sm' ? 'mt-2' : 'mt-4', className)} {...props} />;
+  return <div className={cn('k-bottom-sheet__footer mt-auto flex flex-col gap-2', size === 'sm' ? 'mt-2' : 'mt-4', className)} {...props} />;
 };
 
 const KBottomSheetTitle = forwardRef<ComponentRef<typeof DrawerPrimitive.Title>, KBottomSheetTitleProps>(
@@ -102,7 +103,7 @@ const KBottomSheetTitle = forwardRef<ComponentRef<typeof DrawerPrimitive.Title>,
     return (
       <DrawerPrimitive.Title
         ref={ref}
-        className={cn('font-semibold leading-none tracking-tight', size === 'sm' ? 'text-base' : 'text-lg', className)}
+        className={cn('k-bottom-sheet__title font-semibold leading-none tracking-tight', size === 'sm' ? 'text-base' : 'text-lg', className)}
         {...props}
       />
     );
@@ -115,7 +116,7 @@ const KBottomSheetDescription = forwardRef<ComponentRef<typeof DrawerPrimitive.D
     return (
       <DrawerPrimitive.Description
         ref={ref}
-        className={cn('text-muted-foreground', size === 'sm' ? 'text-xs' : 'text-sm', className)}
+        className={cn('k-bottom-sheet__description text-muted-foreground', size === 'sm' ? 'text-xs' : 'text-sm', className)}
         {...props}
       />
     );

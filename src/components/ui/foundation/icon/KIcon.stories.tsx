@@ -44,7 +44,7 @@ type Story = StoryObj<typeof KIcon>;
 export const Default: Story = {
   args: {
     icon: ICON_LIST[0] || 'check',
-    size: 'medium',
+    size: 'md',
   },
 };
 
@@ -64,7 +64,7 @@ export const CustomSize: Story = {
  */
 export const AllIcons: Story = {
   args: {
-    size: 'medium',
+    size: 'md',
   },
   render: (args) => (
     <div className="flex flex-wrap gap-6 items-center justify-start p-4 border rounded-lg bg-card">

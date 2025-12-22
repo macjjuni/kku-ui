@@ -6,7 +6,7 @@ export interface KSkeletonProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const KSkeleton = ({ className, circle, ...restProps }: KSkeletonProps) => (
-  <div aria-hidden="true" {...restProps} className={cn('animate-pulse bg-muted', circle ? 'rounded-full' : 'rounded-md', className)} />
+  <div aria-hidden="true" {...restProps} className={cn('k-skeleton animate-pulse bg-muted', circle ? 'rounded-full' : 'rounded-md', className)} />
 )
 
 KSkeleton.displayName = "KSkeleton";

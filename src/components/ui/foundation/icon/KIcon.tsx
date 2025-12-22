@@ -62,7 +62,7 @@ const KIcon = memo(
 
     const rootClass = useMemo(() => {
       return cn(
-        'inline-flex items-center justify-center shrink-0 transition-colors overflow-hidden', // overflow-hidden 추가
+        'k-icon inline-flex items-center justify-center shrink-0 transition-colors overflow-hidden', // overflow-hidden 추가
         typeof size === 'string' ? sizeMap[size] : '',
         isClickable && 'cursor-pointer',
         disabled && 'opacity-50 cursor-not-allowed grayscale',

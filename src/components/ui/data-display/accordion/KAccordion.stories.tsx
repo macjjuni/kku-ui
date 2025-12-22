@@ -18,7 +18,7 @@ const meta: Meta<typeof KAccordion> = {
     },
     size: {
       control: "radio",
-      options: ["small", "medium"],
+      options: ["sm", "md"],
       description: "아코디언 크기",
     },
   },
@@ -31,7 +31,7 @@ export const Default: Story = {
   args: {
     type: "single",
     collapsible: true,
-    size: "medium",
+    size: "md",
   },
   render: (args) => (
     <KAccordion {...args} className="w-full max-w-[400px]">
@@ -54,7 +54,7 @@ export const Default: Story = {
 export const Small: Story = {
   args: {
     type: "single",
-    size: "small",
+    size: "sm",
     collapsible: true,
   },
   render: (args) => (

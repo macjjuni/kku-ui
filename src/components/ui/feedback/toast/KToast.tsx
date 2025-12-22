@@ -30,7 +30,7 @@ const toastStyleMap = {
 const KToast = ({ size = 'md', position = 'top-right', ...props }: KToasterProps) => {
   return (
     <Sonner
-      className="toaster group"
+      className="k-toast toaster group"
       position={position}
       theme="system"
       {...props}
@@ -49,20 +49,24 @@ const KToast = ({ size = 'md', position = 'top-right', ...props }: KToasterProps
             props.toastOptions?.classNames?.toast,
           ),
           title: cn(
+            'k-toast__title',
             sizeTextMap[size].title,
             'font-semibold',
             props.toastOptions?.classNames?.title,
           ),
           description: cn(
+            'k-toast__description',
             'group-[.toast]:text-muted-foreground',
             sizeTextMap[size].description,
             props.toastOptions?.classNames?.description,
           ),
           actionButton: cn(
+            'k-toast__action-button',
             'group-[.toast]:bg-primary group-[.toast]:text-primary-foreground',
             props.toastOptions?.classNames?.actionButton,
           ),
           cancelButton: cn(
+            'k-toast__cancel-button',
             'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground',
             props.toastOptions?.classNames?.cancelButton,
           ),

@@ -3,8 +3,9 @@ import { ButtonHTMLAttributes, forwardRef, ComponentRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
+
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors ' +
+  'k-button inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors ' +
   'focus-ring disabled:pointer-events-none disabled:opacity-50 ' +
   '[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 truncate',
   {
@@ -44,17 +45,25 @@ const buttonVariants = cva(
   },
 );
 
-export interface KButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+type ButtonVariantsProps = VariantProps<typeof buttonVariants>;
+
+export interface KButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'width'>,
+  Omit<ButtonVariantsProps, 'width'> {
   asChild?: boolean;
+  width?: ButtonVariantsProps['width'] | number; // string(variant) + number 허용
 }
 
 const KButton = forwardRef<ComponentRef<'button'>, KButtonProps>(
-  ({ className, variant, size = 'md', width, asChild = false, ...props }, ref) => {
+  ({ className, variant, size = 'md', width, style, asChild = false, ...props }, ref) => {
+
     const Comp = asChild ? Slot : 'button';
+    const isNumberWidth = typeof width === 'number';
+
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, width, className }))}
         ref={ref}
+        className={cn(buttonVariants({ variant, size, width: isNumberWidth ? undefined : (width as ButtonVariantsProps['width']), className }))}
+        style={{ width: isNumberWidth ? width : undefined, ...style }}
         {...props}
       />
     );

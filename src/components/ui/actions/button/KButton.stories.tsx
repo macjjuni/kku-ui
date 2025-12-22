@@ -14,7 +14,7 @@ const meta: Meta<typeof KButton> = {
       control: "select",
       options: ["md", "sm", "lg", "icon"],
     },
-    width: { control: 'select', options: ["default", "full"] },
+    width: { control: 'select', options: ["default", "full", 120, 300, 420] },
     disabled: { control: "boolean" },
   },
 };

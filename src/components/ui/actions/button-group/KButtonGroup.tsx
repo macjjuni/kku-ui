@@ -32,6 +32,7 @@ const KButtonGroup = (props: KButtonGroupProps) => {
     <div
       role="group"
       className={cn(
+        'k-button-group',
         'inline-flex',
         vertical ? 'flex-col' : 'flex-row',
         '[&>button]:relative [&>button]:rounded-none focus-within:z-10',

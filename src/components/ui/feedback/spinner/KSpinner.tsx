@@ -20,7 +20,7 @@ const KSpinner = forwardRef<ComponentRef<'svg'>, KSpinnerProps>(
         <Loader2
           ref={ref}
           className={cn(
-            'animate-spin text-muted-foreground',
+            'k-spinner animate-spin text-muted-foreground',
             sizeMap[size],
             className,
           )}

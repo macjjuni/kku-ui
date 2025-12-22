@@ -9,8 +9,13 @@ export interface KPopoverAnchorProps extends ComponentPropsWithoutRef<typeof Pop
 export interface KPopoverContentProps extends ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> {}
 
 const KPopover = PopoverPrimitive.Root;
-const KPopoverTrigger = PopoverPrimitive.Trigger;
 const KPopoverAnchor = PopoverPrimitive.Anchor;
+
+
+const KPopoverTrigger = forwardRef<ComponentRef<typeof PopoverPrimitive.Trigger>,
+  ComponentPropsWithoutRef<typeof PopoverPrimitive.Trigger>>(({ className, ...props }, ref) => (
+    <PopoverPrimitive.Trigger ref={ref} className={cn("k-popover__trigger", className)} {...props} />
+  ));
 
 const KPopoverContent = forwardRef<
   ComponentRef<typeof PopoverPrimitive.Content>,
@@ -23,6 +28,7 @@ const KPopoverContent = forwardRef<
       side={side}
       sideOffset={sideOffset}
       className={cn(
+        "k-popover__content",
         "z-50 w-72 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none",
         // 열고 닫기 애니메이션
         "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
