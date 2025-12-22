@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils';
 import { getIcon } from '@/common/icons/icons';
 
 // --- Types ---
-export const ICON_SIZES = ['xsmall', 'small', 'medium', 'large', 'xlarge'] as const;
+export const ICON_SIZES = ['xs', 'sm', 'md', 'lg', 'xlg'] as const;
 export type KIconSize = (typeof ICON_SIZES)[number];
 
 export interface KIconRefs {
@@ -35,28 +35,18 @@ export type KIconProps = ComponentPropsWithoutRef<'span'> & {
 };
 
 const sizeMap: Record<KIconSize, string> = {
-  xsmall: 'w-3 h-3 text-[12px]',
-  small: 'w-4 h-4 text-[14px]',
-  medium: 'w-6 h-6 text-[16px]',
-  large: 'w-8 h-8 text-[20px]',
-  xlarge: 'w-10 h-10 text-[24px]',
+  xs: 'w-3 h-3 text-[12px]',
+  sm: 'w-4 h-4 text-[14px]',
+  md: 'w-6 h-6 text-[16px]',
+  lg: 'w-8 h-8 text-[20px]',
+  xlg: 'w-10 h-10 text-[24px]',
 };
 
 // --- Component ---
 // forwardRef의 첫 번째 제네릭을 KIconRefs로 변경하여 TS2740 해결
 const KIcon = memo(
   forwardRef<KIconRefs, KIconProps>((props, ref) => {
-    const {
-      id,
-      className,
-      style,
-      icon,
-      size = 'medium',
-      onClick,
-      color,
-      disabled,
-      ...restProps
-    } = props;
+    const { id, className, style, icon, size = 'md', onClick, color, disabled, ...restProps } = props;
 
     const internalRef = useRef<HTMLSpanElement>(null);
     const uniqueId = useId();
@@ -72,7 +62,7 @@ const KIcon = memo(
 
     const rootClass = useMemo(() => {
       return cn(
-        'inline-flex items-center justify-center shrink-0 transition-colors',
+        'inline-flex items-center justify-center shrink-0 transition-colors overflow-hidden', // overflow-hidden 추가
         typeof size === 'string' ? sizeMap[size] : '',
         isClickable && 'cursor-pointer',
         disabled && 'opacity-50 cursor-not-allowed grayscale',
