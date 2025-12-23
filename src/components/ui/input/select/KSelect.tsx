@@ -19,10 +19,10 @@ const selectVariants = cva(
       width: {
         auto: 'w-auto',
         full: 'w-full',
-        xs: 'w-full max-w-[120px]',
-        sm: 'w-full max-w-[160px]',
-        md: 'w-full max-w-[200px]',
-        lg: 'w-full max-w-[240px]',
+        xs: 'w-full max-w-[120px] min-w-[120px]',
+        sm: 'w-full max-w-[160px] min-w-[160px]',
+        md: 'w-full max-w-[200px] min-w-[200px]',
+        lg: 'w-full max-w-[240px] min-w-[240px]',
       },
     },
     defaultVariants: {
@@ -57,14 +57,13 @@ export interface KSelectProps
   extends Omit<ComponentPropsWithoutRef<typeof SelectPrimitive.Root>, 'onValueChange'>,
     Omit<VariantProps<typeof selectVariants>, 'width'> {
   options: KSelectOption[];
-  /** 리스트 상단에 노출될 라벨 */
-  selectLabel?: string;
+  selectLabel?: string; /** 리스트 상단에 노출될 라벨 */
   placeholder?: string;
   className?: string;
   id?: string;
   onChange?: (value: KSelectValue) => void;
   error?: boolean;
-  /** 너비를 프리셋(xs~lg) 혹은 숫자(px)로 설정 */
+  /** width[xs/sm/md/lg/auto/full] 프리셋 또는 숫자(px)로 설정 가능 */
   width?: VariantProps<typeof selectVariants>['width'] | number;
 }
 
@@ -118,7 +117,7 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
         className={cn(
           selectVariants({ size, width: isNumericWidth ? undefined : (width as never) }),
           error && 'border-danger focus:ring-danger',
-          'min-w-0 [&>span]:line-clamp-1 [&>span]:flex-1 [&>span]:text-left',
+          '[&>span]:line-clamp-1 [&>span]:flex-1 [&>span]:text-left',
           className,
         )}
       >

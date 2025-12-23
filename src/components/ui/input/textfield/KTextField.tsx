@@ -1,10 +1,9 @@
 import { ComponentProps, forwardRef, useId, useState, useImperativeHandle, useRef, useCallback, ChangeEvent, useMemo } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { KInput } from '@/components';
 import { cn } from '@/lib/utils';
+import { KInput } from '@/components';
 
 const inputVariants = cva(
-  // KInput과 중복되는 border, bg, ring 스타일은 제거하고 레이아웃만 관리
   'w-full transition-all',
   {
     variants: {
@@ -16,10 +15,10 @@ const inputVariants = cva(
       width: {
         auto: 'w-auto',
         full: 'w-full',
-        xs: 'max-w-[120px]',
-        sm: 'max-w-[160px]',
-        md: 'max-w-[200px]',
-        lg: 'max-w-[240px]',
+        xs: 'w-full max-w-[160px] min-w-[160px]',
+        sm: 'w-full max-w-[200px] min-w-[200px]',
+        md: 'w-full max-w-[240px] min-w-[240px]',
+        lg: 'w-full max-w-[280px] min-w-[280px]',
       },
     },
     defaultVariants: {
@@ -31,10 +30,13 @@ const inputVariants = cva(
 
 export type KValidationRule = (value: string) => boolean | string | Promise<boolean | string>;
 
-export interface KTextFieldProps extends Omit<ComponentProps<'input'>, 'size' | 'width'>, VariantProps<typeof inputVariants> {
+type InputVariantsProps = VariantProps<typeof inputVariants>;
+
+export interface KTextFieldProps extends Omit<ComponentProps<'input'>, 'size' | 'width'>, Omit<InputVariantsProps, 'width'> {
   label?: string;
   helperText?: string;
   rules?: KValidationRule[];
+  width?: InputVariantsProps['width'] | number; // number 타입 추가
 }
 
 export interface KTextFieldRefs {
@@ -45,12 +47,13 @@ export interface KTextFieldRefs {
 
 const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
   const { id, className, type, label, required, readOnly, size = 'md', width = 'full', helperText,
-    maxLength, rules, onChange, ...restProps } = props;
+    maxLength, rules, onChange, style, ...restProps } = props;
 
   const generatedId = useId();
   const inputId = id || generatedId;
   const inputRef = useRef<HTMLInputElement>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const isNumberWidth = useMemo(() => (typeof width === 'number'), [width]);
 
   useImperativeHandle(ref, () => ({
     validate,
@@ -63,10 +66,10 @@ const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
   const containerClass = useMemo(() => (
     cn(
       'grid items-center gap-1.5',
-      (width === 'full' || width === 'xs' || width === 'sm' || width === 'md') && 'w-full',
+      (isNumberWidth || width === 'full' || width === 'xs' || width === 'sm' || width === 'md' || width === 'lg') && 'w-full',
       width === 'auto' && 'w-fit',
       className,
-    )), [width, className]);
+    )), [width, isNumberWidth, className]);
 
   const validate = useCallback(async () => {
     if (!rules) return true;
@@ -96,7 +99,7 @@ const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
   }, [errorMessage, onChange]);
 
   return (
-    <div className={containerClass}>
+    <div className={containerClass} style={{ ...style, width: isNumberWidth ? width as number : style?.width }}>
       {label && (
         <label htmlFor={inputId} className={cn('font-medium', size === 'sm' ? 'text-sm' : 'text-md')}>
           {label}
@@ -112,7 +115,7 @@ const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
         readOnly={readOnly}
         maxLength={maxLength}
         className={cn(
-          inputVariants({ size, width }),
+          inputVariants({ size, width: isNumberWidth ? 'full' : (width as InputVariantsProps['width']) }),
           errorMessage && 'border-danger focus-visible:ring-danger',
           className,
         )}
