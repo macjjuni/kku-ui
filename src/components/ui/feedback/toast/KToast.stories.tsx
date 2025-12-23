@@ -15,6 +15,9 @@ const meta: Meta<typeof KToast> = {
         defaultValue: { summary: "md" },
       },
     },
+    offset: {
+      control: 'number',
+    },
     position: {
       control: "select",
       options: [
