@@ -42,7 +42,7 @@ const KListGroup = ({ children, header, footer, width = 'md', className }: KList
 
   return (
     <section className={cn('w-full mx-auto [&&+&]:mt-6 px-0', widthMap[width], className)}>
-      {header && (<header className="px-4 mb-2 text-[14px] opacity-80 uppercase">{header}</header>)}
+      {header && (<header className="px-4 mb-3 text-[14px] opacity-80 uppercase">{header}</header>)}
       <div className="overflow-hidden bg-card rounded-xl border-[1px] border-border shadow-sm">{children}</div>
 
       {footer && (<footer className="px-4 mt-2 text-[13px] text-muted-foreground leading-tight">{footer}</footer>)}

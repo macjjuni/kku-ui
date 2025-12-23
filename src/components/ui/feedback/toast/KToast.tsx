@@ -1,7 +1,6 @@
 import { toast, Toaster as Sonner } from 'sonner';
 import { ComponentProps, CSSProperties } from 'react';
 import { cn } from '@/lib/utils';
-import "./KToast.css";
 
 export interface KToasterProps extends ComponentProps<typeof Sonner> {
   size?: 'sm' | 'md' | 'lg' | 'full';
