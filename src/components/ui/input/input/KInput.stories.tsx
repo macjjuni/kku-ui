@@ -1,15 +1,18 @@
-// KInput.stories.tsx
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { KInput } from "./KInput";
 
 const meta: Meta<typeof KInput> = {
-  title: "Input/KInput",
+  title: "Input/Input",
   component: KInput,
   tags: ["autodocs"],
   argTypes: {
     type: {
       control: "select",
       options: ["text", "password", "email", "number", "tel"],
+    },
+    size: {
+      control: "select",
+      options: ["sm", "md", "lg"],
     },
     disabled: {
       control: "boolean",

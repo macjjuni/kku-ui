@@ -61,7 +61,7 @@ export const Default: Story = {
       <KDropdownMenuTrigger className="rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">
         설정 열기
       </KDropdownMenuTrigger>
-      <KDropdownMenuContent className="w-56" side="bottom" align="start" sideOffset={12}>
+      <KDropdownMenuContent className="w-56" side={args.side} align={args.align} sideOffset={12}>
         <KDropdownMenuLabel>내 계정</KDropdownMenuLabel>
         <KDropdownMenuSeparator />
         <KDropdownMenuGroup>
@@ -168,7 +168,7 @@ export const CustomTrigger: Story = {
             <MoreVertical className="size-5" />
           </KButton>
         </KDropdownMenuTrigger>
-        <KDropdownMenuContent side="bottom" align="end">
+        <KDropdownMenuContent {...args}>
           <KDropdownMenuItem>
             편집
             <KDropdownMenuShortcut>⌘E</KDropdownMenuShortcut>
@@ -193,7 +193,7 @@ export const CustomTrigger: Story = {
             <div className="text-sm font-medium">User1</div>
           </KButton>
         </KDropdownMenuTrigger>
-        <KDropdownMenuContent align="end" className="w-48">
+        <KDropdownMenuContent {...args}>
           <KDropdownMenuLabel>내 계정</KDropdownMenuLabel>
           <KDropdownMenuSeparator />
           <KDropdownMenuItem>

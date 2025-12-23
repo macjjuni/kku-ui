@@ -11,7 +11,7 @@ import {
 } from "@/components";
 
 const meta: Meta<typeof KInputGroup> = {
-  title: "Input/KInputGroup",
+  title: "Input/InputGroup",
   component: KInputGroup,
   tags: ["autodocs"],
   decorators: [

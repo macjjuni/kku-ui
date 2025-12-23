@@ -39,7 +39,7 @@ const preview: Preview = {
         order: [
           'Actions',
           ['KSwitch', 'ButtonGroup', 'ToggleButton', 'Switch'],
-          'KInput',
+          'KNumberStepper',
           ['TextField', 'Select'],
           'Data Display',
           ['KAccordion', 'Menu', 'Dropdown', 'Skeleton'],

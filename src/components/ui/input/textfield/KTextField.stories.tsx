@@ -9,7 +9,7 @@ const meta: Meta<typeof KTextField> = {
   argTypes: {
     size: {
       control: 'select',
-      options: ['sm', 'default', 'lg'],
+      options: ['sm', 'md', 'lg'],
     },
     width: {
       control: 'select',
@@ -114,7 +114,7 @@ export const ErrorSizes: Story = {
     return (
       <div className="flex flex-col gap-4 w-full max-w-sm">
         <KTextField ref={textFieldRef1} size="sm" label="Small Error" defaultValue="Error value" rules={[() => '에러 발생']}/>
-        <KTextField ref={textFieldRef2} size="default" label="Default Error" defaultValue="Error value" rules={[() => '에러 발생']}/>
+        <KTextField ref={textFieldRef2} size="md" label="Default Error" defaultValue="Error value" rules={[() => '에러 발생']}/>
         <KTextField ref={textFieldRef3} size="lg" label="Large Error" defaultValue="Error value" rules={[() => '에러 발생']}/>
         <button type="button" className="px-4 py-2 bg-slate-900 text-white" onClick={validate}>Validate</button>
       </div>

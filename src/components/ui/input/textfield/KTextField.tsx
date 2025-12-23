@@ -1,17 +1,13 @@
 import { ComponentProps, forwardRef, useId, useState, useImperativeHandle, useRef, useCallback, ChangeEvent, useMemo } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { KInput } from '@/components';
+import { KInput, KInputSizeType } from '@/components';
 
-const inputVariants = cva(
+
+const textFieldVariants = cva(
   'w-full transition-all',
   {
     variants: {
-      size: {
-        md: 'h-9 px-3 py-2 text-sm',
-        sm: 'h-8 px-2 py-1 text-xs',
-        lg: 'h-10 px-3 py-2 text-base',
-      },
       width: {
         auto: 'w-auto',
         full: 'w-full',
@@ -22,7 +18,6 @@ const inputVariants = cva(
       },
     },
     defaultVariants: {
-      size: 'md',
       width: 'md',
     },
   },
@@ -30,13 +25,13 @@ const inputVariants = cva(
 
 export type KValidationRule = (value: string) => boolean | string | Promise<boolean | string>;
 
-type InputVariantsProps = VariantProps<typeof inputVariants>;
 
-export interface KTextFieldProps extends Omit<ComponentProps<'input'>, 'size' | 'width'>, Omit<InputVariantsProps, 'width'> {
+export interface KTextFieldProps extends Omit<ComponentProps<'input'>, 'size' | 'width'> {
   label?: string;
   helperText?: string;
   rules?: KValidationRule[];
-  width?: InputVariantsProps['width'] | number; // number 타입 추가
+  width?: VariantProps<typeof textFieldVariants>['width'] | number;
+  size?: KInputSizeType;
 }
 
 export interface KTextFieldRefs {
@@ -111,11 +106,12 @@ const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
         id={inputId}
         ref={inputRef}
         type={type}
+        size={size} // KInput으로 size 프롭 전달
         onChange={onChangeTextField}
         readOnly={readOnly}
         maxLength={maxLength}
         className={cn(
-          inputVariants({ size, width: isNumberWidth ? 'full' : (width as InputVariantsProps['width']) }),
+          textFieldVariants({ width: isNumberWidth ? 'full' : (width as never) }),
           errorMessage && 'border-danger focus-visible:ring-danger',
           className,
         )}

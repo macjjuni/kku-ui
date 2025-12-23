@@ -3,7 +3,7 @@ import { KToast, kToast } from "./KToast";
 import { KButton } from "@/components";
 
 const meta: Meta<typeof KToast> = {
-  title: "Feedback/KToast",
+  title: "Feedback/Toast",
   component: KToast,
   tags: ["autodocs"],
   argTypes: {

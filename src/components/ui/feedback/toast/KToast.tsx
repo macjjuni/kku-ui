@@ -1,6 +1,7 @@
 import { toast, Toaster as Sonner } from 'sonner';
 import { ComponentProps, CSSProperties } from 'react';
 import { cn } from '@/lib/utils';
+import "./KToast.css";
 
 export interface KToasterProps extends ComponentProps<typeof Sonner> {
   size?: 'sm' | 'md' | 'lg' | 'full';
@@ -69,6 +70,12 @@ const KToast = ({ size = 'md', position = 'top-right', ...props }: KToasterProps
             'k-toast__cancel-button',
             'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground',
             props.toastOptions?.classNames?.cancelButton,
+          ),
+          closeButton: cn(
+            'k-toast__close-button',
+            '!left-auto !right-[-16px] !top-[-2px]',
+            'group-[.toast]:bg-background group-[.toast]:border-border',
+            props.toastOptions?.classNames?.closeButton,
           ),
         },
       }}

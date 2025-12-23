@@ -2,7 +2,7 @@ import { ComponentProps } from "react";
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
-import { KButton, KTextarea, KInput } from "@/components"
+import { KButton, KTextarea, KInput, KInputProps } from '@/components';
 
 function KInputGroup({ className, ...props }: ComponentProps<"div">) {
   return (
@@ -112,13 +112,12 @@ function InputGroupText({ className, ...props }: ComponentProps<"span">) {
   )
 }
 
-function InputGroupInput({ className, ...props }: ComponentProps<'input'>) {
+function InputGroupInput({ className, ...props }: KInputProps) {
   return (
     <KInput
       data-slot="input-group-control"
       className={cn(
         "k-input-group__input flex-1 rounded-none border-0 bg-transparent shadow-none dark:bg-transparent",
-        // 핵심: 기존 KInput의 focus-ring(shadow)을 제거하고 아웃라인도 방지
         "focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none",
         className,
       )}

@@ -41,7 +41,7 @@ const itemVariants = cva(
 
 const labelVariants = cva("px-2 py-1.5 font-semibold", {
   variants: {
-    size: { sm: "text-[11px] py-1 opacity-70", md: "text-sm py-1.5" },
+    size: { sm: "text-[11px] py-0.5 opacity-70", md: "text-[13px] py-1" },
   },
   defaultVariants: { size: "md" },
 });
