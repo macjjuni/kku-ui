@@ -94,9 +94,8 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
 
   // 숫자형 너비 판별 및 스타일 생성
   const isNumericWidth = typeof width === 'number';
-  const triggerStyle = useMemo(() => ({
-    width: isNumericWidth ? `${width}px` : undefined,
-  }), [width, isNumericWidth]);
+
+  const triggerStyle = useMemo(() => (isNumericWidth ? { width: `${width}px`, minWidth: `${width}px`, maxWidth: `${width}px` } : undefined), [width, isNumericWidth]);
 
   useImperativeHandle(ref, () => ({ value }));
 

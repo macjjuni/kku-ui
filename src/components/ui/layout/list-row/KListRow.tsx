@@ -72,9 +72,9 @@ const KListGroup = ({ children, header, footer, width = "md", className }: KList
   };
 
   return (
-    <section className={cn("w-full mx-auto my-5 px-4", widthMap[width], className)}>
+    <section className={cn("w-full mx-auto [&&+&]:mt-6 px-0", widthMap[width], className)}>
       {header && (
-        <header className="px-4 mb-2 text-[13px] text-muted-foreground uppercase">
+        <header className="px-4 mb-2 text-[14px] text-muted-foreground uppercase">
           {header}
         </header>
       )}

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { KTextarea } from "./KTextarea";
 
 const meta: Meta<typeof KTextarea> = {
-  title: "Input/KTextarea",
+  title: "Input/Textarea",
   component: KTextarea,
   tags: ["autodocs"],
   argTypes: {
