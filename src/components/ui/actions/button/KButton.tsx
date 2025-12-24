@@ -4,6 +4,8 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 
+const focusStyle = 'focus-visible:outline focus-visible:outline-ring focus-visible:outline focus-visible:outline-offset-[-2px]'
+
 const buttonVariants = cva(
   'k-button inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors ' +
   'focus-ring disabled:pointer-events-none disabled:opacity-50 ' +
@@ -11,13 +13,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-gray-200/80 shadow hover:brightness-90 hover:text-accent-foreground active:scale-[0.97] transition-transform',
+        default: `bg-gray-200/80 shadow hover:brightness-90 hover:text-accent-foreground active:scale-[0.97] transition-transform ${focusStyle}`,
         outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground active:scale-[0.97] transition-transform',
-        primary: 'bg-primary text-primary-foreground shadow hover:bg-primary/90 active:scale-[0.97] transition-transform',
-        danger: 'bg-danger text-danger-foreground shadow-sm hover:bg-danger/90 active:scale-[0.97] transition-transform',
-        secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 active:scale-[0.97] transition-transform',
-        ghost: 'hover:bg-accent hover:text-accent-foreground active:scale-[0.97] transition-transform',
-        link: 'text-primary underline-offset-4 hover:underline active:scale-[0.97] transition-transform',
+        primary: `bg-primary text-primary-foreground shadow hover:bg-primary/90 active:scale-[0.97] transition-transform ${focusStyle} focus-visible:outline-danger`,
+        danger: `bg-danger text-danger-foreground shadow-sm hover:bg-danger/90 active:scale-[0.97] transition-transform ${focusStyle} focus-visible:outline-primary`,
+        ghost: `hover:bg-accent hover:text-accent-foreground active:scale-[0.97] transition-transform ${focusStyle}`,
+        link: `text-primary underline-offset-4 hover:underline active:scale-[0.97] transition-transform ${focusStyle} focus-visible:outline-primary`,
       },
       size: {
         sm: 'h-8 rounded-md px-3 text-xs',
@@ -46,11 +47,12 @@ const buttonVariants = cva(
 );
 
 type ButtonVariantsProps = VariantProps<typeof buttonVariants>;
+export type KButtonWidthType = ButtonVariantsProps['width'] | number; // string(variant) + number 허용
 
 export interface KButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'width'>,
   Omit<ButtonVariantsProps, 'width'> {
   asChild?: boolean;
-  width?: ButtonVariantsProps['width'] | number; // string(variant) + number 허용
+  width?: KButtonWidthType;
 }
 
 const KButton = forwardRef<ComponentRef<'button'>, KButtonProps>(

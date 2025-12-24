@@ -13,7 +13,12 @@ const meta: Meta<typeof KButtonGroup> = {
     },
     size: {
       control: 'select',
-      options: ['default', 'sm', 'lg', 'icon'],
+      options: ['sm', 'md', 'lg', 'icon'],
+      description: '그룹 내 모든 버튼의 기본 size를 설정합니다.',
+    },
+    width: {
+      control: 'select',
+      options: ['default', 'full', 240],
       description: '그룹 내 모든 버튼의 기본 size를 설정합니다.',
     },
     vertical: {

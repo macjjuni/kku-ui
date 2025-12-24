@@ -1,16 +1,17 @@
 import { Children, cloneElement, isValidElement, ReactNode, useMemo } from 'react';
-import { KButtonProps } from '@/components';
+import { KButtonProps, KButtonWidthType } from '@/components';
 import { cn } from '@/lib/utils';
 
 export interface KButtonGroupProps extends Pick<KButtonProps, 'variant' | 'size' | 'disabled'> {
   children: ReactNode;
   className?: string;
   vertical?: boolean;
+  width?: KButtonWidthType;
 }
 
 const KButtonGroup = (props: KButtonGroupProps) => {
 
-  const { children, className, vertical = false, variant, size, disabled } = props;
+  const { children, className, vertical = false, width, variant, size, disabled } = props;
 
   // region [Templates]
   const renderButtons = useMemo(() => {
@@ -21,11 +22,12 @@ const KButtonGroup = (props: KButtonGroupProps) => {
           size: child.props.size || size,
           disabled: child.props.disabled || disabled,
           type: child.props.type || 'button',
+          width,
         });
       }
       return child;
     });
-  }, [children, variant, size, disabled]);
+  }, [children, variant, size, disabled, width]);
   // endregion
 
   return (
