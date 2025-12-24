@@ -43,8 +43,7 @@ const KListGroup = ({ children, header, footer, width = 'md', className }: KList
   return (
     <section className={cn('w-full mx-auto [&&+&]:mt-6 px-0', widthMap[width], className)}>
       {header && (<header className="px-4 mb-3 text-[14px] opacity-80 uppercase">{header}</header>)}
-      <div className="overflow-hidden bg-card rounded-xl border-[1px] border-border shadow-sm">{children}</div>
-
+      <div className="overflow-hidden rounded-xl border border-border shadow-sm bg-background">{children}</div>
       {footer && (<footer className="px-4 mt-2 text-[13px] text-muted-foreground leading-tight">{footer}</footer>)}
     </section>
   );
@@ -58,18 +57,15 @@ const KListRow = ({
   onClick,
   className,
 }: KListRowProps) => (
-  <div className={cn('group bg-background', className)}>
-    {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-    <div
-      onClick={onClick}
-      className={cn(
-        'flex items-center justify-between px-4 py-[11px] transition-colors',
-        onClick && 'active:bg-secondary cursor-pointer',
-      )}
-    >
+  <div className={cn('group bg-background first:rounded-t-xl last:rounded-b-xl', className)}>
+    {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex */}
+    <div tabIndex={onClick ? 0 : -1} onClick={onClick} className={cn(
+      'flex items-center justify-between px-4 py-[11px] transition-colors',
+      onClick && 'active:bg-secondary cursor-pointer focus-ring',
+    )}>
       {/* Left: Icon + Label */}
       <div className="flex items-center gap-3">
-        {icon && (<div className="flex items-center justify-center w-7 h-7 overflow-hidden rounded-[7px]">{icon}</div>)}
+        {icon && (<div className="flex items-center justify-center w-7 h-7 overflow-hidden rounded-lg">{icon}</div>)}
         <span className="text-[17px] tracking-tight text-foreground">{label}</span>
       </div>
       <div className="flex items-center text-[17px]">{rightElement}</div>
@@ -82,9 +78,9 @@ const KListRow = ({
 );
 
 const KListRowAccordion = ({ icon, label, children, className, value }: KListRowAccordionProps) => (
-  <div className={cn('group bg-background', className)}>
+  <div className={cn('group bg-background first:rounded-t-xl last:rounded-b-xl overflow-hidden', className)}>
     <Accordion.Root collapsible type="single">
-      <Accordion.Item value={value} className={cn('group bg-background', className)}>
+      <Accordion.Item value={value} className="bg-background">
         <Accordion.Header className="flex">
           <Accordion.Trigger className={cn(
             'flex flex-1 items-center justify-between px-4 py-[11px] transition-colors',
@@ -92,7 +88,7 @@ const KListRowAccordion = ({ icon, label, children, className, value }: KListRow
           )}>
             {/* Left: Icon + Label */}
             <div className="flex items-center gap-3">
-              {icon && (<div className="flex items-center justify-center w-7 h-7 overflow-hidden rounded-[7px]">{icon}</div>)}
+              {icon && (<div className="flex items-center justify-center w-7 h-7 overflow-hidden rounded-lg">{icon}</div>)}
               <span className="text-[17px] tracking-tight text-foreground text-left">{label}</span>
             </div>
 

@@ -1,6 +1,7 @@
 import React, { useState, useCallback, CSSProperties } from 'react';
 import { Minus, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { KInput } from "@/components";
 
 export interface KNumberStepperProps {
   value?: number;
@@ -15,15 +16,13 @@ export interface KNumberStepperProps {
 }
 
 const sizeMap = {
-  sm: { container: 'h-8', input: 'w-10 text-xs', icon: 14 },
-  md: { container: 'h-9', input: 'w-12 text-sm', icon: 16 },
-  lg: { container: 'h-10', input: 'w-14 text-base', icon: 18 },
+  sm: { container: 'h-8', input: 'w-11 h-8 text-xs', icon: 14 },
+  md: { container: 'h-9', input: 'w-12 h-9 text-sm', icon: 16 },
+  lg: { container: 'h-10', input: 'w-14 h-10 text-base', icon: 18 },
 };
 
 
-const KNumberStepper = ({
-  value: controlledValue, defaultValue = 0, min = 0, max = Infinity, step = 1, onChange, className, size = 'md', style,
-}: KNumberStepperProps) => {
+const KNumberStepper = ({ value: controlledValue, defaultValue = 0, min = -10, max = Infinity, step = 1, onChange, className, size = 'md', style }: KNumberStepperProps) => {
 
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
   const isControlled = controlledValue !== undefined;
@@ -35,48 +34,41 @@ const KNumberStepper = ({
     onChange?.(clampedValue);
   }, [min, max, isControlled, onChange]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(e.target.value, 10);
-    if (!Number.isNaN(newValue)) updateValue(newValue);
-  };
+    if (!Number.isNaN(newValue)) {
+      updateValue(newValue);
+    }
+  }, [updateValue]);
 
   return (
-    <div className={cn(
-      'inline-flex items-stretch border rounded-md bg-background overflow-hidden',
-      sizeMap[size].container,
-      className,
-    )}
-         style={style}>
-      {/* Input */}
-      <input
+    <div className={cn('inline-flex items-stretch bg-background overflow-hidden', sizeMap[size].container, className)} style={style}>
+      <KInput
         type="text"
         value={value}
         onChange={handleInputChange}
         className={cn(
-          'border-none bg-transparent text-center focus:outline-none focus:ring-0',
+          'border border-r-0 bg-transparent rounded-none rounded-tl-md rounded-bl-md text-center',
+          'focus-ring focus-visible:border-r',
           sizeMap[size].input,
         )}
       />
-
-      {/* Buttons Container */}
-      <div className="flex border-l">
-        <button
-          type="button"
-          onClick={() => updateValue(value - step)}
-          disabled={value <= min}
-          className="flex items-center justify-center px-2 hover:bg-muted border-r transition-colors disabled:opacity-50"
-        >
-          <Minus size={sizeMap[size].icon}/>
-        </button>
-        <button
-          type="button"
-          onClick={() => updateValue(value + step)}
-          disabled={value >= max}
-          className="flex items-center justify-center px-2 hover:bg-muted transition-colors disabled:opacity-50"
-        >
-          <Plus size={sizeMap[size].icon}/>
-        </button>
-      </div>
+      <button
+        type="button"
+        onClick={() => updateValue(value - step)}
+        disabled={value <= min}
+        className="flex items-center justify-center mx-[-1px] px-2 rounded-none hover:bg-muted border transition-colors disabled:opacity-50 focus-ring"
+      >
+        <Minus size={sizeMap[size].icon}/>
+      </button>
+      <button
+        type="button"
+        className="flex items-center justify-center px-2 rounded-none rounded-tr-md rounded-br-md hover:bg-muted border transition-colors disabled:opacity-50 focus-ring"
+        onClick={() => updateValue(value + step)}
+        disabled={value >= max}
+      >
+        <Plus size={sizeMap[size].icon}/>
+      </button>
     </div>
   );
 };

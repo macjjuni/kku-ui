@@ -32,7 +32,7 @@
   --danger-foreground: 223.8136 0.0004% 98.0256%;
   --border: 0 0% 83.1373%;
   --input: 0 0% 83.1373%;
-  --ring: 221.2987 97.4684% 53.5294%;
+  --ring: 223.8136 0.0000% 45.1519%;
   --chart-1: 211.9266 100% 78.6275%;
   --chart-2: 217.3404 91.2621% 59.6078%;
   --chart-3: 221.5842 86.3248% 54.1176%;
@@ -49,7 +49,7 @@
   --font-sans: Pretendard, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --font-serif: Pretendard, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: Pretendard, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --radius: 0.3rem;
+  --radius: 0.45rem;
   --shadow-x: 0px;
   --shadow-y: 0px;
   --shadow-blur: 1px;
@@ -87,7 +87,7 @@
   --danger-foreground: 223.8136 0.0004% 98.0256%;
   --border: 0 0% 15.6863%;
   --input: 0 0% 20.3922%;
-  --ring: 0 0% 45.0980%;
+  --ring: 223.8136 0.0000% 45.1519%;
   --chart-1: 211.9266 100% 78.6275%;
   --chart-2: 217.3404 91.2621% 59.6078%;
   --chart-3: 221.5842 86.3248% 54.1176%;
@@ -104,7 +104,7 @@
   --font-sans: Pretendard, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --font-serif: Pretendard, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: Pretendard, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --radius: 0.3rem;
+  --radius: 0.45rem;
   --shadow-x: 0px;
   --shadow-y: 0px;
   --shadow-blur: 1px;

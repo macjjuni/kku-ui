@@ -106,13 +106,12 @@ module.exports = {
     function({ addUtilities, theme }) {
       addUtilities({
         '.focus-ring': {
-          '&:focus': { outline: 'none', boxShadow: 'none' }, // 마우스 클릭 시 조용하게
+          'outline': 'none',
+          '&:focus': { 'outline': 'none' },
           '&:focus-visible': {
-            'outline': 'none',
-            '--ring-offset-width': '1px',
-            '--ring-offset-color': theme('colors.background'),
-            '--ring-color': 'hsl(var(--primary))', // 예: 직접 파란색 지정
-            'box-shadow': `0 0 0 2px var(--ring-color), 0 0 4px 2px rgba(59, 130, 246, 0.5)`,
+            'border-color': 'hsl(var(--ring))',
+            'box-shadow': 'none',
+            'z-index': '1',
           },
         },
       });
