@@ -121,7 +121,7 @@ const KDropdownMenuCheckboxItem = forwardRef<ComponentRef<typeof KDropdownMenuPr
   ({ className, children, checked, ...props }, ref) => {
     const { size } = useContext(KDropdownContext);
     return (
-      <KDropdownMenuPrimitive.CheckboxItem ref={ref} className={cn("k-dropdown-menu__checkbox-item", itemVariants({ size, className }), "pl-8")} checked={checked} {...props}>
+      <KDropdownMenuPrimitive.CheckboxItem ref={ref} className={cn("k-dropdown-menu__checkbox-item", itemVariants({ size, className }), "!pl-8")} checked={checked} {...props}>
         <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
           <KDropdownMenuPrimitive.ItemIndicator>
             <Check className="size-4" />

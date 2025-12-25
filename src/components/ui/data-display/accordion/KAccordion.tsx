@@ -52,17 +52,10 @@ const KAccordionTrigger = forwardRef<ComponentRef<typeof AccordionPrimitive.Trig
 
     return (
       <AccordionPrimitive.Header className="k-accordion__header flex">
-        <AccordionPrimitive.Trigger
-          ref={ref}
-          className={cn("k-accordion__trigger", KAccordionTriggerVariants({ size, className }))}
-          {...props}
-        >
+        <AccordionPrimitive.Trigger ref={ref} className={cn("k-accordion__trigger pr-1 focus-visible:outline-ring ", KAccordionTriggerVariants({ size, className }))} {...props}>
           {children}
           <ChevronDown
-            className={cn(
-              'shrink-0 text-muted-foreground transition-transform duration-200',
-              size === 'sm' ? 'h-3 w-3' : 'h-4 w-4',
-            )}
+            className={cn('shrink-0 text-muted-foreground transition-transform duration-200', size === 'sm' ? 'h-3 w-3' : 'h-4 w-4')}
           />
         </AccordionPrimitive.Trigger>
       </AccordionPrimitive.Header>
