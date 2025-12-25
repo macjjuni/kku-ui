@@ -48,7 +48,6 @@ const KListGroup = ({ children, header, footer, width = 'md', className }: KList
     </section>
   );
 };
-// overflow-hidden rounded-xl border border-border shadow-sm bg-background
 
 const KListRow = ({
   icon,
@@ -60,7 +59,7 @@ const KListRow = ({
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex
   <div tabIndex={onClick ? 0 : -1} onClick={onClick}
        className={cn(
-         'group bg-background first:border-t last:border-b first:rounded-t-xl last:rounded-b-xl border-x',
+         'group bg-background first:border-t last:border-b first:rounded-t-xl last:rounded-b-xl border-x border-border',
          onClick && 'active:bg-secondary cursor-pointer',
          'focus-visible:outline focus-visible:outline-ring focus-visible:outline-offset-[-1px]',
          className,
