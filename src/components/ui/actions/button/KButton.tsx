@@ -13,7 +13,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: `bg-gray-200/80 shadow hover:brightness-90 hover:text-accent-foreground active:scale-[0.97] transition-transform ${focusStyle}`,
+        default: `bg-gray-200/70 shadow hover:brightness-90 hover:text-accent-foreground active:scale-[0.97] transition-transform ${focusStyle}`,
         outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground active:scale-[0.97] transition-transform',
         primary: `bg-primary text-primary-foreground shadow hover:bg-primary/90 active:scale-[0.97] transition-transform ${focusStyle} focus-visible:outline-danger`,
         danger: `bg-danger text-danger-foreground shadow-sm hover:bg-danger/90 active:scale-[0.97] transition-transform ${focusStyle} focus-visible:outline-primary`,

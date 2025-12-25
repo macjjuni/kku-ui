@@ -42,7 +42,7 @@ const KAccordion = forwardRef<ComponentRef<typeof AccordionPrimitive.Root>, KAcc
 
 const KAccordionItem = forwardRef<ComponentRef<typeof AccordionPrimitive.Item>, KAccordionItemProps>(
   ({ className, ...props }, ref) => (
-    <AccordionPrimitive.Item ref={ref} className={cn('k-accordion__item border-b', className)} {...props} />
+    <AccordionPrimitive.Item ref={ref} className={cn('k-accordion__item border-b border-border', className)} {...props} />
   ),
 );
 

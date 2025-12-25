@@ -131,7 +131,7 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
           position="item-aligned"
           sideOffset={4}
           className={cn(
-            'relative z-50 min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md',
+            'relative z-50 min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-md',
             'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
             'data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2',
           )}>
