@@ -48,7 +48,7 @@ const KNumberStepper = ({ value: controlledValue, defaultValue = 0, min = -10, m
         value={value}
         onChange={handleInputChange}
         className={cn(
-          'border border-r-0 bg-transparent rounded-none rounded-tl-md rounded-bl-md text-center',
+          'border border-border border-r-0 bg-transparent rounded-none rounded-tl-md rounded-bl-md text-center',
           'focus-ring focus-visible:border-r',
           sizeMap[size].input,
         )}
@@ -57,13 +57,13 @@ const KNumberStepper = ({ value: controlledValue, defaultValue = 0, min = -10, m
         type="button"
         onClick={() => updateValue(value - step)}
         disabled={value <= min}
-        className="flex items-center justify-center mx-[-1px] px-2 rounded-none hover:bg-muted border transition-colors disabled:opacity-50 focus-ring"
+        className="flex items-center justify-center mx-[-1px] px-2 rounded-none hover:bg-muted border border-border transition-colors disabled:opacity-50 focus-ring"
       >
         <Minus size={sizeMap[size].icon}/>
       </button>
       <button
         type="button"
-        className="flex items-center justify-center px-2 rounded-none rounded-tr-md rounded-br-md hover:bg-muted border transition-colors disabled:opacity-50 focus-ring"
+        className="flex items-center justify-center px-2 rounded-none rounded-tr-md rounded-br-md hover:bg-muted border border-border transition-colors disabled:opacity-50 focus-ring"
         onClick={() => updateValue(value + step)}
         disabled={value >= max}
       >
