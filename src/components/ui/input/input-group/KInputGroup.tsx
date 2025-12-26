@@ -71,7 +71,7 @@ const inputGroupAddonVariants = cva(
   },
 );
 
-function InputGroupAddon({
+function KInputGroupAddon({
   className,
   align = 'inline-start',
   ...props
@@ -94,7 +94,7 @@ function InputGroupAddon({
   );
 }
 
-function InputGroupButton({ className, size, variant = 'ghost', ...props }: ComponentProps<typeof KButton>) {
+function KInputGroupButton({ className, size, variant = 'ghost', ...props }: ComponentProps<typeof KButton>) {
   const { size: groupSize } = useContext(InputGroupContext);
   const sizeStyles = {
     sm: 'h-[24px] text-xs px-2',
@@ -118,7 +118,7 @@ function InputGroupButton({ className, size, variant = 'ghost', ...props }: Comp
 }
 
 
-function InputGroupText({ className, ...props }: ComponentProps<'span'>) {
+function KInputGroupText({ className, ...props }: ComponentProps<'span'>) {
   const { size } = useContext(InputGroupContext);
   const sizeClasses = {
     sm: 'text-xs',
@@ -138,7 +138,7 @@ function InputGroupText({ className, ...props }: ComponentProps<'span'>) {
   );
 }
 
-function InputGroupInput({ className, ...props }: KInputProps) {
+function KInputGroupInput({ className, ...props }: KInputProps) {
   const { size } = useContext(InputGroupContext);
   return (
     <KInput
@@ -155,7 +155,7 @@ function InputGroupInput({ className, ...props }: KInputProps) {
   );
 }
 
-function InputGroupTextarea({ className, ...props }: ComponentProps<'textarea'>) {
+function KInputGroupTextarea({ className, ...props }: ComponentProps<'textarea'>) {
   return (
     <KTextarea
       data-slot="input-group-control"
@@ -169,11 +169,19 @@ function InputGroupTextarea({ className, ...props }: ComponentProps<'textarea'>)
   );
 }
 
+KInputGroup.displayName = 'KInputGroup';
+KInputGroupAddon.displayName = 'KInputGroupAddon';
+KInputGroupText.displayName = 'KInputGroupText';
+KInputGroupButton.displayName = 'KInputGroupButton';
+KInputGroupInput.displayName = 'KInputGroupInput';
+KInputGroupTextarea.displayName = 'KInputGroupTextarea';
+
+
 export {
   KInputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroupButton,
-  InputGroupInput,
-  InputGroupTextarea,
+  KInputGroupAddon,
+  KInputGroupText,
+  KInputGroupButton,
+  KInputGroupInput,
+  KInputGroupTextarea,
 };

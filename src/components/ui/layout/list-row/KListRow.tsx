@@ -81,7 +81,7 @@ const KListRow = ({
 
 const KListRowAccordion = ({ icon, label, children, className, value }: KListRowAccordionProps) => (
   <div className={cn(
-    'group bg-background first:border-t last:border-b first:rounded-t-xl last:rounded-b-xl border-x',
+    'group bg-background first:border-t last:border-b first:rounded-t-xl last:rounded-b-xl border-x border-border',
     className,
   )}>
     <Accordion.Root collapsible type="single">

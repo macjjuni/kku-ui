@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Globe, Mail, Search } from 'lucide-react';
-import { InputGroupAddon, InputGroupInput, InputGroupText, InputGroupTextarea, KInputGroup, InputGroupButton } from './KInputGroup';
+import { KInputGroupAddon, KInputGroupInput, KInputGroupText, KInputGroupTextarea, KInputGroup, KInputGroupButton } from './KInputGroup';
 import { KButton } from '@/components';
 
 const meta: Meta<typeof KInputGroup> = {
@@ -32,39 +32,39 @@ export const Sizes: Story = {
       <div className="space-y-2">
         <p className="text-xs font-mono text-muted-foreground">Size: Small (sm)</p>
         <KInputGroup size="sm">
-          <InputGroupAddon align="inline-start">
+          <KInputGroupAddon align="inline-start">
             <Search className="size-3"/>
-          </InputGroupAddon>
-          <InputGroupInput placeholder="Small input group..."/>
-          <InputGroupAddon align="inline-end">
-            <InputGroupButton>Action</InputGroupButton>
-          </InputGroupAddon>
+          </KInputGroupAddon>
+          <KInputGroupInput placeholder="Small input group..."/>
+          <KInputGroupAddon align="inline-end">
+            <KInputGroupButton>Action</KInputGroupButton>
+          </KInputGroupAddon>
         </KInputGroup>
       </div>
 
       <div className="space-y-2">
         <p className="text-xs font-mono text-muted-foreground">Size: Medium (md)</p>
         <KInputGroup size="md">
-          <InputGroupAddon align="inline-start">
+          <KInputGroupAddon align="inline-start">
             <Search className="size-4"/>
-          </InputGroupAddon>
-          <InputGroupInput placeholder="Medium input group..."/>
-          <InputGroupAddon align="inline-end">
-            <InputGroupButton>Action</InputGroupButton>
-          </InputGroupAddon>
+          </KInputGroupAddon>
+          <KInputGroupInput placeholder="Medium input group..."/>
+          <KInputGroupAddon align="inline-end">
+            <KInputGroupButton>Action</KInputGroupButton>
+          </KInputGroupAddon>
         </KInputGroup>
       </div>
 
       <div className="space-y-2">
         <p className="text-xs font-mono text-muted-foreground">Size: Large (lg)</p>
         <KInputGroup size="lg">
-          <InputGroupAddon align="inline-start">
+          <KInputGroupAddon align="inline-start">
             <Search className="size-5"/>
-          </InputGroupAddon>
-          <InputGroupInput placeholder="Large input group..."/>
-          <InputGroupAddon align="inline-end">
-            <InputGroupButton>Action</InputGroupButton>
-          </InputGroupAddon>
+          </KInputGroupAddon>
+          <KInputGroupInput placeholder="Large input group..."/>
+          <KInputGroupAddon align="inline-end">
+            <KInputGroupButton>Action</KInputGroupButton>
+          </KInputGroupAddon>
         </KInputGroup>
       </div>
     </div>
@@ -76,11 +76,11 @@ export const URLInput: Story = {
   args: { size: 'md' },
   render: (args) => (
     <KInputGroup {...args}>
-      <InputGroupAddon align="inline-start">
+      <KInputGroupAddon align="inline-start">
         <Globe className="size-4"/>
-        <InputGroupText>https://</InputGroupText>
-      </InputGroupAddon>
-      <InputGroupInput placeholder="example.com"/>
+        <KInputGroupText>https://</KInputGroupText>
+      </KInputGroupAddon>
+      <KInputGroupInput placeholder="example.com"/>
     </KInputGroup>
   ),
 };
@@ -89,16 +89,16 @@ export const URLInput: Story = {
 export const ErrorState: Story = {
   render: () => (
     <KInputGroup>
-      <InputGroupAddon align="inline-start">
+      <KInputGroupAddon align="inline-start">
         <Mail className="size-4"/>
-      </InputGroupAddon>
-      <InputGroupInput
+      </KInputGroupAddon>
+      <KInputGroupInput
         placeholder="wrong-email"
         aria-invalid="true"
       />
-      <InputGroupAddon align="inline-end">
-        <InputGroupText className="text-danger">Invalid</InputGroupText>
-      </InputGroupAddon>
+      <KInputGroupAddon align="inline-end">
+        <KInputGroupText className="text-danger">Invalid</KInputGroupText>
+      </KInputGroupAddon>
     </KInputGroup>
   ),
 };
@@ -107,12 +107,12 @@ export const ErrorState: Story = {
 export const ChatInput: Story = {
   render: () => (
     <KInputGroup>
-      <InputGroupTextarea placeholder="메시지를 입력하세요..." className="min-h-[80px]"/>
-      <InputGroupAddon align="inline-end" className="items-end pb-2">
+      <KInputGroupTextarea placeholder="메시지를 입력하세요..." className="min-h-[80px]"/>
+      <KInputGroupAddon align="inline-end" className="items-end pb-2">
         <KButton variant="primary" size="md">
           Send
         </KButton>
-      </InputGroupAddon>
+      </KInputGroupAddon>
     </KInputGroup>
   ),
 };
@@ -121,13 +121,13 @@ export const ChatInput: Story = {
 export const BlockLayout: Story = {
   render: () => (
     <KInputGroup>
-      <InputGroupAddon align="block-start" className="border-b bg-muted/30">
-        <InputGroupText className="text-[10px] font-bold uppercase tracking-wider">User Token</InputGroupText>
-      </InputGroupAddon>
-      <InputGroupInput placeholder="Enter your token here..." className="py-6"/>
-      <InputGroupAddon align="inline-end">
+      <KInputGroupAddon align="block-start" className="border-b bg-muted/30">
+        <KInputGroupText className="text-[10px] font-bold uppercase tracking-wider">User Token</KInputGroupText>
+      </KInputGroupAddon>
+      <KInputGroupInput placeholder="Enter your token here..." className="py-6"/>
+      <KInputGroupAddon align="inline-end">
         <KButton variant="primary">Verify</KButton>
-      </InputGroupAddon>
+      </KInputGroupAddon>
     </KInputGroup>
   ),
 };
