@@ -1,4 +1,4 @@
-import React, { useState, useCallback, CSSProperties } from 'react';
+import { useState, useCallback, CSSProperties, FocusEvent } from 'react';
 import { Minus, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { KInput } from '@/components';
@@ -10,6 +10,8 @@ export interface KNumberStepperProps {
   max?: number;
   step?: number;
   onChange?: (value: number) => void;
+  onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
   className?: string;
   size?: 'sm' | 'md' | 'lg';
   style?: CSSProperties;
@@ -27,31 +29,47 @@ const inputAlignMap = { left: 'text-left', center: 'text-center', right: 'text-r
 
 const KNumberStepper = (props: KNumberStepperProps) => {
 
+  // region [Hooks]
   const {
     value: controlledValue, defaultValue = 0, min = -10, max = Infinity, step = 1, className, style,
-    size = 'md', align = 'center', onChange, inputWidth,
+    inputWidth, size = 'md', align = 'center', onChange, onFocus, onBlur,
   } = props;
 
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
   const isControlled = controlledValue !== undefined;
   const value = isControlled ? controlledValue : uncontrolledValue;
+  // endregion
 
+
+  // region [Events]
   const updateValue = useCallback((newValue: number) => {
     const clampedValue = Math.min(Math.max(newValue, min), max);
     const stepString = step.toString();
     const precision = stepString.includes('.') ? stepString.split('.')[1].length : 0;
     const fixedValue = parseFloat(clampedValue.toFixed(precision));
 
-    if (!isControlled) setUncontrolledValue(fixedValue);
+    if (!isControlled) {
+      setUncontrolledValue(fixedValue);
+    }
     onChange?.(fixedValue);
   }, [min, max, isControlled, onChange, step]);
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(e.target.value, 10);
+    const inputValue = e.target.value;
+
+    if (inputValue === '') {
+      const fallback = Math.max(0, min);
+      if (!isControlled) setUncontrolledValue(fallback);
+      onChange?.(fallback);
+      return;
+    }
+
+    const newValue = parseFloat(inputValue);
     if (!Number.isNaN(newValue)) {
       updateValue(newValue);
     }
-  }, [updateValue]);
+  }, [min, isControlled, onChange, updateValue]);
+  // endregion
 
   return (
     <div className={cn('inline-flex items-stretch bg-background overflow-hidden', sizeMap[size].container, className)} style={style}>
@@ -60,6 +78,8 @@ const KNumberStepper = (props: KNumberStepperProps) => {
         inputMode="decimal"
         value={value}
         onChange={handleInputChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
         className={cn(
           'border border-border border-r-0 bg-transparent rounded-none rounded-tl-md rounded-bl-md text-center',
           'focus-ring focus-visible:border-r',
