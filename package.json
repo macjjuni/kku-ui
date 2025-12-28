@@ -1,6 +1,6 @@
 {
   "name": "kku-ui",
-  "version": "0.9.985",
+  "version": "0.9.986",
   "packageManager": "pnpm@10.5.2",
   "type": "module",
   "exports": {
