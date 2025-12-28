@@ -18,7 +18,7 @@ const meta: Meta<typeof KButtonGroup> = {
     },
     width: {
       control: 'select',
-      options: ['default', 'full', 240],
+      options: ['default', 'full', 88, 128, 240],
       description: '그룹 내 모든 버튼의 기본 size를 설정합니다.',
     },
     vertical: {
@@ -56,7 +56,7 @@ export const Vertical: Story = {
     vertical: true,
   },
   render: (args) => (
-    <KButtonGroup {...args}>
+    <KButtonGroup width={108} {...args}>
       <KButton>프로필 수정</KButton>
       <KButton>비밀번호 변경</KButton>
       <KButton>계정 삭제</KButton>

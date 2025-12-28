@@ -12,6 +12,12 @@ const meta: Meta<typeof KNumberStepper> = {
       options: ['sm', 'md', 'lg'],
     },
     onChange: { action: 'changed' },
+    align: {
+      control: 'select',
+      options: ['left', 'center', 'right'],
+    },
+    step: { control: 'number' },
+    inputWidth: { control: 'number' },
   },
 };
 
