@@ -1,4 +1,4 @@
-import { CSSProperties, FocusEvent, useCallback, useState } from 'react';
+import { CSSProperties, FocusEvent, useCallback, useEffect, useState } from 'react';
 import { Minus, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { KInput } from '@/components';
@@ -35,20 +35,34 @@ const KNumberStepper = (props: KNumberStepperProps) => {
     inputWidth, size = 'md', align = 'center', onChange, onFocus, onBlur,
   } = props;
 
+  // 내부 상태를 string | number로 확장하여 소수점(.) 입력 상태를 보존
   const [uncontrolledValue, setUncontrolledValue] = useState<number | string>(defaultValue);
   const isControlled = controlledValue !== undefined;
+
+  // 현재 렌더링에 사용할 값 결정
   const value = isControlled ? controlledValue : uncontrolledValue;
   // endregion
 
 
   // region [Events]
-  const updateValue = useCallback((newValue: number) => {
-    // 1. 최소/최대값 제한
+  const updateValue = useCallback((newValue: number | string) => {
+    // 1. 문자열 입력 중(마침표, 마이너스 등)일 때는 보정 없이 상태만 업데이트
+    if (typeof newValue === 'string') {
+      if (!isControlled) setUncontrolledValue(newValue);
+      return;
+    }
+
+    // 2. 실제 숫자 값에 대한 최소/최대값 제한
     const clampedValue = Math.min(Math.max(newValue, min), max);
 
-    // 2. step 단위에 맞춘 소수점 정밀도 보정
+    // 3. step과 현재 입력값의 소수점 자릿수 중 큰 쪽을 선택하여 정밀도 유지
     const stepString = step.toString();
-    const precision = stepString.includes('.') ? stepString.split('.')[1].length : 0;
+    const stepPrecision = stepString.includes('.') ? stepString.split('.')[1].length : 0;
+
+    const valueString = newValue.toString();
+    const valuePrecision = valueString.includes('.') ? valueString.split('.')[1].length : 0;
+
+    const precision = Math.max(stepPrecision, valuePrecision);
     const fixedValue = parseFloat(clampedValue.toFixed(precision));
 
     if (!isControlled) {
@@ -95,6 +109,16 @@ const KNumberStepper = (props: KNumberStepperProps) => {
       updateValue(newValue);
     }
   }, [min, isControlled, onChange, updateValue]);
+  // endregion
+
+
+  // region [Life Cycles]
+  useEffect(() => {
+    if (isControlled) {
+      setUncontrolledValue(controlledValue);
+    }
+  }, [controlledValue, isControlled]);
+  // endregion
 
 
   return (
@@ -116,8 +140,8 @@ const KNumberStepper = (props: KNumberStepperProps) => {
       />
       <button
         type="button"
-        onClick={() => updateValue(value as number - step)}
-        disabled={value as number <= min}
+        onClick={() => updateValue(Number(value) - step)}
+        disabled={Number(value) <= min}
         className="flex items-center justify-center mx-[-1px] px-2 rounded-none hover:bg-muted border border-border transition-colors disabled:opacity-50 focus-ring"
       >
         <Minus size={sizeMap[size].icon}/>
@@ -125,8 +149,8 @@ const KNumberStepper = (props: KNumberStepperProps) => {
       <button
         type="button"
         className="flex items-center justify-center px-2 rounded-none rounded-tr-md rounded-br-md hover:bg-muted border border-border transition-colors disabled:opacity-50 focus-ring"
-        onClick={() => updateValue(value as number + step)}
-        disabled={value as number >= max}
+        onClick={() => updateValue(Number(value) + step)}
+        disabled={Number(value) >= max}
       >
         <Plus size={sizeMap[size].icon}/>
       </button>
