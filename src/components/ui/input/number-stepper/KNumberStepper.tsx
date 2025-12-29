@@ -8,7 +8,6 @@ export interface KNumberStepperProps {
   min?: number;
   max?: number;
   step?: number;
-  precision?: number;
   disabled?: boolean;
   onChange?: (value: number) => void;
   onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
@@ -30,7 +29,7 @@ const inputAlignMap = { left: 'text-left', center: 'text-center', right: 'text-r
 const KNumberStepper = (props: KNumberStepperProps) => {
   // region [Hooks]
   const {
-    value: controlledValue, min = 0, max = Infinity, step = 1, precision,
+    value: controlledValue, min = 0, max = Infinity, step = 1,
     disabled = false, className, style, inputWidth, size = 'md', align = 'center',
     onChange, onFocus, onBlur,
   } = props;
@@ -39,75 +38,93 @@ const KNumberStepper = (props: KNumberStepperProps) => {
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  // 터치 이벤트 발생 여부를 체크하여 중복 실행 방지
   const isTouching = useRef(false);
   // endregion
 
   // region [Privates]
-  const getDynamicPrecision = useCallback((val: number | string) => {
-    if (precision !== undefined) return precision;
+  const getStepPrecision = useCallback(() => {
     const stepString = step.toString();
-    const stepPrecision = stepString.includes('.') ? stepString.split('.')[1].length : 0;
-    const valueString = val.toString();
-    const valuePrecision = valueString.includes('.') ? valueString.split('.')[1].length : 0;
-    return Math.max(stepPrecision, valuePrecision);
-  }, [precision, step]);
+    return stepString.includes('.') ? stepString.split('.')[1].length : 0;
+  }, [step]);
   // endregion
 
   // region [Events]
-  const updateValue = useCallback((nextVal: number | string) => {
+  const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (disabled) return;
+    const inputValue = e.target.value;
 
-    if (typeof nextVal === 'string' && (nextVal === '-' || nextVal === '.' || nextVal.endsWith('.'))) {
-      setInternalValue(nextVal);
+    // 빈 값 처리
+    if (inputValue === '') {
+      setInternalValue('');
+      onChange?.(min);
       return;
     }
 
-    const numValue = typeof nextVal === 'string' ? parseFloat(nextVal) : nextVal;
+    // 유효 문자만 허용
+    if (!/^-?\d*\.?\d*$/.test(inputValue)) return;
+
+    // 중간 입력 상태 (-, ., 숫자.)
+    if (inputValue === '-' || inputValue === '.' || inputValue.endsWith('.')) {
+      setInternalValue(inputValue);
+      return;
+    }
+
+    // 완성된 숫자
+    const numValue = parseFloat(inputValue);
     if (Number.isNaN(numValue)) return;
 
-    const targetPrecision = getDynamicPrecision(nextVal);
+    // 범위 제한
     const clampedValue = Math.min(Math.max(numValue, min), max);
-    const fixedString = clampedValue.toFixed(targetPrecision);
+    const precision = getStepPrecision();
+    const fixedNumber = parseFloat(clampedValue.toFixed(precision));
 
-    setInternalValue(fixedString);
-    onChange?.(parseFloat(fixedString));
-  }, [min, max, getDynamicPrecision, onChange, disabled]);
+    setInternalValue(fixedNumber.toString());
+    onChange?.(fixedNumber);
+  }, [min, max, getStepPrecision, onChange, disabled]);
+
+  const handleBlur = useCallback((e: FocusEvent<HTMLInputElement>) => {
+    if (disabled) return;
+
+    const parsed = parseFloat(internalValue);
+    const finalValue = Number.isNaN(parsed) ? min : Math.min(Math.max(parsed, min), max);
+    const precision = getStepPrecision();
+    const fixedNumber = parseFloat(finalValue.toFixed(precision));
+
+    setInternalValue(fixedNumber.toString());
+    onChange?.(fixedNumber);
+    onBlur?.(e);
+  }, [internalValue, min, max, getStepPrecision, onChange, onBlur, disabled]);
 
   const handleStep = useCallback((direction: 'plus' | 'minus') => {
     if (disabled) return;
+
     setInternalValue((prev) => {
       const currentNum = parseFloat(prev) || 0;
       const nextNum = direction === 'plus' ? currentNum + step : currentNum - step;
 
-      const targetPrecision = getDynamicPrecision(nextNum);
+      const precision = getStepPrecision();
       const clampedValue = Math.min(Math.max(nextNum, min), max);
-      const fixedString = clampedValue.toFixed(targetPrecision);
+      const fixedNumber = parseFloat(clampedValue.toFixed(precision));
 
-      onChange?.(parseFloat(fixedString));
-      return fixedString;
+      onChange?.(fixedNumber);
+      return fixedNumber.toString();
     });
-  }, [disabled, step, min, max, getDynamicPrecision, onChange]);
+  }, [disabled, step, min, max, getStepPrecision, onChange]);
 
   const stopStepper = useCallback(() => {
     if (timerRef.current) clearTimeout(timerRef.current);
     if (intervalRef.current) clearInterval(intervalRef.current);
     timerRef.current = null;
     intervalRef.current = null;
-    // 인터벌 중지 시점에 터치 플래그 해제
-    setTimeout(() => { isTouching.current = false; }, 100);
+    setTimeout(() => {
+      isTouching.current = false;
+    }, 100);
   }, []);
 
   const startStepper = useCallback((e: React.MouseEvent | React.TouchEvent, direction: 'plus' | 'minus') => {
     if (disabled) return;
-
-    // 1. 마우스 이벤트인데 이미 터치 중이라면 무시 (Ghost Click 방지)
     if (e.type === 'mousedown' && isTouching.current) return;
-
-    // 2. 터치 이벤트라면 플래그 세팅
-    if (e.type === 'touchstart') {
-      isTouching.current = true;
-    }
+    if (e.type === 'touchstart') isTouching.current = true;
 
     stopStepper();
     handleStep(direction);
@@ -118,53 +135,14 @@ const KNumberStepper = (props: KNumberStepperProps) => {
       }, 80);
     }, 500);
   }, [disabled, handleStep, stopStepper]);
-
-  const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    if (disabled) return;
-    const inputValue = e.target.value;
-
-    if (inputValue === '') {
-      const fallback = Math.max(0, min);
-      setInternalValue('');
-      onChange?.(fallback);
-      return;
-    }
-
-    if (!/^-?\d*\.?\d*$/.test(inputValue)) return;
-
-    if (precision !== undefined && precision > 0) {
-      const parts = inputValue.split('.');
-      if (parts[1] && parts[1].length > precision) return;
-    } else if (precision === 0 && inputValue.includes('.')) {
-      return;
-    }
-
-    if (inputValue === '-' || inputValue === '.' || inputValue.endsWith('.')) {
-      setInternalValue(inputValue);
-    } else {
-      updateValue(inputValue);
-    }
-  }, [min, precision, onChange, updateValue, disabled]);
-
-  const handleBlur = useCallback((e: FocusEvent<HTMLInputElement>) => {
-    if (disabled) return;
-    const parsed = parseFloat(internalValue);
-    if (!Number.isNaN(parsed)) {
-      updateValue(parsed);
-    } else {
-      updateValue(Math.max(0, min));
-    }
-    onBlur?.(e);
-  }, [internalValue, min, updateValue, onBlur, disabled]);
   // endregion
 
   // region [Life Cycles]
   useEffect(() => {
     if (controlledValue !== undefined) {
-      const targetPrecision = getDynamicPrecision(controlledValue);
-      setInternalValue(controlledValue.toFixed(targetPrecision));
+      setInternalValue(controlledValue.toString());
     }
-  }, [controlledValue, getDynamicPrecision]);
+  }, [controlledValue]);
 
   useEffect(() => {
     return () => stopStepper();
@@ -179,8 +157,7 @@ const KNumberStepper = (props: KNumberStepperProps) => {
         disabled && 'opacity-50 pointer-events-none',
         className,
       )}
-      style={style}
-    >
+      style={style}>
       <KInput
         type="text"
         inputMode="decimal"
@@ -190,8 +167,7 @@ const KNumberStepper = (props: KNumberStepperProps) => {
         onBlur={handleBlur}
         disabled={disabled}
         className={cn(
-          'border border-border border-r-0 bg-transparent rounded-none rounded-tl-md rounded-bl-md text-center',
-          'focus-ring focus-visible:border-r',
+          'border border-border border-r-0 bg-transparent rounded-none rounded-tl-md rounded-bl-md focus-ring focus-visible:border-r',
           sizeMap[size].input,
           inputAlignMap[align],
         )}

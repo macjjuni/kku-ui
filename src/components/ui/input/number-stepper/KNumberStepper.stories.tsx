@@ -18,7 +18,6 @@ const meta: Meta<typeof KNumberStepper> = {
     },
     step: { control: 'number' },
     inputWidth: { control: 'number' },
-    precision: { control: 'number' },
   },
 };
 
