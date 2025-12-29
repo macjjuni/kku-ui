@@ -18,6 +18,7 @@ const meta: Meta<typeof KNumberStepper> = {
     },
     step: { control: 'number' },
     inputWidth: { control: 'number' },
+    precision: { control: 'number' },
   },
 };
 
@@ -25,24 +26,21 @@ export default meta;
 type Story = StoryObj<typeof KNumberStepper>;
 
 export const Default: Story = {
-  args: {
-    defaultValue: 5,
-  },
+  args: {},
 };
 
 export const Sizes: Story = {
   render: () => (
     <div className="inline-flex flex-row gap-4">
-      <KNumberStepper size="sm" defaultValue={10}/>
-      <KNumberStepper size="md" defaultValue={10}/>
-      <KNumberStepper size="lg" defaultValue={10}/>
+      <KNumberStepper size="sm" />
+      <KNumberStepper size="md" />
+      <KNumberStepper size="lg" />
     </div>
   ),
 };
 
 export const StepAndRange: Story = {
   args: {
-    defaultValue: 50,
     min: 0,
     max: 100,
     step: 10,

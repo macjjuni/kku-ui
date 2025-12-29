@@ -1,14 +1,15 @@
-import { CSSProperties, FocusEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, CSSProperties, FocusEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { Minus, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { KInput } from '@/components';
 
 export interface KNumberStepperProps {
   value?: number;
-  defaultValue?: number;
   min?: number;
   max?: number;
   step?: number;
+  precision?: number;
+  disabled?: boolean;
   onChange?: (value: number) => void;
   onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
@@ -26,110 +27,165 @@ const sizeMap = {
 };
 const inputAlignMap = { left: 'text-left', center: 'text-center', right: 'text-right' };
 
-
 const KNumberStepper = (props: KNumberStepperProps) => {
-
   // region [Hooks]
   const {
-    value: controlledValue, defaultValue = 0, min = -10, max = Infinity, step = 1, className, style,
-    inputWidth, size = 'md', align = 'center', onChange, onFocus, onBlur,
+    value: controlledValue, min = 0, max = Infinity, step = 1, precision,
+    disabled = false, className, style, inputWidth, size = 'md', align = 'center',
+    onChange, onFocus, onBlur,
   } = props;
 
-  // 내부 상태를 string | number로 확장하여 소수점(.) 입력 상태를 보존
-  const [uncontrolledValue, setUncontrolledValue] = useState<number | string>(defaultValue);
-  const isControlled = controlledValue !== undefined;
+  const [internalValue, setInternalValue] = useState<string>(controlledValue !== undefined ? controlledValue.toString() : '0');
 
-  // 현재 렌더링에 사용할 값 결정
-  const value = isControlled ? controlledValue : uncontrolledValue;
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   // endregion
 
+  // region [Privates]
+  const getDynamicPrecision = useCallback((val: number | string) => {
+    if (precision !== undefined) return precision;
+    const stepString = step.toString();
+    const stepPrecision = stepString.includes('.') ? stepString.split('.')[1].length : 0;
+    const valueString = val.toString();
+    const valuePrecision = valueString.includes('.') ? valueString.split('.')[1].length : 0;
+    return Math.max(stepPrecision, valuePrecision);
+  }, [precision, step]);
+  // endregion
 
   // region [Events]
-  const updateValue = useCallback((newValue: number | string) => {
-    // 1. 문자열 입력 중(마침표, 마이너스 등)일 때는 보정 없이 상태만 업데이트
-    if (typeof newValue === 'string') {
-      if (!isControlled) setUncontrolledValue(newValue);
+  const updateValue = useCallback((nextVal: number | string) => {
+    if (disabled) return;
+
+    if (typeof nextVal === 'string' && (nextVal === '-' || nextVal === '.' || nextVal.endsWith('.'))) {
+      setInternalValue(nextVal);
       return;
     }
 
-    // 2. 실제 숫자 값에 대한 최소/최대값 제한
-    const clampedValue = Math.min(Math.max(newValue, min), max);
+    const numValue = typeof nextVal === 'string' ? parseFloat(nextVal) : nextVal;
+    if (Number.isNaN(numValue)) return;
 
-    // 3. step과 현재 입력값의 소수점 자릿수 중 큰 쪽을 선택하여 정밀도 유지
-    const stepString = step.toString();
-    const stepPrecision = stepString.includes('.') ? stepString.split('.')[1].length : 0;
+    const targetPrecision = getDynamicPrecision(nextVal);
 
-    const valueString = newValue.toString();
-    const valuePrecision = valueString.includes('.') ? valueString.split('.')[1].length : 0;
+    // 먼저 정밀도 적용
+    const roundedValue = parseFloat(numValue.toFixed(targetPrecision));
 
-    const precision = Math.max(stepPrecision, valuePrecision);
-    const fixedValue = parseFloat(clampedValue.toFixed(precision));
+    // 그 다음 clamp
+    const clampedValue = Math.min(Math.max(roundedValue, min), max);
 
-    if (!isControlled) {
-      setUncontrolledValue(fixedValue);
+    const fixedString = clampedValue.toFixed(targetPrecision);
+    const fixedNumber = parseFloat(fixedString);
+
+    setInternalValue(fixedString);
+    onChange?.(fixedNumber);
+  }, [min, max, getDynamicPrecision, onChange, disabled]);
+
+  const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    if (disabled) return;
+    const inputValue = e.target.value;
+
+    if (inputValue === '') {
+      const fallback = Math.max(0, min);
+      setInternalValue('');
+      onChange?.(fallback);
+      return;
     }
-    onChange?.(fixedValue);
-  }, [min, max, isControlled, onChange, step]);
 
+    if (!/^-?\d*\.?\d*$/.test(inputValue)) return;
+
+    if (precision !== undefined && precision > 0) {
+      const parts = inputValue.split('.');
+      if (parts[1] && parts[1].length > precision) return;
+    } else if (precision === 0 && inputValue.includes('.')) {
+      return;
+    }
+
+    if (inputValue === '-' || inputValue === '.' || inputValue.endsWith('.')) {
+      setInternalValue(inputValue);
+    } else {
+      updateValue(inputValue);
+    }
+  }, [min, precision, onChange, updateValue, disabled]);
 
   const handleBlur = useCallback((e: FocusEvent<HTMLInputElement>) => {
-    // 포커스가 나갈 때 '0.' 이나 '-' 처럼 불완전한 값을 숫자로 최종 보정
-    const parsed = parseFloat(value.toString());
+    if (disabled) return;
+    const parsed = parseFloat(internalValue);
     if (!Number.isNaN(parsed)) {
       updateValue(parsed);
     } else {
       updateValue(Math.max(0, min));
     }
     onBlur?.(e);
-  }, [value, min, updateValue, onBlur]);
+  }, [internalValue, min, updateValue, onBlur, disabled]);
 
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
+  const handleStep = useCallback((direction: 'plus' | 'minus') => {
+    if (disabled) return;
+    setInternalValue((prev) => {
+      const currentNum = parseFloat(prev) || 0;
+      const nextNum = direction === 'plus' ? currentNum + step : currentNum - step;
 
-    // 빈 값 처리 (백스페이스로 다 지웠을 때 0 또는 min으로 세팅)
-    if (inputValue === '') {
-      const fallback = Math.max(0, min);
-      if (!isControlled) setUncontrolledValue(fallback);
-      onChange?.(fallback);
-      return;
-    }
+      // 먼저 정밀도를 적용하여 부동소수점 오차 제거
+      const targetPrecision = getDynamicPrecision(step);
+      const roundedNum = parseFloat(nextNum.toFixed(targetPrecision));
 
-    // 정규식: 숫자, 마침표 1개, 마이너스 기호만 허용 (0..1 같은 입력 방지)
-    const regExp = /^-?\d*\.?\d*$/;
-    if (!regExp.test(inputValue)) return;
+      // 그 다음 clamp 처리
+      const clampedValue = Math.min(Math.max(roundedNum, min), max);
 
-    // 마침표로 끝나거나 마이너스만 있는 '입력 중' 상태는 문자열 그대로 유지 (0. 이 0이 되지 않게)
-    if (inputValue.endsWith('.') || inputValue === '-' || inputValue === '.') {
-      if (!isControlled) setUncontrolledValue(inputValue);
-      return;
-    }
+      const fixedString = clampedValue.toFixed(targetPrecision);
+      const fixedNumber = parseFloat(fixedString);
 
-    const newValue = parseFloat(inputValue);
-    if (!Number.isNaN(newValue)) {
-      updateValue(newValue);
-    }
-  }, [min, isControlled, onChange, updateValue]);
+      onChange?.(fixedNumber);
+      return fixedString;
+    });
+  }, [disabled, step, min, max, getDynamicPrecision, onChange]);
+
+  const stopStepper = useCallback(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (intervalRef.current) clearInterval(intervalRef.current);
+  }, []);
+
+  const startStepper = useCallback((direction: 'plus' | 'minus') => {
+    if (disabled) return;
+    handleStep(direction);
+    timerRef.current = setTimeout(() => {
+      intervalRef.current = setInterval(() => {
+        handleStep(direction);
+      }, 80);
+    }, 500);
+  }, [disabled, handleStep]);
   // endregion
-
 
   // region [Life Cycles]
   useEffect(() => {
-    if (isControlled) {
-      setUncontrolledValue(controlledValue);
+    if (controlledValue !== undefined) {
+      // 제어 컴포넌트일 때도 부동소수점 오차 방지를 위해 precision 적용
+      const targetPrecision = getDynamicPrecision(controlledValue);
+      setInternalValue(controlledValue.toFixed(targetPrecision));
     }
-  }, [controlledValue, isControlled]);
+  }, [controlledValue, getDynamicPrecision]);
+
+  useEffect(() => {
+    return () => stopStepper();
+  }, [stopStepper]);
   // endregion
 
-
   return (
-    <div className={cn('inline-flex items-stretch bg-background overflow-hidden', sizeMap[size].container, className)} style={style}>
+    <div
+      className={cn(
+        'inline-flex items-stretch bg-background overflow-hidden transition-opacity',
+        sizeMap[size].container,
+        disabled && 'opacity-50 pointer-events-none',
+        className,
+      )}
+      style={style}
+    >
       <KInput
         type="text"
         inputMode="decimal"
-        value={value}
+        value={internalValue}
         onChange={handleInputChange}
         onFocus={onFocus}
         onBlur={handleBlur}
+        disabled={disabled}
         className={cn(
           'border border-border border-r-0 bg-transparent rounded-none rounded-tl-md rounded-bl-md text-center',
           'focus-ring focus-visible:border-r',
@@ -140,17 +196,25 @@ const KNumberStepper = (props: KNumberStepperProps) => {
       />
       <button
         type="button"
-        onClick={() => updateValue(Number(value) - step)}
-        disabled={Number(value) <= min}
+        onMouseDown={() => startStepper('minus')}
+        onMouseUp={stopStepper}
+        onMouseLeave={stopStepper}
+        onTouchStart={() => startStepper('minus')}
+        onTouchEnd={stopStepper}
+        disabled={disabled || parseFloat(internalValue) <= min}
         className="flex items-center justify-center mx-[-1px] px-2 rounded-none hover:bg-muted border border-border transition-colors disabled:opacity-50 focus-ring"
       >
         <Minus size={sizeMap[size].icon}/>
       </button>
       <button
         type="button"
+        onMouseDown={() => startStepper('plus')}
+        onMouseUp={stopStepper}
+        onMouseLeave={stopStepper}
+        onTouchStart={() => startStepper('plus')}
+        onTouchEnd={stopStepper}
+        disabled={disabled || parseFloat(internalValue) >= max}
         className="flex items-center justify-center px-2 rounded-none rounded-tr-md rounded-br-md hover:bg-muted border border-border transition-colors disabled:opacity-50 focus-ring"
-        onClick={() => updateValue(Number(value) + step)}
-        disabled={Number(value) >= max}
       >
         <Plus size={sizeMap[size].icon}/>
       </button>
