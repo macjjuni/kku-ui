@@ -39,6 +39,8 @@ const KNumberStepper = (props: KNumberStepperProps) => {
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  // 터치 이벤트 발생 여부를 체크하여 중복 실행 방지
+  const isTouching = useRef(false);
   // endregion
 
   // region [Privates]
@@ -65,19 +67,57 @@ const KNumberStepper = (props: KNumberStepperProps) => {
     if (Number.isNaN(numValue)) return;
 
     const targetPrecision = getDynamicPrecision(nextVal);
-
-    // 먼저 정밀도 적용
-    const roundedValue = parseFloat(numValue.toFixed(targetPrecision));
-
-    // 그 다음 clamp
-    const clampedValue = Math.min(Math.max(roundedValue, min), max);
-
+    const clampedValue = Math.min(Math.max(numValue, min), max);
     const fixedString = clampedValue.toFixed(targetPrecision);
-    const fixedNumber = parseFloat(fixedString);
 
     setInternalValue(fixedString);
-    onChange?.(fixedNumber);
+    onChange?.(parseFloat(fixedString));
   }, [min, max, getDynamicPrecision, onChange, disabled]);
+
+  const handleStep = useCallback((direction: 'plus' | 'minus') => {
+    if (disabled) return;
+    setInternalValue((prev) => {
+      const currentNum = parseFloat(prev) || 0;
+      const nextNum = direction === 'plus' ? currentNum + step : currentNum - step;
+
+      const targetPrecision = getDynamicPrecision(nextNum);
+      const clampedValue = Math.min(Math.max(nextNum, min), max);
+      const fixedString = clampedValue.toFixed(targetPrecision);
+
+      onChange?.(parseFloat(fixedString));
+      return fixedString;
+    });
+  }, [disabled, step, min, max, getDynamicPrecision, onChange]);
+
+  const stopStepper = useCallback(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    timerRef.current = null;
+    intervalRef.current = null;
+    // 인터벌 중지 시점에 터치 플래그 해제
+    setTimeout(() => { isTouching.current = false; }, 100);
+  }, []);
+
+  const startStepper = useCallback((e: React.MouseEvent | React.TouchEvent, direction: 'plus' | 'minus') => {
+    if (disabled) return;
+
+    // 1. 마우스 이벤트인데 이미 터치 중이라면 무시 (Ghost Click 방지)
+    if (e.type === 'mousedown' && isTouching.current) return;
+
+    // 2. 터치 이벤트라면 플래그 세팅
+    if (e.type === 'touchstart') {
+      isTouching.current = true;
+    }
+
+    stopStepper();
+    handleStep(direction);
+
+    timerRef.current = setTimeout(() => {
+      intervalRef.current = setInterval(() => {
+        handleStep(direction);
+      }, 80);
+    }, 500);
+  }, [disabled, handleStep, stopStepper]);
 
   const handleInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (disabled) return;
@@ -116,48 +156,11 @@ const KNumberStepper = (props: KNumberStepperProps) => {
     }
     onBlur?.(e);
   }, [internalValue, min, updateValue, onBlur, disabled]);
-
-  const handleStep = useCallback((direction: 'plus' | 'minus') => {
-    if (disabled) return;
-    setInternalValue((prev) => {
-      const currentNum = parseFloat(prev) || 0;
-      const nextNum = direction === 'plus' ? currentNum + step : currentNum - step;
-
-      // 먼저 정밀도를 적용하여 부동소수점 오차 제거
-      const targetPrecision = getDynamicPrecision(step);
-      const roundedNum = parseFloat(nextNum.toFixed(targetPrecision));
-
-      // 그 다음 clamp 처리
-      const clampedValue = Math.min(Math.max(roundedNum, min), max);
-
-      const fixedString = clampedValue.toFixed(targetPrecision);
-      const fixedNumber = parseFloat(fixedString);
-
-      onChange?.(fixedNumber);
-      return fixedString;
-    });
-  }, [disabled, step, min, max, getDynamicPrecision, onChange]);
-
-  const stopStepper = useCallback(() => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    if (intervalRef.current) clearInterval(intervalRef.current);
-  }, []);
-
-  const startStepper = useCallback((direction: 'plus' | 'minus') => {
-    if (disabled) return;
-    handleStep(direction);
-    timerRef.current = setTimeout(() => {
-      intervalRef.current = setInterval(() => {
-        handleStep(direction);
-      }, 80);
-    }, 500);
-  }, [disabled, handleStep]);
   // endregion
 
   // region [Life Cycles]
   useEffect(() => {
     if (controlledValue !== undefined) {
-      // 제어 컴포넌트일 때도 부동소수점 오차 방지를 위해 precision 적용
       const targetPrecision = getDynamicPrecision(controlledValue);
       setInternalValue(controlledValue.toFixed(targetPrecision));
     }
@@ -171,7 +174,7 @@ const KNumberStepper = (props: KNumberStepperProps) => {
   return (
     <div
       className={cn(
-        'inline-flex items-stretch bg-background overflow-hidden transition-opacity',
+        'inline-flex items-stretch bg-background overflow-hidden transition-opacity select-none',
         sizeMap[size].container,
         disabled && 'opacity-50 pointer-events-none',
         className,
@@ -196,10 +199,10 @@ const KNumberStepper = (props: KNumberStepperProps) => {
       />
       <button
         type="button"
-        onMouseDown={() => startStepper('minus')}
+        onMouseDown={(e) => startStepper(e, 'minus')}
         onMouseUp={stopStepper}
         onMouseLeave={stopStepper}
-        onTouchStart={() => startStepper('minus')}
+        onTouchStart={(e) => startStepper(e, 'minus')}
         onTouchEnd={stopStepper}
         disabled={disabled || parseFloat(internalValue) <= min}
         className="flex items-center justify-center mx-[-1px] px-2 rounded-none hover:bg-muted border border-border transition-colors disabled:opacity-50 focus-ring"
@@ -208,10 +211,10 @@ const KNumberStepper = (props: KNumberStepperProps) => {
       </button>
       <button
         type="button"
-        onMouseDown={() => startStepper('plus')}
+        onMouseDown={(e) => startStepper(e, 'plus')}
         onMouseUp={stopStepper}
         onMouseLeave={stopStepper}
-        onTouchStart={() => startStepper('plus')}
+        onTouchStart={(e) => startStepper(e, 'plus')}
         onTouchEnd={stopStepper}
         disabled={disabled || parseFloat(internalValue) >= max}
         className="flex items-center justify-center px-2 rounded-none rounded-tr-md rounded-br-md hover:bg-muted border border-border transition-colors disabled:opacity-50 focus-ring"
