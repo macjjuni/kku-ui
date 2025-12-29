@@ -37,8 +37,8 @@ const KNumberStepper = (props: KNumberStepperProps) => {
 
   const [internalValue, setInternalValue] = useState<string>(controlledValue !== undefined ? controlledValue.toString() : '0');
 
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   // endregion
 
   // region [Privates]
