@@ -28,7 +28,7 @@ export interface KListRowAccordionProps {
   children: ReactNode; // 아코디언이 열렸을 때 보여줄 내용
   className?: string;
   value: string; // Accordion.Item의 고유 값
-  onValueChange?: () => void;
+  onValueChange?: (val: string) => void;
 }
 
 
