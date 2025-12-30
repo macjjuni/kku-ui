@@ -88,6 +88,7 @@ const KListRowAccordion = ({ icon, label, children, className, value }: KListRow
       <Accordion.Item value={value} className="border-none">
         <Accordion.Header className="flex">
           <Accordion.Trigger className={cn(
+            'group/trigger',
             'flex flex-1 items-center justify-between px-4 py-[11px] transition-colors',
             'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-ring',
             'active:bg-secondary cursor-pointer',
@@ -101,7 +102,10 @@ const KListRowAccordion = ({ icon, label, children, className, value }: KListRow
 
             {/* Right: Animated Chevron */}
             <div className="flex items-center">
-              <ChevronRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 transition-transform duration-200 group-data-[state=open]:rotate-90"/>
+              <ChevronRight className={cn(
+                "w-5 h-5 text-zinc-300 dark:text-zinc-700 transition-transform duration-200",
+                "group-data-[state=closed]/trigger:rotate-90 group-data-[state=open]/trigger:-rotate-90",
+              )}/>
             </div>
           </Accordion.Trigger>
         </Accordion.Header>
