@@ -28,6 +28,7 @@ export interface KListRowAccordionProps {
   children: ReactNode; // 아코디언이 열렸을 때 보여줄 내용
   className?: string;
   value: string; // Accordion.Item의 고유 값
+  onValueChange?: () => void;
 }
 
 
@@ -79,12 +80,12 @@ const KListRow = ({
   </div>
 );
 
-const KListRowAccordion = ({ icon, label, children, className, value }: KListRowAccordionProps) => (
+const KListRowAccordion = ({ icon, label, children, className, value, onValueChange }: KListRowAccordionProps) => (
   <div className={cn(
     'group bg-background first:border-t last:border-b first:rounded-t-xl last:rounded-b-xl border-x border-border',
     className,
   )}>
-    <Accordion.Root collapsible type="single">
+    <Accordion.Root collapsible type="single" onValueChange={onValueChange}>
       <Accordion.Item value={value} className="border-none">
         <Accordion.Header className="flex">
           <Accordion.Trigger className={cn(
@@ -103,8 +104,8 @@ const KListRowAccordion = ({ icon, label, children, className, value }: KListRow
             {/* Right: Animated Chevron */}
             <div className="flex items-center">
               <ChevronRight className={cn(
-                "w-5 h-5 text-zinc-300 dark:text-zinc-700 transition-transform duration-200",
-                "group-data-[state=closed]/trigger:rotate-90 group-data-[state=open]/trigger:-rotate-90",
+                'w-5 h-5 text-zinc-300 dark:text-zinc-700 transition-transform duration-200',
+                'group-data-[state=closed]/trigger:rotate-90 group-data-[state=open]/trigger:-rotate-90',
               )}/>
             </div>
           </Accordion.Trigger>
