@@ -1,10 +1,10 @@
 import { Slot } from '@radix-ui/react-slot';
-import { ButtonHTMLAttributes, forwardRef, ComponentRef } from 'react';
+import { ButtonHTMLAttributes, useMemo } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 
-const focusStyle = 'focus-visible:outline focus-visible:outline-ring focus-visible:outline-offset-[-2px]'
+const focusStyle = 'focus-visible:outline focus-visible:outline-ring focus-visible:outline-offset-[-2px]';
 
 const buttonVariants = cva(
   'k-button inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors ' +
@@ -47,31 +47,45 @@ const buttonVariants = cva(
 );
 
 type ButtonVariantsProps = VariantProps<typeof buttonVariants>;
-export type KButtonWidthType = ButtonVariantsProps['width'] | number; // string(variant) + number 허용
+export type KButtonWidthType = ButtonVariantsProps['width'] | number;
 
-export interface KButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'width'>,
+export interface KButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'width' | 'ref'>,
   Omit<ButtonVariantsProps, 'width'> {
   asChild?: boolean;
   width?: KButtonWidthType;
+  ref?: React.Ref<HTMLButtonElement>;
 }
 
-const KButton = forwardRef<ComponentRef<'button'>, KButtonProps>(
-  ({ className, variant, size = 'md', width, style, asChild = false, ...props }, ref) => {
+const KButton = (props: KButtonProps) => {
 
-    const Comp = asChild ? Slot : 'button';
-    const isNumberWidth = typeof width === 'number';
+  // region [hooks]
+  const { className, variant, size = 'md', width, style, asChild = false, ref, ...restProps } = props;
+  // endregion
 
-    return (
-      <Comp
-        ref={ref}
-        className={cn(buttonVariants({ variant, size, width: isNumberWidth ? undefined : (width as ButtonVariantsProps['width']), className }))}
-        style={{ width: isNumberWidth ? width : undefined, ...style }}
-        {...props}
-      />
-    );
-  },
-);
 
-KButton.displayName = 'KButton';
+  // region Privates
+  const Comp = asChild ? Slot : 'button';
+  const isNumberWidth = typeof width === 'number';
+
+  const buttonStyle = useMemo(() => ({
+    width: isNumberWidth ? width : undefined,
+    ...style,
+  }), [isNumberWidth, width, style]);
+  // endregion
+
+  return (
+    <Comp
+      ref={ref}
+      className={cn(buttonVariants({
+        variant,
+        size,
+        width: isNumberWidth ? undefined : (width as ButtonVariantsProps['width']),
+        className,
+      }))}
+      style={buttonStyle}
+      {...restProps}
+    />
+  );
+};
 
 export { KButton, buttonVariants };

@@ -1,35 +1,40 @@
-import { forwardRef, ComponentRef, HTMLAttributes, memo, useMemo } from 'react';
-import { cn } from "@/lib/utils";
+import { HTMLAttributes, memo, Ref, useMemo } from 'react';
+import { cn } from '@/lib/utils';
 
-export interface KAspectRatioProps extends HTMLAttributes<HTMLDivElement> {
-  // eslint-disable-next-line react/no-unused-prop-types
+export type KAspectRatioProps = HTMLAttributes<HTMLDivElement> & {
   ratio?: number;
-}
+  ref?: Ref<HTMLDivElement>;
+};
 
-const KAspectRatio = memo(
-  forwardRef<ComponentRef<'div'>, KAspectRatioProps>(
-    (props, ref) => {
-      const { ratio = 1, className, children, style, ...rest } = props;
 
-      const isValidRatio = ratio > 0;
+const KAspectRatio = memo((props: KAspectRatioProps) => {
+  // region hooks
+  const { ratio = 1, className, children, style, ref, ...restProps } = props;
+  const isValidRatio = ratio > 0;
 
-      if (!isValidRatio) {
-        console.warn(`[KAspectRatio]: ratio는 0보다 커야 합니다. 현재 입력값: ${ratio}`);
-      }
+  const safeRatio = useMemo(() => {
+    if (!isValidRatio) {
+      console.warn(`[KAspectRatio]: ratio는 0보다 커야 합니다. 현재 입력값: ${ratio}`);
+      return 1;
+    }
+    return ratio;
+  }, [isValidRatio, ratio]);
+  // endregion
 
-      const safeRatio = useMemo(() => (isValidRatio ? ratio : 1), [isValidRatio, ratio]);
-
-      return (
-        <div ref={ref} className={cn("relative w-full overflow-hidden", className)}
-             style={{ ...style, aspectRatio: `${safeRatio}` }} {...rest}>
-          <div className="absolute inset-0 [&>img]:h-full [&>img]:w-full [&>img]:object-cover [&>video]:h-full [&>video]:w-full [&>video]:object-cover">
-            {children}
-          </div>
-        </div>
-      );
-    },
-  ),
-);
+  return (
+    <div
+      ref={ref}
+      className={cn('relative w-full overflow-hidden', className)}
+      style={{ ...style, aspectRatio: `${safeRatio}` }}
+      {...restProps}
+    >
+      <div
+        className="absolute inset-0 [&>img]:h-full [&>img]:w-full [&>img]:object-cover [&>video]:h-full [&>video]:w-full [&>video]:object-cover">
+        {children}
+      </div>
+    </div>
+  );
+});
 
 KAspectRatio.displayName = "KAspectRatio";
 

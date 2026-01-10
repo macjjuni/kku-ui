@@ -1,8 +1,17 @@
-import { ComponentProps, forwardRef } from "react";
-import { cn } from "@/lib/utils"
+import { ComponentProps, Ref } from 'react';
+import { cn } from "@/lib/utils";
 
-const KTextarea = forwardRef<HTMLTextAreaElement, ComponentProps<"textarea">
->(({ className, ...props }, ref) => {
+
+export interface KTextareaProps extends Omit<ComponentProps<"textarea">, "ref"> {
+  ref?: Ref<HTMLTextAreaElement>;
+}
+
+const KTextarea = (props: KTextareaProps) => {
+
+  // region hooks
+  const { className, ref, ...restProps } = props;
+  // endregion
+
   return (
     <textarea
       ref={ref}
@@ -11,11 +20,9 @@ const KTextarea = forwardRef<HTMLTextAreaElement, ComponentProps<"textarea">
         "placeholder:text-muted-foreground focus-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
         className,
       )}
-      {...props}
+      {...restProps}
     />
-  )
-})
+  );
+};
 
-KTextarea.displayName = "KTextarea"
-
-export { KTextarea }
+export { KTextarea };

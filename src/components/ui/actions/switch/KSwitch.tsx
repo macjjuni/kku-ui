@@ -1,11 +1,19 @@
-import { ComponentRef, ComponentPropsWithoutRef, forwardRef } from 'react';
+// region hooks
 import * as SwitchPrimitives from '@radix-ui/react-switch';
 import { cn } from '@/lib/utils';
+// endregion
 
-export interface KSwitchProps extends ComponentPropsWithoutRef<typeof SwitchPrimitives.Root> {}
+// region Privates
+export type KSwitchProps = React.ComponentPropsWithRef<typeof SwitchPrimitives.Root>;
+// endregion
 
-const KSwitch = forwardRef<ComponentRef<typeof SwitchPrimitives.Root>, KSwitchProps>(
-  ({ className, ...props }, ref) => (
+// region Components
+const KSwitch = (props: KSwitchProps) => {
+  // region hooks
+  const { className, ref, ...restProps } = props;
+  // endregion
+
+  return (
     <SwitchPrimitives.Root
       ref={ref}
       className={cn(
@@ -15,7 +23,7 @@ const KSwitch = forwardRef<ComponentRef<typeof SwitchPrimitives.Root>, KSwitchPr
         "focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         className,
       )}
-      {...props}
+      {...restProps}
     >
       <SwitchPrimitives.Thumb
         className={cn(
@@ -24,9 +32,8 @@ const KSwitch = forwardRef<ComponentRef<typeof SwitchPrimitives.Root>, KSwitchPr
         )}
       />
     </SwitchPrimitives.Root>
-  ),
-);
-
-KSwitch.displayName = "KSwitch";
+  );
+};
+// endregion
 
 export { KSwitch };

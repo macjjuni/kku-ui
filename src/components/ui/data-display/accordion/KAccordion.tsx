@@ -1,18 +1,19 @@
-import { ComponentRef, ComponentPropsWithoutRef, createContext, forwardRef, useContext } from 'react';
+import { createContext, useContext, ComponentPropsWithRef } from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 import { cva } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
+
 export interface KAccordionContextType { size?: 'sm' | 'md'; }
-export type KAccordionProps = ComponentPropsWithoutRef<typeof AccordionPrimitive.Root> & KAccordionContextType;
-export interface KAccordionItemProps extends ComponentPropsWithoutRef<typeof AccordionPrimitive.Item> {}
-export interface KAccordionTriggerProps extends ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> {}
-export interface KAccordionContentProps extends ComponentPropsWithoutRef<typeof AccordionPrimitive.Content> {}
+export type KAccordionProps = ComponentPropsWithRef<typeof AccordionPrimitive.Root> & KAccordionContextType;
+export type KAccordionItemProps = ComponentPropsWithRef<typeof AccordionPrimitive.Item>;
+export type KAccordionTriggerProps = ComponentPropsWithRef<typeof AccordionPrimitive.Trigger>;
+export type KAccordionContentProps = ComponentPropsWithRef<typeof AccordionPrimitive.Content>;
 
 const AccordionContext = createContext<KAccordionContextType>({ size: 'md' });
 
-// --- Styles ---
+
 const KAccordionTriggerVariants = cva(
   'flex flex-1 items-center justify-between font-md transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180',
   {
@@ -27,63 +28,74 @@ const KAccordionTriggerVariants = cva(
     },
   },
 );
+// endregion
 
-// --- Components ---
+// region Components
+const KAccordion = (props: KAccordionProps) => {
+  const { size = 'md', className, children, ref, ...restProps } = props;
 
-const KAccordion = forwardRef<ComponentRef<typeof AccordionPrimitive.Root>, KAccordionProps>(
-  ({ size = 'md', className, children, ...props }, ref) => (
+  return (
     <AccordionContext.Provider value={{ size }}>
-      <AccordionPrimitive.Root ref={ref} {...props} className={cn("k-accordion", className)}>
+      <AccordionPrimitive.Root ref={ref} {...restProps} className={cn("k-accordion", className)}>
         {children}
       </AccordionPrimitive.Root>
     </AccordionContext.Provider>
-  ),
-);
+  );
+};
 
-const KAccordionItem = forwardRef<ComponentRef<typeof AccordionPrimitive.Item>, KAccordionItemProps>(
-  ({ className, ...props }, ref) => (
-    <AccordionPrimitive.Item ref={ref} className={cn('k-accordion__item border-b border-border', className)} {...props} />
-  ),
-);
+const KAccordionItem = (props: KAccordionItemProps) => {
+  const { className, ref, ...restProps } = props;
 
-const KAccordionTrigger = forwardRef<ComponentRef<typeof AccordionPrimitive.Trigger>, KAccordionTriggerProps>(
-  ({ className, children, ...props }, ref) => {
-    const { size } = useContext(AccordionContext);
+  return (
+    <AccordionPrimitive.Item
+      ref={ref}
+      className={cn('k-accordion__item border-b border-border', className)}
+      {...restProps}
+    />
+  );
+};
 
-    return (
-      <AccordionPrimitive.Header className="k-accordion__header flex">
-        <AccordionPrimitive.Trigger ref={ref} className={cn("k-accordion__trigger pr-1 focus-visible:outline-ring ", KAccordionTriggerVariants({ size, className }))} {...props}>
-          {children}
-          <ChevronDown
-            className={cn('shrink-0 text-muted-foreground transition-transform duration-200', size === 'sm' ? 'h-3 w-3' : 'h-4 w-4')}
-          />
-        </AccordionPrimitive.Trigger>
-      </AccordionPrimitive.Header>
-    );
-  },
-);
+const KAccordionTrigger = (props: KAccordionTriggerProps) => {
+  // region hooks
+  const { className, children, ref, ...restProps } = props;
+  const { size } = useContext(AccordionContext);
+  // endregion
 
-const KAccordionContent = forwardRef<ComponentRef<typeof AccordionPrimitive.Content>, KAccordionContentProps>(
-  ({ className, children, ...props }, ref) => {
-    const { size } = useContext(AccordionContext);
-
-    return (
-      <AccordionPrimitive.Content
+  return (
+    <AccordionPrimitive.Header className="k-accordion__header flex">
+      <AccordionPrimitive.Trigger
         ref={ref}
-        className="k-accordion__content overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-        {...props}
+        className={cn("k-accordion__trigger pr-1 focus-visible:outline-ring ", KAccordionTriggerVariants({ size, className }))}
+        {...restProps}
       >
-        <div className={cn('pt-0', size === 'sm' ? 'pb-2 text-xs' : 'pb-4 text-sm', className)}>
-          {children}
-        </div>
-      </AccordionPrimitive.Content>
-    );
-  },
-);
+        {children}
+        <ChevronDown
+          className={cn('shrink-0 text-muted-foreground transition-transform duration-200', size === 'sm' ? 'h-3 w-3' : 'h-4 w-4')}
+        />
+      </AccordionPrimitive.Trigger>
+    </AccordionPrimitive.Header>
+  );
+};
 
-KAccordion.displayName = 'KAccordion';
-KAccordionItem.displayName = 'KAccordionItem';
-KAccordionTrigger.displayName = 'KAccordionTrigger';
-KAccordionContent.displayName = 'KAccordionContent';
+const KAccordionContent = (props: KAccordionContentProps) => {
+
+  // region hooks
+  const { className, children, ref, ...restProps } = props;
+  const { size } = useContext(AccordionContext);
+  // endregion
+
+  return (
+    <AccordionPrimitive.Content
+      ref={ref}
+      className="k-accordion__content overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+      {...restProps}
+    >
+      <div className={cn('pt-0', size === 'sm' ? 'pb-2 text-xs' : 'pb-4 text-sm', className)}>
+        {children}
+      </div>
+    </AccordionPrimitive.Content>
+  );
+};
+
 
 export { KAccordion, KAccordionItem, KAccordionTrigger, KAccordionContent };

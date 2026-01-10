@@ -1,21 +1,22 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/no-static-element-interactions  */
+
 import {
+  ComponentPropsWithRef,
   CSSProperties,
-  forwardRef,
+  KeyboardEvent,
   memo,
+  MouseEvent, Ref,
   useCallback,
-  useId,
   useImperativeHandle,
   useMemo,
   useRef,
-  KeyboardEvent,
-  ComponentPropsWithoutRef,
 } from 'react';
 import { cn } from '@/lib/utils';
 import { getIcon } from '@/common/icons/icons';
+import { useStableId } from '@/common/hooks';
 
-// --- Types ---
+
 export const ICON_SIZES = ['xs', 'sm', 'md', 'lg', 'xlg'] as const;
 export type KIconSize = (typeof ICON_SIZES)[number];
 
@@ -23,15 +24,12 @@ export interface KIconRefs {
   click: () => void;
 }
 
-export type KIconProps = ComponentPropsWithoutRef<'span'> & {
-  // eslint-disable-next-line react/no-unused-prop-types
+export type KIconProps = ComponentPropsWithRef<'span'> & {
   icon: string;
-  // eslint-disable-next-line react/no-unused-prop-types
   size?: KIconSize | number;
-  // eslint-disable-next-line react/no-unused-prop-types
   disabled?: boolean;
-  // eslint-disable-next-line react/no-unused-prop-types
   color?: string;
+  ref?: Ref<KIconRefs>;
 };
 
 const sizeMap: Record<KIconSize, string> = {
@@ -42,89 +40,90 @@ const sizeMap: Record<KIconSize, string> = {
   xlg: 'w-10 h-10 text-[24px]',
 };
 
-// --- Component ---
-// forwardRef의 첫 번째 제네릭을 KIconRefs로 변경하여 TS2740 해결
-const KIcon = memo(
-  forwardRef<KIconRefs, KIconProps>((props, ref) => {
-    const { id, className, style, icon, size = 'md', onClick, color, disabled, ...restProps } = props;
 
-    const internalRef = useRef<HTMLSpanElement>(null);
-    const uniqueId = useId();
-    const generatedId = id || `k-icon-${uniqueId}`;
+const KIcon = (props: KIconProps) => {
+  // region hooks
+  const { id, className, style, icon, size = 'md', onClick, color, disabled, ref, ...restProps } = props;
 
-    useImperativeHandle(ref, () => ({
-      click: () => {
-        internalRef.current?.click();
-      },
-    }));
+  const internalRef = useRef<HTMLSpanElement>(null);
+  const uniqueId = useStableId();
+  const generatedId = id || `k-icon-${uniqueId}`;
+  // endregion
 
-    const isClickable = !!onClick && !disabled;
+  // region Transactions
+  useImperativeHandle(ref, () => ({
+    click: () => {
+      internalRef.current?.click();
+    },
+  }));
 
-    const rootClass = useMemo(() => {
-      return cn(
-        'k-icon inline-flex items-center justify-center shrink-0 transition-colors overflow-hidden', // overflow-hidden 추가
-        typeof size === 'string' ? sizeMap[size] : '',
-        isClickable && 'cursor-pointer',
-        disabled && 'opacity-50 cursor-not-allowed grayscale',
-        className,
-      );
-    }, [className, disabled, size, isClickable]);
-
-    const rootStyle = useMemo((): CSSProperties => {
-      const styles: CSSProperties = { ...style };
-
-      if (typeof size === 'number') {
-        styles.width = `${size}px`;
-        styles.height = `${size}px`;
-        styles.fontSize = `${size}px`;
-      }
-
-      if (color) {
-        styles.color = color;
-        styles.fill = 'currentColor';
-      }
-
-      return styles;
-    }, [size, color, style]);
-
-    const currentIcon = useMemo(() => {
-      if (!icon) return null;
-      return getIcon(icon, color);
-    }, [icon, color]);
-
-    const handleKeyDown = useCallback(
-      (e: KeyboardEvent<HTMLSpanElement>) => {
-        if (disabled) return;
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          // any 대신 올바른 타입 캐스팅으로 ESLint 해결
-          onClick?.(e as unknown as React.MouseEvent<HTMLSpanElement>);
-        }
-      },
-      [disabled, onClick],
+  const rootClass = useMemo(() => {
+    return cn(
+      'k-icon inline-flex items-center justify-center shrink-0 transition-colors overflow-hidden',
+      typeof size === 'string' ? sizeMap[size] : '',
+      onClick && 'cursor-pointer',
+      disabled && 'opacity-50 !cursor-not-allowed grayscale',
+      className,
     );
+  }, [className, disabled, size, onClick]);
 
+  const rootStyle = useMemo((): CSSProperties => {
+    const styles: CSSProperties = { ...style };
+
+    if (typeof size === 'number') {
+      styles.width = `${size}px`;
+      styles.height = `${size}px`;
+      styles.fontSize = `${size}px`;
+    }
+
+    if (color) {
+      styles.color = color;
+      styles.fill = 'currentColor';
+    }
+
+    return styles;
+  }, [size, color, style]);
+
+  const currentIcon = useMemo(() => {
     if (!icon) return null;
+    return getIcon(icon, color);
+  }, [icon, color]);
+  // endregion
 
-    return (
-      <span
-        ref={internalRef}
-        id={generatedId}
-        className={rootClass}
-        style={rootStyle}
-        role={onClick ? 'button' : 'img'}
-        tabIndex={isClickable ? 0 : undefined}
-        aria-label={`${icon} icon`}
-        aria-disabled={disabled}
-        onClick={!disabled ? onClick : undefined}
-        onKeyDown={handleKeyDown}
-        {...restProps}>
-        {currentIcon}
-      </span>
-    );
-  }),
-);
+  // region Events
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLSpanElement>) => {
+      if (disabled) return;
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onClick?.(e as unknown as MouseEvent<HTMLSpanElement>);
+      }
+    },
+    [disabled, onClick],
+  );
+  // endregion
 
-KIcon.displayName = 'KIcon';
+  if (!icon) return null;
 
-export { KIcon };
+  return (
+    <span
+      ref={internalRef}
+      id={generatedId}
+      className={rootClass}
+      style={rootStyle}
+      role={onClick ? 'button' : 'img'}
+      tabIndex={onClick && !disabled ? 0 : undefined}
+      aria-label={`${icon} icon`}
+      aria-disabled={disabled}
+      onClick={!disabled ? onClick : undefined}
+      onKeyDown={handleKeyDown}
+      {...restProps}>
+      {currentIcon}
+    </span>
+  );
+};
+
+const MemoizedKIcon = memo(KIcon);
+MemoizedKIcon.displayName = 'KIcon';
+
+export { MemoizedKIcon as KIcon };

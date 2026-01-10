@@ -1,8 +1,8 @@
-import { ComponentProps, forwardRef, useId, useState, useImperativeHandle, useRef, useCallback, ChangeEvent, useMemo } from 'react';
+import { ChangeEvent, ComponentProps, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import { KInput, KInputSizeType } from '@/components';
-
+import { useStableId } from '@/common/hooks';
 
 const textFieldVariants = cva(
   'w-full transition-all',
@@ -25,38 +25,37 @@ const textFieldVariants = cva(
 
 export type KValidationRule = (value: string) => boolean | string | Promise<boolean | string>;
 
-
-export interface KTextFieldProps extends Omit<ComponentProps<'input'>, 'size' | 'width'> {
-  label?: string;
-  helperText?: string;
-  rules?: KValidationRule[];
-  width?: VariantProps<typeof textFieldVariants>['width'] | number;
-  size?: KInputSizeType;
-}
-
 export interface KTextFieldRefs {
   validate: () => Promise<boolean>;
   reset: () => void;
   value: string;
 }
 
-const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
-  const { id, className, type, label, required, readOnly, size = 'md', width = 'full', helperText,
-    maxLength, rules, onChange, style, ...restProps } = props;
+export interface KTextFieldProps extends Omit<ComponentProps<'input'>, 'size' | 'width' | 'ref'> {
+  label?: string;
+  helperText?: string;
+  rules?: KValidationRule[];
+  width?: VariantProps<typeof textFieldVariants>['width'] | number;
+  size?: KInputSizeType;
+  ref?: Ref<KTextFieldRefs>;
+}
 
-  const generatedId = useId();
+
+const KTextField = (props: KTextFieldProps) => {
+  // region hooks
+  const {
+    id, className, type, label, required, readOnly, size = 'md', width = 'full', helperText,
+    maxLength, rules, onChange, style, ref, ...restProps
+  } = props;
+
+  const generatedId = useStableId();
   const inputId = id || generatedId;
   const inputRef = useRef<HTMLInputElement>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const isNumberWidth = useMemo(() => (typeof width === 'number'), [width]);
+  // endregion
 
-  useImperativeHandle(ref, () => ({
-    validate,
-    reset: () => setErrorMessage(null),
-    get value() {
-      return inputRef.current?.value || '';
-    },
-  }));
+  // region Privates
+  const isNumberWidth = useMemo(() => (typeof width === 'number'), [width]);
 
   const containerClass = useMemo(() => (
     cn(
@@ -65,7 +64,9 @@ const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
       width === 'auto' && 'w-fit',
       className,
     )), [width, isNumberWidth, className]);
+  // endregion
 
+  // region Transactions
   const validate = useCallback(async () => {
     if (!rules) return true;
     const val = inputRef.current?.value || '';
@@ -86,12 +87,23 @@ const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
     return true;
   }, [rules]);
 
+  useImperativeHandle(ref, () => ({
+    validate,
+    reset: () => setErrorMessage(null),
+    get value() {
+      return inputRef.current?.value || '';
+    },
+  }));
+  // endregion
+
+  // region Events
   const onChangeTextField = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (errorMessage) {
       setErrorMessage(null);
     }
     onChange?.(e);
   }, [errorMessage, onChange]);
+  // endregion
 
   return (
     <div className={containerClass} style={{ ...style, width: isNumberWidth ? width as number : style?.width }}>
@@ -106,7 +118,7 @@ const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
         id={inputId}
         ref={inputRef}
         type={type}
-        size={size} // KInput으로 size 프롭 전달
+        size={size}
         onChange={onChangeTextField}
         readOnly={readOnly}
         maxLength={maxLength}
@@ -123,8 +135,6 @@ const KTextField = forwardRef<KTextFieldRefs, KTextFieldProps>((props, ref) => {
       )}
     </div>
   );
-});
-
-KTextField.displayName = 'KTextField';
+};
 
 export { KTextField };
