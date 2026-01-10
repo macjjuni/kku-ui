@@ -1,8 +1,9 @@
-import { ComponentPropsWithoutRef, forwardRef, useCallback, useId, useImperativeHandle, useMemo } from 'react';
+import { ComponentPropsWithoutRef, forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useStableId } from '@/common/hooks';
 
 // region [Styles]
 const selectVariants = cva(
@@ -57,7 +58,8 @@ export interface KSelectProps
   extends Omit<ComponentPropsWithoutRef<typeof SelectPrimitive.Root>, 'onValueChange'>,
     Omit<VariantProps<typeof selectVariants>, 'width'> {
   options: KSelectOption[];
-  selectLabel?: string; /** 리스트 상단에 노출될 라벨 */
+  selectLabel?: string;
+  /** 리스트 상단에 노출될 라벨 */
   placeholder?: string;
   className?: string;
   id?: string;
@@ -89,13 +91,17 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
     ...rest
   } = props;
 
-  const generatedId = useId();
+  const generatedId = useStableId();
   const selectId = id || generatedId;
 
   // 숫자형 너비 판별 및 스타일 생성
   const isNumericWidth = typeof width === 'number';
 
-  const triggerStyle = useMemo(() => (isNumericWidth ? { width: `${width}px`, minWidth: `${width}px`, maxWidth: `${width}px` } : undefined), [width, isNumericWidth]);
+  const triggerStyle = useMemo(() => (isNumericWidth ? {
+    width: `${width}px`,
+    minWidth: `${width}px`,
+    maxWidth: `${width}px`,
+  } : undefined), [width, isNumericWidth]);
 
   useImperativeHandle(ref, () => ({ value }));
 

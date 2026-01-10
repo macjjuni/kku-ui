@@ -36,7 +36,8 @@ const KAccordion = (props: KAccordionProps) => {
 
   return (
     <AccordionContext.Provider value={{ size }}>
-      <AccordionPrimitive.Root ref={ref} {...restProps} className={cn("k-accordion", className)}>
+      <AccordionPrimitive.Root ref={ref} {...restProps} className={cn("k-accordion", className)}
+                               suppressHydrationWarning>
         {children}
       </AccordionPrimitive.Root>
     </AccordionContext.Provider>
