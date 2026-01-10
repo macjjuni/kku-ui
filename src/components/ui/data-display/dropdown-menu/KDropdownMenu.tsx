@@ -58,7 +58,7 @@ const KDropdownMenu = ({ size = 'md', ...props }: KDropdownMenuProps) => (
 
 const KDropdownMenuTrigger = ({ id, className, ref, ...props }: KDropdownMenuTriggerProps) => (
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  <KDropdownMenuPrimitive.Trigger ref={ref} id={id || useStableId()} className={cn('k-dropdown-menu__trigger', className)} { ...props } />
+  <KDropdownMenuPrimitive.Trigger ref={ref} id={id || useStableId()} className={cn('k-dropdown-menu__trigger', className)} {...props} />
 );
 
 const KDropdownMenuGroup = ({ className, ref, ...props }: KDropdownMenuGroupProps) => (
@@ -115,10 +115,12 @@ const KDropdownMenuContent = ({ className, sideOffset = 4, ref, ...props }: KDro
 
 const KDropdownMenuItem = ({ className, inset, ref, ...props }: KDropdownMenuItemProps) => {
   const { size } = useContext(KDropdownContext);
-  return <KDropdownMenuPrimitive.Item ref={ref} className={cn('k-dropdown-menu__item', itemVariants({
-    size,
-    className,
-  }), inset && 'pl-8')} {...props} />;
+  return (
+    <KDropdownMenuPrimitive.Item ref={ref} className={cn('k-dropdown-menu__item', itemVariants({
+      size,
+      className,
+    }), inset && 'pl-8')} {...props} />
+  );
 };
 
 const KDropdownMenuCheckboxItem = ({ className, children, checked, ref, ...props }: KDropdownMenuCheckboxItemProps) => {
@@ -160,8 +162,7 @@ const KDropdownMenuRadioItem = ({ className, children, ref, ...props }: KDropdow
 
 const KDropdownMenuLabel = ({ className, inset, ref, ...props }: KDropdownMenuLabelProps) => {
   const { size } = useContext(KDropdownContext);
-  return <KDropdownMenuPrimitive.Label ref={ref}
-                                       className={cn('k-dropdown-menu__label', labelVariants({ size }), inset && 'pl-8', className)} {...props} />;
+  return <KDropdownMenuPrimitive.Label ref={ref} className={cn('k-dropdown-menu__label', labelVariants({ size }), inset && 'pl-8', className)} {...props} />;
 };
 
 const KDropdownMenuSeparator = ({ className, ref, ...props }: KDropdownMenuSeparatorProps) => (
