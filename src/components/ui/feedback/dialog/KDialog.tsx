@@ -60,7 +60,6 @@ const KDialogContent = ({ className, children, ref, ...props }: KDialogContentPr
   const { size } = useContext(KDialogContext);
   return (
     <KDialogPortal>
-      <KDialogOverlay />
       <DialogPrimitive.Content
         ref={ref}
         className={cn(
