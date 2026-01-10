@@ -62,7 +62,6 @@ const KBottomSheetContent = ({ className, children, ref, ...props }: KBottomShee
   const { size } = useContext(KBottomSheetContext);
   return (
     <KBottomSheetPortal>
-      <KBottomSheetOverlay />
       <DrawerPrimitive.Content
         ref={ref}
         className={cn(
