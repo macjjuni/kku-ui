@@ -11,12 +11,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-gray-200/70 shadow hover:brightness-90 hover:text-accent-foreground active:scale-[0.97] transition-transform',
-        outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground active:scale-[0.97] transition-transform',
-        primary: 'bg-primary text-primary-foreground shadow hover:bg-primary/90 active:scale-[0.97] transition-transform focus-visible:!outline-gray-900 dark:focus-visible:!outline-white',
-        destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90 active:scale-[0.97] transition-transform focus-visible:!outline-gray-900 dark:focus-visible:!outline-white',
-        ghost: 'hover:bg-accent hover:text-accent-foreground active:scale-[0.97] transition-transform',
-        link: 'text-primary underline-offset-4 hover:underline active:scale-[0.97] transition-transform',
+        default: 'bg-gray-200/70 shadow hover:brightness-90 hover:text-accent-foreground',
+        outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+        primary: 'bg-primary text-primary-foreground shadow hover:bg-primary/90 focus-visible:!outline-gray-900 dark:focus-visible:!outline-white',
+        destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90 focus-visible:!outline-gray-900 dark:focus-visible:!outline-white',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
         sm: 'h-8 rounded-md px-3 text-xs',
