@@ -29,7 +29,13 @@
     "test": "vitest",
     "test-ui": "vitest --ui",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_8a400cd81ccf1b2"
+    "chromatic": "npx chromatic --project-token=chpt_8a400cd81ccf1b2",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "e2e:headed": "playwright test --headed",
+    "e2e:debug": "playwright test --debug",
+    "e2e:report": "playwright show-report",
+    "e2e:codegen": "playwright codegen http://localhost:6006"
   },
   "pnpm": {
     "overrides": {
@@ -56,7 +62,9 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
     "@chromatic-com/storybook": "^4.0.1",
+    "@playwright/test": "^1.58.2",
     "@storybook/addon-a11y": "^9.0.15",
     "@storybook/addon-docs": "^9.0.15",
     "@storybook/addon-links": "^9.0.15",
@@ -70,6 +78,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^25.2.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^7.0.0",

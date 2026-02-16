@@ -52,3 +52,8 @@ storybook-static
 
 analyzer
 EsbuildAnalyzer.html
+
+# E2E Testing
+playwright-report/
+test-results/
+/playwright/.cache/
