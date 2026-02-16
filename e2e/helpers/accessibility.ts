@@ -13,11 +13,13 @@ export async function checkA11y(
     detailedReport?: boolean;
     tags?: string[];
     exclude?: string[];
+    disableRules?: string[];
   }
 ) {
   const {
     tags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'],
     exclude = [],
+    disableRules = [],
   } = options || {};
 
   let axeBuilder = new AxeBuilder({ page }).withTags(tags);
@@ -27,6 +29,11 @@ export async function checkA11y(
     exclude.forEach((selector) => {
       axeBuilder = axeBuilder.exclude(selector);
     });
+  }
+
+  // Disable specific rules if provided
+  if (disableRules.length > 0) {
+    axeBuilder = axeBuilder.disableRules(disableRules);
   }
 
   return await axeBuilder.analyze();

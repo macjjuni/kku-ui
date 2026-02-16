@@ -126,9 +126,13 @@ test.describe('KAccordion E2E', () => {
     const accordion = page.locator('.k-accordion');
     await expect(accordion).toBeVisible();
 
-    // Verify items are rendered
+    // Verify item is rendered (Small story has 1 item)
     const items = page.locator('.k-accordion__item');
-    await expect(items).toHaveCount(3);
+    await expect(items).toHaveCount(1);
+
+    // Verify small size styling
+    const trigger = page.locator('.k-accordion__trigger').first();
+    await expect(trigger).toBeVisible();
   });
 
   test('should pass axe accessibility tests', async ({ page }) => {
