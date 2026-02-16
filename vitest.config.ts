@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitest/config';
+import { defineConfig, configDefaults } from 'vitest/config'; // configDefaults 추가
 import viteConfig from './vite.config';
 
 export default defineConfig({
@@ -8,6 +8,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './vitest.setup.ts', // 테스트 실행 전에 필요한 설정 파일
     testTimeout: 4000,
+    exclude: [...configDefaults.exclude, 'e2e/**'],
     coverage: {
       provider: 'v8', // 코드 커버리지 제공자 설정 (v8 또는 istanbul)
       reporter: ['text', 'lcov', 'html'], // 커버리지 리포트 형식 (HTML 추가)
