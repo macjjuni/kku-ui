@@ -17,7 +17,7 @@ describe('useClickOutside', () => {
     const callback = vi.fn();
     const element = document.createElement('div');
     document.body.appendChild(element);
-    const ref: RefObject<HTMLDivElement> = { current: element };
+    const ref = { current: element } as RefObject<HTMLElement>;
 
     renderHook(() => useClickOutside(ref, callback));
 
@@ -40,7 +40,7 @@ describe('useClickOutside', () => {
     const callback = vi.fn();
     const element = document.createElement('div');
     document.body.appendChild(element);
-    const ref: RefObject<HTMLDivElement> = { current: element };
+    const ref = { current: element } as RefObject<HTMLElement>;
 
     renderHook(() => useClickOutside(ref, callback));
     vi.runAllTimers();
@@ -59,7 +59,7 @@ describe('useClickOutside', () => {
     const child = document.createElement('button');
     parent.appendChild(child);
     document.body.appendChild(parent);
-    const ref: RefObject<HTMLDivElement> = { current: parent };
+    const ref = { current: parent } as RefObject<HTMLElement>;
 
     renderHook(() => useClickOutside(ref, callback));
     vi.runAllTimers();
@@ -80,8 +80,8 @@ describe('useClickOutside', () => {
     const element2 = document.createElement('div');
     document.body.appendChild(element1);
     document.body.appendChild(element2);
-    const ref: RefObject<HTMLDivElement> = { current: element1 };
-    const otherRef: RefObject<HTMLDivElement> = { current: element2 };
+    const ref = { current: element1 } as RefObject<HTMLElement>;
+    const otherRef = { current: element2 } as RefObject<HTMLElement>;
 
     renderHook(() => useClickOutside(ref, callback, otherRef));
     vi.runAllTimers();
@@ -104,8 +104,8 @@ describe('useClickOutside', () => {
     const element2 = document.createElement('div');
     document.body.appendChild(element1);
     document.body.appendChild(element2);
-    const ref: RefObject<HTMLDivElement> = { current: element1 };
-    const otherRef: RefObject<HTMLDivElement> = { current: element2 };
+    const ref = { current: element1 } as RefObject<HTMLElement>;
+    const otherRef = { current: element2 } as RefObject<HTMLElement>;
 
     renderHook(() => useClickOutside(ref, callback, otherRef));
     vi.runAllTimers();
@@ -125,7 +125,7 @@ describe('useClickOutside', () => {
     const callback = vi.fn();
     const element = document.createElement('div');
     document.body.appendChild(element);
-    const ref: RefObject<HTMLDivElement> = { current: element };
+    const ref = { current: element } as RefObject<HTMLElement>;
 
     const addEventListenerSpy = vi.spyOn(window, 'addEventListener');
     const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
@@ -149,7 +149,7 @@ describe('useClickOutside', () => {
     const callback2 = vi.fn();
     const element = document.createElement('div');
     document.body.appendChild(element);
-    const ref: RefObject<HTMLDivElement> = { current: element };
+    const ref = { current: element } as RefObject<HTMLElement>;
 
     const { rerender } = renderHook(
       ({ cb }) => useClickOutside(ref, cb),
@@ -184,7 +184,7 @@ describe('useClickOutside', () => {
   // region [Edge Cases]
   it('ref.current가 null일 때 에러가 발생하지 않아야 한다', () => {
     const callback = vi.fn();
-    const ref: RefObject<HTMLDivElement> = { current: null };
+    const ref = { current: null } as unknown as RefObject<HTMLElement>;
 
     expect(() => {
       renderHook(() => useClickOutside(ref, callback));
@@ -201,8 +201,8 @@ describe('useClickOutside', () => {
     const callback = vi.fn();
     const element = document.createElement('div');
     document.body.appendChild(element);
-    const ref: RefObject<HTMLDivElement> = { current: element };
-    const otherRef: RefObject<HTMLDivElement> = { current: null };
+    const ref = { current: element } as RefObject<HTMLElement>;
+    const otherRef = { current: null } as unknown as RefObject<HTMLElement>;
 
     renderHook(() => useClickOutside(ref, callback, otherRef));
     vi.runAllTimers();
@@ -223,7 +223,7 @@ describe('useClickOutside', () => {
     const callback = vi.fn();
     const element = document.createElement('div');
     document.body.appendChild(element);
-    const ref: RefObject<HTMLDivElement> = { current: element };
+    const ref = { current: element } as RefObject<HTMLElement>;
 
     renderHook(() => useClickOutside(ref, callback));
 
@@ -250,7 +250,7 @@ describe('useClickOutside', () => {
     const callback = vi.fn();
     const element = document.createElement('div');
     document.body.appendChild(element);
-    const ref: RefObject<HTMLDivElement> = { current: element };
+    const ref = { current: element } as RefObject<HTMLElement>;
 
     renderHook(() => useClickOutside(ref, callback));
     vi.runAllTimers();

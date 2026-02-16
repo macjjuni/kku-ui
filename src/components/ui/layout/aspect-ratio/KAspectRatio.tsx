@@ -8,7 +8,7 @@ export type KAspectRatioProps = HTMLAttributes<HTMLDivElement> & {
 
 
 const KAspectRatio = memo((props: KAspectRatioProps) => {
-  // region hooks
+  // region [Hooks]
   const { ratio = 1, className, children, style, ref, ...restProps } = props;
   const isValidRatio = ratio > 0;
 

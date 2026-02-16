@@ -42,7 +42,7 @@ const sizeMap: Record<KIconSize, string> = {
 
 
 const KIcon = (props: KIconProps) => {
-  // region hooks
+  // region [Hooks]
   const { id, className, style, icon, size = 'md', onClick, color, disabled, ref, ...restProps } = props;
 
   const internalRef = useRef<HTMLSpanElement>(null);
@@ -95,7 +95,7 @@ const KIcon = (props: KIconProps) => {
   }, [icon, color]);
   // endregion
 
-  // region Events
+  // region [Events]
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLSpanElement>) => {
       if (disabled) return;

@@ -18,7 +18,7 @@ const sizeMap: Record<KSpinnerSize, string> = {
 
 
 const KSpinner = (props: KSpinnerProps) => {
-  // region hooks
+  // region [Hooks]
   const { size = 'md', className, ref, ...restProps } = props;
   // endregion
 

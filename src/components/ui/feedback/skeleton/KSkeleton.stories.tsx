@@ -44,7 +44,6 @@ export const ProfileCard: Story = {
       </div>
     </div>
   ),
-  name: "프로필 카드 로딩",
 };
 
 export const MixedGallery: Story = {
@@ -62,7 +61,6 @@ export const MixedGallery: Story = {
       </div>
     </div>
   ),
-  name: "복합 리스트 로딩",
 };
 
 export const ImageCard: Story = {
@@ -75,7 +73,6 @@ export const ImageCard: Story = {
       </div>
     </div>
   ),
-  name: "이미지 카드 로딩",
 };
 
 export const TextBlock: Story = {
@@ -88,5 +85,4 @@ export const TextBlock: Story = {
       <KSkeleton className="h-4 w-3/4" />
     </div>
   ),
-  name: "텍스트 블록 로딩",
 };

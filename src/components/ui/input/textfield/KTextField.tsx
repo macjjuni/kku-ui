@@ -42,7 +42,7 @@ export interface KTextFieldProps extends Omit<ComponentProps<'input'>, 'size' | 
 
 
 const KTextField = (props: KTextFieldProps) => {
-  // region hooks
+  // region [Hooks]
   const {
     id, className, type, label, required, readOnly, size = 'md', width = 'full', helperText,
     maxLength, rules, onChange, style, ref, ...restProps
@@ -54,7 +54,7 @@ const KTextField = (props: KTextFieldProps) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   // endregion
 
-  // region Privates
+  // region [Privates]
   const isNumberWidth = useMemo(() => (typeof width === 'number'), [width]);
 
   const containerClass = useMemo(() => (
@@ -96,7 +96,7 @@ const KTextField = (props: KTextFieldProps) => {
   }));
   // endregion
 
-  // region Events
+  // region [Events]
   const onChangeTextField = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (errorMessage) {
       setErrorMessage(null);

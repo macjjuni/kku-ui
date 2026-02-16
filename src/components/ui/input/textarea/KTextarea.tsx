@@ -8,7 +8,7 @@ export interface KTextareaProps extends Omit<ComponentProps<"textarea">, "ref"> 
 
 const KTextarea = (props: KTextareaProps) => {
 
-  // region hooks
+  // region [Hooks]
   const { className, ref, ...restProps } = props;
   // endregion
 

@@ -1,15 +1,15 @@
-// region hooks
+// region [Hooks]
 import * as SwitchPrimitives from '@radix-ui/react-switch';
 import { cn } from '@/lib/utils';
 // endregion
 
-// region Privates
+// region [Privates]
 export type KSwitchProps = React.ComponentPropsWithRef<typeof SwitchPrimitives.Root>;
 // endregion
 
 // region Components
 const KSwitch = (props: KSwitchProps) => {
-  // region hooks
+  // region [Hooks]
   const { className, ref, ...restProps } = props;
   // endregion
 

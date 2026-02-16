@@ -56,12 +56,12 @@ export interface KButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElemen
 
 const KButton = (props: KButtonProps) => {
 
-  // region [hooks]
+  // region [Hooks]
   const { className, variant, size = 'md', width, style, asChild = false, ref, ...restProps } = props;
   // endregion
 
 
-  // region Privates
+  // region [Privates]
   const Comp = asChild ? Slot : 'button';
   const isNumberWidth = typeof width === 'number';
 

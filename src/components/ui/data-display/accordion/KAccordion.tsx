@@ -57,7 +57,7 @@ const KAccordionItem = (props: KAccordionItemProps) => {
 };
 
 const KAccordionTrigger = (props: KAccordionTriggerProps) => {
-  // region hooks
+  // region [Hooks]
   const { className, children, ref, ...restProps } = props;
   const { size } = useContext(AccordionContext);
   // endregion
@@ -80,7 +80,7 @@ const KAccordionTrigger = (props: KAccordionTriggerProps) => {
 
 const KAccordionContent = (props: KAccordionContentProps) => {
 
-  // region hooks
+  // region [Hooks]
   const { className, children, ref, ...restProps } = props;
   const { size } = useContext(AccordionContext);
   // endregion

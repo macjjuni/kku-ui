@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 
-// region Privates
+// region [Privates]
 export type KCardProps = HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> };
 export type KCardHeaderProps = HTMLAttributes<HTMLDivElement> & { ref?: React.Ref<HTMLDivElement> };
 export type KCardTitleProps = HTMLAttributes<HTMLHeadingElement> & { ref?: React.Ref<HTMLHeadingElement> };
