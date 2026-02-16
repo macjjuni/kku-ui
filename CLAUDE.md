@@ -24,15 +24,18 @@
 - **Ref**: `ComponentPropsWithRef<typeof Primitive>` for forwarding.
 - **Hooks**: Independent entry point (`kku-ui/hooks`).
 
-### Coding Convention (Strict)
-React/Vue components **must** use `// region [Name]` ... `// endregion`.
+### [Strict Syntax] Region Naming Convention
+Every region name in React/Vue components **must** be enclosed in square brackets `[]`.
+- **CRITICAL**: Do not omit the brackets.
+- **BAD**: `// region Hooks`
+- **GOOD**: `// region [Hooks]`
 
 **Order & Scope:**
-1. **Hooks/Defines**: States, Refs, Custom hooks.
+1. **Hooks**: States, Refs, Custom hooks.
 2. **Privates**: Internal logic & helper functions (called by Events).
 3. **Events**: DOM event handlers.
 4. **Transactions**: API/Data fetching.
-5. **Life Cycles**: `useEffect`, `watch`.
+5. **Life Cycles**: `useEffect`.
 
 ## Build & Styling
 - **Bundler**: Vite + `vite-plugin-dts`.
