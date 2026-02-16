@@ -10,7 +10,7 @@ const inputGroupVariants = cva(
     "k-input-group group/input-group relative flex w-full items-center rounded-md border border-input bg-background shadow-xs outline-none transition-all",
     "has-[>textarea]:h-auto",
     "focus-within:border-[hsl(var(--ring))] focus-within:z-10 focus-within:ring-0",
-    "has-[[data-slot][aria-invalid=true]]:border-danger has-[[data-slot][aria-invalid=true]]:focus-within:border-danger",
+    "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:focus-within:border-destructive",
     "dark:bg-input/30",
   ],
   {

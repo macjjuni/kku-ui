@@ -71,7 +71,7 @@ export const Default: Story = {
             <KButton>취소</KButton>
           </KDialogClose>
           <KDialogClose asChild>
-            <KButton variant="danger">삭제</KButton>
+            <KButton variant="destructive">삭제</KButton>
           </KDialogClose>
         </KDialogFooter>
       </KDialogContent>

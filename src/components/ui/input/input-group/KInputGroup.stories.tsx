@@ -97,7 +97,7 @@ export const ErrorState: Story = {
         aria-invalid="true"
       />
       <KInputGroupAddon align="inline-end">
-        <KInputGroupText className="text-danger">Invalid</KInputGroupText>
+        <KInputGroupText className="text-destructive">Invalid</KInputGroupText>
       </KInputGroupAddon>
     </KInputGroup>
   ),

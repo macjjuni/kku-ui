@@ -62,7 +62,7 @@ const KListRow = ({
        className={cn(
          'group bg-background first:border-t last:border-b first:rounded-t-xl last:rounded-b-xl border-x border-border',
          onClick && 'active:bg-secondary cursor-pointer',
-         'focus-visible:outline focus-visible:outline-ring focus-visible:outline-offset-[-1px]',
+         'focus-ring',
          className,
        )}>
     <div className={cn('flex items-center justify-between px-4 py-[11px] transition-colors')}>
@@ -91,7 +91,9 @@ const KListRowAccordion = ({ icon, label, children, className, value, onValueCha
           <Accordion.Trigger className={cn(
             'group/trigger',
             'flex flex-1 items-center justify-between px-4 py-[11px] transition-colors',
-            'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-ring',
+            'focus-ring',
+            'group-first:focus-visible:rounded-t-xl',
+            'group-last:focus-visible:rounded-b-xl',
             'active:bg-secondary cursor-pointer',
             'text-left',
           )}>

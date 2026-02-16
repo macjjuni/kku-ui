@@ -12,3 +12,18 @@ Object.defineProperty(globalThis, 'ResizeObserver', {
   configurable: true,
   value: ResizeObserver,
 });
+
+// Mock matchMedia for components that use it (e.g., sonner/KToast)
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: (query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {}, // deprecated
+    removeListener: () => {}, // deprecated
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => true,
+  }),
+});

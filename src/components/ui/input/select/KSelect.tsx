@@ -121,7 +121,7 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
         style={triggerStyle}
         className={cn(
           selectVariants({ size, width: isNumericWidth ? undefined : (width as never) }),
-          error && 'border-danger focus:ring-danger',
+          error && 'border-destructive focus:ring-destructive',
           '[&>span]:line-clamp-1 [&>span]:flex-1 [&>span]:text-left',
           className,
         )}

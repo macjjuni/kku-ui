@@ -40,7 +40,7 @@ describe('KSelect 컴포넌트 테스트', () => {
     });
 
     expect(screen.getByText('5자 이상 입력하세요.')).toBeInTheDocument();
-    expect(screen.getByRole('textbox')).toHaveClass('border-danger');
+    expect(screen.getByRole('textbox')).toHaveClass('border-destructive');
   });
 
   it('비동기 규칙(rules) 검증을 지원해야 한다', async () => {

@@ -110,7 +110,7 @@ const KTextField = (props: KTextFieldProps) => {
       {label && (
         <label htmlFor={inputId} className={cn('font-medium', size === 'sm' ? 'text-sm' : 'text-md')}>
           {label}
-          {required && <span className="text-danger ml-0.5">*</span>}
+          {required && <span className="text-destructive ml-0.5">*</span>}
         </label>
       )}
       <KInput
@@ -124,12 +124,12 @@ const KTextField = (props: KTextFieldProps) => {
         maxLength={maxLength}
         className={cn(
           textFieldVariants({ width: isNumberWidth ? 'full' : (width as never) }),
-          errorMessage && 'border-danger focus-visible:ring-danger',
+          errorMessage && 'border-destructive focus-visible:ring-destructive',
           className,
         )}
       />
       {errorMessage ? (
-        <p className="text-xs font-medium text-danger">{errorMessage}</p>
+        <p className="text-xs font-medium text-destructive">{errorMessage}</p>
       ) : (
         helperText && <p className="text-xs text-muted-foreground">{helperText}</p>
       )}

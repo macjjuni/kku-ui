@@ -4,21 +4,19 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 
-const focusStyle = 'focus-visible:outline focus-visible:outline-ring focus-visible:outline-offset-[-2px]';
-
 const buttonVariants = cva(
   'k-button inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors ' +
   'disabled:pointer-events-none disabled:opacity-50 ' +
-  '[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 truncate',
+  '[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 truncate focus-ring',
   {
     variants: {
       variant: {
-        default: `bg-gray-200/70 shadow hover:brightness-90 hover:text-accent-foreground active:scale-[0.97] transition-transform ${focusStyle}`,
-        outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground active:scale-[0.97] transition-transform focus-ring ',
-        primary: `bg-primary text-primary-foreground shadow hover:bg-primary/90 active:scale-[0.97] transition-transform ${focusStyle} focus-visible:outline-white`,
-        danger: `bg-danger text-danger-foreground shadow-sm hover:bg-danger/90 active:scale-[0.97] transition-transform ${focusStyle} focus-visible:outline-white`,
-        ghost: `hover:bg-accent hover:text-accent-foreground active:scale-[0.97] transition-transform ${focusStyle}`,
-        link: `text-primary underline-offset-4 hover:underline active:scale-[0.97] transition-transform ${focusStyle} focus-visible:outline-primary`,
+        default: 'bg-gray-200/70 shadow hover:brightness-90 hover:text-accent-foreground active:scale-[0.97] transition-transform',
+        outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground active:scale-[0.97] transition-transform',
+        primary: 'bg-primary text-primary-foreground shadow hover:bg-primary/90 active:scale-[0.97] transition-transform focus-visible:!outline-gray-900 dark:focus-visible:!outline-white',
+        destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90 active:scale-[0.97] transition-transform focus-visible:!outline-gray-900 dark:focus-visible:!outline-white',
+        ghost: 'hover:bg-accent hover:text-accent-foreground active:scale-[0.97] transition-transform',
+        link: 'text-primary underline-offset-4 hover:underline active:scale-[0.97] transition-transform',
       },
       size: {
         sm: 'h-8 rounded-md px-3 text-xs',

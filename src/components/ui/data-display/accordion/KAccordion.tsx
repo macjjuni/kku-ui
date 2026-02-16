@@ -66,7 +66,7 @@ const KAccordionTrigger = (props: KAccordionTriggerProps) => {
     <AccordionPrimitive.Header className="k-accordion__header flex">
       <AccordionPrimitive.Trigger
         ref={ref}
-        className={cn("k-accordion__trigger pr-1 focus-visible:outline-ring ", KAccordionTriggerVariants({ size, className }))}
+        className={cn("k-accordion__trigger pr-1 focus-ring", KAccordionTriggerVariants({ size, className }))}
         {...restProps}
       >
         {children}

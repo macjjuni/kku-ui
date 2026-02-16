@@ -8,7 +8,7 @@ const meta: Meta<typeof KButton> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'outline', 'primary', 'danger', 'ghost', 'link'],
+      options: ['default', 'outline', 'primary', 'destructive', 'ghost', 'link'],
     },
     size: {
       control: 'select',
@@ -30,7 +30,7 @@ export const AllVariants: Story = {
       <KButton {...args} variant="default">Default</KButton>
       <KButton {...args} variant="outline">Outline</KButton>
       <KButton {...args} variant="primary">Primary</KButton>
-      <KButton {...args} variant="danger">Danger</KButton>
+      <KButton {...args} variant="destructive">Destructive</KButton>
       <KButton {...args} variant="ghost">Ghost</KButton>
       <KButton {...args} variant="link">Link</KButton>
     </div>
@@ -50,7 +50,7 @@ export const AllSizes: Story = {
             <KButton {...args} size={size} variant="default">{size !== 'icon' ? 'Button' : 'B'}</KButton>
             <KButton {...args} size={size} variant="outline">{size !== 'icon' ? 'Button' : 'B'}</KButton>
             <KButton {...args} size={size} variant="primary">{size !== 'icon' ? 'Button' : 'B'}</KButton>
-            <KButton {...args} size={size} variant="danger">{size !== 'icon' ? 'Button' : 'B'}</KButton>
+            <KButton {...args} size={size} variant="destructive">{size !== 'icon' ? 'Button' : 'B'}</KButton>
             <KButton {...args} size={size} variant="ghost">{size !== 'icon' ? 'Button' : 'B'}</KButton>
             <KButton {...args} size={size} variant="link">{size !== 'icon' ? 'Button' : 'B'}</KButton>
           </div>

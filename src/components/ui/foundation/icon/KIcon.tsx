@@ -58,11 +58,16 @@ const KIcon = (props: KIconProps) => {
   }));
 
   const rootClass = useMemo(() => {
+    const getCursorClass = () => {
+      if (disabled) return 'opacity-50 cursor-not-allowed grayscale';
+      if (onClick) return 'cursor-pointer';
+      return 'cursor-default';
+    };
+
     return cn(
       'k-icon inline-flex items-center justify-center shrink-0 transition-colors overflow-hidden',
       typeof size === 'string' ? sizeMap[size] : '',
-      onClick && 'cursor-pointer',
-      disabled && 'opacity-50 !cursor-not-allowed grayscale',
+      getCursorClass(),
       className,
     );
   }, [className, disabled, size, onClick]);

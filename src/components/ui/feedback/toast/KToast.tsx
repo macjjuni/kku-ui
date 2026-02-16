@@ -27,13 +27,20 @@ const toastStyleMap = {
   full: 'group-[.toaster]:p-4 group-[.toaster]:rounded-none',
 };
 
-const KToast = ({ size = 'md', position = 'top-right', ...props }: KToasterProps) => {
+const KToast = ({
+  size = 'md',
+  position = 'top-right',
+  offset,
+  mobileOffset,
+  ...props
+}: KToasterProps) => {
   return (
     <Sonner
       className="k-toast toaster group"
       position={position}
       theme="system"
-      {...props}
+      offset={offset}
+      mobileOffset={mobileOffset}
       style={{
         '--width': sizeWidthMap[size],
         ...props.style,
@@ -78,6 +85,7 @@ const KToast = ({ size = 'md', position = 'top-right', ...props }: KToasterProps
           ),
         },
       }}
+      {...props}
     />
   );
 };

@@ -21,7 +21,7 @@ const meta: Meta<typeof KIcon> = {
     },
     color: {
       description: '아이콘의 색상을 설정합니다.',
-      control: 'color',
+      control: 'text',
     },
     disabled: {
       description: '비활성화 상태를 설정합니다.',
@@ -43,8 +43,9 @@ type Story = StoryObj<typeof KIcon>;
  */
 export const Default: Story = {
   args: {
-    icon: ICON_LIST[0] || 'check',
+    icon: ICON_LIST[19] || 'check',
     size: 'md',
+    onClick: undefined,
   },
 };
 
@@ -53,9 +54,10 @@ export const Default: Story = {
  */
 export const CustomSize: Story = {
   args: {
-    icon: ICON_LIST[0] || 'check',
+    icon: ICON_LIST[19] || 'check',
     size: 48,
     color: '#3b82f6',
+    onClick: undefined,
   },
 };
 
@@ -65,6 +67,7 @@ export const CustomSize: Story = {
 export const AllIcons: Story = {
   args: {
     size: 'md',
+    onClick: undefined,
   },
   render: (args) => (
     <div className="flex flex-wrap gap-6 items-center justify-start p-4 border rounded-lg bg-card">

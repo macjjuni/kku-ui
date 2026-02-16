@@ -61,7 +61,7 @@ export const Default: StoryObj = {
         <KButton variant="primary" onClick={() => kToast.success("작업이 완료되었습니다.")}>
           성공 토스트
         </KButton>
-        <KButton variant="danger" onClick={() => kToast.error("오류가 발생했습니다.")}>
+        <KButton variant="destructive" onClick={() => kToast.error("오류가 발생했습니다.")}>
           에러 토스트
         </KButton>
       </div>

@@ -22,9 +22,9 @@ module.exports = {
   				DEFAULT: 'hsl(var(--secondary))',
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
-  			danger: {
-  				DEFAULT: 'hsl(var(--danger))',
-  				foreground: 'hsl(var(--danger-foreground))'
+  			destructive: {
+  				DEFAULT: 'hsl(var(--destructive))',
+  				foreground: 'hsl(var(--destructive-foreground))'
   			},
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',
@@ -71,6 +71,14 @@ module.exports = {
   			serif: ['var(--font-serif)'],
   			mono: ['var(--font-mono)']
   		},
+  		spacing: {
+  			'xs': 'var(--spacing-xs)',
+  			'sm': 'var(--spacing-sm)',
+  			'md': 'var(--spacing-md)',
+  			'lg': 'var(--spacing-lg)',
+  			'xl': 'var(--spacing-xl)',
+  			'2xl': 'var(--spacing-2xl)'
+  		},
   		keyframes: {
   			'accordion-down': {
   				from: { height: '0' },
@@ -80,22 +88,12 @@ module.exports = {
   				from: { height: 'var(--radix-accordion-content-height)' },
   				to: { height: '0' }
   			},
-  			'accordion-down': {
-  				from: { height: '0' },
-  				to: { height: 'var(--radix-accordion-content-height)' }
-  			},
-  			'accordion-up': {
-  				from: { height: 'var(--radix-accordion-content-height)' },
-  				to: { height: '0' }
-  			},
-            spin: {
-              from: { transform: 'rotate(0deg)' },
-              to: { transform: 'rotate(360deg)' },
-            }
+  			spin: {
+  				from: { transform: 'rotate(0deg)' },
+  				to: { transform: 'rotate(360deg)' },
+  			}
   		},
   		animation: {
-  			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out',
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
   		}
@@ -103,14 +101,15 @@ module.exports = {
   },
   plugins: [
     require("tailwindcss-animate"),
-    function({ addUtilities, theme }) {
+    function({ addUtilities }) {
       addUtilities({
         '.focus-ring': {
           'outline': 'none',
+          'transition': 'none',
           '&:focus': { 'outline': 'none' },
           '&:focus-visible': {
-            'border-color': 'hsl(var(--ring))',
-            'box-shadow': 'none',
+            'outline': '2px solid hsl(var(--ring))',
+            'outline-offset': '2px',
             'z-index': '1',
           },
         },

@@ -58,10 +58,10 @@ describe('KSelect Component', () => {
     expect(handleChange).not.toHaveBeenCalled();
   });
 
-  it('error props 전달 시 에러 스타일(border-danger)이 적용되어야 한다.', () => {
+  it('error props 전달 시 에러 스타일(border-destructive)이 적용되어야 한다.', () => {
     render(<KSelect options={mockOptions} error />);
     const trigger = screen.getByRole('combobox');
-    expect(trigger).toHaveClass('border-danger');
+    expect(trigger).toHaveClass('border-destructive');
   });
 
   it('width props에 따라 적절한 클래스가 적용되어 sostiene.', () => {
