@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from "@testing-library/react";
-import { KSpinner } from "./KSpinner";
+import { KSpinner } from '@/components/ui/feedback/spinner/KSpinner';
 
 describe("KSpinner", () => {
   it("로딩 상태에 대한 접근성(role='status')을 가져야 한다", () => {

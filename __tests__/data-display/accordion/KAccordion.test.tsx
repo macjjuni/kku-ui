@@ -5,11 +5,14 @@ import {
   KAccordionItem,
   KAccordionTrigger,
   KAccordionContent,
-} from './KAccordion';
+} from '@/components/ui/data-display/accordion/KAccordion';
 import {
   renderWithUser,
   expectClasses,
   expectDataState,
+  expectVisible,
+  expectNoClasses,
+  expectA11yAttributes,
   createAccordionItems,
 } from '@/test-utils';
 import {
@@ -90,7 +93,7 @@ describe('KAccordion', () => {
     await user.click(trigger1);
 
     // 첫 번째 아이템 열림
-    expect(screen.getByText('Content 1')).toBeVisible();
+    expectVisible(screen.getByText('Content 1'));
   });
 
   it('다른 트리거 클릭 시 이전 아이템은 닫히고 새 아이템만 열려야 한다 (type="single")', async () => {
@@ -98,15 +101,15 @@ describe('KAccordion', () => {
 
     // 첫 번째 열기
     await user.click(screen.getByText('Title 1'));
-    expect(screen.getByText('Content 1')).toBeVisible();
+    expectVisible(screen.getByText('Content 1'));
 
     // 두 번째 열기 (첫 번째 자동으로 닫힘)
     await user.click(screen.getByText('Title 2'));
-    expect(screen.getByText('Content 2')).toBeVisible();
+    expectVisible(screen.getByText('Content 2'));
 
     // 첫 번째는 닫힘 (data-state="closed")
     const trigger1 = screen.getByText('Title 1');
-    expect(trigger1).toHaveAttribute('data-state', 'closed');
+    expectDataState(trigger1, 'closed');
   });
 
   it('여러 아이템을 동시에 열 수 있어야 한다 (type="multiple")', async () => {
@@ -116,8 +119,8 @@ describe('KAccordion', () => {
     await user.click(screen.getByText('Title 2'));
 
     // 둘 다 열림
-    expect(screen.getByText('Content 1')).toBeVisible();
-    expect(screen.getByText('Content 2')).toBeVisible();
+    expectVisible(screen.getByText('Content 1'));
+    expectVisible(screen.getByText('Content 2'));
   });
 
   it('열린 트리거를 다시 클릭하면 닫혀야 한다 (collapsible=true)', async () => {
@@ -127,11 +130,11 @@ describe('KAccordion', () => {
 
     // 열기
     await user.click(trigger1);
-    expect(screen.getByText('Content 1')).toBeVisible();
+    expectVisible(screen.getByText('Content 1'));
 
     // 다시 클릭하여 닫기
     await user.click(trigger1);
-    expect(trigger1).toHaveAttribute('data-state', 'closed');
+    expectDataState(trigger1, 'closed');
   });
 
   it('disabled 아이템은 클릭해도 열리지 않아야 한다', async () => {
@@ -148,7 +151,7 @@ describe('KAccordion', () => {
     await user.click(trigger);
 
     // 열리지 않음 (data-state가 closed로 유지)
-    expect(trigger).toHaveAttribute('data-state', 'closed');
+    expectDataState(trigger, 'closed');
     expect(trigger).toHaveAttribute('data-disabled', '');
   });
   // endregion
@@ -255,7 +258,7 @@ describe('KAccordion', () => {
     const chevron = trigger.querySelector('svg');
 
     // 닫힌 상태 (회전 없음)
-    expect(chevron).not.toHaveClass('rotate-180');
+    expectNoClasses(chevron as HTMLElement, ['rotate-180']);
 
     // 열기
     await user.click(trigger);
@@ -272,11 +275,11 @@ describe('KAccordion', () => {
     const trigger = screen.getByText('Title 1');
 
     // 닫힌 상태
-    expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    expectA11yAttributes(trigger, { 'aria-expanded': 'false' });
 
     // 열린 상태
     await user.click(trigger);
-    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    expectA11yAttributes(trigger, { 'aria-expanded': 'true' });
   });
 
   it('트리거와 콘텐츠가 aria-controls로 연결되어야 한다', async () => {
@@ -322,7 +325,7 @@ describe('KAccordion', () => {
       shouldFocus: true,
     });
 
-    expect(screen.getByText('Content 1')).toBeVisible();
+    expectVisible(screen.getByText('Content 1'));
   });
 
   it('키보드 네비게이션: Space 키로 아이템을 열 수 있어야 한다', async () => {
@@ -333,7 +336,7 @@ describe('KAccordion', () => {
 
     await user.keyboard(' ');
 
-    expect(screen.getByText('Content 1')).toBeVisible();
+    expectVisible(screen.getByText('Content 1'));
   });
 
   it('focus-ring 클래스가 트리거에 적용되어야 한다', () => {
@@ -365,7 +368,7 @@ describe('KAccordion', () => {
     );
 
     await user.click(screen.getByText('Only One'));
-    expect(screen.getByText('Only Content')).toBeVisible();
+    expectVisible(screen.getByText('Only Content'));
   });
 
   it('대량의 아이템도 처리할 수 있어야 한다', () => {
@@ -406,7 +409,7 @@ describe('KAccordion', () => {
     expect(container.querySelector('.custom-trigger')).toBeInTheDocument();
 
     // defaultValue로 초기에 열려있으므로 content가 보임
-    expect(screen.getByText('Content')).toBeVisible();
+    expectVisible(screen.getByText('Content'));
   });
 
   it('defaultValue로 초기 열림 상태를 설정할 수 있어야 한다', () => {
@@ -427,9 +430,9 @@ describe('KAccordion', () => {
     const trigger1 = screen.getByText('Title 1');
     const trigger2 = screen.getByText('Title 2');
 
-    expect(trigger1).toHaveAttribute('data-state', 'closed');
-    expect(trigger2).toHaveAttribute('data-state', 'open');
-    expect(screen.getByText('Content 2')).toBeVisible();
+    expectDataState(trigger1, 'closed');
+    expectDataState(trigger2, 'open');
+    expectVisible(screen.getByText('Content 2'));
   });
   // endregion
 

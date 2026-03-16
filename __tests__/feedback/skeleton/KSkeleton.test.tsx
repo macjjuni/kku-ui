@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { KSkeleton } from './KSkeleton';
+import { KSkeleton } from '@/components/ui/feedback/skeleton/KSkeleton';
+import { expectNoClasses } from '@/test-utils';
 
 describe('KSkeleton', () => {
   it('기본 렌더링 시 animate-pulse와 bg-muted 클래스를 포함한다', () => {
@@ -19,7 +20,7 @@ describe('KSkeleton', () => {
     const skeleton = screen.getByTestId('skeleton-circle');
 
     expect(skeleton).toHaveClass('rounded-full');
-    expect(skeleton).not.toHaveClass('rounded-md');
+    expectNoClasses(skeleton, ['rounded-md']);
   });
 
   it('사용자가 주입한 커스텀 className이 기존 클래스와 병합된다', () => {

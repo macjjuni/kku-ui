@@ -1,7 +1,8 @@
 import { describe, it, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { KSwitch } from "./KSwitch"
+import { KSwitch } from '@/components/ui/actions/switch/KSwitch'
+import { expectA11yAttributes, expectDisabled } from '@/test-utils'
 
 describe("KSwitch", () => {
   it("클릭 시 온/오프 상태가 전환된다", async () => {
@@ -10,10 +11,10 @@ describe("KSwitch", () => {
 
     const switchElement = screen.getByTestId("switch")
 
-    expect(switchElement).toHaveAttribute("aria-checked", "false")
+    expectA11yAttributes(switchElement, { "aria-checked": "false" })
 
     await user.click(switchElement)
-    expect(switchElement).toHaveAttribute("aria-checked", "true")
+    expectA11yAttributes(switchElement, { "aria-checked": "true" })
   })
 
   it("disabled 상태일 때 클릭이 작동하지 않는다", async () => {
@@ -21,9 +22,9 @@ describe("KSwitch", () => {
     render(<KSwitch disabled data-testid="switch" />)
 
     const switchElement = screen.getByTestId("switch")
-    expect(switchElement).toBeDisabled()
+    expectDisabled(switchElement)
 
     await user.click(switchElement)
-    expect(switchElement).toHaveAttribute("aria-checked", "false")
+    expectA11yAttributes(switchElement, { "aria-checked": "false" })
   })
 })

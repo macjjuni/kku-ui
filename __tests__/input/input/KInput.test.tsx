@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import { createRef } from 'react';
 import { screen } from '@testing-library/react';
-import { KInput } from './KInput';
-import { renderWithUser, expectClasses, expectDisabled } from '@/test-utils';
+import { KInput } from '@/components/ui/input/input/KInput';
+import { renderWithUser, expectClasses, expectDisabled, expectFocused } from '@/test-utils';
 
 describe('KInput', () => {
   // region [Basic Rendering Tests]
@@ -113,7 +113,7 @@ describe('KInput', () => {
     renderWithUser(<KInput ref={ref} />);
 
     ref.current?.focus();
-    expect(ref.current).toHaveFocus();
+    expectFocused(ref.current as HTMLElement);
   });
 
   it('ref를 통해 input value를 읽을 수 있어야 한다', async () => {
@@ -295,7 +295,7 @@ describe('KInput', () => {
     renderWithUser(<KInput autoFocus />);
 
     const input = screen.getByRole('textbox');
-    expect(input).toHaveFocus();
+    expectFocused(input);
   });
   // endregion
 });

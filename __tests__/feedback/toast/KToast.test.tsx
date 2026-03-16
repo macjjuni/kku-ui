@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
-import { KToast, kToast } from './KToast';
+import { KToast, kToast } from '@/components/ui/feedback/toast/KToast';
 import { renderWithUser } from '@/test-utils';
 
 describe('KToast', () => {

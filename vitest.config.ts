@@ -8,6 +8,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './vitest.setup.ts', // 테스트 실행 전에 필요한 설정 파일
     testTimeout: 4000,
+    include: ['__tests__/**/*.{test,spec}.{ts,tsx}'],
     exclude: [...configDefaults.exclude, 'e2e/**'],
     coverage: {
       provider: 'v8', // 코드 커버리지 제공자 설정 (v8 또는 istanbul)
@@ -20,12 +21,14 @@ export default defineConfig({
         lines: 85, // 라인 커버리지 85%
       },
       // 커버리지 계산에서 제외할 파일
+      include: ['src/**/*.{ts,tsx}'],
       exclude: [
         'node_modules/**',
         '**/*.stories.tsx', // Storybook 파일
         '**/*.test.tsx', // 테스트 파일 자체
         '**/*.test.ts',
         '**/test-utils/**', // 테스트 유틸리티
+        'src/vite-env.d.ts',
         'vitest.setup.ts',
         'vitest.config.ts',
         'vite.config.ts',

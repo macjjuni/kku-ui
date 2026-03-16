@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import useDynamicRefs from './useDynamicRefs';
+import useDynamicRefs from '@/common/hooks/useDynamicRefs';
 
 describe('useDynamicRefs', () => {
   // region [Basic Tests]

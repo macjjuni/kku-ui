@@ -1,7 +1,7 @@
 
 import { render, screen } from '@testing-library/react';
 import { vi, describe, expect, it } from 'vitest';
-import { KAspectRatio } from './KAspectRatio';
+import { KAspectRatio } from '@/components/ui/layout/aspect-ratio/KAspectRatio';
 
 describe('KAspectRatio', () => {
   it('지정된 ratio가 스타일에 적용되어야 한다', () => {

@@ -8,7 +8,7 @@ import {
   KCardDescription,
   KCardContent,
   KCardFooter,
-} from './KCard';
+} from '@/components/ui/layout/card/KCard';
 import { renderWithUser, expectClasses } from '@/test-utils';
 
 describe('KCard', () => {

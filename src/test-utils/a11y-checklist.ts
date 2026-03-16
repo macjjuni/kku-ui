@@ -5,6 +5,7 @@
 
 import { type UserEvent } from '@testing-library/user-event';
 import { waitFor } from '@testing-library/react';
+import { expect } from 'vitest';
 
 /**
  * 키보드 네비게이션 테스트
@@ -17,7 +18,7 @@ import { waitFor } from '@testing-library/react';
  * @example
  * await testKeyboardNavigation(button, user, {
  *   keys: ['Enter', 'Space'],
- *   expectAction: () => expect(mockFn).toHaveBeenCalled(),
+ *   expectAction: () => expect(mockFn).toHavㅈeBeenCalled(),
  * });
  */
 export async function testKeyboardNavigation(

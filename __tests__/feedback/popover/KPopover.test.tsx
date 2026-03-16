@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { expect, describe, it } from 'vitest';
-import { KPopover, KPopoverTrigger, KPopoverContent } from "./KPopover";
+import { KPopover, KPopoverTrigger, KPopoverContent } from '@/components/ui/feedback/popover/KPopover';
 
 describe("KPopover", () => {
   it("트리거를 클릭하면 컨텐츠가 나타나야 한다", async () => {

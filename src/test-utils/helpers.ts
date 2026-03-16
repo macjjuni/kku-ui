@@ -1,5 +1,6 @@
-import { render, waitFor, type RenderOptions } from '@testing-library/react';
+import { render, waitFor, type RenderOptions, type RenderResult } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { expect } from 'vitest';
 import type { ReactElement } from 'react';
 
 /**
@@ -13,7 +14,7 @@ import type { ReactElement } from 'react';
 export function renderWithUser(
   ui: ReactElement,
   options?: Omit<RenderOptions, 'queries'>,
-) {
+): { user: ReturnType<typeof userEvent.setup> } & RenderResult {
   return {
     user: userEvent.setup(),
     ...render(ui, options),
@@ -135,21 +136,6 @@ export function expectDisabled(element: HTMLElement) {
 }
 
 /**
- * 요소가 활성화 상태인지 확인
- *
- * @param element - 검증할 DOM 요소
- *
- * @example
- * expectEnabled(button);
- */
-export function expectEnabled(element: HTMLElement) {
-  expect(element).toBeEnabled();
-  if (element.hasAttribute('aria-disabled')) {
-    expect(element).toHaveAttribute('aria-disabled', 'false');
-  }
-}
-
-/**
  * 포커스 상태 확인
  *
  * @param element - 검증할 DOM 요소
@@ -171,22 +157,6 @@ export function expectFocused(element: HTMLElement) {
  */
 export function expectVisible(element: HTMLElement) {
   expect(element).toBeVisible();
-}
-
-/**
- * 요소가 숨겨졌는지 확인 (not in document or not visible)
- *
- * @param element - 검증할 DOM 요소 또는 null
- *
- * @example
- * expectHidden(screen.queryByText('Hidden Text'));
- */
-export function expectHidden(element: HTMLElement | null) {
-  if (element === null) {
-    expect(element).not.toBeInTheDocument();
-  } else {
-    expect(element).not.toBeVisible();
-  }
 }
 
 /**

@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import { createRef } from 'react';
 import { screen } from '@testing-library/react';
-import { KTextarea } from './KTextarea';
-import { renderWithUser, expectClasses, expectDisabled } from '@/test-utils';
+import { KTextarea } from '@/components/ui/input/textarea/KTextarea';
+import { renderWithUser, expectClasses, expectDisabled, expectFocused } from '@/test-utils';
 
 describe('KTextarea', () => {
   // region [Basic Rendering Tests]
@@ -99,7 +99,7 @@ describe('KTextarea', () => {
     renderWithUser(<KTextarea ref={ref} />);
 
     ref.current?.focus();
-    expect(ref.current).toHaveFocus();
+    expectFocused(ref.current as HTMLElement);
   });
 
   it('ref를 통해 textarea value를 읽을 수 있어야 한다', async () => {
@@ -281,7 +281,7 @@ describe('KTextarea', () => {
     renderWithUser(<KTextarea autoFocus />);
 
     const textarea = screen.getByRole('textbox');
-    expect(textarea).toHaveFocus();
+    expectFocused(textarea);
   });
 
   it('긴 텍스트를 입력할 수 있어야 한다', async () => {

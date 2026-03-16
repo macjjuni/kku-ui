@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { createRef } from 'react';
-import { KIcon, type KIconRefs } from './KIcon';
+import { KIcon, type KIconRefs } from '@/components/ui/foundation/icon/KIcon';
 import { renderWithUser, expectClasses } from '@/test-utils';
 import { testKeyboardNavigation } from '@/test-utils/a11y-checklist';
 

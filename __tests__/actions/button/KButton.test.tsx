@@ -3,6 +3,7 @@ import { vi, describe, beforeEach, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { KButton } from '@/components';
+import { expectDisabled, expectFocused } from '@/test-utils';
 
 describe('KSwitch', () => {
   const labelText = 'Click me';
@@ -35,7 +36,7 @@ describe('KSwitch', () => {
 
     const button = screen.getByRole('button');
 
-    expect(button).toBeDisabled();
+    expectDisabled(button);
     // shadcn/ui(CVA) 기본 disabled 클래스 확인 (일반적으로 opacity-50 등)
     expect(button).toHaveClass('disabled:opacity-50');
 
@@ -78,6 +79,6 @@ describe('KSwitch', () => {
     render(<KButton ref={ref}>{labelText}</KButton>);
 
     ref.current?.focus();
-    expect(screen.getByRole('button')).toHaveFocus();
+    expectFocused(screen.getByRole('button'));
   });
 });

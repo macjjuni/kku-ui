@@ -14,7 +14,8 @@
 ## Architecture & Rules
 ### Organization (src/components/ui/)
 - `actions`, `data-display`, `feedback`, `input`, `layout`, `foundation`.
-- File structure: `[Name].tsx`, `[Name].test.tsx`, `[Name].stories.tsx`.
+- File structure: `[Name].tsx`, `[Name].stories.tsx`.
+- **Unit Tests**: `/__tests__/[category]/[ComponentName]/[Name].test.tsx` (mirrors `src/components/ui/` structure).
 - **E2E Tests**: `/e2e/[ComponentName].spec.ts`.
 
 ### Development Standards

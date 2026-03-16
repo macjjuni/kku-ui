@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { KSelect } from './KSelect';
+import { KSelect } from '@/components/ui/input/select/KSelect';
 
 const mockOptions = [
   { label: '사과', value: 'apple' },
