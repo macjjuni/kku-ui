@@ -48,3 +48,4 @@ Every region name in React/Vue components **must** be enclosed in square bracket
 ## Notes
 - Maintain **A11y** & **SSR** compatibility (`suppressHydrationWarning`).
 - Strict TS mode: No unused locals/parameters.
+- **NEVER** add `Co-Authored-By: Claude` (or any Claude/Anthropic attribution) to commit messages.
