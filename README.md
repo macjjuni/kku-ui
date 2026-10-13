@@ -36,8 +36,8 @@ import 'kku-ui/index.css'
 
 | 파일 | 내용 |
 |---|---|
-| `kku-ui/index.css` | 디자인 토큰(CSS 변수), 폰트, 컴포넌트 스타일 |
-| `kku-ui/base.css` | Tailwind preflight, 기본 border 색상, `body` 배경·글자색 (선택) |
+| `kku-ui/index.css` | 디자인 토큰(CSS 변수), 폰트, 컴포넌트 스타일, 기본 border 색상, `body` 배경·글자색(라이트/다크) |
+| `kku-ui/base.css` | Tailwind preflight (선택, Tailwind를 쓰지 않는 앱용) |
 
 ### 2. 컴포넌트 사용
 

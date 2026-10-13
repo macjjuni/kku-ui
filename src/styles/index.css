@@ -3,7 +3,7 @@
 /*
  * 컴포넌트 스타일 + 디자인 토큰.
  * preflight는 tailwind.config.cjs에서 꺼짐. @tailwind base는 utilities가 참조하는 --tw-* 기본값만 출력.
- * 전역 리셋(preflight)과 body 스타일은 base.css에 따로 있음.
+ * 전역 리셋(preflight)은 base.css에 따로 있음. body 테마(폰트/배경/글자색)와 border 색상은 이 파일 하단에 있음.
  */
 @tailwind base;
 @tailwind components;
@@ -113,10 +113,21 @@
 }
 
 /*
- * kku-ui 기본 폰트(Pretendard). body에 지정해 앱 preflight(html)와 import 순서에 관계없이 적용되고,
- * Portal(body 하위)로 렌더링되는 컴포넌트도 상속받는다.
+ * 테마 border 색상. 앱 마크업에서 색상 없이 `border`만 써도 --border(라이트/다크)를 따른다.
+ */
+*,
+::before,
+::after {
+  border-color: hsl(var(--border));
+}
+
+/*
+ * kku-ui 기본 폰트(Pretendard)와 테마 배경/글자색. body에 지정해 앱 preflight(html)와 import 순서에 관계없이 적용되고,
+ * Portal(body 하위)로 렌더링되는 컴포넌트도 상속받는다. (.dark 전환 시 --background/--foreground를 따라 바뀜)
  * 다른 폰트를 쓰려면 앱에서 :root { --font-sans: ... } 로 덮어쓴다. (폰트/radius/shadow 토큰은 :root에만 선언)
  */
 body {
   font-family: var(--font-sans);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
 }

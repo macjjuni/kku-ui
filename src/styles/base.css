@@ -1,8 +1,9 @@
 @config "../../tailwind.base.config.cjs";
 
 /*
- * 선택적 전역 스타일: Tailwind preflight + 테마 기본 border/body 색상.
+ * 선택적 전역 스타일: Tailwind preflight.
  * Tailwind를 쓰지 않는 앱에서 index.css와 함께 import한다. (Tailwind를 쓰는 앱은 자체 preflight가 있으므로 불필요)
+ * border/body 색상은 index.css에도 있지만, preflight의 기본 border 색이 import 순서에 따라 덮어쓰지 않도록 여기서도 다시 지정한다.
  */
 @tailwind base;
 
