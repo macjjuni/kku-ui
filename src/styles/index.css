@@ -42,6 +42,13 @@
   --sidebar-accent-foreground: 240 1.9608% 10%;
   --sidebar-border: 0 0% 89.8039%;
   --sidebar-ring: 0 0% 63.1373%;
+}
+
+/*
+ * 테마(라이트/다크)와 무관한 토큰. :where()로 우선순위를 0으로 낮춰
+ * 앱의 :root { --font-sans: ... } 오버라이드가 CSS import 순서와 관계없이 항상 적용되도록 한다.
+ */
+:where(:root) {
   --font-sans: Pretendard, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --font-serif: Pretendard, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: Pretendard, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -103,22 +110,13 @@
   --sidebar-accent-foreground: 0 0% 98.0392%;
   --sidebar-border: 0 0% 15.6863%;
   --sidebar-ring: 0 0% 32.1569%;
-  --font-sans: Pretendard, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-serif: Pretendard, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: Pretendard, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --radius: 0.45rem;
-  --shadow-x: 0px;
-  --shadow-y: 0px;
-  --shadow-blur: 1px;
-  --shadow-spread: 0px;
-  --shadow-opacity: 0.12;
-  --shadow-color: oklch(0 0 0);
-  --shadow-2xs: 0px 0px 1px 0px hsl(0 0% 0% / 0.06);
-  --shadow-xs: 0px 0px 1px 0px hsl(0 0% 0% / 0.06);
-  --shadow-sm: 0px 0px 1px 0px hsl(0 0% 0% / 0.12), 0px 1px 2px -1px hsl(0 0% 0% / 0.12);
-  --shadow: 0px 0px 1px 0px hsl(0 0% 0% / 0.12), 0px 1px 2px -1px hsl(0 0% 0% / 0.12);
-  --shadow-md: 0px 0px 1px 0px hsl(0 0% 0% / 0.12), 0px 2px 4px -1px hsl(0 0% 0% / 0.12);
-  --shadow-lg: 0px 0px 1px 0px hsl(0 0% 0% / 0.12), 0px 4px 6px -1px hsl(0 0% 0% / 0.12);
-  --shadow-xl: 0px 0px 1px 0px hsl(0 0% 0% / 0.12), 0px 8px 10px -1px hsl(0 0% 0% / 0.12);
-  --shadow-2xl: 0px 0px 1px 0px hsl(0 0% 0% / 0.30);
+}
+
+/*
+ * kku-ui 기본 폰트(Pretendard). body에 지정해 앱 preflight(html)와 import 순서에 관계없이 적용되고,
+ * Portal(body 하위)로 렌더링되는 컴포넌트도 상속받는다.
+ * 다른 폰트를 쓰려면 앱에서 :root { --font-sans: ... } 로 덮어쓴다. (폰트/radius/shadow 토큰은 :root에만 선언)
+ */
+body {
+  font-family: var(--font-sans);
 }

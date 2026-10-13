@@ -141,6 +141,33 @@ CSS 변수로 테마를 덮어쓸 수 있습니다:
 
 모든 컴포넌트는 `className` prop으로 Tailwind 클래스를 추가할 수 있습니다.
 
+### 폰트
+
+`kku-ui/index.css`를 import하면 기본 폰트로 **Pretendard**(Regular/Medium/Bold)가 `body`에 자동 적용됩니다. 별도 폰트 설정이 필요 없습니다.
+
+다른 폰트를 쓰려면 `--font-sans` 변수를 덮어쓰면 됩니다. Portal로 렌더링되는 Dialog, Dropdown, Toast 등에도 함께 적용됩니다 CSS import 순서나 다크모드와 관계없이 앱의 `:root` 선언이 우선 적용됩니다.
+
+```css
+:root {
+  --font-sans: 'Noto Sans KR', sans-serif;
+}
+```
+
+Next.js의 `next/font`를 쓰는 경우 `body`에 폰트 클래스를 지정하거나 변수로 연결합니다.
+
+```tsx
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+// <html className={inter.variable}>
+```
+
+```css
+:root {
+  --font-sans: var(--font-inter), sans-serif;
+}
+```
+
+다른 폰트로 덮어쓰면 Pretendard 파일은 다운로드되지 않습니다.
+
 ---
 
 ## 개발
