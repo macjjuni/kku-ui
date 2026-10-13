@@ -6,6 +6,8 @@ module.exports = {
     './.storybook/**/*.{js,ts,jsx,tsx}', // 스토리북 설정 파일 스타일 대응
   ],
   darkMode: ['class'],
+  // preflight는 소비자 앱의 전역 스타일을 덮어쓰므로 base.css(tailwind.base.config.cjs)로 분리
+  corePlugins: { preflight: false },
   theme: {
     extend: {
       colors: {

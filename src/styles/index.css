@@ -1,17 +1,13 @@
 @import "./fonts.css";
 
+/*
+ * 컴포넌트 스타일 + 디자인 토큰.
+ * preflight는 tailwind.config.cjs에서 꺼짐. @tailwind base는 utilities가 참조하는 --tw-* 기본값만 출력.
+ * 전역 리셋(preflight)과 body 스타일은 base.css에 따로 있음.
+ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer base {
-  * { @apply border-border; }
-  body { @apply bg-background text-foreground; }
-
-  @font-face {
-    font-family: 'Pretendard';
-  }
-}
 
 :root {
   --background: 0 0% 100%;

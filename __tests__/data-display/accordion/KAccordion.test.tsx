@@ -255,7 +255,7 @@ describe('KAccordion', () => {
     const chevron = trigger.querySelector('svg');
 
     // 닫힌 상태 (회전 없음)
-    expectNoClasses(chevron as HTMLElement, ['rotate-180']);
+    expectNoClasses(chevron as unknown as HTMLElement, ['rotate-180']);
 
     // 열기
     await user.click(trigger);

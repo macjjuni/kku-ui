@@ -1,18 +1,18 @@
-/// <reference types="vitest" />  // <-- 이 줄을 반드시 파일 최상단에 추가하세요.
+/// <reference types="vitest" />
 import path from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
-import compression from 'vite-plugin-compression2';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import dts from 'vite-plugin-dts';
+import pkg from './package.json';
+
+// dependencies/peerDependencies는 번들에 포함하지 않고 소비자 쪽에서 해석하도록 둔다 (서브패스 포함)
+const externalPackages = [...Object.keys(pkg.dependencies), ...Object.keys(pkg.peerDependencies)];
+const isExternal = (id: string) => externalPackages.some((name) => id === name || id.startsWith(`${name}/`));
 
 export default defineConfig({
   plugins: [
     react(),
-    compression({
-      include: [/\.(js)$/, /\.(scss)$/],
-      threshold: 1400,
-    }),
     tsconfigPaths({
       projects: ['tsconfig.json', 'tsconfig.esm.json'],
     }),
@@ -57,12 +57,8 @@ export default defineConfig({
       fileName: (format, entry) => `${format}/${entry}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime', 'lucide-react'],
+      external: isExternal,
       output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
         assetFileNames: 'index.css',
         entryFileNames: 'es/[name].js',
         chunkFileNames: 'es/chunks/[name]-[hash].js',

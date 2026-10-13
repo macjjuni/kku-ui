@@ -21,7 +21,7 @@ export interface KIconRefs {
   click: () => void;
 }
 
-export type KIconProps = ComponentPropsWithRef<'span'> & {
+export type KIconProps = Omit<ComponentPropsWithRef<'span'>, 'ref'> & {
   icon: string;
   size?: KIconSize | number;
   disabled?: boolean;

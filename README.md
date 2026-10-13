@@ -14,18 +14,30 @@
 ## 설치
 
 ```bash
-npm install kku-ui
+npm install kku-ui react react-dom lucide-react
 # or
-pnpm add kku-ui
+pnpm add kku-ui react react-dom lucide-react
 ```
+
+`react`, `react-dom`(19 이상)과 `lucide-react`는 peerDependency이므로 앱에 직접 설치해야 합니다.
 
 ## 사용법
 
 ### 1. 스타일 불러오기
 
 ```tsx
-import 'kku-ui/lib/index.css'
+// Tailwind를 쓰지 않는 앱: 전역 리셋(preflight) + 컴포넌트 스타일
+import 'kku-ui/base.css'
+import 'kku-ui/index.css'
+
+// Tailwind를 쓰는 앱: 앱의 preflight를 그대로 쓰고 컴포넌트 스타일만
+import 'kku-ui/index.css'
 ```
+
+| 파일 | 내용 |
+|---|---|
+| `kku-ui/index.css` | 디자인 토큰(CSS 변수), 폰트, 컴포넌트 스타일 |
+| `kku-ui/base.css` | Tailwind preflight, 기본 border 색상, `body` 배경·글자색 (선택) |
 
 ### 2. 컴포넌트 사용
 

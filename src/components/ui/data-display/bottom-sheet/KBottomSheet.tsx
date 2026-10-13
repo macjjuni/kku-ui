@@ -65,7 +65,7 @@ const KBottomSheetContent = ({ className, children, ref, ...props }: KBottomShee
         ref={ref}
         className={cn(
           'k-bottom-sheet__content',
-          'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background shadow-lg outline-none',
+          'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border border-border bg-background shadow-lg outline-none',
           size === 'sm' ? 'max-w-md mx-auto' : 'w-full',
           className,
         )}
