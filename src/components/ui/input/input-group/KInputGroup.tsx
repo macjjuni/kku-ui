@@ -7,7 +7,7 @@ const InputGroupContext = createContext<{ size?: KInputSizeType | null }>({ size
 
 const inputGroupVariants = cva(
   [
-    'k-input-group group/input-group relative flex w-full items-center rounded-md border border-input bg-background shadow-xs outline-none transition-all',
+    'k-input-group group/input-group relative flex w-full items-center rounded-md border border-input bg-background shadow-sm outline-none transition-all',
     'has-[>textarea]:h-auto',
     'focus-within:border-[hsl(var(--ring))] focus-within:z-10 focus-within:ring-0',
     'has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:focus-within:border-destructive',
@@ -147,7 +147,6 @@ function KInputGroupInput({ className, ...props }: KInputProps) {
     <KInput
       data-slot="input-group-control"
       size={size}
-      width="full"
       className={cn(
         'k-input-group__input flex-1 rounded-none border-0 bg-transparent shadow-none dark:bg-transparent',
         'focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:outline-none',

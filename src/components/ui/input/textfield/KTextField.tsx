@@ -39,6 +39,8 @@ export interface KTextFieldRefs {
 
 export interface KTextFieldProps extends Omit<ComponentProps<'input'>, 'size' | 'width' | 'ref'> {
   label?: string;
+  /** input 요소에 적용할 클래스 (className은 루트 컨테이너에 적용) */
+  inputClassName?: string;
   helperText?: string;
   rules?: KValidationRule[];
   width?: VariantProps<typeof textFieldVariants>['width'] | number;
@@ -51,6 +53,7 @@ const KTextField = (props: KTextFieldProps) => {
   const {
     id,
     className,
+    inputClassName,
     type,
     label,
     required,
@@ -132,7 +135,7 @@ const KTextField = (props: KTextFieldProps) => {
   return (
     <div className={containerClass} style={{ ...style, width: isNumberWidth ? (width as number) : style?.width }}>
       {label && (
-        <label htmlFor={inputId} className={cn('font-medium', size === 'sm' ? 'text-sm' : 'text-md')}>
+        <label htmlFor={inputId} className={cn('font-medium', size === 'sm' ? 'text-sm' : 'text-base')}>
           {label}
           {required && <span className="text-destructive ml-0.5">*</span>}
         </label>
@@ -149,7 +152,7 @@ const KTextField = (props: KTextFieldProps) => {
         className={cn(
           textFieldVariants({ width: isNumberWidth ? 'full' : (width as never) }),
           errorMessage && 'border-destructive focus-visible:ring-destructive',
-          className,
+          inputClassName,
         )}
       />
       {errorMessage ? (

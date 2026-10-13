@@ -117,12 +117,12 @@ describe('KDialog', () => {
     expect(screen.getByTestId('dialog-content')).toHaveClass('max-w-sm', 'p-4', 'gap-2', 'text-sm');
   });
 
-  it('size="md"일 때 content에 max-w-lg, p-6, gap-4, text-md 클래스가 적용되어야 한다 (기본값)', async () => {
+  it('size="md"일 때 content에 max-w-lg, p-6, gap-4, text-base 클래스가 적용되어야 한다 (기본값)', async () => {
     const { user } = renderWithUser(<DialogFixture size="md" />);
 
     await openDialog(user);
 
-    expect(screen.getByTestId('dialog-content')).toHaveClass('max-w-lg', 'p-6', 'gap-4', 'text-md');
+    expect(screen.getByTestId('dialog-content')).toHaveClass('max-w-lg', 'p-6', 'gap-4', 'text-base');
   });
   // endregion
 });

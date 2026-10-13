@@ -143,39 +143,6 @@ describe('useClickOutside', () => {
     removeEventListenerSpy.mockRestore();
     document.body.removeChild(element);
   });
-
-  it('리렌더링 시 이전 리스너를 제거하고 새 리스너를 등록해야 한다', () => {
-    const callback1 = vi.fn();
-    const callback2 = vi.fn();
-    const element = document.createElement('div');
-    document.body.appendChild(element);
-    const ref = { current: element } as RefObject<HTMLElement>;
-
-    const { rerender } = renderHook(({ cb }) => useClickOutside(ref, cb), { initialProps: { cb: callback1 } });
-    vi.runAllTimers();
-
-    // 외부 클릭 (callback1 호출)
-    const outsideElement = document.createElement('div');
-    document.body.appendChild(outsideElement);
-    outsideElement.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-
-    expect(callback1).toHaveBeenCalledTimes(1);
-    expect(callback2).not.toHaveBeenCalled();
-
-    // callback 변경 (하지만 hook의 deps에 callback이 없어서 이전 callback이 계속 사용됨)
-    rerender({ cb: callback2 });
-    vi.runAllTimers();
-
-    // 다시 외부 클릭 (여전히 callback1이 호출됨, callback은 deps에 없음)
-    outsideElement.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-
-    // useEffect deps에 callback이 없으므로 callback1이 계속 호출됨
-    expect(callback1).toHaveBeenCalledTimes(2);
-    expect(callback2).not.toHaveBeenCalled();
-
-    document.body.removeChild(element);
-    document.body.removeChild(outsideElement);
-  });
   // endregion
 
   // region [Edge Cases]
@@ -264,6 +231,46 @@ describe('useClickOutside', () => {
 
     document.body.removeChild(element);
     document.body.removeChild(outsideElement);
+  });
+  // endregion
+
+  // region [Regression Tests]
+  it('등록 타이머가 실행되기 전에 언마운트되면 리스너가 등록되지 않아야 한다', () => {
+    const callback = vi.fn();
+    const element = document.createElement('div');
+    document.body.appendChild(element);
+    const ref = { current: element } as RefObject<HTMLElement>;
+    const addEventListenerSpy = vi.spyOn(window, 'addEventListener');
+
+    const { unmount } = renderHook(() => useClickOutside(ref, callback));
+    unmount();
+    vi.runAllTimers();
+
+    expect(addEventListenerSpy).not.toHaveBeenCalledWith('mousedown', expect.any(Function));
+    document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+    expect(callback).not.toHaveBeenCalled();
+
+    addEventListenerSpy.mockRestore();
+    document.body.removeChild(element);
+  });
+
+  it('리렌더링으로 callback이 바뀌면 최신 callback이 호출되어야 한다', () => {
+    const firstCallback = vi.fn();
+    const secondCallback = vi.fn();
+    const element = document.createElement('div');
+    document.body.appendChild(element);
+    const ref = { current: element } as RefObject<HTMLElement>;
+
+    const { rerender } = renderHook(({ cb }) => useClickOutside(ref, cb), { initialProps: { cb: firstCallback } });
+    vi.runAllTimers();
+    rerender({ cb: secondCallback });
+
+    document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+
+    expect(firstCallback).not.toHaveBeenCalled();
+    expect(secondCallback).toHaveBeenCalledTimes(1);
+
+    document.body.removeChild(element);
   });
   // endregion
 });

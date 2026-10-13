@@ -1,5 +1,6 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { KToast, kToast } from '@/components/ui/feedback/toast/KToast';
+import { act, screen } from '@testing-library/react';
 import { renderWithUser } from '@/test-utils';
 
 describe('KToast', () => {
@@ -89,6 +90,30 @@ describe('KToast', () => {
         />,
       );
     }).not.toThrow();
+  });
+  // endregion
+
+  // region [Regression Tests]
+  it('toastOptions/style/className을 넘겨도 기본 스타일이 유지되어야 한다', async () => {
+    const { container } = renderWithUser(
+      <KToast
+        className="custom-toaster"
+        style={{ zIndex: 9999 }}
+        toastOptions={{ classNames: { toast: 'custom-toast' } }}
+      />,
+    );
+
+    act(() => {
+      kToast('토스트 메시지');
+    });
+
+    const toastEl = (await screen.findByText('토스트 메시지')).closest('[data-sonner-toast]');
+    expect(toastEl).toHaveClass('custom-toast', 'flex', 'items-center');
+
+    const toaster = container.ownerDocument.querySelector('.k-toast') as HTMLElement;
+    expect(toaster).toHaveClass('custom-toaster', 'toaster');
+    expect(toaster.style.getPropertyValue('--width')).toBe('280px');
+    expect(toaster.style.zIndex).toBe('9999');
   });
   // endregion
 });

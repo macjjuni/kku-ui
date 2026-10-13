@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { KSelect } from '@/components/ui/input/select/KSelect';
+import { createRef } from 'react';
+import { KSelect, type KSelectRefs } from '@/components/ui/input/select/KSelect';
 
 const mockOptions = [
   { label: '사과', value: 'apple' },
@@ -81,5 +82,17 @@ describe('KSelect Component', () => {
 
     // 2. 또는 RTL matchers 사용 (권장)
     expect(trigger).toHaveStyle({ width: '350px' });
+  });
+
+  it('비제어 모드에서 ref.value가 현재 선택값을 반환해야 한다', async () => {
+    const ref = createRef<KSelectRefs>();
+    render(<KSelect ref={ref} options={mockOptions} defaultValue="banana" />);
+
+    expect(ref.current?.value).toBe('banana');
+
+    fireEvent.click(screen.getByRole('combobox'));
+    fireEvent.click(await screen.findByRole('option', { name: '사과' }));
+
+    await waitFor(() => expect(ref.current?.value).toBe('apple'));
   });
 });

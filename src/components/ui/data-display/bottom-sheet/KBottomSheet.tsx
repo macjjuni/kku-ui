@@ -72,7 +72,7 @@ const KBottomSheetContent = ({ className, children, ref, ...props }: KBottomShee
         {...props}
       >
         <div className="mx-auto mt-4 h-1.5 w-12 rounded-full bg-muted" />
-        <div className={cn('grid w-full', size === 'sm' ? 'gap-2 p-4 text-sm' : 'gap-4 p-5 text-md')}>{children}</div>
+        <div className={cn('grid w-full', size === 'sm' ? 'gap-2 p-4 text-sm' : 'gap-4 p-5 text-base')}>{children}</div>
       </DrawerPrimitive.Content>
     </KBottomSheetPortal>
   );
