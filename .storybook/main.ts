@@ -2,15 +2,7 @@ import { mergeConfig } from 'vite';
 
 export default {
   stories: ['../src/**/*.stories.@(ts|tsx|js|jsx)'],
-  core: { builder: '@storybook/builder-vite' },
-  addons: [
-    '@storybook/addon-a11y',
-    '@storybook/addon-links',
-    '@chromatic-com/storybook',
-    'storybook-dark-mode',
-    '@storybook/addon-docs',
-    '@storybook/addon-themes',
-  ],
+  addons: ['@storybook/addon-a11y', '@storybook/addon-links', '@chromatic-com/storybook', '@storybook/addon-docs'],
   framework: { name: '@storybook/react-vite', options: {} },
   docs: {},
   async viteFinal(config: any) {
