@@ -1,12 +1,10 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-/* eslint-disable jsx-a11y/no-static-element-interactions  */
 
 import {
-  ComponentPropsWithRef,
-  CSSProperties,
-  KeyboardEvent,
+  type ComponentPropsWithRef,
+  type CSSProperties,
+  type KeyboardEvent,
   memo,
-  MouseEvent, Ref,
+  type MouseEvent, type Ref,
   useCallback,
   useImperativeHandle,
   useMemo,
@@ -111,6 +109,8 @@ const KIcon = (props: KIconProps) => {
   if (!icon) return null;
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: clickable 시 role/tabIndex/onKeyDown을 동적으로 부여
+    // biome-ignore lint/a11y/useAriaPropsSupportedByRole: role은 clickable 여부에 따라 동적으로 부여
     <span
       ref={internalRef}
       id={generatedId}

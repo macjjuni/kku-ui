@@ -101,7 +101,7 @@ module.exports = {
   },
   plugins: [
     require("tailwindcss-animate"),
-    function({ addUtilities }) {
+    ({ addUtilities }) => {
       addUtilities({
         '.focus-ring': {
           'outline': 'none',

@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 
 // region [Privates]
@@ -20,7 +20,6 @@ const KCardHeader = ({ className, ref, ...props }: KCardHeaderProps) => (
 );
 
 const KCardTitle = ({ className, ref, ...props }: KCardTitleProps) => (
-  // eslint-disable-next-line jsx-a11y/heading-has-content
   <h3 ref={ref} className={cn('font-semibold leading-none tracking-tight text-lg', className)} {...props} />
 );
 

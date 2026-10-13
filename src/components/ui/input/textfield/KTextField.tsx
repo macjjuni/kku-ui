@@ -1,7 +1,7 @@
-import { ChangeEvent, ComponentProps, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import { type ChangeEvent, type ComponentProps, type Ref, useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { KInput, KInputSizeType } from '@/components';
+import { KInput, type KInputSizeType } from '@/components';
 import { useStableId } from '@/common/hooks';
 
 const textFieldVariants = cva(
@@ -71,7 +71,6 @@ const KTextField = (props: KTextFieldProps) => {
     if (!rules) return true;
     const val = inputRef.current?.value || '';
 
-    // eslint-disable-next-line no-restricted-syntax
     for (const rule of rules) {
       const result = await rule(val);
       if (typeof result === 'string') {

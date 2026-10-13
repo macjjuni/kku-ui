@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 import { gotoStory } from '../../helpers/storybook';
-import { verifyAriaAttributes } from '../../helpers/interactions';
 import { checkA11y } from '../../helpers/accessibility';
 
 test.describe('KTextField E2E', () => {
@@ -44,8 +43,6 @@ test.describe('KTextField E2E', () => {
   test('should display error message when validation fails', async ({ page }) => {
     await gotoStory(page, 'input-textfield--validation');
 
-    // Find input by placeholder (from Validation story)
-    const input = page.getByPlaceholder('example@kku.com');
     const validateButton = page.getByRole('button', { name: /검증하기/i });
 
     // Leave input empty and validate

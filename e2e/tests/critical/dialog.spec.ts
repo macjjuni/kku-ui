@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { gotoStory } from '../../helpers/storybook';
-import { waitForPortal, verifyFocusTrap, verifyAriaAttributes } from '../../helpers/interactions';
+import { waitForPortal, verifyFocusTrap, } from '../../helpers/interactions';
 import { checkA11y } from '../../helpers/accessibility';
 
 test.describe('KDialog E2E', () => {

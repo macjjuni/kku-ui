@@ -207,7 +207,9 @@ describe('KNumberStepper', () => {
     const buttons = screen.getAllByRole('button');
 
     expectDisabled(input as HTMLElement);
-    buttons.forEach((btn) => expect(btn).toBeDisabled());
+    buttons.forEach((btn) => {
+      expect(btn).toBeDisabled();
+    });
   });
 
   it('disabled 시 + 버튼 클릭해도 값이 변하지 않아야 한다', async () => {

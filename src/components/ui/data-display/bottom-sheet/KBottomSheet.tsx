@@ -1,4 +1,4 @@
-import { createContext, useContext, HTMLAttributes } from 'react';
+import { createContext, useContext, type HTMLAttributes } from 'react';
 import { Drawer as DrawerPrimitive } from 'vaul';
 import { cn } from '@/lib/utils';
 

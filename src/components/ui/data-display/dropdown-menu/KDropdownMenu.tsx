@@ -1,4 +1,4 @@
-import { createContext, HTMLAttributes, useContext } from 'react';
+import { createContext, type HTMLAttributes, useContext } from 'react';
 import * as KDropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { Check, ChevronRight, Circle } from 'lucide-react';
 import { cva } from 'class-variance-authority';
@@ -56,10 +56,10 @@ const KDropdownMenu = ({ size = 'md', ...props }: KDropdownMenuProps) => (
   </KDropdownContext.Provider>
 );
 
-const KDropdownMenuTrigger = ({ id, className, ref, ...props }: KDropdownMenuTriggerProps) => (
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  <KDropdownMenuPrimitive.Trigger ref={ref} id={id || useStableId()} className={cn('k-dropdown-menu__trigger', className)} {...props} />
-);
+const KDropdownMenuTrigger = ({ id, className, ref, ...props }: KDropdownMenuTriggerProps) => {
+  const stableId = useStableId();
+  return <KDropdownMenuPrimitive.Trigger ref={ref} id={id || stableId} className={cn('k-dropdown-menu__trigger', className)} {...props} />;
+};
 
 const KDropdownMenuGroup = ({ className, ref, ...props }: KDropdownMenuGroupProps) => (
   <KDropdownMenuPrimitive.Group ref={ref} className={cn('k-dropdown-menu__group', className)} {...props} />

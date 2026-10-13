@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useRef } from 'react';
-import { KTextField, KTextFieldRefs } from './KTextField';
+import { KTextField, type KTextFieldRefs } from './KTextField';
 
 const meta: Meta<typeof KTextField> = {
   title: 'Input/TextField',

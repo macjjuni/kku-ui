@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { KButton, KButtonProps } from '@/components';
+import { KButton, type KButtonProps } from '@/components';
 
 const meta: Meta<typeof KButton> = {
   title: 'Actions/Button',

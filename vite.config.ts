@@ -1,21 +1,15 @@
 /// <reference types="vitest" />  // <-- 이 줄을 반드시 파일 최상단에 추가하세요.
-import path from 'path';
+import path from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import compression from 'vite-plugin-compression2';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import eslint from 'vite-plugin-eslint';
 import dts from 'vite-plugin-dts';
 
 
 export default defineConfig({
   plugins: [
     react(),
-    eslint({
-      cache: false,
-      include: ['src/**/*.ts', 'src/**/*.tsx'],
-      exclude: ['/virtual:/**', 'node_modules/**'],
-    }),
     compression({
       include: [/\.(js)$/, /\.(scss)$/],
       threshold: 1400,

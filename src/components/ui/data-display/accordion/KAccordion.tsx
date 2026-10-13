@@ -1,4 +1,4 @@
-import { createContext, useContext, ComponentPropsWithRef } from 'react';
+import { createContext, useContext, type ComponentPropsWithRef } from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 import { cva } from 'class-variance-authority';

@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this, @typescript-eslint/no-unused-vars, @typescript-eslint/lines-between-class-members */
 import '@testing-library/jest-dom'
 
 class ResizeObserver {
@@ -14,9 +13,9 @@ Object.defineProperty(globalThis, 'ResizeObserver', {
 });
 
 // Mock Pointer Capture API for vaul (Drawer) - jsdom does not implement these
-HTMLElement.prototype.setPointerCapture = function() {};
-HTMLElement.prototype.releasePointerCapture = function() {};
-HTMLElement.prototype.hasPointerCapture = function() { return false; };
+HTMLElement.prototype.setPointerCapture = () => {};
+HTMLElement.prototype.releasePointerCapture = () => {};
+HTMLElement.prototype.hasPointerCapture = () => false;
 
 // Mock getComputedStyle().transform for vaul's getTranslate() - jsdom returns '' (falsy)
 // which causes vaul to fall through to webkitTransform (undefined), then crash on .match()

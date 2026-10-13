@@ -1,6 +1,6 @@
 import esbuild from 'esbuild';
 import AnalyzerPlugin from 'esbuild-analyzer';
-import fs from 'fs';
+import fs from 'node:fs';
 
 esbuild.build({
   entryPoints: ['lib/es/index.js'],

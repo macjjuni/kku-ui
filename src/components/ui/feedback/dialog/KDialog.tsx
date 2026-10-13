@@ -1,6 +1,6 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
-import { HTMLAttributes, createContext, useContext } from "react"
+import { type HTMLAttributes, createContext, useContext } from "react"
 import { cn } from "@/lib/utils"
 
 export interface KDialogContextType {

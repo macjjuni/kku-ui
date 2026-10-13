@@ -1,7 +1,7 @@
-import { ComponentProps, createContext, useContext } from 'react';
+import { type ComponentProps, createContext, useContext } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { KButton, KTextarea, KInput, KInputProps, KInputSizeType } from '@/components';
+import { KButton, KTextarea, KInput, type KInputProps, type KInputSizeType } from '@/components';
 
 const InputGroupContext = createContext<{ size?: KInputSizeType | null }>({ size: 'md' });
 
@@ -78,7 +78,7 @@ function KInputGroupAddon({
 }: ComponentProps<'div'> & VariantProps<typeof inputGroupAddonVariants>) {
   const { size } = useContext(InputGroupContext);
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
+    // biome-ignore lint/a11y/useKeyWithClickEvents: addon 클릭 시 input 포커스 위임용 (키보드는 input에서 처리)
     <div
       role="group"
       data-slot="input-group-addon"

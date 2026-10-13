@@ -110,9 +110,7 @@ export const Selection: Story = {
   },
   render: (args) => {
     const { size } = args;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [showStatusBar, setShowStatusBar] = useState(true);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [position, setPosition] = useState("bottom");
 
     return (

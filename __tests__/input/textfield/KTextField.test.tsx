@@ -2,7 +2,7 @@ import { act, createRef } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import { KTextField, KTextFieldRefs } from '@/components/ui/input/textfield/KTextField';
+import { KTextField, type KTextFieldRefs } from '@/components/ui/input/textfield/KTextField';
 
 describe('KSelect 컴포넌트 테스트', () => {
 

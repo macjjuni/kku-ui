@@ -3,7 +3,7 @@
  * WCAG 2.1 AA 기준 검증 헬퍼
  */
 
-import { type UserEvent } from '@testing-library/user-event';
+import type { UserEvent } from '@testing-library/user-event';
 import { waitFor } from '@testing-library/react';
 import { expect } from 'vitest';
 
@@ -37,7 +37,6 @@ export async function testKeyboardNavigation(
     expect(element).toHaveFocus();
   }
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const key of keys) {
     await user.keyboard(`{${key}}`);
     if (expectAction) {
@@ -59,7 +58,6 @@ export async function testTabOrder(
   elements: HTMLElement[],
   user: UserEvent,
 ) {
-  // eslint-disable-next-line no-restricted-syntax
   for (const element of elements) {
     await user.tab();
     expect(element).toHaveFocus();
@@ -82,7 +80,6 @@ export async function testShiftTabOrder(
   // 마지막 요소로 이동
   elements[0].focus();
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const element of elements) {
     expect(element).toHaveFocus();
     await user.tab({ shift: true });

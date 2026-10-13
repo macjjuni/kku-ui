@@ -1,4 +1,4 @@
-import { HTMLAttributes, memo, Ref, useMemo } from 'react';
+import { type HTMLAttributes, memo, type Ref, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
 export type KAspectRatioProps = HTMLAttributes<HTMLDivElement> & {

@@ -10,7 +10,7 @@ import {
   KBottomSheetDescription,
   KBottomSheetClose,
 } from '@/components/ui/data-display/bottom-sheet/KBottomSheet';
-import { renderWithUser, waitForPortalRender } from '@/test-utils';
+import { renderWithUser, } from '@/test-utils';
 
 const BottomSheetExample = ({ size = 'md' }: { size?: 'sm' | 'md' }) => (
   <KBottomSheet size={size}>

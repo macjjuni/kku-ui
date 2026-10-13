@@ -5,7 +5,8 @@
 
 ## Commands
 - `pnpm sb`: Storybook (Port 6006) / `pnpm build-storybook`: SB build
-- `pnpm build`: Build `lib/` (Vitest → Vite)
+- `pnpm build`: Build `lib/` (Biome lint → Vitest → Vite)
+- `pnpm lint` / `pnpm check` / `pnpm check:fix` / `pnpm format`: Biome (`biome.json`)
 - `pnpm publish`: NPM public access
 - `pnpm test`: Vitest (jsdom) / `pnpm test-ui`
 - `pnpm chromatic`: Visual regression tests

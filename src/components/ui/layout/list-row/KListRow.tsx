@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import * as Separator from '@radix-ui/react-separator';
 import { ChevronRight } from 'lucide-react';
@@ -57,7 +57,8 @@ const KListRow = ({
   onClick,
   className,
 }: KListRowProps) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex
+  // biome-ignore lint/a11y/useKeyWithClickEvents: 기존 동작 유지
+  // biome-ignore lint/a11y/noStaticElementInteractions: 기존 동작 유지
   <div tabIndex={onClick ? 0 : -1} onClick={onClick}
        className={cn(
          'group bg-background first:border-t last:border-b first:rounded-t-xl last:rounded-b-xl border-x border-border',

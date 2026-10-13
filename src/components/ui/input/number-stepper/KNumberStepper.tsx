@@ -1,4 +1,4 @@
-import { ChangeEvent, CSSProperties, FocusEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { type ChangeEvent, type CSSProperties, type FocusEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { Minus, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { KInput } from '@/components';

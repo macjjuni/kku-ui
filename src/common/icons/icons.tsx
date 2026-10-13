@@ -1,10 +1,5 @@
-/* eslint-disable max-len */
-/* eslint-disable react/jsx-first-prop-new-line */
-/* eslint-disable @typescript-eslint/comma-dangle */
-/* eslint-disable @typescript-eslint/quotes */
-/* eslint-disable react/jsx-max-props-per-line */
 
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 
 interface Icons {

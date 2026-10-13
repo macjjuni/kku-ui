@@ -1,5 +1,5 @@
-import { Children, cloneElement, isValidElement, ReactNode, useMemo } from 'react';
-import { KButtonProps, KButtonWidthType } from '@/components';
+import { Children, cloneElement, isValidElement, type ReactNode, useMemo } from 'react';
+import type { KButtonProps, KButtonWidthType } from '@/components';
 import { cn } from '@/lib/utils';
 
 export interface KButtonGroupProps extends Pick<KButtonProps, 'variant' | 'size' | 'disabled'> {
