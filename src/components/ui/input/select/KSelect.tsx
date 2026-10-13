@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef, forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
+import { type ComponentPropsWithoutRef, forwardRef, useCallback, useImperativeHandle, useMemo, useState } from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
@@ -79,6 +79,7 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
   const {
     options,
     value,
+    defaultValue,
     onChange,
     placeholder,
     className,
@@ -109,17 +110,28 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
     [width, isNumericWidth],
   );
 
-  useImperativeHandle(ref, () => ({ value }));
+  // 비제어 모드에서도 ref.value가 현재 선택값을 반환하도록 내부 값을 추적
+  const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
+  const currentValue = value !== undefined ? value : uncontrolledValue;
+
+  useImperativeHandle(ref, () => ({ value: currentValue }), [currentValue]);
 
   const handleValueChange = useCallback(
     (val: KSelectValue) => {
+      setUncontrolledValue(val);
       onChange?.(val);
     },
     [onChange],
   );
 
   return (
-    <SelectPrimitive.Root value={value} onValueChange={handleValueChange} disabled={disabled} {...rest}>
+    <SelectPrimitive.Root
+      value={value}
+      defaultValue={defaultValue}
+      onValueChange={handleValueChange}
+      disabled={disabled}
+      {...rest}
+    >
       <SelectPrimitive.Trigger
         id={selectId}
         style={triggerStyle}

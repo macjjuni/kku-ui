@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { useState } from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import { StrictMode, useState } from 'react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { KNumberStepper } from '@/components/ui/input/number-stepper/KNumberStepper';
 import { renderWithUser, expectClasses, expectDisabled } from '@/test-utils';
 
@@ -26,6 +26,15 @@ describe('KNumberStepper', () => {
 
     const input = screen.getByRole('textbox') as HTMLInputElement;
     expect(input.value).toBe('0');
+  });
+
+  it('비제어 모드의 초기값은 min/max 범위로 맞춰져야 한다', () => {
+    const { unmount } = render(<KNumberStepper min={1} />);
+    expect((screen.getByRole('textbox') as HTMLInputElement).value).toBe('1');
+    unmount();
+
+    render(<KNumberStepper min={-10} max={-5} />);
+    expect((screen.getByRole('textbox') as HTMLInputElement).value).toBe('-5');
   });
 
   it('value prop으로 초기값을 설정할 수 있어야 한다', () => {
@@ -199,6 +208,57 @@ describe('KNumberStepper', () => {
     const updatedInput = screen.getByRole('textbox') as HTMLInputElement;
     expect(Number(updatedInput.value)).toBe(10);
   });
+
+  it('입력 중에는 min 미만이어도 클램핑하지 않아야 한다 (min=10에서 50 입력)', async () => {
+    const handleChange = vi.fn();
+    const Stepper = () => {
+      const [val, setVal] = useState(20);
+      return (
+        <KNumberStepper
+          value={val}
+          min={10}
+          onChange={(v) => {
+            setVal(v);
+            handleChange(v);
+          }}
+        />
+      );
+    };
+    const { user } = renderWithUser(<Stepper />);
+
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    await user.clear(input);
+    await user.type(input, '5');
+    expect(input.value).toBe('5');
+
+    await user.type(input, '0');
+    expect(input.value).toBe('50');
+    expect(handleChange).toHaveBeenLastCalledWith(50);
+    expect(handleChange).not.toHaveBeenCalledWith(10);
+  });
+
+  it('min 미만 값을 입력하고 blur하면 min으로 클램핑되어야 한다', async () => {
+    const { user } = renderWithUser(<ControlledStepper initial={20} min={10} />);
+
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    await user.clear(input);
+    await user.type(input, '5');
+    await user.tab();
+
+    await waitFor(() => expect(input.value).toBe('10'));
+  });
+
+  it('제어 모드에서 입력값을 모두 지워도 blur 전까지 빈 값이 유지되어야 한다', async () => {
+    const { user } = renderWithUser(<ControlledStepper initial={7} />);
+
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    await user.click(input);
+    await user.keyboard('{End}{Backspace}');
+    expect(input.value).toBe('');
+
+    await user.type(input, '3');
+    expect(input.value).toBe('3');
+  });
   // endregion
 
   // region [Disabled State Tests]
@@ -291,6 +351,54 @@ describe('KNumberStepper', () => {
 
     const wrapper = container.firstChild as HTMLElement;
     expect(wrapper).toHaveStyle({ opacity: '0.5' });
+  });
+  // endregion
+
+  // region [Stepper Regression Tests]
+  it('StrictMode에서 + 버튼 1회 클릭 시 onChange가 1번만 호출되어야 한다', () => {
+    const handleChange = vi.fn();
+    render(
+      <StrictMode>
+        <KNumberStepper value={0} onChange={handleChange} />
+      </StrictMode>,
+    );
+
+    const [, plusBtn] = screen.getAllByRole('button');
+    fireEvent.mouseDown(plusBtn);
+    fireEvent.mouseUp(plusBtn);
+
+    expect(handleChange).toHaveBeenCalledTimes(1);
+    expect(handleChange).toHaveBeenCalledWith(1);
+  });
+
+  it('버튼을 길게 누르면 값이 연속으로 증가하고 max에서 멈춰야 한다', () => {
+    vi.useFakeTimers();
+    const handleChange = vi.fn();
+    const Stepper = () => {
+      const [val, setVal] = useState(0);
+      return (
+        <KNumberStepper
+          value={val}
+          max={5}
+          onChange={(v) => {
+            setVal(v);
+            handleChange(v);
+          }}
+        />
+      );
+    };
+    render(<Stepper />);
+
+    const [, plusBtn] = screen.getAllByRole('button');
+    fireEvent.mouseDown(plusBtn);
+    act(() => {
+      vi.advanceTimersByTime(500 + 80 * 10);
+    });
+    fireEvent.mouseUp(plusBtn);
+    vi.useRealTimers();
+
+    expect((screen.getByRole('textbox') as HTMLInputElement).value).toBe('5');
+    expect(handleChange.mock.calls.map(([v]) => v)).toEqual([1, 2, 3, 4, 5]);
   });
   // endregion
 });

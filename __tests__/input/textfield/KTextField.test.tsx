@@ -111,4 +111,16 @@ describe('KSelect 컴포넌트 테스트', () => {
     expect(textFieldRef.current?.value).toBe('initial updated');
   });
   // endregion
+
+  // region [ClassName Tests]
+  it('className은 루트 컨테이너에만, inputClassName은 input에만 적용되어야 한다', () => {
+    const { container } = render(<KTextField className="root-class" inputClassName="input-class" />);
+
+    const input = screen.getByRole('textbox');
+    expect(container.firstElementChild).toHaveClass('root-class');
+    expect(container.firstElementChild).not.toHaveClass('input-class');
+    expect(input).toHaveClass('input-class');
+    expect(input).not.toHaveClass('root-class');
+  });
+  // endregion
 });

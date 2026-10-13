@@ -14,18 +14,30 @@
 ## 설치
 
 ```bash
-npm install kku-ui
+npm install kku-ui react react-dom lucide-react
 # or
-pnpm add kku-ui
+pnpm add kku-ui react react-dom lucide-react
 ```
+
+`react`, `react-dom`(19 이상)과 `lucide-react`는 peerDependency이므로 앱에 직접 설치해야 합니다.
 
 ## 사용법
 
 ### 1. 스타일 불러오기
 
 ```tsx
-import 'kku-ui/lib/index.css'
+// Tailwind를 쓰지 않는 앱: 전역 리셋(preflight) + 컴포넌트 스타일
+import 'kku-ui/base.css'
+import 'kku-ui/index.css'
+
+// Tailwind를 쓰는 앱: 앱의 preflight를 그대로 쓰고 컴포넌트 스타일만
+import 'kku-ui/index.css'
 ```
+
+| 파일 | 내용 |
+|---|---|
+| `kku-ui/index.css` | 디자인 토큰(CSS 변수), 폰트, 컴포넌트 스타일 |
+| `kku-ui/base.css` | Tailwind preflight, 기본 border 색상, `body` 배경·글자색 (선택) |
 
 ### 2. 컴포넌트 사용
 
@@ -128,6 +140,33 @@ CSS 변수로 테마를 덮어쓸 수 있습니다:
 ```
 
 모든 컴포넌트는 `className` prop으로 Tailwind 클래스를 추가할 수 있습니다.
+
+### 폰트
+
+`kku-ui/index.css`를 import하면 기본 폰트로 **Pretendard**(Regular/Medium/Bold)가 `body`에 자동 적용됩니다. 별도 폰트 설정이 필요 없습니다.
+
+다른 폰트를 쓰려면 `--font-sans` 변수를 덮어쓰면 됩니다. Portal로 렌더링되는 Dialog, Dropdown, Toast 등에도 함께 적용됩니다 CSS import 순서나 다크모드와 관계없이 앱의 `:root` 선언이 우선 적용됩니다.
+
+```css
+:root {
+  --font-sans: 'Noto Sans KR', sans-serif;
+}
+```
+
+Next.js의 `next/font`를 쓰는 경우 `body`에 폰트 클래스를 지정하거나 변수로 연결합니다.
+
+```tsx
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+// <html className={inter.variable}>
+```
+
+```css
+:root {
+  --font-sans: var(--font-inter), sans-serif;
+}
+```
+
+다른 폰트로 덮어쓰면 Pretendard 파일은 다운로드되지 않습니다.
 
 ---
 

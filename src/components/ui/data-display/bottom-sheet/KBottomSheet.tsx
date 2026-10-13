@@ -65,14 +65,14 @@ const KBottomSheetContent = ({ className, children, ref, ...props }: KBottomShee
         ref={ref}
         className={cn(
           'k-bottom-sheet__content',
-          'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background shadow-lg outline-none',
+          'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border border-border bg-background shadow-lg outline-none',
           size === 'sm' ? 'max-w-md mx-auto' : 'w-full',
           className,
         )}
         {...props}
       >
         <div className="mx-auto mt-4 h-1.5 w-12 rounded-full bg-muted" />
-        <div className={cn('grid w-full', size === 'sm' ? 'gap-2 p-4 text-sm' : 'gap-4 p-5 text-md')}>{children}</div>
+        <div className={cn('grid w-full', size === 'sm' ? 'gap-2 p-4 text-sm' : 'gap-4 p-5 text-base')}>{children}</div>
       </DrawerPrimitive.Content>
     </KBottomSheetPortal>
   );

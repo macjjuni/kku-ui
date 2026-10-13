@@ -57,3 +57,6 @@ EsbuildAnalyzer.html
 playwright-report/
 test-results/
 /playwright/.cache/
+
+# TypeScript
+*.tsbuildinfo

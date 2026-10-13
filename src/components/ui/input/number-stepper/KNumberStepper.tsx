@@ -46,9 +46,12 @@ const KNumberStepper = (props: KNumberStepperProps) => {
     onBlur,
   } = props;
 
-  const [internalValue, setInternalValue] = useState<string>(
-    controlledValue !== undefined ? controlledValue.toString() : '0',
+  // 비제어 모드의 초기값은 0을 [min, max] 범위로 맞춘 값
+  const [internalValue, setInternalValue] = useState<string>(() =>
+    (controlledValue !== undefined ? controlledValue : Math.min(Math.max(0, min), max)).toString(),
   );
+  // 길게 누르기(setInterval) 중에도 최신 값을 읽기 위한 ref
+  const internalValueRef = useRef(internalValue);
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -85,24 +88,17 @@ const KNumberStepper = (props: KNumberStepperProps) => {
       if (disabled) return;
       const inputValue = e.target.value;
 
-      if (inputValue === '') {
-        setInternalValue('');
-        return;
-      }
-
       if (!/^-?\d*\.?\d*$/.test(inputValue)) return;
 
-      if (inputValue === '-' || inputValue === '.' || inputValue.endsWith('.')) {
-        setInternalValue(inputValue);
-        return;
-      }
+      // '', '-', '1.' 같은 미완성 값도 포함해 입력 중에는 범위를 강제하지 않고 그대로 보여준다 (clamp는 blur 시점에 처리)
+      setInternalValue(inputValue);
 
       const numValue = parseFloat(inputValue);
-      if (!Number.isNaN(numValue)) {
-        triggerChange(numValue);
+      if (!Number.isNaN(numValue) && numValue >= min && numValue <= max && numValue !== controlledValue) {
+        onChange?.(numValue);
       }
     },
-    [disabled, triggerChange],
+    [disabled, min, max, controlledValue, onChange],
   );
 
   const handleBlur = useCallback(
@@ -120,24 +116,21 @@ const KNumberStepper = (props: KNumberStepperProps) => {
     (direction: 'plus' | 'minus') => {
       if (disabled) return;
 
-      setInternalValue((prev) => {
-        const currentNum = parseFloat(prev) || 0;
-        const nextNum = direction === 'plus' ? currentNum + step : currentNum - step;
-        const precision = getStepPrecision();
-        const clampedValue = Math.min(Math.max(nextNum, min), max);
-        const fixedNumber = parseFloat(clampedValue.toFixed(precision));
+      // setState updater 안에서 onChange를 호출하면 StrictMode에서 updater가 두 번 실행되어 중복 호출되므로 updater 밖에서 계산
+      const currentNum = parseFloat(internalValueRef.current) || 0;
+      const nextNum = direction === 'plus' ? currentNum + step : currentNum - step;
+      const precision = getStepPrecision();
+      const clampedValue = Math.min(Math.max(nextNum, min), max);
+      const fixedNumber = parseFloat(clampedValue.toFixed(precision));
 
-        // 비동기 틱으로 부모 업데이트 실행하여 렌더링 중 setState 에러 방지
-        setTimeout(() => {
-          if (onChange && fixedNumber !== controlledValue) {
-            onChange(fixedNumber);
-          }
-        }, 0);
+      internalValueRef.current = fixedNumber.toString();
+      setInternalValue(internalValueRef.current);
 
-        return fixedNumber.toString();
-      });
+      if (fixedNumber !== currentNum) {
+        onChange?.(fixedNumber);
+      }
     },
-    [disabled, step, min, max, getStepPrecision, onChange, controlledValue],
+    [disabled, step, min, max, getStepPrecision, onChange],
   );
 
   const stopStepper = useCallback(() => {
@@ -171,13 +164,14 @@ const KNumberStepper = (props: KNumberStepperProps) => {
 
   // region [Life Cycles]
   useEffect(() => {
-    if (controlledValue !== undefined) {
-      const currentInternalNum = parseFloat(internalValue);
-      if (controlledValue !== currentInternalNum) {
-        setInternalValue(controlledValue.toString());
-      }
-    }
-  }, [controlledValue, internalValue]);
+    internalValueRef.current = internalValue;
+  }, [internalValue]);
+
+  // 부모의 value가 바뀔 때만 동기화 (입력 중인 미완성/범위 밖 값을 덮어쓰지 않도록 internalValue는 deps에서 제외)
+  useEffect(() => {
+    if (controlledValue === undefined) return;
+    setInternalValue((prev) => (parseFloat(prev) === controlledValue ? prev : controlledValue.toString()));
+  }, [controlledValue]);
 
   useEffect(() => {
     return () => stopStepper();

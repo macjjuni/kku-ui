@@ -44,7 +44,8 @@ Every region name in React/Vue components **must** be enclosed in square bracket
 - **Alias**: `@/` -> `src/`.
 - **Theme**: HSL-based CSS variables, `.focus-ring` utility.
 - **Dark Mode**: Class-based (`darkMode: ['class']`).
-- **External**: `react`, `react-dom`, `lucide-react`.
+- **External**: `dependencies` + `peerDependencies` 전체 (peer: `react`, `react-dom`, `lucide-react`).
+- **CSS**: `index.css`(토큰+컴포넌트, preflight 없음) / `base.css`(preflight+body, `tailwind.base.config.cjs`).
 
 ## Notes
 - Maintain **A11y** & **SSR** compatibility (`suppressHydrationWarning`).

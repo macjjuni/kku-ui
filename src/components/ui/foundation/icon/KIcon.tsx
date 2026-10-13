@@ -21,7 +21,7 @@ export interface KIconRefs {
   click: () => void;
 }
 
-export type KIconProps = ComponentPropsWithRef<'span'> & {
+export type KIconProps = Omit<ComponentPropsWithRef<'span'>, 'ref'> & {
   icon: string;
   size?: KIconSize | number;
   disabled?: boolean;
@@ -87,7 +87,10 @@ const KIcon = (props: KIconProps) => {
 
   const currentIcon = useMemo(() => {
     if (!icon) return null;
-    return getIcon(icon, color);
+
+    const iconNode = getIcon(icon, color);
+    if (!iconNode) console.warn(`[KIcon]: 등록되지 않은 아이콘입니다. icon: ${icon}`);
+    return iconNode;
   }, [icon, color]);
   // endregion
 
@@ -104,7 +107,7 @@ const KIcon = (props: KIconProps) => {
   );
   // endregion
 
-  if (!icon) return null;
+  if (!currentIcon) return null;
 
   return (
     // biome-ignore lint/a11y/noStaticElementInteractions: clickable 시 role/tabIndex/onKeyDown을 동적으로 부여

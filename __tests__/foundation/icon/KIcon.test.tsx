@@ -342,4 +342,19 @@ describe('KIcon', () => {
     expect(icon).toHaveAttribute('data-custom', 'value');
   });
   // endregion
+
+  // region [Unknown Icon Tests]
+  it('등록되지 않은 아이콘이면 에러 없이 null을 렌더링하고 경고를 출력해야 한다', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const { container } = renderWithUser(<KIcon icon="not-exist-icon" />);
+    expect(container.querySelector('.k-icon')).not.toBeInTheDocument();
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('not-exist-icon'));
+
+    renderWithUser(<KIcon icon="toString" />);
+    expect(container.ownerDocument.querySelector('.k-icon')).not.toBeInTheDocument();
+
+    warnSpy.mockRestore();
+  });
+  // endregion
 });

@@ -811,13 +811,12 @@ const kIcons: Icons = {
 } as const;
 
 const getIcon = (iconName: string, color?: string): ReactNode | null => {
-  const targetIcon = kIcons[iconName](color);
-
-  if (targetIcon) {
-    return targetIcon;
+  // 'toString' 같은 프로토타입 키가 매칭되지 않도록 own property만 허용
+  if (!Object.hasOwn(kIcons, iconName)) {
+    return null;
   }
 
-  return null;
+  return kIcons[iconName](color);
 };
 
 export { kIcons, getIcon };

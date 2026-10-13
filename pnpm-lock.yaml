@@ -41,24 +41,12 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
-      lucide-react:
-        specifier: ^0.562.0
-        version: 0.562.0(react@19.2.3)
-      react:
-        specifier: ^19.2.3
-        version: 19.2.3
-      react-dom:
-        specifier: ^19.2.3
-        version: 19.2.3(react@19.2.3)
       sonner:
         specifier: ^2.0.7
         version: 2.0.7(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.4.0
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.19)
       vaul:
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -114,9 +102,6 @@ importers:
       '@vitest/ui':
         specifier: ^3.1.2
         version: 3.2.4(vitest@3.2.4)
-      add:
-        specifier: ^2.0.6
-        version: 2.0.6
       autoprefixer:
         specifier: ^10.4.23
         version: 10.4.23(postcss@8.5.6)
@@ -126,12 +111,21 @@ importers:
       jsdom:
         specifier: ^26.1.0
         version: 26.1.0
+      lucide-react:
+        specifier: ^0.562.0
+        version: 0.562.0(react@19.2.3)
       postcss:
         specifier: ^8.5.6
         version: 8.5.6
+      react:
+        specifier: ^19.2.3
+        version: 19.2.3
       react-docgen-typescript:
         specifier: ^2.4.0
         version: 2.4.0(typescript@5.3.3)
+      react-dom:
+        specifier: ^19.2.3
+        version: 19.2.3(react@19.2.3)
       sass:
         specifier: ^1.86.3
         version: 1.97.1
@@ -141,6 +135,9 @@ importers:
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.19
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.4.19)
       ts-node:
         specifier: ^10.9.1
         version: 10.9.2(@swc/core@1.15.7)(@types/node@25.2.3)(typescript@5.3.3)
@@ -150,9 +147,6 @@ importers:
       vite:
         specifier: ^6.3.5
         version: 6.4.1(@types/node@25.2.3)(jiti@1.21.7)(sass@1.97.1)(terser@5.44.1)
-      vite-plugin-compression2:
-        specifier: ^2.2.0
-        version: 2.4.0(rollup@4.44.2)
       vite-plugin-dts:
         specifier: ^4.5.4
         version: 4.5.4(@types/node@25.2.3)(rollup@4.44.2)(typescript@5.3.3)(vite@6.4.1(@types/node@25.2.3)(jiti@1.21.7)(sass@1.97.1)(terser@5.44.1))
@@ -1831,9 +1825,6 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  add@2.0.6:
-    resolution: {integrity: sha512-j5QzrmsokwWWp6kUcJQySpbG+xfOBqqKnup3OIk1pz+kB/80SLorZ9V8zHFLO92Lcd+hbvq8bT+zOGoPkmBV0Q==}
-
   agent-base@7.1.4:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
     engines: {node: '>= 14'}
@@ -2974,9 +2965,6 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
-  tar-mini@0.2.0:
-    resolution: {integrity: sha512-+qfUHz700DWnRutdUsxRRVZ38G1Qr27OetwaMYTdg8hcPxf46U0S1Zf76dQMWRBmusOt2ZCK5kbIaiLkoGO7WQ==}
-
   terser@5.44.1:
     resolution: {integrity: sha512-t/R3R/n0MSwnnazuPpPNVO60LX0SKL45pyl9YlvxIdkH0Of7D5qM2EVe+yASRIlY5pZ73nclYJfNANGWPwFDZw==}
     engines: {node: '>=10'}
@@ -3153,9 +3141,6 @@ packages:
     resolution: {integrity: sha512-EbKSKh+bh1E1IFxeO0pg1n4dvoOTt0UDiXMd/qn++r98+jPO1xtJilvXldeuQ8giIB5IkpjCgMleHMNEsGH6pg==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
-
-  vite-plugin-compression2@2.4.0:
-    resolution: {integrity: sha512-8J4CBF1+dM1I06azba/eXJuJHinLF0Am7lUvRH8AZpu0otJoBaDEnxrIEr5iPZJSwH0AEglJGYCveh7pN52jCg==}
 
   vite-plugin-dts@4.5.4:
     resolution: {integrity: sha512-d4sOM8M/8z7vRXHHq/ebbblfaxENjogAAekcfcDCCwAyvGqnPrc7f4NZbvItS+g4WTgerW0xDwSz5qz11JT3vg==}
@@ -4871,8 +4856,6 @@ snapshots:
 
   acorn@8.15.0: {}
 
-  add@2.0.6: {}
-
   agent-base@7.1.4: {}
 
   ajv-draft-04@1.0.0(ajv@8.13.0):
@@ -5985,8 +5968,6 @@ snapshots:
       - tsx
       - yaml
 
-  tar-mini@0.2.0: {}
-
   terser@5.44.1:
     dependencies:
       '@jridgewell/source-map': 0.3.11
@@ -6161,13 +6142,6 @@ snapshots:
       - terser
       - tsx
       - yaml
-
-  vite-plugin-compression2@2.4.0(rollup@4.44.2):
-    dependencies:
-      '@rollup/pluginutils': 5.3.0(rollup@4.44.2)
-      tar-mini: 0.2.0
-    transitivePeerDependencies:
-      - rollup
 
   vite-plugin-dts@4.5.4(@types/node@25.2.3)(rollup@4.44.2)(typescript@5.3.3)(vite@6.4.1(@types/node@25.2.3)(jiti@1.21.7)(sass@1.97.1)(terser@5.44.1)):
     dependencies:

@@ -153,9 +153,6 @@ export const AccordionItems: Story = {
         value="device"
         label="연결된 기기"
         icon={<Smartphone className="w-5 h-5 text-gray-500" />}
-        onClick={() => {
-          alert(123);
-        }}
       >
         <ul className="list-disc list-inside text-sm">
           <li>iPhone 15 Pro</li>

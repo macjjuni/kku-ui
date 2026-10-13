@@ -27,56 +27,58 @@ const toastStyleMap = {
   full: 'group-[.toaster]:p-4 group-[.toaster]:rounded-none',
 };
 
-const KToast = ({ size = 'md', position = 'top-right', offset, mobileOffset, ...props }: KToasterProps) => {
+const KToast = (props: KToasterProps) => {
+  // region [Hooks]
+  const { size = 'md', position = 'top-right', theme = 'system', className, style, toastOptions, ...restProps } = props;
+  // endregion
+
   return (
     <Sonner
-      className="k-toast toaster group"
+      {...restProps}
+      className={cn('k-toast toaster group', className)}
       position={position}
-      theme="system"
-      offset={offset}
-      mobileOffset={mobileOffset}
+      theme={theme}
       style={
         {
           '--width': sizeWidthMap[size],
-          ...props.style,
+          ...style,
         } as CSSProperties
       }
       toastOptions={{
-        ...props.toastOptions,
+        ...toastOptions,
         classNames: {
-          ...props.toastOptions?.classNames,
+          ...toastOptions?.classNames,
           toast: cn(
             'group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border ' +
               'group-[.toaster]:rounded-md group-[.toaster]:shadow-lg flex items-center',
             toastStyleMap[size],
-            props.toastOptions?.classNames?.toast,
+            toastOptions?.classNames?.toast,
           ),
-          title: cn('k-toast__title', sizeTextMap[size].title, 'font-semibold', props.toastOptions?.classNames?.title),
+          title: cn('k-toast__title', sizeTextMap[size].title, 'font-semibold', toastOptions?.classNames?.title),
           description: cn(
             'k-toast__description',
             'group-[.toast]:text-muted-foreground',
             sizeTextMap[size].description,
-            props.toastOptions?.classNames?.description,
+            toastOptions?.classNames?.description,
           ),
           actionButton: cn(
             'k-toast__action-button',
             'group-[.toast]:bg-primary group-[.toast]:text-primary-foreground',
-            props.toastOptions?.classNames?.actionButton,
+            toastOptions?.classNames?.actionButton,
           ),
           cancelButton: cn(
             'k-toast__cancel-button',
             'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground',
-            props.toastOptions?.classNames?.cancelButton,
+            toastOptions?.classNames?.cancelButton,
           ),
           closeButton: cn(
             'k-toast__close-button',
             '!left-auto !right-[-16px] !top-[-2px]',
             'group-[.toast]:bg-background group-[.toast]:border-border',
-            props.toastOptions?.classNames?.closeButton,
+            toastOptions?.classNames?.closeButton,
           ),
         },
       }}
-      {...props}
     />
   );
 };

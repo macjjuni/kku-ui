@@ -4,13 +4,13 @@
     "target": "ESNext",
     "outDir": "./lib/esm",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "allowJs": true, // JavaScript 파일의 컴파일을 허용
     "module": "ESNext",
     "skipLibCheck": true, // 모든 선언 파일(*.d.ts)의 타입 검사를 건너뜀
     "types": ["vitest/globals", "node"],
     /* Bundler mode */
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "declaration": true, // 해당하는 .d.ts 파일을 생성합니다.
@@ -28,17 +28,14 @@
     "sourceMap": true,
     "removeComments": true,
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": [],
     "baseUrl": "./",
-    "paths": { "@/*": ["./src/*"] },
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "paths": { "@/*": ["./src/*"] }
   },
   "include": [
     "src/**/*.tsx",
     "src/**/*.ts",
     "src/**/*.stories.tsx",
     "__tests__",
-    "vitest.config.ts",
     "vitest.setup.ts",
     "analyzer.js",
     ".storybook/*"

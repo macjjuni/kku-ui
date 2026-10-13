@@ -15,7 +15,7 @@ export type KAccordionContentProps = ComponentPropsWithRef<typeof AccordionPrimi
 const AccordionContext = createContext<KAccordionContextType>({ size: 'md' });
 
 const KAccordionTriggerVariants = cva(
-  'flex flex-1 items-center justify-between font-md transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180',
+  'flex flex-1 items-center justify-between font-medium transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180',
   {
     variants: {
       size: {
