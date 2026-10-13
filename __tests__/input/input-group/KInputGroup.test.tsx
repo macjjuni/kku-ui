@@ -11,7 +11,6 @@ import {
 import { renderWithUser, expectClasses, expectFocused } from '@/test-utils';
 
 describe('KInputGroup', () => {
-
   // region [Basic Rendering Tests]
   it('기본적으로 렌더링되어야 한다', () => {
     renderWithUser(
@@ -98,11 +97,9 @@ describe('KInputGroup', () => {
     expect(screen.getByRole('button', { name: '확인' })).toHaveClass('text-xs');
   });
   // endregion
-
 });
 
 describe('KInputGroupAddon', () => {
-
   // region [Basic Rendering Tests]
   it('렌더링되어야 한다', () => {
     renderWithUser(
@@ -127,7 +124,9 @@ describe('KInputGroupAddon', () => {
   it('data-align 속성이 align prop과 일치해야 한다', () => {
     renderWithUser(
       <KInputGroup>
-        <KInputGroupAddon align="inline-end" data-testid="addon">addon</KInputGroupAddon>
+        <KInputGroupAddon align="inline-end" data-testid="addon">
+          addon
+        </KInputGroupAddon>
       </KInputGroup>,
     );
 
@@ -168,11 +167,9 @@ describe('KInputGroupAddon', () => {
     expect(screen.getByRole('textbox')).not.toHaveFocus();
   });
   // endregion
-
 });
 
 describe('KInputGroupInput', () => {
-
   // region [Basic Rendering Tests]
   it('렌더링되어야 한다', () => {
     renderWithUser(
@@ -240,11 +237,9 @@ describe('KInputGroupInput', () => {
     expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid', 'true');
   });
   // endregion
-
 });
 
 describe('KInputGroupTextarea', () => {
-
   // region [Basic Rendering Tests]
   it('렌더링되어야 한다', () => {
     renderWithUser(
@@ -279,11 +274,9 @@ describe('KInputGroupTextarea', () => {
     expect(textarea.value).toBe('메시지 내용');
   });
   // endregion
-
 });
 
 describe('KInputGroupText', () => {
-
   // region [Basic Rendering Tests]
   it('텍스트 내용이 렌더링되어야 한다', () => {
     renderWithUser(
@@ -309,11 +302,9 @@ describe('KInputGroupText', () => {
     expect(screen.getByText('label').tagName).toBe('SPAN');
   });
   // endregion
-
 });
 
 describe('KInputGroupButton', () => {
-
   // region [Basic Rendering Tests]
   it('렌더링되어야 한다', () => {
     renderWithUser(
@@ -357,5 +348,4 @@ describe('KInputGroupButton', () => {
     ]);
   });
   // endregion
-
 });

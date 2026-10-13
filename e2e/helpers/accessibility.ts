@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 /**
@@ -14,13 +14,9 @@ export async function checkA11y(
     tags?: string[];
     exclude?: string[];
     disableRules?: string[];
-  }
+  },
 ) {
-  const {
-    tags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'],
-    exclude = [],
-    disableRules = [],
-  } = options || {};
+  const { tags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'], exclude = [], disableRules = [] } = options || {};
 
   let axeBuilder = new AxeBuilder({ page }).withTags(tags);
 
@@ -45,11 +41,7 @@ export async function checkA11y(
  * @param startElement - Selector or locator to start from
  * @param expectedStops - Array of selectors for expected focus stops
  */
-export async function verifyKeyboardNav(
-  page: Page,
-  startElement: string,
-  expectedStops: string[]
-): Promise<void> {
+export async function verifyKeyboardNav(page: Page, startElement: string, expectedStops: string[]): Promise<void> {
   // Focus the start element
   await page.locator(startElement).focus();
 

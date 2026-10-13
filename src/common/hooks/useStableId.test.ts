@@ -54,10 +54,7 @@ describe('useStableId', () => {
   });
 
   it('prefix가 변경되어도 기본 ID는 안정적이어야 한다', () => {
-    const { result, rerender } = renderHook(
-      ({ prefix }) => useStableId(prefix),
-      { initialProps: { prefix: 'first' } },
-    );
+    const { result, rerender } = renderHook(({ prefix }) => useStableId(prefix), { initialProps: { prefix: 'first' } });
 
     const firstId = result.current;
     expect(firstId).toContain('first-');

@@ -30,7 +30,7 @@
     "forceConsistentCasingInFileNames": true,
     "typeRoots": [],
     "baseUrl": "./",
-    "paths": {"@/*": ["./src/*"]},
+    "paths": { "@/*": ["./src/*"] },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": [
@@ -41,8 +41,8 @@
     "vitest.config.ts",
     "vitest.setup.ts",
     "analyzer.js",
-    ".storybook/*",
+    ".storybook/*"
   ],
   "exclude": ["node_modules", "./lib/**/*"],
-  "references": [{"path": "./tsconfig.node.json"}]
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

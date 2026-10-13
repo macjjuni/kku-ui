@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useRef } from 'react';
-import { KTextField, KTextFieldRefs } from './KTextField';
+import { KTextField, type KTextFieldRefs } from './KTextField';
 
 const meta: Meta<typeof KTextField> = {
   title: 'Input/TextField',
@@ -44,14 +44,20 @@ export const Validation: Story = {
 
     return (
       <div className="flex flex-col gap-4 max-w-sm">
-        <KTextField {...args} ref={textFieldRef}/>
+        <KTextField {...args} ref={textFieldRef} />
         <div className="flex gap-2">
-          <button type="button" onClick={onValidate}
-                  className="px-4 py-2 bg-slate-900 text-white rounded-md text-sm hover:bg-slate-800 transition-colors">
+          <button
+            type="button"
+            onClick={onValidate}
+            className="px-4 py-2 bg-slate-900 text-white rounded-md text-sm hover:bg-slate-800 transition-colors"
+          >
             검증하기
           </button>
-          <button type="button" onClick={() => textFieldRef.current?.reset()}
-                  className="px-4 py-2 border rounded-md text-sm hover:bg-slate-50 transition-colors">
+          <button
+            type="button"
+            onClick={() => textFieldRef.current?.reset()}
+            className="px-4 py-2 border rounded-md text-sm hover:bg-slate-50 transition-colors"
+          >
             에러 초기화
           </button>
         </div>
@@ -88,9 +94,12 @@ export const AsyncValidation: Story = {
     const textFieldRef = useRef<KTextFieldRefs>(null);
     return (
       <div className="flex flex-col gap-4 max-w-sm">
-        <KTextField {...args} ref={textFieldRef}/>
-        <button type="button" onClick={() => textFieldRef.current?.validate()}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 transition-colors">
+        <KTextField {...args} ref={textFieldRef} />
+        <button
+          type="button"
+          onClick={() => textFieldRef.current?.validate()}
+          className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 transition-colors"
+        >
           중복 확인
         </button>
       </div>
@@ -109,14 +118,34 @@ export const ErrorSizes: Story = {
       textFieldRef1.current?.validate();
       textFieldRef2.current?.validate();
       textFieldRef3.current?.validate();
-    }
+    };
 
     return (
       <div className="flex flex-col gap-4 w-full max-w-sm">
-        <KTextField ref={textFieldRef1} size="sm" label="Small Error" defaultValue="Error value" rules={[() => '에러 발생']}/>
-        <KTextField ref={textFieldRef2} size="md" label="Default Error" defaultValue="Error value" rules={[() => '에러 발생']}/>
-        <KTextField ref={textFieldRef3} size="lg" label="Large Error" defaultValue="Error value" rules={[() => '에러 발생']}/>
-        <button type="button" className="px-4 py-2 bg-slate-900 text-white" onClick={validate}>Validate</button>
+        <KTextField
+          ref={textFieldRef1}
+          size="sm"
+          label="Small Error"
+          defaultValue="Error value"
+          rules={[() => '에러 발생']}
+        />
+        <KTextField
+          ref={textFieldRef2}
+          size="md"
+          label="Default Error"
+          defaultValue="Error value"
+          rules={[() => '에러 발생']}
+        />
+        <KTextField
+          ref={textFieldRef3}
+          size="lg"
+          label="Large Error"
+          defaultValue="Error value"
+          rules={[() => '에러 발생']}
+        />
+        <button type="button" className="px-4 py-2 bg-slate-900 text-white" onClick={validate}>
+          Validate
+        </button>
       </div>
     );
   },

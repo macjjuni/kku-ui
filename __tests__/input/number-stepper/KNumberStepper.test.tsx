@@ -4,13 +4,15 @@ import { screen, waitFor } from '@testing-library/react';
 import { KNumberStepper } from '@/components/ui/input/number-stepper/KNumberStepper';
 import { renderWithUser, expectClasses, expectDisabled } from '@/test-utils';
 
-const ControlledStepper = ({ initial = 0, ...props }: { initial?: number } & Omit<React.ComponentProps<typeof KNumberStepper>, 'value' | 'onChange'>) => {
+const ControlledStepper = ({
+  initial = 0,
+  ...props
+}: { initial?: number } & Omit<React.ComponentProps<typeof KNumberStepper>, 'value' | 'onChange'>) => {
   const [val, setVal] = useState(initial);
   return <KNumberStepper {...props} value={val} onChange={setVal} />;
 };
 
 describe('KNumberStepper', () => {
-
   // region [Basic Rendering Tests]
   it('기본적으로 렌더링되어야 한다', () => {
     renderWithUser(<KNumberStepper />);
@@ -207,7 +209,9 @@ describe('KNumberStepper', () => {
     const buttons = screen.getAllByRole('button');
 
     expectDisabled(input as HTMLElement);
-    buttons.forEach((btn) => expect(btn).toBeDisabled());
+    buttons.forEach((btn) => {
+      expect(btn).toBeDisabled();
+    });
   });
 
   it('disabled 시 + 버튼 클릭해도 값이 변하지 않아야 한다', async () => {

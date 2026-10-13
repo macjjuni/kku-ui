@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
-import { type RefObject } from 'react';
+import type { RefObject } from 'react';
 import useClickOutside from '@/common/hooks/useClickOutside';
 
 describe('useClickOutside', () => {
@@ -151,10 +151,7 @@ describe('useClickOutside', () => {
     document.body.appendChild(element);
     const ref = { current: element } as RefObject<HTMLElement>;
 
-    const { rerender } = renderHook(
-      ({ cb }) => useClickOutside(ref, cb),
-      { initialProps: { cb: callback1 } },
-    );
+    const { rerender } = renderHook(({ cb }) => useClickOutside(ref, cb), { initialProps: { cb: callback1 } });
     vi.runAllTimers();
 
     // 외부 클릭 (callback1 호출)

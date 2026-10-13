@@ -1,7 +1,6 @@
 import { Loader2, type LucideProps } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-
 export type KSpinnerSize = 'sm' | 'md' | 'lg' | 'xl';
 
 export type KSpinnerProps = LucideProps & {
@@ -16,7 +15,6 @@ const sizeMap: Record<KSpinnerSize, string> = {
   xl: 'h-12 w-12',
 };
 
-
 const KSpinner = (props: KSpinnerProps) => {
   // region [Hooks]
   const { size = 'md', className, ref, ...restProps } = props;
@@ -26,11 +24,7 @@ const KSpinner = (props: KSpinnerProps) => {
     <div className="inline-block" role="status">
       <Loader2
         ref={ref}
-        className={cn(
-          'k-spinner animate-spin text-muted-foreground',
-          sizeMap[size],
-          className,
-        )}
+        className={cn('k-spinner animate-spin text-muted-foreground', sizeMap[size], className)}
         style={{ animationDuration: '1s' }}
         aria-hidden="true"
         {...restProps}

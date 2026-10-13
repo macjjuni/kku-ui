@@ -15,13 +15,7 @@ import {
 import { renderWithUser, waitForPortalRender, waitForPortalDisappear } from '@/test-utils';
 
 // region [Helpers]
-const DialogFixture = ({
-  size,
-  children,
-}: {
-  size?: 'sm' | 'md';
-  children?: React.ReactNode;
-}) => (
+const DialogFixture = ({ size, children }: { size?: 'sm' | 'md'; children?: React.ReactNode }) => (
   <KDialog size={size}>
     <KDialogTrigger>열기</KDialogTrigger>
     <KDialogContent data-testid="dialog-content">
@@ -39,7 +33,6 @@ const openDialog = async (user: ReturnType<typeof import('@testing-library/user-
 // endregion
 
 describe('KDialog', () => {
-
   // region [Open/Close Tests]
   it('트리거 클릭 시 다이얼로그가 열려야 한다', async () => {
     const { user } = renderWithUser(<DialogFixture />);
@@ -132,11 +125,9 @@ describe('KDialog', () => {
     expect(screen.getByTestId('dialog-content')).toHaveClass('max-w-lg', 'p-6', 'gap-4', 'text-md');
   });
   // endregion
-
 });
 
 describe('KDialogContent', () => {
-
   it('k-dialog__content 클래스가 적용되어야 한다', async () => {
     const { user } = renderWithUser(<DialogFixture />);
 
@@ -187,11 +178,9 @@ describe('KDialogContent', () => {
 
     expect(screen.getByRole('button', { name: /close/i })).toHaveClass('k-dialog__close');
   });
-
 });
 
 describe('KDialogOverlay', () => {
-
   it('k-dialog__overlay 클래스가 적용되어야 한다', async () => {
     const { user } = renderWithUser(
       <KDialog>
@@ -248,11 +237,9 @@ describe('KDialogOverlay', () => {
 
     expect(screen.getByTestId('overlay')).toBeInTheDocument();
   });
-
 });
 
 describe('KDialogHeader', () => {
-
   it('k-dialog__header 클래스가 적용되어야 한다', async () => {
     const { user } = renderWithUser(
       <KDialog>
@@ -303,11 +290,9 @@ describe('KDialogHeader', () => {
 
     expect(screen.getByTestId('header')).toHaveClass('space-y-1.5');
   });
-
 });
 
 describe('KDialogFooter', () => {
-
   it('k-dialog__footer 클래스가 적용되어야 한다', async () => {
     const { user } = renderWithUser(
       <KDialog>
@@ -355,11 +340,9 @@ describe('KDialogFooter', () => {
 
     expect(screen.getByTestId('footer')).toHaveClass('mt-4');
   });
-
 });
 
 describe('KDialogTitle', () => {
-
   it('k-dialog__title 클래스가 적용되어야 한다', async () => {
     const { user } = renderWithUser(<DialogFixture />);
 
@@ -383,11 +366,9 @@ describe('KDialogTitle', () => {
 
     expect(screen.getByText('제목')).toHaveClass('text-lg');
   });
-
 });
 
 describe('KDialogDescription', () => {
-
   it('k-dialog__description 클래스가 적용되어야 한다', async () => {
     const { user } = renderWithUser(<DialogFixture />);
 
@@ -411,11 +392,9 @@ describe('KDialogDescription', () => {
 
     expect(screen.getByText('설명')).toHaveClass('text-sm');
   });
-
 });
 
 describe('KDialogClose', () => {
-
   it('커스텀 닫기 버튼 클릭 시 다이얼로그가 닫혀야 한다', async () => {
     const { user } = renderWithUser(
       <KDialog>
@@ -440,7 +419,9 @@ describe('KDialogClose', () => {
         <KDialogContent>
           <KDialogTitle>제목</KDialogTitle>
           <KDialogClose asChild>
-            <button type="button" data-testid="custom-close">커스텀 닫기</button>
+            <button type="button" data-testid="custom-close">
+              커스텀 닫기
+            </button>
           </KDialogClose>
         </KDialogContent>
       </KDialog>,
@@ -451,5 +432,4 @@ describe('KDialogClose', () => {
 
     expect(screen.getByTestId('custom-close').tagName).toBe('BUTTON');
   });
-
 });

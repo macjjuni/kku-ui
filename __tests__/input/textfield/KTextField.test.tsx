@@ -2,10 +2,9 @@ import { act, createRef } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import { KTextField, KTextFieldRefs } from '@/components/ui/input/textfield/KTextField';
+import { KTextField, type KTextFieldRefs } from '@/components/ui/input/textfield/KTextField';
 
 describe('KSelect 컴포넌트 테스트', () => {
-
   // region [Basic Tests]
   it('라벨과 헬퍼 텍스트가 정상적으로 렌더링되어야 한다', () => {
     render(<KTextField label="아이디" helperText="영문/숫자 조합" />);
@@ -46,7 +45,9 @@ describe('KSelect 컴포넌트 테스트', () => {
   it('비동기 규칙(rules) 검증을 지원해야 한다', async () => {
     const textFieldRef = createRef<KTextFieldRefs>();
     const asyncRule = async (v: string) => {
-      await new Promise((res) => { setTimeout(res, 10); });
+      await new Promise((res) => {
+        setTimeout(res, 10);
+      });
       return v === 'admin' ? '이미 사용 중인 아이디입니다.' : true;
     };
 

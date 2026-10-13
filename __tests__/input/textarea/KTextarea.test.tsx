@@ -289,7 +289,8 @@ describe('KTextarea', () => {
     const { user } = renderWithUser(<KTextarea />);
 
     const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
-    await user.type(textarea, longText);
+    await user.click(textarea);
+    await user.paste(longText);
 
     expect(textarea.value).toBe(longText);
   });

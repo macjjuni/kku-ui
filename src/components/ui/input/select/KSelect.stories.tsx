@@ -49,6 +49,7 @@ export const FullWidth: Story = {
 };
 
 // 에러 상태
+// biome-ignore lint/suspicious/noShadowRestrictedNames: 스토리 ID 유지
 export const Error: Story = {
   args: {
     error: true,

@@ -23,16 +23,14 @@ const setHtmlDataTheme = (theme: string) => {
   }
 };
 
-
 const preview: Preview = {
   parameters: {
     controls: { expanded: true },
     backgrounds: {
-      default: '#fff',
-      values: [
-        { name: 'white', value: '#fff' },
-        { name: 'dark', value: '#000' },
-      ],
+      options: {
+        white: { name: 'white', value: '#fff' },
+        dark: { name: 'dark', value: '#000' },
+      },
     },
     options: {
       storySort: {
@@ -52,15 +50,21 @@ const preview: Preview = {
       },
     },
   },
+
   decorators: [
     (Story, context) => {
-
       const theme = context.globals.backgrounds.value || 'light';
       setHtmlDataTheme(theme);
 
       return <Story {...context} />;
     },
   ],
+
+  initialGlobals: {
+    backgrounds: {
+      value: 'white',
+    },
+  },
 };
 
 export default preview;

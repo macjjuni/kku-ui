@@ -1,11 +1,10 @@
-import { HTMLAttributes, memo, Ref, useMemo } from 'react';
+import { type HTMLAttributes, memo, type Ref, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
 export type KAspectRatioProps = HTMLAttributes<HTMLDivElement> & {
   ratio?: number;
   ref?: Ref<HTMLDivElement>;
 };
-
 
 const KAspectRatio = memo((props: KAspectRatioProps) => {
   // region [Hooks]
@@ -28,14 +27,13 @@ const KAspectRatio = memo((props: KAspectRatioProps) => {
       style={{ ...style, aspectRatio: `${safeRatio}` }}
       {...restProps}
     >
-      <div
-        className="absolute inset-0 [&>img]:h-full [&>img]:w-full [&>img]:object-cover [&>video]:h-full [&>video]:w-full [&>video]:object-cover">
+      <div className="absolute inset-0 [&>img]:h-full [&>img]:w-full [&>img]:object-cover [&>video]:h-full [&>video]:w-full [&>video]:object-cover">
         {children}
       </div>
     </div>
   );
 });
 
-KAspectRatio.displayName = "KAspectRatio";
+KAspectRatio.displayName = 'KAspectRatio';
 
 export { KAspectRatio };

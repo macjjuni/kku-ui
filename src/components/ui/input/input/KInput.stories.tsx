@@ -1,21 +1,21 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { KInput } from "./KInput";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { KInput } from './KInput';
 
 const meta: Meta<typeof KInput> = {
-  title: "Input/Input",
+  title: 'Input/Input',
   component: KInput,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     type: {
-      control: "select",
-      options: ["text", "password", "email", "number", "tel"],
+      control: 'select',
+      options: ['text', 'password', 'email', 'number', 'tel'],
     },
     size: {
-      control: "select",
-      options: ["sm", "md", "lg"],
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
     },
     disabled: {
-      control: "boolean",
+      control: 'boolean',
     },
   },
   // 중앙 정렬을 위한 데코레이터
@@ -34,15 +34,15 @@ type Story = StoryObj<typeof KInput>;
 // 1. 기본 상태
 export const Default: Story = {
   args: {
-    placeholder: "내용을 입력하세요",
+    placeholder: '내용을 입력하세요',
   },
 };
 
 // 2. 비밀번호 (타입 확인)
 export const Password: Story = {
   args: {
-    type: "password",
-    placeholder: "비밀번호를 입력하세요",
+    type: 'password',
+    placeholder: '비밀번호를 입력하세요',
   },
 };
 
@@ -50,19 +50,18 @@ export const Password: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
-    value: "수정할 수 없는 값",
+    value: '수정할 수 없는 값',
   },
 };
-
 
 // 4. 모바일 환경 테스트 가이드 (Story 설명용)
 export const MobileResponsive: Story = {
   args: {
-    placeholder: "iOS에서 확대되지 않는 16px 확인",
+    placeholder: 'iOS에서 확대되지 않는 16px 확인',
   },
   parameters: {
     viewport: {
-      defaultViewport: "iphone14",
+      defaultViewport: 'iphone14',
     },
   },
 };

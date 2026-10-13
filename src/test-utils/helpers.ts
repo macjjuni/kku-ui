@@ -31,10 +31,7 @@ export function renderWithUser(
  * @example
  * await waitForPortalRender(() => screen.findByText('Dialog Content'));
  */
-export async function waitForPortalRender<T>(
-  queryFn: () => Promise<T>,
-  timeout = 3000,
-): Promise<T> {
+export async function waitForPortalRender<T>(queryFn: () => Promise<T>, timeout = 3000): Promise<T> {
   return waitFor(queryFn, { timeout });
 }
 
@@ -52,10 +49,7 @@ export async function waitForPortalRender<T>(
  *   'aria-pressed': 'false',
  * });
  */
-export function expectA11yAttributes(
-  element: HTMLElement,
-  attributes: Record<string, string | null>,
-) {
+export function expectA11yAttributes(element: HTMLElement, attributes: Record<string, string | null>) {
   Object.entries(attributes).forEach(([key, value]) => {
     if (value === null) {
       expect(element).not.toHaveAttribute(key);
@@ -75,10 +69,7 @@ export function expectA11yAttributes(
  * @example
  * await waitForPortalDisappear(() => screen.queryByText('Dialog Content'));
  */
-export async function waitForPortalDisappear(
-  queryFn: () => HTMLElement | null,
-  timeout = 1000,
-) {
+export async function waitForPortalDisappear(queryFn: () => HTMLElement | null, timeout = 1000) {
   await waitFor(
     () => {
       expect(queryFn()).not.toBeInTheDocument();
@@ -169,9 +160,6 @@ export function expectVisible(element: HTMLElement) {
  * @example
  * expectDataState(accordionContent, 'open');
  */
-export function expectDataState(
-  element: HTMLElement,
-  state: 'open' | 'closed' | 'checked' | 'unchecked' | string,
-) {
+export function expectDataState(element: HTMLElement, state: 'open' | 'closed' | 'checked' | 'unchecked' | string) {
   expect(element).toHaveAttribute('data-state', state);
 }

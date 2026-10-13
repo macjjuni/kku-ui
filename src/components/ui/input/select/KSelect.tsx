@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
+import { type ComponentPropsWithoutRef, forwardRef, useCallback, useImperativeHandle, useMemo } from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
@@ -8,8 +8,8 @@ import { useStableId } from '@/common/hooks';
 // region [Styles]
 const selectVariants = cva(
   'flex items-center justify-between rounded-md border border-input bg-background ' +
-  'px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none ' +
-  'focus-ring disabled:cursor-not-allowed disabled:opacity-50',
+    'px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none ' +
+    'focus-ring disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       size: {
@@ -97,25 +97,29 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
   // 숫자형 너비 판별 및 스타일 생성
   const isNumericWidth = typeof width === 'number';
 
-  const triggerStyle = useMemo(() => (isNumericWidth ? {
-    width: `${width}px`,
-    minWidth: `${width}px`,
-    maxWidth: `${width}px`,
-  } : undefined), [width, isNumericWidth]);
+  const triggerStyle = useMemo(
+    () =>
+      isNumericWidth
+        ? {
+            width: `${width}px`,
+            minWidth: `${width}px`,
+            maxWidth: `${width}px`,
+          }
+        : undefined,
+    [width, isNumericWidth],
+  );
 
   useImperativeHandle(ref, () => ({ value }));
 
-  const handleValueChange = useCallback((val: KSelectValue) => {
-    onChange?.(val);
-  }, [onChange]);
+  const handleValueChange = useCallback(
+    (val: KSelectValue) => {
+      onChange?.(val);
+    },
+    [onChange],
+  );
 
   return (
-    <SelectPrimitive.Root
-      value={value}
-      onValueChange={handleValueChange}
-      disabled={disabled}
-      {...rest}
-    >
+    <SelectPrimitive.Root value={value} onValueChange={handleValueChange} disabled={disabled} {...rest}>
       <SelectPrimitive.Trigger
         id={selectId}
         style={triggerStyle}
@@ -126,9 +130,9 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
           className,
         )}
       >
-        <SelectPrimitive.Value placeholder={placeholder}/>
+        <SelectPrimitive.Value placeholder={placeholder} />
         <SelectPrimitive.Icon asChild>
-          <ChevronDown className={cn('opacity-50 shrink-0 ml-2', size === 'sm' ? 'h-3 w-3' : 'h-4 w-4')}/>
+          <ChevronDown className={cn('opacity-50 shrink-0 ml-2', size === 'sm' ? 'h-3 w-3' : 'h-4 w-4')} />
         </SelectPrimitive.Icon>
       </SelectPrimitive.Trigger>
 
@@ -140,14 +144,14 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
             'relative z-50 min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-md',
             'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
             'data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2',
-          )}>
+          )}
+        >
           <SelectPrimitive.ScrollUpButton className="flex cursor-default items-center justify-center py-1">
-            <ChevronUp className="h-4 w-4"/>
+            <ChevronUp className="h-4 w-4" />
           </SelectPrimitive.ScrollUpButton>
 
           <SelectPrimitive.Viewport className="p-1">
             <SelectPrimitive.Group>
-
               {selectLabel && (
                 <SelectPrimitive.Label className="px-2 py-1.5 text-xs text-muted-foreground">
                   {selectLabel}
@@ -164,7 +168,7 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
                   <SelectPrimitive.ItemText>{opt.label}</SelectPrimitive.ItemText>
                   <span className="absolute right-2 flex items-center justify-center">
                     <SelectPrimitive.ItemIndicator>
-                      <Check className={cn(size === 'sm' ? 'h-3 w-3' : 'h-4 w-4')}/>
+                      <Check className={cn(size === 'sm' ? 'h-3 w-3' : 'h-4 w-4')} />
                     </SelectPrimitive.ItemIndicator>
                   </span>
                 </SelectPrimitive.Item>
@@ -173,7 +177,7 @@ const KSelect = forwardRef<KSelectRefs, KSelectProps>((props, ref) => {
           </SelectPrimitive.Viewport>
 
           <SelectPrimitive.ScrollDownButton className="flex cursor-default items-center justify-center py-1">
-            <ChevronDown className="h-4 w-4"/>
+            <ChevronDown className="h-4 w-4" />
           </SelectPrimitive.ScrollDownButton>
         </SelectPrimitive.Content>
       </SelectPrimitive.Portal>

@@ -15,10 +15,7 @@ import {
   expectA11yAttributes,
   createAccordionItems,
 } from '@/test-utils';
-import {
-  testKeyboardNavigation,
-  validateExpandable,
-} from '@/test-utils/a11y-checklist';
+import { testKeyboardNavigation, validateExpandable } from '@/test-utils/a11y-checklist';
 
 describe('KAccordion', () => {
   const AccordionExample = ({
@@ -349,9 +346,7 @@ describe('KAccordion', () => {
 
   // region [Edge Cases]
   it('빈 아이템 배열도 렌더링되어야 한다', () => {
-    const { container } = renderWithUser(
-      <KAccordion type="single">{/* 빈 children */}</KAccordion>,
-    );
+    const { container } = renderWithUser(<KAccordion type="single">{/* 빈 children */}</KAccordion>);
 
     const accordion = container.querySelector('.k-accordion');
     expect(accordion).toBeInTheDocument();
@@ -393,12 +388,8 @@ describe('KAccordion', () => {
     const { container } = renderWithUser(
       <KAccordion type="single" className="custom-accordion" defaultValue="item-1">
         <KAccordionItem value="item-1" className="custom-item">
-          <KAccordionTrigger className="custom-trigger">
-            Title
-          </KAccordionTrigger>
-          <KAccordionContent className="custom-content">
-            Content
-          </KAccordionContent>
+          <KAccordionTrigger className="custom-trigger">Title</KAccordionTrigger>
+          <KAccordionContent className="custom-content">Content</KAccordionContent>
         </KAccordionItem>
       </KAccordion>,
     );

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import * as Separator from '@radix-ui/react-separator';
 import { ChevronRight } from 'lucide-react';
@@ -31,7 +31,6 @@ export interface KListRowAccordionProps {
   onValueChange?: (val: string) => void;
 }
 
-
 const KListGroup = ({ children, header, footer, width = 'md', className }: KListGroupProps) => {
   const widthMap: Record<ListGroupWidth, string> = {
     sm: 'max-w-[440px]',
@@ -43,9 +42,9 @@ const KListGroup = ({ children, header, footer, width = 'md', className }: KList
 
   return (
     <section className={cn('w-full mx-auto [&&+&]:mt-6 px-0', widthMap[width], className)}>
-      {header && (<header className="px-4 mb-3 text-[14px] opacity-80 uppercase">{header}</header>)}
+      {header && <header className="px-4 mb-3 text-[14px] opacity-80 uppercase">{header}</header>}
       <div className="">{children}</div>
-      {footer && (<footer className="px-4 mt-2 text-[13px] text-muted-foreground leading-tight">{footer}</footer>)}
+      {footer && <footer className="px-4 mt-2 text-[13px] text-muted-foreground leading-tight">{footer}</footer>}
     </section>
   );
 };
@@ -53,79 +52,88 @@ const KListGroup = ({ children, header, footer, width = 'md', className }: KList
 const KListRow = ({
   icon,
   label,
-  rightElement = <ChevronRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700"/>,
+  rightElement = <ChevronRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700" />,
   onClick,
   className,
 }: KListRowProps) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex
-  <div tabIndex={onClick ? 0 : -1} onClick={onClick}
-       className={cn(
-         'group bg-background first:border-t last:border-b first:rounded-t-xl last:rounded-b-xl border-x border-border',
-         onClick && 'active:bg-secondary cursor-pointer',
-         'focus-ring',
-         className,
-       )}>
+  // biome-ignore lint/a11y/useKeyWithClickEvents: 기존 동작 유지
+  // biome-ignore lint/a11y/noStaticElementInteractions: 기존 동작 유지
+  <div
+    tabIndex={onClick ? 0 : -1}
+    onClick={onClick}
+    className={cn(
+      'group bg-background first:border-t last:border-b first:rounded-t-xl last:rounded-b-xl border-x border-border',
+      onClick && 'active:bg-secondary cursor-pointer',
+      'focus-ring',
+      className,
+    )}
+  >
     <div className={cn('flex items-center justify-between px-4 py-[11px] transition-colors')}>
       {/* Left: Icon + Label */}
       <div className="flex items-center gap-3">
-        {icon && (<div className="flex items-center justify-center w-7 h-7 overflow-hidden rounded-lg">{icon}</div>)}
+        {icon && <div className="flex items-center justify-center w-7 h-7 overflow-hidden rounded-lg">{icon}</div>}
         <span className="text-[17px] tracking-tight text-foreground">{label}</span>
       </div>
       <div className="flex items-center text-[17px]">{rightElement}</div>
     </div>
 
     <div className="group-last:hidden">
-      <Separator.Root className="bg-border ml-[56px] h-[1px]" orientation="horizontal"/>
+      <Separator.Root className="bg-border ml-[56px] h-[1px]" orientation="horizontal" />
     </div>
   </div>
 );
 
 const KListRowAccordion = ({ icon, label, children, className, value, onValueChange }: KListRowAccordionProps) => (
-  <div className={cn(
-    'group bg-background first:border-t last:border-b first:rounded-t-xl last:rounded-b-xl border-x border-border',
-    className,
-  )}>
+  <div
+    className={cn(
+      'group bg-background first:border-t last:border-b first:rounded-t-xl last:rounded-b-xl border-x border-border',
+      className,
+    )}
+  >
     <Accordion.Root collapsible type="single" onValueChange={onValueChange}>
       <Accordion.Item value={value} className="border-none">
         <Accordion.Header className="flex">
-          <Accordion.Trigger className={cn(
-            'group/trigger',
-            'flex flex-1 items-center justify-between px-4 py-[11px] transition-colors',
-            'focus-ring',
-            'group-first:focus-visible:rounded-t-xl',
-            'group-last:focus-visible:rounded-b-xl',
-            'active:bg-secondary cursor-pointer',
-            'text-left',
-          )}>
+          <Accordion.Trigger
+            className={cn(
+              'group/trigger',
+              'flex flex-1 items-center justify-between px-4 py-[11px] transition-colors',
+              'focus-ring',
+              'group-first:focus-visible:rounded-t-xl',
+              'group-last:focus-visible:rounded-b-xl',
+              'active:bg-secondary cursor-pointer',
+              'text-left',
+            )}
+          >
             {/* Left: Icon + Label */}
             <div className="flex items-center gap-3">
-              {icon && (<div className="flex items-center justify-center w-7 h-7 overflow-hidden rounded-lg">{icon}</div>)}
+              {icon && (
+                <div className="flex items-center justify-center w-7 h-7 overflow-hidden rounded-lg">{icon}</div>
+              )}
               <span className="text-[17px] tracking-tight text-foreground">{label}</span>
             </div>
 
             {/* Right: Animated Chevron */}
             <div className="flex items-center">
-              <ChevronRight className={cn(
-                'w-5 h-5 text-zinc-300 dark:text-zinc-700 transition-transform duration-200',
-                'group-data-[state=closed]/trigger:rotate-90 group-data-[state=open]/trigger:-rotate-90',
-              )}/>
+              <ChevronRight
+                className={cn(
+                  'w-5 h-5 text-zinc-300 dark:text-zinc-700 transition-transform duration-200',
+                  'group-data-[state=closed]/trigger:rotate-90 group-data-[state=open]/trigger:-rotate-90',
+                )}
+              />
             </div>
           </Accordion.Trigger>
         </Accordion.Header>
 
-        <Accordion.Content
-          className="overflow-hidden text-[15px] transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+        <Accordion.Content className="overflow-hidden text-[15px] transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
           {/* 아코디언 내용 영역 */}
-          <div className="px-4 pb-[11px] pt-1 text-muted-foreground bg-background">
-            {children}
-          </div>
+          <div className="px-4 pb-[11px] pt-1 text-muted-foreground bg-background">{children}</div>
         </Accordion.Content>
       </Accordion.Item>
     </Accordion.Root>
 
     {/* 하단 구분선: 리스트의 마지막 요소가 아닐 때만 노출 */}
     <div className="group-last:hidden">
-      <Separator.Root className="bg-border ml-[56px] h-[1px]" orientation="horizontal"/>
+      <Separator.Root className="bg-border ml-[56px] h-[1px]" orientation="horizontal" />
     </div>
   </div>
 );

@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [24.x]
 
     steps:
       - uses: actions/checkout@v4 # v3 -> v4 업데이트 (더 빠름)
@@ -33,6 +33,9 @@ jobs:
           ls -R src/lib
           echo "Checking if utils.ts exists in lowercase:"
           find src/lib -name "utils.ts"
+
+      - name: Lint
+        run: pnpm lint
 
       - name: Run tests
         run: pnpm vitest run

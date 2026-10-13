@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 
 // region [Privates]
@@ -12,7 +12,11 @@ export type KCardFooterProps = HTMLAttributes<HTMLDivElement> & { ref?: React.Re
 
 // region Components
 const KCard = ({ className, ref, ...props }: KCardProps) => (
-  <div ref={ref} className={cn('rounded-md border border-border bg-card text-card-foreground shadow-sm', className)} {...props} />
+  <div
+    ref={ref}
+    className={cn('rounded-md border border-border bg-card text-card-foreground shadow-sm', className)}
+    {...props}
+  />
 );
 
 const KCardHeader = ({ className, ref, ...props }: KCardHeaderProps) => (
@@ -20,7 +24,6 @@ const KCardHeader = ({ className, ref, ...props }: KCardHeaderProps) => (
 );
 
 const KCardTitle = ({ className, ref, ...props }: KCardTitleProps) => (
-  // eslint-disable-next-line jsx-a11y/heading-has-content
   <h3 ref={ref} className={cn('font-semibold leading-none tracking-tight text-lg', className)} {...props} />
 );
 

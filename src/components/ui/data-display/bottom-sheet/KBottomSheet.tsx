@@ -1,4 +1,4 @@
-import { createContext, useContext, HTMLAttributes } from 'react';
+import { createContext, useContext, type HTMLAttributes } from 'react';
 import { Drawer as DrawerPrimitive } from 'vaul';
 import { cn } from '@/lib/utils';
 
@@ -22,7 +22,6 @@ export type KBottomSheetTitleProps = React.ComponentPropsWithRef<typeof DrawerPr
 export type KBottomSheetDescriptionProps = React.ComponentPropsWithRef<typeof DrawerPrimitive.Description>;
 
 const KBottomSheetContext = createContext<KBottomSheetContextType>({ size: 'md', opacity: 40, blur: 0 });
-
 
 const KBottomSheet = ({
   size = 'md',
@@ -73,9 +72,7 @@ const KBottomSheetContent = ({ className, children, ref, ...props }: KBottomShee
         {...props}
       >
         <div className="mx-auto mt-4 h-1.5 w-12 rounded-full bg-muted" />
-        <div className={cn("grid w-full", size === 'sm' ? "gap-2 p-4 text-sm" : "gap-4 p-5 text-md")}>
-          {children}
-        </div>
+        <div className={cn('grid w-full', size === 'sm' ? 'gap-2 p-4 text-sm' : 'gap-4 p-5 text-md')}>{children}</div>
       </DrawerPrimitive.Content>
     </KBottomSheetPortal>
   );
@@ -87,7 +84,12 @@ const KBottomSheetHeader = ({ className, ...props }: KBottomSheetHeaderProps) =>
 
 const KBottomSheetFooter = ({ className, ...props }: KBottomSheetFooterProps) => {
   const { size } = useContext(KBottomSheetContext);
-  return <div className={cn('k-bottom-sheet__footer mt-auto flex flex-col gap-2', size === 'sm' ? 'mt-2' : 'mt-4', className)} {...props} />;
+  return (
+    <div
+      className={cn('k-bottom-sheet__footer mt-auto flex flex-col gap-2', size === 'sm' ? 'mt-2' : 'mt-4', className)}
+      {...props}
+    />
+  );
 };
 
 const KBottomSheetTitle = ({ className, ref, ...props }: KBottomSheetTitleProps) => {
@@ -95,7 +97,11 @@ const KBottomSheetTitle = ({ className, ref, ...props }: KBottomSheetTitleProps)
   return (
     <DrawerPrimitive.Title
       ref={ref}
-      className={cn('k-bottom-sheet__title font-semibold leading-none tracking-tight', size === 'sm' ? 'text-base' : 'text-lg', className)}
+      className={cn(
+        'k-bottom-sheet__title font-semibold leading-none tracking-tight',
+        size === 'sm' ? 'text-base' : 'text-lg',
+        className,
+      )}
       {...props}
     />
   );
@@ -106,12 +112,15 @@ const KBottomSheetDescription = ({ className, ref, ...props }: KBottomSheetDescr
   return (
     <DrawerPrimitive.Description
       ref={ref}
-      className={cn('k-bottom-sheet__description text-muted-foreground', size === 'sm' ? 'text-xs' : 'text-sm', className)}
+      className={cn(
+        'k-bottom-sheet__description text-muted-foreground',
+        size === 'sm' ? 'text-xs' : 'text-sm',
+        className,
+      )}
       {...props}
     />
   );
 };
-
 
 export {
   KBottomSheet,
