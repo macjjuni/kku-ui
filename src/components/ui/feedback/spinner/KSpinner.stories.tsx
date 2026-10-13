@@ -1,17 +1,17 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { KSpinner } from "./KSpinner";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { KSpinner } from './KSpinner';
 
 const meta: Meta<typeof KSpinner> = {
-  title: "Feedback/Spinner",
+  title: 'Feedback/Spinner',
   component: KSpinner,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     size: {
-      control: "select",
-      options: ["sm", "md", "lg", "xl"],
-      description: "스피너의 크기를 결정합니다.",
+      control: 'select',
+      options: ['sm', 'md', 'lg', 'xl'],
+      description: '스피너의 크기를 결정합니다.',
     },
-    className: { control: "text" },
+    className: { control: 'text' },
   },
 };
 
@@ -20,7 +20,7 @@ type Story = StoryObj<typeof KSpinner>;
 
 export const Default: Story = {
   args: {
-    size: "md",
+    size: 'md',
   },
 };
 

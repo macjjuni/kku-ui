@@ -34,7 +34,6 @@ const MenuFixture = ({ size, children }: { size?: 'sm' | 'md'; children: React.R
 // endregion
 
 describe('KDropdownMenu', () => {
-
   // region [Open/Close Tests]
   it('트리거 클릭 시 메뉴가 열려야 한다', async () => {
     const { user } = renderWithUser(
@@ -140,11 +139,9 @@ describe('KDropdownMenu', () => {
     expect(screen.getByText('섹션')).toHaveClass('text-[11px]');
   });
   // endregion
-
 });
 
 describe('KDropdownMenuTrigger', () => {
-
   it('k-dropdown-menu__trigger 클래스가 적용되어야 한다', () => {
     renderWithUser(
       <KDropdownMenu>
@@ -154,11 +151,9 @@ describe('KDropdownMenuTrigger', () => {
 
     expect(screen.getByRole('button', { name: '열기' })).toHaveClass('k-dropdown-menu__trigger');
   });
-
 });
 
 describe('KDropdownMenuContent', () => {
-
   it('k-dropdown-menu 클래스가 적용되어야 한다', async () => {
     const { user } = renderWithUser(
       <MenuFixture>
@@ -185,11 +180,9 @@ describe('KDropdownMenuContent', () => {
 
     expect(screen.getByRole('menu')).toHaveClass('custom-menu');
   });
-
 });
 
 describe('KDropdownMenuItem', () => {
-
   it('클릭 시 onSelect가 호출되어야 한다', async () => {
     const handleSelect = vi.fn();
     const { user } = renderWithUser(
@@ -220,7 +213,9 @@ describe('KDropdownMenuItem', () => {
     const handleSelect = vi.fn();
     const { user } = renderWithUser(
       <MenuFixture>
-        <KDropdownMenuItem disabled onSelect={handleSelect}>비활성 항목</KDropdownMenuItem>
+        <KDropdownMenuItem disabled onSelect={handleSelect}>
+          비활성 항목
+        </KDropdownMenuItem>
       </MenuFixture>,
     );
 
@@ -253,11 +248,9 @@ describe('KDropdownMenuItem', () => {
 
     expect(screen.getByText('항목')).toHaveClass('k-dropdown-menu__item');
   });
-
 });
 
 describe('KDropdownMenuCheckboxItem', () => {
-
   it('checked 상태일 때 data-state="checked" 속성이 설정되어야 한다', async () => {
     const { user } = renderWithUser(
       <MenuFixture>
@@ -309,16 +302,20 @@ describe('KDropdownMenuCheckboxItem', () => {
 
     expect(screen.getByRole('menuitemcheckbox')).toHaveClass('k-dropdown-menu__checkbox-item');
   });
-
 });
 
 describe('KDropdownMenuRadioGroup + KDropdownMenuRadioItem', () => {
-
   const RadioExample = ({ onValueChange }: { onValueChange?: (v: string) => void }) => {
     const [value, setValue] = useState('option1');
     return (
       <MenuFixture>
-        <KDropdownMenuRadioGroup value={value} onValueChange={(v) => { setValue(v); onValueChange?.(v); }}>
+        <KDropdownMenuRadioGroup
+          value={value}
+          onValueChange={(v) => {
+            setValue(v);
+            onValueChange?.(v);
+          }}
+        >
           <KDropdownMenuRadioItem value="option1">옵션1</KDropdownMenuRadioItem>
           <KDropdownMenuRadioItem value="option2">옵션2</KDropdownMenuRadioItem>
         </KDropdownMenuRadioGroup>
@@ -354,11 +351,9 @@ describe('KDropdownMenuRadioGroup + KDropdownMenuRadioItem', () => {
       expect(item).toHaveClass('k-dropdown-menu__radio-item');
     });
   });
-
 });
 
 describe('KDropdownMenuLabel', () => {
-
   it('k-dropdown-menu__label 클래스가 적용되어야 한다', async () => {
     const { user } = renderWithUser(
       <MenuFixture>
@@ -382,11 +377,9 @@ describe('KDropdownMenuLabel', () => {
 
     expect(screen.getByText('라벨')).toHaveClass('pl-8');
   });
-
 });
 
 describe('KDropdownMenuSeparator', () => {
-
   it('k-dropdown-menu__separator 클래스가 적용되어야 한다', async () => {
     const { user } = renderWithUser(
       <MenuFixture>
@@ -412,11 +405,9 @@ describe('KDropdownMenuSeparator', () => {
 
     expect(screen.getByRole('separator')).toBeInTheDocument();
   });
-
 });
 
 describe('KDropdownMenuShortcut', () => {
-
   it('단축키 텍스트가 렌더링되어야 한다', async () => {
     const { user } = renderWithUser(
       <MenuFixture>
@@ -446,11 +437,9 @@ describe('KDropdownMenuShortcut', () => {
 
     expect(screen.getByText('⌘S')).toHaveClass('k-dropdown-menu__shortcut');
   });
-
 });
 
 describe('KDropdownMenuGroup', () => {
-
   it('k-dropdown-menu__group 클래스가 적용되어야 한다', async () => {
     const { user } = renderWithUser(
       <MenuFixture>
@@ -464,11 +453,9 @@ describe('KDropdownMenuGroup', () => {
 
     expect(screen.getByTestId('group')).toHaveClass('k-dropdown-menu__group');
   });
-
 });
 
 describe('KDropdownMenuSub', () => {
-
   it('서브 트리거 클릭 시 서브 메뉴가 열려야 한다', async () => {
     const { user } = renderWithUser(
       <MenuFixture>
@@ -503,5 +490,4 @@ describe('KDropdownMenuSub', () => {
 
     expect(screen.getByText('더 보기')).toHaveClass('k-dropdown-menu__sub-trigger');
   });
-
 });

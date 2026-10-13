@@ -1,29 +1,28 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-        "module": "ESNext",
-        "moduleResolution": "Node",
-        "noEmit": false,
-        "importHelpers": true,
-        "noEmitHelpers": true,
-        "emitDeclarationOnly": false,
-        "allowImportingTsExtensions": false,
-        "declaration": true,
-    },
-    "include": ["src/index.ts", "styles.d.ts"],
-    "exclude": [
-        "/**/*.tsx",
-        "src/**/*.stories.tsx",
-        "__tests__",
-        "vitest.config.ts",
-        "vitest.setup.ts",
-        "node_modules",
-        "./lib/**/*"
-    ],
-    "files": ["src/index.ts",
-        "styles.d.ts"],
-    "tsc-alias": {
-        "verbose": true,
-        "fileExtensions": ["js"]
-    }
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "noEmit": false,
+    "importHelpers": true,
+    "noEmitHelpers": true,
+    "emitDeclarationOnly": false,
+    "allowImportingTsExtensions": false,
+    "declaration": true
+  },
+  "include": ["src/index.ts", "styles.d.ts"],
+  "exclude": [
+    "/**/*.tsx",
+    "src/**/*.stories.tsx",
+    "__tests__",
+    "vitest.config.ts",
+    "vitest.setup.ts",
+    "node_modules",
+    "./lib/**/*"
+  ],
+  "files": ["src/index.ts", "styles.d.ts"],
+  "tsc-alias": {
+    "verbose": true,
+    "fileExtensions": ["js"]
+  }
 }

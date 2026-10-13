@@ -67,9 +67,7 @@
   },
   "overrides": [
     {
-      "includes": [
-        "src/common/icons/icons.tsx"
-      ],
+      "includes": ["src/common/icons/icons.tsx"],
       "linter": {
         "rules": {
           "a11y": {

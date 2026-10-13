@@ -3,18 +3,19 @@ import { type ButtonHTMLAttributes, useMemo } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-
 const buttonVariants = cva(
   'k-button inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors ' +
-  'disabled:pointer-events-none disabled:opacity-50 ' +
-  '[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 truncate focus-ring',
+    'disabled:pointer-events-none disabled:opacity-50 ' +
+    '[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 truncate focus-ring',
   {
     variants: {
       variant: {
         default: 'bg-gray-200/70 shadow hover:brightness-90 hover:text-accent-foreground',
         outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
-        primary: 'bg-primary text-primary-foreground shadow hover:bg-primary/90 focus-visible:!outline-gray-900 dark:focus-visible:!outline-white',
-        destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90 focus-visible:!outline-gray-900 dark:focus-visible:!outline-white',
+        primary:
+          'bg-primary text-primary-foreground shadow hover:bg-primary/90 focus-visible:!outline-gray-900 dark:focus-visible:!outline-white',
+        destructive:
+          'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90 focus-visible:!outline-gray-900 dark:focus-visible:!outline-white',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
       },
@@ -47,39 +48,43 @@ const buttonVariants = cva(
 type ButtonVariantsProps = VariantProps<typeof buttonVariants>;
 export type KButtonWidthType = ButtonVariantsProps['width'] | number;
 
-export interface KButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'width' | 'ref'>,
-  Omit<ButtonVariantsProps, 'width'> {
+export interface KButtonProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'width' | 'ref'>,
+    Omit<ButtonVariantsProps, 'width'> {
   asChild?: boolean;
   width?: KButtonWidthType;
   ref?: React.Ref<HTMLButtonElement>;
 }
 
 const KButton = (props: KButtonProps) => {
-
   // region [Hooks]
   const { className, variant, size = 'md', width, style, asChild = false, ref, ...restProps } = props;
   // endregion
-
 
   // region [Privates]
   const Comp = asChild ? Slot : 'button';
   const isNumberWidth = typeof width === 'number';
 
-  const buttonStyle = useMemo(() => ({
-    width: isNumberWidth ? width : undefined,
-    ...style,
-  }), [isNumberWidth, width, style]);
+  const buttonStyle = useMemo(
+    () => ({
+      width: isNumberWidth ? width : undefined,
+      ...style,
+    }),
+    [isNumberWidth, width, style],
+  );
   // endregion
 
   return (
     <Comp
       ref={ref}
-      className={cn(buttonVariants({
-        variant,
-        size,
-        width: isNumberWidth ? undefined : (width as ButtonVariantsProps['width']),
-        className,
-      }))}
+      className={cn(
+        buttonVariants({
+          variant,
+          size,
+          width: isNumberWidth ? undefined : (width as ButtonVariantsProps['width']),
+          className,
+        }),
+      )}
       style={buttonStyle}
       {...restProps}
     />

@@ -51,7 +51,7 @@ export const Controlled: Story = {
     const [val, setVal] = useState(0);
     return (
       <div className="inline-flex flex-col gap-2">
-        <KNumberStepper {...args} value={val} onChange={setVal}/>
+        <KNumberStepper {...args} value={val} onChange={setVal} />
         <p className="text-sm text-muted-foreground">
           Current Value:
           {val}

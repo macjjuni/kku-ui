@@ -7,27 +7,31 @@ const InputGroupContext = createContext<{ size?: KInputSizeType | null }>({ size
 
 const inputGroupVariants = cva(
   [
-    "k-input-group group/input-group relative flex w-full items-center rounded-md border border-input bg-background shadow-xs outline-none transition-all",
-    "has-[>textarea]:h-auto",
-    "focus-within:border-[hsl(var(--ring))] focus-within:z-10 focus-within:ring-0",
-    "has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:focus-within:border-destructive",
-    "dark:bg-input/30",
+    'k-input-group group/input-group relative flex w-full items-center rounded-md border border-input bg-background shadow-xs outline-none transition-all',
+    'has-[>textarea]:h-auto',
+    'focus-within:border-[hsl(var(--ring))] focus-within:z-10 focus-within:ring-0',
+    'has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:focus-within:border-destructive',
+    'dark:bg-input/30',
   ],
   {
     variants: {
       size: {
-        sm: "h-8",
-        md: "h-9",
-        lg: "h-10",
+        sm: 'h-8',
+        md: 'h-9',
+        lg: 'h-10',
       },
     },
     defaultVariants: {
-      size: "md",
+      size: 'md',
     },
   },
 );
 
-const KInputGroup = ({ className, size = 'md', ...props }: ComponentProps<'div'> & VariantProps<typeof inputGroupVariants>) => (
+const KInputGroup = ({
+  className,
+  size = 'md',
+  ...props
+}: ComponentProps<'div'> & VariantProps<typeof inputGroupVariants>) => (
   <InputGroupContext.Provider value={{ size }}>
     <div
       data-slot="input-group"
@@ -49,13 +53,14 @@ const KInputGroup = ({ className, size = 'md', ...props }: ComponentProps<'div'>
 
 const inputGroupAddonVariants = cva(
   'text-muted-foreground flex h-auto cursor-text select-none items-center justify-center gap-2 py-1.5 font-medium ' +
-  'group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*=\'size-\'])]:size-4',
+    "group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4",
   {
     variants: {
       align: {
         'inline-start': 'order-first pl-3 has-[>button]:ml-[-0.45rem] has-[>kbd]:ml-[-0.35rem]',
         'inline-end': 'order-last pr-3 has-[>button]:mr-[-0.4rem] has-[>kbd]:mr-[-0.35rem]',
-        'block-start': '[.border-b]:pb-3 order-first w-full justify-start px-3 pt-3 group-has-[>input]/input-group:pt-2.5',
+        'block-start':
+          '[.border-b]:pb-3 order-first w-full justify-start px-3 pt-3 group-has-[>input]/input-group:pt-2.5',
         'block-end': '[.border-t]:pt-3 order-last w-full justify-start px-3 pb-3 group-has-[>input]/input-group:pb-2.5',
       },
       size: {
@@ -86,8 +91,7 @@ function KInputGroupAddon({
       className={cn('k-input-group__addon', inputGroupAddonVariants({ align, size }), className)}
       onClick={(e) => {
         if ((e.target as HTMLElement).closest('button')) return;
-        e.currentTarget.parentElement?.querySelector('input')
-          ?.focus();
+        e.currentTarget.parentElement?.querySelector('input')?.focus();
       }}
       {...props}
     />
@@ -117,7 +121,6 @@ function KInputGroupButton({ className, size, variant = 'ghost', ...props }: Com
   );
 }
 
-
 function KInputGroupText({ className, ...props }: ComponentProps<'span'>) {
   const { size } = useContext(InputGroupContext);
   const sizeClasses = {
@@ -129,7 +132,7 @@ function KInputGroupText({ className, ...props }: ComponentProps<'span'>) {
   return (
     <span
       className={cn(
-        'k-input-group__text text-muted-foreground flex items-center gap-2 [&_svg:not([class*=\'size-\'])]:size-4 [&_svg]:pointer-events-none',
+        "k-input-group__text text-muted-foreground flex items-center gap-2 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
         sizeClasses[size || 'md'],
         className,
       )}
@@ -176,12 +179,4 @@ KInputGroupButton.displayName = 'KInputGroupButton';
 KInputGroupInput.displayName = 'KInputGroupInput';
 KInputGroupTextarea.displayName = 'KInputGroupTextarea';
 
-
-export {
-  KInputGroup,
-  KInputGroupAddon,
-  KInputGroupText,
-  KInputGroupButton,
-  KInputGroupInput,
-  KInputGroupTextarea,
-};
+export { KInputGroup, KInputGroupAddon, KInputGroupText, KInputGroupButton, KInputGroupInput, KInputGroupTextarea };

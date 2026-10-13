@@ -151,10 +151,7 @@ describe('useClickOutside', () => {
     document.body.appendChild(element);
     const ref = { current: element } as RefObject<HTMLElement>;
 
-    const { rerender } = renderHook(
-      ({ cb }) => useClickOutside(ref, cb),
-      { initialProps: { cb: callback1 } },
-    );
+    const { rerender } = renderHook(({ cb }) => useClickOutside(ref, cb), { initialProps: { cb: callback1 } });
     vi.runAllTimers();
 
     // 외부 클릭 (callback1 호출)

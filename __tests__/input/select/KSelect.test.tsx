@@ -8,9 +8,7 @@ const mockOptions = [
   { label: '포도', value: 'grape', disabled: true },
 ];
 
-
 describe('KSelect Component', () => {
-
   beforeEach(() => {
     // 테스트 실행 전 메서드 모킹
     window.HTMLElement.prototype.scrollIntoView = vi.fn();

@@ -73,10 +73,8 @@ export const AllIcons: Story = {
     <div className="flex flex-wrap gap-6 items-center justify-start p-4 border rounded-lg bg-card">
       {ICON_LIST.map((iconName) => (
         <div key={iconName} className="flex flex-col items-center gap-2 w-20 overflow-hidden">
-          <KIcon {...args} icon={iconName}/>
-          <span className="text-[10px] text-muted-foreground truncate w-full text-center">
-            {iconName}
-          </span>
+          <KIcon {...args} icon={iconName} />
+          <span className="text-[10px] text-muted-foreground truncate w-full text-center">{iconName}</span>
         </div>
       ))}
     </div>

@@ -6,11 +6,7 @@ import { type Page, type Locator, expect } from '@playwright/test';
  * @param selector - CSS selector for the portal content
  * @param timeout - Maximum wait time in milliseconds
  */
-export async function waitForPortal(
-  page: Page,
-  selector: string,
-  timeout = 3000
-): Promise<void> {
+export async function waitForPortal(page: Page, selector: string, timeout = 3000): Promise<void> {
   await page.waitForSelector(selector, { state: 'visible', timeout });
 }
 
@@ -19,10 +15,7 @@ export async function waitForPortal(
  * @param page - Playwright page instance
  * @param portalSelector - CSS selector for the portal content
  */
-export async function testClickOutside(
-  page: Page,
-  portalSelector: string
-): Promise<void> {
+export async function testClickOutside(page: Page, portalSelector: string): Promise<void> {
   // Click on body (outside the portal)
   await page.click('body', { position: { x: 5, y: 5 } });
 
@@ -36,16 +29,13 @@ export async function testClickOutside(
  * @param page - Playwright page instance
  * @param containerSelector - CSS selector for the container with focus trap
  */
-export async function verifyFocusTrap(
-  page: Page,
-  containerSelector: string
-): Promise<void> {
+export async function verifyFocusTrap(page: Page, containerSelector: string): Promise<void> {
   const container = page.locator(containerSelector);
 
   // Get all focusable elements within the container
-  const focusable = await container.locator(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-  ).all();
+  const focusable = await container
+    .locator('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+    .all();
 
   expect(focusable.length).toBeGreaterThan(0);
 
@@ -68,10 +58,7 @@ export async function verifyFocusTrap(
  * @param page - Playwright page instance
  * @param expectedOrder - Array of locators in expected tab order
  */
-export async function testTabNavigation(
-  page: Page,
-  expectedOrder: Locator[]
-): Promise<void> {
+export async function testTabNavigation(page: Page, expectedOrder: Locator[]): Promise<void> {
   // Focus first element
   await expectedOrder[0].focus();
   await expect(expectedOrder[0]).toBeFocused();
@@ -88,10 +75,7 @@ export async function testTabNavigation(
  * @param locator - Playwright locator
  * @param attributes - Object with expected ARIA attribute values
  */
-export async function verifyAriaAttributes(
-  locator: Locator,
-  attributes: Record<string, string>
-): Promise<void> {
+export async function verifyAriaAttributes(locator: Locator, attributes: Record<string, string>): Promise<void> {
   for (const [attr, value] of Object.entries(attributes)) {
     await expect(locator).toHaveAttribute(attr, value);
   }
@@ -102,9 +86,6 @@ export async function verifyAriaAttributes(
  * @param page - Playwright page instance
  * @param duration - Animation duration in milliseconds
  */
-export async function waitForAnimation(
-  page: Page,
-  duration = 300
-): Promise<void> {
+export async function waitForAnimation(page: Page, duration = 300): Promise<void> {
   await page.waitForTimeout(duration);
 }

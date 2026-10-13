@@ -10,7 +10,7 @@ import {
   KBottomSheetDescription,
   KBottomSheetClose,
 } from '@/components/ui/data-display/bottom-sheet/KBottomSheet';
-import { renderWithUser, } from '@/test-utils';
+import { renderWithUser } from '@/test-utils';
 
 const BottomSheetExample = ({ size = 'md' }: { size?: 'sm' | 'md' }) => (
   <KBottomSheet size={size}>
@@ -28,7 +28,6 @@ const BottomSheetExample = ({ size = 'md' }: { size?: 'sm' | 'md' }) => (
 );
 
 describe('KBottomSheet', () => {
-
   // region [Open/Close Tests]
   it('트리거 클릭 시 바텀시트가 열려야 한다', async () => {
     const { user } = renderWithUser(<BottomSheetExample />);
@@ -179,11 +178,9 @@ describe('KBottomSheet', () => {
     expect(screen.getByTestId('sheet-footer')).toHaveClass('mt-2');
   });
   // endregion
-
 });
 
 describe('KBottomSheetContent', () => {
-
   // region [Rendering Tests]
   it('열렸을 때 k-bottom-sheet__content 클래스가 적용되어야 한다', async () => {
     const { user } = renderWithUser(
@@ -214,11 +211,9 @@ describe('KBottomSheetContent', () => {
     expect(await screen.findByText('콘텐츠 내용')).toBeInTheDocument();
   });
   // endregion
-
 });
 
 describe('KBottomSheetHeader', () => {
-
   it('k-bottom-sheet__header 클래스가 적용되어야 한다', async () => {
     renderWithUser(
       <KBottomSheet defaultOpen>
@@ -230,11 +225,9 @@ describe('KBottomSheetHeader', () => {
 
     expect(await screen.findByTestId('header')).toHaveClass('k-bottom-sheet__header');
   });
-
 });
 
 describe('KBottomSheetFooter', () => {
-
   it('k-bottom-sheet__footer 클래스가 적용되어야 한다', async () => {
     renderWithUser(
       <KBottomSheet defaultOpen>
@@ -246,11 +239,9 @@ describe('KBottomSheetFooter', () => {
 
     expect(await screen.findByTestId('footer')).toHaveClass('k-bottom-sheet__footer');
   });
-
 });
 
 describe('KBottomSheetTitle', () => {
-
   it('k-bottom-sheet__title 클래스가 적용되어야 한다', async () => {
     renderWithUser(
       <KBottomSheet defaultOpen>
@@ -262,11 +253,9 @@ describe('KBottomSheetTitle', () => {
 
     expect(await screen.findByText('타이틀')).toHaveClass('k-bottom-sheet__title');
   });
-
 });
 
 describe('KBottomSheetDescription', () => {
-
   it('k-bottom-sheet__description 클래스가 적용되어야 한다', async () => {
     renderWithUser(
       <KBottomSheet defaultOpen>
@@ -278,5 +267,4 @@ describe('KBottomSheetDescription', () => {
 
     expect(await screen.findByText('설명 텍스트')).toHaveClass('k-bottom-sheet__description');
   });
-
 });

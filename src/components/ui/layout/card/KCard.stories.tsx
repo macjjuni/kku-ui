@@ -1,12 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import {
-  KCard,
-  KCardHeader,
-  KCardTitle,
-  KCardDescription,
-  KCardContent,
-  KCardFooter,
-} from './KCard';
+import { KCard, KCardHeader, KCardTitle, KCardDescription, KCardContent, KCardFooter } from './KCard';
 import { KButton } from '@/components'; // 기존에 만든 버튼이 있다고 가정
 
 const meta: Meta<typeof KCard> = {
@@ -41,9 +34,7 @@ export const Default: Story = {
 export const ContentOnly: Story = {
   render: () => (
     <KCard className="w-[350px]">
-      <KCardContent className="pt-6">
-        패딩이 적용된 본문 전용 카드입니다.
-      </KCardContent>
+      <KCardContent className="pt-6">패딩이 적용된 본문 전용 카드입니다.</KCardContent>
     </KCard>
   ),
 };

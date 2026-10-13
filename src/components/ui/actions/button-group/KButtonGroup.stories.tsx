@@ -35,7 +35,6 @@ const meta: Meta<typeof KButtonGroup> = {
 export default meta;
 type Story = StoryObj<typeof KButtonGroup>;
 
-
 export const Default: Story = {
   args: {
     variant: 'outline',

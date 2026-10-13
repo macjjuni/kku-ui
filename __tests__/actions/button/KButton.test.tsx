@@ -23,7 +23,11 @@ describe('KSwitch', () => {
     const testId = 'test-id';
     const testClass = 'custom-class';
 
-    render(<KButton id={testId} className={testClass}>{labelText}</KButton>);
+    render(
+      <KButton id={testId} className={testClass}>
+        {labelText}
+      </KButton>,
+    );
     const button = screen.getByRole('button');
 
     expect(button).toHaveAttribute('id', testId);
@@ -32,7 +36,11 @@ describe('KSwitch', () => {
 
   it('disabled 상태일 때 클릭이 되지 않으며 속성이 적용된다', async () => {
     const user = userEvent.setup();
-    render(<KButton disabled onClick={mockFn}>{labelText}</KButton>);
+    render(
+      <KButton disabled onClick={mockFn}>
+        {labelText}
+      </KButton>,
+    );
 
     const button = screen.getByRole('button');
 

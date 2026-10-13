@@ -6,7 +6,6 @@ export type KAspectRatioProps = HTMLAttributes<HTMLDivElement> & {
   ref?: Ref<HTMLDivElement>;
 };
 
-
 const KAspectRatio = memo((props: KAspectRatioProps) => {
   // region [Hooks]
   const { ratio = 1, className, children, style, ref, ...restProps } = props;
@@ -28,14 +27,13 @@ const KAspectRatio = memo((props: KAspectRatioProps) => {
       style={{ ...style, aspectRatio: `${safeRatio}` }}
       {...restProps}
     >
-      <div
-        className="absolute inset-0 [&>img]:h-full [&>img]:w-full [&>img]:object-cover [&>video]:h-full [&>video]:w-full [&>video]:object-cover">
+      <div className="absolute inset-0 [&>img]:h-full [&>img]:w-full [&>img]:object-cover [&>video]:h-full [&>video]:w-full [&>video]:object-cover">
         {children}
       </div>
     </div>
   );
 });
 
-KAspectRatio.displayName = "KAspectRatio";
+KAspectRatio.displayName = 'KAspectRatio';
 
 export { KAspectRatio };

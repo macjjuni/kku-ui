@@ -60,14 +60,7 @@ describe('KCard', () => {
     const { container } = renderWithUser(<KCard>Content</KCard>);
 
     const card = container.firstChild as HTMLElement;
-    expectClasses(card, [
-      'rounded-md',
-      'border',
-      'border-border',
-      'bg-card',
-      'text-card-foreground',
-      'shadow-sm',
-    ]);
+    expectClasses(card, ['rounded-md', 'border', 'border-border', 'bg-card', 'text-card-foreground', 'shadow-sm']);
   });
 
   it('KCard에 custom className이 병합되어야 한다', () => {

@@ -6,7 +6,6 @@ import compression from 'vite-plugin-compression2';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import dts from 'vite-plugin-dts';
 
-
 export default defineConfig({
   plugins: [
     react(),
@@ -31,15 +30,8 @@ export default defineConfig({
       enforce: 'post',
       generateBundle(_, bundle) {
         for (const file of Object.values(bundle)) {
-          if (
-            file.type === 'asset' &&
-            file.fileName.endsWith('.css') &&
-            typeof file.source === 'string'
-          ) {
-            file.source = file.source.replace(
-              /url\(\s*['"]?\/(fonts\/[a-zA-Z0-9_\-./]+)['"]?\s*\)/g,
-              'url("$1")'
-            )
+          if (file.type === 'asset' && file.fileName.endsWith('.css') && typeof file.source === 'string') {
+            file.source = file.source.replace(/url\(\s*['"]?\/(fonts\/[a-zA-Z0-9_\-./]+)['"]?\s*\)/g, 'url("$1")');
           }
         }
       },
@@ -57,20 +49,15 @@ export default defineConfig({
     outDir: 'lib',
     lib: {
       entry: {
-        index: path.resolve(__dirname, 'src/index.ts'),               // for `kku-ui`
-        hooks: path.resolve(__dirname, 'src/common/hooks/index.ts'),  // for `kku-ui/hooks`
+        index: path.resolve(__dirname, 'src/index.ts'), // for `kku-ui`
+        hooks: path.resolve(__dirname, 'src/common/hooks/index.ts'), // for `kku-ui/hooks`
       },
       name: 'kku-ui',
       formats: ['es'],
       fileName: (format, entry) => `${format}/${entry}.js`,
     },
     rollupOptions: {
-      external: [
-        'react',
-        'react-dom',
-        'react/jsx-runtime',
-        'lucide-react',
-      ],
+      external: ['react', 'react-dom', 'react/jsx-runtime', 'lucide-react'],
       output: {
         globals: {
           react: 'React',

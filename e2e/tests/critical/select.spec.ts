@@ -145,7 +145,7 @@ test.describe('KSelect E2E', () => {
 
     // Verify trigger has correct role and attributes
     await verifyAriaAttributes(trigger, {
-      'role': 'combobox',
+      role: 'combobox',
       'aria-expanded': 'false',
     });
 

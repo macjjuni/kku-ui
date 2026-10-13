@@ -25,7 +25,6 @@ export default meta;
 
 type Story = StoryObj<typeof KPopoverContent>;
 
-
 export const Default: Story = {
   args: {
     side: 'bottom',
@@ -42,12 +41,10 @@ export const Default: Story = {
           <div className="space-y-4">
             <div className="space-y-2">
               <h4 className="font-medium leading-none">디스플레이 설정</h4>
-              <p className="text-xs text-muted-foreground">
-                화면에 표시될 정보를 제어합니다.
-              </p>
+              <p className="text-xs text-muted-foreground">화면에 표시될 정보를 제어합니다.</p>
             </div>
-            <KTextField label="너비" defaultValue="100%" size="sm"/>
-            <KTextField label="높이" defaultValue="auto" size="sm"/>
+            <KTextField label="너비" defaultValue="100%" size="sm" />
+            <KTextField label="높이" defaultValue="auto" size="sm" />
           </div>
         </KPopoverContent>
       </KPopover>
@@ -65,8 +62,10 @@ export const WithForm: Story = {
         <KPopoverContent className="w-80" {...args}>
           <div className="grid gap-4">
             <h3 className="text-lg font-semibold">인증 필요</h3>
-            <KTextField label="이메일" type="email" placeholder="user@kku.com"/>
-            <KButton variant="primary" className="w-full">인증메일 발송</KButton>
+            <KTextField label="이메일" type="email" placeholder="user@kku.com" />
+            <KButton variant="primary" className="w-full">
+              인증메일 발송
+            </KButton>
           </div>
         </KPopoverContent>
       </KPopover>

@@ -1,10 +1,10 @@
-
 import {
   type ComponentPropsWithRef,
   type CSSProperties,
   type KeyboardEvent,
   memo,
-  type MouseEvent, type Ref,
+  type MouseEvent,
+  type Ref,
   useCallback,
   useImperativeHandle,
   useMemo,
@@ -13,7 +13,6 @@ import {
 import { cn } from '@/lib/utils';
 import { getIcon } from '@/common/icons/icons';
 import { useStableId } from '@/common/hooks';
-
 
 export const ICON_SIZES = ['xs', 'sm', 'md', 'lg', 'xlg'] as const;
 export type KIconSize = (typeof ICON_SIZES)[number];
@@ -37,7 +36,6 @@ const sizeMap: Record<KIconSize, string> = {
   lg: 'w-8 h-8 text-[20px]',
   xlg: 'w-10 h-10 text-[24px]',
 };
-
 
 const KIcon = (props: KIconProps) => {
   // region [Hooks]
@@ -122,7 +120,8 @@ const KIcon = (props: KIconProps) => {
       aria-disabled={disabled}
       onClick={!disabled ? onClick : undefined}
       onKeyDown={handleKeyDown}
-      {...restProps}>
+      {...restProps}
+    >
       {currentIcon}
     </span>
   );

@@ -23,7 +23,6 @@ const setHtmlDataTheme = (theme: string) => {
   }
 };
 
-
 const preview: Preview = {
   parameters: {
     controls: { expanded: true },
@@ -54,7 +53,6 @@ const preview: Preview = {
   },
   decorators: [
     (Story, context) => {
-
       const theme = context.globals.backgrounds.value || 'light';
       setHtmlDataTheme(theme);
 

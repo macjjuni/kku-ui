@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { gotoStory } from '../../helpers/storybook';
-import { waitForPortal, } from '../../helpers/interactions';
+import { waitForPortal } from '../../helpers/interactions';
 import { checkA11y } from '../../helpers/accessibility';
 
 test.describe('KDropdownMenu E2E', () => {

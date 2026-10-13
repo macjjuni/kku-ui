@@ -172,9 +172,7 @@ describe('KIcon', () => {
 
   it('disabled 상태에서 onClick이 호출되지 않아야 한다', async () => {
     const handleClick = vi.fn();
-    const { user, container } = renderWithUser(
-      <KIcon icon="check" onClick={handleClick} disabled />,
-    );
+    const { user, container } = renderWithUser(<KIcon icon="check" onClick={handleClick} disabled />);
 
     const icon = container.querySelector('.k-icon') as HTMLElement;
     await user.click(icon);
@@ -184,9 +182,7 @@ describe('KIcon', () => {
 
   it('disabled 상태에서 tabIndex가 설정되지 않아야 한다', () => {
     const handleClick = vi.fn();
-    const { container } = renderWithUser(
-      <KIcon icon="check" onClick={handleClick} disabled />,
-    );
+    const { container } = renderWithUser(<KIcon icon="check" onClick={handleClick} disabled />);
 
     const icon = container.querySelector('.k-icon') as HTMLElement;
     expect(icon).not.toHaveAttribute('tabIndex');
@@ -220,9 +216,7 @@ describe('KIcon', () => {
 
   it('disabled 상태에서 키보드 이벤트가 무시되어야 한다', async () => {
     const handleClick = vi.fn();
-    const { user, container } = renderWithUser(
-      <KIcon icon="check" onClick={handleClick} disabled />,
-    );
+    const { user, container } = renderWithUser(<KIcon icon="check" onClick={handleClick} disabled />);
 
     const icon = container.querySelector('.k-icon') as HTMLElement;
     icon.focus();
@@ -296,9 +290,7 @@ describe('KIcon', () => {
   });
 
   it('custom style이 병합되어야 한다', () => {
-    const { container } = renderWithUser(
-      <KIcon icon="check" style={{ marginTop: '10px' }} />,
-    );
+    const { container } = renderWithUser(<KIcon icon="check" style={{ marginTop: '10px' }} />);
 
     const icon = container.querySelector('.k-icon') as HTMLElement;
     expect(icon.style.marginTop).toBe('10px');
@@ -309,13 +301,7 @@ describe('KIcon', () => {
   it('여러 props를 함께 사용할 수 있어야 한다', async () => {
     const handleClick = vi.fn();
     const { user, container } = renderWithUser(
-      <KIcon
-        icon="check"
-        size="lg"
-        color="#ff0000"
-        onClick={handleClick}
-        className="custom-class"
-      />,
+      <KIcon icon="check" size="lg" color="#ff0000" onClick={handleClick} className="custom-class" />,
     );
 
     const icon = container.querySelector('.k-icon') as HTMLElement;
@@ -349,9 +335,7 @@ describe('KIcon', () => {
   });
 
   it('data-* 속성이 정상적으로 전달되어야 한다', () => {
-    const { container } = renderWithUser(
-      <KIcon icon="check" data-testid="test-icon" data-custom="value" />,
-    );
+    const { container } = renderWithUser(<KIcon icon="check" data-testid="test-icon" data-custom="value" />);
 
     const icon = container.querySelector('.k-icon') as HTMLElement;
     expect(icon).toHaveAttribute('data-testid', 'test-icon');

@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { User, Settings, LogOut, MoreVertical } from "lucide-react";
-import { useState } from "react";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { User, Settings, LogOut, MoreVertical } from 'lucide-react';
+import { useState } from 'react';
 import {
   KDropdownMenu,
   KDropdownMenuTrigger,
@@ -21,29 +21,29 @@ import { KButton } from '@/components';
 
 // 가상 Props 타입 정의 (Story 컨트롤을 위한 타입)
 type KDropdownMenuStoryArgs = {
-  size?: "sm" | "md";
-  side?: "top" | "right" | "bottom" | "left";
-  align?: "start" | "center" | "end";
+  size?: 'sm' | 'md';
+  side?: 'top' | 'right' | 'bottom' | 'left';
+  align?: 'start' | 'center' | 'end';
 };
 
 const meta: Meta<KDropdownMenuStoryArgs> = {
-  title: "DataDisplay/DropdownMenu",
+  title: 'DataDisplay/DropdownMenu',
   component: KDropdownMenu,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     size: {
-      control: "select",
-      options: ["sm", "md"],
+      control: 'select',
+      options: ['sm', 'md'],
     },
     side: {
-      control: "select",
-      options: ["top", "right", "bottom", "left"],
-      table: { category: "Custom Content Props" },
+      control: 'select',
+      options: ['top', 'right', 'bottom', 'left'],
+      table: { category: 'Custom Content Props' },
     },
     align: {
-      control: "select",
-      options: ["start", "center", "end"],
-      table: { category: "Custom Content Props" },
+      control: 'select',
+      options: ['start', 'center', 'end'],
+      table: { category: 'Custom Content Props' },
     },
   },
 };
@@ -53,9 +53,9 @@ type Story = StoryObj<KDropdownMenuStoryArgs>;
 
 export const Default: Story = {
   args: {
-    size: "md",
-    side: "bottom",
-    align: "end",
+    size: 'md',
+    side: 'bottom',
+    align: 'end',
   },
   render: (args) => {
     const { size, side, align } = args;
@@ -104,14 +104,14 @@ export const Default: Story = {
 
 export const Selection: Story = {
   args: {
-    size: "md",
-    side: "bottom",
-    align: "end",
+    size: 'md',
+    side: 'bottom',
+    align: 'end',
   },
   render: (args) => {
     const { size } = args;
     const [showStatusBar, setShowStatusBar] = useState(true);
-    const [position, setPosition] = useState("bottom");
+    const [position, setPosition] = useState('bottom');
 
     return (
       <KDropdownMenu size={size}>
@@ -158,12 +158,11 @@ export const PositionTest: Story = {
   },
 };
 
-
 export const CustomTrigger: Story = {
   args: {
-    size: "md",
-    side: "bottom",
-    align: "end",
+    size: 'md',
+    side: 'bottom',
+    align: 'end',
   },
   render: (args) => {
     const { size, side, align } = args;

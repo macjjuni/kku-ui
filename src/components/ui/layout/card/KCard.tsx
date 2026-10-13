@@ -12,7 +12,11 @@ export type KCardFooterProps = HTMLAttributes<HTMLDivElement> & { ref?: React.Re
 
 // region Components
 const KCard = ({ className, ref, ...props }: KCardProps) => (
-  <div ref={ref} className={cn('rounded-md border border-border bg-card text-card-foreground shadow-sm', className)} {...props} />
+  <div
+    ref={ref}
+    className={cn('rounded-md border border-border bg-card text-card-foreground shadow-sm', className)}
+    {...props}
+  />
 );
 
 const KCardHeader = ({ className, ref, ...props }: KCardHeaderProps) => (

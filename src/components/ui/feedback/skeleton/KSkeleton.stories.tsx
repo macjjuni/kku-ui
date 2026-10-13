@@ -1,18 +1,18 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { KSkeleton } from "./KSkeleton";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { KSkeleton } from './KSkeleton';
 
 const meta: Meta<typeof KSkeleton> = {
-  title: "Feedback/Skeleton",
+  title: 'Feedback/Skeleton',
   component: KSkeleton,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     circle: {
-      control: "boolean",
-      description: "스켈레톤을 원형으로 표시할지 여부",
+      control: 'boolean',
+      description: '스켈레톤을 원형으로 표시할지 여부',
     },
     className: {
-      control: "text",
-      description: "Tailwind CSS 클래스를 직접 지정하여 크기 및 기타 스타일 제어",
+      control: 'text',
+      description: 'Tailwind CSS 클래스를 직접 지정하여 크기 및 기타 스타일 제어',
     },
   },
 };
@@ -22,14 +22,14 @@ type Story = StoryObj<typeof KSkeleton>;
 
 export const Default: Story = {
   args: {
-    className: "w-[360px] h-8",
+    className: 'w-[360px] h-8',
     circle: false,
   },
 };
 
 export const Circle: Story = {
   args: {
-    className: "h-12 w-12",
+    className: 'h-12 w-12',
     circle: true,
   },
 };

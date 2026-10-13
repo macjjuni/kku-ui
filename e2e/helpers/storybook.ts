@@ -27,11 +27,7 @@ export async function getStoryRoot(page: Page) {
  * @param storyId - Story ID
  * @param args - URL-encoded args object
  */
-export async function gotoStoryWithArgs(
-  page: Page,
-  storyId: string,
-  args: Record<string, unknown>
-) {
+export async function gotoStoryWithArgs(page: Page, storyId: string, args: Record<string, unknown>) {
   const argsParam = encodeURIComponent(JSON.stringify(args));
   await page.goto(`/iframe.html?id=${storyId}&viewMode=story&args=${argsParam}`);
   await page.waitForSelector('#storybook-root', { state: 'attached' });

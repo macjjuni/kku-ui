@@ -54,10 +54,7 @@ export async function testKeyboardNavigation(
  * @example
  * await testTabOrder([input1, input2, button], user);
  */
-export async function testTabOrder(
-  elements: HTMLElement[],
-  user: UserEvent,
-) {
+export async function testTabOrder(elements: HTMLElement[], user: UserEvent) {
   for (const element of elements) {
     await user.tab();
     expect(element).toHaveFocus();
@@ -73,10 +70,7 @@ export async function testTabOrder(
  * @example
  * await testShiftTabOrder([button, input2, input1], user);
  */
-export async function testShiftTabOrder(
-  elements: HTMLElement[],
-  user: UserEvent,
-) {
+export async function testShiftTabOrder(elements: HTMLElement[], user: UserEvent) {
   // 마지막 요소로 이동
   elements[0].focus();
 
@@ -95,10 +89,7 @@ export async function testShiftTabOrder(
  * @example
  * validateAriaRole(button, 'button');
  */
-export function validateAriaRole(
-  element: HTMLElement,
-  expectedRole: string,
-) {
+export function validateAriaRole(element: HTMLElement, expectedRole: string) {
   const role = element.getAttribute('role') || element.tagName.toLowerCase();
   expect(role).toBe(expectedRole);
 }
@@ -116,10 +107,7 @@ export function validateAriaRole(
  *   'aria-describedby': 'dialog-description',
  * });
  */
-export function validateAriaAttributes(
-  element: HTMLElement,
-  expectedAttributes: Record<string, string | null>,
-) {
+export function validateAriaAttributes(element: HTMLElement, expectedAttributes: Record<string, string | null>) {
   Object.entries(expectedAttributes).forEach(([key, value]) => {
     if (value === null) {
       expect(element).not.toHaveAttribute(key);
@@ -138,10 +126,7 @@ export function validateAriaAttributes(
  * @example
  * validateAriaLabelledBy(input, 'username-label');
  */
-export function validateAriaLabelledBy(
-  element: HTMLElement,
-  labelId: string,
-) {
+export function validateAriaLabelledBy(element: HTMLElement, labelId: string) {
   expect(element).toHaveAttribute('aria-labelledby', labelId);
   const label = document.getElementById(labelId);
   expect(label).toBeInTheDocument();
@@ -156,10 +141,7 @@ export function validateAriaLabelledBy(
  * @example
  * validateAriaDescribedBy(input, 'error-message');
  */
-export function validateAriaDescribedBy(
-  element: HTMLElement,
-  descriptionId: string,
-) {
+export function validateAriaDescribedBy(element: HTMLElement, descriptionId: string) {
   expect(element).toHaveAttribute('aria-describedby', descriptionId);
   const description = document.getElementById(descriptionId);
   expect(description).toBeInTheDocument();
@@ -174,10 +156,7 @@ export function validateAriaDescribedBy(
  * @example
  * await testFocusTrap(dialogContent, user);
  */
-export async function testFocusTrap(
-  container: HTMLElement,
-  user: UserEvent,
-) {
+export async function testFocusTrap(container: HTMLElement, user: UserEvent) {
   const focusableElements = container.querySelectorAll<HTMLElement>(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
   );
@@ -207,10 +186,7 @@ export async function testFocusTrap(
  * @example
  * await testInitialFocus(firstInput);
  */
-export async function testInitialFocus(
-  expectedElement: HTMLElement,
-  timeout = 1000,
-) {
+export async function testInitialFocus(expectedElement: HTMLElement, timeout = 1000) {
   await waitFor(() => expect(expectedElement).toHaveFocus(), { timeout });
 }
 
@@ -223,10 +199,7 @@ export async function testInitialFocus(
  * @example
  * await testDisabledFocus(disabledButton, user);
  */
-export async function testDisabledFocus(
-  element: HTMLElement,
-  user: UserEvent,
-) {
+export async function testDisabledFocus(element: HTMLElement, user: UserEvent) {
   expect(element).toBeDisabled();
 
   // Tab으로 포커스 시도
@@ -253,14 +226,14 @@ export function validateScreenReaderOnly(element: HTMLElement) {
   // sr-only 클래스 스타일 확인
   expect(
     styles.position === 'absolute' &&
-    styles.width === '1px' &&
-    styles.height === '1px' &&
-    styles.padding === '0px' &&
-    styles.margin === '-1px' &&
-    styles.overflow === 'hidden' &&
-    styles.clip === 'rect(0px, 0px, 0px, 0px)' &&
-    styles.whiteSpace === 'nowrap' &&
-    styles.borderWidth === '0px',
+      styles.width === '1px' &&
+      styles.height === '1px' &&
+      styles.padding === '0px' &&
+      styles.margin === '-1px' &&
+      styles.overflow === 'hidden' &&
+      styles.clip === 'rect(0px, 0px, 0px, 0px)' &&
+      styles.whiteSpace === 'nowrap' &&
+      styles.borderWidth === '0px',
   ).toBe(true);
 }
 
@@ -310,11 +283,7 @@ export function validateLiveRegion(
  * @example
  * validateExpandable(accordionTrigger, accordionContent, true);
  */
-export function validateExpandable(
-  trigger: HTMLElement,
-  content: HTMLElement,
-  isExpanded: boolean,
-) {
+export function validateExpandable(trigger: HTMLElement, content: HTMLElement, isExpanded: boolean) {
   expect(trigger).toHaveAttribute('aria-expanded', String(isExpanded));
   expect(trigger).toHaveAttribute('aria-controls', content.id);
   expect(content.id).toBeTruthy();
@@ -330,10 +299,7 @@ export function validateExpandable(
  * @example
  * validateColorContrast(textElement, 4.5);
  */
-export function validateColorContrast(
-  element: HTMLElement,
-  minRatio = 4.5,
-) {
+export function validateColorContrast(element: HTMLElement, minRatio = 4.5) {
   const styles = window.getComputedStyle(element);
   const { color } = styles;
   const { backgroundColor } = styles;
@@ -343,9 +309,7 @@ export function validateColorContrast(
   expect(backgroundColor).toBeTruthy();
 
   // 경고: 실제 대비는 측정하지 않음
-  console.warn(
-    `Color contrast should be tested manually or with axe-core. Required ratio: ${minRatio}`,
-  );
+  console.warn(`Color contrast should be tested manually or with axe-core. Required ratio: ${minRatio}`);
 }
 
 /**
@@ -357,10 +321,7 @@ export function validateColorContrast(
  * @example
  * validateErrorMessage(emailInput, errorElement);
  */
-export function validateErrorMessage(
-  input: HTMLElement,
-  errorMessage: HTMLElement,
-) {
+export function validateErrorMessage(input: HTMLElement, errorMessage: HTMLElement) {
   // aria-invalid 확인
   expect(input).toHaveAttribute('aria-invalid', 'true');
 
@@ -382,14 +343,9 @@ export function validateErrorMessage(
  * @example
  * validateRequiredField(emailInput, emailLabel);
  */
-export function validateRequiredField(
-  element: HTMLElement,
-  label?: HTMLElement,
-) {
+export function validateRequiredField(element: HTMLElement, label?: HTMLElement) {
   // required 속성 또는 aria-required
-  const hasRequired =
-    element.hasAttribute('required') ||
-    element.getAttribute('aria-required') === 'true';
+  const hasRequired = element.hasAttribute('required') || element.getAttribute('aria-required') === 'true';
 
   expect(hasRequired).toBe(true);
 

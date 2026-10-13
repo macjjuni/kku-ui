@@ -27,13 +27,7 @@ const toastStyleMap = {
   full: 'group-[.toaster]:p-4 group-[.toaster]:rounded-none',
 };
 
-const KToast = ({
-  size = 'md',
-  position = 'top-right',
-  offset,
-  mobileOffset,
-  ...props
-}: KToasterProps) => {
+const KToast = ({ size = 'md', position = 'top-right', offset, mobileOffset, ...props }: KToasterProps) => {
   return (
     <Sonner
       className="k-toast toaster group"
@@ -41,26 +35,23 @@ const KToast = ({
       theme="system"
       offset={offset}
       mobileOffset={mobileOffset}
-      style={{
-        '--width': sizeWidthMap[size],
-        ...props.style,
-      } as CSSProperties}
+      style={
+        {
+          '--width': sizeWidthMap[size],
+          ...props.style,
+        } as CSSProperties
+      }
       toastOptions={{
         ...props.toastOptions,
         classNames: {
           ...props.toastOptions?.classNames,
           toast: cn(
             'group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border ' +
-            'group-[.toaster]:rounded-md group-[.toaster]:shadow-lg flex items-center',
+              'group-[.toaster]:rounded-md group-[.toaster]:shadow-lg flex items-center',
             toastStyleMap[size],
             props.toastOptions?.classNames?.toast,
           ),
-          title: cn(
-            'k-toast__title',
-            sizeTextMap[size].title,
-            'font-semibold',
-            props.toastOptions?.classNames?.title,
-          ),
+          title: cn('k-toast__title', sizeTextMap[size].title, 'font-semibold', props.toastOptions?.classNames?.title),
           description: cn(
             'k-toast__description',
             'group-[.toast]:text-muted-foreground',
@@ -90,6 +81,6 @@ const KToast = ({
   );
 };
 
-KToast.displayName = "KToast";
+KToast.displayName = 'KToast';
 
 export { KToast, toast as kToast };

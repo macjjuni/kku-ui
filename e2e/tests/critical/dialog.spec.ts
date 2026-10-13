@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { gotoStory } from '../../helpers/storybook';
-import { waitForPortal, verifyFocusTrap, } from '../../helpers/interactions';
+import { waitForPortal, verifyFocusTrap } from '../../helpers/interactions';
 import { checkA11y } from '../../helpers/accessibility';
 
 test.describe('KDialog E2E', () => {
@@ -58,7 +58,10 @@ test.describe('KDialog E2E', () => {
     await waitForPortal(page, '[role="dialog"]');
 
     // Click close button (X icon)
-    const closeButton = page.locator('[role="dialog"] button').filter({ hasText: /×|close/i }).first();
+    const closeButton = page
+      .locator('[role="dialog"] button')
+      .filter({ hasText: /×|close/i })
+      .first();
     await closeButton.click();
 
     // Verify dialog is closed
@@ -109,9 +112,7 @@ test.describe('KDialog E2E', () => {
     const results = await checkA11y(page);
 
     // Filter out color-contrast violations (known design system issue)
-    const nonColorContrastViolations = results.violations.filter(
-      violation => violation.id !== 'color-contrast'
-    );
+    const nonColorContrastViolations = results.violations.filter((violation) => violation.id !== 'color-contrast');
 
     expect(nonColorContrastViolations).toHaveLength(0);
   });

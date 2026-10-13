@@ -1,1 +1,1 @@
-export * from './KIcon'
+export * from './KIcon';

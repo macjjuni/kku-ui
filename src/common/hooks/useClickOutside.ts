@@ -1,6 +1,5 @@
 import { type RefObject, useEffect } from 'react';
 
-
 export default function useClickOutside(
   ref: RefObject<HTMLElement | null>,
   callback: () => void,
@@ -8,9 +7,7 @@ export default function useClickOutside(
 ) {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-
       if (ref.current && !ref.current.contains(e.target as HTMLElement)) {
-
         if (!otherRef) {
           callback();
           return;
@@ -24,7 +21,6 @@ export default function useClickOutside(
     setTimeout(() => {
       window.addEventListener('mousedown', handleClickOutside);
     }, 0);
-
 
     return () => {
       window.removeEventListener('mousedown', handleClickOutside);
