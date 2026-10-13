@@ -199,6 +199,57 @@ describe('KNumberStepper', () => {
     const updatedInput = screen.getByRole('textbox') as HTMLInputElement;
     expect(Number(updatedInput.value)).toBe(10);
   });
+
+  it('입력 중에는 min 미만이어도 클램핑하지 않아야 한다 (min=10에서 50 입력)', async () => {
+    const handleChange = vi.fn();
+    const Stepper = () => {
+      const [val, setVal] = useState(20);
+      return (
+        <KNumberStepper
+          value={val}
+          min={10}
+          onChange={(v) => {
+            setVal(v);
+            handleChange(v);
+          }}
+        />
+      );
+    };
+    const { user } = renderWithUser(<Stepper />);
+
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    await user.clear(input);
+    await user.type(input, '5');
+    expect(input.value).toBe('5');
+
+    await user.type(input, '0');
+    expect(input.value).toBe('50');
+    expect(handleChange).toHaveBeenLastCalledWith(50);
+    expect(handleChange).not.toHaveBeenCalledWith(10);
+  });
+
+  it('min 미만 값을 입력하고 blur하면 min으로 클램핑되어야 한다', async () => {
+    const { user } = renderWithUser(<ControlledStepper initial={20} min={10} />);
+
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    await user.clear(input);
+    await user.type(input, '5');
+    await user.tab();
+
+    await waitFor(() => expect(input.value).toBe('10'));
+  });
+
+  it('제어 모드에서 입력값을 모두 지워도 blur 전까지 빈 값이 유지되어야 한다', async () => {
+    const { user } = renderWithUser(<ControlledStepper initial={7} />);
+
+    const input = screen.getByRole('textbox') as HTMLInputElement;
+    await user.click(input);
+    await user.keyboard('{End}{Backspace}');
+    expect(input.value).toBe('');
+
+    await user.type(input, '3');
+    expect(input.value).toBe('3');
+  });
   // endregion
 
   // region [Disabled State Tests]
