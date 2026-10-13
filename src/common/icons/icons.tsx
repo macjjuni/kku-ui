@@ -812,7 +812,7 @@ const kIcons: Icons = {
 
 const getIcon = (iconName: string, color?: string): ReactNode | null => {
   // 'toString' 같은 프로토타입 키가 매칭되지 않도록 own property만 허용
-  if (!Object.prototype.hasOwnProperty.call(kIcons, iconName)) {
+  if (!Object.hasOwn(kIcons, iconName)) {
     return null;
   }
 
